@@ -29,9 +29,9 @@ namespace Terraria.Social.Steam
         {
             lock (this.ioLock)
             {
-                int fileCount = SteamRemoteStorage.GetFileCount();
-                List<string> stringList = new List<string>(fileCount);
-                for (int index = 0; index < fileCount; ++index)
+                var fileCount = SteamRemoteStorage.GetFileCount();
+                var stringList = new List<string>(fileCount);
+                for (var index = 0; index < fileCount; ++index)
                 {
                     int num;
                     stringList.Add(SteamRemoteStorage.GetFileNameAndSize(index, out num));
@@ -45,11 +45,11 @@ namespace Terraria.Social.Steam
         {
             lock (this.ioLock)
             {
-                UGCFileWriteStreamHandle_t writeStreamHandleT = SteamRemoteStorage.FileWriteStreamOpen(path);
+                var writeStreamHandleT = SteamRemoteStorage.FileWriteStreamOpen(path);
                 uint num1 = 0;
                 while ((long) num1 < (long) length)
                 {
-                    int num2 = (int) Math.Min(1024L, (long) length - (long) num1);
+                    var num2 = (int) Math.Min(1024L, (long) length - (long) num1);
                     Array.Copy((Array) data, (long) num1, (Array) this.writeBuffer, 0L, (long) num2);
                     SteamRemoteStorage.FileWriteStreamWriteChunk(writeStreamHandleT, this.writeBuffer, num2);
                     num1 += 1024U;

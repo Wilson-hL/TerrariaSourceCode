@@ -43,7 +43,7 @@ namespace Terraria.UI
         public void Calculate(UIElement element)
         {
             this.BoundElement = element;
-            CalculatedStyle dimensions = element.GetDimensions();
+            var dimensions = element.GetDimensions();
             this._calculatedPosition = dimensions.Position() + this._offset +
                                        this._anchor * new Vector2(dimensions.Width, dimensions.Height);
         }

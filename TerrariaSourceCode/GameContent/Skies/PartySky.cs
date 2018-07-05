@@ -25,7 +25,7 @@ namespace Terraria.GameContent.Skies
         public override void OnLoad()
         {
             this._textures = new Texture2D[3];
-            for (int index = 0; index < this._textures.Length; ++index)
+            for (var index = 0; index < this._textures.Length; ++index)
                 this._textures[index] = Main.extraTexture[69 + index];
             this.GenerateBalloons(false);
         }
@@ -34,12 +34,12 @@ namespace Terraria.GameContent.Skies
         {
             if (!onlyMissing)
                 this._balloons = new PartySky.Balloon[Main.maxTilesY / 4];
-            for (int i = 0; i < this._balloons.Length; ++i)
+            for (var i = 0; i < this._balloons.Length; ++i)
             {
                 if (!onlyMissing || !this._balloons[i].Active)
                 {
-                    int maxValue = (int) ((double) Main.screenPosition.Y * 0.7 - (double) Main.screenHeight);
-                    int minValue = (int) ((double) maxValue - Main.worldSurface * 16.0);
+                    var maxValue = (int) ((double) Main.screenPosition.Y * 0.7 - (double) Main.screenHeight);
+                    var minValue = (int) ((double) maxValue - Main.worldSurface * 16.0);
                     this._balloons[i].Position = new Vector2((float) (this._random.Next(0, Main.maxTilesX) * 16),
                         (float) this._random.Next(minValue, maxValue));
                     this.ResetBalloon(i);
@@ -77,7 +77,7 @@ namespace Terraria.GameContent.Skies
                 return;
             this._opacity = Utils.Clamp<float>(this._opacity + (float) this.IsNearParty().ToDirectionInt() * 0.01f,
                 0.0f, 1f);
-            for (int i = 0; i < this._balloons.Length; ++i)
+            for (var i = 0; i < this._balloons.Length; ++i)
             {
                 if (this._balloons[i].Active)
                 {
@@ -115,18 +115,18 @@ namespace Terraria.GameContent.Skies
             {
                 this._active = false;
                 this._leaving = false;
-                for (int index = 0; index < this._balloons.Length; ++index)
+                for (var index = 0; index < this._balloons.Length; ++index)
                     this._balloons[index].Active = false;
             }
 
             if ((double) Main.screenPosition.Y > Main.worldSurface * 16.0 || Main.gameMenu ||
                 (double) this._opacity <= 0.0)
                 return;
-            int num1 = -1;
-            int num2 = 0;
-            for (int index = 0; index < this._balloons.Length; ++index)
+            var num1 = -1;
+            var num2 = 0;
+            for (var index = 0; index < this._balloons.Length; ++index)
             {
-                float depth = this._balloons[index].Depth;
+                var depth = this._balloons[index].Depth;
                 if (num1 == -1 && (double) depth < (double) maxDepth)
                     num1 = index;
                 if ((double) depth > (double) minDepth)
@@ -137,15 +137,15 @@ namespace Terraria.GameContent.Skies
 
             if (num1 == -1)
                 return;
-            Vector2 vector2_1 = Main.screenPosition +
+            var vector2_1 = Main.screenPosition +
                                 new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-            Rectangle rectangle = new Rectangle(-1000, -1000, 4000, 4000);
-            for (int index = num1; index < num2; ++index)
+            var rectangle = new Rectangle(-1000, -1000, 4000, 4000);
+            for (var index = num1; index < num2; ++index)
             {
                 if (this._balloons[index].Active)
                 {
-                    Color color = new Color(Main.bgColor.ToVector4() * 0.9f + new Vector4(0.1f)) * 0.8f;
-                    float num3 = 1f;
+                    var color = new Color(Main.bgColor.ToVector4() * 0.9f + new Vector4(0.1f)) * 0.8f;
+                    var num3 = 1f;
                     if ((double) this._balloons[index].Depth > 3.0)
                         num3 = 0.6f;
                     else if ((double) this._balloons[index].Depth > 2.5)
@@ -154,13 +154,13 @@ namespace Terraria.GameContent.Skies
                         num3 = 0.8f;
                     else if ((double) this._balloons[index].Depth > 1.5)
                         num3 = 0.9f;
-                    float num4 = num3 * 0.9f;
+                    var num4 = num3 * 0.9f;
                     color = new Color((int) ((double) color.R * (double) num4),
                         (int) ((double) color.G * (double) num4), (int) ((double) color.B * (double) num4),
                         (int) ((double) color.A * (double) num4));
-                    Vector2 vector2_2 = new Vector2(1f / this._balloons[index].Depth,
+                    var vector2_2 = new Vector2(1f / this._balloons[index].Depth,
                         0.9f / this._balloons[index].Depth);
-                    Vector2 position = this._balloons[index].Position;
+                    var position = this._balloons[index].Position;
                     position = (position - vector2_1) * vector2_2 + vector2_1 - Main.screenPosition;
                     position.X = (float) (((double) position.X + 500.0) % 4000.0);
                     if ((double) position.X < 0.0)

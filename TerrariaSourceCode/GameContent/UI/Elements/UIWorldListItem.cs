@@ -46,8 +46,8 @@ namespace Terraria.GameContent.UI.Elements
             this._worldIcon.Left.Set(4f, 0.0f);
             this._worldIcon.OnDoubleClick += new UIElement.MouseEvent(this.PlayGame);
             this.Append((UIElement) this._worldIcon);
-            float pixels1 = 4f;
-            UIImageButton uiImageButton1 = new UIImageButton(this._buttonPlayTexture);
+            var pixels1 = 4f;
+            var uiImageButton1 = new UIImageButton(this._buttonPlayTexture);
             uiImageButton1.VAlign = 1f;
             uiImageButton1.Left.Set(pixels1, 0.0f);
             uiImageButton1.OnClick += new UIElement.MouseEvent(this.PlayGame);
@@ -55,8 +55,8 @@ namespace Terraria.GameContent.UI.Elements
             uiImageButton1.OnMouseOver += new UIElement.MouseEvent(this.PlayMouseOver);
             uiImageButton1.OnMouseOut += new UIElement.MouseEvent(this.ButtonMouseOut);
             this.Append((UIElement) uiImageButton1);
-            float pixels2 = pixels1 + 24f;
-            UIImageButton uiImageButton2 = new UIImageButton(this._data.IsFavorite
+            var pixels2 = pixels1 + 24f;
+            var uiImageButton2 = new UIImageButton(this._data.IsFavorite
                 ? this._buttonFavoriteActiveTexture
                 : this._buttonFavoriteInactiveTexture);
             uiImageButton2.VAlign = 1f;
@@ -66,10 +66,10 @@ namespace Terraria.GameContent.UI.Elements
             uiImageButton2.OnMouseOut += new UIElement.MouseEvent(this.ButtonMouseOut);
             uiImageButton2.SetVisibility(1f, this._data.IsFavorite ? 0.8f : 0.4f);
             this.Append((UIElement) uiImageButton2);
-            float pixels3 = pixels2 + 24f;
+            var pixels3 = pixels2 + 24f;
             if (SocialAPI.Cloud != null)
             {
-                UIImageButton uiImageButton3 = new UIImageButton(this._data.IsCloudSave
+                var uiImageButton3 = new UIImageButton(this._data.IsCloudSave
                     ? this._buttonCloudActiveTexture
                     : this._buttonCloudInactiveTexture);
                 uiImageButton3.VAlign = 1f;
@@ -84,7 +84,7 @@ namespace Terraria.GameContent.UI.Elements
 
             if (Main.UseSeedUI && this._data.WorldGeneratorVersion != 0UL)
             {
-                UIImageButton uiImageButton3 = new UIImageButton(this._buttonSeedTexture);
+                var uiImageButton3 = new UIImageButton(this._buttonSeedTexture);
                 uiImageButton3.VAlign = 1f;
                 uiImageButton3.Left.Set(pixels3, 0.0f);
                 uiImageButton3.OnClick += new UIElement.MouseEvent(this.SeedButtonClick);
@@ -95,7 +95,7 @@ namespace Terraria.GameContent.UI.Elements
                 pixels3 += 24f;
             }
 
-            UIImageButton uiImageButton4 = new UIImageButton(this._buttonDeleteTexture);
+            var uiImageButton4 = new UIImageButton(this._buttonDeleteTexture);
             uiImageButton4.VAlign = 1f;
             uiImageButton4.HAlign = 1f;
             uiImageButton4.OnClick += new UIElement.MouseEvent(this.DeleteButtonClick);
@@ -104,7 +104,7 @@ namespace Terraria.GameContent.UI.Elements
             this._deleteButton = uiImageButton4;
             if (!this._data.IsFavorite)
                 this.Append((UIElement) uiImageButton4);
-            float pixels4 = pixels3 + 4f;
+            var pixels4 = pixels3 + 4f;
             this._buttonLabel = new UIText("", 1f, false);
             this._buttonLabel.VAlign = 1f;
             this._buttonLabel.Left.Set(pixels4, 0.0f);
@@ -206,7 +206,7 @@ namespace Terraria.GameContent.UI.Elements
 
         private void DeleteButtonClick(UIMouseEvent evt, UIElement listeningElement)
         {
-            for (int index = 0; index < Main.WorldList.Count; ++index)
+            for (var index = 0; index < Main.WorldList.Count; ++index)
             {
                 if (Main.WorldList[index] == this._data)
                 {
@@ -262,7 +262,7 @@ namespace Terraria.GameContent.UI.Elements
 
         public override int CompareTo(object obj)
         {
-            UIWorldListItem uiWorldListItem = obj as UIWorldListItem;
+            var uiWorldListItem = obj as UIWorldListItem;
             if (uiWorldListItem == null)
                 return base.CompareTo(obj);
             if (this.IsFavorite && !uiWorldListItem.IsFavorite)
@@ -303,10 +303,10 @@ namespace Terraria.GameContent.UI.Elements
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             base.DrawSelf(spriteBatch);
-            CalculatedStyle innerDimensions = this.GetInnerDimensions();
-            CalculatedStyle dimensions = this._worldIcon.GetDimensions();
-            float x1 = dimensions.X + dimensions.Width;
-            Color color = this._data.IsValid ? Color.White : Color.Red;
+            var innerDimensions = this.GetInnerDimensions();
+            var dimensions = this._worldIcon.GetDimensions();
+            var x1 = dimensions.X + dimensions.Width;
+            var color = this._data.IsValid ? Color.White : Color.Red;
             Utils.DrawBorderString(spriteBatch, this._data.Name, new Vector2(x1 + 6f, dimensions.Y - 2f), color, 1f,
                 0.0f, 0.0f, -1);
             spriteBatch.Draw(this._dividerTexture, new Vector2(x1, innerDimensions.Y + 21f), new Rectangle?(),
@@ -314,35 +314,35 @@ namespace Terraria.GameContent.UI.Elements
                 new Vector2(
                     (float) (((double) this.GetDimensions().X + (double) this.GetDimensions().Width - (double) x1) /
                              8.0), 1f), SpriteEffects.None, 0.0f);
-            Vector2 position = new Vector2(x1 + 6f, innerDimensions.Y + 29f);
-            float width1 = 100f;
+            var position = new Vector2(x1 + 6f, innerDimensions.Y + 29f);
+            var width1 = 100f;
             this.DrawPanel(spriteBatch, position, width1);
-            string text = this._data.IsExpertMode
+            var text = this._data.IsExpertMode
                 ? Language.GetTextValue("UI.Expert")
                 : Language.GetTextValue("UI.Normal");
-            float x2 = Main.fontMouseText.MeasureString(text).X;
-            float x3 = (float) ((double) width1 * 0.5 - (double) x2 * 0.5);
+            var x2 = Main.fontMouseText.MeasureString(text).X;
+            var x3 = (float) ((double) width1 * 0.5 - (double) x2 * 0.5);
             Utils.DrawBorderString(spriteBatch, text, position + new Vector2(x3, 3f),
                 this._data.IsExpertMode ? new Color(217, 143, 244) : Color.White, 1f, 0.0f, 0.0f, -1);
             position.X += width1 + 5f;
-            float width2 = 150f;
+            var width2 = 150f;
             if (!GameCulture.English.IsActive)
                 width2 += 40f;
             this.DrawPanel(spriteBatch, position, width2);
-            string textValue1 = Language.GetTextValue("UI.WorldSizeFormat", (object) this._data.WorldSizeName);
-            float x4 = Main.fontMouseText.MeasureString(textValue1).X;
-            float x5 = (float) ((double) width2 * 0.5 - (double) x4 * 0.5);
+            var textValue1 = Language.GetTextValue("UI.WorldSizeFormat", (object) this._data.WorldSizeName);
+            var x4 = Main.fontMouseText.MeasureString(textValue1).X;
+            var x5 = (float) ((double) width2 * 0.5 - (double) x4 * 0.5);
             Utils.DrawBorderString(spriteBatch, textValue1, position + new Vector2(x5, 3f), Color.White, 1f, 0.0f, 0.0f,
                 -1);
             position.X += width2 + 5f;
-            float width3 = innerDimensions.X + innerDimensions.Width - position.X;
+            var width3 = innerDimensions.X + innerDimensions.Width - position.X;
             this.DrawPanel(spriteBatch, position, width3);
-            string textValue2 = Language.GetTextValue("UI.WorldCreatedFormat",
+            var textValue2 = Language.GetTextValue("UI.WorldCreatedFormat",
                 !GameCulture.English.IsActive
                     ? (object) this._data.CreationTime.ToShortDateString()
                     : (object) this._data.CreationTime.ToString("d MMMM yyyy"));
-            float x6 = Main.fontMouseText.MeasureString(textValue2).X;
-            float x7 = (float) ((double) width3 * 0.5 - (double) x6 * 0.5);
+            var x6 = Main.fontMouseText.MeasureString(textValue2).X;
+            var x7 = (float) ((double) width3 * 0.5 - (double) x6 * 0.5);
             Utils.DrawBorderString(spriteBatch, textValue2, position + new Vector2(x7, 3f), Color.White, 1f, 0.0f, 0.0f,
                 -1);
             position.X += width3 + 5f;

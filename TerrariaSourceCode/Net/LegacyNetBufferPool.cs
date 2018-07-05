@@ -58,14 +58,14 @@ namespace Terraria.Net
 
         public static byte[] RequestBuffer(byte[] data, int offset, int size)
         {
-            byte[] numArray = LegacyNetBufferPool.RequestBuffer(size);
+            var numArray = LegacyNetBufferPool.RequestBuffer(size);
             Buffer.BlockCopy((Array) data, offset, (Array) numArray, 0, size);
             return numArray;
         }
 
         public static void ReturnBuffer(byte[] buffer)
         {
-            int length = buffer.Length;
+            var length = buffer.Length;
             lock (LegacyNetBufferPool.bufferLock)
             {
                 if (length <= 256)

@@ -31,9 +31,9 @@ namespace Terraria.GameContent.UI.States
             this._categoryButtons.Clear();
             this._achievementElements.Clear();
             this._achievementsList = (UIList) null;
-            bool largeForOtherLanguages = true;
-            int num = largeForOtherLanguages.ToInt() * 100;
-            UIElement element1 = new UIElement();
+            var largeForOtherLanguages = true;
+            var num = largeForOtherLanguages.ToInt() * 100;
+            var element1 = new UIElement();
             element1.Width.Set(0.0f, 0.8f);
             element1.MaxWidth.Set(800f + (float) num, 0.0f);
             element1.MinWidth.Set(600f + (float) num, 0.0f);
@@ -42,7 +42,7 @@ namespace Terraria.GameContent.UI.States
             element1.HAlign = 0.5f;
             this._outerContainer = element1;
             this.Append(element1);
-            UIPanel uiPanel = new UIPanel();
+            var uiPanel = new UIPanel();
             uiPanel.Width.Set(0.0f, 1f);
             uiPanel.Height.Set(-110f, 1f);
             uiPanel.BackgroundColor = new Color(33, 43, 79) * 0.8f;
@@ -54,14 +54,14 @@ namespace Terraria.GameContent.UI.States
             this._achievementsList.Top.Set(50f, 0.0f);
             this._achievementsList.ListPadding = 5f;
             uiPanel.Append((UIElement) this._achievementsList);
-            UITextPanel<LocalizedText> uiTextPanel1 =
+            var uiTextPanel1 =
                 new UITextPanel<LocalizedText>(Language.GetText("UI.Achievements"), 1f, true);
             uiTextPanel1.HAlign = 0.5f;
             uiTextPanel1.Top.Set(-33f, 0.0f);
             uiTextPanel1.SetPadding(13f);
             uiTextPanel1.BackgroundColor = new Color(73, 94, 171);
             element1.Append((UIElement) uiTextPanel1);
-            UITextPanel<LocalizedText> uiTextPanel2 =
+            var uiTextPanel2 =
                 new UITextPanel<LocalizedText>(Language.GetText("UI.Back"), 0.7f, true);
             uiTextPanel2.Width.Set(-10f, 0.5f);
             uiTextPanel2.Height.Set(50f, 0.0f);
@@ -73,30 +73,30 @@ namespace Terraria.GameContent.UI.States
             uiTextPanel2.OnClick += new UIElement.MouseEvent(this.GoBackClick);
             element1.Append((UIElement) uiTextPanel2);
             this._backpanel = (UIElement) uiTextPanel2;
-            List<Achievement> achievementsList = Main.Achievements.CreateAchievementsList();
-            for (int index = 0; index < achievementsList.Count; ++index)
+            var achievementsList = Main.Achievements.CreateAchievementsList();
+            for (var index = 0; index < achievementsList.Count; ++index)
             {
-                UIAchievementListItem achievementListItem =
+                var achievementListItem =
                     new UIAchievementListItem(achievementsList[index], largeForOtherLanguages);
                 this._achievementsList.Add((UIElement) achievementListItem);
                 this._achievementElements.Add(achievementListItem);
             }
 
-            UIScrollbar scrollbar = new UIScrollbar();
+            var scrollbar = new UIScrollbar();
             scrollbar.SetView(100f, 1000f);
             scrollbar.Height.Set(-50f, 1f);
             scrollbar.Top.Set(50f, 0.0f);
             scrollbar.HAlign = 1f;
             uiPanel.Append((UIElement) scrollbar);
             this._achievementsList.SetScrollbar(scrollbar);
-            UIElement element2 = new UIElement();
+            var element2 = new UIElement();
             element2.Width.Set(0.0f, 1f);
             element2.Height.Set(32f, 0.0f);
             element2.Top.Set(10f, 0.0f);
-            Texture2D texture = TextureManager.Load("Images/UI/Achievement_Categories");
-            for (int index = 0; index < 4; ++index)
+            var texture = TextureManager.Load("Images/UI/Achievement_Categories");
+            for (var index = 0; index < 4; ++index)
             {
-                UIToggleImage uiToggleImage =
+                var uiToggleImage =
                     new UIToggleImage(texture, 32, 32, new Point(34 * index, 0), new Point(34 * index, 34));
                 uiToggleImage.Left.Set((float) (index * 36 + 8), 0.0f);
                 uiToggleImage.SetState(true);
@@ -111,7 +111,7 @@ namespace Terraria.GameContent.UI.States
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            for (int index = 0; index < this._categoryButtons.Count; ++index)
+            for (var index = 0; index < this._categoryButtons.Count; ++index)
             {
                 if (this._categoryButtons[index].IsMouseHovering)
                 {
@@ -138,8 +138,8 @@ namespace Terraria.GameContent.UI.States
                             break;
                     }
 
-                    float x = Main.fontMouseText.MeasureString(textValue).X;
-                    Vector2 vector2 = new Vector2((float) Main.mouseX, (float) Main.mouseY) + new Vector2(16f);
+                    var x = Main.fontMouseText.MeasureString(textValue).X;
+                    var vector2 = new Vector2((float) Main.mouseX, (float) Main.mouseY) + new Vector2(16f);
                     if ((double) vector2.Y > (double) (Main.screenHeight - 30))
                         vector2.Y = (float) (Main.screenHeight - 30);
                     if ((double) vector2.X > (double) Main.screenWidth - (double) x)
@@ -158,7 +158,7 @@ namespace Terraria.GameContent.UI.States
         {
             this._achievementsList.Goto((UIList.ElementSearchMethod) (element =>
             {
-                UIAchievementListItem achievementListItem = element as UIAchievementListItem;
+                var achievementListItem = element as UIAchievementListItem;
                 if (achievementListItem == null)
                     return false;
                 return achievementListItem.GetAchievement() == achievement;
@@ -185,7 +185,7 @@ namespace Terraria.GameContent.UI.States
         private void FilterList(UIMouseEvent evt, UIElement listeningElement)
         {
             this._achievementsList.Clear();
-            foreach (UIAchievementListItem achievementElement in this._achievementElements)
+            foreach (var achievementElement in this._achievementElements)
             {
                 if (this._categoryButtons[(int) achievementElement.GetAchievement().Category].IsOn)
                     this._achievementsList.Add((UIElement) achievementElement);
@@ -217,27 +217,27 @@ namespace Terraria.GameContent.UI.States
         private void SetupGamepadPoints(SpriteBatch spriteBatch)
         {
             UILinkPointNavigator.Shortcuts.BackButtonCommand = 3;
-            int ID1 = 3000;
+            var ID1 = 3000;
             UILinkPointNavigator.SetPosition(ID1,
                 this._backpanel.GetInnerDimensions().ToRectangle().Center.ToVector2());
             UILinkPointNavigator.SetPosition(ID1 + 1,
                 this._outerContainer.GetInnerDimensions().ToRectangle().Center.ToVector2());
-            int index1 = ID1;
-            UILinkPoint point1 = UILinkPointNavigator.Points[index1];
+            var index1 = ID1;
+            var point1 = UILinkPointNavigator.Points[index1];
             point1.Unlink();
             point1.Up = index1 + 1;
-            int ID2 = index1 + 1;
-            UILinkPoint point2 = UILinkPointNavigator.Points[ID2];
+            var ID2 = index1 + 1;
+            var point2 = UILinkPointNavigator.Points[ID2];
             point2.Unlink();
             point2.Up = ID2 + 1;
             point2.Down = ID2 - 1;
-            for (int index2 = 0; index2 < this._categoryButtons.Count; ++index2)
+            for (var index2 = 0; index2 < this._categoryButtons.Count; ++index2)
             {
                 ++ID2;
                 UILinkPointNavigator.Shortcuts.FANCYUI_HIGHEST_INDEX = ID2;
                 UILinkPointNavigator.SetPosition(ID2,
                     this._categoryButtons[index2].GetInnerDimensions().ToRectangle().Center.ToVector2());
-                UILinkPoint point3 = UILinkPointNavigator.Points[ID2];
+                var point3 = UILinkPointNavigator.Points[ID2];
                 point3.Unlink();
                 point3.Left = index2 == 0 ? -3 : ID2 - 1;
                 point3.Right = index2 == this._categoryButtons.Count - 1 ? -4 : ID2 + 1;

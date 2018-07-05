@@ -38,7 +38,7 @@ namespace Terraria.GameContent.Events
 
         public static void CheckNight()
         {
-            bool flag = false;
+            var flag = false;
             if (BirthdayParty.GenuineParty)
             {
                 flag = true;
@@ -54,7 +54,7 @@ namespace Terraria.GameContent.Events
 
             if (!flag)
                 return;
-            Color color = new Color((int) byte.MaxValue, 0, 160);
+            var color = new Color((int) byte.MaxValue, 0, 160);
             WorldGen.BroadcastText(NetworkText.FromKey(Lang.misc[99].Key), color);
         }
 
@@ -70,10 +70,10 @@ namespace Terraria.GameContent.Events
             {
                 if (Main.rand.Next(10) != 0)
                     return;
-                List<NPC> source = new List<NPC>();
-                for (int index = 0; index < 200; ++index)
+                var source = new List<NPC>();
+                for (var index = 0; index < 200; ++index)
                 {
-                    NPC npc = Main.npc[index];
+                    var npc = Main.npc[index];
                     if (npc.active && npc.townNPC && (npc.type != 37 && npc.type != 453) && npc.aiStyle != 0)
                         source.Add(npc);
                 }
@@ -83,18 +83,18 @@ namespace Terraria.GameContent.Events
                 BirthdayParty.GenuineParty = true;
                 BirthdayParty.PartyDaysOnCooldown = Main.rand.Next(5, 11);
                 BirthdayParty.CelebratingNPCs.Clear();
-                List<int> intList = new List<int>();
-                int num = 1;
+                var intList = new List<int>();
+                var num = 1;
                 if (Main.rand.Next(5) == 0 && source.Count > 12)
                     num = 3;
                 else if (Main.rand.Next(3) == 0)
                     num = 2;
-                List<NPC> list = source.OrderBy<NPC, int>((Func<NPC, int>) (i => Main.rand.Next())).ToList<NPC>();
-                for (int index = 0; index < num; ++index)
+                var list = source.OrderBy<NPC, int>((Func<NPC, int>) (i => Main.rand.Next())).ToList<NPC>();
+                for (var index = 0; index < num; ++index)
                     intList.Add(index);
-                for (int index = 0; index < intList.Count; ++index)
+                for (var index = 0; index < intList.Count; ++index)
                     BirthdayParty.CelebratingNPCs.Add(list[intList[index]].whoAmI);
-                Color color = new Color((int) byte.MaxValue, 0, 160);
+                var color = new Color((int) byte.MaxValue, 0, 160);
                 if (BirthdayParty.CelebratingNPCs.Count == 3)
                     WorldGen.BroadcastText(
                         NetworkText.FromKey("Game.BirthdayParty_3",
@@ -115,7 +115,7 @@ namespace Terraria.GameContent.Events
 
         public static void ToggleManualParty()
         {
-            bool partyIsUp = BirthdayParty.PartyIsUp;
+            var partyIsUp = BirthdayParty.PartyIsUp;
             if (Main.netMode != 1)
                 BirthdayParty.ManualParty = !BirthdayParty.ManualParty;
             else
@@ -148,9 +148,9 @@ namespace Terraria.GameContent.Events
 
                 if (Main.netMode != 1 && BirthdayParty.CelebratingNPCs.Count > 0)
                 {
-                    for (int index = 0; index < BirthdayParty.CelebratingNPCs.Count; ++index)
+                    for (var index = 0; index < BirthdayParty.CelebratingNPCs.Count; ++index)
                     {
-                        NPC npc = Main.npc[BirthdayParty.CelebratingNPCs[index]];
+                        var npc = Main.npc[BirthdayParty.CelebratingNPCs[index]];
                         if (!npc.active || !npc.townNPC || (npc.type == 37 || npc.type == 453) || npc.aiStyle == 0)
                             BirthdayParty.CelebratingNPCs.RemoveAt(index);
                     }
@@ -160,7 +160,7 @@ namespace Terraria.GameContent.Events
                         BirthdayParty.GenuineParty = false;
                         if (!BirthdayParty.ManualParty)
                         {
-                            Color color = new Color((int) byte.MaxValue, 0, 160);
+                            var color = new Color((int) byte.MaxValue, 0, 160);
                             WorldGen.BroadcastText(NetworkText.FromKey(Lang.misc[99].Key), color);
                             NetMessage.SendData(7, -1, -1, (NetworkText) null, 0, 0.0f, 0.0f, 0.0f, 0, 0, 0);
                         }

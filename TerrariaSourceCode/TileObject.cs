@@ -26,7 +26,7 @@ namespace Terraria
 
         public static bool Place(TileObject toBePlaced)
         {
-            TileObjectData tileData =
+            var tileData =
                 TileObjectData.GetTileData(toBePlaced.type, toBePlaced.style, toBePlaced.alternate);
             if (tileData == null)
                 return false;
@@ -51,10 +51,10 @@ namespace Terraria
             }
             else
             {
-                ushort type = (ushort) toBePlaced.type;
-                int placementStyle =
+                var type = (ushort) toBePlaced.type;
+                var placementStyle =
                     tileData.CalculatePlacementStyle(toBePlaced.style, toBePlaced.alternate, toBePlaced.random);
-                int num1 = 0;
+                var num1 = 0;
                 if (tileData.StyleWrapLimit > 0)
                 {
                     num1 = placementStyle / tileData.StyleWrapLimit * tileData.StyleLineSkip;
@@ -74,25 +74,25 @@ namespace Terraria
                     num3 = tileData.CoordinateFullHeight * placementStyle;
                 }
 
-                int xCoord = toBePlaced.xCoord;
-                int yCoord = toBePlaced.yCoord;
-                for (int index1 = 0; index1 < tileData.Width; ++index1)
+                var xCoord = toBePlaced.xCoord;
+                var yCoord = toBePlaced.yCoord;
+                for (var index1 = 0; index1 < tileData.Width; ++index1)
                 {
-                    for (int index2 = 0; index2 < tileData.Height; ++index2)
+                    for (var index2 = 0; index2 < tileData.Height; ++index2)
                     {
-                        Tile tileSafely = Framing.GetTileSafely(xCoord + index1, yCoord + index2);
+                        var tileSafely = Framing.GetTileSafely(xCoord + index1, yCoord + index2);
                         if (tileSafely.active() && Main.tileCut[(int) tileSafely.type])
                             WorldGen.KillTile(xCoord + index1, yCoord + index2, false, false, false);
                     }
                 }
 
-                for (int index1 = 0; index1 < tileData.Width; ++index1)
+                for (var index1 = 0; index1 < tileData.Width; ++index1)
                 {
-                    int num4 = num2 + index1 * (tileData.CoordinateWidth + tileData.CoordinatePadding);
-                    int num5 = num3;
-                    for (int index2 = 0; index2 < tileData.Height; ++index2)
+                    var num4 = num2 + index1 * (tileData.CoordinateWidth + tileData.CoordinatePadding);
+                    var num5 = num3;
+                    for (var index2 = 0; index2 < tileData.Height; ++index2)
                     {
-                        Tile tileSafely = Framing.GetTileSafely(xCoord + index1, yCoord + index2);
+                        var tileSafely = Framing.GetTileSafely(xCoord + index1, yCoord + index2);
                         if (!tileSafely.active())
                         {
                             tileSafely.active(true);
@@ -108,14 +108,14 @@ namespace Terraria
 
             if (tileData.FlattenAnchors)
             {
-                AnchorData anchorData = tileData.AnchorBottom;
+                var anchorData = tileData.AnchorBottom;
                 if (anchorData.tileCount != 0 && (anchorData.type & AnchorType.SolidTile) == AnchorType.SolidTile)
                 {
-                    int num = toBePlaced.xCoord + anchorData.checkStart;
-                    int j = toBePlaced.yCoord + tileData.Height;
-                    for (int index = 0; index < anchorData.tileCount; ++index)
+                    var num = toBePlaced.xCoord + anchorData.checkStart;
+                    var j = toBePlaced.yCoord + tileData.Height;
+                    for (var index = 0; index < anchorData.tileCount; ++index)
                     {
-                        Tile tileSafely = Framing.GetTileSafely(num + index, j);
+                        var tileSafely = Framing.GetTileSafely(num + index, j);
                         if (Main.tileSolid[(int) tileSafely.type] && !Main.tileSolidTop[(int) tileSafely.type] &&
                             tileSafely.blockType() != 0)
                             WorldGen.SlopeTile(num + index, j, 0);
@@ -125,11 +125,11 @@ namespace Terraria
                 anchorData = tileData.AnchorTop;
                 if (anchorData.tileCount != 0 && (anchorData.type & AnchorType.SolidTile) == AnchorType.SolidTile)
                 {
-                    int num = toBePlaced.xCoord + anchorData.checkStart;
-                    int j = toBePlaced.yCoord - 1;
-                    for (int index = 0; index < anchorData.tileCount; ++index)
+                    var num = toBePlaced.xCoord + anchorData.checkStart;
+                    var j = toBePlaced.yCoord - 1;
+                    for (var index = 0; index < anchorData.tileCount; ++index)
                     {
-                        Tile tileSafely = Framing.GetTileSafely(num + index, j);
+                        var tileSafely = Framing.GetTileSafely(num + index, j);
                         if (Main.tileSolid[(int) tileSafely.type] && !Main.tileSolidTop[(int) tileSafely.type] &&
                             tileSafely.blockType() != 0)
                             WorldGen.SlopeTile(num + index, j, 0);
@@ -139,11 +139,11 @@ namespace Terraria
                 anchorData = tileData.AnchorRight;
                 if (anchorData.tileCount != 0 && (anchorData.type & AnchorType.SolidTile) == AnchorType.SolidTile)
                 {
-                    int i = toBePlaced.xCoord + tileData.Width;
-                    int num = toBePlaced.yCoord + anchorData.checkStart;
-                    for (int index = 0; index < anchorData.tileCount; ++index)
+                    var i = toBePlaced.xCoord + tileData.Width;
+                    var num = toBePlaced.yCoord + anchorData.checkStart;
+                    for (var index = 0; index < anchorData.tileCount; ++index)
                     {
-                        Tile tileSafely = Framing.GetTileSafely(i, num + index);
+                        var tileSafely = Framing.GetTileSafely(i, num + index);
                         if (Main.tileSolid[(int) tileSafely.type] && !Main.tileSolidTop[(int) tileSafely.type] &&
                             tileSafely.blockType() != 0)
                             WorldGen.SlopeTile(i, num + index, 0);
@@ -153,11 +153,11 @@ namespace Terraria
                 anchorData = tileData.AnchorLeft;
                 if (anchorData.tileCount != 0 && (anchorData.type & AnchorType.SolidTile) == AnchorType.SolidTile)
                 {
-                    int i = toBePlaced.xCoord - 1;
-                    int num = toBePlaced.yCoord + anchorData.checkStart;
-                    for (int index = 0; index < anchorData.tileCount; ++index)
+                    var i = toBePlaced.xCoord - 1;
+                    var num = toBePlaced.yCoord + anchorData.checkStart;
+                    for (var index = 0; index < anchorData.tileCount; ++index)
                     {
-                        Tile tileSafely = Framing.GetTileSafely(i, num + index);
+                        var tileSafely = Framing.GetTileSafely(i, num + index);
                         if (Main.tileSolid[(int) tileSafely.type] && !Main.tileSolidTop[(int) tileSafely.type] &&
                             tileSafely.blockType() != 0)
                             WorldGen.SlopeTile(i, num + index, 0);
@@ -171,44 +171,44 @@ namespace Terraria
         public static bool CanPlace(int x, int y, int type, int style, int dir, out TileObject objectData,
             bool onlyCheck = false)
         {
-            TileObjectData tileData1 = TileObjectData.GetTileData(type, style, 0);
+            var tileData1 = TileObjectData.GetTileData(type, style, 0);
             objectData = TileObject.Empty;
             if (tileData1 == null)
                 return false;
-            int num1 = x - (int) tileData1.Origin.X;
-            int num2 = y - (int) tileData1.Origin.Y;
+            var num1 = x - (int) tileData1.Origin.X;
+            var num2 = y - (int) tileData1.Origin.Y;
             if (num1 < 0 || num1 + tileData1.Width >= Main.maxTilesX ||
                 (num2 < 0 || num2 + tileData1.Height >= Main.maxTilesY))
                 return false;
-            bool flag1 = tileData1.RandomStyleRange > 0;
+            var flag1 = tileData1.RandomStyleRange > 0;
             if (TileObjectPreviewData.placementCache == null)
                 TileObjectPreviewData.placementCache = new TileObjectPreviewData();
             TileObjectPreviewData.placementCache.Reset();
-            int num3 = 0;
-            int num4 = 0;
+            var num3 = 0;
+            var num4 = 0;
             if (tileData1.AlternatesCount != 0)
                 num4 = tileData1.AlternatesCount;
-            float num5 = -1f;
-            float num6 = -1f;
-            int num7 = 0;
-            TileObjectData tileObjectData = (TileObjectData) null;
-            int alternate = num3 - 1;
+            var num5 = -1f;
+            var num6 = -1f;
+            var num7 = 0;
+            var tileObjectData = (TileObjectData) null;
+            var alternate = num3 - 1;
             while (alternate < num4)
             {
                 ++alternate;
-                TileObjectData tileData2 = TileObjectData.GetTileData(type, style, alternate);
+                var tileData2 = TileObjectData.GetTileData(type, style, alternate);
                 if (tileData2.Direction == TileObjectDirection.None ||
                     (tileData2.Direction != TileObjectDirection.PlaceLeft || dir != 1) &&
                     (tileData2.Direction != TileObjectDirection.PlaceRight || dir != -1))
                 {
-                    int num8 = x - (int) tileData2.Origin.X;
-                    int num9 = y - (int) tileData2.Origin.Y;
+                    var num8 = x - (int) tileData2.Origin.X;
+                    var num9 = y - (int) tileData2.Origin.Y;
                     if (num8 < 5 || num8 + tileData2.Width > Main.maxTilesX - 5 ||
                         (num9 < 5 || num9 + tileData2.Height > Main.maxTilesY - 5))
                         return false;
-                    Rectangle rectangle = new Rectangle(0, 0, tileData2.Width, tileData2.Height);
-                    int X = 0;
-                    int Y = 0;
+                    var rectangle = new Rectangle(0, 0, tileData2.Width, tileData2.Height);
+                    var X = 0;
+                    var Y = 0;
                     if (tileData2.AnchorTop.tileCount != 0)
                     {
                         if (rectangle.Y == 0)
@@ -218,7 +218,7 @@ namespace Terraria
                             ++Y;
                         }
 
-                        int checkStart = tileData2.AnchorTop.checkStart;
+                        var checkStart = tileData2.AnchorTop.checkStart;
                         if (checkStart < rectangle.X)
                         {
                             rectangle.Width += rectangle.X - checkStart;
@@ -226,8 +226,8 @@ namespace Terraria
                             rectangle.X = checkStart;
                         }
 
-                        int num10 = checkStart + tileData2.AnchorTop.tileCount - 1;
-                        int num11 = rectangle.X + rectangle.Width - 1;
+                        var num10 = checkStart + tileData2.AnchorTop.tileCount - 1;
+                        var num11 = rectangle.X + rectangle.Width - 1;
                         if (num10 > num11)
                             rectangle.Width += num10 - num11;
                     }
@@ -236,7 +236,7 @@ namespace Terraria
                     {
                         if (rectangle.Y + rectangle.Height == tileData2.Height)
                             ++rectangle.Height;
-                        int checkStart = tileData2.AnchorBottom.checkStart;
+                        var checkStart = tileData2.AnchorBottom.checkStart;
                         if (checkStart < rectangle.X)
                         {
                             rectangle.Width += rectangle.X - checkStart;
@@ -244,8 +244,8 @@ namespace Terraria
                             rectangle.X = checkStart;
                         }
 
-                        int num10 = checkStart + tileData2.AnchorBottom.tileCount - 1;
-                        int num11 = rectangle.X + rectangle.Width - 1;
+                        var num10 = checkStart + tileData2.AnchorBottom.tileCount - 1;
+                        var num11 = rectangle.X + rectangle.Width - 1;
                         if (num10 > num11)
                             rectangle.Width += num10 - num11;
                     }
@@ -259,7 +259,7 @@ namespace Terraria
                             ++X;
                         }
 
-                        int checkStart = tileData2.AnchorLeft.checkStart;
+                        var checkStart = tileData2.AnchorLeft.checkStart;
                         if ((tileData2.AnchorLeft.type & AnchorType.Tree) == AnchorType.Tree)
                             --checkStart;
                         if (checkStart < rectangle.Y)
@@ -269,10 +269,10 @@ namespace Terraria
                             rectangle.Y = checkStart;
                         }
 
-                        int num10 = checkStart + tileData2.AnchorLeft.tileCount - 1;
+                        var num10 = checkStart + tileData2.AnchorLeft.tileCount - 1;
                         if ((tileData2.AnchorLeft.type & AnchorType.Tree) == AnchorType.Tree)
                             num10 += 2;
-                        int num11 = rectangle.Y + rectangle.Height - 1;
+                        var num11 = rectangle.Y + rectangle.Height - 1;
                         if (num10 > num11)
                             rectangle.Height += num10 - num11;
                     }
@@ -281,7 +281,7 @@ namespace Terraria
                     {
                         if (rectangle.X + rectangle.Width == tileData2.Width)
                             ++rectangle.Width;
-                        int checkStart = tileData2.AnchorLeft.checkStart;
+                        var checkStart = tileData2.AnchorLeft.checkStart;
                         if ((tileData2.AnchorRight.type & AnchorType.Tree) == AnchorType.Tree)
                             --checkStart;
                         if (checkStart < rectangle.Y)
@@ -291,10 +291,10 @@ namespace Terraria
                             rectangle.Y = checkStart;
                         }
 
-                        int num10 = checkStart + tileData2.AnchorRight.tileCount - 1;
+                        var num10 = checkStart + tileData2.AnchorRight.tileCount - 1;
                         if ((tileData2.AnchorRight.type & AnchorType.Tree) == AnchorType.Tree)
                             num10 += 2;
-                        int num11 = rectangle.Y + rectangle.Height - 1;
+                        var num11 = rectangle.Y + rectangle.Height - 1;
                         if (num10 > num11)
                             rectangle.Height += num10 - num11;
                     }
@@ -311,17 +311,17 @@ namespace Terraria
                         TileObject.objectPreview.Coordinates = new Point16(num8 - X, num9 - Y);
                     }
 
-                    float num12 = 0.0f;
-                    float num13 = (float) (tileData2.Width * tileData2.Height);
-                    float num14 = 0.0f;
-                    float num15 = 0.0f;
-                    for (int index1 = 0; index1 < tileData2.Width; ++index1)
+                    var num12 = 0.0f;
+                    var num13 = (float) (tileData2.Width * tileData2.Height);
+                    var num14 = 0.0f;
+                    var num15 = 0.0f;
+                    for (var index1 = 0; index1 < tileData2.Width; ++index1)
                     {
-                        for (int index2 = 0; index2 < tileData2.Height; ++index2)
+                        for (var index2 = 0; index2 < tileData2.Height; ++index2)
                         {
-                            Tile tileSafely = Framing.GetTileSafely(num8 + index1, num9 + index2);
-                            bool flag2 = !tileData2.LiquidPlace(tileSafely);
-                            bool flag3 = false;
+                            var tileSafely = Framing.GetTileSafely(num8 + index1, num9 + index2);
+                            var flag2 = !tileData2.LiquidPlace(tileSafely);
+                            var flag3 = false;
                             if (tileData2.AnchorWall)
                             {
                                 ++num15;
@@ -331,7 +331,7 @@ namespace Terraria
                                     ++num14;
                             }
 
-                            bool flag4 = false;
+                            var flag4 = false;
                             if (tileSafely.active() && !Main.tileCut[(int) tileSafely.type])
                                 flag4 = true;
                             if (flag4 || flag2 || flag3)
@@ -348,16 +348,16 @@ namespace Terraria
                         }
                     }
 
-                    AnchorData anchorBottom = tileData2.AnchorBottom;
+                    var anchorBottom = tileData2.AnchorBottom;
                     if (anchorBottom.tileCount != 0)
                     {
                         num15 += (float) anchorBottom.tileCount;
-                        int height = tileData2.Height;
-                        for (int index = 0; index < anchorBottom.tileCount; ++index)
+                        var height = tileData2.Height;
+                        for (var index = 0; index < anchorBottom.tileCount; ++index)
                         {
-                            int num10 = anchorBottom.checkStart + index;
-                            Tile tileSafely = Framing.GetTileSafely(num8 + num10, num9 + height);
-                            bool flag2 = false;
+                            var num10 = anchorBottom.checkStart + index;
+                            var tileSafely = Framing.GetTileSafely(num8 + num10, num9 + height);
+                            var flag2 = false;
                             if (tileSafely.nactive())
                             {
                                 if ((anchorBottom.type & AnchorType.SolidTile) == AnchorType.SolidTile &&
@@ -372,7 +372,7 @@ namespace Terraria
                                 {
                                     if (TileID.Sets.Platforms[(int) tileSafely.type])
                                     {
-                                        int num11 = (int) tileSafely.frameX / TileObjectData.PlatformFrameWidth();
+                                        var num11 = (int) tileSafely.frameX / TileObjectData.PlatformFrameWidth();
                                         if (!tileSafely.halfBrick() && num11 >= 0 && num11 <= 7 ||
                                             (num11 >= 12 && num11 <= 16 || num11 >= 25 && num11 <= 26))
                                             flag2 = true;
@@ -421,16 +421,16 @@ namespace Terraria
                         }
                     }
 
-                    AnchorData anchorTop = tileData2.AnchorTop;
+                    var anchorTop = tileData2.AnchorTop;
                     if (anchorTop.tileCount != 0)
                     {
                         num15 += (float) anchorTop.tileCount;
-                        int num10 = -1;
-                        for (int index = 0; index < anchorTop.tileCount; ++index)
+                        var num10 = -1;
+                        for (var index = 0; index < anchorTop.tileCount; ++index)
                         {
-                            int num11 = anchorTop.checkStart + index;
-                            Tile tileSafely = Framing.GetTileSafely(num8 + num11, num9 + num10);
-                            bool flag2 = false;
+                            var num11 = anchorTop.checkStart + index;
+                            var tileSafely = Framing.GetTileSafely(num8 + num11, num9 + num10);
+                            var flag2 = false;
                             if (tileSafely.nactive())
                             {
                                 if (Main.tileSolid[(int) tileSafely.type] &&
@@ -480,16 +480,16 @@ namespace Terraria
                         }
                     }
 
-                    AnchorData anchorRight = tileData2.AnchorRight;
+                    var anchorRight = tileData2.AnchorRight;
                     if (anchorRight.tileCount != 0)
                     {
                         num15 += (float) anchorRight.tileCount;
-                        int width = tileData2.Width;
-                        for (int index = 0; index < anchorRight.tileCount; ++index)
+                        var width = tileData2.Width;
+                        for (var index = 0; index < anchorRight.tileCount; ++index)
                         {
-                            int num10 = anchorRight.checkStart + index;
-                            Tile tileSafely1 = Framing.GetTileSafely(num8 + width, num9 + num10);
-                            bool flag2 = false;
+                            var num10 = anchorRight.checkStart + index;
+                            var tileSafely1 = Framing.GetTileSafely(num8 + width, num9 + num10);
+                            var flag2 = false;
                             if (tileSafely1.nactive())
                             {
                                 if (Main.tileSolid[(int) tileSafely1.type] &&
@@ -517,7 +517,7 @@ namespace Terraria
                                     if (index == 0)
                                     {
                                         ++num15;
-                                        Tile tileSafely2 = Framing.GetTileSafely(num8 + width, num9 + num10 - 1);
+                                        var tileSafely2 = Framing.GetTileSafely(num8 + width, num9 + num10 - 1);
                                         if (tileSafely2.nactive() && tileSafely2.type == (ushort) 5)
                                         {
                                             ++num14;
@@ -531,7 +531,7 @@ namespace Terraria
                                     if (index == anchorRight.tileCount - 1)
                                     {
                                         ++num15;
-                                        Tile tileSafely2 = Framing.GetTileSafely(num8 + width, num9 + num10 + 1);
+                                        var tileSafely2 = Framing.GetTileSafely(num8 + width, num9 + num10 + 1);
                                         if (tileSafely2.nactive() && tileSafely2.type == (ushort) 5)
                                         {
                                             ++num14;
@@ -565,16 +565,16 @@ namespace Terraria
                         }
                     }
 
-                    AnchorData anchorLeft = tileData2.AnchorLeft;
+                    var anchorLeft = tileData2.AnchorLeft;
                     if (anchorLeft.tileCount != 0)
                     {
                         num15 += (float) anchorLeft.tileCount;
-                        int num10 = -1;
-                        for (int index = 0; index < anchorLeft.tileCount; ++index)
+                        var num10 = -1;
+                        for (var index = 0; index < anchorLeft.tileCount; ++index)
                         {
-                            int num11 = anchorLeft.checkStart + index;
-                            Tile tileSafely1 = Framing.GetTileSafely(num8 + num10, num9 + num11);
-                            bool flag2 = false;
+                            var num11 = anchorLeft.checkStart + index;
+                            var tileSafely1 = Framing.GetTileSafely(num8 + num10, num9 + num11);
+                            var flag2 = false;
                             if (tileSafely1.nactive())
                             {
                                 if (Main.tileSolid[(int) tileSafely1.type] &&
@@ -602,7 +602,7 @@ namespace Terraria
                                     if (index == 0)
                                     {
                                         ++num15;
-                                        Tile tileSafely2 = Framing.GetTileSafely(num8 + num10, num9 + num11 - 1);
+                                        var tileSafely2 = Framing.GetTileSafely(num8 + num10, num9 + num11 - 1);
                                         if (tileSafely2.nactive() && tileSafely2.type == (ushort) 5)
                                         {
                                             ++num14;
@@ -616,7 +616,7 @@ namespace Terraria
                                     if (index == anchorLeft.tileCount - 1)
                                     {
                                         ++num15;
-                                        Tile tileSafely2 = Framing.GetTileSafely(num8 + num10, num9 + num11 + 1);
+                                        var tileSafely2 = Framing.GetTileSafely(num8 + num10, num9 + num11 + 1);
                                         if (tileSafely2.nactive() && tileSafely2.type == (ushort) 5)
                                         {
                                             ++num14;
@@ -654,8 +654,8 @@ namespace Terraria
                     {
                         if (tileData2.HookCheck.processedCoordinates)
                         {
-                            int x1 = (int) tileData2.Origin.X;
-                            int y1 = (int) tileData2.Origin.Y;
+                            var x1 = (int) tileData2.Origin.X;
+                            var y1 = (int) tileData2.Origin.Y;
                         }
 
                         if (tileData2.HookCheck.hook(x, y, type, style, dir) == tileData2.HookCheck.badReturn &&
@@ -667,8 +667,8 @@ namespace Terraria
                         }
                     }
 
-                    float num16 = num14 / num15;
-                    float num17 = num12 / num13;
+                    var num16 = num14 / num15;
+                    var num17 = num12 / num13;
                     if ((double) num17 == 1.0 && (double) num15 == 0.0)
                     {
                         num16 = 1f;
@@ -696,20 +696,20 @@ namespace Terraria
                 }
             }
 
-            int num18 = -1;
+            var num18 = -1;
             if (flag1)
             {
                 if (TileObjectPreviewData.randomCache == null)
                     TileObjectPreviewData.randomCache = new TileObjectPreviewData();
-                bool flag2 = false;
+                var flag2 = false;
                 if ((int) TileObjectPreviewData.randomCache.Type == type)
                 {
-                    Point16 coordinates = TileObjectPreviewData.randomCache.Coordinates;
-                    Point16 objectStart = TileObjectPreviewData.randomCache.ObjectStart;
-                    int num8 = (int) coordinates.X + (int) objectStart.X;
-                    int num9 = (int) coordinates.Y + (int) objectStart.Y;
-                    int num10 = x - (int) tileData1.Origin.X;
-                    int num11 = y - (int) tileData1.Origin.Y;
+                    var coordinates = TileObjectPreviewData.randomCache.Coordinates;
+                    var objectStart = TileObjectPreviewData.randomCache.ObjectStart;
+                    var num8 = (int) coordinates.X + (int) objectStart.X;
+                    var num9 = (int) coordinates.Y + (int) objectStart.Y;
+                    var num10 = x - (int) tileData1.Origin.X;
+                    var num11 = y - (int) tileData1.Origin.Y;
                     if (num8 != num10 || num9 != num11)
                         flag2 = true;
                 }
@@ -749,12 +749,12 @@ namespace Terraria
 
         public static void DrawPreview(SpriteBatch sb, TileObjectPreviewData op, Vector2 position)
         {
-            Point16 coordinates = op.Coordinates;
-            Texture2D texture = Main.tileTexture[(int) op.Type];
-            TileObjectData tileData = TileObjectData.GetTileData((int) op.Type, (int) op.Style, op.Alternate);
-            int placementStyle = tileData.CalculatePlacementStyle((int) op.Style, op.Alternate, op.Random);
-            int num1 = 0;
-            int drawYoffset = tileData.DrawYOffset;
+            var coordinates = op.Coordinates;
+            var texture = Main.tileTexture[(int) op.Type];
+            var tileData = TileObjectData.GetTileData((int) op.Type, (int) op.Style, op.Alternate);
+            var placementStyle = tileData.CalculatePlacementStyle((int) op.Style, op.Alternate, op.Random);
+            var num1 = 0;
+            var drawYoffset = tileData.DrawYOffset;
             if (tileData.StyleWrapLimit > 0)
             {
                 num1 = placementStyle / tileData.StyleWrapLimit * tileData.StyleLineSkip;
@@ -774,15 +774,15 @@ namespace Terraria
                 num3 = tileData.CoordinateFullHeight * placementStyle;
             }
 
-            for (int index1 = 0; index1 < (int) op.Size.X; ++index1)
+            for (var index1 = 0; index1 < (int) op.Size.X; ++index1)
             {
-                int x = num2 + (index1 - (int) op.ObjectStart.X) *
+                var x = num2 + (index1 - (int) op.ObjectStart.X) *
                         (tileData.CoordinateWidth + tileData.CoordinatePadding);
-                int y = num3;
-                for (int index2 = 0; index2 < (int) op.Size.Y; ++index2)
+                var y = num3;
+                for (var index2 = 0; index2 < (int) op.Size.Y; ++index2)
                 {
-                    int i = (int) coordinates.X + index1;
-                    int num4 = (int) coordinates.Y + index2;
+                    var i = (int) coordinates.X + index1;
+                    var num4 = (int) coordinates.Y + index2;
                     if (index2 == 0 && tileData.DrawStepDown != 0 &&
                         WorldGen.SolidTile(Framing.GetTileSafely(i, num4 - 1)))
                         drawYoffset += tileData.DrawStepDown;
@@ -799,16 +799,16 @@ namespace Terraria
                             continue;
                     }
 
-                    Color color2 = color1 * 0.5f;
+                    var color2 = color1 * 0.5f;
                     if (index1 >= (int) op.ObjectStart.X && index1 < (int) op.ObjectStart.X + tileData.Width &&
                         (index2 >= (int) op.ObjectStart.Y && index2 < (int) op.ObjectStart.Y + tileData.Height))
                     {
-                        SpriteEffects effects = SpriteEffects.None;
+                        var effects = SpriteEffects.None;
                         if (tileData.DrawFlipHorizontal && index1 % 2 == 1)
                             effects |= SpriteEffects.FlipHorizontally;
                         if (tileData.DrawFlipVertical && index2 % 2 == 1)
                             effects |= SpriteEffects.FlipVertically;
-                        Rectangle rectangle = new Rectangle(x, y, tileData.CoordinateWidth,
+                        var rectangle = new Rectangle(x, y, tileData.CoordinateWidth,
                             tileData.CoordinateHeights[index2 - (int) op.ObjectStart.Y]);
                         sb.Draw(texture,
                             new Vector2(

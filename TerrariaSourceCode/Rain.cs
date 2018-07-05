@@ -24,12 +24,12 @@ namespace Terraria
         {
             if ((double) Main.screenPosition.Y > Main.worldSurface * 16.0 || Main.gameMenu)
                 return;
-            float num1 = (float) Main.screenWidth / 1920f * 25f * (float) (0.25 + 1.0 * (double) Main.cloudAlpha);
+            var num1 = (float) Main.screenWidth / 1920f * 25f * (float) (0.25 + 1.0 * (double) Main.cloudAlpha);
             if (Filters.Scene["Sandstorm"].IsActive())
                 return;
-            for (int index = 0; (double) index < (double) num1; ++index)
+            for (var index = 0; (double) index < (double) num1; ++index)
             {
-                int num2 = 600;
+                var num2 = 600;
                 if ((double) Main.player[Main.myPlayer].velocity.Y < 0.0)
                     num2 += (int) ((double) Math.Abs(Main.player[Main.myPlayer].velocity.Y) * 30.0);
                 Vector2 Position;
@@ -42,15 +42,15 @@ namespace Terraria
                     Position.X = 0.0f;
                 if ((double) Position.X > (double) ((Main.maxTilesX - 1) * 16))
                     Position.X = (float) ((Main.maxTilesX - 1) * 16);
-                int i = (int) Position.X / 16;
-                int j = (int) Position.Y / 16;
+                var i = (int) Position.X / 16;
+                var j = (int) Position.Y / 16;
                 if (i < 0)
                     i = 0;
                 if (i > Main.maxTilesX - 1)
                     i = Main.maxTilesX - 1;
                 if (Main.gameMenu || !WorldGen.SolidTile(i, j) && Main.tile[i, j].wall <= (byte) 0)
                 {
-                    Vector2 Velocity = new Vector2(Main.windSpeed * 12f, 14f);
+                    var Velocity = new Vector2(Main.windSpeed * 12f, 14f);
                     Rain.NewRain(Position, Velocity);
                 }
             }
@@ -66,10 +66,10 @@ namespace Terraria
             this.active = false;
             if ((double) Main.rand.Next(100) >= (double) Main.gfxQuality * 100.0)
                 return;
-            int Type = 154;
+            var Type = 154;
             if (this.type == (byte) 3 || this.type == (byte) 4 || this.type == (byte) 5)
                 Type = 218;
-            int index = Dust.NewDust(this.position - this.velocity, 2, 2, Type, 0.0f, 0.0f, 0, new Color(), 1f);
+            var index = Dust.NewDust(this.position - this.velocity, 2, 2, Type, 0.0f, 0.0f, 0, new Color(), 1f);
             Main.dust[index].position.X -= 2f;
             Main.dust[index].alpha = 38;
             Main.dust[index].velocity *= 0.1f;
@@ -79,26 +79,26 @@ namespace Terraria
 
         public static int NewRain(Vector2 Position, Vector2 Velocity)
         {
-            int index1 = -1;
-            int num1 = (int) ((double) Main.maxRain * (double) Main.cloudAlpha);
+            var index1 = -1;
+            var num1 = (int) ((double) Main.maxRain * (double) Main.cloudAlpha);
             if (num1 > Main.maxRain)
                 num1 = Main.maxRain;
-            float num2 = (float) Main.maxTilesX / 6400f;
-            float num3 = Math.Max(0.0f,
+            var num2 = (float) Main.maxTilesX / 6400f;
+            var num3 = Math.Max(0.0f,
                 Math.Min(1f,
                     (float) (((double) Main.player[Main.myPlayer].position.Y / 16.0 - 85.0 * (double) num2) /
                              (60.0 * (double) num2))));
-            float num4 = num3 * num3;
-            int num5 = (int) ((double) num1 * (double) num4);
-            float num6 = (float) ((1.0 + (double) Main.gfxQuality) / 2.0);
+            var num4 = num3 * num3;
+            var num5 = (int) ((double) num1 * (double) num4);
+            var num6 = (float) ((1.0 + (double) Main.gfxQuality) / 2.0);
             if ((double) num6 < 0.9)
                 num5 = (int) ((double) num5 * (double) num6);
-            float num7 = (float) (800 - Main.snowTiles);
+            var num7 = (float) (800 - Main.snowTiles);
             if ((double) num7 < 0.0)
                 num7 = 0.0f;
-            float num8 = num7 / 800f;
-            int num9 = (int) ((double) num5 * (double) num8);
-            for (int index2 = 0; index2 < num9; ++index2)
+            var num8 = num7 / 800f;
+            var num9 = (int) ((double) num5 * (double) num8);
+            for (var index2 = 0; index2 < num9; ++index2)
             {
                 if (!Main.rain[index2].active)
                 {
@@ -109,7 +109,7 @@ namespace Terraria
 
             if (index1 == -1)
                 return Main.maxRain;
-            Rain rain = Main.rain[index1];
+            var rain = Main.rain[index1];
             rain.active = true;
             rain.position = Position;
             rain.scale = (float) (1.0 + (double) Main.rand.Next(-20, 21) * 0.00999999977648258);

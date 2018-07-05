@@ -106,24 +106,24 @@ namespace Terraria
                 Lighting.swipe = new Lighting.LightingSwipeData();
                 Lighting.countdown = new CountdownEvent(0);
                 Lighting.threadSwipes = new Lighting.LightingSwipeData[Environment.ProcessorCount];
-                for (int index = 0; index < Lighting.threadSwipes.Length; ++index)
+                for (var index = 0; index < Lighting.threadSwipes.Length; ++index)
                     Lighting.threadSwipes[index] = new Lighting.LightingSwipeData();
             }
 
-            int length1 = Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10;
-            int length2 = Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10;
+            var length1 = Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10;
+            var length2 = Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10;
             if (Lighting.states != null && Lighting.states.Length >= length1 && Lighting.states[0].Length >= length2)
                 return;
             Lighting.states = new Lighting.LightingState[length1][];
             Lighting.axisFlipStates = new Lighting.LightingState[length2][];
-            for (int index = 0; index < length2; ++index)
+            for (var index = 0; index < length2; ++index)
                 Lighting.axisFlipStates[index] = new Lighting.LightingState[length1];
-            for (int index1 = 0; index1 < length1; ++index1)
+            for (var index1 = 0; index1 < length1; ++index1)
             {
-                Lighting.LightingState[] lightingStateArray = new Lighting.LightingState[length2];
-                for (int index2 = 0; index2 < length2; ++index2)
+                var lightingStateArray = new Lighting.LightingState[length2];
+                for (var index2 = 0; index2 < length2; ++index2)
                 {
-                    Lighting.LightingState lightingState = new Lighting.LightingState();
+                    var lightingState = new Lighting.LightingState();
                     lightingStateArray[index2] = lightingState;
                     Lighting.axisFlipStates[index2][index1] = lightingState;
                 }
@@ -136,9 +136,9 @@ namespace Terraria
         {
             Main.render = true;
             Lighting.oldSkyColor = Lighting.skyColor;
-            float num1 = (float) Main.tileColor.R / (float) byte.MaxValue;
-            float num2 = (float) Main.tileColor.G / (float) byte.MaxValue;
-            float num3 = (float) Main.tileColor.B / (float) byte.MaxValue;
+            var num1 = (float) Main.tileColor.R / (float) byte.MaxValue;
+            var num2 = (float) Main.tileColor.G / (float) byte.MaxValue;
+            var num3 = (float) Main.tileColor.B / (float) byte.MaxValue;
             Lighting.skyColor = (float) (((double) num1 + (double) num2 + (double) num3) / 3.0);
             if (Lighting.lightMode < 2)
             {
@@ -167,24 +167,24 @@ namespace Terraria
             Lighting.lastToLightY = Lighting.lastTileY + Lighting.offScreenTiles;
             ++Lighting.lightCounter;
             ++Main.renderCount;
-            int num4 = Main.screenWidth / 16 + Lighting.offScreenTiles * 2;
-            int num5 = Main.screenHeight / 16 + Lighting.offScreenTiles * 2;
-            Vector2 screenLastPosition = Main.screenLastPosition;
+            var num4 = Main.screenWidth / 16 + Lighting.offScreenTiles * 2;
+            var num5 = Main.screenHeight / 16 + Lighting.offScreenTiles * 2;
+            var screenLastPosition = Main.screenLastPosition;
             if (Main.renderCount < 3)
                 Lighting.doColors();
             if (Main.renderCount == 2)
             {
-                Vector2 screenPosition = Main.screenPosition;
-                int num6 = (int) Math.Floor((double) Main.screenPosition.X / 16.0) - Lighting.scrX;
-                int num7 = (int) Math.Floor((double) Main.screenPosition.Y / 16.0) - Lighting.scrY;
+                var screenPosition = Main.screenPosition;
+                var num6 = (int) Math.Floor((double) Main.screenPosition.X / 16.0) - Lighting.scrX;
+                var num7 = (int) Math.Floor((double) Main.screenPosition.Y / 16.0) - Lighting.scrY;
                 if (num6 > 16)
                     num6 = 0;
                 if (num7 > 16)
                     num7 = 0;
-                int num8 = 0;
-                int num9 = num4;
-                int num10 = 0;
-                int num11 = num5;
+                var num8 = 0;
+                var num9 = num4;
+                var num10 = 0;
+                var num11 = num5;
                 if (num6 < 0)
                     num8 -= num6;
                 else
@@ -195,20 +195,20 @@ namespace Terraria
                     num11 -= num7;
                 if (Lighting.RGB)
                 {
-                    int num12 = num4;
+                    var num12 = num4;
                     if (Lighting.states.Length <= num12 + num6)
                         num12 = Lighting.states.Length - num6 - 1;
-                    for (int index1 = num8; index1 < num12; ++index1)
+                    for (var index1 = num8; index1 < num12; ++index1)
                     {
-                        Lighting.LightingState[] state1 = Lighting.states[index1];
-                        Lighting.LightingState[] state2 = Lighting.states[index1 + num6];
-                        int num13 = num11;
+                        var state1 = Lighting.states[index1];
+                        var state2 = Lighting.states[index1 + num6];
+                        var num13 = num11;
                         if (state2.Length <= num13 + num6)
                             num13 = state2.Length - num7 - 1;
-                        for (int index2 = num10; index2 < num13; ++index2)
+                        for (var index2 = num10; index2 < num13; ++index2)
                         {
-                            Lighting.LightingState lightingState1 = state1[index2];
-                            Lighting.LightingState lightingState2 = state2[index2 + num7];
+                            var lightingState1 = state1[index2];
+                            var lightingState2 = state2[index2 + num7];
                             lightingState1.r = lightingState2.r2;
                             lightingState1.g = lightingState2.g2;
                             lightingState1.b = lightingState2.b2;
@@ -217,20 +217,20 @@ namespace Terraria
                 }
                 else
                 {
-                    int num12 = num9;
+                    var num12 = num9;
                     if (Lighting.states.Length <= num12 + num6)
                         num12 = Lighting.states.Length - num6 - 1;
-                    for (int index1 = num8; index1 < num12; ++index1)
+                    for (var index1 = num8; index1 < num12; ++index1)
                     {
-                        Lighting.LightingState[] state1 = Lighting.states[index1];
-                        Lighting.LightingState[] state2 = Lighting.states[index1 + num6];
-                        int num13 = num11;
+                        var state1 = Lighting.states[index1];
+                        var state2 = Lighting.states[index1 + num6];
+                        var num13 = num11;
                         if (state2.Length <= num13 + num6)
                             num13 = state2.Length - num7 - 1;
-                        for (int index2 = num10; index2 < num13; ++index2)
+                        for (var index2 = num10; index2 < num13; ++index2)
                         {
-                            Lighting.LightingState lightingState1 = state1[index2];
-                            Lighting.LightingState lightingState2 = state2[index2 + num7];
+                            var lightingState1 = state1[index2];
+                            var lightingState2 = state2[index2 + num7];
                             lightingState1.r = lightingState2.r2;
                             lightingState1.g = lightingState2.r2;
                             lightingState1.b = lightingState2.r2;
@@ -240,7 +240,7 @@ namespace Terraria
             }
             else if (!Main.renderNow)
             {
-                int num6 = (int) Math.Floor((double) Main.screenPosition.X / 16.0) -
+                var num6 = (int) Math.Floor((double) Main.screenPosition.X / 16.0) -
                            (int) Math.Floor((double) screenLastPosition.X / 16.0);
                 if (num6 > 5 || num6 < -5)
                     num6 = 0;
@@ -261,7 +261,7 @@ namespace Terraria
                     num9 = num4 - num6;
                 }
 
-                int num10 = (int) Math.Floor((double) Main.screenPosition.Y / 16.0) -
+                var num10 = (int) Math.Floor((double) Main.screenPosition.Y / 16.0) -
                             (int) Math.Floor((double) screenLastPosition.Y / 16.0);
                 if (num10 > 5 || num10 < -5)
                     num10 = 0;
@@ -284,16 +284,16 @@ namespace Terraria
 
                 if (num6 != 0 || num10 != 0)
                 {
-                    int index1 = num8;
+                    var index1 = num8;
                     while (index1 != num9)
                     {
-                        Lighting.LightingState[] state1 = Lighting.states[index1];
-                        Lighting.LightingState[] state2 = Lighting.states[index1 + num6 * num7];
-                        int index2 = num12;
+                        var state1 = Lighting.states[index1];
+                        var state2 = Lighting.states[index1 + num6 * num7];
+                        var index2 = num12;
                         while (index2 != num13)
                         {
-                            Lighting.LightingState lightingState1 = state1[index2];
-                            Lighting.LightingState lightingState2 = state2[index2 + num10 * num11];
+                            var lightingState1 = state1[index2];
+                            var lightingState2 = state2[index2 + num10 * num11];
                             lightingState1.r = lightingState2.r;
                             lightingState1.g = lightingState2.g;
                             lightingState1.b = lightingState2.b;
@@ -322,16 +322,16 @@ namespace Terraria
                                 Main.maxTilesY - 1);
                             Main.mapMaxY = Utils.Clamp<int>(Lighting.lastToLightY - Lighting.offScreenTiles, 0,
                                 Main.maxTilesY - 1);
-                            for (int mapMinX = Main.mapMinX; mapMinX < Main.mapMaxX; ++mapMinX)
+                            for (var mapMinX = Main.mapMinX; mapMinX < Main.mapMaxX; ++mapMinX)
                             {
-                                Lighting.LightingState[] state =
+                                var state =
                                     Lighting.states[mapMinX - Lighting.firstTileX + Lighting.offScreenTiles];
-                                for (int mapMinY = Main.mapMinY; mapMinY < Main.mapMaxY; ++mapMinY)
+                                for (var mapMinY = Main.mapMinY; mapMinY < Main.mapMaxY; ++mapMinY)
                                 {
-                                    Lighting.LightingState lightingState =
+                                    var lightingState =
                                         state[mapMinY - Lighting.firstTileY + Lighting.offScreenTiles];
-                                    Tile tile = Main.tile[mapMinX, mapMinY];
-                                    float num14 = 0.0f;
+                                    var tile = Main.tile[mapMinX, mapMinY];
+                                    var num14 = 0.0f;
                                     if ((double) lightingState.r > (double) num14)
                                         num14 = lightingState.r;
                                     if ((double) lightingState.g > (double) num14)
@@ -340,7 +340,7 @@ namespace Terraria
                                         num14 = lightingState.b;
                                     if (Lighting.lightMode < 2)
                                         num14 *= 1.5f;
-                                    byte light = (byte) Math.Min((float) byte.MaxValue, num14 * (float) byte.MaxValue);
+                                    var light = (byte) Math.Min((float) byte.MaxValue, num14 * (float) byte.MaxValue);
                                     if ((double) mapMinY < Main.worldSurface && !tile.active() &&
                                         (tile.wall == (byte) 0 && tile.liquid == (byte) 0))
                                         light = (byte) 22;
@@ -361,19 +361,19 @@ namespace Terraria
 
                 if ((double) Lighting.oldSkyColor != (double) Lighting.skyColor)
                 {
-                    int num14 = Utils.Clamp<int>(Lighting.firstToLightX, 0, Main.maxTilesX - 1);
-                    int num15 = Utils.Clamp<int>(Lighting.lastToLightX, 0, Main.maxTilesX - 1);
-                    int num16 = Utils.Clamp<int>(Lighting.firstToLightY, 0, Main.maxTilesY - 1);
-                    int num17 = Utils.Clamp<int>(Lighting.lastToLightY, 0, (int) Main.worldSurface - 1);
+                    var num14 = Utils.Clamp<int>(Lighting.firstToLightX, 0, Main.maxTilesX - 1);
+                    var num15 = Utils.Clamp<int>(Lighting.lastToLightX, 0, Main.maxTilesX - 1);
+                    var num16 = Utils.Clamp<int>(Lighting.firstToLightY, 0, Main.maxTilesY - 1);
+                    var num17 = Utils.Clamp<int>(Lighting.lastToLightY, 0, (int) Main.worldSurface - 1);
                     if ((double) num16 < Main.worldSurface)
                     {
-                        for (int index1 = num14; index1 < num15; ++index1)
+                        for (var index1 = num14; index1 < num15; ++index1)
                         {
-                            Lighting.LightingState[] state = Lighting.states[index1 - Lighting.firstToLightX];
-                            for (int index2 = num16; index2 < num17; ++index2)
+                            var state = Lighting.states[index1 - Lighting.firstToLightX];
+                            for (var index2 = num16; index2 < num17; ++index2)
                             {
-                                Lighting.LightingState lightingState = state[index2 - Lighting.firstToLightY];
-                                Tile tile = Main.tile[index1, index2];
+                                var lightingState = state[index2 - Lighting.firstToLightY];
+                                var tile = Main.tile[index1, index2];
                                 if (tile == null)
                                 {
                                     tile = new Tile();
@@ -406,26 +406,26 @@ namespace Terraria
 
         public static void PreRenderPhase()
         {
-            float num1 = (float) Main.tileColor.R / (float) byte.MaxValue;
-            float num2 = (float) Main.tileColor.G / (float) byte.MaxValue;
-            float num3 = (float) Main.tileColor.B / (float) byte.MaxValue;
-            Stopwatch stopwatch = new Stopwatch();
+            var num1 = (float) Main.tileColor.R / (float) byte.MaxValue;
+            var num2 = (float) Main.tileColor.G / (float) byte.MaxValue;
+            var num3 = (float) Main.tileColor.B / (float) byte.MaxValue;
+            var stopwatch = new Stopwatch();
             stopwatch.Start();
-            int num4 = 0;
-            int num5 = Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10;
-            int num6 = 0;
-            int num7 = Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10;
+            var num4 = 0;
+            var num5 = Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10;
+            var num6 = 0;
+            var num7 = Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10;
             Lighting.minX = num5;
             Lighting.maxX = num4;
             Lighting.minY = num7;
             Lighting.maxY = num6;
             Lighting.RGB = Lighting.lightMode == 0 || Lighting.lightMode == 3;
-            for (int index1 = num4; index1 < num5; ++index1)
+            for (var index1 = num4; index1 < num5; ++index1)
             {
-                Lighting.LightingState[] state = Lighting.states[index1];
-                for (int index2 = num6; index2 < num7; ++index2)
+                var state = Lighting.states[index1];
+                for (var index2 = num6; index2 < num7; ++index2)
                 {
-                    Lighting.LightingState lightingState = state[index2];
+                    var lightingState = state[index2];
                     lightingState.r2 = 0.0f;
                     lightingState.g2 = 0.0f;
                     lightingState.b2 = 0.0f;
@@ -441,23 +441,23 @@ namespace Terraria
                 {
                     try
                     {
-                        int num8 = (int) Main.screenPosition.Y / 16 - 10;
-                        int num9 = (int) ((double) Main.screenPosition.Y + (double) Main.screenHeight) / 16 + 10;
-                        int num10 = (int) Main.npc[Main.wof].position.X / 16;
-                        int num11 = Main.npc[Main.wof].direction <= 0 ? num10 + 2 : num10 - 3;
-                        int num12 = num11 + 8;
-                        float num13 = (float) (0.5 * (double) Main.demonTorch + 1.0 * (1.0 - (double) Main.demonTorch));
-                        float num14 = 0.3f;
-                        float num15 = (float) (1.0 * (double) Main.demonTorch + 0.5 * (1.0 - (double) Main.demonTorch));
-                        float num16 = num13 * 0.2f;
-                        float num17 = num14 * 0.1f;
-                        float num18 = num15 * 0.3f;
-                        for (int index1 = num11; index1 <= num12; ++index1)
+                        var num8 = (int) Main.screenPosition.Y / 16 - 10;
+                        var num9 = (int) ((double) Main.screenPosition.Y + (double) Main.screenHeight) / 16 + 10;
+                        var num10 = (int) Main.npc[Main.wof].position.X / 16;
+                        var num11 = Main.npc[Main.wof].direction <= 0 ? num10 + 2 : num10 - 3;
+                        var num12 = num11 + 8;
+                        var num13 = (float) (0.5 * (double) Main.demonTorch + 1.0 * (1.0 - (double) Main.demonTorch));
+                        var num14 = 0.3f;
+                        var num15 = (float) (1.0 * (double) Main.demonTorch + 0.5 * (1.0 - (double) Main.demonTorch));
+                        var num16 = num13 * 0.2f;
+                        var num17 = num14 * 0.1f;
+                        var num18 = num15 * 0.3f;
+                        for (var index1 = num11; index1 <= num12; ++index1)
                         {
-                            Lighting.LightingState[] state = Lighting.states[index1 - num11];
-                            for (int index2 = num8; index2 <= num9; ++index2)
+                            var state = Lighting.states[index1 - num11];
+                            for (var index2 = num8; index2 <= num9; ++index2)
                             {
-                                Lighting.LightingState lightingState = state[index2 - Lighting.firstToLightY];
+                                var lightingState = state[index2 - Lighting.firstToLightY];
                                 if ((double) lightingState.r2 < (double) num16)
                                     lightingState.r2 = num16;
                                 if ((double) lightingState.g2 < (double) num17)
@@ -490,35 +490,35 @@ namespace Terraria
             Main.clock = false;
             Main.musicBox = -1;
             Main.waterCandles = 0;
-            for (int index = 0; index < Main.player[Main.myPlayer].NPCBannerBuff.Length; ++index)
+            for (var index = 0; index < Main.player[Main.myPlayer].NPCBannerBuff.Length; ++index)
                 Main.player[Main.myPlayer].NPCBannerBuff[index] = false;
             Main.player[Main.myPlayer].hasBanner = false;
-            int[] screenTileCounts = Main.screenTileCounts;
+            var screenTileCounts = Main.screenTileCounts;
             Array.Clear((Array) screenTileCounts, 0, screenTileCounts.Length);
-            int num19 = Utils.Clamp<int>(Lighting.firstToLightX, 5, Main.maxTilesX - 1);
-            int num20 = Utils.Clamp<int>(Lighting.lastToLightX, 5, Main.maxTilesX - 1);
-            int num21 = Utils.Clamp<int>(Lighting.firstToLightY, 5, Main.maxTilesY - 1);
-            int num22 = Utils.Clamp<int>(Lighting.lastToLightY, 5, Main.maxTilesY - 1);
-            int num23 = (num20 - num19 - Main.zoneX) / 2;
-            int num24 = (num22 - num21 - Main.zoneY) / 2;
+            var num19 = Utils.Clamp<int>(Lighting.firstToLightX, 5, Main.maxTilesX - 1);
+            var num20 = Utils.Clamp<int>(Lighting.lastToLightX, 5, Main.maxTilesX - 1);
+            var num21 = Utils.Clamp<int>(Lighting.firstToLightY, 5, Main.maxTilesY - 1);
+            var num22 = Utils.Clamp<int>(Lighting.lastToLightY, 5, Main.maxTilesY - 1);
+            var num23 = (num20 - num19 - Main.zoneX) / 2;
+            var num24 = (num22 - num21 - Main.zoneY) / 2;
             Main.fountainColor = -1;
             Main.monolithType = -1;
-            for (int index1 = num19; index1 < num20; ++index1)
+            for (var index1 = num19; index1 < num20; ++index1)
             {
-                Lighting.LightingState[] state = Lighting.states[index1 - Lighting.firstToLightX];
-                for (int index2 = num21; index2 < num22; ++index2)
+                var state = Lighting.states[index1 - Lighting.firstToLightX];
+                for (var index2 = num21; index2 < num22; ++index2)
                 {
-                    Lighting.LightingState lightingState = state[index2 - Lighting.firstToLightY];
-                    Tile tile = Main.tile[index1, index2];
+                    var lightingState = state[index2 - Lighting.firstToLightY];
+                    var tile = Main.tile[index1, index2];
                     if (tile == null)
                     {
                         tile = new Tile();
                         Main.tile[index1, index2] = tile;
                     }
 
-                    float num8 = 0.0f;
-                    float num9 = 0.0f;
-                    float num10 = 0.0f;
+                    var num8 = 0.0f;
+                    var num9 = 0.0f;
+                    var num10 = 0.0f;
                     if ((double) index2 < Main.worldSurface)
                     {
                         if ((!tile.active() || !Main.tileNoSunLight[(int) tile.type] ||
@@ -571,8 +571,8 @@ namespace Terraria
                                     num10 *= 0.15f;
                                     break;
                                 case 93:
-                                    float num11 = 0.2f;
-                                    float num12 = 0.7f - num11;
+                                    var num11 = 0.2f;
+                                    var num12 = 0.7f - num11;
                                     num8 *= num12 + (float) Main.DiscoR / (float) byte.MaxValue * num11;
                                     num9 *= num12 + (float) Main.DiscoG / (float) byte.MaxValue * num11;
                                     num10 *= num12 + (float) Main.DiscoB / (float) byte.MaxValue * num11;
@@ -596,7 +596,7 @@ namespace Terraria
                             lightingState.b2 = num10;
                     }
 
-                    float num13 = (float) (0.550000011920929 +
+                    var num13 = (float) (0.550000011920929 +
                                            Math.Sin((double) Main.GlobalTime * 2.0) * 0.0799999982118607);
                     if (index2 > Main.maxTilesY - 200)
                     {
@@ -650,8 +650,8 @@ namespace Terraria
                                     num10 *= 0.15f;
                                     break;
                                 case 93:
-                                    float num11 = 0.2f;
-                                    float num12 = 0.7f - num11;
+                                    var num11 = 0.2f;
+                                    var num12 = 0.7f - num11;
                                     num8 *= num12 + (float) Main.DiscoR / (float) byte.MaxValue * num11;
                                     num9 *= num12 + (float) Main.DiscoG / (float) byte.MaxValue * num11;
                                     num10 *= num12 + (float) Main.DiscoB / (float) byte.MaxValue * num11;
@@ -700,7 +700,7 @@ namespace Terraria
                         case 137:
                             if (!tile.active() || !Main.tileBlockLight[(int) tile.type])
                             {
-                                float num11 = 0.4f + (float) (270 - (int) Main.mouseTextColor) / 1500f +
+                                var num11 = 0.4f + (float) (270 - (int) Main.mouseTextColor) / 1500f +
                                               (float) Main.rand.Next(0, 50) * 0.0005f;
                                 num8 = 1f * num11;
                                 num9 = 0.5f * num11;
@@ -791,15 +791,15 @@ namespace Terraria
                                 Main.starInBottle = true;
                             if (tile.type == (ushort) 91 && (tile.frameX >= (short) 396 || tile.frameY >= (short) 54))
                             {
-                                int banner = (int) tile.frameX / 18 - 21;
-                                int frameY = (int) tile.frameY;
+                                var banner = (int) tile.frameX / 18 - 21;
+                                var frameY = (int) tile.frameY;
                                 while (frameY >= 54)
                                 {
                                     banner = banner + 90 + 21;
                                     frameY -= 54;
                                 }
 
-                                int index3 = Item.BannerToItem(banner);
+                                var index3 = Item.BannerToItem(banner);
                                 if (ItemID.Sets.BannerStrength[index3].Enabled)
                                 {
                                     Main.player[Main.myPlayer].NPCBannerBuff[banner] = true;
@@ -992,14 +992,14 @@ namespace Terraria
                                     if (tile.type == (ushort) 31 && tile.frameX >= (short) 36 ||
                                         tile.type == (ushort) 26 && tile.frameX >= (short) 54)
                                     {
-                                        float num11 = (float) Main.rand.Next(-5, 6) * (1f / 400f);
+                                        var num11 = (float) Main.rand.Next(-5, 6) * (1f / 400f);
                                         num8 = (float) (0.5 + (double) num11 * 2.0);
                                         num9 = 0.2f + num11;
                                         num10 = 0.1f;
                                         break;
                                     }
 
-                                    float num12 = (float) Main.rand.Next(-5, 6) * (1f / 400f);
+                                    var num12 = (float) Main.rand.Next(-5, 6) * (1f / 400f);
                                     num8 = 0.31f + num12;
                                     num9 = 0.1f;
                                     num10 = (float) (0.439999997615814 + (double) num12 * 2.0);
@@ -1071,7 +1071,7 @@ namespace Terraria
                                                 num10 = 1f;
                                                 break;
                                             case 30:
-                                                Vector3 vector3_1 =
+                                                var vector3_1 =
                                                     Main.hslToRgb(
                                                         (float) ((double) Main.demonTorch * 0.119999997317791 +
                                                                  0.689999997615814), 1f, 0.75f).ToVector3() * 1.2f;
@@ -1169,7 +1169,7 @@ namespace Terraria
                                                 num10 = 1f;
                                                 break;
                                             case 37:
-                                                Vector3 vector3_2 =
+                                                var vector3_2 =
                                                     Main.hslToRgb(
                                                         (float) ((double) Main.demonTorch * 0.119999997317791 +
                                                                  0.689999997615814), 1f, 0.75f).ToVector3() * 1.2f;
@@ -1244,7 +1244,7 @@ namespace Terraria
                                                 num10 = 0.3f;
                                                 break;
                                             case 7:
-                                                float num14 = Main.demonTorch * 0.2f;
+                                                var num14 = Main.demonTorch * 0.2f;
                                                 num8 = 0.9f - num14;
                                                 num9 = 0.9f - num14;
                                                 num10 = 0.7f + num14;
@@ -1255,8 +1255,8 @@ namespace Terraria
                                                 num10 = 0.3f;
                                                 break;
                                             case 9:
-                                                float num15 = 1f;
-                                                float num16 = 0.3f;
+                                                var num15 = 1f;
+                                                var num16 = 0.3f;
                                                 num10 = 0.5f + Main.demonTorch * 0.2f;
                                                 num8 = num15 - Main.demonTorch * 0.1f;
                                                 num9 = num16 - Main.demonTorch * 0.2f;
@@ -1289,7 +1289,7 @@ namespace Terraria
                                                 num10 = 0.9f;
                                                 break;
                                             case 37:
-                                                Vector3 vector3_3 =
+                                                var vector3_3 =
                                                     Main.hslToRgb(
                                                         (float) ((double) Main.demonTorch * 0.119999997317791 +
                                                                  0.689999997615814), 1f, 0.75f).ToVector3() * 1.2f;
@@ -1316,9 +1316,9 @@ namespace Terraria
                                 case 61:
                                     if (tile.frameX == (short) 144)
                                     {
-                                        float num11 =
+                                        var num11 =
                                             (float) (1.0 + (double) (270 - (int) Main.mouseTextColor) / 400.0);
-                                        float num17 =
+                                        var num17 =
                                             (float) (0.800000011920929 -
                                                      (double) (270 - (int) Main.mouseTextColor) / 400.0);
                                         num8 = 0.42f * num17;
@@ -1336,7 +1336,7 @@ namespace Terraria
                                 case 349:
                                     if (tile.type != (ushort) 349 || tile.frameX >= (short) 36)
                                     {
-                                        float num11 = (float) Main.rand.Next(28, 42) * 0.005f +
+                                        var num11 = (float) Main.rand.Next(28, 42) * 0.005f +
                                                       (float) (270 - (int) Main.mouseTextColor) / 1000f;
                                         num8 = 0.1f;
                                         num9 = (float) (0.200000002980232 + (double) num11 / 2.0);
@@ -1371,7 +1371,7 @@ namespace Terraria
                                     switch ((int) tile.frameX / 18)
                                     {
                                         case 2:
-                                            float num18 = (float) (270 - (int) Main.mouseTextColor) / 800f;
+                                            var num18 = (float) (270 - (int) Main.mouseTextColor) / 800f;
                                             if ((double) num18 > 1.0)
                                                 num18 = 1f;
                                             else if ((double) num18 < 0.0)
@@ -1381,13 +1381,13 @@ namespace Terraria
                                             num10 = num18 * 0.1f;
                                             break;
                                         case 5:
-                                            float num25 = 0.9f;
+                                            var num25 = 0.9f;
                                             num8 = num25;
                                             num9 = num25 * 0.8f;
                                             num10 = num25 * 0.2f;
                                             break;
                                         case 6:
-                                            float num26 = 0.08f;
+                                            var num26 = 0.08f;
                                             num9 = num26 * 0.8f;
                                             num10 = num26;
                                             break;
@@ -1483,7 +1483,7 @@ namespace Terraria
                                                 num10 = 1f;
                                                 break;
                                             case 31:
-                                                Vector3 vector3_4 =
+                                                var vector3_4 =
                                                     Main.hslToRgb(
                                                         (float) ((double) Main.demonTorch * 0.119999997317791 +
                                                                  0.689999997615814), 1f, 0.75f).ToVector3() * 1.2f;
@@ -1607,7 +1607,7 @@ namespace Terraria
                                                 num10 = 1f;
                                                 break;
                                             case 31:
-                                                Vector3 vector3_5 =
+                                                var vector3_5 =
                                                     Main.hslToRgb(
                                                         (float) ((double) Main.demonTorch * 0.119999997317791 +
                                                                  0.689999997615814), 1f, 0.75f).ToVector3() * 1.2f;
@@ -1627,7 +1627,7 @@ namespace Terraria
 
                                     break;
                                 case 125:
-                                    float num27 = (float) Main.rand.Next(28, 42) * 0.01f +
+                                    var num27 = (float) Main.rand.Next(28, 42) * 0.01f +
                                                   (float) (270 - (int) Main.mouseTextColor) / 800f;
                                     num9 = lightingState.g2 = 0.3f * num27;
                                     num10 = lightingState.b2 = 0.6f * num27;
@@ -1698,8 +1698,8 @@ namespace Terraria
                                     num10 = (float) ((double) Main.DiscoB / (double) byte.MaxValue * 0.25);
                                     break;
                                 case 171:
-                                    int index4 = index1;
-                                    int index5 = index2;
+                                    var index4 = index1;
+                                    var index5 = index2;
                                     if (tile.frameX < (short) 10)
                                     {
                                         index4 -= (int) tile.frameX;
@@ -1790,7 +1790,7 @@ namespace Terraria
                                 case 209:
                                     if (tile.frameX == (short) 234 || tile.frameX == (short) 252)
                                     {
-                                        Vector3 vector3_6 =
+                                        var vector3_6 =
                                             PortalHelper.GetPortalColor(Main.myPlayer, 0).ToVector3() * 0.65f;
                                         num8 = vector3_6.X;
                                         num9 = vector3_6.Y;
@@ -1800,7 +1800,7 @@ namespace Terraria
 
                                     if (tile.frameX == (short) 306 || tile.frameX == (short) 324)
                                     {
-                                        Vector3 vector3_6 =
+                                        var vector3_6 =
                                             PortalHelper.GetPortalColor(Main.myPlayer, 1).ToVector3() * 0.65f;
                                         num8 = vector3_6.X;
                                         num9 = vector3_6.Y;
@@ -1812,7 +1812,7 @@ namespace Terraria
                                 case 215:
                                     if (tile.frameY < (short) 36)
                                     {
-                                        float num11 = (float) Main.rand.Next(28, 42) * 0.005f +
+                                        var num11 = (float) Main.rand.Next(28, 42) * 0.005f +
                                                       (float) (270 - (int) Main.mouseTextColor) / 700f;
                                         float num17;
                                         float num29;
@@ -1938,9 +1938,9 @@ namespace Terraria
                                 case 316:
                                 case 317:
                                 case 318:
-                                    int index6 = (index1 - (int) tile.frameX / 18) / 2 *
+                                    var index6 = (index1 - (int) tile.frameX / 18) / 2 *
                                                  ((index2 - (int) tile.frameY / 18) / 3) % Main.cageFrames;
-                                    bool flag1 = Main.jellyfishCageMode[(int) tile.type - 316, index6] == (byte) 2;
+                                    var flag1 = Main.jellyfishCageMode[(int) tile.type - 316, index6] == (byte) 2;
                                     if (tile.type == (ushort) 316)
                                     {
                                         if (flag1)
@@ -1991,7 +1991,7 @@ namespace Terraria
 
                                     break;
                                 case 327:
-                                    float num31 = 0.5f + (float) (270 - (int) Main.mouseTextColor) / 1500f +
+                                    var num31 = 0.5f + (float) (270 - (int) Main.mouseTextColor) / 1500f +
                                                   (float) Main.rand.Next(0, 50) * 0.0005f;
                                     num8 = 1f * num31;
                                     num9 = 0.5f * num31;
@@ -2030,8 +2030,8 @@ namespace Terraria
                                     num10 = 0.96f;
                                     break;
                                 case 350:
-                                    double num32 = Main.time * 0.08;
-                                    float num33 =
+                                    var num32 = Main.time * 0.08;
+                                    var num33 =
                                         (float) (-Math.Cos((int) (num32 / 6.283) % 3 == 1 ? num32 : 0.0) * 0.1 + 0.1);
                                     num8 = num33;
                                     num9 = num33;
@@ -2070,7 +2070,7 @@ namespace Terraria
                                 case 405:
                                     if (tile.frameX < (short) 54)
                                     {
-                                        float num11 = (float) Main.rand.Next(28, 42) * 0.005f +
+                                        var num11 = (float) Main.rand.Next(28, 42) * 0.005f +
                                                       (float) (270 - (int) Main.mouseTextColor) / 700f;
                                         float num17;
                                         float num29;
@@ -2139,11 +2139,11 @@ namespace Terraria
                                     num10 = 0.9f;
                                     break;
                                 case 429:
-                                    int num34 = (int) tile.frameX / 18;
-                                    bool flag2 = num34 % 2 >= 1;
-                                    bool flag3 = num34 % 4 >= 2;
-                                    bool flag4 = num34 % 8 >= 4;
-                                    bool flag5 = num34 % 16 >= 8;
+                                    var num34 = (int) tile.frameX / 18;
+                                    var flag2 = num34 % 2 >= 1;
+                                    var flag3 = num34 % 4 >= 2;
+                                    var flag4 = num34 % 8 >= 4;
+                                    var flag5 = num34 % 16 >= 8;
                                     if (flag2)
                                         num8 += 0.5f;
                                     if (flag3)
@@ -2178,7 +2178,7 @@ namespace Terraria
                     }
                     else
                     {
-                        float num11 = (float) (((double) num8 + (double) num9 + (double) num10) / 3.0);
+                        var num11 = (float) (((double) num8 + (double) num9 + (double) num10) / 3.0);
                         if ((double) lightingState.r2 < (double) num11)
                             lightingState.r2 = num11;
                     }
@@ -2187,10 +2187,10 @@ namespace Terraria
                     {
                         if (Lighting.RGB)
                         {
-                            float num11 =
+                            var num11 =
                                 (float) ((double) ((int) tile.liquid / (int) byte.MaxValue) * 0.409999996423721 +
                                          0.140000000596046);
-                            float num12 = 0.55f + (float) (270 - (int) Main.mouseTextColor) / 900f;
+                            var num12 = 0.55f + (float) (270 - (int) Main.mouseTextColor) / 900f;
                             if ((double) lightingState.r2 < (double) num12)
                                 lightingState.r2 = num12;
                             if ((double) lightingState.g2 < (double) num12)
@@ -2200,7 +2200,7 @@ namespace Terraria
                         }
                         else
                         {
-                            float num11 =
+                            var num11 =
                                 (float) ((double) ((int) tile.liquid / (int) byte.MaxValue) * 0.379999995231628 +
                                          0.0799999982118607) + (float) (270 - (int) Main.mouseTextColor) / 2000f;
                             if ((double) lightingState.r2 < (double) num11)
@@ -2217,8 +2217,8 @@ namespace Terraria
                     if ((double) lightingState.r2 > 0.0 || Lighting.RGB &&
                         ((double) lightingState.g2 > 0.0 || (double) lightingState.b2 > 0.0))
                     {
-                        int num11 = index1 - Lighting.firstToLightX;
-                        int num12 = index2 - Lighting.firstToLightY;
+                        var num11 = index1 - Lighting.firstToLightX;
+                        var num12 = index2 - Lighting.firstToLightY;
                         if (Lighting.minX > num11)
                             Lighting.minX = num11;
                         if (Lighting.maxX < num11 + 1)
@@ -2231,14 +2231,14 @@ namespace Terraria
                 }
             }
 
-            foreach (KeyValuePair<Point16, Lighting.ColorTriplet> tempLight in Lighting.tempLights)
+            foreach (var tempLight in Lighting.tempLights)
             {
-                int index1 = (int) tempLight.Key.X - Lighting.firstTileX + Lighting.offScreenTiles;
-                int index2 = (int) tempLight.Key.Y - Lighting.firstTileY + Lighting.offScreenTiles;
+                var index1 = (int) tempLight.Key.X - Lighting.firstTileX + Lighting.offScreenTiles;
+                var index2 = (int) tempLight.Key.Y - Lighting.firstTileY + Lighting.offScreenTiles;
                 if (index1 >= 0 && index1 < Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 &&
                     (index2 >= 0 && index2 < Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10))
                 {
-                    Lighting.LightingState lightingState = Lighting.states[index1][index2];
+                    var lightingState = Lighting.states[index1][index2];
                     if ((double) lightingState.r2 < (double) tempLight.Value.r)
                         lightingState.r2 = tempLight.Value.r;
                     if ((double) lightingState.g2 < (double) tempLight.Value.g)
@@ -2287,7 +2287,7 @@ namespace Terraria
             if (Main.player[Main.myPlayer].accOreFinder)
             {
                 Main.player[Main.myPlayer].bestOre = -1;
-                for (int index = 0; index < 470; ++index)
+                for (var index = 0; index < 470; ++index)
                 {
                     if (screenTileCounts[index] > 0 && Main.tileValue[index] > (short) 0 &&
                         (Main.player[Main.myPlayer].bestOre < 0 || (int) Main.tileValue[index] >
@@ -2302,7 +2302,7 @@ namespace Terraria
                 Main.evilTiles = 0;
             if (Main.bloodTiles < 0)
                 Main.bloodTiles = 0;
-            int holyTiles = Main.holyTiles;
+            var holyTiles = Main.holyTiles;
             Main.holyTiles -= Main.evilTiles;
             Main.holyTiles -= Main.bloodTiles;
             Main.evilTiles -= holyTiles;
@@ -2504,11 +2504,11 @@ namespace Terraria
                 Lighting.LightingThreads = 0;
             if (Lighting.LightingThreads >= Environment.ProcessorCount)
                 Lighting.LightingThreads = Environment.ProcessorCount - 1;
-            int lightingThreads = Lighting.LightingThreads;
+            var lightingThreads = Lighting.LightingThreads;
             if (lightingThreads > 0)
                 ++lightingThreads;
-            Stopwatch stopwatch = new Stopwatch();
-            for (int index1 = num1; index1 < num2; ++index1)
+            var stopwatch = new Stopwatch();
+            for (var index1 = num1; index1 < num2; ++index1)
             {
                 stopwatch.Restart();
                 switch (index1)
@@ -2590,14 +2590,14 @@ namespace Terraria
                 }
                 else
                 {
-                    int num3 = Lighting.swipe.outerLoopEnd - Lighting.swipe.outerLoopStart;
-                    int num4 = num3 / lightingThreads;
-                    int num5 = num3 % lightingThreads;
-                    int outerLoopStart = Lighting.swipe.outerLoopStart;
+                    var num3 = Lighting.swipe.outerLoopEnd - Lighting.swipe.outerLoopStart;
+                    var num4 = num3 / lightingThreads;
+                    var num5 = num3 % lightingThreads;
+                    var outerLoopStart = Lighting.swipe.outerLoopStart;
                     Lighting.countdown.Reset(lightingThreads);
-                    for (int index2 = 0; index2 < lightingThreads; ++index2)
+                    for (var index2 = 0; index2 < lightingThreads; ++index2)
                     {
-                        Lighting.LightingSwipeData threadSwipe = Lighting.threadSwipes[index2];
+                        var threadSwipe = Lighting.threadSwipes[index2];
                         threadSwipe.CopyFrom(Lighting.swipe);
                         threadSwipe.outerLoopStart = outerLoopStart;
                         outerLoopStart += num4;
@@ -2622,7 +2622,7 @@ namespace Terraria
 
         private static void callback_LightingSwipe(object obj)
         {
-            Lighting.LightingSwipeData lightingSwipeData = obj as Lighting.LightingSwipeData;
+            var lightingSwipeData = obj as Lighting.LightingSwipeData;
             try
             {
                 lightingSwipeData.function(lightingSwipeData);
@@ -2638,7 +2638,7 @@ namespace Terraria
         {
             try
             {
-                bool flag1 = true;
+                var flag1 = true;
                 while (true)
                 {
                     int num1;
@@ -2657,23 +2657,23 @@ namespace Terraria
                         num3 = swipeData.innerLoop2End;
                     }
 
-                    int outerLoopStart = swipeData.outerLoopStart;
-                    int outerLoopEnd = swipeData.outerLoopEnd;
-                    for (int index1 = outerLoopStart; index1 < outerLoopEnd; ++index1)
+                    var outerLoopStart = swipeData.outerLoopStart;
+                    var outerLoopEnd = swipeData.outerLoopEnd;
+                    for (var index1 = outerLoopStart; index1 < outerLoopEnd; ++index1)
                     {
-                        Lighting.LightingState[] jagged = swipeData.jaggedArray[index1];
-                        float num4 = 0.0f;
-                        float num5 = 0.0f;
-                        float num6 = 0.0f;
-                        int num7 = num2;
-                        int num8 = num3;
-                        int index2 = num7;
+                        var jagged = swipeData.jaggedArray[index1];
+                        var num4 = 0.0f;
+                        var num5 = 0.0f;
+                        var num6 = 0.0f;
+                        var num7 = num2;
+                        var num8 = num3;
+                        var index2 = num7;
                         while (index2 != num8)
                         {
-                            Lighting.LightingState lightingState1 = jagged[index2];
-                            Lighting.LightingState lightingState2 = jagged[index2 + num1];
+                            var lightingState1 = jagged[index2];
+                            var lightingState2 = jagged[index2 + num1];
                             bool flag2;
-                            bool flag3 = flag2 = false;
+                            var flag3 = flag2 = false;
                             if ((double) lightingState1.r2 > (double) num4)
                                 num4 = lightingState1.r2;
                             else if ((double) num4 <= 0.0185)
@@ -2763,7 +2763,7 @@ namespace Terraria
         {
             try
             {
-                bool flag = true;
+                var flag = true;
                 while (true)
                 {
                     int num1;
@@ -2782,16 +2782,16 @@ namespace Terraria
                         num3 = swipeData.innerLoop2End;
                     }
 
-                    int outerLoopStart = swipeData.outerLoopStart;
-                    int outerLoopEnd = swipeData.outerLoopEnd;
-                    for (int index1 = outerLoopStart; index1 < outerLoopEnd; ++index1)
+                    var outerLoopStart = swipeData.outerLoopStart;
+                    var outerLoopEnd = swipeData.outerLoopEnd;
+                    for (var index1 = outerLoopStart; index1 < outerLoopEnd; ++index1)
                     {
-                        Lighting.LightingState[] jagged = swipeData.jaggedArray[index1];
-                        float num4 = 0.0f;
-                        int index2 = num2;
+                        var jagged = swipeData.jaggedArray[index1];
+                        var num4 = 0.0f;
+                        var index2 = num2;
                         while (index2 != num3)
                         {
-                            Lighting.LightingState lightingState = jagged[index2];
+                            var lightingState = jagged[index2];
                             if ((double) lightingState.r2 > (double) num4)
                                 num4 = lightingState.r2;
                             else if ((double) num4 > 0.0185)
@@ -2839,7 +2839,7 @@ namespace Terraria
         {
             try
             {
-                bool flag = true;
+                var flag = true;
                 while (true)
                 {
                     int num1;
@@ -2858,16 +2858,16 @@ namespace Terraria
                         num3 = swipeData.innerLoop2End;
                     }
 
-                    int outerLoopStart = swipeData.outerLoopStart;
-                    int outerLoopEnd = swipeData.outerLoopEnd;
-                    for (int index1 = outerLoopStart; index1 < outerLoopEnd; ++index1)
+                    var outerLoopStart = swipeData.outerLoopStart;
+                    var outerLoopEnd = swipeData.outerLoopEnd;
+                    for (var index1 = outerLoopStart; index1 < outerLoopEnd; ++index1)
                     {
-                        Lighting.LightingState[] jagged = swipeData.jaggedArray[index1];
-                        float num4 = 0.0f;
-                        int index2 = num2;
+                        var jagged = swipeData.jaggedArray[index1];
+                        var num4 = 0.0f;
+                        var index2 = num2;
                         while (index2 != num3)
                         {
-                            Lighting.LightingState lightingState = jagged[index2];
+                            var lightingState = jagged[index2];
                             if ((double) lightingState.r2 > (double) num4)
                                 num4 = lightingState.r2;
                             else if ((double) num4 > 0.0)
@@ -2900,7 +2900,7 @@ namespace Terraria
         {
             try
             {
-                bool flag1 = true;
+                var flag1 = true;
                 while (true)
                 {
                     int num1;
@@ -2919,20 +2919,20 @@ namespace Terraria
                         num3 = swipeData.innerLoop2End;
                     }
 
-                    int outerLoopStart = swipeData.outerLoopStart;
-                    int outerLoopEnd = swipeData.outerLoopEnd;
-                    for (int index1 = outerLoopStart; index1 < outerLoopEnd; ++index1)
+                    var outerLoopStart = swipeData.outerLoopStart;
+                    var outerLoopEnd = swipeData.outerLoopEnd;
+                    for (var index1 = outerLoopStart; index1 < outerLoopEnd; ++index1)
                     {
-                        Lighting.LightingState[] jagged = swipeData.jaggedArray[index1];
-                        float num4 = 0.0f;
-                        float num5 = 0.0f;
-                        float num6 = 0.0f;
-                        int index2 = num2;
+                        var jagged = swipeData.jaggedArray[index1];
+                        var num4 = 0.0f;
+                        var num5 = 0.0f;
+                        var num6 = 0.0f;
+                        var index2 = num2;
                         while (index2 != num3)
                         {
-                            Lighting.LightingState lightingState = jagged[index2];
+                            var lightingState = jagged[index2];
                             bool flag2;
-                            bool flag3 = flag2 = false;
+                            var flag3 = flag2 = false;
                             if ((double) lightingState.r2 > (double) num4)
                                 num4 = lightingState.r2;
                             else if ((double) num4 <= 0.0)
@@ -3013,7 +3013,7 @@ namespace Terraria
                  Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10 ||
                  Lighting.tempLights.Count == Lighting.maxTempLights))
                 return;
-            Point16 key = new Point16(i, j);
+            var key = new Point16(i, j);
             Lighting.ColorTriplet colorTriplet;
             if (Lighting.tempLights.TryGetValue(key, out colorTriplet))
             {
@@ -3029,7 +3029,7 @@ namespace Terraria
                 }
                 else
                 {
-                    float averageColor = (float) (((double) R + (double) G + (double) B) / 3.0);
+                    var averageColor = (float) (((double) R + (double) G + (double) B) / 3.0);
                     if ((double) colorTriplet.r >= (double) averageColor)
                         return;
                     Lighting.tempLights[key] = new Lighting.ColorTriplet(averageColor);
@@ -3059,14 +3059,14 @@ namespace Terraria
 
         public static void BlackOut()
         {
-            int num1 = Main.screenWidth / 16 + Lighting.offScreenTiles * 2;
-            int num2 = Main.screenHeight / 16 + Lighting.offScreenTiles * 2;
-            for (int index1 = 0; index1 < num1; ++index1)
+            var num1 = Main.screenWidth / 16 + Lighting.offScreenTiles * 2;
+            var num2 = Main.screenHeight / 16 + Lighting.offScreenTiles * 2;
+            for (var index1 = 0; index1 < num1; ++index1)
             {
-                Lighting.LightingState[] state = Lighting.states[index1];
-                for (int index2 = 0; index2 < num2; ++index2)
+                var state = Lighting.states[index1];
+                for (var index2 = 0; index2 < num2; ++index2)
                 {
-                    Lighting.LightingState lightingState = state[index2];
+                    var lightingState = state[index2];
                     lightingState.r = 0.0f;
                     lightingState.g = 0.0f;
                     lightingState.b = 0.0f;
@@ -3076,18 +3076,18 @@ namespace Terraria
 
         public static Color GetColor(int x, int y, Color oldColor)
         {
-            int index1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
-            int index2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
+            var index1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
+            var index2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
             if (Main.gameMenu)
                 return oldColor;
             if (index1 < 0 || index2 < 0 || (index1 >= Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 ||
                                              index2 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10))
                 return Color.Black;
-            Color white = Color.White;
-            Lighting.LightingState lightingState = Lighting.states[index1][index2];
-            int num1 = (int) ((double) oldColor.R * (double) lightingState.r * (double) Lighting.brightness);
-            int num2 = (int) ((double) oldColor.G * (double) lightingState.g * (double) Lighting.brightness);
-            int num3 = (int) ((double) oldColor.B * (double) lightingState.b * (double) Lighting.brightness);
+            var white = Color.White;
+            var lightingState = Lighting.states[index1][index2];
+            var num1 = (int) ((double) oldColor.R * (double) lightingState.r * (double) Lighting.brightness);
+            var num2 = (int) ((double) oldColor.G * (double) lightingState.g * (double) Lighting.brightness);
+            var num3 = (int) ((double) oldColor.B * (double) lightingState.b * (double) Lighting.brightness);
             if (num1 > (int) byte.MaxValue)
                 num1 = (int) byte.MaxValue;
             if (num2 > (int) byte.MaxValue)
@@ -3102,17 +3102,17 @@ namespace Terraria
 
         public static Color GetColor(int x, int y)
         {
-            int index1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
-            int index2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
+            var index1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
+            var index2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
             if (Main.gameMenu)
                 return Color.White;
             if (index1 < 0 || index2 < 0 || (index1 >= Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 ||
                                              index2 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2))
                 return Color.Black;
-            Lighting.LightingState lightingState = Lighting.states[index1][index2];
-            int num1 = (int) ((double) byte.MaxValue * (double) lightingState.r * (double) Lighting.brightness);
-            int num2 = (int) ((double) byte.MaxValue * (double) lightingState.g * (double) Lighting.brightness);
-            int num3 = (int) ((double) byte.MaxValue * (double) lightingState.b * (double) Lighting.brightness);
+            var lightingState = Lighting.states[index1][index2];
+            var num1 = (int) ((double) byte.MaxValue * (double) lightingState.r * (double) Lighting.brightness);
+            var num2 = (int) ((double) byte.MaxValue * (double) lightingState.g * (double) Lighting.brightness);
+            var num3 = (int) ((double) byte.MaxValue * (double) lightingState.b * (double) Lighting.brightness);
             if (num1 > (int) byte.MaxValue)
                 num1 = (int) byte.MaxValue;
             if (num2 > (int) byte.MaxValue)
@@ -3124,28 +3124,28 @@ namespace Terraria
 
         public static void GetColor9Slice(int centerX, int centerY, ref Color[] slices)
         {
-            int num1 = centerX - Lighting.firstTileX + Lighting.offScreenTiles;
-            int num2 = centerY - Lighting.firstTileY + Lighting.offScreenTiles;
+            var num1 = centerX - Lighting.firstTileX + Lighting.offScreenTiles;
+            var num2 = centerY - Lighting.firstTileY + Lighting.offScreenTiles;
             if (num1 <= 0 || num2 <= 0 || (num1 >= Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 - 1 ||
                                            num2 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2 - 1))
             {
-                for (int index = 0; index < 9; ++index)
+                for (var index = 0; index < 9; ++index)
                     slices[index] = Color.Black;
             }
             else
             {
-                int index1 = 0;
-                for (int index2 = num1 - 1; index2 <= num1 + 1; ++index2)
+                var index1 = 0;
+                for (var index2 = num1 - 1; index2 <= num1 + 1; ++index2)
                 {
-                    Lighting.LightingState[] state = Lighting.states[index2];
-                    for (int index3 = num2 - 1; index3 <= num2 + 1; ++index3)
+                    var state = Lighting.states[index2];
+                    for (var index3 = num2 - 1; index3 <= num2 + 1; ++index3)
                     {
-                        Lighting.LightingState lightingState = state[index3];
-                        int num3 = (int) ((double) byte.MaxValue * (double) lightingState.r *
+                        var lightingState = state[index3];
+                        var num3 = (int) ((double) byte.MaxValue * (double) lightingState.r *
                                           (double) Lighting.brightness);
-                        int num4 = (int) ((double) byte.MaxValue * (double) lightingState.g *
+                        var num4 = (int) ((double) byte.MaxValue * (double) lightingState.g *
                                           (double) Lighting.brightness);
-                        int num5 = (int) ((double) byte.MaxValue * (double) lightingState.b *
+                        var num5 = (int) ((double) byte.MaxValue * (double) lightingState.b *
                                           (double) Lighting.brightness);
                         if (num3 > (int) byte.MaxValue)
                             num3 = (int) byte.MaxValue;
@@ -3165,25 +3165,25 @@ namespace Terraria
 
         public static Vector3 GetSubLight(Vector2 position)
         {
-            Vector2 vector2_1 = position / 16f - new Vector2(0.5f, 0.5f);
-            Vector2 vector2_2 = new Vector2(vector2_1.X % 1f, vector2_1.Y % 1f);
-            int index1 = (int) vector2_1.X - Lighting.firstTileX + Lighting.offScreenTiles;
-            int index2 = (int) vector2_1.Y - Lighting.firstTileY + Lighting.offScreenTiles;
+            var vector2_1 = position / 16f - new Vector2(0.5f, 0.5f);
+            var vector2_2 = new Vector2(vector2_1.X % 1f, vector2_1.Y % 1f);
+            var index1 = (int) vector2_1.X - Lighting.firstTileX + Lighting.offScreenTiles;
+            var index2 = (int) vector2_1.Y - Lighting.firstTileY + Lighting.offScreenTiles;
             if (index1 <= 0 || index2 <= 0 || (index1 >= Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 - 1 ||
                                                index2 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2 - 1))
                 return Vector3.One;
-            Vector3 vector3_1 = Lighting.states[index1][index2].ToVector3();
-            Vector3 vector3_2 = Lighting.states[index1 + 1][index2].ToVector3();
-            Vector3 vector3_3 = Lighting.states[index1][index2 + 1].ToVector3();
-            Vector3 vector3_4 = Lighting.states[index1 + 1][index2 + 1].ToVector3();
+            var vector3_1 = Lighting.states[index1][index2].ToVector3();
+            var vector3_2 = Lighting.states[index1 + 1][index2].ToVector3();
+            var vector3_3 = Lighting.states[index1][index2 + 1].ToVector3();
+            var vector3_4 = Lighting.states[index1 + 1][index2 + 1].ToVector3();
             return Vector3.Lerp(Vector3.Lerp(vector3_1, vector3_2, vector2_2.X),
                 Vector3.Lerp(vector3_3, vector3_4, vector2_2.X), vector2_2.Y);
         }
 
         public static void GetColor4Slice_New(int centerX, int centerY, out VertexColors vertices, float scale = 1f)
         {
-            int index1 = centerX - Lighting.firstTileX + Lighting.offScreenTiles;
-            int index2 = centerY - Lighting.firstTileY + Lighting.offScreenTiles;
+            var index1 = centerX - Lighting.firstTileX + Lighting.offScreenTiles;
+            var index2 = centerY - Lighting.firstTileY + Lighting.offScreenTiles;
             if (index1 <= 0 || index2 <= 0 || (index1 >= Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 - 1 ||
                                                index2 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2 - 1))
             {
@@ -3194,19 +3194,19 @@ namespace Terraria
             }
             else
             {
-                Lighting.LightingState lightingState1 = Lighting.states[index1][index2];
-                Lighting.LightingState lightingState2 = Lighting.states[index1][index2 - 1];
-                Lighting.LightingState lightingState3 = Lighting.states[index1][index2 + 1];
-                Lighting.LightingState lightingState4 = Lighting.states[index1 - 1][index2];
-                Lighting.LightingState lightingState5 = Lighting.states[index1 + 1][index2];
-                Lighting.LightingState lightingState6 = Lighting.states[index1 - 1][index2 - 1];
-                Lighting.LightingState lightingState7 = Lighting.states[index1 + 1][index2 - 1];
-                Lighting.LightingState lightingState8 = Lighting.states[index1 - 1][index2 + 1];
-                Lighting.LightingState lightingState9 = Lighting.states[index1 + 1][index2 + 1];
-                float num1 = (float) ((double) Lighting.brightness * (double) scale * (double) byte.MaxValue * 0.25);
-                float num2 = (lightingState2.r + lightingState6.r + lightingState4.r + lightingState1.r) * num1;
-                float num3 = (lightingState2.g + lightingState6.g + lightingState4.g + lightingState1.g) * num1;
-                float num4 = (lightingState2.b + lightingState6.b + lightingState4.b + lightingState1.b) * num1;
+                var lightingState1 = Lighting.states[index1][index2];
+                var lightingState2 = Lighting.states[index1][index2 - 1];
+                var lightingState3 = Lighting.states[index1][index2 + 1];
+                var lightingState4 = Lighting.states[index1 - 1][index2];
+                var lightingState5 = Lighting.states[index1 + 1][index2];
+                var lightingState6 = Lighting.states[index1 - 1][index2 - 1];
+                var lightingState7 = Lighting.states[index1 + 1][index2 - 1];
+                var lightingState8 = Lighting.states[index1 - 1][index2 + 1];
+                var lightingState9 = Lighting.states[index1 + 1][index2 + 1];
+                var num1 = (float) ((double) Lighting.brightness * (double) scale * (double) byte.MaxValue * 0.25);
+                var num2 = (lightingState2.r + lightingState6.r + lightingState4.r + lightingState1.r) * num1;
+                var num3 = (lightingState2.g + lightingState6.g + lightingState4.g + lightingState1.g) * num1;
+                var num4 = (lightingState2.b + lightingState6.b + lightingState4.b + lightingState1.b) * num1;
                 if ((double) num2 > (double) byte.MaxValue)
                     num2 = (float) byte.MaxValue;
                 if ((double) num3 > (double) byte.MaxValue)
@@ -3215,9 +3215,9 @@ namespace Terraria
                     num4 = (float) byte.MaxValue;
                 vertices.TopLeftColor = new Color((int) (byte) num2, (int) (byte) num3, (int) (byte) num4,
                     (int) byte.MaxValue);
-                float num5 = (lightingState2.r + lightingState7.r + lightingState5.r + lightingState1.r) * num1;
-                float num6 = (lightingState2.g + lightingState7.g + lightingState5.g + lightingState1.g) * num1;
-                float num7 = (lightingState2.b + lightingState7.b + lightingState5.b + lightingState1.b) * num1;
+                var num5 = (lightingState2.r + lightingState7.r + lightingState5.r + lightingState1.r) * num1;
+                var num6 = (lightingState2.g + lightingState7.g + lightingState5.g + lightingState1.g) * num1;
+                var num7 = (lightingState2.b + lightingState7.b + lightingState5.b + lightingState1.b) * num1;
                 if ((double) num5 > (double) byte.MaxValue)
                     num5 = (float) byte.MaxValue;
                 if ((double) num6 > (double) byte.MaxValue)
@@ -3226,9 +3226,9 @@ namespace Terraria
                     num7 = (float) byte.MaxValue;
                 vertices.TopRightColor = new Color((int) (byte) num5, (int) (byte) num6, (int) (byte) num7,
                     (int) byte.MaxValue);
-                float num8 = (lightingState3.r + lightingState8.r + lightingState4.r + lightingState1.r) * num1;
-                float num9 = (lightingState3.g + lightingState8.g + lightingState4.g + lightingState1.g) * num1;
-                float num10 = (lightingState3.b + lightingState8.b + lightingState4.b + lightingState1.b) * num1;
+                var num8 = (lightingState3.r + lightingState8.r + lightingState4.r + lightingState1.r) * num1;
+                var num9 = (lightingState3.g + lightingState8.g + lightingState4.g + lightingState1.g) * num1;
+                var num10 = (lightingState3.b + lightingState8.b + lightingState4.b + lightingState1.b) * num1;
                 if ((double) num8 > (double) byte.MaxValue)
                     num8 = (float) byte.MaxValue;
                 if ((double) num9 > (double) byte.MaxValue)
@@ -3237,9 +3237,9 @@ namespace Terraria
                     num10 = (float) byte.MaxValue;
                 vertices.BottomLeftColor = new Color((int) (byte) num8, (int) (byte) num9, (int) (byte) num10,
                     (int) byte.MaxValue);
-                float num11 = (lightingState3.r + lightingState9.r + lightingState5.r + lightingState1.r) * num1;
-                float num12 = (lightingState3.g + lightingState9.g + lightingState5.g + lightingState1.g) * num1;
-                float num13 = (lightingState3.b + lightingState9.b + lightingState5.b + lightingState1.b) * num1;
+                var num11 = (lightingState3.r + lightingState9.r + lightingState5.r + lightingState1.r) * num1;
+                var num12 = (lightingState3.g + lightingState9.g + lightingState5.g + lightingState1.g) * num1;
+                var num13 = (lightingState3.b + lightingState9.b + lightingState5.b + lightingState1.b) * num1;
                 if ((double) num11 > (double) byte.MaxValue)
                     num11 = (float) byte.MaxValue;
                 if ((double) num12 > (double) byte.MaxValue)
@@ -3254,8 +3254,8 @@ namespace Terraria
         public static void GetColor4Slice_New(int centerX, int centerY, out VertexColors vertices, Color centerColor,
             float scale = 1f)
         {
-            int index1 = centerX - Lighting.firstTileX + Lighting.offScreenTiles;
-            int index2 = centerY - Lighting.firstTileY + Lighting.offScreenTiles;
+            var index1 = centerX - Lighting.firstTileX + Lighting.offScreenTiles;
+            var index2 = centerY - Lighting.firstTileY + Lighting.offScreenTiles;
             if (index1 <= 0 || index2 <= 0 || (index1 >= Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 - 1 ||
                                                index2 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2 - 1))
             {
@@ -3266,21 +3266,21 @@ namespace Terraria
             }
             else
             {
-                float num1 = (float) centerColor.R / (float) byte.MaxValue;
-                float num2 = (float) centerColor.G / (float) byte.MaxValue;
-                float num3 = (float) centerColor.B / (float) byte.MaxValue;
-                Lighting.LightingState lightingState1 = Lighting.states[index1][index2 - 1];
-                Lighting.LightingState lightingState2 = Lighting.states[index1][index2 + 1];
-                Lighting.LightingState lightingState3 = Lighting.states[index1 - 1][index2];
-                Lighting.LightingState lightingState4 = Lighting.states[index1 + 1][index2];
-                Lighting.LightingState lightingState5 = Lighting.states[index1 - 1][index2 - 1];
-                Lighting.LightingState lightingState6 = Lighting.states[index1 + 1][index2 - 1];
-                Lighting.LightingState lightingState7 = Lighting.states[index1 - 1][index2 + 1];
-                Lighting.LightingState lightingState8 = Lighting.states[index1 + 1][index2 + 1];
-                float num4 = (float) ((double) Lighting.brightness * (double) scale * (double) byte.MaxValue * 0.25);
-                float num5 = (lightingState1.r + lightingState5.r + lightingState3.r + num1) * num4;
-                float num6 = (lightingState1.g + lightingState5.g + lightingState3.g + num2) * num4;
-                float num7 = (lightingState1.b + lightingState5.b + lightingState3.b + num3) * num4;
+                var num1 = (float) centerColor.R / (float) byte.MaxValue;
+                var num2 = (float) centerColor.G / (float) byte.MaxValue;
+                var num3 = (float) centerColor.B / (float) byte.MaxValue;
+                var lightingState1 = Lighting.states[index1][index2 - 1];
+                var lightingState2 = Lighting.states[index1][index2 + 1];
+                var lightingState3 = Lighting.states[index1 - 1][index2];
+                var lightingState4 = Lighting.states[index1 + 1][index2];
+                var lightingState5 = Lighting.states[index1 - 1][index2 - 1];
+                var lightingState6 = Lighting.states[index1 + 1][index2 - 1];
+                var lightingState7 = Lighting.states[index1 - 1][index2 + 1];
+                var lightingState8 = Lighting.states[index1 + 1][index2 + 1];
+                var num4 = (float) ((double) Lighting.brightness * (double) scale * (double) byte.MaxValue * 0.25);
+                var num5 = (lightingState1.r + lightingState5.r + lightingState3.r + num1) * num4;
+                var num6 = (lightingState1.g + lightingState5.g + lightingState3.g + num2) * num4;
+                var num7 = (lightingState1.b + lightingState5.b + lightingState3.b + num3) * num4;
                 if ((double) num5 > (double) byte.MaxValue)
                     num5 = (float) byte.MaxValue;
                 if ((double) num6 > (double) byte.MaxValue)
@@ -3289,9 +3289,9 @@ namespace Terraria
                     num7 = (float) byte.MaxValue;
                 vertices.TopLeftColor = new Color((int) (byte) num5, (int) (byte) num6, (int) (byte) num7,
                     (int) byte.MaxValue);
-                float num8 = (lightingState1.r + lightingState6.r + lightingState4.r + num1) * num4;
-                float num9 = (lightingState1.g + lightingState6.g + lightingState4.g + num2) * num4;
-                float num10 = (lightingState1.b + lightingState6.b + lightingState4.b + num3) * num4;
+                var num8 = (lightingState1.r + lightingState6.r + lightingState4.r + num1) * num4;
+                var num9 = (lightingState1.g + lightingState6.g + lightingState4.g + num2) * num4;
+                var num10 = (lightingState1.b + lightingState6.b + lightingState4.b + num3) * num4;
                 if ((double) num8 > (double) byte.MaxValue)
                     num8 = (float) byte.MaxValue;
                 if ((double) num9 > (double) byte.MaxValue)
@@ -3300,9 +3300,9 @@ namespace Terraria
                     num10 = (float) byte.MaxValue;
                 vertices.TopRightColor = new Color((int) (byte) num8, (int) (byte) num9, (int) (byte) num10,
                     (int) byte.MaxValue);
-                float num11 = (lightingState2.r + lightingState7.r + lightingState3.r + num1) * num4;
-                float num12 = (lightingState2.g + lightingState7.g + lightingState3.g + num2) * num4;
-                float num13 = (lightingState2.b + lightingState7.b + lightingState3.b + num3) * num4;
+                var num11 = (lightingState2.r + lightingState7.r + lightingState3.r + num1) * num4;
+                var num12 = (lightingState2.g + lightingState7.g + lightingState3.g + num2) * num4;
+                var num13 = (lightingState2.b + lightingState7.b + lightingState3.b + num3) * num4;
                 if ((double) num11 > (double) byte.MaxValue)
                     num11 = (float) byte.MaxValue;
                 if ((double) num12 > (double) byte.MaxValue)
@@ -3311,9 +3311,9 @@ namespace Terraria
                     num13 = (float) byte.MaxValue;
                 vertices.BottomLeftColor = new Color((int) (byte) num11, (int) (byte) num12, (int) (byte) num13,
                     (int) byte.MaxValue);
-                float num14 = (lightingState2.r + lightingState8.r + lightingState4.r + num1) * num4;
-                float num15 = (lightingState2.g + lightingState8.g + lightingState4.g + num2) * num4;
-                float num16 = (lightingState2.b + lightingState8.b + lightingState4.b + num3) * num4;
+                var num14 = (lightingState2.r + lightingState8.r + lightingState4.r + num1) * num4;
+                var num15 = (lightingState2.g + lightingState8.g + lightingState4.g + num2) * num4;
+                var num16 = (lightingState2.b + lightingState8.b + lightingState4.b + num3) * num4;
                 if ((double) num14 > (double) byte.MaxValue)
                     num14 = (float) byte.MaxValue;
                 if ((double) num15 > (double) byte.MaxValue)
@@ -3327,31 +3327,31 @@ namespace Terraria
 
         public static void GetColor4Slice(int centerX, int centerY, ref Color[] slices)
         {
-            int index1 = centerX - Lighting.firstTileX + Lighting.offScreenTiles;
-            int index2 = centerY - Lighting.firstTileY + Lighting.offScreenTiles;
+            var index1 = centerX - Lighting.firstTileX + Lighting.offScreenTiles;
+            var index2 = centerY - Lighting.firstTileY + Lighting.offScreenTiles;
             if (index1 <= 0 || index2 <= 0 || (index1 >= Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 - 1 ||
                                                index2 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2 - 1))
             {
-                for (int index3 = 0; index3 < 4; ++index3)
+                for (var index3 = 0; index3 < 4; ++index3)
                     slices[index3] = Color.Black;
             }
             else
             {
-                Lighting.LightingState lightingState1 = Lighting.states[index1][index2 - 1];
-                Lighting.LightingState lightingState2 = Lighting.states[index1][index2 + 1];
-                Lighting.LightingState lightingState3 = Lighting.states[index1 - 1][index2];
-                Lighting.LightingState lightingState4 = Lighting.states[index1 + 1][index2];
-                float num1 = lightingState1.r + lightingState1.g + lightingState1.b;
-                float num2 = lightingState2.r + lightingState2.g + lightingState2.b;
-                float num3 = lightingState4.r + lightingState4.g + lightingState4.b;
-                float num4 = lightingState3.r + lightingState3.g + lightingState3.b;
+                var lightingState1 = Lighting.states[index1][index2 - 1];
+                var lightingState2 = Lighting.states[index1][index2 + 1];
+                var lightingState3 = Lighting.states[index1 - 1][index2];
+                var lightingState4 = Lighting.states[index1 + 1][index2];
+                var num1 = lightingState1.r + lightingState1.g + lightingState1.b;
+                var num2 = lightingState2.r + lightingState2.g + lightingState2.b;
+                var num3 = lightingState4.r + lightingState4.g + lightingState4.b;
+                var num4 = lightingState3.r + lightingState3.g + lightingState3.b;
                 if ((double) num1 >= (double) num4)
                 {
-                    int num5 = (int) ((double) byte.MaxValue * (double) lightingState3.r *
+                    var num5 = (int) ((double) byte.MaxValue * (double) lightingState3.r *
                                       (double) Lighting.brightness);
-                    int num6 = (int) ((double) byte.MaxValue * (double) lightingState3.g *
+                    var num6 = (int) ((double) byte.MaxValue * (double) lightingState3.g *
                                       (double) Lighting.brightness);
-                    int num7 = (int) ((double) byte.MaxValue * (double) lightingState3.b *
+                    var num7 = (int) ((double) byte.MaxValue * (double) lightingState3.b *
                                       (double) Lighting.brightness);
                     if (num5 > (int) byte.MaxValue)
                         num5 = (int) byte.MaxValue;
@@ -3363,11 +3363,11 @@ namespace Terraria
                 }
                 else
                 {
-                    int num5 = (int) ((double) byte.MaxValue * (double) lightingState1.r *
+                    var num5 = (int) ((double) byte.MaxValue * (double) lightingState1.r *
                                       (double) Lighting.brightness);
-                    int num6 = (int) ((double) byte.MaxValue * (double) lightingState1.g *
+                    var num6 = (int) ((double) byte.MaxValue * (double) lightingState1.g *
                                       (double) Lighting.brightness);
-                    int num7 = (int) ((double) byte.MaxValue * (double) lightingState1.b *
+                    var num7 = (int) ((double) byte.MaxValue * (double) lightingState1.b *
                                       (double) Lighting.brightness);
                     if (num5 > (int) byte.MaxValue)
                         num5 = (int) byte.MaxValue;
@@ -3380,11 +3380,11 @@ namespace Terraria
 
                 if ((double) num1 >= (double) num3)
                 {
-                    int num5 = (int) ((double) byte.MaxValue * (double) lightingState4.r *
+                    var num5 = (int) ((double) byte.MaxValue * (double) lightingState4.r *
                                       (double) Lighting.brightness);
-                    int num6 = (int) ((double) byte.MaxValue * (double) lightingState4.g *
+                    var num6 = (int) ((double) byte.MaxValue * (double) lightingState4.g *
                                       (double) Lighting.brightness);
-                    int num7 = (int) ((double) byte.MaxValue * (double) lightingState4.b *
+                    var num7 = (int) ((double) byte.MaxValue * (double) lightingState4.b *
                                       (double) Lighting.brightness);
                     if (num5 > (int) byte.MaxValue)
                         num5 = (int) byte.MaxValue;
@@ -3396,11 +3396,11 @@ namespace Terraria
                 }
                 else
                 {
-                    int num5 = (int) ((double) byte.MaxValue * (double) lightingState1.r *
+                    var num5 = (int) ((double) byte.MaxValue * (double) lightingState1.r *
                                       (double) Lighting.brightness);
-                    int num6 = (int) ((double) byte.MaxValue * (double) lightingState1.g *
+                    var num6 = (int) ((double) byte.MaxValue * (double) lightingState1.g *
                                       (double) Lighting.brightness);
-                    int num7 = (int) ((double) byte.MaxValue * (double) lightingState1.b *
+                    var num7 = (int) ((double) byte.MaxValue * (double) lightingState1.b *
                                       (double) Lighting.brightness);
                     if (num5 > (int) byte.MaxValue)
                         num5 = (int) byte.MaxValue;
@@ -3413,11 +3413,11 @@ namespace Terraria
 
                 if ((double) num2 >= (double) num4)
                 {
-                    int num5 = (int) ((double) byte.MaxValue * (double) lightingState3.r *
+                    var num5 = (int) ((double) byte.MaxValue * (double) lightingState3.r *
                                       (double) Lighting.brightness);
-                    int num6 = (int) ((double) byte.MaxValue * (double) lightingState3.g *
+                    var num6 = (int) ((double) byte.MaxValue * (double) lightingState3.g *
                                       (double) Lighting.brightness);
-                    int num7 = (int) ((double) byte.MaxValue * (double) lightingState3.b *
+                    var num7 = (int) ((double) byte.MaxValue * (double) lightingState3.b *
                                       (double) Lighting.brightness);
                     if (num5 > (int) byte.MaxValue)
                         num5 = (int) byte.MaxValue;
@@ -3429,11 +3429,11 @@ namespace Terraria
                 }
                 else
                 {
-                    int num5 = (int) ((double) byte.MaxValue * (double) lightingState2.r *
+                    var num5 = (int) ((double) byte.MaxValue * (double) lightingState2.r *
                                       (double) Lighting.brightness);
-                    int num6 = (int) ((double) byte.MaxValue * (double) lightingState2.g *
+                    var num6 = (int) ((double) byte.MaxValue * (double) lightingState2.g *
                                       (double) Lighting.brightness);
-                    int num7 = (int) ((double) byte.MaxValue * (double) lightingState2.b *
+                    var num7 = (int) ((double) byte.MaxValue * (double) lightingState2.b *
                                       (double) Lighting.brightness);
                     if (num5 > (int) byte.MaxValue)
                         num5 = (int) byte.MaxValue;
@@ -3446,11 +3446,11 @@ namespace Terraria
 
                 if ((double) num2 >= (double) num3)
                 {
-                    int num5 = (int) ((double) byte.MaxValue * (double) lightingState4.r *
+                    var num5 = (int) ((double) byte.MaxValue * (double) lightingState4.r *
                                       (double) Lighting.brightness);
-                    int num6 = (int) ((double) byte.MaxValue * (double) lightingState4.g *
+                    var num6 = (int) ((double) byte.MaxValue * (double) lightingState4.g *
                                       (double) Lighting.brightness);
-                    int num7 = (int) ((double) byte.MaxValue * (double) lightingState4.b *
+                    var num7 = (int) ((double) byte.MaxValue * (double) lightingState4.b *
                                       (double) Lighting.brightness);
                     if (num5 > (int) byte.MaxValue)
                         num5 = (int) byte.MaxValue;
@@ -3462,11 +3462,11 @@ namespace Terraria
                 }
                 else
                 {
-                    int num5 = (int) ((double) byte.MaxValue * (double) lightingState2.r *
+                    var num5 = (int) ((double) byte.MaxValue * (double) lightingState2.r *
                                       (double) Lighting.brightness);
-                    int num6 = (int) ((double) byte.MaxValue * (double) lightingState2.g *
+                    var num6 = (int) ((double) byte.MaxValue * (double) lightingState2.g *
                                       (double) Lighting.brightness);
-                    int num7 = (int) ((double) byte.MaxValue * (double) lightingState2.b *
+                    var num7 = (int) ((double) byte.MaxValue * (double) lightingState2.b *
                                       (double) Lighting.brightness);
                     if (num5 > (int) byte.MaxValue)
                         num5 = (int) byte.MaxValue;
@@ -3481,8 +3481,8 @@ namespace Terraria
 
         public static Color GetBlackness(int x, int y)
         {
-            int index1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
-            int index2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
+            var index1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
+            var index2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
             if (index1 < 0 || index2 < 0 || (index1 >= Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 ||
                                              index2 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10))
                 return Color.Black;
@@ -3493,22 +3493,22 @@ namespace Terraria
 
         public static float Brightness(int x, int y)
         {
-            int index1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
-            int index2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
+            var index1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
+            var index2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
             if (index1 < 0 || index2 < 0 || (index1 >= Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10 ||
                                              index2 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10))
                 return 0.0f;
-            Lighting.LightingState lightingState = Lighting.states[index1][index2];
+            var lightingState = Lighting.states[index1][index2];
             return (float) ((double) Lighting.brightness *
                             ((double) lightingState.r + (double) lightingState.g + (double) lightingState.b) / 3.0);
         }
 
         public static float BrightnessAverage(int x, int y, int width, int height)
         {
-            int num1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
-            int num2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
-            int num3 = num1 + width;
-            int num4 = num2 + height;
+            var num1 = x - Lighting.firstTileX + Lighting.offScreenTiles;
+            var num2 = y - Lighting.firstTileY + Lighting.offScreenTiles;
+            var num3 = num1 + width;
+            var num4 = num2 + height;
             if (num1 < 0)
                 num1 = 0;
             if (num2 < 0)
@@ -3517,14 +3517,14 @@ namespace Terraria
                 num3 = Main.screenWidth / 16 + Lighting.offScreenTiles * 2 + 10;
             if (num4 >= Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10)
                 num4 = Main.screenHeight / 16 + Lighting.offScreenTiles * 2 + 10;
-            float num5 = 0.0f;
-            float num6 = 0.0f;
-            for (int index1 = num1; index1 < num3; ++index1)
+            var num5 = 0.0f;
+            var num6 = 0.0f;
+            for (var index1 = num1; index1 < num3; ++index1)
             {
-                for (int index2 = num2; index2 < num4; ++index2)
+                for (var index2 = num2; index2 < num4; ++index2)
                 {
                     ++num5;
-                    Lighting.LightingState lightingState = Lighting.states[index1][index2];
+                    var lightingState = Lighting.states[index1][index2];
                     num6 += (float) (((double) lightingState.r + (double) lightingState.g + (double) lightingState.b) /
                                      3.0);
                 }

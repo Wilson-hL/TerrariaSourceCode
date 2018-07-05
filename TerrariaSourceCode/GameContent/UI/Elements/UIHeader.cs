@@ -23,7 +23,7 @@ namespace Terraria.GameContent.UI.Elements
                 if (!(this._text != value))
                     return;
                 this._text = value;
-                Vector2 vector2 = Main.fontDeathText.MeasureString(this.Text);
+                var vector2 = Main.fontDeathText.MeasureString(this.Text);
                 this.Width.Pixels = vector2.X;
                 this.Height.Pixels = vector2.Y;
                 this.Width.Precent = 0.0f;
@@ -44,7 +44,7 @@ namespace Terraria.GameContent.UI.Elements
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
-            CalculatedStyle dimensions = this.GetDimensions();
+            var dimensions = this.GetDimensions();
             DynamicSpriteFontExtensionMethods.DrawString(spriteBatch, Main.fontDeathText, this.Text,
                 new Vector2(dimensions.X, dimensions.Y), Color.White);
         }

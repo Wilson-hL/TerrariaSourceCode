@@ -31,12 +31,12 @@ namespace Terraria.GameContent.UI.Elements
 
         private void DrawPanel(SpriteBatch spriteBatch, Texture2D texture, Color color)
         {
-            CalculatedStyle dimensions = this.GetDimensions();
-            Point point1 = new Point((int) dimensions.X, (int) dimensions.Y);
-            Point point2 = new Point(point1.X + (int) dimensions.Width - UIPanel.CORNER_SIZE,
+            var dimensions = this.GetDimensions();
+            var point1 = new Point((int) dimensions.X, (int) dimensions.Y);
+            var point2 = new Point(point1.X + (int) dimensions.Width - UIPanel.CORNER_SIZE,
                 point1.Y + (int) dimensions.Height - UIPanel.CORNER_SIZE);
-            int width = point2.X - point1.X - UIPanel.CORNER_SIZE;
-            int height = point2.Y - point1.Y - UIPanel.CORNER_SIZE;
+            var width = point2.X - point1.X - UIPanel.CORNER_SIZE;
+            var height = point2.Y - point1.Y - UIPanel.CORNER_SIZE;
             spriteBatch.Draw(texture, new Rectangle(point1.X, point1.Y, UIPanel.CORNER_SIZE, UIPanel.CORNER_SIZE),
                 new Rectangle?(new Rectangle(0, 0, UIPanel.CORNER_SIZE, UIPanel.CORNER_SIZE)), color);
             spriteBatch.Draw(texture, new Rectangle(point2.X, point1.Y, UIPanel.CORNER_SIZE, UIPanel.CORNER_SIZE),

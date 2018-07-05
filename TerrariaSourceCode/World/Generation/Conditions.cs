@@ -21,7 +21,7 @@ namespace Terraria.World.Generation
             {
                 if (GenBase._tiles[x, y].active())
                 {
-                    for (int index = 0; index < this._types.Length; ++index)
+                    for (var index = 0; index < this._types.Length; ++index)
                     {
                         if ((int) GenBase._tiles[x, y].type == (int) this._types[index])
                             return true;

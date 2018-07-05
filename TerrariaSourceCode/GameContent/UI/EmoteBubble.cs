@@ -35,14 +35,14 @@ namespace Terraria.GameContent.UI
             lock (EmoteBubble.byID)
             {
                 EmoteBubble.toClean.Clear();
-                foreach (KeyValuePair<int, EmoteBubble> keyValuePair in EmoteBubble.byID)
+                foreach (var keyValuePair in EmoteBubble.byID)
                 {
                     keyValuePair.Value.Update();
                     if (keyValuePair.Value.lifeTime <= 0)
                         EmoteBubble.toClean.Add(keyValuePair.Key);
                 }
 
-                foreach (int key in EmoteBubble.toClean)
+                foreach (var key in EmoteBubble.toClean)
                     EmoteBubble.byID.Remove(key);
                 EmoteBubble.toClean.Clear();
             }
@@ -52,7 +52,7 @@ namespace Terraria.GameContent.UI
         {
             lock (EmoteBubble.byID)
             {
-                foreach (KeyValuePair<int, EmoteBubble> keyValuePair in EmoteBubble.byID)
+                foreach (var keyValuePair in EmoteBubble.byID)
                     keyValuePair.Value.Draw(sb);
             }
         }
@@ -61,7 +61,7 @@ namespace Terraria.GameContent.UI
         {
             if (anch.type != WorldUIAnchor.AnchorType.Entity)
                 return Tuple.Create<int, int>(0, 0);
-            int num = 0;
+            var num = 0;
             if (anch.entity is NPC)
                 num = 0;
             else if (anch.entity is Player)
@@ -89,11 +89,11 @@ namespace Terraria.GameContent.UI
 
         public static int NewBubble(int emoticon, WorldUIAnchor bubbleAnchor, int time)
         {
-            EmoteBubble emoteBubble = new EmoteBubble(emoticon, bubbleAnchor, time) {ID = EmoteBubble.AssignNewID()};
+            var emoteBubble = new EmoteBubble(emoticon, bubbleAnchor, time) {ID = EmoteBubble.AssignNewID()};
             EmoteBubble.byID[emoteBubble.ID] = emoteBubble;
             if (Main.netMode == 2)
             {
-                Tuple<int, int> tuple = EmoteBubble.SerializeNetAnchor(bubbleAnchor);
+                var tuple = EmoteBubble.SerializeNetAnchor(bubbleAnchor);
                 NetMessage.SendData(91, -1, -1, (NetworkText) null, emoteBubble.ID, (float) tuple.Item1,
                     (float) tuple.Item2, (float) time, emoticon, 0, 0);
             }
@@ -103,12 +103,12 @@ namespace Terraria.GameContent.UI
 
         public static int NewBubbleNPC(WorldUIAnchor bubbleAnchor, int time, WorldUIAnchor other = null)
         {
-            EmoteBubble emoteBubble = new EmoteBubble(0, bubbleAnchor, time) {ID = EmoteBubble.AssignNewID()};
+            var emoteBubble = new EmoteBubble(0, bubbleAnchor, time) {ID = EmoteBubble.AssignNewID()};
             EmoteBubble.byID[emoteBubble.ID] = emoteBubble;
             emoteBubble.PickNPCEmote(other);
             if (Main.netMode == 2)
             {
-                Tuple<int, int> tuple = EmoteBubble.SerializeNetAnchor(bubbleAnchor);
+                var tuple = EmoteBubble.SerializeNetAnchor(bubbleAnchor);
                 NetMessage.SendData(91, -1, -1, (NetworkText) null, emoteBubble.ID, (float) tuple.Item1,
                     (float) tuple.Item2, (float) time, emoteBubble.emote, emoteBubble.metadata, 0);
             }
@@ -136,12 +136,12 @@ namespace Terraria.GameContent.UI
 
         private void Draw(SpriteBatch sb)
         {
-            Texture2D texture2D = Main.extraTexture[48];
-            SpriteEffects effect = SpriteEffects.None;
-            Vector2 vector2 = this.GetPosition(out effect);
-            bool flag = this.lifeTime < 6 || this.lifeTimeStart - this.lifeTime < 6;
-            Rectangle rectangle = texture2D.Frame(8, 33, flag ? 0 : 1, 0);
-            Vector2 origin = new Vector2((float) (rectangle.Width / 2), (float) rectangle.Height);
+            var texture2D = Main.extraTexture[48];
+            var effect = SpriteEffects.None;
+            var vector2 = this.GetPosition(out effect);
+            var flag = this.lifeTime < 6 || this.lifeTimeStart - this.lifeTime < 6;
+            var rectangle = texture2D.Frame(8, 33, flag ? 0 : 1, 0);
+            var origin = new Vector2((float) (rectangle.Width / 2), (float) rectangle.Height);
             if ((double) Main.player[Main.myPlayer].gravDir == -1.0)
             {
                 origin.Y = 0.0f;
@@ -164,8 +164,8 @@ namespace Terraria.GameContent.UI
             {
                 if (this.emote != -1)
                     return;
-                Texture2D texture = Main.npcHeadTexture[this.metadata];
-                float scale = 1f;
+                var texture = Main.npcHeadTexture[this.metadata];
+                var scale = 1f;
                 if ((double) texture.Width / 22.0 > 1.0)
                     scale = 22f / (float) texture.Width;
                 if ((double) texture.Height / 16.0 > 1.0 / (double) scale)
@@ -201,10 +201,10 @@ namespace Terraria.GameContent.UI
 
         public void PickNPCEmote(WorldUIAnchor other = null)
         {
-            Player plr = Main.player[(int) Player.FindClosest(this.anchor.entity.Center, 0, 0)];
-            List<int> list = new List<int>();
-            bool flag = false;
-            for (int index = 0; index < 200; ++index)
+            var plr = Main.player[(int) Player.FindClosest(this.anchor.entity.Center, 0, 0)];
+            var list = new List<int>();
+            var flag = false;
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.npc[index].active && Main.npc[index].boss)
                     flag = true;
@@ -330,16 +330,16 @@ namespace Terraria.GameContent.UI
 
         private void ProbeTownNPCs(List<int> list)
         {
-            for (int index = 0; index < 580; ++index)
+            for (var index = 0; index < 580; ++index)
                 EmoteBubble.CountNPCs[index] = 0;
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.npc[index].active)
                     ++EmoteBubble.CountNPCs[Main.npc[index].type];
             }
 
-            int type = ((NPC) this.anchor.entity).type;
-            for (int index = 0; index < 580; ++index)
+            var type = ((NPC) this.anchor.entity).type;
+            for (var index = 0; index < 580; ++index)
             {
                 if (NPCID.Sets.FaceEmote[index] > 0 && EmoteBubble.CountNPCs[index] > 0 && index != type)
                     list.Add(NPCID.Sets.FaceEmote[index]);
@@ -376,9 +376,9 @@ namespace Terraria.GameContent.UI
 
         private void ProbeCritters(List<int> list)
         {
-            Vector2 center = this.anchor.entity.Center;
-            float num1 = 1f;
-            float num2 = 1f;
+            var center = this.anchor.entity.Center;
+            var num1 = 1f;
+            var num2 = 1f;
             if ((double) center.Y < Main.rockLayer * 16.0)
                 num2 = 0.2f;
             else
@@ -429,7 +429,7 @@ namespace Terraria.GameContent.UI
             list.Add(91);
             if (!Main.bloodMoon || Main.dayTime)
                 return;
-            int num = Utils.SelectRandom<int>(Main.rand, new int[2] {16, 1});
+            var num = Utils.SelectRandom<int>(Main.rand, new int[2] {16, 1});
             list.Add(num);
             list.Add(num);
             list.Add(num);
@@ -437,7 +437,7 @@ namespace Terraria.GameContent.UI
 
         private void ProbeBosses(List<int> list)
         {
-            int num = 0;
+            var num = 0;
             if (!NPC.downedBoss1 && !Main.dayTime || NPC.downedBoss1)
                 num = 1;
             if (NPC.downedBoss2)
@@ -454,7 +454,7 @@ namespace Terraria.GameContent.UI
                 num = 7;
             if (NPC.downedAncientCultist)
                 num = 8;
-            int maxValue = 10;
+            var maxValue = 10;
             if (NPC.downedMoonlord)
                 maxValue = 1;
             if (num >= 1 && num <= 2 || num >= 1 && Main.rand.Next(maxValue) == 0)
@@ -531,7 +531,7 @@ namespace Terraria.GameContent.UI
 
         private void ProbeExceptions(List<int> list, Player plr, WorldUIAnchor other)
         {
-            NPC entity = (NPC) this.anchor.entity;
+            var entity = (NPC) this.anchor.entity;
             if (entity.type == 17)
             {
                 list.Add(80);

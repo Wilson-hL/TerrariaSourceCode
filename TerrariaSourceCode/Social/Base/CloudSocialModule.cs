@@ -38,7 +38,7 @@ namespace Terraria.Social.Base
 
         public byte[] Read(string path)
         {
-            byte[] buffer = new byte[this.GetFileSize(path)];
+            var buffer = new byte[this.GetFileSize(path)];
             this.Read(path, buffer, buffer.Length);
             return buffer;
         }

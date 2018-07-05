@@ -67,29 +67,29 @@ namespace Terraria
         public static double QuickWater(int verbose = 0, int minY = -1, int maxY = -1)
         {
             Main.tileSolid[379] = true;
-            int num1 = 0;
+            var num1 = 0;
             if (minY == -1)
                 minY = 3;
             if (maxY == -1)
                 maxY = Main.maxTilesY - 3;
-            for (int index1 = maxY; index1 >= minY; --index1)
+            for (var index1 = maxY; index1 >= minY; --index1)
             {
                 if (verbose > 0)
                 {
-                    float num2 = (float) (maxY - index1) / (float) (maxY - minY + 1) / (float) verbose;
+                    var num2 = (float) (maxY - index1) / (float) (maxY - minY + 1) / (float) verbose;
                     Main.statusText = Lang.gen[27].Value + " " + (object) (int) ((double) num2 * 100.0 + 1.0) + "%";
                 }
                 else if (verbose < 0)
                 {
-                    float num2 = (float) (maxY - index1) / (float) (maxY - minY + 1) / (float) -verbose;
+                    var num2 = (float) (maxY - index1) / (float) (maxY - minY + 1) / (float) -verbose;
                     Main.statusText = Lang.gen[18].Value + " " + (object) (int) ((double) num2 * 100.0 + 1.0) + "%";
                 }
 
-                for (int index2 = 0; index2 < 2; ++index2)
+                for (var index2 = 0; index2 < 2; ++index2)
                 {
-                    int num2 = 2;
-                    int num3 = Main.maxTilesX - 2;
-                    int num4 = 1;
+                    var num2 = 2;
+                    var num3 = Main.maxTilesX - 2;
+                    var num4 = 1;
                     if (index2 == 1)
                     {
                         num2 = Main.maxTilesX - 2;
@@ -97,23 +97,23 @@ namespace Terraria
                         num4 = -1;
                     }
 
-                    int index3 = num2;
+                    var index3 = num2;
                     while (index3 != num3)
                     {
-                        Tile tile = Main.tile[index3, index1];
+                        var tile = Main.tile[index3, index1];
                         if (tile.liquid > (byte) 0)
                         {
-                            int num5 = -num4;
-                            bool flag1 = false;
-                            int x = index3;
-                            int y = index1;
-                            byte num6 = tile.liquidType();
-                            bool flag2 = tile.lava();
-                            bool flag3 = tile.honey();
-                            byte liquid = tile.liquid;
+                            var num5 = -num4;
+                            var flag1 = false;
+                            var x = index3;
+                            var y = index1;
+                            var num6 = tile.liquidType();
+                            var flag2 = tile.lava();
+                            var flag3 = tile.honey();
+                            var liquid = tile.liquid;
                             tile.liquid = (byte) 0;
-                            bool flag4 = true;
-                            int num7 = 0;
+                            var flag4 = true;
+                            var num7 = 0;
                             while (flag4 && x > 3 && (x < Main.maxTilesX - 3 && y < Main.maxTilesY - 3))
                             {
                                 flag4 = false;
@@ -135,7 +135,7 @@ namespace Terraria
                                     Main.tile[x, y + 1].liquid < byte.MaxValue &&
                                     (int) Main.tile[x, y + 1].liquidType() == (int) num6)
                                 {
-                                    int num8 = (int) byte.MaxValue - (int) Main.tile[x, y + 1].liquid;
+                                    var num8 = (int) byte.MaxValue - (int) Main.tile[x, y + 1].liquid;
                                     if (num8 > (int) liquid)
                                         num8 = (int) liquid;
                                     Main.tile[x, y + 1].liquid += (byte) num8;
@@ -256,19 +256,19 @@ namespace Terraria
         public void Update()
         {
             Main.tileSolid[379] = true;
-            Tile tile1 = Main.tile[this.x - 1, this.y];
-            Tile tile2 = Main.tile[this.x + 1, this.y];
-            Tile tile3 = Main.tile[this.x, this.y - 1];
-            Tile tile4 = Main.tile[this.x, this.y + 1];
-            Tile tile5 = Main.tile[this.x, this.y];
+            var tile1 = Main.tile[this.x - 1, this.y];
+            var tile2 = Main.tile[this.x + 1, this.y];
+            var tile3 = Main.tile[this.x, this.y - 1];
+            var tile4 = Main.tile[this.x, this.y + 1];
+            var tile5 = Main.tile[this.x, this.y];
             if (tile5.nactive() && Main.tileSolid[(int) tile5.type] && !Main.tileSolidTop[(int) tile5.type])
             {
-                int type = (int) tile5.type;
+                var type = (int) tile5.type;
                 this.kill = 9;
             }
             else
             {
-                byte liquid = tile5.liquid;
+                var liquid = tile5.liquid;
                 if (this.y > Main.maxTilesY - 200 && tile5.liquidType() == (byte) 0 && tile5.liquid > (byte) 0)
                 {
                     byte num = 2;
@@ -339,7 +339,7 @@ namespace Terraria
                         ((tile4.liquid <= (byte) 0 || (int) tile4.liquidType() == (int) tile5.liquidType()) &&
                          tile4.liquid < byte.MaxValue))
                     {
-                        float num = (float) ((int) byte.MaxValue - (int) tile4.liquid);
+                        var num = (float) ((int) byte.MaxValue - (int) tile4.liquid);
                         if ((double) num > (double) tile5.liquid)
                             num = (float) tile5.liquid;
                         tile5.liquid -= (byte) num;
@@ -361,10 +361,10 @@ namespace Terraria
 
                     if (tile5.liquid > (byte) 0)
                     {
-                        bool flag1 = true;
-                        bool flag2 = true;
-                        bool flag3 = true;
-                        bool flag4 = true;
+                        var flag1 = true;
+                        var flag2 = true;
+                        var flag3 = true;
+                        var flag4 = true;
                         if (tile1.nactive() && Main.tileSolid[(int) tile1.type] && !Main.tileSolidTop[(int) tile1.type])
                             flag1 = false;
                         else if (tile1.liquid > (byte) 0 && (int) tile1.liquidType() != (int) tile5.liquidType())
@@ -391,15 +391,15 @@ namespace Terraria
                         else if (Main.tile[this.x + 2, this.y].liquid > (byte) 0 &&
                                  (int) Main.tile[this.x + 2, this.y].liquidType() != (int) tile5.liquidType())
                             flag4 = false;
-                        int num1 = 0;
+                        var num1 = 0;
                         if (tile5.liquid < (byte) 3)
                             num1 = -1;
                         if (flag1 && flag2)
                         {
                             if (flag3 && flag4)
                             {
-                                bool flag5 = true;
-                                bool flag6 = true;
+                                var flag5 = true;
+                                var flag6 = true;
                                 if (Main.tile[this.x - 3, this.y].nactive() &&
                                     Main.tileSolid[(int) Main.tile[this.x - 3, this.y].type] &&
                                     !Main.tileSolidTop[(int) Main.tile[this.x - 3, this.y].type])
@@ -418,14 +418,14 @@ namespace Terraria
                                     flag6 = false;
                                 if (flag5 && flag6)
                                 {
-                                    float num2 = (float) Math.Round(
+                                    var num2 = (float) Math.Round(
                                         (double) ((int) tile1.liquid + (int) tile2.liquid +
                                                   (int) Main.tile[this.x - 2, this.y].liquid +
                                                   (int) Main.tile[this.x + 2, this.y].liquid +
                                                   (int) Main.tile[this.x - 3, this.y].liquid +
                                                   (int) Main.tile[this.x + 3, this.y].liquid + (int) tile5.liquid +
                                                   num1) / 7.0);
-                                    int num3 = 0;
+                                    var num3 = 0;
                                     tile1.liquidType((int) tile5.liquidType());
                                     if ((int) tile1.liquid != (int) (byte) num2)
                                     {
@@ -503,8 +503,8 @@ namespace Terraria
                                 }
                                 else
                                 {
-                                    int num2 = 0;
-                                    float num3 = (float) Math.Round(
+                                    var num2 = 0;
+                                    var num3 = (float) Math.Round(
                                         (double) ((int) tile1.liquid + (int) tile2.liquid +
                                                   (int) Main.tile[this.x - 2, this.y].liquid +
                                                   (int) Main.tile[this.x + 2, this.y].liquid + (int) tile5.liquid +
@@ -563,7 +563,7 @@ namespace Terraria
                             }
                             else if (flag3)
                             {
-                                float num2 = (float) Math.Round(
+                                var num2 = (float) Math.Round(
                                     (double) ((int) tile1.liquid + (int) tile2.liquid +
                                               (int) Main.tile[this.x - 2, this.y].liquid + (int) tile5.liquid + num1) /
                                     4.0 + 0.001);
@@ -593,7 +593,7 @@ namespace Terraria
                             }
                             else if (flag4)
                             {
-                                float num2 = (float) Math.Round(
+                                var num2 = (float) Math.Round(
                                     (double) ((int) tile1.liquid + (int) tile2.liquid +
                                               (int) Main.tile[this.x + 2, this.y].liquid + (int) tile5.liquid + num1) /
                                     4.0 + 0.001);
@@ -623,7 +623,7 @@ namespace Terraria
                             }
                             else
                             {
-                                float num2 = (float) Math.Round(
+                                var num2 = (float) Math.Round(
                                     (double) ((int) tile1.liquid + (int) tile2.liquid + (int) tile5.liquid + num1) /
                                     3.0 + 0.001);
                                 tile1.liquidType((int) tile5.liquidType());
@@ -641,7 +641,7 @@ namespace Terraria
                         }
                         else if (flag1)
                         {
-                            float num2 =
+                            var num2 =
                                 (float) Math.Round((double) ((int) tile1.liquid + (int) tile5.liquid + num1) / 2.0 +
                                                    0.001);
                             if ((int) tile1.liquid != (int) (byte) num2)
@@ -653,7 +653,7 @@ namespace Terraria
                         }
                         else if (flag2)
                         {
-                            float num2 =
+                            var num2 =
                                 (float) Math.Round((double) ((int) tile2.liquid + (int) tile5.liquid + num1) / 2.0 +
                                                    0.001);
                             if ((int) tile2.liquid != (int) (byte) num2)
@@ -701,7 +701,7 @@ namespace Terraria
 
         public static void UpdateLiquid()
         {
-            int netMode1 = Main.netMode;
+            var netMode1 = Main.netMode;
             if (!WorldGen.gen)
             {
                 if (!Liquid.panicMode)
@@ -718,7 +718,7 @@ namespace Terraria
 
                 if (Liquid.panicMode)
                 {
-                    int num = 0;
+                    var num = 0;
                     while (Liquid.panicY >= 3 && num < 5)
                     {
                         ++num;
@@ -732,11 +732,11 @@ namespace Terraria
                             WorldGen.WaterCheck();
                             if (Main.netMode == 2)
                             {
-                                for (int index1 = 0; index1 < (int) byte.MaxValue; ++index1)
+                                for (var index1 = 0; index1 < (int) byte.MaxValue; ++index1)
                                 {
-                                    for (int index2 = 0; index2 < Main.maxSectionsX; ++index2)
+                                    for (var index2 = 0; index2 < Main.maxSectionsX; ++index2)
                                     {
-                                        for (int index3 = 0; index3 < Main.maxSectionsY; ++index3)
+                                        for (var index3 = 0; index3 < Main.maxSectionsY; ++index3)
                                             Netplay.Clients[index1].TileSections[index2, index3] = false;
                                     }
                                 }
@@ -750,21 +750,21 @@ namespace Terraria
 
             Liquid.quickFall = Liquid.quickSettle || Liquid.numLiquid > 2000;
             ++Liquid.wetCounter;
-            int num1 = Liquid.maxLiquid / Liquid.cycles;
-            int num2 = num1 * (Liquid.wetCounter - 1);
-            int num3 = num1 * Liquid.wetCounter;
+            var num1 = Liquid.maxLiquid / Liquid.cycles;
+            var num2 = num1 * (Liquid.wetCounter - 1);
+            var num3 = num1 * Liquid.wetCounter;
             if (Liquid.wetCounter == Liquid.cycles)
                 num3 = Liquid.numLiquid;
             if (num3 > Liquid.numLiquid)
             {
                 num3 = Liquid.numLiquid;
-                int netMode2 = Main.netMode;
+                var netMode2 = Main.netMode;
                 Liquid.wetCounter = Liquid.cycles;
             }
 
             if (Liquid.quickFall)
             {
-                for (int index = num2; index < num3; ++index)
+                for (var index = num2; index < num3; ++index)
                 {
                     Main.liquid[index].delay = 10;
                     Main.liquid[index].Update();
@@ -773,7 +773,7 @@ namespace Terraria
             }
             else
             {
-                for (int index = num2; index < num3; ++index)
+                for (var index = num2; index < num3; ++index)
                 {
                     if (!Main.tile[Main.liquid[index].x, Main.liquid[index].y].skipLiquid())
                         Main.liquid[index].Update();
@@ -785,16 +785,16 @@ namespace Terraria
             if (Liquid.wetCounter >= Liquid.cycles)
             {
                 Liquid.wetCounter = 0;
-                for (int l = Liquid.numLiquid - 1; l >= 0; --l)
+                for (var l = Liquid.numLiquid - 1; l >= 0; --l)
                 {
                     if (Main.liquid[l].kill > 4)
                         Liquid.DelWater(l);
                 }
 
-                int num4 = Liquid.maxLiquid - (Liquid.maxLiquid - Liquid.numLiquid);
+                var num4 = Liquid.maxLiquid - (Liquid.maxLiquid - Liquid.numLiquid);
                 if (num4 > LiquidBuffer.numLiquidBuffer)
                     num4 = LiquidBuffer.numLiquidBuffer;
-                for (int index = 0; index < num4; ++index)
+                for (var index = 0; index < num4; ++index)
                 {
                     Main.tile[Main.liquidBuffer[0].x, Main.liquidBuffer[0].y].checkingLiquid(false);
                     Liquid.AddWater(Main.liquidBuffer[0].x, Main.liquidBuffer[0].y);
@@ -808,7 +808,7 @@ namespace Terraria
                     if (Liquid.stuckCount >= 10000)
                     {
                         Liquid.stuck = true;
-                        for (int l = Liquid.numLiquid - 1; l >= 0; --l)
+                        for (var l = Liquid.numLiquid - 1; l >= 0; --l)
                             Liquid.DelWater(l);
                         Liquid.stuck = false;
                         Liquid.stuckCount = 0;
@@ -830,7 +830,7 @@ namespace Terraria
 
         public static void AddWater(int x, int y)
         {
-            Tile checkTile = Main.tile[x, y];
+            var checkTile = Main.tile[x, y];
             if (Main.tile[x, y] == null || checkTile.checkingLiquid() ||
                 (x >= Main.maxTilesX - 5 || y >= Main.maxTilesY - 5) ||
                 (x < 5 || y < 5 || checkTile.liquid == (byte) 0))
@@ -852,7 +852,7 @@ namespace Terraria
                     Liquid.NetSendLiquid(x, y);
                 if (!checkTile.active() || WorldGen.gen)
                     return;
-                bool flag = false;
+                var flag = false;
                 if (checkTile.lava())
                 {
                     if (TileObjectData.CheckLavaDeath(checkTile))
@@ -872,16 +872,16 @@ namespace Terraria
 
         public static void LavaCheck(int x, int y)
         {
-            Tile tile1 = Main.tile[x - 1, y];
-            Tile tile2 = Main.tile[x + 1, y];
-            Tile tile3 = Main.tile[x, y - 1];
-            Tile tile4 = Main.tile[x, y + 1];
-            Tile tile5 = Main.tile[x, y];
+            var tile1 = Main.tile[x - 1, y];
+            var tile2 = Main.tile[x + 1, y];
+            var tile3 = Main.tile[x, y - 1];
+            var tile4 = Main.tile[x, y + 1];
+            var tile5 = Main.tile[x, y];
             if (tile1.liquid > (byte) 0 && !tile1.lava() || tile2.liquid > (byte) 0 && !tile2.lava() ||
                 tile3.liquid > (byte) 0 && !tile3.lava())
             {
-                int num = 0;
-                int type = 56;
+                var num = 0;
+                var type = 56;
                 if (!tile1.lava())
                 {
                     num += (int) tile1.liquid;
@@ -930,7 +930,7 @@ namespace Terraria
             {
                 if (tile4.liquid <= (byte) 0 || tile4.lava())
                     return;
-                bool flag = false;
+                var flag = false;
                 if (tile5.active() && TileID.Sets.ForceObsidianKill[(int) tile5.type] &&
                     !TileID.Sets.ForceObsidianKill[(int) tile4.type])
                     flag = true;
@@ -961,7 +961,7 @@ namespace Terraria
                 }
                 else
                 {
-                    int type = 56;
+                    var type = 56;
                     if (tile4.honey())
                         type = 230;
                     tile5.liquid = (byte) 0;
@@ -985,17 +985,17 @@ namespace Terraria
 
         public static void HoneyCheck(int x, int y)
         {
-            Tile tile1 = Main.tile[x - 1, y];
-            Tile tile2 = Main.tile[x + 1, y];
-            Tile tile3 = Main.tile[x, y - 1];
-            Tile tile4 = Main.tile[x, y + 1];
-            Tile tile5 = Main.tile[x, y];
-            bool flag = false;
+            var tile1 = Main.tile[x - 1, y];
+            var tile2 = Main.tile[x + 1, y];
+            var tile3 = Main.tile[x, y - 1];
+            var tile4 = Main.tile[x, y + 1];
+            var tile5 = Main.tile[x, y];
+            var flag = false;
             if (tile1.liquid > (byte) 0 && tile1.liquidType() == (byte) 0 ||
                 tile2.liquid > (byte) 0 && tile2.liquidType() == (byte) 0 ||
                 tile3.liquid > (byte) 0 && tile3.liquidType() == (byte) 0)
             {
-                int num = 0;
+                var num = 0;
                 if (tile1.liquidType() == (byte) 0)
                 {
                     num += (int) tile1.liquid;
@@ -1095,12 +1095,12 @@ namespace Terraria
 
         public static void DelWater(int l)
         {
-            int x = Main.liquid[l].x;
-            int y = Main.liquid[l].y;
-            Tile tile1 = Main.tile[x - 1, y];
-            Tile tile2 = Main.tile[x + 1, y];
-            Tile tile3 = Main.tile[x, y + 1];
-            Tile tile4 = Main.tile[x, y];
+            var x = Main.liquid[l].x;
+            var y = Main.liquid[l].y;
+            var tile1 = Main.tile[x - 1, y];
+            var tile2 = Main.tile[x + 1, y];
+            var tile3 = Main.tile[x, y + 1];
+            var tile4 = Main.tile[x, y];
             byte num = 2;
             if ((int) tile4.liquid < (int) num)
             {
@@ -1151,11 +1151,11 @@ namespace Terraria
                 if (tile4.lava())
                 {
                     Liquid.LavaCheck(x, y);
-                    for (int i = x - 1; i <= x + 1; ++i)
+                    for (var i = x - 1; i <= x + 1; ++i)
                     {
-                        for (int j = y - 1; j <= y + 1; ++j)
+                        for (var j = y - 1; j <= y + 1; ++j)
                         {
-                            Tile tile5 = Main.tile[i, j];
+                            var tile5 = Main.tile[i, j];
                             if (tile5.active())
                             {
                                 if (tile5.type == (ushort) 2 || tile5.type == (ushort) 23 ||

@@ -31,9 +31,9 @@ namespace Terraria.GameContent
 
         static PortalHelper()
         {
-            for (int index = 0; index < PortalHelper.SLOPE_EDGES.Length; ++index)
+            for (var index = 0; index < PortalHelper.SLOPE_EDGES.Length; ++index)
                 PortalHelper.SLOPE_EDGES[index].Normalize();
-            for (int index = 0; index < PortalHelper.FoundPortals.GetLength(0); ++index)
+            for (var index = 0; index < PortalHelper.FoundPortals.GetLength(0); ++index)
             {
                 PortalHelper.FoundPortals[index, 0] = -1;
                 PortalHelper.FoundPortals[index, 1] = -1;
@@ -42,27 +42,27 @@ namespace Terraria.GameContent
 
         public static void UpdatePortalPoints()
         {
-            for (int index = 0; index < PortalHelper.FoundPortals.GetLength(0); ++index)
+            for (var index = 0; index < PortalHelper.FoundPortals.GetLength(0); ++index)
             {
                 PortalHelper.FoundPortals[index, 0] = -1;
                 PortalHelper.FoundPortals[index, 1] = -1;
             }
 
-            for (int index = 0; index < PortalHelper.PortalCooldownForPlayers.Length; ++index)
+            for (var index = 0; index < PortalHelper.PortalCooldownForPlayers.Length; ++index)
             {
                 if (PortalHelper.PortalCooldownForPlayers[index] > 0)
                     --PortalHelper.PortalCooldownForPlayers[index];
             }
 
-            for (int index = 0; index < PortalHelper.PortalCooldownForNPCs.Length; ++index)
+            for (var index = 0; index < PortalHelper.PortalCooldownForNPCs.Length; ++index)
             {
                 if (PortalHelper.PortalCooldownForNPCs[index] > 0)
                     --PortalHelper.PortalCooldownForNPCs[index];
             }
 
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
-                Projectile projectile = Main.projectile[index];
+                var projectile = Main.projectile[index];
                 if (projectile.active && projectile.type == 602 &&
                     ((double) projectile.ai[1] >= 0.0 && (double) projectile.ai[1] <= 1.0) &&
                     (projectile.owner >= 0 && projectile.owner <= (int) byte.MaxValue))
@@ -72,14 +72,14 @@ namespace Terraria.GameContent
 
         public static void TryGoingThroughPortals(Entity ent)
         {
-            float collisionPoint = 0.0f;
-            Vector2 velocity = ent.velocity;
-            int width = ent.width;
-            int height = ent.height;
-            int gravDir = 1;
+            var collisionPoint = 0.0f;
+            var velocity = ent.velocity;
+            var width = ent.width;
+            var height = ent.height;
+            var gravDir = 1;
             if (ent is Player)
                 gravDir = (int) ((Player) ent).gravDir;
-            for (int index1 = 0; index1 < PortalHelper.FoundPortals.GetLength(0); ++index1)
+            for (var index1 = 0; index1 < PortalHelper.FoundPortals.GetLength(0); ++index1)
             {
                 if (PortalHelper.FoundPortals[index1, 0] != -1 && PortalHelper.FoundPortals[index1, 1] != -1 &&
                     (!(ent is Player) || index1 < PortalHelper.PortalCooldownForPlayers.Length &&
@@ -87,40 +87,40 @@ namespace Terraria.GameContent
                     (!(ent is NPC) || index1 < PortalHelper.PortalCooldownForNPCs.Length &&
                      PortalHelper.PortalCooldownForNPCs[index1] <= 0))
                 {
-                    for (int index2 = 0; index2 < 2; ++index2)
+                    for (var index2 = 0; index2 < 2; ++index2)
                     {
-                        Projectile projectile1 = Main.projectile[PortalHelper.FoundPortals[index1, index2]];
+                        var projectile1 = Main.projectile[PortalHelper.FoundPortals[index1, index2]];
                         Vector2 start;
                         Vector2 end;
                         PortalHelper.GetPortalEdges(projectile1.Center, projectile1.ai[0], out start, out end);
                         if (Collision.CheckAABBvLineCollision(ent.position + ent.velocity, ent.Size, start, end, 2f,
                             ref collisionPoint))
                         {
-                            Projectile projectile2 = Main.projectile[PortalHelper.FoundPortals[index1, 1 - index2]];
-                            float num1 = ent.Hitbox.Distance(projectile1.Center);
+                            var projectile2 = Main.projectile[PortalHelper.FoundPortals[index1, 1 - index2]];
+                            var num1 = ent.Hitbox.Distance(projectile1.Center);
                             int bonusX;
                             int bonusY;
-                            Vector2 newPos =
+                            var newPos =
                                 PortalHelper.GetPortalOutingPoint(ent.Size, projectile2.Center, projectile2.ai[0],
                                     out bonusX, out bonusY) +
                                 Vector2.Normalize(new Vector2((float) bonusX, (float) bonusY)) * num1;
-                            Vector2 Velocity1 = Vector2.UnitX * 16f;
+                            var Velocity1 = Vector2.UnitX * 16f;
                             if (!(Collision.TileCollision(newPos - Velocity1, Velocity1, width, height, true, true,
                                       gravDir) != Velocity1))
                             {
-                                Vector2 Velocity2 = -Vector2.UnitX * 16f;
+                                var Velocity2 = -Vector2.UnitX * 16f;
                                 if (!(Collision.TileCollision(newPos - Velocity2, Velocity2, width, height, true, true,
                                           gravDir) != Velocity2))
                                 {
-                                    Vector2 Velocity3 = Vector2.UnitY * 16f;
+                                    var Velocity3 = Vector2.UnitY * 16f;
                                     if (!(Collision.TileCollision(newPos - Velocity3, Velocity3, width, height, true,
                                               true, gravDir) != Velocity3))
                                     {
-                                        Vector2 Velocity4 = -Vector2.UnitY * 16f;
+                                        var Velocity4 = -Vector2.UnitY * 16f;
                                         if (!(Collision.TileCollision(newPos - Velocity4, Velocity4, width, height,
                                                   true, true, gravDir) != Velocity4))
                                         {
-                                            float num2 = 0.1f;
+                                            var num2 = 0.1f;
                                             if (bonusY == -gravDir)
                                                 num2 = 0.1f;
                                             if (ent.velocity == Vector2.Zero)
@@ -132,7 +132,7 @@ namespace Terraria.GameContent
                                                 ent.velocity *= num2;
                                             }
 
-                                            Vector2 vec =
+                                            var vec =
                                                 Vector2.Normalize(new Vector2((float) bonusX, (float) bonusY));
                                             if (vec.HasNaNs() || vec == Vector2.Zero)
                                                 vec = Vector2.UnitX * (float) ent.direction;
@@ -140,12 +140,12 @@ namespace Terraria.GameContent
                                             if (bonusY == -gravDir && Math.Sign(ent.velocity.Y) != -gravDir ||
                                                 (double) Math.Abs(ent.velocity.Y) < 0.100000001490116)
                                                 ent.velocity.Y = (float) -gravDir * 0.1f;
-                                            int extraInfo =
+                                            var extraInfo =
                                                 (int) ((double) (projectile2.owner * 2) + (double) projectile2.ai[1]);
-                                            int num3 = extraInfo + (extraInfo % 2 == 0 ? 1 : -1);
+                                            var num3 = extraInfo + (extraInfo % 2 == 0 ? 1 : -1);
                                             if (ent is Player)
                                             {
-                                                Player player = (Player) ent;
+                                                var player = (Player) ent;
                                                 player.lastPortalColorIndex = num3;
                                                 player.Teleport(newPos, 4, extraInfo);
                                                 if (Main.netMode == 1)
@@ -162,7 +162,7 @@ namespace Terraria.GameContent
 
                                             if (!(ent is NPC))
                                                 return;
-                                            NPC npc = (NPC) ent;
+                                            var npc = (NPC) ent;
                                             npc.lastPortalColorIndex = num3;
                                             npc.Teleport(newPos, 4, extraInfo);
                                             if (Main.netMode == 1)
@@ -187,16 +187,16 @@ namespace Terraria.GameContent
 
         public static int TryPlacingPortal(Projectile theBolt, Vector2 velocity, Vector2 theCrashVelocity)
         {
-            Vector2 vector2_1 = velocity / velocity.Length();
-            Point tileCoordinates = PortalHelper
+            var vector2_1 = velocity / velocity.Length();
+            var tileCoordinates = PortalHelper
                 .FindCollision(theBolt.position, theBolt.position + velocity + vector2_1 * 32f).ToTileCoordinates();
-            Tile tile = Main.tile[tileCoordinates.X, tileCoordinates.Y];
-            Vector2 position = new Vector2((float) (tileCoordinates.X * 16 + 8), (float) (tileCoordinates.Y * 16 + 8));
+            var tile = Main.tile[tileCoordinates.X, tileCoordinates.Y];
+            var position = new Vector2((float) (tileCoordinates.X * 16 + 8), (float) (tileCoordinates.Y * 16 + 8));
             if (!WorldGen.SolidOrSlopedTile(tile))
                 return -1;
-            int num = (int) tile.slope();
-            bool flag = tile.halfBrick();
-            for (int index = 0; index < (flag ? 2 : PortalHelper.EDGES.Length); ++index)
+            var num = (int) tile.slope();
+            var flag = tile.halfBrick();
+            for (var index = 0; index < (flag ? 2 : PortalHelper.EDGES.Length); ++index)
             {
                 Point bestPosition;
                 if ((double) Vector2.Dot(PortalHelper.EDGES[index], vector2_1) > 0.0 && PortalHelper.FindValidLine(
@@ -212,7 +212,7 @@ namespace Terraria.GameContent
 
             if (num != 0)
             {
-                Vector2 vector2_2 = PortalHelper.SLOPE_EDGES[num - 1];
+                var vector2_2 = PortalHelper.SLOPE_EDGES[num - 1];
                 Point bestPosition;
                 if ((double) Vector2.Dot(vector2_2, -vector2_1) > 0.0 && PortalHelper.FindValidLine(tileCoordinates,
                         -PortalHelper.SLOPE_OFFSETS[num - 1].Y, PortalHelper.SLOPE_OFFSETS[num - 1].X,
@@ -233,14 +233,14 @@ namespace Terraria.GameContent
             bestPosition = position;
             if (PortalHelper.IsValidLine(position, xOffset, yOffset))
                 return true;
-            Point position1 = new Point(position.X - xOffset, position.Y - yOffset);
+            var position1 = new Point(position.X - xOffset, position.Y - yOffset);
             if (PortalHelper.IsValidLine(position1, xOffset, yOffset))
             {
                 bestPosition = position1;
                 return true;
             }
 
-            Point position2 = new Point(position.X + xOffset, position.Y + yOffset);
+            var position2 = new Point(position.X + xOffset, position.Y + yOffset);
             if (!PortalHelper.IsValidLine(position2, xOffset, yOffset))
                 return false;
             bestPosition = position2;
@@ -249,9 +249,9 @@ namespace Terraria.GameContent
 
         private static bool IsValidLine(Point position, int xOffset, int yOffset)
         {
-            Tile tile1 = Main.tile[position.X, position.Y];
-            Tile tile2 = Main.tile[position.X - xOffset, position.Y - yOffset];
-            Tile tile3 = Main.tile[position.X + xOffset, position.Y + yOffset];
+            var tile1 = Main.tile[position.X, position.Y];
+            var tile2 = Main.tile[position.X - xOffset, position.Y - yOffset];
+            var tile3 = Main.tile[position.X + xOffset, position.Y + yOffset];
             return !PortalHelper.BlockPortals(Main.tile[position.X + yOffset, position.Y - xOffset]) &&
                    !PortalHelper.BlockPortals(Main.tile[position.X + yOffset - xOffset,
                        position.Y - xOffset - yOffset]) &&
@@ -270,8 +270,8 @@ namespace Terraria.GameContent
 
         private static Vector2 FindCollision(Vector2 startPosition, Vector2 stopPosition)
         {
-            int lastX = 0;
-            int lastY = 0;
+            var lastX = 0;
+            var lastY = 0;
             Utils.PlotLine(startPosition.ToTileCoordinates(), stopPosition.ToTileCoordinates(),
                 (Utils.PerLinePoint) ((x, y) =>
                 {
@@ -288,7 +288,7 @@ namespace Terraria.GameContent
                 return -1;
             PortalHelper.RemoveMyOldPortal(form);
             PortalHelper.RemoveIntersectingPortals(position, angle);
-            int index = Projectile.NewProjectile(position.X, position.Y, 0.0f, 0.0f, 602, 0, 0.0f, Main.myPlayer, angle,
+            var index = Projectile.NewProjectile(position.X, position.Y, 0.0f, 0.0f, 602, 0, 0.0f, Main.myPlayer, angle,
                 (float) form);
             Main.projectile[index].direction = direction;
             Main.projectile[index].netUpdate = true;
@@ -297,9 +297,9 @@ namespace Terraria.GameContent
 
         private static void RemoveMyOldPortal(int form)
         {
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
-                Projectile projectile = Main.projectile[index];
+                var projectile = Main.projectile[index];
                 if (projectile.active && projectile.type == 602 &&
                     (projectile.owner == Main.myPlayer && (double) projectile.ai[1] == (double) form))
                 {
@@ -314,9 +314,9 @@ namespace Terraria.GameContent
             Vector2 start1;
             Vector2 end1;
             PortalHelper.GetPortalEdges(position, angle, out start1, out end1);
-            for (int number = 0; number < 1000; ++number)
+            for (var number = 0; number < 1000; ++number)
             {
-                Projectile projectile = Main.projectile[number];
+                var projectile = Main.projectile[number];
                 if (projectile.active && projectile.type == 602)
                 {
                     Vector2 start2;
@@ -342,7 +342,7 @@ namespace Terraria.GameContent
 
         public static Color GetPortalColor(int player, int portal)
         {
-            Color white = Color.White;
+            var white = Color.White;
             Color color;
             if (Main.netMode == 0)
             {
@@ -350,7 +350,7 @@ namespace Terraria.GameContent
             }
             else
             {
-                float num = 0.08f;
+                var num = 0.08f;
                 color = Main.hslToRgb(
                     (float) ((0.5 + (double) player * ((double) num * 2.0) + (double) portal * (double) num) % 1.0), 1f,
                     0.5f);
@@ -362,7 +362,7 @@ namespace Terraria.GameContent
 
         private static void GetPortalEdges(Vector2 position, float angle, out Vector2 start, out Vector2 end)
         {
-            Vector2 rotationVector2 = angle.ToRotationVector2();
+            var rotationVector2 = angle.ToRotationVector2();
             start = position + rotationVector2 * -22f;
             end = position + rotationVector2 * 22f;
         }
@@ -370,7 +370,7 @@ namespace Terraria.GameContent
         private static Vector2 GetPortalOutingPoint(Vector2 objectSize, Vector2 portalPosition, float portalAngle,
             out int bonusX, out int bonusY)
         {
-            int num = (int) Math.Round((double) MathHelper.WrapAngle(portalAngle) / 0.785398185253143);
+            var num = (int) Math.Round((double) MathHelper.WrapAngle(portalAngle) / 0.785398185253143);
             switch (num)
             {
                 case -3:
@@ -409,17 +409,17 @@ namespace Terraria.GameContent
         {
             portals = new List<Point>();
             portalCenters = new List<Point>();
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
-                Projectile projectile = Main.projectile[index];
+                var projectile = Main.projectile[index];
                 if (projectile.active && (projectile.type == 602 || projectile.type == 601))
                 {
-                    Vector2 center = projectile.Center;
-                    int sectionX = Netplay.GetSectionX((int) ((double) center.X / 16.0));
-                    int sectionY = Netplay.GetSectionY((int) ((double) center.Y / 16.0));
-                    for (int x = sectionX - fluff; x < sectionX + fluff + 1; ++x)
+                    var center = projectile.Center;
+                    var sectionX = Netplay.GetSectionX((int) ((double) center.X / 16.0));
+                    var sectionY = Netplay.GetSectionY((int) ((double) center.Y / 16.0));
+                    for (var x = sectionX - fluff; x < sectionX + fluff + 1; ++x)
                     {
-                        for (int y = sectionY - fluff; y < sectionY + fluff + 1; ++y)
+                        for (var y = sectionY - fluff; y < sectionY + fluff + 1; ++y)
                         {
                             if (x >= 0 && x < Main.maxSectionsX && (y >= 0 && y < Main.maxSectionsY) &&
                                 (!Netplay.Clients[plr].TileSections[x, y] && !dontInclude.Contains(new Point(x, y))))
@@ -436,7 +436,7 @@ namespace Terraria.GameContent
 
         public static void SyncPortalSections(Vector2 portalPosition, int fluff)
         {
-            for (int playerIndex = 0; playerIndex < (int) byte.MaxValue; ++playerIndex)
+            for (var playerIndex = 0; playerIndex < (int) byte.MaxValue; ++playerIndex)
             {
                 if (Main.player[playerIndex].active)
                     RemoteClient.CheckSection(playerIndex, portalPosition, fluff);
@@ -445,8 +445,8 @@ namespace Terraria.GameContent
 
         public static bool SupportedTilesAreFine(Vector2 portalCenter, float portalAngle)
         {
-            Point tileCoordinates = portalCenter.ToTileCoordinates();
-            int num1 = (int) Math.Round((double) MathHelper.WrapAngle(portalAngle) / 0.785398185253143);
+            var tileCoordinates = portalCenter.ToTileCoordinates();
+            var num1 = (int) Math.Round((double) MathHelper.WrapAngle(portalAngle) / 0.785398185253143);
             int num2;
             int num3;
             switch (num1)
@@ -479,14 +479,14 @@ namespace Terraria.GameContent
 
             if (num2 != 0 && num3 != 0)
             {
-                int num4 = 3;
+                var num4 = 3;
                 if (num2 == -1 && num3 == 1)
                     num4 = 5;
                 if (num2 == 1 && num3 == -1)
                     num4 = 2;
                 if (num2 == 1 && num3 == 1)
                     num4 = 4;
-                int slope = num4 - 1;
+                var slope = num4 - 1;
                 if (PortalHelper.SupportedSlope(tileCoordinates.X, tileCoordinates.Y, slope) &&
                     PortalHelper.SupportedSlope(tileCoordinates.X + num2, tileCoordinates.Y - num3, slope))
                     return PortalHelper.SupportedSlope(tileCoordinates.X - num2, tileCoordinates.Y + num3, slope);
@@ -526,7 +526,7 @@ namespace Terraria.GameContent
 
         private static bool SupportedSlope(int x, int y, int slope)
         {
-            Tile tile = Main.tile[x, y];
+            var tile = Main.tile[x, y];
             if (tile != null && tile.nactive() &&
                 (!Main.tileCut[(int) tile.type] && !TileID.Sets.BreakableWhenPlacing[(int) tile.type]) &&
                 Main.tileSolid[(int) tile.type])
@@ -536,7 +536,7 @@ namespace Terraria.GameContent
 
         private static bool SupportedHalfbrick(int x, int y)
         {
-            Tile tile = Main.tile[x, y];
+            var tile = Main.tile[x, y];
             if (tile != null && tile.nactive() &&
                 (!Main.tileCut[(int) tile.type] && !TileID.Sets.BreakableWhenPlacing[(int) tile.type]) &&
                 Main.tileSolid[(int) tile.type])
@@ -546,7 +546,7 @@ namespace Terraria.GameContent
 
         private static bool SupportedNormal(int x, int y)
         {
-            Tile tile = Main.tile[x, y];
+            var tile = Main.tile[x, y];
             if (tile != null && tile.nactive() &&
                 (!Main.tileCut[(int) tile.type] && !TileID.Sets.BreakableWhenPlacing[(int) tile.type]) &&
                 (Main.tileSolid[(int) tile.type] && !TileID.Sets.NotReallySolid[(int) tile.type] && !tile.halfBrick()))

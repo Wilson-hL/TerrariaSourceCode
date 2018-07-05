@@ -22,8 +22,8 @@ namespace Terraria.GameContent.Shaders
             if (this._moonLordIndex >= 0 && Main.npc[this._moonLordIndex].active &&
                 Main.npc[this._moonLordIndex].type == 398)
                 return;
-            int num = -1;
-            for (int index = 0; index < Main.npc.Length; ++index)
+            var num = -1;
+            for (var index = 0; index < Main.npc.Length; ++index)
             {
                 if (Main.npc[index].active && Main.npc[index].type == 398)
                 {

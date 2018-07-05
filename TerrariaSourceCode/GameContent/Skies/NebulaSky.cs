@@ -30,7 +30,7 @@ namespace Terraria.GameContent.Skies
             this._bgTexture = TextureManager.Load("Images/Misc/NebulaSky/Background");
             this._beamTexture = TextureManager.Load("Images/Misc/NebulaSky/Beam");
             this._rockTextures = new Texture2D[3];
-            for (int index = 0; index < this._rockTextures.Length; ++index)
+            for (var index = 0; index < this._rockTextures.Length; ++index)
                 this._rockTextures[index] = TextureManager.Load("Images/Misc/NebulaSky/Rock_" + (object) index);
         }
 
@@ -60,8 +60,8 @@ namespace Terraria.GameContent.Skies
                                    0.100000001490116)), Main.screenWidth, Main.screenHeight),
                     Color.White * Math.Min(1f,
                         (float) (((double) Main.screenPosition.Y - 800.0) / 1000.0) * this._fadeOpacity));
-                Vector2 vector2_1 = new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-                Vector2 vector2_2 = 0.01f * (new Vector2((float) Main.maxTilesX * 8f, (float) Main.worldSurface / 2f) -
+                var vector2_1 = new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
+                var vector2_2 = 0.01f * (new Vector2((float) Main.maxTilesX * 8f, (float) Main.worldSurface / 2f) -
                                              Main.screenPosition);
                 spriteBatch.Draw(this._planetTexture, vector2_1 + new Vector2(-200f, -200f) + vector2_2,
                     new Rectangle?(), Color.White * 0.9f * this._fadeOpacity, 0.0f,
@@ -69,11 +69,11 @@ namespace Terraria.GameContent.Skies
                     1f, SpriteEffects.None, 1f);
             }
 
-            int num1 = -1;
-            int num2 = 0;
-            for (int index = 0; index < this._pillars.Length; ++index)
+            var num1 = -1;
+            var num2 = 0;
+            for (var index = 0; index < this._pillars.Length; ++index)
             {
-                float depth = this._pillars[index].Depth;
+                var depth = this._pillars[index].Depth;
                 if (num1 == -1 && (double) depth < (double) maxDepth)
                     num1 = index;
                 if ((double) depth > (double) minDepth)
@@ -84,26 +84,26 @@ namespace Terraria.GameContent.Skies
 
             if (num1 == -1)
                 return;
-            Vector2 vector2_3 = Main.screenPosition +
+            var vector2_3 = Main.screenPosition +
                                 new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-            Rectangle rectangle = new Rectangle(-1000, -1000, 4000, 4000);
-            float num3 = Math.Min(1f, (float) (((double) Main.screenPosition.Y - 1000.0) / 1000.0));
-            for (int index1 = num1; index1 < num2; ++index1)
+            var rectangle = new Rectangle(-1000, -1000, 4000, 4000);
+            var num3 = Math.Min(1f, (float) (((double) Main.screenPosition.Y - 1000.0) / 1000.0));
+            for (var index1 = num1; index1 < num2; ++index1)
             {
-                Vector2 vector2_1 = new Vector2(1f / this._pillars[index1].Depth, 0.9f / this._pillars[index1].Depth);
-                Vector2 position = (this._pillars[index1].Position - vector2_3) * vector2_1 + vector2_3 -
+                var vector2_1 = new Vector2(1f / this._pillars[index1].Depth, 0.9f / this._pillars[index1].Depth);
+                var position = (this._pillars[index1].Position - vector2_3) * vector2_1 + vector2_3 -
                                    Main.screenPosition;
                 if (rectangle.Contains((int) position.X, (int) position.Y))
                 {
-                    float num4 = vector2_1.X * 450f;
+                    var num4 = vector2_1.X * 450f;
                     spriteBatch.Draw(this._beamTexture, position, new Rectangle?(),
                         Color.White * 0.2f * num3 * this._fadeOpacity, 0.0f, Vector2.Zero,
                         new Vector2(num4 / 70f, num4 / 45f), SpriteEffects.None, 0.0f);
-                    int index2 = 0;
-                    float num5 = 0.0f;
+                    var index2 = 0;
+                    var num5 = 0.0f;
                     while ((double) num5 <= 1.0)
                     {
-                        float num6 = (float) (1.0 - ((double) num5 + (double) Main.GlobalTime * 0.0199999995529652 +
+                        var num6 = (float) (1.0 - ((double) num5 + (double) Main.GlobalTime * 0.0199999995529652 +
                                                      Math.Sin((double) index1)) % 1.0);
                         spriteBatch.Draw(this._rockTextures[index2],
                             position + new Vector2(
@@ -129,7 +129,7 @@ namespace Terraria.GameContent.Skies
             this._fadeOpacity = 1f / 500f;
             this._isActive = true;
             this._pillars = new NebulaSky.LightPillar[40];
-            for (int index = 0; index < this._pillars.Length; ++index)
+            for (var index = 0; index < this._pillars.Length; ++index)
             {
                 this._pillars[index].Position.X =
                     (float) ((double) index / (double) this._pillars.Length *

@@ -53,7 +53,7 @@ namespace Terraria.GameContent.UI.Elements
 
         private Rectangle GetHandleRectangle()
         {
-            CalculatedStyle innerDimensions = this.GetInnerDimensions();
+            var innerDimensions = this.GetInnerDimensions();
             if ((double) this._maxViewSize == 0.0 && (double) this._viewSize == 0.0)
             {
                 this._viewSize = 1f;
@@ -79,16 +79,16 @@ namespace Terraria.GameContent.UI.Elements
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
-            CalculatedStyle dimensions = this.GetDimensions();
-            CalculatedStyle innerDimensions = this.GetInnerDimensions();
+            var dimensions = this.GetDimensions();
+            var innerDimensions = this.GetInnerDimensions();
             if (this._isDragging)
                 this._viewPosition =
                     MathHelper.Clamp(
                         (UserInterface.ActiveInstance.MousePosition.Y - innerDimensions.Y - this._dragYOffset) /
                         innerDimensions.Height * this._maxViewSize, 0.0f, this._maxViewSize - this._viewSize);
-            Rectangle handleRectangle = this.GetHandleRectangle();
-            Vector2 mousePosition = UserInterface.ActiveInstance.MousePosition;
-            bool hoveringOverHandle = this._isHoveringOverHandle;
+            var handleRectangle = this.GetHandleRectangle();
+            var mousePosition = UserInterface.ActiveInstance.MousePosition;
+            var hoveringOverHandle = this._isHoveringOverHandle;
             this._isHoveringOverHandle =
                 handleRectangle.Contains(new Point((int) mousePosition.X, (int) mousePosition.Y));
             if (!hoveringOverHandle && this._isHoveringOverHandle && Main.hasFocus)
@@ -103,7 +103,7 @@ namespace Terraria.GameContent.UI.Elements
             base.MouseDown(evt);
             if (evt.Target != this)
                 return;
-            Rectangle handleRectangle = this.GetHandleRectangle();
+            var handleRectangle = this.GetHandleRectangle();
             if (handleRectangle.Contains(new Point((int) evt.MousePosition.X, (int) evt.MousePosition.Y)))
             {
                 this._isDragging = true;
@@ -111,7 +111,7 @@ namespace Terraria.GameContent.UI.Elements
             }
             else
             {
-                CalculatedStyle innerDimensions = this.GetInnerDimensions();
+                var innerDimensions = this.GetInnerDimensions();
                 this._viewPosition = MathHelper.Clamp(
                     (UserInterface.ActiveInstance.MousePosition.Y - innerDimensions.Y -
                      (float) (handleRectangle.Height >> 1)) / innerDimensions.Height * this._maxViewSize, 0.0f,

@@ -827,15 +827,15 @@ namespace Terraria
 
         public void RotateRelativePoint(ref float x, ref float y)
         {
-            Vector2 vector2 = this.RotatedRelativePoint(new Vector2(x, y), true);
+            var vector2 = this.RotatedRelativePoint(new Vector2(x, y), true);
             x = vector2.X;
             y = vector2.Y;
         }
 
         public Vector2 RotatedRelativePoint(Vector2 pos, bool rotateForward = true)
         {
-            Vector2 vector2 = this.position + this.fullRotationOrigin;
-            Matrix rotationZ = Matrix.CreateRotationZ(this.fullRotation * (float) rotateForward.ToInt());
+            var vector2 = this.position + this.fullRotationOrigin;
+            var rotationZ = Matrix.CreateRotationZ(this.fullRotation * (float) rotateForward.ToInt());
             pos -= this.position + this.fullRotationOrigin;
             pos = Vector2.Transform(pos, rotationZ);
             return pos + vector2;
@@ -1105,7 +1105,7 @@ namespace Terraria
         public static byte FindClosest(Vector2 Position, int Width, int Height)
         {
             byte num1 = 0;
-            for (int index = 0; index < (int) byte.MaxValue; ++index)
+            for (var index = 0; index < (int) byte.MaxValue; ++index)
             {
                 if (Main.player[index].active)
                 {
@@ -1114,12 +1114,12 @@ namespace Terraria
                 }
             }
 
-            float num2 = -1f;
-            for (int index = 0; index < (int) byte.MaxValue; ++index)
+            var num2 = -1f;
+            for (var index = 0; index < (int) byte.MaxValue; ++index)
             {
                 if (Main.player[index].active && !Main.player[index].dead)
                 {
-                    float num3 =
+                    var num3 =
                         Math.Abs((float) ((double) Main.player[index].position.X +
                                           (double) (Main.player[index].width / 2) -
                                           ((double) Position.X + (double) (Width / 2)))) +
@@ -1139,7 +1139,7 @@ namespace Terraria
 
         public void ToggleInv()
         {
-            bool interactAreShared = PlayerInput.GrappleAndInteractAreShared;
+            var interactAreShared = PlayerInput.GrappleAndInteractAreShared;
             if (Main.mapFullscreen)
             {
                 Main.mapFullscreen = false;
@@ -1204,7 +1204,7 @@ namespace Terraria
                 Main.PlaySound(11, -1, -1, 1, 1f, 0.0f);
                 if (ItemSlot.Options.HighlightNewItems)
                 {
-                    foreach (Item obj in this.inventory)
+                    foreach (var obj in this.inventory)
                         obj.newAndShiny = false;
                 }
             }
@@ -1223,10 +1223,10 @@ namespace Terraria
             if (!Main.InGuideCraftMenu && Main.guideItem.type > 0)
             {
                 Main.guideItem.position = this.Center;
-                Item obj = this.GetItem(this.whoAmI, Main.guideItem, false, true);
+                var obj = this.GetItem(this.whoAmI, Main.guideItem, false, true);
                 if (obj.stack > 0)
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         obj.type, obj.stack, false, (int) Main.guideItem.prefix, true, false);
                     Main.item[number].newAndShiny = false;
                     if (Main.netMode == 1)
@@ -1239,10 +1239,10 @@ namespace Terraria
             if (!Main.InReforgeMenu && Main.reforgeItem.type > 0)
             {
                 Main.reforgeItem.position = this.Center;
-                Item obj = this.GetItem(this.whoAmI, Main.reforgeItem, false, true);
+                var obj = this.GetItem(this.whoAmI, Main.reforgeItem, false, true);
                 if (obj.stack > 0)
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         obj.type, obj.stack, false, (int) Main.reforgeItem.prefix, true, false);
                     Main.item[number].newAndShiny = false;
                     if (Main.netMode == 1)
@@ -1254,7 +1254,7 @@ namespace Terraria
 
             if (Main.myPlayer == this.whoAmI)
                 this.inventory[58] = Main.mouseItem.Clone();
-            bool flag = true;
+            var flag = true;
             if (Main.mouseItem.type > 0 && Main.mouseItem.stack > 0)
             {
                 if (!Main.gamePaused)
@@ -1288,10 +1288,10 @@ namespace Terraria
             if (Main.mouseItem.type > 0 && !Main.playerInventory)
             {
                 Main.mouseItem.position = this.Center;
-                Item obj = this.GetItem(this.whoAmI, Main.mouseItem, false, true);
+                var obj = this.GetItem(this.whoAmI, Main.mouseItem, false, true);
                 if (obj.stack > 0)
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         obj.type, obj.stack, false, 0, true, false);
                     Main.item[number].newAndShiny = false;
                     if (Main.netMode == 1)
@@ -1316,7 +1316,7 @@ namespace Terraria
 
         public void DropSelectedItem()
         {
-            bool flag1 = false;
+            var flag1 = false;
             if (this.inventory[this.selectedItem].favorited)
             {
                 this.inventory[this.selectedItem] =
@@ -1330,8 +1330,8 @@ namespace Terraria
 
             if (flag1)
                 return;
-            Item obj = new Item();
-            bool flag2 = false;
+            var obj = new Item();
+            var flag2 = false;
             if ((Main.mouseRight && !this.mouseInterface && Main.mouseRightRelease || !Main.playerInventory) &&
                 (Main.mouseItem.type > 0 && Main.mouseItem.stack > 0))
             {
@@ -1342,7 +1342,7 @@ namespace Terraria
                 flag2 = true;
             }
 
-            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                 this.inventory[this.selectedItem].type, 1, false, 0, false, false);
             if (!flag2 && this.inventory[this.selectedItem].type == 8 && this.inventory[this.selectedItem].stack > 1)
             {
@@ -1384,7 +1384,7 @@ namespace Terraria
         {
             if (this.buffImmune[type])
                 return -1;
-            for (int index = 0; index < 22; ++index)
+            for (var index = 0; index < 22; ++index)
             {
                 if (this.buffTime[index] >= 1 && this.buffType[index] == type)
                     return index;
@@ -1397,7 +1397,7 @@ namespace Terraria
         {
             if (this.buffImmune[type])
                 return;
-            int num = time1;
+            var num = time1;
             if (Main.expertMode && this.whoAmI == Main.myPlayer && (type == 20 || type == 22 ||
                                                                     (type == 23 || type == 24) ||
                                                                     (type == 30 || type == 31 ||
@@ -1409,8 +1409,8 @@ namespace Terraria
                 num = (int) ((double) Main.expertDebuffTime * (double) num);
             if (!quiet && Main.netMode == 1)
             {
-                bool flag = true;
-                for (int index = 0; index < 22; ++index)
+                var flag = true;
+                for (var index = 0; index < 22; ++index)
                 {
                     if (this.buffType[index] == type)
                     {
@@ -1424,8 +1424,8 @@ namespace Terraria
                         0, 0);
             }
 
-            int index1 = -1;
-            for (int index2 = 0; index2 < 22; ++index2)
+            var index1 = -1;
+            for (var index2 = 0; index2 < 22; ++index2)
             {
                 if (this.buffType[index2] == type)
                 {
@@ -1447,7 +1447,7 @@ namespace Terraria
 
             if (Main.vanityPet[type] || Main.lightPet[type])
             {
-                for (int b = 0; b < 22; ++b)
+                for (var b = 0; b < 22; ++b)
                 {
                     if (Main.vanityPet[type] && Main.vanityPet[this.buffType[b]])
                         this.DelBuff(b);
@@ -1458,8 +1458,8 @@ namespace Terraria
 
             while (index1 == -1)
             {
-                int b = -1;
-                for (int index2 = 0; index2 < 22; ++index2)
+                var b = -1;
+                for (var index2 = 0; index2 < 22; ++index2)
                 {
                     if (!Main.debuff[this.buffType[index2]])
                     {
@@ -1470,7 +1470,7 @@ namespace Terraria
 
                 if (b == -1)
                     return;
-                for (int index2 = b; index2 < 22; ++index2)
+                for (var index2 = b; index2 < 22; ++index2)
                 {
                     if (this.buffType[index2] == 0)
                     {
@@ -1487,7 +1487,7 @@ namespace Terraria
             this.buffTime[index1] = num;
             if (!Main.meleeBuff[type])
                 return;
-            for (int b = 0; b < 22; ++b)
+            for (var b = 0; b < 22; ++b)
             {
                 if (b != index1 && Main.meleeBuff[this.buffType[b]])
                     this.DelBuff(b);
@@ -1498,11 +1498,11 @@ namespace Terraria
         {
             this.buffTime[b] = 0;
             this.buffType[b] = 0;
-            for (int index1 = 0; index1 < 21; ++index1)
+            for (var index1 = 0; index1 < 21; ++index1)
             {
                 if (this.buffTime[index1] == 0 || this.buffType[index1] == 0)
                 {
-                    for (int index2 = index1 + 1; index2 < 22; ++index2)
+                    for (var index2 = index1 + 1; index2 < 22; ++index2)
                     {
                         this.buffTime[index2 - 1] = this.buffTime[index2];
                         this.buffType[index2 - 1] = this.buffType[index2];
@@ -1515,7 +1515,7 @@ namespace Terraria
 
         public void ClearBuff(int type)
         {
-            for (int b = 0; b < 22; ++b)
+            for (var b = 0; b < 22; ++b)
             {
                 if (this.buffType[b] == type)
                     this.DelBuff(b);
@@ -1524,8 +1524,8 @@ namespace Terraria
 
         public int CountBuffs()
         {
-            int index1 = 0;
-            for (int index2 = 0; index2 < 22; ++index2)
+            var index1 = 0;
+            for (var index2 = 0; index2 < 22; ++index2)
             {
                 if (this.buffType[index1] > 0)
                     ++index1;
@@ -1538,7 +1538,7 @@ namespace Terraria
         {
             if (this.noItems || this.statLife == this.statLifeMax2 || this.potionDelay > 0)
                 return;
-            Item itemToUse = this.QuickHeal_GetItemToUse();
+            var itemToUse = this.QuickHeal_GetItemToUse();
             if (itemToUse == null)
                 return;
             Main.PlaySound(itemToUse.UseSound, this.position);
@@ -1579,15 +1579,15 @@ namespace Terraria
 
         public Item QuickHeal_GetItemToUse()
         {
-            int num1 = this.statLifeMax2 - this.statLife;
-            Item obj1 = (Item) null;
-            int num2 = -this.statLifeMax2;
-            for (int index = 0; index < 58; ++index)
+            var num1 = this.statLifeMax2 - this.statLife;
+            var obj1 = (Item) null;
+            var num2 = -this.statLifeMax2;
+            for (var index = 0; index < 58; ++index)
             {
-                Item obj2 = this.inventory[index];
+                var obj2 = this.inventory[index];
                 if (obj2.stack > 0 && obj2.type > 0 && (obj2.potion && obj2.healLife > 0))
                 {
-                    int num3 = obj2.healLife - num1;
+                    var num3 = obj2.healLife - num1;
                     if (num2 < 0)
                     {
                         if (num3 > num2)
@@ -1611,7 +1611,7 @@ namespace Terraria
         {
             if (this.noItems || this.statMana == this.statManaMax2)
                 return;
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
                 if (this.inventory[index].stack > 0 && this.inventory[index].type > 0 &&
                     this.inventory[index].healMana > 0 && (this.potionDelay == 0 || !this.inventory[index].potion))
@@ -1657,7 +1657,7 @@ namespace Terraria
 
         public Item QuickMana_GetItemToUse()
         {
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
                 if (this.inventory[index].stack > 0 && this.inventory[index].type > 0 &&
                     this.inventory[index].healMana > 0 && (this.potionDelay == 0 || !this.inventory[index].potion))
@@ -1671,8 +1671,8 @@ namespace Terraria
         {
             if (this.noItems)
                 return;
-            LegacySoundStyle type1 = (LegacySoundStyle) null;
-            for (int index1 = 0; index1 < 58; ++index1)
+            var type1 = (LegacySoundStyle) null;
+            for (var index1 = 0; index1 < 58; ++index1)
             {
                 if (this.CountBuffs() == 22)
                     return;
@@ -1680,9 +1680,9 @@ namespace Terraria
                     (this.inventory[index1].buffType > 0 && !this.inventory[index1].summon) &&
                     this.inventory[index1].buffType != 90)
                 {
-                    int type2 = this.inventory[index1].buffType;
-                    bool flag = true;
-                    for (int index2 = 0; index2 < 22; ++index2)
+                    var type2 = this.inventory[index1].buffType;
+                    var flag = true;
+                    for (var index2 = 0; index2 < 22; ++index2)
                     {
                         if (type2 == 27 && (this.buffType[index2] == type2 || this.buffType[index2] == 101 ||
                                             this.buffType[index2] == 102))
@@ -1707,7 +1707,7 @@ namespace Terraria
                     if (Main.lightPet[this.inventory[index1].buffType] ||
                         Main.vanityPet[this.inventory[index1].buffType])
                     {
-                        for (int index2 = 0; index2 < 22; ++index2)
+                        for (var index2 = 0; index2 < 22; ++index2)
                         {
                             if (Main.lightPet[this.buffType[index2]] && Main.lightPet[this.inventory[index1].buffType])
                                 flag = false;
@@ -1744,7 +1744,7 @@ namespace Terraria
                     if (flag)
                     {
                         type1 = this.inventory[index1].UseSound;
-                        int time1 = this.inventory[index1].buffTime;
+                        var time1 = this.inventory[index1].buffTime;
                         if (time1 == 0)
                             time1 = 3600;
                         this.AddBuff(type2, time1, true);
@@ -1775,23 +1775,23 @@ namespace Terraria
                 if (this.frozen || this.tongued || (this.webbed || this.stoned) ||
                     ((double) this.gravDir == -1.0 || this.noItems))
                     return;
-                Item itemToUse = this.QuickMount_GetItemToUse();
+                var itemToUse = this.QuickMount_GetItemToUse();
                 if (itemToUse != null && itemToUse.mountType != -1 && this.mount.CanMount(itemToUse.mountType, this))
                 {
-                    bool flag = false;
-                    List<Point> tilesIn = Collision.GetTilesIn(this.TopLeft - new Vector2(24f),
+                    var flag = false;
+                    var tilesIn = Collision.GetTilesIn(this.TopLeft - new Vector2(24f),
                         this.BottomRight + new Vector2(24f));
                     if (tilesIn.Count > 0)
                     {
-                        Point? nullable = new Point?();
-                        Microsoft.Xna.Framework.Rectangle hitbox = this.Hitbox;
-                        for (int index = 0; index < tilesIn.Count; ++index)
+                        var nullable = new Point?();
+                        var hitbox = this.Hitbox;
+                        for (var index = 0; index < tilesIn.Count; ++index)
                         {
-                            Point point = tilesIn[index];
-                            Tile tileSafely = Framing.GetTileSafely(point.X, point.Y);
+                            var point = tilesIn[index];
+                            var tileSafely = Framing.GetTileSafely(point.X, point.Y);
                             if (tileSafely.active() && tileSafely.type == (ushort) 314)
                             {
-                                Vector2 vector2 = tilesIn[index].ToVector2() * 16f + new Vector2(8f);
+                                var vector2 = tilesIn[index].ToVector2() * 16f + new Vector2(8f);
                                 if (!nullable.HasValue ||
                                     (double) this.Distance(vector2) <
                                     (double) this.Distance(nullable.Value.ToVector2() * 16f + new Vector2(8f)) &&
@@ -1816,30 +1816,30 @@ namespace Terraria
                 }
                 else
                 {
-                    int num1 = 0;
-                    int num2 = (int) ((double) this.position.X / 16.0) - Player.tileRangeX - num1 + 1;
-                    int num3 = (int) (((double) this.position.X + (double) this.width) / 16.0) + Player.tileRangeX +
+                    var num1 = 0;
+                    var num2 = (int) ((double) this.position.X / 16.0) - Player.tileRangeX - num1 + 1;
+                    var num3 = (int) (((double) this.position.X + (double) this.width) / 16.0) + Player.tileRangeX +
                                num1 - 1;
-                    int num4 = (int) ((double) this.position.Y / 16.0) - Player.tileRangeY - num1 + 1;
-                    int num5 = (int) (((double) this.position.Y + (double) this.height) / 16.0) + Player.tileRangeY +
+                    var num4 = (int) ((double) this.position.Y / 16.0) - Player.tileRangeY - num1 + 1;
+                    var num5 = (int) (((double) this.position.Y + (double) this.height) / 16.0) + Player.tileRangeY +
                                num1 - 2;
-                    int num6 = Utils.Clamp<int>(num2, 10, Main.maxTilesX - 10);
-                    int num7 = Utils.Clamp<int>(num3, 10, Main.maxTilesX - 10);
-                    int num8 = Utils.Clamp<int>(num4, 10, Main.maxTilesY - 10);
-                    int num9 = Utils.Clamp<int>(num5, 10, Main.maxTilesY - 10);
-                    List<Point> tilesIn = Collision.GetTilesIn(new Vector2((float) num6, (float) num8) * 16f,
+                    var num6 = Utils.Clamp<int>(num2, 10, Main.maxTilesX - 10);
+                    var num7 = Utils.Clamp<int>(num3, 10, Main.maxTilesX - 10);
+                    var num8 = Utils.Clamp<int>(num4, 10, Main.maxTilesY - 10);
+                    var num9 = Utils.Clamp<int>(num5, 10, Main.maxTilesY - 10);
+                    var tilesIn = Collision.GetTilesIn(new Vector2((float) num6, (float) num8) * 16f,
                         new Vector2((float) (num7 + 1), (float) (num9 + 1)) * 16f);
                     if (tilesIn.Count <= 0)
                         return;
-                    Point? nullable = new Point?();
-                    Microsoft.Xna.Framework.Rectangle hitbox = this.Hitbox;
-                    for (int index = 0; index < tilesIn.Count; ++index)
+                    var nullable = new Point?();
+                    var hitbox = this.Hitbox;
+                    for (var index = 0; index < tilesIn.Count; ++index)
                     {
-                        Point point = tilesIn[index];
-                        Tile tileSafely = Framing.GetTileSafely(point.X, point.Y);
+                        var point = tilesIn[index];
+                        var tileSafely = Framing.GetTileSafely(point.X, point.Y);
                         if (tileSafely.active() && tileSafely.type == (ushort) 314)
                         {
-                            Vector2 vector2 = tilesIn[index].ToVector2() * 16f + new Vector2(8f);
+                            var vector2 = tilesIn[index].ToVector2() * 16f + new Vector2(8f);
                             if (!nullable.HasValue ||
                                 (double) this.Distance(vector2) <
                                 (double) this.Distance(nullable.Value.ToVector2() * 16f + new Vector2(8f)) &&
@@ -1857,12 +1857,12 @@ namespace Terraria
 
         public Item QuickMount_GetItemToUse()
         {
-            Item obj = (Item) null;
+            var obj = (Item) null;
             if (obj == null && this.miscEquips[3].mountType != -1 && !MountID.Sets.Cart[this.miscEquips[3].mountType])
                 obj = this.miscEquips[3];
             if (obj == null)
             {
-                for (int index = 0; index < 58; ++index)
+                for (var index = 0; index < 58; ++index)
                 {
                     if (this.inventory[index].mountType != -1 && !MountID.Sets.Cart[this.inventory[index].mountType])
                     {
@@ -1885,7 +1885,7 @@ namespace Terraria
                     (this._quickGrappleCooldown > 0 && !Main.mapFullscreen || WiresUI.Settings.DrawToolModeUI) ||
                     !this.controlUseTile && !this.releaseUseTile)
                     return;
-                Tile tileSafely = Framing.GetTileSafely(Player.tileTargetX, Player.tileTargetY);
+                var tileSafely = Framing.GetTileSafely(Player.tileTargetX, Player.tileTargetY);
                 if (tileSafely.active() && (tileSafely.type == (ushort) 4 || tileSafely.type == (ushort) 33 ||
                                             (tileSafely.type == (ushort) 372 || tileSafely.type == (ushort) 174) ||
                                             tileSafely.type == (ushort) 49) ||
@@ -1897,12 +1897,12 @@ namespace Terraria
                 this.mount.Dismount(this);
             if (this.noItems)
                 return;
-            Item obj = (Item) null;
+            var obj = (Item) null;
             if (obj == null && Main.projHook[this.miscEquips[4].shoot])
                 obj = this.miscEquips[4];
             if (obj == null)
             {
-                for (int index = 0; index < 58; ++index)
+                for (var index = 0; index < 58; ++index)
                 {
                     if (Main.projHook[this.inventory[index].shoot])
                     {
@@ -1916,8 +1916,8 @@ namespace Terraria
                 return;
             if (obj.shoot == 73)
             {
-                int num = 0;
-                for (int index = 0; index < 1000; ++index)
+                var num = 0;
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                         (Main.projectile[index].type == 73 || Main.projectile[index].type == 74))
@@ -1929,8 +1929,8 @@ namespace Terraria
             }
             else if (obj.shoot == 165)
             {
-                int num = 0;
-                for (int index = 0; index < 1000; ++index)
+                var num = 0;
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                         Main.projectile[index].type == 165)
@@ -1942,8 +1942,8 @@ namespace Terraria
             }
             else if (obj.shoot == 372)
             {
-                int num = 0;
-                for (int index = 0; index < 1000; ++index)
+                var num = 0;
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                         Main.projectile[index].type == 372)
@@ -1955,8 +1955,8 @@ namespace Terraria
             }
             else if (obj.shoot == 652)
             {
-                int num = 0;
-                for (int index = 0; index < 1000; ++index)
+                var num = 0;
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                         Main.projectile[index].type == 652)
@@ -1968,9 +1968,9 @@ namespace Terraria
             }
             else if (obj.type == 3572)
             {
-                int num = 0;
-                bool flag = false;
-                for (int index = 0; index < 1000; ++index)
+                var num = 0;
+                var flag = false;
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                         (Main.projectile[index].type >= 646 && Main.projectile[index].type <= 649))
@@ -1986,7 +1986,7 @@ namespace Terraria
             }
             else
             {
-                for (int index = 0; index < 1000; ++index)
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                         (Main.projectile[index].type == obj.shoot && (double) Main.projectile[index].ai[0] != 2.0))
@@ -2002,15 +2002,15 @@ namespace Terraria
             Main.PlaySound(obj.UseSound, this.position);
             if (Main.netMode == 1 && this.whoAmI == Main.myPlayer)
                 NetMessage.SendData(51, -1, -1, (NetworkText) null, this.whoAmI, 2f, 0.0f, 0.0f, 0, 0, 0);
-            int Type = obj.shoot;
-            float shootSpeed = obj.shootSpeed;
-            int damage = obj.damage;
-            float knockBack = obj.knockBack;
+            var Type = obj.shoot;
+            var shootSpeed = obj.shootSpeed;
+            var damage = obj.damage;
+            var knockBack = obj.knockBack;
             if (Type == 13 || Type == 32 || Type == 315 || (Type >= 230 && Type <= 235 || Type == 331))
             {
                 this.grappling[0] = -1;
                 this.grapCount = 0;
-                for (int index = 0; index < 1000; ++index)
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.projectile[index].active && Main.projectile[index].owner == this.whoAmI)
                     {
@@ -2028,10 +2028,10 @@ namespace Terraria
 
             if (Type == 256)
             {
-                int num1 = 0;
-                int index1 = -1;
-                int num2 = 100000;
-                for (int index2 = 0; index2 < 1000; ++index2)
+                var num1 = 0;
+                var index1 = -1;
+                var num2 = 100000;
+                for (var index2 = 0; index2 < 1000; ++index2)
                 {
                     if (Main.projectile[index2].active && Main.projectile[index2].owner == this.whoAmI &&
                         Main.projectile[index2].type == 256)
@@ -2051,10 +2051,10 @@ namespace Terraria
 
             if (Type == 652)
             {
-                int num1 = 0;
-                int index1 = -1;
-                int num2 = 100000;
-                for (int index2 = 0; index2 < 1000; ++index2)
+                var num1 = 0;
+                var index1 = -1;
+                var num2 = 100000;
+                for (var index2 = 0; index2 < 1000; ++index2)
                 {
                     if (Main.projectile[index2].active && Main.projectile[index2].owner == this.whoAmI &&
                         Main.projectile[index2].type == 652)
@@ -2074,7 +2074,7 @@ namespace Terraria
 
             if (Type == 73)
             {
-                for (int index = 0; index < 1000; ++index)
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.projectile[index].active && Main.projectile[index].owner == this.whoAmI &&
                         Main.projectile[index].type == 73)
@@ -2084,11 +2084,11 @@ namespace Terraria
 
             if (obj.type == 3572)
             {
-                int num1 = -1;
-                int num2 = -1;
-                for (int index = 0; index < 1000; ++index)
+                var num1 = -1;
+                var num2 = -1;
+                for (var index = 0; index < 1000; ++index)
                 {
-                    Projectile projectile = Main.projectile[index];
+                    var projectile = Main.projectile[index];
                     if (projectile.active && projectile.owner == this.whoAmI &&
                         (projectile.type >= 646 && projectile.type <= 649) &&
                         (num2 == -1 || num2 < projectile.timeLeft))
@@ -2116,13 +2116,13 @@ namespace Terraria
                 }
             }
 
-            Vector2 vector2 = new Vector2(this.position.X + (float) this.width * 0.5f,
+            var vector2 = new Vector2(this.position.X + (float) this.width * 0.5f,
                 this.position.Y + (float) this.height * 0.5f);
-            float f1 = (float) Main.mouseX + Main.screenPosition.X - vector2.X;
-            float f2 = (float) Main.mouseY + Main.screenPosition.Y - vector2.Y;
+            var f1 = (float) Main.mouseX + Main.screenPosition.X - vector2.X;
+            var f2 = (float) Main.mouseY + Main.screenPosition.Y - vector2.Y;
             if ((double) this.gravDir == -1.0)
                 f2 = Main.screenPosition.Y + (float) Main.screenHeight - (float) Main.mouseY - vector2.Y;
-            float num3 = (float) Math.Sqrt((double) f1 * (double) f1 + (double) f2 * (double) f2);
+            var num3 = (float) Math.Sqrt((double) f1 * (double) f1 + (double) f2 * (double) f2);
             float num4;
             if (float.IsNaN(f1) && float.IsNaN(f2) || (double) f1 == 0.0 && (double) f2 == 0.0)
             {
@@ -2133,8 +2133,8 @@ namespace Terraria
             else
                 num4 = shootSpeed / num3;
 
-            float SpeedX = f1 * num4;
-            float SpeedY = f2 * num4;
+            var SpeedX = f1 * num4;
+            var SpeedY = f2 * num4;
             Projectile.NewProjectile(vector2.X, vector2.Y, SpeedX, SpeedY, Type, damage, knockBack, this.whoAmI, 0.0f,
                 0.0f);
         }
@@ -2329,7 +2329,7 @@ namespace Terraria
             else
                 this.velocity.X = 0.0f;
 
-            Player player = this;
+            var player = this;
             player.position = player.position + this.velocity;
             ++this.ghostFrameCounter;
             if ((double) this.velocity.X < 0.0)
@@ -2375,11 +2375,11 @@ namespace Terraria
 
         private void OldInputGhost()
         {
-            Keys[] pressedKeys = Main.keyState.GetPressedKeys();
+            var pressedKeys = Main.keyState.GetPressedKeys();
             if (Main.blockKey != Keys.None.ToString())
             {
-                bool flag = false;
-                for (int index = 0; index < pressedKeys.Length; ++index)
+                var flag = false;
+                for (var index = 0; index < pressedKeys.Length; ++index)
                 {
                     if (pressedKeys[index].ToString() == Main.blockKey)
                     {
@@ -2392,9 +2392,9 @@ namespace Terraria
                     Main.blockKey = Keys.None.ToString();
             }
 
-            for (int index = 0; index < pressedKeys.Length; ++index)
+            for (var index = 0; index < pressedKeys.Length; ++index)
             {
-                string str = string.Concat((object) pressedKeys[index]);
+                var str = string.Concat((object) pressedKeys[index]);
                 if (str == Main.cUp)
                     this.controlUp = true;
                 if (str == Main.cLeft)
@@ -2423,13 +2423,13 @@ namespace Terraria
                 this.AddBuff(58, 300, true);
             if (this.stardustMinion && victim is NPC)
             {
-                for (int index = 0; index < 1000; ++index)
+                for (var index = 0; index < 1000; ++index)
                 {
-                    Projectile projectile = Main.projectile[index];
+                    var projectile = Main.projectile[index];
                     if (projectile.active && projectile.owner == this.whoAmI &&
                         (projectile.type == 613 && (double) projectile.localAI[1] <= 0.0) && Main.rand.Next(2) == 0)
                     {
-                        Vector2 vector2 = new Vector2(x, y) - projectile.Center;
+                        var vector2 = new Vector2(x, y) - projectile.Center;
                         if ((double) vector2.Length() > 0.0)
                             vector2.Normalize();
                         vector2 *= 20f;
@@ -2443,42 +2443,42 @@ namespace Terraria
             if (this.onHitPetal && this.petalTimer == 0)
             {
                 this.petalTimer = 20;
-                int num1 = 1;
+                var num1 = 1;
                 if ((double) x < (double) this.position.X + (double) (this.width / 2))
                     num1 = -1;
-                int direction = this.direction;
-                float x1 = Main.screenPosition.X;
+                var direction = this.direction;
+                var x1 = Main.screenPosition.X;
                 if (direction < 0)
                     x1 += (float) Main.screenWidth;
-                float num2 = Main.screenPosition.Y + (float) Main.rand.Next(Main.screenHeight);
-                Vector2 vector2 = new Vector2(x1, num2);
-                float num3 = x - vector2.X;
-                float num4 = y - vector2.Y;
-                float num5 = num3 + (float) Main.rand.Next(-50, 51) * 0.1f;
-                float num6 = num4 + (float) Main.rand.Next(-50, 51) * 0.1f;
-                float num7 = 24f / (float) Math.Sqrt((double) num5 * (double) num5 + (double) num6 * (double) num6);
-                float SpeedX = num5 * num7;
-                float SpeedY = num6 * num7;
+                var num2 = Main.screenPosition.Y + (float) Main.rand.Next(Main.screenHeight);
+                var vector2 = new Vector2(x1, num2);
+                var num3 = x - vector2.X;
+                var num4 = y - vector2.Y;
+                var num5 = num3 + (float) Main.rand.Next(-50, 51) * 0.1f;
+                var num6 = num4 + (float) Main.rand.Next(-50, 51) * 0.1f;
+                var num7 = 24f / (float) Math.Sqrt((double) num5 * (double) num5 + (double) num6 * (double) num6);
+                var SpeedX = num5 * num7;
+                var SpeedY = num6 * num7;
                 Projectile.NewProjectile(x1, num2, SpeedX, SpeedY, 221, 36, 0.0f, this.whoAmI, 0.0f, 0.0f);
             }
 
             if (!this.crystalLeaf || this.petalTimer != 0)
                 return;
-            int type = this.inventory[this.selectedItem].type;
-            for (int index = 0; index < 1000; ++index)
+            var type = this.inventory[this.selectedItem].type;
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.projectile[index].owner == this.whoAmI && Main.projectile[index].type == 226)
                 {
                     this.petalTimer = 50;
-                    float num1 = 12f;
-                    Vector2 vector2 = new Vector2(Main.projectile[index].position.X + (float) this.width * 0.5f,
+                    var num1 = 12f;
+                    var vector2 = new Vector2(Main.projectile[index].position.X + (float) this.width * 0.5f,
                         Main.projectile[index].position.Y + (float) this.height * 0.5f);
-                    float num2 = x - vector2.X;
-                    float num3 = y - vector2.Y;
-                    float num4 = (float) Math.Sqrt((double) num2 * (double) num2 + (double) num3 * (double) num3);
-                    float num5 = num1 / num4;
-                    float SpeedX = num2 * num5;
-                    float SpeedY = num3 * num5;
+                    var num2 = x - vector2.X;
+                    var num3 = y - vector2.Y;
+                    var num4 = (float) Math.Sqrt((double) num2 * (double) num2 + (double) num3 * (double) num3);
+                    var num5 = num1 / num4;
+                    var SpeedX = num2 * num5;
+                    var SpeedY = num3 * num5;
                     Projectile.NewProjectile(Main.projectile[index].Center.X - 4f, Main.projectile[index].Center.Y,
                         SpeedX, SpeedY, 227, Player.crystalLeafDamage, (float) Player.crystalLeafKB, this.whoAmI, 0.0f,
                         0.0f);
@@ -2491,7 +2491,7 @@ namespace Terraria
         {
             if (Main.rand.Next(15) == 0 && Main.hardMode)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 602, 1,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 602, 1,
                     false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2499,7 +2499,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(30) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1922,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1922,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2507,7 +2507,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(400) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1927,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1927,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2515,11 +2515,11 @@ namespace Terraria
             }
             else if (Main.rand.Next(150) == 0)
             {
-                int number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1870,
+                var number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1870,
                     1, false, 0, false, false);
                 if (Main.netMode == 1)
                     NetMessage.SendData(21, -1, -1, (NetworkText) null, number1, 1f, 0.0f, 0.0f, 0, 0, 0);
-                int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 97,
+                var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 97,
                     Main.rand.Next(30, 61), false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2527,7 +2527,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(150) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1909,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1909,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2535,7 +2535,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(150) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1917,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1917,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2543,7 +2543,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(150) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1915,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1915,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2551,7 +2551,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(150) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1918,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1918,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2559,7 +2559,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(150) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1921,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1921,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2567,7 +2567,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(300) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1923,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1923,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2575,7 +2575,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(40) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1907,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1907,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2583,7 +2583,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(10) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1908,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1908,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2594,59 +2594,59 @@ namespace Terraria
                 switch (Main.rand.Next(5))
                 {
                     case 0:
-                        int number3 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number3 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1932, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number3, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number4 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number4 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1933, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number4, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number5 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number5 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1934, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number5, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 1:
-                        int number6 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number6 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1935, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number6, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number7 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number7 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1936, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number7, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number8 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number8 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1937, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number8, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 2:
-                        int number9 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number9 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1940, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number9, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number10 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number10 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1941, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number10, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number11 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number11 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1942, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number11, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 3:
-                        int number12 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number12 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1938, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number12, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 4:
-                        int number13 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number13 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1939, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
@@ -2656,14 +2656,14 @@ namespace Terraria
             }
             else if (Main.rand.Next(7) == 0)
             {
-                int Type = Main.rand.Next(3);
+                var Type = Main.rand.Next(3);
                 if (Type == 0)
                     Type = 1911;
                 if (Type == 1)
                     Type = 1919;
                 if (Type == 2)
                     Type = 1920;
-                int number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, Type,
+                var number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, Type,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2671,7 +2671,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(8) == 0)
             {
-                int number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1912,
+                var number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1912,
                     Main.rand.Next(1, 4), false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2679,7 +2679,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(9) == 0)
             {
-                int number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1913,
+                var number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1913,
                     Main.rand.Next(20, 41), false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -2690,21 +2690,21 @@ namespace Terraria
                 switch (Main.rand.Next(3))
                 {
                     case 0:
-                        int number14 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number14 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1872, Main.rand.Next(20, 50), false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number14, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 1:
-                        int number15 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number15 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 586, Main.rand.Next(20, 50), false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number15, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     default:
-                        int number16 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number16 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 591, Main.rand.Next(20, 50), false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
@@ -2716,7 +2716,7 @@ namespace Terraria
 
         public void QuickSpawnItem(int item, int stack = 1)
         {
-            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, item,
+            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, item,
                 stack, false, -1, false, false);
             if (Main.netMode != 1)
                 return;
@@ -2732,8 +2732,8 @@ namespace Terraria
                         this.QuickSpawnItem(2430, 1);
                     if (Main.rand.Next(7) == 0)
                         this.QuickSpawnItem(2493, 1);
-                    int num1 = Main.rand.Next(256, 259);
-                    int num2 = Main.rand.Next(256, 259);
+                    var num1 = Main.rand.Next(256, 259);
+                    var num2 = Main.rand.Next(256, 259);
                     while (num2 == num1)
                         num2 = Main.rand.Next(256, 259);
                     this.QuickSpawnItem(num1, 1);
@@ -2789,7 +2789,7 @@ namespace Terraria
                 case 3322:
                     if (Main.rand.Next(7) == 0)
                         this.QuickSpawnItem(2108, 1);
-                    int num3 = Main.rand.Next(3);
+                    var num3 = Main.rand.Next(3);
                     switch (num3)
                     {
                         case 0:
@@ -2838,7 +2838,7 @@ namespace Terraria
                     this.QuickSpawnItem(367, 1);
                     if (!this.extraAccessory)
                         this.QuickSpawnItem(3335, 1);
-                    int num4 = Main.rand.Next(4);
+                    var num4 = Main.rand.Next(4);
                     this.QuickSpawnItem(num4 != 3 ? 489 + num4 : 2998, 1);
                     switch (Main.rand.Next(3))
                     {
@@ -3039,7 +3039,7 @@ namespace Terraria
                     break;
             }
 
-            int Type = -1;
+            var Type = -1;
             if (type == 3318)
                 Type = 50;
             if (type == 3319)
@@ -3078,9 +3078,9 @@ namespace Terraria
                 Type = 564;
             if (Type <= 0)
                 return;
-            NPC npc = new NPC();
+            var npc = new NPC();
             npc.SetDefaults(Type, -1f);
-            float num5 = npc.value * (float) (1.0 + (double) Main.rand.Next(-20, 21) * 0.00999999977648258);
+            var num5 = npc.value * (float) (1.0 + (double) Main.rand.Next(-20, 21) * 0.00999999977648258);
             if (Main.rand.Next(5) == 0)
                 num5 *= (float) (1.0 + (double) Main.rand.Next(5, 11) * 0.00999999977648258);
             if (Main.rand.Next(10) == 0)
@@ -3093,25 +3093,25 @@ namespace Terraria
             {
                 if ((double) num5 > 1000000.0)
                 {
-                    int stack = (int) ((double) num5 / 1000000.0);
+                    var stack = (int) ((double) num5 / 1000000.0);
                     num5 -= (float) (1000000 * stack);
                     this.QuickSpawnItem(74, stack);
                 }
                 else if ((double) num5 > 10000.0)
                 {
-                    int stack = (int) ((double) num5 / 10000.0);
+                    var stack = (int) ((double) num5 / 10000.0);
                     num5 -= (float) (10000 * stack);
                     this.QuickSpawnItem(73, stack);
                 }
                 else if ((double) num5 > 100.0)
                 {
-                    int stack = (int) ((double) num5 / 100.0);
+                    var stack = (int) ((double) num5 / 100.0);
                     num5 -= (float) (100 * stack);
                     this.QuickSpawnItem(72, stack);
                 }
                 else
                 {
-                    int stack = (int) num5;
+                    var stack = (int) num5;
                     if (stack < 1)
                         stack = 1;
                     num5 -= (float) stack;
@@ -3218,18 +3218,18 @@ namespace Terraria
 
         public void openCrate(int type)
         {
-            int num = type - 2334;
+            var num = type - 2334;
             if (type >= 3203)
                 num = type - 3203 + 3;
             switch (num)
             {
                 case 0:
-                    bool flag1 = true;
+                    var flag1 = true;
                     while (flag1)
                     {
                         if (Main.hardMode && flag1 && Main.rand.Next(200) == 0)
                         {
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 3064, 1, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3238,7 +3238,7 @@ namespace Terraria
 
                         if (flag1 && Main.rand.Next(40) == 0)
                         {
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 3200, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3247,7 +3247,7 @@ namespace Terraria
 
                         if (flag1 && Main.rand.Next(40) == 0)
                         {
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 3201, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3256,7 +3256,7 @@ namespace Terraria
 
                         if (Main.hardMode && flag1 && Main.rand.Next(25) == 0)
                         {
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 2424, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3265,7 +3265,7 @@ namespace Terraria
 
                         if (Main.rand.Next(45) == 0)
                         {
-                            int Type = Main.rand.Next(5);
+                            var Type = Main.rand.Next(5);
                             switch (Type)
                             {
                                 case 0:
@@ -3285,7 +3285,7 @@ namespace Terraria
                                     break;
                             }
 
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3294,7 +3294,7 @@ namespace Terraria
 
                         if (!Main.hardMode && flag1 && Main.rand.Next(50) == 0)
                         {
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 997, 1, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3316,7 +3316,7 @@ namespace Terraria
                                 Stack = Main.rand.Next(20, 91);
                             }
 
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, Stack, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3325,7 +3325,7 @@ namespace Terraria
 
                         if (Main.rand.Next(7) == 0)
                         {
-                            int Type = Main.rand.Next(8);
+                            var Type = Main.rand.Next(8);
                             switch (Type)
                             {
                                 case 0:
@@ -3380,8 +3380,8 @@ namespace Terraria
                                 }
                             }
 
-                            int Stack = Main.rand.Next(8, 21);
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var Stack = Main.rand.Next(8, 21);
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, Stack, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3390,7 +3390,7 @@ namespace Terraria
 
                         if (Main.rand.Next(8) == 0)
                         {
-                            int Type = Main.rand.Next(8);
+                            var Type = Main.rand.Next(8);
                             switch (Type)
                             {
                                 case 0:
@@ -3419,7 +3419,7 @@ namespace Terraria
                                     break;
                             }
 
-                            int Stack = Main.rand.Next(2, 8);
+                            var Stack = Main.rand.Next(2, 8);
                             if (Main.hardMode && Main.rand.Next(2) == 0)
                             {
                                 Type = Main.rand.Next(6);
@@ -3448,7 +3448,7 @@ namespace Terraria
                                 Stack -= Main.rand.Next(2);
                             }
 
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, Stack, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3457,7 +3457,7 @@ namespace Terraria
 
                         if (Main.rand.Next(7) == 0)
                         {
-                            int Type = Main.rand.Next(10);
+                            var Type = Main.rand.Next(10);
                             switch (Type)
                             {
                                 case 0:
@@ -3492,8 +3492,8 @@ namespace Terraria
                                     break;
                             }
 
-                            int Stack = Main.rand.Next(1, 4);
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var Stack = Main.rand.Next(1, 4);
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, Stack, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3503,7 +3503,7 @@ namespace Terraria
 
                     if (Main.rand.Next(3) == 0)
                     {
-                        int Type = Main.rand.Next(2);
+                        var Type = Main.rand.Next(2);
                         switch (Type)
                         {
                             case 0:
@@ -3514,8 +3514,8 @@ namespace Terraria
                                 break;
                         }
 
-                        int Stack = Main.rand.Next(5, 16);
-                        int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                        var Stack = Main.rand.Next(5, 16);
+                        var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                             Type, Stack, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3523,19 +3523,19 @@ namespace Terraria
 
                     if (Main.rand.Next(3) != 0)
                         break;
-                    int number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         Main.rand.Next(3) != 0 ? 2674 : 2675, Main.rand.Next(1, 5), false, 0, false, false);
                     if (Main.netMode != 1)
                         break;
                     NetMessage.SendData(21, -1, -1, (NetworkText) null, number1, 1f, 0.0f, 0.0f, 0, 0, 0);
                     break;
                 case 1:
-                    bool flag2 = true;
+                    var flag2 = true;
                     while (flag2)
                     {
                         if (Main.hardMode && flag2 && Main.rand.Next(60) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 3064, 1, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3544,7 +3544,7 @@ namespace Terraria
 
                         if (flag2 && Main.rand.Next(25) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 2501, 1, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3553,7 +3553,7 @@ namespace Terraria
 
                         if (flag2 && Main.rand.Next(20) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 2587, 1, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3562,7 +3562,7 @@ namespace Terraria
 
                         if (flag2 && Main.rand.Next(15) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 2608, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3571,7 +3571,7 @@ namespace Terraria
 
                         if (flag2 && Main.rand.Next(20) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 3200, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3580,7 +3580,7 @@ namespace Terraria
 
                         if (flag2 && Main.rand.Next(20) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 3201, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3589,7 +3589,7 @@ namespace Terraria
 
                         if (Main.rand.Next(4) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 73, Main.rand.Next(5, 11), false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3598,7 +3598,7 @@ namespace Terraria
 
                         if (Main.rand.Next(4) == 0)
                         {
-                            int Type = Main.rand.Next(8);
+                            var Type = Main.rand.Next(8);
                             switch (Type)
                             {
                                 case 0:
@@ -3627,7 +3627,7 @@ namespace Terraria
                                     break;
                             }
 
-                            int Stack = Main.rand.Next(6, 15);
+                            var Stack = Main.rand.Next(6, 15);
                             if (Main.hardMode && Main.rand.Next(3) != 0)
                             {
                                 Type = Main.rand.Next(6);
@@ -3656,7 +3656,7 @@ namespace Terraria
                                 Stack -= Main.rand.Next(2);
                             }
 
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, Stack, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3665,7 +3665,7 @@ namespace Terraria
 
                         if (Main.rand.Next(4) == 0)
                         {
-                            int Type = Main.rand.Next(8);
+                            var Type = Main.rand.Next(8);
                             switch (Type)
                             {
                                 case 0:
@@ -3694,8 +3694,8 @@ namespace Terraria
                                     break;
                             }
 
-                            int Stack = Main.rand.Next(2, 5);
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var Stack = Main.rand.Next(2, 5);
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, Stack, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3705,7 +3705,7 @@ namespace Terraria
 
                     if (Main.rand.Next(2) == 0)
                     {
-                        int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, Main.rand.Next(188, 190), Main.rand.Next(5, 16), false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3713,19 +3713,19 @@ namespace Terraria
 
                     if (Main.rand.Next(2) != 0)
                         break;
-                    int number3 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number3 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         Main.rand.Next(3) != 0 ? 2675 : 2676, Main.rand.Next(2, 5), false, 0, false, false);
                     if (Main.netMode != 1)
                         break;
                     NetMessage.SendData(21, -1, -1, (NetworkText) null, number3, 1f, 0.0f, 0.0f, 0, 0, 0);
                     break;
                 case 2:
-                    bool flag3 = true;
+                    var flag3 = true;
                     while (flag3)
                     {
                         if (Main.hardMode && flag3 && Main.rand.Next(20) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 3064, 1, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3734,7 +3734,7 @@ namespace Terraria
 
                         if (flag3 && Main.rand.Next(10) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 2491, 1, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3743,7 +3743,7 @@ namespace Terraria
 
                         if (Main.rand.Next(3) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 73, Main.rand.Next(8, 21), false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3752,7 +3752,7 @@ namespace Terraria
 
                         if (Main.rand.Next(3) == 0)
                         {
-                            int Type = Main.rand.Next(4);
+                            var Type = Main.rand.Next(4);
                             switch (Type)
                             {
                                 case 0:
@@ -3789,8 +3789,8 @@ namespace Terraria
                                 }
                             }
 
-                            int Stack = Main.rand.Next(15, 31);
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var Stack = Main.rand.Next(15, 31);
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, Stack, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3800,7 +3800,7 @@ namespace Terraria
 
                     if (Main.rand.Next(3) == 0)
                     {
-                        int Type = Main.rand.Next(5);
+                        var Type = Main.rand.Next(5);
                         switch (Type)
                         {
                             case 0:
@@ -3820,8 +3820,8 @@ namespace Terraria
                                 break;
                         }
 
-                        int Stack = Main.rand.Next(2, 6);
-                        int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var Stack = Main.rand.Next(2, 6);
+                        var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, Type, Stack, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3829,7 +3829,7 @@ namespace Terraria
 
                     if (Main.rand.Next(2) == 0)
                     {
-                        int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, Main.rand.Next(499, 501), Main.rand.Next(5, 21), false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3837,15 +3837,15 @@ namespace Terraria
 
                     if (Main.rand.Next(3) == 0)
                         break;
-                    int number4 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number4 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         2676, Main.rand.Next(3, 8), false, 0, false, false);
                     if (Main.netMode != 1)
                         break;
                     NetMessage.SendData(21, -1, -1, (NetworkText) null, number4, 1f, 0.0f, 0.0f, 0, 0, 0);
                     break;
                 default:
-                    int maxValue = 6;
-                    bool flag4 = true;
+                    var maxValue = 6;
+                    var flag4 = true;
                     while (flag4)
                     {
                         if (num == 3 && flag4 && Main.rand.Next(maxValue) == 0)
@@ -3870,7 +3870,7 @@ namespace Terraria
                                     break;
                             }
 
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3899,7 +3899,7 @@ namespace Terraria
                                     break;
                             }
 
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3908,7 +3908,7 @@ namespace Terraria
 
                         if (num == 5 && flag4 && Main.rand.Next(maxValue) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 3085, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3931,7 +3931,7 @@ namespace Terraria
                                     break;
                             }
 
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3960,7 +3960,7 @@ namespace Terraria
                                     break;
                             }
 
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, 1, false, -1, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3969,7 +3969,7 @@ namespace Terraria
 
                         if (Main.rand.Next(4) == 0)
                         {
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, 73, Main.rand.Next(5, 13), false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -3978,7 +3978,7 @@ namespace Terraria
 
                         if (Main.rand.Next(4) == 0)
                         {
-                            int Type = Main.rand.Next(6);
+                            var Type = Main.rand.Next(6);
                             switch (Type)
                             {
                                 case 0:
@@ -4001,7 +4001,7 @@ namespace Terraria
                                     break;
                             }
 
-                            int Stack = Main.rand.Next(10, 21);
+                            var Stack = Main.rand.Next(10, 21);
                             if (Main.hardMode && Main.rand.Next(3) != 0)
                             {
                                 Type = Main.rand.Next(6);
@@ -4030,7 +4030,7 @@ namespace Terraria
                                 Stack -= Main.rand.Next(3);
                             }
 
-                            int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, Type, Stack, false, 0, false, false);
                             if (Main.netMode == 1)
                                 NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -4040,7 +4040,7 @@ namespace Terraria
 
                     if (Main.rand.Next(4) == 0)
                     {
-                        int Type = Main.rand.Next(6);
+                        var Type = Main.rand.Next(6);
                         switch (Type)
                         {
                             case 0:
@@ -4063,8 +4063,8 @@ namespace Terraria
                                 break;
                         }
 
-                        int Stack = Main.rand.Next(2, 5);
-                        int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var Stack = Main.rand.Next(2, 5);
+                        var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, Type, Stack, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -4072,7 +4072,7 @@ namespace Terraria
 
                     if (Main.rand.Next(2) == 0)
                     {
-                        int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, Main.rand.Next(188, 190), Main.rand.Next(5, 18), false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -4080,7 +4080,7 @@ namespace Terraria
 
                     if (Main.rand.Next(2) == 0)
                     {
-                        int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, Main.rand.Next(2) != 0 ? 2675 : 2676, Main.rand.Next(2, 7), false, 0, false,
                             false);
                         if (Main.netMode == 1)
@@ -4091,11 +4091,11 @@ namespace Terraria
                         break;
                     if (Main.hardMode && Main.rand.Next(2) == 0)
                     {
-                        int Type = 521;
+                        var Type = 521;
                         if (num == 7)
                             Type = 520;
-                        int Stack = Main.rand.Next(2, 6);
-                        int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var Stack = Main.rand.Next(2, 6);
+                        var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, Type, Stack, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -4103,8 +4103,8 @@ namespace Terraria
 
                     if (!Main.hardMode || Main.rand.Next(2) != 0)
                         break;
-                    int Type1 = 522;
-                    int Stack1 = Main.rand.Next(2, 6);
+                    var Type1 = 522;
+                    var Stack1 = Main.rand.Next(2, 6);
                     switch (num)
                     {
                         case 4:
@@ -4116,7 +4116,7 @@ namespace Terraria
                             break;
                     }
 
-                    int number5 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number5 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         Type1, Stack1, false, 0, false, false);
                     if (Main.netMode != 1)
                         break;
@@ -4127,8 +4127,8 @@ namespace Terraria
 
         public int CountItem(int type, int stopCountingAt = 0)
         {
-            int num = 0;
-            for (int index = 0; index != 58; ++index)
+            var num = 0;
+            for (var index = 0; index != 58; ++index)
             {
                 if (this.inventory[index].stack > 0 && this.inventory[index].type == type)
                 {
@@ -4143,9 +4143,9 @@ namespace Terraria
 
         public bool ConsumeItem(int type, bool reverseOrder = false)
         {
-            int num1 = 0;
-            int num2 = 58;
-            int num3 = 1;
+            var num1 = 0;
+            var num2 = 58;
+            var num3 = 1;
             if (reverseOrder)
             {
                 num1 = 57;
@@ -4153,7 +4153,7 @@ namespace Terraria
                 num3 = -1;
             }
 
-            int index = num1;
+            var index = num1;
             while (index != num2)
             {
                 if (this.inventory[index].stack > 0 && this.inventory[index].type == type)
@@ -4172,7 +4172,7 @@ namespace Terraria
 
         public void openLockBox()
         {
-            bool flag = true;
+            var flag = true;
             while (flag)
             {
                 flag = false;
@@ -4202,14 +4202,14 @@ namespace Terraria
                         break;
                 }
 
-                int number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, Type1,
+                var number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, Type1,
                     1, false, -1, false, false);
                 if (Main.netMode == 1)
                     NetMessage.SendData(21, -1, -1, (NetworkText) null, number1, 1f, 0.0f, 0.0f, 0, 0, 0);
                 if (Main.rand.Next(3) == 0)
                 {
                     flag = false;
-                    int Stack = Main.rand.Next(1, 4);
+                    var Stack = Main.rand.Next(1, 4);
                     if (Main.rand.Next(2) == 0)
                         Stack += Main.rand.Next(2);
                     if (Main.rand.Next(3) == 0)
@@ -4218,7 +4218,7 @@ namespace Terraria
                         Stack += Main.rand.Next(3);
                     if (Main.rand.Next(5) == 0)
                         Stack += Main.rand.Next(1, 3);
-                    int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         73, Stack, false, 0, false, false);
                     if (Main.netMode == 1)
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -4227,7 +4227,7 @@ namespace Terraria
                 if (Main.rand.Next(2) == 0)
                 {
                     flag = false;
-                    int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         72, Main.rand.Next(10, 100), false, 0, false, false);
                     if (Main.netMode == 1)
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -4236,7 +4236,7 @@ namespace Terraria
                 if (Main.rand.Next(3) == 0)
                 {
                     flag = false;
-                    int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         188, Main.rand.Next(2, 6), false, 0, false, false);
                     if (Main.netMode == 1)
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -4274,7 +4274,7 @@ namespace Terraria
                             break;
                     }
 
-                    int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         Type2, Main.rand.Next(1, 4), false, 0, false, false);
                     if (Main.netMode == 1)
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -4284,12 +4284,12 @@ namespace Terraria
 
         public void openHerbBag()
         {
-            int num = Main.rand.Next(2, 5);
+            var num = Main.rand.Next(2, 5);
             if (Main.rand.Next(3) == 0)
                 ++num;
-            for (int index = 0; index < num; ++index)
+            for (var index = 0; index < num; ++index)
             {
-                int Type = Main.rand.Next(14);
+                var Type = Main.rand.Next(14);
                 if (Type == 0)
                     Type = 313;
                 if (Type == 1)
@@ -4318,10 +4318,10 @@ namespace Terraria
                     Type = 312;
                 if (Type == 13)
                     Type = 2357;
-                int Stack = Main.rand.Next(2, 5);
+                var Stack = Main.rand.Next(2, 5);
                 if (Main.rand.Next(3) == 0)
                     Stack += Main.rand.Next(1, 5);
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, Type,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, Type,
                     Stack, false, 0, false, false);
                 if (Main.netMode == 1)
                     NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -4332,7 +4332,7 @@ namespace Terraria
         {
             if (Main.rand.Next(150) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1810,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1810,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -4340,7 +4340,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(150) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1800,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1800,
                     1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -4348,7 +4348,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(4) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1809,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, 1809,
                     Main.rand.Next(10, 41), false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -4356,7 +4356,7 @@ namespace Terraria
             }
             else if (Main.rand.Next(10) == 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                     Main.rand.Next(1846, 1851), 1, false, 0, false, false);
                 if (Main.netMode != 1)
                     return;
@@ -4367,253 +4367,253 @@ namespace Terraria
                 switch (Main.rand.Next(19))
                 {
                     case 0:
-                        int number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1749, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number1, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number2 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1750, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number2, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number3 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number3 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1751, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number3, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 1:
-                        int number4 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number4 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1746, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number4, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number5 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number5 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1747, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number5, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number6 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number6 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1748, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number6, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 2:
-                        int number7 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number7 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1752, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number7, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number8 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number8 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1753, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number8, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 3:
-                        int number9 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number9 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1767, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number9, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number10 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number10 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1768, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number10, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number11 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number11 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1769, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number11, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 4:
-                        int number12 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number12 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1770, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number12, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number13 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number13 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1771, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number13, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 5:
-                        int number14 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number14 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1772, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number14, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number15 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number15 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1773, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number15, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 6:
-                        int number16 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number16 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1754, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number16, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number17 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number17 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1755, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number17, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number18 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number18 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1756, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number18, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 7:
-                        int number19 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number19 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1757, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number19, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number20 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number20 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1758, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number20, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number21 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number21 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1759, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number21, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 8:
-                        int number22 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number22 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1760, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number22, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number23 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number23 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1761, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number23, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number24 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number24 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1762, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number24, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 9:
-                        int number25 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number25 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1763, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number25, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number26 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number26 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1764, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number26, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number27 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number27 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1765, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number27, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 10:
-                        int number28 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number28 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1766, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number28, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number29 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number29 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1775, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number29, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number30 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number30 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1776, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number30, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 11:
-                        int number31 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number31 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1777, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number31, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number32 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number32 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1778, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number32, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 12:
-                        int number33 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number33 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1779, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number33, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number34 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number34 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1780, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number34, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number35 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number35 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1781, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number35, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 13:
-                        int number36 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number36 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1819, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number36, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number37 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number37 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1820, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number37, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 14:
-                        int number38 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number38 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1821, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number38, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number39 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number39 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1822, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number39, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number40 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number40 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1823, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number40, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 15:
-                        int number41 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number41 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1824, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number41, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 16:
-                        int number42 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number42 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1838, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number42, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number43 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number43 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1839, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number43, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number44 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number44 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1840, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number44, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 17:
-                        int number45 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number45 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1841, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number45, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number46 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number46 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1842, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number46, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number47 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number47 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1843, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number47, 1f, 0.0f, 0.0f, 0, 0, 0);
                         break;
                     case 18:
-                        int number48 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number48 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1851, 1, false, 0, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(21, -1, -1, (NetworkText) null, number48, 1f, 0.0f, 0.0f, 0, 0, 0);
-                        int number49 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                        var number49 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                             this.height, 1852, 1, false, 0, false, false);
                         if (Main.netMode != 1)
                             break;
@@ -4659,9 +4659,9 @@ namespace Terraria
                 this.cMount = (int) this.miscDyes[3].dye;
             if (this.miscDyes[4] != null)
                 this.cGrapple = (int) this.miscDyes[4].dye;
-            for (int index1 = 0; index1 < 20; ++index1)
+            for (var index1 = 0; index1 < 20; ++index1)
             {
-                int index2 = index1 % 10;
+                var index2 = index1 % 10;
                 if (this.dye[index2] != null && this.armor[index1].type > 0 && this.armor[index1].stack > 0 &&
                     (index1 / 10 >= 1 || !this.hideVisual[index2] ||
                      (this.armor[index1].wingSlot > (sbyte) 0 || this.armor[index1].type == 934)))
@@ -4715,13 +4715,13 @@ namespace Terraria
         {
             if (this.soulDrain > 0 && this.whoAmI == Main.myPlayer)
                 this.AddBuff(151, 2, true);
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.projectile[index].active && Main.projectile[index].owner == i)
                     ++this.ownedProjectileCounts[Main.projectile[index].type];
             }
 
-            for (int index1 = 0; index1 < 22; ++index1)
+            for (var index1 = 0; index1 < 22; ++index1)
             {
                 if (this.buffType[index1] > 0 && this.buffTime[index1] > 0)
                 {
@@ -4862,15 +4862,15 @@ namespace Terraria
                         this.inferno = true;
                         Lighting.AddLight((int) ((double) this.Center.X / 16.0), (int) ((double) this.Center.Y / 16.0),
                             0.65f, 0.4f, 0.1f);
-                        int type = 24;
-                        float num1 = 200f;
-                        bool flag = this.infernoCounter % 60 == 0;
-                        int num2 = 10;
+                        var type = 24;
+                        var num1 = 200f;
+                        var flag = this.infernoCounter % 60 == 0;
+                        var num2 = 10;
                         if (this.whoAmI == Main.myPlayer)
                         {
-                            for (int index2 = 0; index2 < 200; ++index2)
+                            for (var index2 = 0; index2 < 200; ++index2)
                             {
-                                NPC npc = Main.npc[index2];
+                                var npc = Main.npc[index2];
                                 if (npc.active && !npc.friendly && (npc.damage > 0 && !npc.dontTakeDamage) &&
                                     (!npc.buffImmune[type] && (double) Vector2.Distance(this.Center, npc.Center) <=
                                      (double) num1))
@@ -4884,11 +4884,11 @@ namespace Terraria
 
                             if (this.hostile)
                             {
-                                for (int playerTargetIndex = 0;
+                                for (var playerTargetIndex = 0;
                                     playerTargetIndex < (int) byte.MaxValue;
                                     ++playerTargetIndex)
                                 {
-                                    Player player = Main.player[playerTargetIndex];
+                                    var player = Main.player[playerTargetIndex];
                                     if (player != this && player.active && (!player.dead && player.hostile) &&
                                         (!player.buffImmune[type] && (player.team != this.team || player.team == 0)) &&
                                         (double) Vector2.Distance(this.Center, player.Center) <= (double) num1)
@@ -4901,7 +4901,7 @@ namespace Terraria
                                                 -1);
                                             if (Main.netMode != 0)
                                             {
-                                                PlayerDeathReason reason = PlayerDeathReason.ByPlayer(this.whoAmI);
+                                                var reason = PlayerDeathReason.ByPlayer(this.whoAmI);
                                                 NetMessage.SendPlayerHurt(playerTargetIndex, reason, num2, 0, false,
                                                     true, 0, -1, -1);
                                             }
@@ -4947,7 +4947,7 @@ namespace Terraria
                     else if (this.buffType[index1] >= 95 && this.buffType[index1] <= 97)
                     {
                         this.buffTime[index1] = 5;
-                        int num = (int) (byte) (1 + this.buffType[index1] - 95);
+                        var num = (int) (byte) (1 + this.buffType[index1] - 95);
                         if (this.beetleOrbs > 0 && this.beetleOrbs != num)
                         {
                             if (this.beetleOrbs > num)
@@ -4957,7 +4957,7 @@ namespace Terraria
                             }
                             else
                             {
-                                for (int b = 0; b < 22; ++b)
+                                for (var b = 0; b < 22; ++b)
                                 {
                                     if (this.buffType[b] >= 95 && this.buffType[b] <= 95 + num - 1)
                                     {
@@ -4981,7 +4981,7 @@ namespace Terraria
                     else if (this.buffType[index1] >= 170 && this.buffType[index1] <= 172)
                     {
                         this.buffTime[index1] = 5;
-                        int num = (int) (byte) (1 + this.buffType[index1] - 170);
+                        var num = (int) (byte) (1 + this.buffType[index1] - 170);
                         if (this.solarShields > 0 && this.solarShields != num)
                         {
                             if (this.solarShields > num)
@@ -4991,7 +4991,7 @@ namespace Terraria
                             }
                             else
                             {
-                                for (int b = 0; b < 22; ++b)
+                                for (var b = 0; b < 22; ++b)
                                 {
                                     if (this.buffType[b] >= 170 && this.buffType[b] <= 170 + num - 1)
                                     {
@@ -5012,7 +5012,7 @@ namespace Terraria
                     }
                     else if (this.buffType[index1] >= 98 && this.buffType[index1] <= 100)
                     {
-                        int num = (int) (byte) (1 + this.buffType[index1] - 98);
+                        var num = (int) (byte) (1 + this.buffType[index1] - 98);
                         if (this.beetleOrbs > 0 && this.beetleOrbs != num)
                         {
                             if (this.beetleOrbs > num)
@@ -5022,7 +5022,7 @@ namespace Terraria
                             }
                             else
                             {
-                                for (int b = 0; b < 22; ++b)
+                                for (var b = 0; b < 22; ++b)
                                 {
                                     if (this.buffType[b] >= 98 && this.buffType[b] <= 98 + num - 1)
                                     {
@@ -5047,8 +5047,8 @@ namespace Terraria
                     }
                     else if (this.buffType[index1] >= 176 && this.buffType[index1] <= 178)
                     {
-                        int nebulaLevelMana = this.nebulaLevelMana;
-                        int num = (int) (byte) (1 + this.buffType[index1] - 176);
+                        var nebulaLevelMana = this.nebulaLevelMana;
+                        var num = (int) (byte) (1 + this.buffType[index1] - 176);
                         if (nebulaLevelMana > 0 && nebulaLevelMana != num)
                         {
                             if (nebulaLevelMana > num)
@@ -5058,7 +5058,7 @@ namespace Terraria
                             }
                             else
                             {
-                                for (int b = 0; b < 22; ++b)
+                                for (var b = 0; b < 22; ++b)
                                 {
                                     if (this.buffType[b] >= 176 && this.buffType[b] <= 178 + num - 1)
                                     {
@@ -5079,8 +5079,8 @@ namespace Terraria
                     }
                     else if (this.buffType[index1] >= 173 && this.buffType[index1] <= 175)
                     {
-                        int nebulaLevelLife = this.nebulaLevelLife;
-                        int num = (int) (byte) (1 + this.buffType[index1] - 173);
+                        var nebulaLevelLife = this.nebulaLevelLife;
+                        var num = (int) (byte) (1 + this.buffType[index1] - 173);
                         if (nebulaLevelLife > 0 && nebulaLevelLife != num)
                         {
                             if (nebulaLevelLife > num)
@@ -5090,7 +5090,7 @@ namespace Terraria
                             }
                             else
                             {
-                                for (int b = 0; b < 22; ++b)
+                                for (var b = 0; b < 22; ++b)
                                 {
                                     if (this.buffType[b] >= 173 && this.buffType[b] <= 175 + num - 1)
                                     {
@@ -5113,8 +5113,8 @@ namespace Terraria
                     }
                     else if (this.buffType[index1] >= 179 && this.buffType[index1] <= 181)
                     {
-                        int nebulaLevelDamage = this.nebulaLevelDamage;
-                        int num1 = (int) (byte) (1 + this.buffType[index1] - 179);
+                        var nebulaLevelDamage = this.nebulaLevelDamage;
+                        var num1 = (int) (byte) (1 + this.buffType[index1] - 179);
                         if (nebulaLevelDamage > 0 && nebulaLevelDamage != num1)
                         {
                             if (nebulaLevelDamage > num1)
@@ -5124,7 +5124,7 @@ namespace Terraria
                             }
                             else
                             {
-                                for (int b = 0; b < 22; ++b)
+                                for (var b = 0; b < 22; ++b)
                                 {
                                     if (this.buffType[b] >= 179 && this.buffType[b] <= 181 + num1 - 1)
                                     {
@@ -5143,7 +5143,7 @@ namespace Terraria
                             this.buffTime[index1] = 480;
                         }
 
-                        float num2 = 0.15f * (float) this.nebulaLevelDamage;
+                        var num2 = 0.15f * (float) this.nebulaLevelDamage;
                         this.meleeDamage += num2;
                         this.rangedDamage += num2;
                         this.magicDamage += num2;
@@ -5175,7 +5175,7 @@ namespace Terraria
                     }
                     else if (this.buffType[index1] == 49)
                     {
-                        for (int index2 = 191; index2 <= 194; ++index2)
+                        for (var index2 = 191; index2 <= 194; ++index2)
                         {
                             if (this.ownedProjectileCounts[index2] > 0)
                                 this.pygmy = true;
@@ -5469,7 +5469,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.lightOrb = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[18] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5481,7 +5481,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.crimsonHeart = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[500] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5501,7 +5501,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.suspiciouslookingTentacle = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[650] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5513,8 +5513,8 @@ namespace Terraria
                              this.buffType[index1] == 102)
                     {
                         this.buffTime[index1] = 18000;
-                        bool flag = true;
-                        int Type = 72;
+                        var flag = true;
+                        var Type = 72;
                         if (this.buffType[index1] == 27)
                             this.blueFairy = true;
                         if (this.buffType[index1] == 101)
@@ -5542,7 +5542,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.bunny = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[111] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5555,8 +5555,8 @@ namespace Terraria
                         this.rabid = true;
                         if (Main.rand.Next(1200) == 0)
                         {
-                            int num1 = Main.rand.Next(6);
-                            float num2 = (float) Main.rand.Next(60, 100) * 0.01f;
+                            var num1 = Main.rand.Next(6);
+                            var num2 = (float) Main.rand.Next(60, 100) * 0.01f;
                             switch (num1)
                             {
                                 case 0:
@@ -5590,7 +5590,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.penguin = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[112] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5611,7 +5611,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.puppy = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[334] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5623,7 +5623,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.grinch = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[353] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5635,7 +5635,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.blackCat = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[319] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5647,7 +5647,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.dino = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[236] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5659,7 +5659,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.babyFaceMonster = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[499] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5671,7 +5671,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.eyeSpring = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[268] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5683,7 +5683,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.snowman = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[269] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5695,7 +5695,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.turtle = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[(int) sbyte.MaxValue] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5707,7 +5707,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.eater = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[175] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5719,7 +5719,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.skeletron = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[197] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5731,7 +5731,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.hornet = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[198] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5743,7 +5743,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.tiki = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[199] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5755,7 +5755,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.lizard = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[200] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5767,7 +5767,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.parrot = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[208] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5779,7 +5779,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.truffle = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[209] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5791,7 +5791,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.sapling = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[210] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5803,7 +5803,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.cSapling = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[324] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5815,7 +5815,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.spider = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[313] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5827,7 +5827,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.squashling = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[314] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5839,7 +5839,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.wisp = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[211] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5851,8 +5851,8 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.crystalLeaf = true;
-                        bool flag = true;
-                        for (int index2 = 0; index2 < 1000; ++index2)
+                        var flag = true;
+                        for (var index2 = 0; index2 < 1000; ++index2)
                         {
                             if (Main.projectile[index2].active && Main.projectile[index2].owner == this.whoAmI &&
                                 Main.projectile[index2].type == 226)
@@ -5872,7 +5872,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.zephyrfish = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[380] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5884,7 +5884,7 @@ namespace Terraria
                     {
                         this.buffTime[index1] = 18000;
                         this.miniMinotaur = true;
-                        bool flag = true;
+                        var flag = true;
                         if (this.ownedProjectileCounts[398] > 0)
                             flag = false;
                         if (flag && this.whoAmI == Main.myPlayer)
@@ -5953,7 +5953,7 @@ namespace Terraria
                         this.noKnockback = true;
                         this.grappling[0] = -1;
                         this.grapCount = 0;
-                        for (int index2 = 0; index2 < 1000; ++index2)
+                        for (var index2 = 0; index2 < 1000; ++index2)
                         {
                             if (Main.projectile[index2].active && Main.projectile[index2].owner == this.whoAmI &&
                                 Main.projectile[index2].aiStyle == 7)
@@ -6042,7 +6042,7 @@ namespace Terraria
         {
             this.buffTime[buffIndex] = 18000;
             petBool = true;
-            bool flag = true;
+            var flag = true;
             if (this.ownedProjectileCounts[petProjID] > 0)
                 flag = false;
             if (!flag || this.whoAmI != Main.myPlayer)
@@ -6055,10 +6055,10 @@ namespace Terraria
         {
             if (!this.yoyoGlove && this.counterWeight <= 0)
                 return;
-            int index1 = -1;
-            int num1 = 0;
-            int num2 = 0;
-            for (int index2 = 0; index2 < 1000; ++index2)
+            var index1 = -1;
+            var num1 = 0;
+            var num2 = 0;
+            for (var index2 = 0; index2 < 1000; ++index2)
             {
                 if (Main.projectile[index2].active && Main.projectile[index2].owner == this.whoAmI)
                 {
@@ -6076,9 +6076,9 @@ namespace Terraria
             {
                 if (index1 < 0)
                     return;
-                Vector2 vector2_1 = hitPos - this.Center;
+                var vector2_1 = hitPos - this.Center;
                 vector2_1.Normalize();
-                Vector2 vector2_2 = vector2_1 * 16f;
+                var vector2_2 = vector2_1 * 16f;
                 Projectile.NewProjectile(this.Center.X, this.Center.Y, vector2_2.X, vector2_2.Y,
                     Main.projectile[index1].type, Main.projectile[index1].damage, Main.projectile[index1].knockBack,
                     this.whoAmI, 1f, 0.0f);
@@ -6087,10 +6087,10 @@ namespace Terraria
             {
                 if (num2 >= num1)
                     return;
-                Vector2 vector2_1 = hitPos - this.Center;
+                var vector2_1 = hitPos - this.Center;
                 vector2_1.Normalize();
-                Vector2 vector2_2 = vector2_1 * 16f;
-                float KnockBack = (float) (((double) kb + 6.0) / 2.0);
+                var vector2_2 = vector2_1 * 16f;
+                var KnockBack = (float) (((double) kb + 6.0) / 2.0);
                 if (num2 > 0)
                     Projectile.NewProjectile(this.Center.X, this.Center.Y, vector2_2.X, vector2_2.Y, this.counterWeight,
                         (int) ((double) dmg * 0.8), KnockBack, this.whoAmI, 1f, 0.0f);
@@ -6128,19 +6128,19 @@ namespace Terraria
 
         public void Yoraiz0rEye()
         {
-            int index = 0 + this.bodyFrame.Y / 56;
+            var index = 0 + this.bodyFrame.Y / 56;
             if (index >= Main.OffsetsPlayerHeadgear.Length)
                 index = 0;
-            Vector2 spinningpoint1 =
+            var spinningpoint1 =
                 new Vector2((float) (3 * this.direction - (this.direction == 1 ? 1 : 0)), -11.5f * this.gravDir) +
                 Vector2.UnitY * this.gfxOffY + this.Size / 2f + Main.OffsetsPlayerHeadgear[index];
-            Vector2 spinningpoint2 =
+            var spinningpoint2 =
                 new Vector2((float) (3 * this.shadowDirection[1] - (this.direction == 1 ? 1 : 0)),
                     -11.5f * this.gravDir) + this.Size / 2f + Main.OffsetsPlayerHeadgear[index];
-            Vector2 vector2_1 = Vector2.Zero;
+            var vector2_1 = Vector2.Zero;
             if (this.mount.Active && this.mount.Cart)
             {
-                int num = Math.Sign(this.velocity.X);
+                var num = Math.Sign(this.velocity.X);
                 if (num == 0)
                     num = this.direction;
                 vector2_1 = new Vector2(MathHelper.Lerp(0.0f, -8f, this.fullRotation / 0.7853982f),
@@ -6156,14 +6156,14 @@ namespace Terraria
                 spinningpoint2 = spinningpoint2.RotatedBy((double) this.fullRotation, this.fullRotationOrigin);
             }
 
-            float num1 = 0.0f;
+            var num1 = 0.0f;
             if (this.mount.Active)
                 num1 = (float) this.mount.PlayerOffset;
-            Vector2 vector2_2 = this.position + spinningpoint1 + vector2_1;
-            Vector2 vector2_3 = this.oldPosition + spinningpoint2 + vector2_1;
+            var vector2_2 = this.position + spinningpoint1 + vector2_1;
+            var vector2_3 = this.oldPosition + spinningpoint2 + vector2_1;
             vector2_3.Y -= num1 / 2f;
             vector2_2.Y -= num1 / 2f;
-            float num2 = 1f;
+            var num2 = 1f;
             switch (this.yoraiz0rEye % 10)
             {
                 case 1:
@@ -6200,12 +6200,12 @@ namespace Terraria
                         new Utils.PerLinePoint(DelegateMethods.CastLightOpen));
             }
 
-            int num3 = (int) Vector2.Distance(vector2_2, vector2_3) / 3 + 1;
+            var num3 = (int) Vector2.Distance(vector2_2, vector2_3) / 3 + 1;
             if ((double) Vector2.Distance(vector2_2, vector2_3) % 3.0 != 0.0)
                 ++num3;
-            for (float num4 = 1f; (double) num4 <= (double) num3; ++num4)
+            for (var num4 = 1f; (double) num4 <= (double) num3; ++num4)
             {
-                Dust dust = Main.dust[Dust.NewDust(this.Center, 0, 0, 182, 0.0f, 0.0f, 0, new Color(), 1f)];
+                var dust = Main.dust[Dust.NewDust(this.Center, 0, 0, 182, 0.0f, 0.0f, 0, new Color(), 1f)];
                 dust.position = Vector2.Lerp(vector2_3, vector2_2, num4 / (float) num3);
                 dust.noGravity = true;
                 dust.velocity = Vector2.Zero;
@@ -6217,9 +6217,9 @@ namespace Terraria
 
         public void UpdateEquips(int i)
         {
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
-                int type = this.inventory[index].type;
+                var type = this.inventory[index].type;
                 if ((type == 15 || type == 707) && this.accWatch < 1)
                     this.accWatch = 1;
                 if ((type == 16 || type == 708) && this.accWatch < 2)
@@ -6267,11 +6267,11 @@ namespace Terraria
                     this.autoActuator = true;
             }
 
-            for (int index1 = 0; index1 < 8 + this.extraAccessorySlots; ++index1)
+            for (var index1 = 0; index1 < 8 + this.extraAccessorySlots; ++index1)
             {
                 if (!this.armor[index1].expertOnly || Main.expertMode)
                 {
-                    int type = this.armor[index1].type;
+                    var type = this.armor[index1].type;
                     if ((type == 15 || type == 707) && this.accWatch < 1)
                         this.accWatch = 1;
                     if ((type == 16 || type == 708) && this.accWatch < 2)
@@ -6312,8 +6312,8 @@ namespace Terraria
                     if (this.armor[index1].type == 3017 && this.whoAmI == Main.myPlayer &&
                         ((double) this.velocity.Y == 0.0 && this.grappling[0] == -1))
                     {
-                        int index2 = (int) this.Center.X / 16;
-                        int tileY = (int) ((double) this.position.Y + (double) this.height - 1.0) / 16;
+                        var index2 = (int) this.Center.X / 16;
+                        var tileY = (int) ((double) this.position.Y + (double) this.height - 1.0) / 16;
                         if (Main.tile[index2, tileY] == null)
                             Main.tile[index2, tileY] = new Tile();
                         if (!Main.tile[index2, tileY].active() && Main.tile[index2, tileY].liquid == (byte) 0 &&
@@ -7183,10 +7183,10 @@ namespace Terraria
                 }
             }
 
-            bool flag1 = false;
-            bool flag2 = false;
-            bool flag3 = false;
-            for (int index = 3; index < 8 + this.extraAccessorySlots; ++index)
+            var flag1 = false;
+            var flag2 = false;
+            var flag3 = false;
+            for (var index = 3; index < 8 + this.extraAccessorySlots; ++index)
             {
                 if (!this.armor[index].expertOnly || Main.expertMode)
                 {
@@ -7707,11 +7707,11 @@ namespace Terraria
                             this.hasPaladinShield = true;
                             if (i != Main.myPlayer && this.miscCounter % 10 == 0)
                             {
-                                int player = Main.myPlayer;
+                                var player = Main.myPlayer;
                                 if (Main.player[player].team == this.team && this.team != 0)
                                 {
-                                    float num1 = this.position.X - Main.player[player].position.X;
-                                    float num2 = this.position.Y - Main.player[player].position.Y;
+                                    var num1 = this.position.X - Main.player[player].position.X;
+                                    var num2 = this.position.Y - Main.player[player].position.Y;
                                     if (Math.Sqrt((double) num1 * (double) num1 + (double) num2 * (double) num2) <
                                         800.0)
                                         Main.player[player].AddBuff(43, 20, true);
@@ -8013,7 +8013,7 @@ namespace Terraria
                         if (this.armor[index].type == 576 && Main.rand.Next(10800) == 0 &&
                             (Main.curMusic > 0 && Main.curMusic <= 41))
                         {
-                            int num = 0;
+                            var num = 0;
                             if (Main.curMusic == 1)
                                 num = 0;
                             if (Main.curMusic == 2)
@@ -8114,7 +8114,7 @@ namespace Terraria
                 ++this.maxTurrets;
             }
 
-            for (int index = 3; index < 8 + this.extraAccessorySlots; ++index)
+            for (var index = 3; index < 8 + this.extraAccessorySlots; ++index)
             {
                 if (this.armor[index].wingSlot > (sbyte) 0)
                 {
@@ -8124,9 +8124,9 @@ namespace Terraria
                 }
             }
 
-            for (int index = 13; index < 18 + this.extraAccessorySlots; ++index)
+            for (var index = 13; index < 18 + this.extraAccessorySlots; ++index)
             {
-                int type = this.armor[index].type;
+                var type = this.armor[index].type;
                 if (this.armor[index].wingSlot > (sbyte) 0)
                     this.wings = (int) this.armor[index].wingSlot;
                 if (type == 861 || type == 3110 || type == 485)
@@ -8159,13 +8159,13 @@ namespace Terraria
                 this.accThirdEyeCounter = (byte) 0;
             if (Main.netMode == 1 && this.whoAmI == Main.myPlayer)
             {
-                for (int index = 0; index < (int) byte.MaxValue; ++index)
+                for (var index = 0; index < (int) byte.MaxValue; ++index)
                 {
                     if (index != this.whoAmI && Main.player[index].active &&
                         (!Main.player[index].dead && Main.player[index].team == this.team) &&
                         Main.player[index].team != 0)
                     {
-                        int num = 800;
+                        var num = 800;
                         if ((double) (Main.player[index].Center - this.Center).Length() < (double) num)
                         {
                             if (Main.player[index].accWatch > this.accWatch)
@@ -8271,7 +8271,7 @@ namespace Terraria
 
             if (this.head == 157 && this.body == 105 && this.legs == 98)
             {
-                int num1 = 0;
+                var num1 = 0;
                 this.setBonus = Language.GetTextValue("ArmorSetBonus.BeetleDamage");
                 this.beetleOffense = true;
                 this.beetleCounter -= 3f;
@@ -8279,9 +8279,9 @@ namespace Terraria
                 ++this.beetleCountdown;
                 if ((double) this.beetleCounter < 0.0)
                     this.beetleCounter = 0.0f;
-                int num2 = 400;
-                int num3 = 1200;
-                int num4 = 4600;
+                var num2 = 400;
+                var num3 = 1200;
+                var num4 = 4600;
                 if ((double) this.beetleCounter > (double) (num2 + num3 + num4 + num3))
                     this.beetleCounter = (float) (num2 + num3 + num4 + num3);
                 if ((double) this.beetleCounter > (double) (num2 + num3 + num4))
@@ -8306,7 +8306,7 @@ namespace Terraria
                     this.beetleCounter += 200f;
                 if (num1 != this.beetleOrbs && this.beetleOrbs > 0)
                 {
-                    for (int b = 0; b < 22; ++b)
+                    for (var b = 0; b < 22; ++b)
                     {
                         if (this.buffType[b] >= 98 && this.buffType[b] <= 100 && this.buffType[b] != 97 + num1)
                             this.DelBuff(b);
@@ -8318,12 +8318,12 @@ namespace Terraria
                 this.setBonus = Language.GetTextValue("ArmorSetBonus.BeetleDefense");
                 this.beetleDefense = true;
                 ++this.beetleCounter;
-                int num = 180;
+                var num = 180;
                 if ((double) this.beetleCounter >= (double) num)
                 {
                     if (this.beetleOrbs > 0 && this.beetleOrbs < 3)
                     {
-                        for (int b = 0; b < 22; ++b)
+                        for (var b = 0; b < 22; ++b)
                         {
                             if (this.buffType[b] >= 95 && this.buffType[b] <= 96)
                                 this.DelBuff(b);
@@ -8355,41 +8355,41 @@ namespace Terraria
                         this.beetleFrame = 0;
                 }
 
-                for (int beetleOrbs = this.beetleOrbs; beetleOrbs < 3; ++beetleOrbs)
+                for (var beetleOrbs = this.beetleOrbs; beetleOrbs < 3; ++beetleOrbs)
                 {
                     this.beetlePos[beetleOrbs].X = 0.0f;
                     this.beetlePos[beetleOrbs].Y = 0.0f;
                 }
 
-                for (int index = 0; index < this.beetleOrbs; ++index)
+                for (var index = 0; index < this.beetleOrbs; ++index)
                 {
                     this.beetlePos[index] += this.beetleVel[index];
                     this.beetleVel[index].X += (float) Main.rand.Next(-100, 101) * 0.005f;
                     this.beetleVel[index].Y += (float) Main.rand.Next(-100, 101) * 0.005f;
-                    float x1 = this.beetlePos[index].X;
-                    float y1 = this.beetlePos[index].Y;
-                    float num1 = (float) Math.Sqrt((double) x1 * (double) x1 + (double) y1 * (double) y1);
+                    var x1 = this.beetlePos[index].X;
+                    var y1 = this.beetlePos[index].Y;
+                    var num1 = (float) Math.Sqrt((double) x1 * (double) x1 + (double) y1 * (double) y1);
                     if ((double) num1 > 100.0)
                     {
-                        float num2 = 20f / num1;
-                        float num3 = x1 * -num2;
-                        float num4 = y1 * -num2;
-                        int num5 = 10;
+                        var num2 = 20f / num1;
+                        var num3 = x1 * -num2;
+                        var num4 = y1 * -num2;
+                        var num5 = 10;
                         this.beetleVel[index].X = (this.beetleVel[index].X * (float) (num5 - 1) + num3) / (float) num5;
                         this.beetleVel[index].Y = (this.beetleVel[index].Y * (float) (num5 - 1) + num4) / (float) num5;
                     }
                     else if ((double) num1 > 30.0)
                     {
-                        float num2 = 10f / num1;
-                        float num3 = x1 * -num2;
-                        float num4 = y1 * -num2;
-                        int num5 = 20;
+                        var num2 = 10f / num1;
+                        var num3 = x1 * -num2;
+                        var num4 = y1 * -num2;
+                        var num5 = 20;
                         this.beetleVel[index].X = (this.beetleVel[index].X * (float) (num5 - 1) + num3) / (float) num5;
                         this.beetleVel[index].Y = (this.beetleVel[index].Y * (float) (num5 - 1) + num4) / (float) num5;
                     }
 
-                    float x2 = this.beetleVel[index].X;
-                    float y2 = this.beetleVel[index].Y;
+                    var x2 = this.beetleVel[index].X;
+                    var y2 = this.beetleVel[index].Y;
                     if (Math.Sqrt((double) x2 * (double) x2 + (double) y2 * (double) y2) > 2.0)
                         this.beetleVel[index] *= 0.9f;
                     this.beetlePos[index] -= this.velocity * 0.25f;
@@ -8479,7 +8479,7 @@ namespace Terraria
             }
             else if (this.crystalLeaf)
             {
-                for (int b = 0; b < 22; ++b)
+                for (var b = 0; b < 22; ++b)
                 {
                     if (this.buffType[b] == 60)
                         this.DelBuff(b);
@@ -8620,12 +8620,12 @@ namespace Terraria
                 this.setSolar = true;
                 this.setBonus = Language.GetTextValue("ArmorSetBonus.Solar");
                 ++this.solarCounter;
-                int num = 240;
+                var num = 240;
                 if (this.solarCounter >= num)
                 {
                     if (this.solarShields > 0 && this.solarShields < 3)
                     {
-                        for (int b = 0; b < 22; ++b)
+                        for (var b = 0; b < 22; ++b)
                         {
                             if (this.buffType[b] >= 170 && this.buffType[b] <= 171)
                                 this.DelBuff(b);
@@ -8635,9 +8635,9 @@ namespace Terraria
                     if (this.solarShields < 3)
                     {
                         this.AddBuff(170 + this.solarShields, 5, false);
-                        for (int index = 0; index < 16; ++index)
+                        for (var index = 0; index < 16; ++index)
                         {
-                            Dust dust = Main.dust[
+                            var dust = Main.dust[
                                 Dust.NewDust(this.position, this.width, this.height, 6, 0.0f, 0.0f, 100, new Color(),
                                     1f)];
                             dust.noGravity = true;
@@ -8653,12 +8653,12 @@ namespace Terraria
                         this.solarCounter = num;
                 }
 
-                for (int solarShields = this.solarShields; solarShields < 3; ++solarShields)
+                for (var solarShields = this.solarShields; solarShields < 3; ++solarShields)
                     this.solarShieldPos[solarShields] = Vector2.Zero;
-                for (int index = 0; index < this.solarShields; ++index)
+                for (var index = 0; index < this.solarShields; ++index)
                 {
                     this.solarShieldPos[index] += this.solarShieldVel[index];
-                    Vector2 vector2 =
+                    var vector2 =
                         ((float) ((double) this.miscCounter / 100.0 * 6.28318548202515 +
                                   (double) index * (6.28318548202515 / (double) this.solarShields)))
                         .ToRotationVector2() * 6f;
@@ -8783,7 +8783,7 @@ namespace Terraria
 
         public void UpdateSocialShadow()
         {
-            for (int index = 2; index > 0; --index)
+            for (var index = 2; index > 0; --index)
                 this.shadowDirection[index] = this.shadowDirection[index - 1];
             this.shadowDirection[0] = this.direction;
             ++this.shadowCount;
@@ -8819,7 +8819,7 @@ namespace Terraria
             {
                 if ((double) Main.rand.Next(100) <= 100.0 * (double) this.teleportTime * 2.0)
                 {
-                    int index = Dust.NewDust(new Vector2((float) this.getRect().X, (float) this.getRect().Y),
+                    var index = Dust.NewDust(new Vector2((float) this.getRect().X, (float) this.getRect().Y),
                         this.getRect().Width, this.getRect().Height, 159, 0.0f, 0.0f, 0, new Color(), 1f);
                     Main.dust[index].scale = this.teleportTime * 1.5f;
                     Main.dust[index].noGravity = true;
@@ -8830,7 +8830,7 @@ namespace Terraria
             {
                 if ((double) Main.rand.Next(100) <= 100.0 * (double) this.teleportTime)
                 {
-                    int index = Dust.NewDust(new Vector2((float) this.getRect().X, (float) this.getRect().Y),
+                    var index = Dust.NewDust(new Vector2((float) this.getRect().X, (float) this.getRect().Y),
                         this.getRect().Width, this.getRect().Height, 164, 0.0f, 0.0f, 0, new Color(), 1f);
                     Main.dust[index].scale = this.teleportTime * 1.5f;
                     Main.dust[index].noGravity = true;
@@ -8846,7 +8846,7 @@ namespace Terraria
                 this.teleportTime -= 0.02f;
                 if ((double) Main.rand.Next(100) <= 100.0 * (double) this.teleportTime)
                 {
-                    Dust dust = Main.dust[
+                    var dust = Main.dust[
                         Dust.NewDust(this.position, this.width, this.height, 263, 0.0f, 0.0f, 0, new Color(), 1f)];
                     dust.color = PortalHelper.GetPortalColor(this.lastPortalColorIndex);
                     dust.noLight = true;
@@ -8861,17 +8861,17 @@ namespace Terraria
 
         public void UpdateBiomes()
         {
-            Point tileCoordinates1 = this.Center.ToTileCoordinates();
+            var tileCoordinates1 = this.Center.ToTileCoordinates();
             this.ZoneDungeon = false;
             if (Main.dungeonTiles >= 250 && (double) this.Center.Y > Main.worldSurface * 16.0)
             {
-                int index1 = (int) this.Center.X / 16;
-                int index2 = (int) this.Center.Y / 16;
+                var index1 = (int) this.Center.X / 16;
+                var index2 = (int) this.Center.Y / 16;
                 if (Main.wallDungeon[(int) Main.tile[index1, index2].wall])
                     this.ZoneDungeon = true;
             }
 
-            Tile tileSafely = Framing.GetTileSafely(this.Center);
+            var tileSafely = Framing.GetTileSafely(this.Center);
             if (tileSafely != null)
                 this.behindBackWall = tileSafely.wall > (byte) 0;
             if (Main.sandTiles > 1000 && (double) this.Center.Y > 3200.0)
@@ -8908,12 +8908,12 @@ namespace Terraria
                                  !this.ZoneBeach && Sandstorm.Happening;
             this.ZoneTowerSolar = this.ZoneTowerVortex = this.ZoneTowerNebula = this.ZoneTowerStardust = false;
             this.ZoneOldOneArmy = false;
-            Vector2 vector2_1 = Vector2.Zero;
-            Vector2 vector2_2 = Vector2.Zero;
-            Vector2 vector2_3 = Vector2.Zero;
-            Vector2 vector2_4 = Vector2.Zero;
-            Vector2 zero = Vector2.Zero;
-            for (int index = 0; index < 200; ++index)
+            var vector2_1 = Vector2.Zero;
+            var vector2_2 = Vector2.Zero;
+            var vector2_3 = Vector2.Zero;
+            var vector2_4 = Vector2.Zero;
+            var zero = Vector2.Zero;
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.npc[index].active)
                 {
@@ -8957,9 +8957,9 @@ namespace Terraria
                 }
             }
 
-            bool flag1 = this.ZoneRain && this.ZoneSnow;
-            bool flag2 = tileCoordinates1.Y > Main.maxTilesY - 320;
-            bool flag3 = this.ZoneOverworldHeight &&
+            var flag1 = this.ZoneRain && this.ZoneSnow;
+            var flag2 = tileCoordinates1.Y > Main.maxTilesY - 320;
+            var flag3 = this.ZoneOverworldHeight &&
                          (tileCoordinates1.X < 380 || tileCoordinates1.X > Main.maxTilesX - 380);
             this.ManageSpecialBiomeVisuals("Stardust", this.ZoneTowerStardust, vector2_4 - new Vector2(0.0f, 10f));
             this.ManageSpecialBiomeVisuals("Nebula", this.ZoneTowerNebula, vector2_3 - new Vector2(0.0f, 10f));
@@ -8978,16 +8978,16 @@ namespace Terraria
                 Filters.Scene.Deactivate("WaterDistortion");
             if (Filters.Scene["WaterDistortion"].IsActive())
             {
-                float num1 = (float) Main.maxTilesX * 0.5f -
+                var num1 = (float) Main.maxTilesX * 0.5f -
                              Math.Abs((float) tileCoordinates1.X - (float) Main.maxTilesX * 0.5f);
-                float num2 = 1f + Math.Abs(Main.windSpeed) * 1f + MathHelper.Clamp(Main.maxRaining, 0.0f, 1f) * 1.5f +
+                var num2 = 1f + Math.Abs(Main.windSpeed) * 1f + MathHelper.Clamp(Main.maxRaining, 0.0f, 1f) * 1.5f +
                              (float) -((double) MathHelper.Clamp((float) (((double) num1 - 380.0) / 100.0), 0.0f, 1f) *
                                        0.5 - 0.25);
-                float num3 =
+                var num3 =
                     1f - MathHelper.Clamp(
                         (float) (3.0 * ((double) ((float) tileCoordinates1.Y - (float) Main.worldSurface) /
                                         (Main.rockLayer - Main.worldSurface))), 0.0f, 1f);
-                float intensity = MathHelper.Clamp(
+                var intensity = MathHelper.Clamp(
                     num2 * num3 +
                     (float) (0.899999976158142 -
                              (double) MathHelper.Clamp((float) (Main.maxTilesY - tileCoordinates1.Y - 200) / 300f, 0.0f,
@@ -8997,7 +8997,7 @@ namespace Terraria
 
             if (flag2)
             {
-                float intensity = Math.Min(1f, (float) (tileCoordinates1.Y - (Main.maxTilesY - 320)) / 120f) * 2f;
+                var intensity = Math.Min(1f, (float) (tileCoordinates1.Y - (Main.maxTilesY - 320)) / 120f) * 2f;
                 Filters.Scene["HeatDistortion"].GetShader().UseIntensity(intensity);
             }
 
@@ -9016,9 +9016,9 @@ namespace Terraria
             }
             else if (this.ZoneDesert && !flag3 && (!Main.raining && !flag2))
             {
-                Vector3 vector3 = Main.tileColor.ToVector3();
-                float num = (float) (((double) vector3.X + (double) vector3.Y + (double) vector3.Z) / 3.0);
-                float intensity = this._stormShaderObstruction * 4f * Math.Max(0.0f, 0.5f - Main.cloudAlpha) * num;
+                var vector3 = Main.tileColor.ToVector3();
+                var num = (float) (((double) vector3.X + (double) vector3.Y + (double) vector3.Z) / 3.0);
+                var intensity = this._stormShaderObstruction * 4f * Math.Max(0.0f, 0.5f - Main.cloudAlpha) * num;
                 Filters.Scene["HeatDistortion"].GetShader().UseIntensity(intensity);
                 if ((double) intensity <= 0.0)
                     Filters.Scene["HeatDistortion"].IsHidden = true;
@@ -9028,8 +9028,8 @@ namespace Terraria
 
             if (flag1)
             {
-                ActiveSound activeSound1 = Main.GetActiveSound(Player._strongBlizzardSound);
-                ActiveSound activeSound2 = Main.GetActiveSound(Player._insideBlizzardSound);
+                var activeSound1 = Main.GetActiveSound(Player._strongBlizzardSound);
+                var activeSound2 = Main.GetActiveSound(Player._insideBlizzardSound);
                 if (activeSound1 == null)
                     Player._strongBlizzardSound = Main.PlayTrackedSound((SoundStyle) SoundID.BlizzardStrongLoop);
                 if (activeSound2 == null)
@@ -9037,7 +9037,7 @@ namespace Terraria
                         Main.PlayTrackedSound((SoundStyle) SoundID.BlizzardInsideBuildingLoop);
                 Main.GetActiveSound(Player._strongBlizzardSound);
                 Main.GetActiveSound(Player._insideBlizzardSound);
-                float opacity = Math.Min(1f, Main.cloudAlpha * 2f) * this._stormShaderObstruction;
+                var opacity = Math.Min(1f, Main.cloudAlpha * 2f) * this._stormShaderObstruction;
                 Filters.Scene["Blizzard"].GetShader().UseIntensity(
                     (float) ((double) this._stormShaderObstruction * 0.400000005960464 *
                              (double) Math.Min(1f, Main.cloudAlpha * 2f) * 0.899999976158142 + 0.100000001490116));
@@ -9048,9 +9048,9 @@ namespace Terraria
             Player._blizzardSoundVolume = !flag1
                 ? Math.Max(Player._blizzardSoundVolume - 0.01f, 0.0f)
                 : Math.Min(Player._blizzardSoundVolume + 0.01f, 1f);
-            float num4 = Math.Min(1f, Main.cloudAlpha * 2f) * this._stormShaderObstruction;
-            ActiveSound activeSound3 = Main.GetActiveSound(Player._strongBlizzardSound);
-            ActiveSound activeSound4 = Main.GetActiveSound(Player._insideBlizzardSound);
+            var num4 = Math.Min(1f, Main.cloudAlpha * 2f) * this._stormShaderObstruction;
+            var activeSound3 = Main.GetActiveSound(Player._strongBlizzardSound);
+            var activeSound4 = Main.GetActiveSound(Player._insideBlizzardSound);
             if ((double) Player._blizzardSoundVolume > 0.0)
             {
                 if (activeSound3 == null)
@@ -9083,10 +9083,10 @@ namespace Terraria
 
             if (!this.dead)
             {
-                Point tileCoordinates2 = this.Center.ToTileCoordinates();
+                var tileCoordinates2 = this.Center.ToTileCoordinates();
                 if (WorldGen.InWorld(tileCoordinates2.X, tileCoordinates2.Y, 1))
                 {
-                    int num1 = 0;
+                    var num1 = 0;
                     if (Main.tile[tileCoordinates2.X, tileCoordinates2.Y] != null)
                         num1 = (int) Main.tile[tileCoordinates2.X, tileCoordinates2.Y].wall;
                     switch (num1)
@@ -9193,7 +9193,7 @@ namespace Terraria
             this.yoraiz0rDarkness = false;
             this.leinforsHair = false;
             this.gravDir = 1f;
-            for (int index = 0; index < 22; ++index)
+            for (var index = 0; index < 22; ++index)
             {
                 if (this.buffType[index] <= 0 || !Main.persistentBuff[this.buffType[index]])
                 {
@@ -9235,7 +9235,7 @@ namespace Terraria
             this.headVelocity.X *= 0.99f;
             this.bodyVelocity.X *= 0.99f;
             this.legVelocity.X *= 0.99f;
-            for (int index = 0; index < this.npcTypeNoAggro.Length; ++index)
+            for (var index = 0; index < this.npcTypeNoAggro.Length; ++index)
                 this.npcTypeNoAggro[index] = false;
             if (this.difficulty == (byte) 2)
             {
@@ -9265,7 +9265,7 @@ namespace Terraria
         {
             if (i != Main.myPlayer || this.miscEquips[0].buffType < 1 || this.miscEquips[0].stack < 1)
                 return;
-            int buffType = this.miscEquips[0].buffType;
+            var buffType = this.miscEquips[0].buffType;
             if (!Main.vanityPet[buffType] && !Main.lightPet[buffType] || this.hideMisc[0] ||
                 (this.miscEquips[0].type == 603 && !Main.cEd || this.FindBuffIndex(buffType) != -1))
                 return;
@@ -9277,11 +9277,11 @@ namespace Terraria
         {
             if (i != Main.myPlayer || this.miscEquips[1].buffType < 1 || this.miscEquips[1].stack < 1)
                 return;
-            int type = this.miscEquips[1].buffType;
+            var type = this.miscEquips[1].buffType;
             if (!Main.vanityPet[type] && !Main.lightPet[type] || this.hideMisc[1] ||
                 this.miscEquips[1].type == 603 && !Main.cEd)
                 return;
-            int buffIndex = this.FindBuffIndex(type);
+            var buffIndex = this.FindBuffIndex(type);
             if (type == 27 && buffIndex == -1)
                 buffIndex = this.FindBuffIndex(102);
             if (type == 27 && buffIndex == -1)
@@ -9326,12 +9326,12 @@ namespace Terraria
             Main.SmartCursorShowing = false;
             if (!Main.SmartCursorEnabled)
                 return;
-            Item obj = this.inventory[this.selectedItem];
-            Vector2 mouse = Main.screenPosition + new Vector2((float) Main.mouseX, (float) Main.mouseY);
+            var obj = this.inventory[this.selectedItem];
+            var mouse = Main.screenPosition + new Vector2((float) Main.mouseX, (float) Main.mouseY);
             if ((double) this.gravDir == -1.0)
                 mouse.Y = Main.screenPosition.Y + (float) Main.screenHeight - (float) Main.mouseY;
-            int index1 = Player.tileTargetX;
-            int index2 = Player.tileTargetY;
+            var index1 = Player.tileTargetX;
+            var index2 = Player.tileTargetY;
             if (index1 < 10)
                 index1 = 10;
             if (index1 > Main.maxTilesX - 10)
@@ -9340,7 +9340,7 @@ namespace Terraria
                 index2 = 10;
             if (index2 > Main.maxTilesY - 10)
                 index2 = Main.maxTilesY - 10;
-            bool flag1 = false;
+            var flag1 = false;
             if (Main.tile[index1, index2] == null)
                 return;
             if (Main.tile[index1, index2].active())
@@ -9402,11 +9402,11 @@ namespace Terraria
                 }
             }
 
-            int tileBoost = obj.tileBoost;
-            int num1 = 0;
+            var tileBoost = obj.tileBoost;
+            var num1 = 0;
             if (obj.type == 1071 || obj.type == 1543 || (obj.type == 1072 || obj.type == 1544))
             {
-                for (int index3 = 0; index3 < 58; ++index3)
+                for (var index3 = 0; index3 < 58; ++index3)
                 {
                     if (this.inventory[index3].stack > 0 && this.inventory[index3].paint > (byte) 0)
                     {
@@ -9416,29 +9416,29 @@ namespace Terraria
                 }
             }
 
-            int num2 = (int) ((double) this.position.X / 16.0) - Player.tileRangeX - tileBoost + 1;
-            int num3 = (int) (((double) this.position.X + (double) this.width) / 16.0) + Player.tileRangeX + tileBoost -
+            var num2 = (int) ((double) this.position.X / 16.0) - Player.tileRangeX - tileBoost + 1;
+            var num3 = (int) (((double) this.position.X + (double) this.width) / 16.0) + Player.tileRangeX + tileBoost -
                        1;
-            int num4 = (int) ((double) this.position.Y / 16.0) - Player.tileRangeY - tileBoost + 1;
-            int num5 = (int) (((double) this.position.Y + (double) this.height) / 16.0) + Player.tileRangeY +
+            var num4 = (int) ((double) this.position.Y / 16.0) - Player.tileRangeY - tileBoost + 1;
+            var num5 = (int) (((double) this.position.Y + (double) this.height) / 16.0) + Player.tileRangeY +
                        tileBoost - 2;
-            int num6 = Utils.Clamp<int>(num2, 10, Main.maxTilesX - 10);
-            int num7 = Utils.Clamp<int>(num3, 10, Main.maxTilesX - 10);
-            int num8 = Utils.Clamp<int>(num4, 10, Main.maxTilesY - 10);
-            int num9 = Utils.Clamp<int>(num5, 10, Main.maxTilesY - 10);
+            var num6 = Utils.Clamp<int>(num2, 10, Main.maxTilesX - 10);
+            var num7 = Utils.Clamp<int>(num3, 10, Main.maxTilesX - 10);
+            var num8 = Utils.Clamp<int>(num4, 10, Main.maxTilesY - 10);
+            var num9 = Utils.Clamp<int>(num5, 10, Main.maxTilesY - 10);
             if (flag1 && index1 >= num6 && (index1 <= num7 && index2 >= num8) && index2 <= num9)
                 return;
-            List<Tuple<int, int>> ignoreTargets = new List<Tuple<int, int>>();
-            for (int index3 = 0; index3 < this.grapCount; ++index3)
+            var ignoreTargets = new List<Tuple<int, int>>();
+            for (var index3 = 0; index3 < this.grapCount; ++index3)
             {
-                Projectile projectile = Main.projectile[this.grappling[index3]];
-                int num10 = (int) projectile.Center.X / 16;
-                int num11 = (int) projectile.Center.Y / 16;
+                var projectile = Main.projectile[this.grappling[index3]];
+                var num10 = (int) projectile.Center.X / 16;
+                var num11 = (int) projectile.Center.Y / 16;
                 ignoreTargets.Add(new Tuple<int, int>(num10, num11));
             }
 
-            int fX = -1;
-            int fY = -1;
+            var fX = -1;
+            var fY = -1;
             if (!Player.SmartCursorSettings.SmartAxeAfterPickaxe)
                 Player.SmartCursor_Axe(obj, ref mouse, num6, num7, num8, num9, ref fX, ref fY);
             if (obj.pick > 0 && fX == -1 && fY == -1)
@@ -9448,9 +9448,9 @@ namespace Terraria
                      (double) PlayerInput.GamepadThumbstickLeft.Length() < 0.0500000007450581 &&
                      (double) PlayerInput.GamepadThumbstickRight.Length() < 0.0500000007450581))
                     mouse = this.Center + new Vector2((float) (this.direction * 1000), 0.0f);
-                Vector2 vector2 = mouse - this.Center;
-                int num10 = Math.Sign(vector2.X);
-                int num11 = Math.Sign(vector2.Y);
+                var vector2 = mouse - this.Center;
+                var num10 = Math.Sign(vector2.X);
+                var num11 = Math.Sign(vector2.Y);
                 if ((double) Math.Abs(vector2.X) > (double) Math.Abs(vector2.Y) * 3.0)
                 {
                     num11 = 0;
@@ -9463,23 +9463,23 @@ namespace Terraria
                     mouse.X = this.Center.X;
                 }
 
-                int num12 = (int) this.Center.X / 16;
-                int num13 = (int) this.Center.Y / 16;
-                List<Tuple<int, int>> tupleList1 = new List<Tuple<int, int>>();
-                List<Tuple<int, int>> tupleList2 = new List<Tuple<int, int>>();
-                int num14 = 1;
+                var num12 = (int) this.Center.X / 16;
+                var num13 = (int) this.Center.Y / 16;
+                var tupleList1 = new List<Tuple<int, int>>();
+                var tupleList2 = new List<Tuple<int, int>>();
+                var num14 = 1;
                 if (num11 == -1 && num10 != 0)
                     num14 = -1;
-                int index3 = (int) (((double) this.position.X + (double) (this.width / 2) +
+                var index3 = (int) (((double) this.position.X + (double) (this.width / 2) +
                                      (double) ((this.width / 2 - 1) * num10)) / 16.0);
-                int index4 = (int) (((double) this.position.Y + 0.1) / 16.0);
+                var index4 = (int) (((double) this.position.Y + 0.1) / 16.0);
                 if (num14 == -1)
                     index4 = (int) (((double) this.position.Y + (double) this.height - 1.0) / 16.0);
-                int num15 = this.width / 16 + (this.width % 16 == 0 ? 0 : 1);
-                int num16 = this.height / 16 + (this.height % 16 == 0 ? 0 : 1);
+                var num15 = this.width / 16 + (this.width % 16 == 0 ? 0 : 1);
+                var num16 = this.height / 16 + (this.height % 16 == 0 ? 0 : 1);
                 if (num10 != 0)
                 {
-                    for (int index5 = 0; index5 < num16; ++index5)
+                    for (var index5 = 0; index5 < num16; ++index5)
                     {
                         if (Main.tile[index3, index4 + index5 * num14] == null)
                             return;
@@ -9489,7 +9489,7 @@ namespace Terraria
 
                 if (num11 != 0)
                 {
-                    for (int index5 = 0; index5 < num15; ++index5)
+                    for (var index5 = 0; index5 < num15; ++index5)
                     {
                         if (Main.tile[(int) ((double) this.position.X / 16.0) + index5, index4] == null)
                             return;
@@ -9497,8 +9497,8 @@ namespace Terraria
                     }
                 }
 
-                int index6 = (int) (((double) mouse.X + (double) ((this.width / 2 - 1) * num10)) / 16.0);
-                int index7 = (int) (((double) mouse.Y + 0.1 - (double) (this.height / 2 + 1)) / 16.0);
+                var index6 = (int) (((double) mouse.X + (double) ((this.width / 2 - 1) * num10)) / 16.0);
+                var index7 = (int) (((double) mouse.Y + 0.1 - (double) (this.height / 2 + 1)) / 16.0);
                 if (num14 == -1)
                     index7 = (int) (((double) mouse.Y + (double) (this.height / 2) - 1.0) / 16.0);
                 if ((double) this.gravDir == -1.0 && num11 == 0)
@@ -9507,11 +9507,11 @@ namespace Terraria
                     index7 = 10;
                 if (index7 > Main.maxTilesY - 10)
                     index7 = Main.maxTilesY - 10;
-                int num17 = this.width / 16 + (this.width % 16 == 0 ? 0 : 1);
-                int num18 = this.height / 16 + (this.height % 16 == 0 ? 0 : 1);
+                var num17 = this.width / 16 + (this.width % 16 == 0 ? 0 : 1);
+                var num18 = this.height / 16 + (this.height % 16 == 0 ? 0 : 1);
                 if (num10 != 0)
                 {
-                    for (int index5 = 0; index5 < num18; ++index5)
+                    for (var index5 = 0; index5 < num18; ++index5)
                     {
                         if (Main.tile[index6, index7 + index5 * num14] == null)
                             return;
@@ -9521,7 +9521,7 @@ namespace Terraria
 
                 if (num11 != 0)
                 {
-                    for (int index5 = 0; index5 < num17; ++index5)
+                    for (var index5 = 0; index5 < num17; ++index5)
                     {
                         if (Main.tile[(int) (((double) mouse.X - (double) (this.width / 2)) / 16.0) + index5, index7] ==
                             null)
@@ -9531,11 +9531,11 @@ namespace Terraria
                     }
                 }
 
-                List<Tuple<int, int>> tupleList3 = new List<Tuple<int, int>>();
+                var tupleList3 = new List<Tuple<int, int>>();
                 while (tupleList1.Count > 0)
                 {
-                    Tuple<int, int> tuple1 = tupleList1[0];
-                    Tuple<int, int> tuple2 = tupleList2[0];
+                    var tuple1 = tupleList1[0];
+                    var tuple2 = tupleList2[0];
                     Tuple<int, int> col;
                     if (!Collision.TupleHitLine(tuple1.Item1, tuple1.Item2, tuple2.Item1, tuple2.Item2,
                         num10 * (int) this.gravDir, -num11 * (int) this.gravDir, ignoreTargets, out col))
@@ -9547,7 +9547,7 @@ namespace Terraria
                     {
                         if (col.Item1 != tuple2.Item1 || col.Item2 != tuple2.Item2)
                             tupleList3.Add(col);
-                        Tile tile = Main.tile[col.Item1, col.Item2];
+                        var tile = Main.tile[col.Item1, col.Item2];
                         if (!tile.inActive() && tile.active() &&
                             (Main.tileSolid[(int) tile.type] && !Main.tileSolidTop[(int) tile.type]) &&
                             !ignoreTargets.Contains(col))
@@ -9557,23 +9557,23 @@ namespace Terraria
                     }
                 }
 
-                List<Tuple<int, int>> tupleList4 = new List<Tuple<int, int>>();
-                for (int index5 = 0; index5 < tupleList3.Count; ++index5)
+                var tupleList4 = new List<Tuple<int, int>>();
+                for (var index5 = 0; index5 < tupleList3.Count; ++index5)
                 {
                     if (!WorldGen.CanKillTile(tupleList3[index5].Item1, tupleList3[index5].Item2))
                         tupleList4.Add(tupleList3[index5]);
                 }
 
-                for (int index5 = 0; index5 < tupleList4.Count; ++index5)
+                for (var index5 = 0; index5 < tupleList4.Count; ++index5)
                     tupleList3.Remove(tupleList4[index5]);
                 tupleList4.Clear();
                 if (tupleList3.Count > 0)
                 {
-                    float num19 = -1f;
-                    Tuple<int, int> tuple = tupleList3[0];
-                    for (int index5 = 0; index5 < tupleList3.Count; ++index5)
+                    var num19 = -1f;
+                    var tuple = tupleList3[0];
+                    for (var index5 = 0; index5 < tupleList3.Count; ++index5)
                     {
-                        float num20 =
+                        var num20 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList3[index5].Item1, (float) tupleList3[index5].Item2) * 16f +
                                 Vector2.One * 8f, this.Center);
@@ -9600,8 +9600,8 @@ namespace Terraria
                 Player.SmartCursor_Axe(obj, ref mouse, num6, num7, num8, num9, ref fX, ref fY);
             if ((obj.type == 509 || obj.type == 850 || (obj.type == 851 || obj.type == 3612)) && (fX == -1 && fY == -1))
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                int num10 = 0;
+                var tupleList = new List<Tuple<int, int>>();
+                var num10 = 0;
                 if (obj.type == 509)
                     num10 = 1;
                 if (obj.type == 850)
@@ -9610,7 +9610,7 @@ namespace Terraria
                     num10 = 3;
                 if (obj.type == 3612)
                     num10 = 4;
-                bool flag2 = false;
+                var flag2 = false;
                 if (Main.tile[index1, index2].wire() && num10 == 1)
                     flag2 = true;
                 if (Main.tile[index1, index2].wire2() && num10 == 2)
@@ -9621,11 +9621,11 @@ namespace Terraria
                     flag2 = true;
                 if (!flag2)
                 {
-                    for (int index3 = num6; index3 <= num7; ++index3)
+                    for (var index3 = num6; index3 <= num7; ++index3)
                     {
-                        for (int index4 = num8; index4 <= num9; ++index4)
+                        for (var index4 = num8; index4 <= num9; ++index4)
                         {
-                            Tile tile = Main.tile[index3, index4];
+                            var tile = Main.tile[index3, index4];
                             if (tile.wire() && num10 == 1 || tile.wire2() && num10 == 2 ||
                                 (tile.wire3() && num10 == 3 || tile.wire4() && num10 == 4))
                             {
@@ -9683,11 +9683,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num11 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num11 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num12 =
+                        var num12 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -9710,9 +9710,9 @@ namespace Terraria
 
             if (obj.type == 3625 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                WiresUI.Settings.MultiToolMode toolMode1 = WiresUI.Settings.ToolMode;
-                WiresUI.Settings.MultiToolMode multiToolMode = (WiresUI.Settings.MultiToolMode) 0;
+                var tupleList = new List<Tuple<int, int>>();
+                var toolMode1 = WiresUI.Settings.ToolMode;
+                var multiToolMode = (WiresUI.Settings.MultiToolMode) 0;
                 if (Main.tile[index1, index2].wire())
                     multiToolMode |= WiresUI.Settings.MultiToolMode.Red;
                 if (Main.tile[index1, index2].wire2())
@@ -9721,20 +9721,20 @@ namespace Terraria
                     multiToolMode |= WiresUI.Settings.MultiToolMode.Green;
                 if (Main.tile[index1, index2].wire4())
                     multiToolMode |= WiresUI.Settings.MultiToolMode.Yellow;
-                bool flag2 = (toolMode1 & ~WiresUI.Settings.MultiToolMode.Cutter) == multiToolMode;
-                WiresUI.Settings.MultiToolMode toolMode2 = WiresUI.Settings.ToolMode;
+                var flag2 = (toolMode1 & ~WiresUI.Settings.MultiToolMode.Cutter) == multiToolMode;
+                var toolMode2 = WiresUI.Settings.ToolMode;
                 if (!flag2)
                 {
-                    bool flag3 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Red);
-                    bool flag4 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Blue);
-                    bool flag5 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Green);
-                    bool flag6 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Yellow);
-                    bool flag7 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Cutter);
-                    for (int index3 = num6; index3 <= num7; ++index3)
+                    var flag3 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Red);
+                    var flag4 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Blue);
+                    var flag5 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Green);
+                    var flag6 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Yellow);
+                    var flag7 = toolMode2.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Cutter);
+                    for (var index3 = num6; index3 <= num7; ++index3)
                     {
-                        for (int index4 = num8; index4 <= num9; ++index4)
+                        for (var index4 = num8; index4 <= num9; ++index4)
                         {
-                            Tile tile = Main.tile[index3, index4];
+                            var tile = Main.tile[index3, index4];
                             if (flag7)
                             {
                                 if (tile.wire() && flag3 || tile.wire2() && flag4 ||
@@ -9798,11 +9798,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -9825,9 +9825,9 @@ namespace Terraria
 
             if (obj.hammer > 0 && fX == -1 && fY == -1)
             {
-                Vector2 vector2 = mouse - this.Center;
-                int num10 = Math.Sign(vector2.X);
-                int num11 = Math.Sign(vector2.Y);
+                var vector2 = mouse - this.Center;
+                var num10 = Math.Sign(vector2.X);
+                var num11 = Math.Sign(vector2.Y);
                 if ((double) Math.Abs(vector2.X) > (double) Math.Abs(vector2.Y) * 3.0)
                 {
                     num11 = 0;
@@ -9840,23 +9840,23 @@ namespace Terraria
                     mouse.X = this.Center.X;
                 }
 
-                int num12 = (int) this.Center.X / 16;
-                int num13 = (int) this.Center.Y / 16;
-                List<Tuple<int, int>> tupleList1 = new List<Tuple<int, int>>();
-                List<Tuple<int, int>> tupleList2 = new List<Tuple<int, int>>();
-                int num14 = 1;
+                var num12 = (int) this.Center.X / 16;
+                var num13 = (int) this.Center.Y / 16;
+                var tupleList1 = new List<Tuple<int, int>>();
+                var tupleList2 = new List<Tuple<int, int>>();
+                var num14 = 1;
                 if (num11 == -1 && num10 != 0)
                     num14 = -1;
-                int index3 = (int) (((double) this.position.X + (double) (this.width / 2) +
+                var index3 = (int) (((double) this.position.X + (double) (this.width / 2) +
                                      (double) ((this.width / 2 - 1) * num10)) / 16.0);
-                int index4 = (int) (((double) this.position.Y + 0.1) / 16.0);
+                var index4 = (int) (((double) this.position.Y + 0.1) / 16.0);
                 if (num14 == -1)
                     index4 = (int) (((double) this.position.Y + (double) this.height - 1.0) / 16.0);
-                int num15 = this.width / 16 + (this.width % 16 == 0 ? 0 : 1);
-                int num16 = this.height / 16 + (this.height % 16 == 0 ? 0 : 1);
+                var num15 = this.width / 16 + (this.width % 16 == 0 ? 0 : 1);
+                var num16 = this.height / 16 + (this.height % 16 == 0 ? 0 : 1);
                 if (num10 != 0)
                 {
-                    for (int index5 = 0; index5 < num16; ++index5)
+                    for (var index5 = 0; index5 < num16; ++index5)
                     {
                         if (Main.tile[index3, index4 + index5 * num14] == null)
                             return;
@@ -9866,7 +9866,7 @@ namespace Terraria
 
                 if (num11 != 0)
                 {
-                    for (int index5 = 0; index5 < num15; ++index5)
+                    for (var index5 = 0; index5 < num15; ++index5)
                     {
                         if (Main.tile[(int) ((double) this.position.X / 16.0) + index5, index4] == null)
                             return;
@@ -9874,8 +9874,8 @@ namespace Terraria
                     }
                 }
 
-                int index6 = (int) (((double) mouse.X + (double) ((this.width / 2 - 1) * num10)) / 16.0);
-                int index7 = (int) (((double) mouse.Y + 0.1 - (double) (this.height / 2 + 1)) / 16.0);
+                var index6 = (int) (((double) mouse.X + (double) ((this.width / 2 - 1) * num10)) / 16.0);
+                var index7 = (int) (((double) mouse.Y + 0.1 - (double) (this.height / 2 + 1)) / 16.0);
                 if (num14 == -1)
                     index7 = (int) (((double) mouse.Y + (double) (this.height / 2) - 1.0) / 16.0);
                 if ((double) this.gravDir == -1.0 && num11 == 0)
@@ -9884,11 +9884,11 @@ namespace Terraria
                     index7 = 10;
                 if (index7 > Main.maxTilesY - 10)
                     index7 = Main.maxTilesY - 10;
-                int num17 = this.width / 16 + (this.width % 16 == 0 ? 0 : 1);
-                int num18 = this.height / 16 + (this.height % 16 == 0 ? 0 : 1);
+                var num17 = this.width / 16 + (this.width % 16 == 0 ? 0 : 1);
+                var num18 = this.height / 16 + (this.height % 16 == 0 ? 0 : 1);
                 if (num10 != 0)
                 {
-                    for (int index5 = 0; index5 < num18; ++index5)
+                    for (var index5 = 0; index5 < num18; ++index5)
                     {
                         if (Main.tile[index6, index7 + index5 * num14] == null)
                             return;
@@ -9898,7 +9898,7 @@ namespace Terraria
 
                 if (num11 != 0)
                 {
-                    for (int index5 = 0; index5 < num17; ++index5)
+                    for (var index5 = 0; index5 < num17; ++index5)
                     {
                         if (Main.tile[(int) (((double) mouse.X - (double) (this.width / 2)) / 16.0) + index5, index7] ==
                             null)
@@ -9908,12 +9908,12 @@ namespace Terraria
                     }
                 }
 
-                List<Tuple<int, int>> tupleList3 = new List<Tuple<int, int>>();
+                var tupleList3 = new List<Tuple<int, int>>();
                 while (tupleList1.Count > 0)
                 {
-                    Tuple<int, int> tuple1 = tupleList1[0];
-                    Tuple<int, int> tuple2 = tupleList2[0];
-                    Tuple<int, int> tuple3 =
+                    var tuple1 = tupleList1[0];
+                    var tuple2 = tupleList2[0];
+                    var tuple3 =
                         Collision.TupleHitLineWall(tuple1.Item1, tuple1.Item2, tuple2.Item1, tuple2.Item2);
                     if (tuple3.Item1 == -1 || tuple3.Item2 == -1)
                     {
@@ -9924,7 +9924,7 @@ namespace Terraria
                     {
                         if (tuple3.Item1 != tuple2.Item1 || tuple3.Item2 != tuple2.Item2)
                             tupleList3.Add(tuple3);
-                        Tile tile = Main.tile[tuple3.Item1, tuple3.Item2];
+                        var tile = Main.tile[tuple3.Item1, tuple3.Item2];
                         if (Collision.HitWallSubstep(tuple3.Item1, tuple3.Item2))
                             tupleList3.Add(tuple3);
                         tupleList1.Remove(tuple1);
@@ -9934,11 +9934,11 @@ namespace Terraria
 
                 if (tupleList3.Count > 0)
                 {
-                    float num19 = -1f;
-                    Tuple<int, int> tuple = tupleList3[0];
-                    for (int index5 = 0; index5 < tupleList3.Count; ++index5)
+                    var num19 = -1f;
+                    var tuple = tupleList3[0];
+                    for (var index5 = 0; index5 < tupleList3.Count; ++index5)
                     {
-                        float num20 =
+                        var num20 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList3[index5].Item1, (float) tupleList3[index5].Item2) * 16f +
                                 Vector2.One * 8f, this.Center);
@@ -9964,10 +9964,10 @@ namespace Terraria
 
             if (obj.hammer > 0 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int x = num6; x <= num7; ++x)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var x = num6; x <= num7; ++x)
                 {
-                    for (int y = num8; y <= num9; ++y)
+                    for (var y = num8; y <= num9; ++y)
                     {
                         if (Main.tile[x, y].wall > (byte) 0 && Collision.HitWallSubstep(x, y))
                             tupleList.Add(new Tuple<int, int>(x, y));
@@ -9976,11 +9976,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10004,12 +10004,12 @@ namespace Terraria
 
             if (obj.type == 3620 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile = Main.tile[index3, index4];
+                        var tile = Main.tile[index3, index4];
                         if (tile.active() && tile.actuator() &&
                             (!this.ActuationRodLock || this.ActuationRodLockSetting == tile.inActive()))
                             tupleList.Add(new Tuple<int, int>(index3, index4));
@@ -10018,11 +10018,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10045,12 +10045,12 @@ namespace Terraria
 
             if (obj.type == 510 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile = Main.tile[index3, index4];
+                        var tile = Main.tile[index3, index4];
                         if (tile.wire() || tile.wire2() || (tile.wire3() || tile.wire4()) || tile.actuator())
                             tupleList.Add(new Tuple<int, int>(index3, index4));
                     }
@@ -10058,11 +10058,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10085,20 +10085,20 @@ namespace Terraria
 
             if (obj.createTile >= 0 && TileID.Sets.Platforms[obj.createTile] && (fX == -1 && fY == -1))
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                bool flag2 = false;
+                var tupleList = new List<Tuple<int, int>>();
+                var flag2 = false;
                 if (Main.tile[index1, index2].active() && TileID.Sets.Platforms[(int) Main.tile[index1, index2].type])
                     flag2 = true;
                 if (!flag2)
                 {
-                    for (int index3 = num6; index3 <= num7; ++index3)
+                    for (var index3 = num6; index3 <= num7; ++index3)
                     {
-                        for (int index4 = num8; index4 <= num9; ++index4)
+                        for (var index4 = num8; index4 <= num9; ++index4)
                         {
-                            Tile tile1 = Main.tile[index3, index4];
+                            var tile1 = Main.tile[index3, index4];
                             if (tile1.active() && TileID.Sets.Platforms[(int) tile1.type])
                             {
-                                int num10 = (int) tile1.slope();
+                                var num10 = (int) tile1.slope();
                                 if (num10 != 2 && !Main.tile[index3 - 1, index4 - 1].active())
                                     tupleList.Add(new Tuple<int, int>(index3 - 1, index4 - 1));
                                 if (!Main.tile[index3 - 1, index4].active())
@@ -10115,21 +10115,21 @@ namespace Terraria
 
                             if (!tile1.active())
                             {
-                                int num10 = 0;
-                                int num11 = 1;
-                                Tile tile2 = Main.tile[index3 + num10, index4 + num11];
+                                var num10 = 0;
+                                var num11 = 1;
+                                var tile2 = Main.tile[index3 + num10, index4 + num11];
                                 if (tile2.active() && Main.tileSolid[(int) tile2.type] &&
                                     !Main.tileSolidTop[(int) tile2.type])
                                     tupleList.Add(new Tuple<int, int>(index3, index4));
-                                int num12 = -1;
-                                int num13 = 0;
-                                Tile tile3 = Main.tile[index3 + num12, index4 + num13];
+                                var num12 = -1;
+                                var num13 = 0;
+                                var tile3 = Main.tile[index3 + num12, index4 + num13];
                                 if (tile3.active() && Main.tileSolid[(int) tile3.type] &&
                                     !Main.tileSolidTop[(int) tile3.type])
                                     tupleList.Add(new Tuple<int, int>(index3, index4));
-                                int num14 = 1;
-                                int num15 = 0;
-                                Tile tile4 = Main.tile[index3 + num14, index4 + num15];
+                                var num14 = 1;
+                                var num15 = 0;
+                                var tile4 = Main.tile[index3 + num14, index4 + num15];
                                 if (tile4.active() && Main.tileSolid[(int) tile4.type] &&
                                     !Main.tileSolidTop[(int) tile4.type])
                                     tupleList.Add(new Tuple<int, int>(index3, index4));
@@ -10140,11 +10140,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10167,26 +10167,26 @@ namespace Terraria
 
             if ((obj.type == 2340 || obj.type == 2739) && (fX == -1 && fY == -1))
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                bool flag2 = false;
+                var tupleList = new List<Tuple<int, int>>();
+                var flag2 = false;
                 if (Main.tile[index1, index2].active() && Main.tile[index1, index2].type == (ushort) 314)
                     flag2 = true;
                 if (!flag2)
                 {
-                    for (int index3 = num6; index3 <= num7; ++index3)
+                    for (var index3 = num6; index3 <= num7; ++index3)
                     {
-                        for (int index4 = num8; index4 <= num9; ++index4)
+                        for (var index4 = num8; index4 <= num9; ++index4)
                         {
-                            Tile tile = Main.tile[index3, index4];
+                            var tile = Main.tile[index3, index4];
                             if (tile.active() && tile.type == (ushort) 314)
                             {
-                                bool flag3 = Main.tile[index3 + 1, index4 + 1].active() &&
+                                var flag3 = Main.tile[index3 + 1, index4 + 1].active() &&
                                              Main.tile[index3 + 1, index4 + 1].type == (ushort) 314;
-                                bool flag4 = Main.tile[index3 + 1, index4 - 1].active() &&
+                                var flag4 = Main.tile[index3 + 1, index4 - 1].active() &&
                                              Main.tile[index3 + 1, index4 - 1].type == (ushort) 314;
-                                bool flag5 = Main.tile[index3 - 1, index4 + 1].active() &&
+                                var flag5 = Main.tile[index3 - 1, index4 + 1].active() &&
                                              Main.tile[index3 - 1, index4 + 1].type == (ushort) 314;
-                                bool flag6 = Main.tile[index3 - 1, index4 - 1].active() &&
+                                var flag6 = Main.tile[index3 - 1, index4 - 1].active() &&
                                              Main.tile[index3 - 1, index4 - 1].type == (ushort) 314;
                                 if ((!Main.tile[index3 - 1, index4 - 1].active() ||
                                      Main.tileCut[(int) Main.tile[index3 - 1, index4 - 1].type] ||
@@ -10223,16 +10223,16 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
                         if ((!Main.tile[tupleList[index3].Item1, tupleList[index3].Item2 - 1].active() ||
                              Main.tile[tupleList[index3].Item1, tupleList[index3].Item2 - 1].type != (ushort) 314) &&
                             (!Main.tile[tupleList[index3].Item1, tupleList[index3].Item2 + 1].active() ||
                              Main.tile[tupleList[index3].Item1, tupleList[index3].Item2 + 1].type != (ushort) 314))
                         {
-                            float num11 =
+                            var num11 =
                                 Vector2.Distance(
                                     new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) *
                                     16f + Vector2.One * 8f, mouse);
@@ -10257,17 +10257,17 @@ namespace Terraria
 
             if (obj.type == 2492 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                bool flag2 = false;
+                var tupleList = new List<Tuple<int, int>>();
+                var flag2 = false;
                 if (Main.tile[index1, index2].active() && Main.tile[index1, index2].type == (ushort) 314)
                     flag2 = true;
                 if (!flag2)
                 {
-                    for (int index3 = num6; index3 <= num7; ++index3)
+                    for (var index3 = num6; index3 <= num7; ++index3)
                     {
-                        for (int index4 = num8; index4 <= num9; ++index4)
+                        for (var index4 = num8; index4 <= num9; ++index4)
                         {
-                            Tile tile = Main.tile[index3, index4];
+                            var tile = Main.tile[index3, index4];
                             if (tile.active() && tile.type == (ushort) 314)
                             {
                                 if (!Main.tile[index3 - 1, index4].active() ||
@@ -10285,16 +10285,16 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
                         if ((!Main.tile[tupleList[index3].Item1, tupleList[index3].Item2 - 1].active() ||
                              Main.tile[tupleList[index3].Item1, tupleList[index3].Item2 - 1].type != (ushort) 314) &&
                             (!Main.tile[tupleList[index3].Item1, tupleList[index3].Item2 + 1].active() ||
                              Main.tile[tupleList[index3].Item1, tupleList[index3].Item2 + 1].type != (ushort) 314))
                         {
-                            float num11 =
+                            var num11 =
                                 Vector2.Distance(
                                     new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) *
                                     16f + Vector2.One * 8f, mouse);
@@ -10319,19 +10319,19 @@ namespace Terraria
 
             if (obj.createWall > 0 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int x = num6; x <= num7; ++x)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var x = num6; x <= num7; ++x)
                 {
-                    for (int y = num8; y <= num9; ++y)
+                    for (var y = num8; y <= num9; ++y)
                     {
-                        Tile tile = Main.tile[x, y];
+                        var tile = Main.tile[x, y];
                         if (tile.wall == (byte) 0 &&
                             (!tile.active() || !Main.tileSolid[(int) tile.type] ||
                              Main.tileSolidTop[(int) tile.type]) && Collision.CanHitWithCheck(this.position, this.width,
                                 this.height, new Vector2((float) x, (float) y) * 16f, 16, 16,
                                 new Utils.PerLinePoint(DelegateMethods.NotDoorStand)))
                         {
-                            bool flag2 = false;
+                            var flag2 = false;
                             if (Main.tile[x - 1, y].active() || Main.tile[x - 1, y].wall > (byte) 0)
                                 flag2 = true;
                             if (Main.tile[x + 1, y].active() || Main.tile[x + 1, y].wall > (byte) 0)
@@ -10350,11 +10350,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10377,16 +10377,16 @@ namespace Terraria
 
             if (obj.createTile == 254 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile1 = Main.tile[index3, index4 + 1];
-                        Tile tile2 = Main.tile[index3 - 1, index4 + 1];
+                        var tile1 = Main.tile[index3, index4 + 1];
+                        var tile2 = Main.tile[index3 - 1, index4 + 1];
                         if ((double) index4 <= Main.worldSurface - 2.0)
                         {
-                            bool flag2 = true;
+                            var flag2 = true;
                             if (!tile2.active() || !tile1.active())
                                 flag2 = false;
                             if (tile2.slope() > (byte) 0 || tile1.slope() > (byte) 0 ||
@@ -10396,9 +10396,9 @@ namespace Terraria
                                 flag2 = false;
                             if (tile1.type != (ushort) 2 && tile1.type != (ushort) 109)
                                 flag2 = false;
-                            for (int x = index3 - 1; x <= index3; ++x)
+                            for (var x = index3 - 1; x <= index3; ++x)
                             {
-                                for (int y = index4 - 1; y <= index4; ++y)
+                                for (var y = index4 - 1; y <= index4; ++y)
                                 {
                                     if (Main.tile[x, y].active() &&
                                         !WorldGen.CanCutTile(x, y, TileCuttingContext.AttackMelee))
@@ -10416,11 +10416,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10443,17 +10443,17 @@ namespace Terraria
 
             if (obj.createTile == 454 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9 && (double) index4 <= Main.worldSurface - 2.0; ++index4)
+                    for (var index4 = num8; index4 <= num9 && (double) index4 <= Main.worldSurface - 2.0; ++index4)
                     {
-                        bool flag2 = true;
-                        for (int index5 = index3 - 2; index5 <= index3 + 1; ++index5)
+                        var flag2 = true;
+                        for (var index5 = index3 - 2; index5 <= index3 + 1; ++index5)
                         {
-                            for (int index6 = index4 - 1; index6 <= index4 + 2; ++index6)
+                            for (var index6 = index4 - 1; index6 <= index4 + 2; ++index6)
                             {
-                                Tile testTile = Main.tile[index5, index6];
+                                var testTile = Main.tile[index5, index6];
                                 if (index6 == index4 - 1)
                                 {
                                     if (!WorldGen.SolidTile(testTile))
@@ -10472,11 +10472,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10499,14 +10499,14 @@ namespace Terraria
 
             if (obj.createTile == 138 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile1 = Main.tile[index3, index4 + 1];
-                        Tile tile2 = Main.tile[index3 - 1, index4 + 1];
-                        bool flag2 = true;
+                        var tile1 = Main.tile[index3, index4 + 1];
+                        var tile2 = Main.tile[index3 - 1, index4 + 1];
+                        var flag2 = true;
                         if (!tile2.nactive() || !tile1.nactive())
                             flag2 = false;
                         if (tile2.slope() > (byte) 0 || tile1.slope() > (byte) 0 ||
@@ -10514,21 +10514,21 @@ namespace Terraria
                             flag2 = false;
                         if (Main.tileNoAttach[(int) tile2.type] || Main.tileNoAttach[(int) tile1.type])
                             flag2 = false;
-                        for (int index5 = index3 - 1; index5 <= index3; ++index5)
+                        for (var index5 = index3 - 1; index5 <= index3; ++index5)
                         {
-                            for (int index6 = index4 - 1; index6 <= index4; ++index6)
+                            for (var index6 = index4 - 1; index6 <= index4; ++index6)
                             {
-                                Tile tile3 = Main.tile[index5, index6];
+                                var tile3 = Main.tile[index5, index6];
                                 if (tile3.active() && !Main.tileCut[(int) tile3.type])
                                     flag2 = false;
                             }
                         }
 
-                        Microsoft.Xna.Framework.Rectangle rectangle =
+                        var rectangle =
                             new Microsoft.Xna.Framework.Rectangle(index3 * 16 - 16, index4 * 16 - 16, 32, 32);
-                        for (int index5 = 0; index5 < (int) byte.MaxValue; ++index5)
+                        for (var index5 = 0; index5 < (int) byte.MaxValue; ++index5)
                         {
-                            Player player = Main.player[index5];
+                            var player = Main.player[index5];
                             if (player.active && !player.dead && player.Hitbox.Intersects(rectangle))
                             {
                                 flag2 = false;
@@ -10543,11 +10543,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10575,23 +10575,23 @@ namespace Terraria
                 (!Main.tileSolidTop[obj.createTile] && !Main.tileFrameImportant[obj.createTile] &&
                  (fX == -1 && fY == -1)))
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                bool flag2 = false;
+                var tupleList = new List<Tuple<int, int>>();
+                var flag2 = false;
                 if (Main.tile[index1, index2].active())
                     flag2 = true;
                 if (!Collision.InTileBounds(index1, index2, num6, num8, num7, num9))
                     flag2 = true;
                 if (!flag2)
                 {
-                    for (int index3 = num6; index3 <= num7; ++index3)
+                    for (var index3 = num6; index3 <= num7; ++index3)
                     {
-                        for (int index4 = num8; index4 <= num9; ++index4)
+                        for (var index4 = num8; index4 <= num9; ++index4)
                         {
-                            Tile tile = Main.tile[index3, index4];
+                            var tile = Main.tile[index3, index4];
                             if (!tile.active() || Main.tileCut[(int) tile.type] ||
                                 TileID.Sets.BreakableWhenPlacing[(int) tile.type])
                             {
-                                bool flag3 = false;
+                                var flag3 = false;
                                 if (Main.tile[index3 - 1, index4].active() &&
                                     Main.tileSolid[(int) Main.tile[index3 - 1, index4].type] &&
                                     !Main.tileSolidTop[(int) Main.tile[index3 - 1, index4].type])
@@ -10617,13 +10617,13 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
                         if (Collision.EmptyTile(tupleList[index3].Item1, tupleList[index3].Item2, false))
                         {
-                            float num11 =
+                            var num11 =
                                 Vector2.Distance(
                                     new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) *
                                     16f + Vector2.One * 8f, mouse);
@@ -10648,12 +10648,12 @@ namespace Terraria
 
             if ((obj.type == 1072 || obj.type == 1544) && (num1 != 0 && fX == -1) && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile = Main.tile[index3, index4];
+                        var tile = Main.tile[index3, index4];
                         if (tile.wall > (byte) 0 && (int) tile.wallColor() != num1 &&
                             (!tile.active() || !Main.tileSolid[(int) tile.type] || Main.tileSolidTop[(int) tile.type]))
                             tupleList.Add(new Tuple<int, int>(index3, index4));
@@ -10662,11 +10662,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10689,12 +10689,12 @@ namespace Terraria
 
             if ((obj.type == 1071 || obj.type == 1543) && (num1 != 0 && fX == -1) && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile = Main.tile[index3, index4];
+                        var tile = Main.tile[index3, index4];
                         if (tile.active() && (int) tile.color() != num1)
                             tupleList.Add(new Tuple<int, int>(index3, index4));
                     }
@@ -10702,11 +10702,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10729,12 +10729,12 @@ namespace Terraria
 
             if ((obj.type == 1100 || obj.type == 1545) && (fX == -1 && fY == -1))
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile = Main.tile[index3, index4];
+                        var tile = Main.tile[index3, index4];
                         if (tile.active() && tile.color() > (byte) 0 ||
                             tile.wall > (byte) 0 && tile.wallColor() > (byte) 0)
                             tupleList.Add(new Tuple<int, int>(index3, index4));
@@ -10743,11 +10743,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10770,20 +10770,20 @@ namespace Terraria
 
             if (obj.type == 27 && fX == -1 && (fY == -1 && num8 > 20))
             {
-                List<Tuple<int, int>> tupleList1 = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList1 = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int endY = num8; endY <= num9; ++endY)
+                    for (var endY = num8; endY <= num9; ++endY)
                     {
-                        Tile tile1 = Main.tile[index3, endY];
-                        Tile tile2 = Main.tile[index3, endY - 1];
-                        Tile testTile = Main.tile[index3, endY + 1];
-                        Tile tile3 = Main.tile[index3 - 1, endY];
-                        Tile tile4 = Main.tile[index3 + 1, endY];
-                        Tile tile5 = Main.tile[index3 - 2, endY];
-                        Tile tile6 = Main.tile[index3 + 2, endY];
-                        Tile tile7 = Main.tile[index3 - 3, endY];
-                        Tile tile8 = Main.tile[index3 + 3, endY];
+                        var tile1 = Main.tile[index3, endY];
+                        var tile2 = Main.tile[index3, endY - 1];
+                        var testTile = Main.tile[index3, endY + 1];
+                        var tile3 = Main.tile[index3 - 1, endY];
+                        var tile4 = Main.tile[index3 + 1, endY];
+                        var tile5 = Main.tile[index3 - 2, endY];
+                        var tile6 = Main.tile[index3 + 2, endY];
+                        var tile7 = Main.tile[index3 - 3, endY];
+                        var tile8 = Main.tile[index3 + 3, endY];
                         if ((!tile1.active() || Main.tileCut[(int) tile1.type] ||
                              TileID.Sets.BreakableWhenPlacing[(int) tile1.type]) &&
                             (!tile2.active() || Main.tileCut[(int) tile2.type] ||
@@ -10831,14 +10831,14 @@ namespace Terraria
                     }
                 }
 
-                List<Tuple<int, int>> tupleList2 = new List<Tuple<int, int>>();
-                for (int index3 = 0; index3 < tupleList1.Count; ++index3)
+                var tupleList2 = new List<Tuple<int, int>>();
+                for (var index3 = 0; index3 < tupleList1.Count; ++index3)
                 {
-                    bool flag2 = false;
-                    int num10 = -1;
+                    var flag2 = false;
+                    var num10 = -1;
                     while (num10 < 2)
                     {
-                        Tile tile = Main.tile[tupleList1[index3].Item1 + num10, tupleList1[index3].Item2 + 1];
+                        var tile = Main.tile[tupleList1[index3].Item1 + num10, tupleList1[index3].Item2 + 1];
                         if (tile.active())
                         {
                             switch (tile.type)
@@ -10865,16 +10865,16 @@ namespace Terraria
                         tupleList2.Add(tupleList1[index3]);
                 }
 
-                for (int index3 = 0; index3 < tupleList2.Count; ++index3)
+                for (var index3 = 0; index3 < tupleList2.Count; ++index3)
                     tupleList1.Remove(tupleList2[index3]);
                 tupleList2.Clear();
                 if (tupleList1.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList1[0];
-                    for (int index3 = 0; index3 < tupleList1.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList1[0];
+                    for (var index3 = 0; index3 < tupleList1.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList1[index3].Item1, (float) tupleList1[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10897,19 +10897,19 @@ namespace Terraria
 
             if (obj.type == 205 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile = Main.tile[index3, index4];
+                        var tile = Main.tile[index3, index4];
                         if (tile.liquid > (byte) 0)
                         {
-                            int num10 = (int) tile.liquidType();
-                            int num11 = 0;
-                            for (int index5 = index3 - 1; index5 <= index3 + 1; ++index5)
+                            var num10 = (int) tile.liquidType();
+                            var num11 = 0;
+                            for (var index5 = index3 - 1; index5 <= index3 + 1; ++index5)
                             {
-                                for (int index6 = index4 - 1; index6 <= index4 + 1; ++index6)
+                                for (var index6 = index4 - 1; index6 <= index4 + 1; ++index6)
                                 {
                                     if ((int) Main.tile[index5, index6].liquidType() == num10)
                                         num11 += (int) Main.tile[index5, index6].liquid;
@@ -10924,11 +10924,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10951,12 +10951,12 @@ namespace Terraria
 
             if (obj.type == 849 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile = Main.tile[index3, index4];
+                        var tile = Main.tile[index3, index4];
                         if ((tile.wire() || tile.wire2() || (tile.wire3() || tile.wire4())) &&
                             (!tile.actuator() && tile.active()))
                             tupleList.Add(new Tuple<int, int>(index3, index4));
@@ -10965,11 +10965,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -10992,14 +10992,14 @@ namespace Terraria
 
             if (obj.createTile == 82 && fX == -1 && fY == -1)
             {
-                int placeStyle = obj.placeStyle;
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var placeStyle = obj.placeStyle;
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile1 = Main.tile[index3, index4];
-                        Tile tile2 = Main.tile[index3, index4 + 1];
+                        var tile1 = Main.tile[index3, index4];
+                        var tile2 = Main.tile[index3, index4 + 1];
                         if ((!tile1.active() || TileID.Sets.BreakableWhenPlacing[(int) tile1.type] ||
                              Main.tileCut[(int) tile1.type] && tile1.type != (ushort) 82 && tile1.type != (ushort) 83
                             ) && (tile2.nactive() && !tile2.halfBrick() && tile2.slope() == (byte) 0))
@@ -11057,11 +11057,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -11084,17 +11084,17 @@ namespace Terraria
 
             if (obj.createTile == 380 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                bool flag2 = false;
+                var tupleList = new List<Tuple<int, int>>();
+                var flag2 = false;
                 if (Main.tile[index1, index2].active() && Main.tile[index1, index2].type == (ushort) 380)
                     flag2 = true;
                 if (!flag2)
                 {
-                    for (int index3 = num6; index3 <= num7; ++index3)
+                    for (var index3 = num6; index3 <= num7; ++index3)
                     {
-                        for (int index4 = num8; index4 <= num9; ++index4)
+                        for (var index4 = num8; index4 <= num9; ++index4)
                         {
-                            Tile tile = Main.tile[index3, index4];
+                            var tile = Main.tile[index3, index4];
                             if (tile.active() && tile.type == (ushort) 380)
                             {
                                 if (!Main.tile[index3 - 1, index4].active() ||
@@ -11112,11 +11112,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -11140,20 +11140,20 @@ namespace Terraria
 
             if (obj.createTile == 78 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                bool flag2 = false;
+                var tupleList = new List<Tuple<int, int>>();
+                var flag2 = false;
                 if (Main.tile[index1, index2].active())
                     flag2 = true;
                 if (!Collision.InTileBounds(index1, index2, num6, num8, num7, num9))
                     flag2 = true;
                 if (!flag2)
                 {
-                    for (int index3 = num6; index3 <= num7; ++index3)
+                    for (var index3 = num6; index3 <= num7; ++index3)
                     {
-                        for (int index4 = num8; index4 <= num9; ++index4)
+                        for (var index4 = num8; index4 <= num9; ++index4)
                         {
-                            Tile tile1 = Main.tile[index3, index4];
-                            Tile tile2 = Main.tile[index3, index4 + 1];
+                            var tile1 = Main.tile[index3, index4];
+                            var tile2 = Main.tile[index3, index4 + 1];
                             if ((!tile1.active() || Main.tileCut[(int) tile1.type] ||
                                  TileID.Sets.BreakableWhenPlacing[(int) tile1.type]) &&
                                 (tile2.nactive() && !tile2.halfBrick() &&
@@ -11165,13 +11165,13 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
                         if (Collision.EmptyTile(tupleList[index3].Item1, tupleList[index3].Item2, true))
                         {
-                            float num11 =
+                            var num11 =
                                 Vector2.Distance(
                                     new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) *
                                     16f + Vector2.One * 8f, mouse);
@@ -11196,16 +11196,16 @@ namespace Terraria
 
             if (obj.type == 213 && fX == -1 && fY == -1)
             {
-                List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-                for (int index3 = num6; index3 <= num7; ++index3)
+                var tupleList = new List<Tuple<int, int>>();
+                for (var index3 = num6; index3 <= num7; ++index3)
                 {
-                    for (int index4 = num8; index4 <= num9; ++index4)
+                    for (var index4 = num8; index4 <= num9; ++index4)
                     {
-                        Tile tile = Main.tile[index3, index4];
-                        bool flag2 = !Main.tile[index3 - 1, index4].active() ||
+                        var tile = Main.tile[index3, index4];
+                        var flag2 = !Main.tile[index3 - 1, index4].active() ||
                                      !Main.tile[index3, index4 + 1].active() ||
                                      !Main.tile[index3 + 1, index4].active() || !Main.tile[index3, index4 - 1].active();
-                        bool flag3 = !Main.tile[index3 - 1, index4 - 1].active() ||
+                        var flag3 = !Main.tile[index3 - 1, index4 - 1].active() ||
                                      !Main.tile[index3 - 1, index4 + 1].active() ||
                                      !Main.tile[index3 + 1, index4 + 1].active() ||
                                      !Main.tile[index3 + 1, index4 - 1].active();
@@ -11217,11 +11217,11 @@ namespace Terraria
 
                 if (tupleList.Count > 0)
                 {
-                    float num10 = -1f;
-                    Tuple<int, int> tuple = tupleList[0];
-                    for (int index3 = 0; index3 < tupleList.Count; ++index3)
+                    var num10 = -1f;
+                    var tuple = tupleList[0];
+                    for (var index3 = 0; index3 < tupleList.Count; ++index3)
                     {
-                        float num11 =
+                        var num11 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList[index3].Item1, (float) tupleList[index3].Item2) * 16f +
                                 Vector2.One * 8f, mouse);
@@ -11267,15 +11267,15 @@ namespace Terraria
             Main.TileInteractionLY = num1;
             Main.TileInteractionHX = num1;
             Main.TileInteractionLX = num1;
-            bool smartCursorEnabled = Main.SmartCursorEnabled;
+            var smartCursorEnabled = Main.SmartCursorEnabled;
             if (!smartCursorEnabled && !PlayerInput.UsingGamepad)
                 return;
-            Item obj = this.inventory[this.selectedItem];
-            Vector2 vector2 = Main.screenPosition + new Vector2((float) Main.mouseX, (float) Main.mouseY);
+            var obj = this.inventory[this.selectedItem];
+            var vector2 = Main.screenPosition + new Vector2((float) Main.mouseX, (float) Main.mouseY);
             if ((double) this.gravDir == -1.0)
                 vector2.Y = Main.screenPosition.Y + (float) Main.screenHeight - (float) Main.mouseY;
-            int index1 = Player.tileTargetX;
-            int index2 = Player.tileTargetY;
+            var index1 = Player.tileTargetX;
+            var index2 = Player.tileTargetY;
             if (index1 < 10)
                 index1 = 10;
             if (index1 > Main.maxTilesX - 10)
@@ -11284,7 +11284,7 @@ namespace Terraria
                 index2 = 10;
             if (index2 > Main.maxTilesY - 10)
                 index2 = Main.maxTilesY - 10;
-            bool flag1 = false;
+            var flag1 = false;
             if (Main.tile[index1, index2] == null)
                 return;
             if (Main.tile[index1, index2].active())
@@ -11304,36 +11304,36 @@ namespace Terraria
 
             if (flag1)
                 return;
-            int num2 = 0;
-            int num3 = (int) ((double) this.position.X / 16.0) - Player.tileRangeX - num2 + 1;
-            int num4 = (int) (((double) this.position.X + (double) this.width) / 16.0) + Player.tileRangeX + num2 - 1;
-            int num5 = (int) ((double) this.position.Y / 16.0) - Player.tileRangeY - num2 + 1;
-            int num6 = (int) (((double) this.position.Y + (double) this.height) / 16.0) + Player.tileRangeY + num2 - 2;
-            int lx1 = Utils.Clamp<int>(num3, 10, Main.maxTilesX - 10);
-            int hx = Utils.Clamp<int>(num4, 10, Main.maxTilesX - 10);
-            int ly1 = Utils.Clamp<int>(num5, 10, Main.maxTilesY - 10);
-            int hy = Utils.Clamp<int>(num6, 10, Main.maxTilesY - 10);
-            List<Tuple<int, int>> tupleList1 = new List<Tuple<int, int>>();
-            for (int index3 = 0; index3 < this.grapCount; ++index3)
+            var num2 = 0;
+            var num3 = (int) ((double) this.position.X / 16.0) - Player.tileRangeX - num2 + 1;
+            var num4 = (int) (((double) this.position.X + (double) this.width) / 16.0) + Player.tileRangeX + num2 - 1;
+            var num5 = (int) ((double) this.position.Y / 16.0) - Player.tileRangeY - num2 + 1;
+            var num6 = (int) (((double) this.position.Y + (double) this.height) / 16.0) + Player.tileRangeY + num2 - 2;
+            var lx1 = Utils.Clamp<int>(num3, 10, Main.maxTilesX - 10);
+            var hx = Utils.Clamp<int>(num4, 10, Main.maxTilesX - 10);
+            var ly1 = Utils.Clamp<int>(num5, 10, Main.maxTilesY - 10);
+            var hy = Utils.Clamp<int>(num6, 10, Main.maxTilesY - 10);
+            var tupleList1 = new List<Tuple<int, int>>();
+            for (var index3 = 0; index3 < this.grapCount; ++index3)
             {
-                Projectile projectile = Main.projectile[this.grappling[index3]];
-                int num7 = (int) projectile.Center.X / 16;
-                int num8 = (int) projectile.Center.Y / 16;
+                var projectile = Main.projectile[this.grappling[index3]];
+                var num7 = (int) projectile.Center.X / 16;
+                var num8 = (int) projectile.Center.Y / 16;
                 tupleList1.Add(new Tuple<int, int>(num7, num8));
             }
 
-            int x1 = -1;
-            int y1 = -1;
-            int index4 = -1;
-            Vector2 point1 = Main.ReverseGravitySupport(Main.MouseScreen, 0.0f) + Main.screenPosition;
+            var x1 = -1;
+            var y1 = -1;
+            var index4 = -1;
+            var point1 = Main.ReverseGravitySupport(Main.MouseScreen, 0.0f) + Main.screenPosition;
             if (x1 == -1 && y1 == -1)
             {
-                List<Tuple<int, int>> tupleList2 = new List<Tuple<int, int>>();
-                for (int index3 = lx1; index3 <= hx; ++index3)
+                var tupleList2 = new List<Tuple<int, int>>();
+                for (var index3 = lx1; index3 <= hx; ++index3)
                 {
-                    for (int index5 = ly1; index5 <= hy; ++index5)
+                    for (var index5 = ly1; index5 <= hy; ++index5)
                     {
-                        Tile tile = Main.tile[index3, index5];
+                        var tile = Main.tile[index3, index5];
                         if (tile.active())
                         {
                             switch (tile.type)
@@ -11409,11 +11409,11 @@ namespace Terraria
 
                 if (tupleList2.Count > 0)
                 {
-                    float num7 = -1f;
-                    Tuple<int, int> tuple = tupleList2[0];
-                    for (int index3 = 0; index3 < tupleList2.Count; ++index3)
+                    var num7 = -1f;
+                    var tuple = tupleList2[0];
+                    for (var index3 = 0; index3 < tupleList2.Count; ++index3)
                     {
-                        float num8 =
+                        var num8 =
                             Vector2.Distance(
                                 new Vector2((float) tupleList2[index3].Item1, (float) tupleList2[index3].Item2) * 16f +
                                 Vector2.One * 8f, vector2);
@@ -11431,18 +11431,18 @@ namespace Terraria
                     }
                 }
 
-                bool flag2 = false;
-                for (int index3 = 0; index3 < tupleList2.Count; ++index3)
+                var flag2 = false;
+                for (var index3 = 0; index3 < tupleList2.Count; ++index3)
                 {
-                    int index5 = tupleList2[index3].Item1;
-                    int index6 = tupleList2[index3].Item2;
-                    Tile tile = Main.tile[index5, index6];
-                    int num7 = 0;
-                    int num8 = 0;
-                    int num9 = 18;
-                    int num10 = 18;
-                    int num11 = 0;
-                    int num12 = 2;
+                    var index5 = tupleList2[index3].Item1;
+                    var index6 = tupleList2[index3].Item2;
+                    var tile = Main.tile[index5, index6];
+                    var num7 = 0;
+                    var num8 = 0;
+                    var num9 = 18;
+                    var num10 = 18;
+                    var num11 = 0;
+                    var num12 = 2;
                     switch (tile.type)
                     {
                         case 10:
@@ -11548,9 +11548,9 @@ namespace Terraria
 
                     if (num7 != 0 && num8 != 0)
                     {
-                        int lx2 = index5 - (int) tile.frameX % (num9 * num7 + num11) / num9;
-                        int ly2 = index6 - (int) tile.frameY % (num10 * num8 + num12) / num10;
-                        bool flag3 = Collision.InTileBounds(x1, y1, lx2, ly2, lx2 + num7 - 1, ly2 + num8 - 1);
+                        var lx2 = index5 - (int) tile.frameX % (num9 * num7 + num11) / num9;
+                        var ly2 = index6 - (int) tile.frameY % (num10 * num8 + num12) / num10;
+                        var flag3 = Collision.InTileBounds(x1, y1, lx2, ly2, lx2 + num7 - 1, ly2 + num8 - 1);
                         if (!smartCursorEnabled)
                             flag3 = flag3 && Collision.InTileBounds((int) vector2.X / 16, (int) vector2.Y / 16, lx2,
                                         ly2, lx2 + num7 - 1, ly2 + num8 - 1);
@@ -11558,11 +11558,11 @@ namespace Terraria
                             flag3 = false;
                         if (!flag2 && flag3)
                             flag2 = true;
-                        for (int x2 = lx2; x2 < lx2 + num7; ++x2)
+                        for (var x2 = lx2; x2 < lx2 + num7; ++x2)
                         {
-                            for (int y2 = ly2; y2 < ly2 + num8; ++y2)
+                            for (var y2 = ly2; y2 < ly2 + num8; ++y2)
                             {
-                                Point point2 = new Point(x2, y2);
+                                var point2 = new Point(x2, y2);
                                 if (!Main.SmartInteractTileCoords.Contains(point2))
                                 {
                                     if (flag3)
@@ -11580,19 +11580,19 @@ namespace Terraria
 
             if (index4 == -1 && smartCursorEnabled)
             {
-                Microsoft.Xna.Framework.Rectangle rectangle =
+                var rectangle =
                     new Microsoft.Xna.Framework.Rectangle(lx1 * 16, ly1 * 16, (hx - lx1) * 16 + 16,
                         (hy - ly1) * 16 + 16);
-                bool flag2 = false;
-                for (int index3 = 0; index3 < 200; ++index3)
+                var flag2 = false;
+                for (var index3 = 0; index3 < 200; ++index3)
                 {
-                    NPC npc = Main.npc[index3];
+                    var npc = Main.npc[index3];
                     if (npc.active && npc.townNPC && npc.Hitbox.Intersects(rectangle))
                     {
                         Main.SmartInteractNPCsNearby.Add(index3);
                         if (!flag2)
                         {
-                            float num7 = npc.Hitbox.Distance(point1);
+                            var num7 = npc.Hitbox.Distance(point1);
                             if (index4 == -1 || (double) Main.npc[index4].Hitbox.Distance(point1) > (double) num7)
                                 index4 = index3;
                             if ((double) num7 == 0.0)
@@ -11614,8 +11614,8 @@ namespace Terraria
 
             if (x1 != -1 && y1 != -1 && index4 != -1)
             {
-                Microsoft.Xna.Framework.Rectangle r = new Microsoft.Xna.Framework.Rectangle(x1 * 16, y1 * 16, 16, 16);
-                Microsoft.Xna.Framework.Rectangle hitbox = Main.npc[index4].Hitbox;
+                var r = new Microsoft.Xna.Framework.Rectangle(x1 * 16, y1 * 16, 16, 16);
+                var hitbox = Main.npc[index4].Hitbox;
                 if ((double) r.Distance(point1) < (double) hitbox.Distance(point1))
                 {
                     index4 = -1;
@@ -11668,18 +11668,18 @@ namespace Terraria
         {
             if (item.axe <= 0 || fX != -1 || fY != -1)
                 return;
-            float num1 = -1f;
-            for (int index1 = LX; index1 <= HX; ++index1)
+            var num1 = -1f;
+            for (var index1 = LX; index1 <= HX; ++index1)
             {
-                for (int index2 = LY; index2 <= HY; ++index2)
+                for (var index2 = LY; index2 <= HY; ++index2)
                 {
                     if (Main.tile[index1, index2].active())
                     {
-                        Tile tile = Main.tile[index1, index2];
+                        var tile = Main.tile[index1, index2];
                         if (Main.tileAxe[(int) tile.type])
                         {
-                            int x = index1;
-                            int y = index2;
+                            var x = index1;
+                            var y = index2;
                             if (tile.type == (ushort) 5)
                             {
                                 if (Collision.InTileBounds(x + 1, y, LX, LY, HX, HY))
@@ -11745,7 +11745,7 @@ namespace Terraria
                                     ++y;
                             }
 
-                            float num2 = Vector2.Distance(new Vector2((float) x, (float) y) * 16f + Vector2.One * 8f,
+                            var num2 = Vector2.Distance(new Vector2((float) x, (float) y) * 16f + Vector2.One * 8f,
                                 mouse);
                             if ((double) num1 == -1.0 || (double) num2 < (double) num1)
                             {
@@ -11767,23 +11767,23 @@ namespace Terraria
                 (Main.tileSolidTop[item.createTile] || Main.tileFrameImportant[item.createTile] ||
                  (fX != -1 || fY != -1)))
                 return;
-            List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-            bool flag1 = false;
+            var tupleList = new List<Tuple<int, int>>();
+            var flag1 = false;
             if (Main.tile[tX, tY].active())
                 flag1 = true;
             if (!Collision.InTileBounds(tX, tY, LX, LY, HX, HY))
                 flag1 = true;
             if (!flag1)
             {
-                for (int index1 = LX; index1 <= HX; ++index1)
+                for (var index1 = LX; index1 <= HX; ++index1)
                 {
-                    for (int index2 = LY; index2 <= HY; ++index2)
+                    for (var index2 = LY; index2 <= HY; ++index2)
                     {
-                        Tile tile = Main.tile[index1, index2];
+                        var tile = Main.tile[index1, index2];
                         if (!tile.active() || Main.tileCut[(int) tile.type] ||
                             TileID.Sets.BreakableWhenPlacing[(int) tile.type])
                         {
-                            int num = 0;
+                            var num = 0;
                             if (Main.tile[index1 - 1, index2].active() &&
                                 Main.tileSolid[(int) Main.tile[index1 - 1, index2].type] &&
                                 !Main.tileSolidTop[(int) Main.tile[index1 - 1, index2].type])
@@ -11809,19 +11809,19 @@ namespace Terraria
 
             if (tupleList.Count > 0)
             {
-                float num1 = -1f;
-                float num2 = float.PositiveInfinity;
-                Tuple<int, int> tuple = tupleList[0];
-                for (int index = 0; index < tupleList.Count; ++index)
+                var num1 = -1f;
+                var num2 = float.PositiveInfinity;
+                var tuple = tupleList[0];
+                for (var index = 0; index < tupleList.Count; ++index)
                 {
                     if (Collision.EmptyTile(tupleList[index].Item1, tupleList[index].Item2, true))
                     {
-                        Vector2 vector2 =
+                        var vector2 =
                             new Vector2((float) tupleList[index].Item1, (float) tupleList[index].Item2) * 16f +
                             Vector2.One * 8f - mouse;
-                        bool flag2 = false;
-                        float num3 = Math.Abs(vector2.X);
-                        float num4 = vector2.Length();
+                        var flag2 = false;
+                        var num3 = Math.Abs(vector2.X);
+                        var num4 = vector2.Length();
                         if ((double) num3 < (double) num2)
                             flag2 = true;
                         if ((double) num3 == (double) num2 && ((double) num1 == -1.0 || (double) num4 < (double) num1))
@@ -11850,23 +11850,23 @@ namespace Terraria
         {
             if (item.createTile != 4 || fX != -1 || fY != -1)
                 return;
-            List<Tuple<int, int>> tupleList = new List<Tuple<int, int>>();
-            bool flag1 = item.type != 1333 && item.type != 523;
-            for (int index1 = LX; index1 <= HX; ++index1)
+            var tupleList = new List<Tuple<int, int>>();
+            var flag1 = item.type != 1333 && item.type != 523;
+            for (var index1 = LX; index1 <= HX; ++index1)
             {
-                for (int index2 = LY; index2 <= HY; ++index2)
+                for (var index2 = LY; index2 <= HY; ++index2)
                 {
-                    Tile tile1 = Main.tile[index1, index2];
-                    Tile tile2 = Main.tile[index1 - 1, index2];
-                    Tile tile3 = Main.tile[index1 + 1, index2];
-                    Tile tile4 = Main.tile[index1, index2 + 1];
+                    var tile1 = Main.tile[index1, index2];
+                    var tile2 = Main.tile[index1 - 1, index2];
+                    var tile3 = Main.tile[index1 + 1, index2];
+                    var tile4 = Main.tile[index1, index2 + 1];
                     if (!tile1.active() || TileID.Sets.BreakableWhenPlacing[(int) tile1.type] ||
                         Main.tileCut[(int) tile1.type] && tile1.type != (ushort) 82 && tile1.type != (ushort) 83)
                     {
-                        bool flag2 = false;
-                        for (int index3 = index1 - 7; index3 <= index1 + 7; ++index3)
+                        var flag2 = false;
+                        for (var index3 = index1 - 7; index3 <= index1 + 7; ++index3)
                         {
-                            for (int index4 = index2 - 7; index4 <= index2 + 7; ++index4)
+                            for (var index4 = index2 - 7; index4 <= index2 + 7; ++index4)
                             {
                                 if (Main.tile[index3, index4] != null && Main.tile[index3, index4].type == (ushort) 4)
                                 {
@@ -11905,11 +11905,11 @@ namespace Terraria
 
             if (tupleList.Count > 0)
             {
-                float num1 = -1f;
-                Tuple<int, int> tuple = tupleList[0];
-                for (int index = 0; index < tupleList.Count; ++index)
+                var num1 = -1f;
+                var tuple = tupleList[0];
+                for (var index = 0; index < tupleList.Count; ++index)
                 {
-                    float num2 =
+                    var num2 =
                         Vector2.Distance(
                             new Vector2((float) tupleList[index].Item1, (float) tupleList[index].Item2) * 16f +
                             Vector2.One * 8f, mouse);
@@ -11934,19 +11934,19 @@ namespace Terraria
         {
             if (this.controlTorch && this.itemAnimation == 0)
             {
-                int num1 = 0;
-                int index1 = (int) (((double) Main.mouseX + (double) Main.screenPosition.X) / 16.0);
-                int index2 = (int) (((double) Main.mouseY + (double) Main.screenPosition.Y) / 16.0);
+                var num1 = 0;
+                var index1 = (int) (((double) Main.mouseX + (double) Main.screenPosition.X) / 16.0);
+                var index2 = (int) (((double) Main.mouseY + (double) Main.screenPosition.Y) / 16.0);
                 if ((double) this.gravDir == -1.0)
                     index2 =
                         (int) (((double) Main.screenPosition.Y + (double) Main.screenHeight - (double) Main.mouseY) /
                                16.0);
-                int num2 = -10;
-                int num3 = -10;
-                int num4 = -10;
-                int num5 = -10;
-                int num6 = -10;
-                for (int index3 = 0; index3 < 50; ++index3)
+                var num2 = -10;
+                var num3 = -10;
+                var num4 = -10;
+                var num5 = -10;
+                var num6 = -10;
+                for (var index3 = 0; index3 < 50; ++index3)
                 {
                     if (this.inventory[index3].pick > 0 && num2 == -10)
                         num2 = this.inventory[index3].tileBoost;
@@ -11961,8 +11961,8 @@ namespace Terraria
                         num6 = this.inventory[index3].tileBoost;
                 }
 
-                int num7 = 0;
-                int num8 = 0;
+                var num7 = 0;
+                var num8 = 0;
                 if ((double) this.position.X / 16.0 >= (double) index1)
                     num7 = (int) ((double) this.position.X / 16.0) - index1;
                 if (((double) this.position.X + (double) this.width) / 16.0 <= (double) index1)
@@ -11971,14 +11971,14 @@ namespace Terraria
                     num8 = (int) ((double) this.position.Y / 16.0) - index2;
                 if (((double) this.position.Y + (double) this.height) / 16.0 <= (double) index2)
                     num8 = index2 - (int) (((double) this.position.Y + (double) this.height) / 16.0);
-                bool flag1 = false;
-                bool flag2 = false;
+                var flag1 = false;
+                var flag2 = false;
                 try
                 {
                     flag2 = Main.tile[index1, index2].liquid > (byte) 0;
                     if (Main.tile[index1, index2].active())
                     {
-                        int type = (int) Main.tile[index1, index2].type;
+                        var type = (int) Main.tile[index1, index2].type;
                         if (type == 219 && num7 <= num6 + Player.tileRangeX && num8 <= num6 + Player.tileRangeY)
                         {
                             num1 = 7;
@@ -12027,17 +12027,17 @@ namespace Terraria
                     num1 = 4;
                 if (num1 == 0 || num1 == 4)
                 {
-                    float num9 = Math.Abs((float) ((double) Main.mouseX + (double) Main.screenPosition.X -
+                    var num9 = Math.Abs((float) ((double) Main.mouseX + (double) Main.screenPosition.X -
                                                    ((double) this.position.X + (double) (this.width / 2))));
-                    float num10 = Math.Abs((float) ((double) Main.mouseY + (double) Main.screenPosition.Y -
+                    var num10 = Math.Abs((float) ((double) Main.mouseY + (double) Main.screenPosition.Y -
                                                     ((double) this.position.Y + (double) (this.height / 2)))) * 1.3f;
                     if (Math.Sqrt((double) num9 * (double) num9 + (double) num10 * (double) num10) > 200.0)
                         num1 = 5;
                 }
 
-                for (int index3 = 0; index3 < 50; ++index3)
+                for (var index3 = 0; index3 < 50; ++index3)
                 {
-                    int type = this.inventory[index3].type;
+                    var type = this.inventory[index3].type;
                     switch (num1)
                     {
                         case 0:
@@ -12136,8 +12136,8 @@ namespace Terraria
 
                             if (type == 930 && flag2)
                             {
-                                bool flag3 = false;
-                                for (int index4 = 57; index4 >= 0; --index4)
+                                var flag3 = false;
+                                for (var index4 = 57; index4 >= 0; --index4)
                                 {
                                     if (this.inventory[index4].ammo == this.inventory[index3].useAmmo)
                                     {
@@ -12203,8 +12203,8 @@ namespace Terraria
                                     this.selectedItem = index3;
                                     return;
                                 case 930:
-                                    bool flag4 = false;
-                                    for (int index4 = 57; index4 >= 0; --index4)
+                                    var flag4 = false;
+                                    for (var index4 = 57; index4 >= 0; --index4)
                                     {
                                         if (this.inventory[index4].ammo == this.inventory[index3].useAmmo)
                                         {
@@ -12226,7 +12226,7 @@ namespace Terraria
                                     continue;
                             }
                         case 6:
-                            int num9 = 929;
+                            var num9 = 929;
                             if (Main.tile[index1, index2].frameX >= (short) 144)
                                 num9 = 1345;
                             else if (Main.tile[index1, index2].frameX >= (short) 72)
@@ -12561,9 +12561,9 @@ namespace Terraria
                 --this.wireOperationsCooldown;
             if (this.releaseUseItem)
                 this.ActuationRodLock = false;
-            for (int index = 0; index < this.npcTypeNoAggro.Length; ++index)
+            for (var index = 0; index < this.npcTypeNoAggro.Length; ++index)
                 this.npcTypeNoAggro[index] = false;
-            for (int index = 0; index < this.ownedProjectileCounts.Length; ++index)
+            for (var index = 0; index < this.ownedProjectileCounts.Length; ++index)
                 this.ownedProjectileCounts[index] = 0;
             if (this.whoAmI == Main.myPlayer)
             {
@@ -12601,7 +12601,7 @@ namespace Terraria
             else
                 this.immuneAlpha = 0;
 
-            for (int index = 0; index < this.hurtCooldowns.Length; ++index)
+            for (var index = 0; index < this.hurtCooldowns.Length; ++index)
             {
                 if (this.hurtCooldowns[index] > 0)
                     --this.hurtCooldowns[index];
@@ -12610,7 +12610,7 @@ namespace Terraria
 
         public void UpdateLifeRegen()
         {
-            bool flag = false;
+            var flag = false;
             if (this.shinyStone && (double) Math.Abs(this.velocity.X) < 0.05 &&
                 ((double) Math.Abs(this.velocity.Y) < 0.05 && this.itemAnimation == 0))
                 flag = true;
@@ -12721,7 +12721,7 @@ namespace Terraria
 
             if (this.soulDrain > 0)
             {
-                int num = (5 + this.soulDrain) / 2;
+                var num = (5 + this.soulDrain) / 2;
                 this.lifeRegenTime += num;
                 this.lifeRegen += num;
             }
@@ -12732,7 +12732,7 @@ namespace Terraria
                 this.lifeRegen += 2;
             if (this.bleed)
                 this.lifeRegenTime = 0;
-            float num1 = 0.0f;
+            var num1 = 0.0f;
             if (this.lifeRegenTime >= 300)
                 ++num1;
             if (this.lifeRegenTime >= 600)
@@ -12751,7 +12751,7 @@ namespace Terraria
                 ++num1;
             if (flag)
             {
-                float num2 = (float) (this.lifeRegenTime - 3000) / 300f;
+                var num2 = (float) (this.lifeRegenTime - 3000) / 300f;
                 if ((double) num2 > 0.0)
                 {
                     if ((double) num2 > 30.0)
@@ -12765,7 +12765,7 @@ namespace Terraria
                 this.lifeRegenTime = 3600;
             }
 
-            float num3 = (double) this.velocity.X == 0.0 || this.grappling[0] > 0 ? num1 * 1.25f : num1 * 0.5f;
+            var num3 = (double) this.velocity.X == 0.0 || this.grappling[0] > 0 ? num1 * 1.25f : num1 * 0.5f;
             if (this.crimsonRegen)
                 num3 *= 1.5f;
             if (this.shinyStone)
@@ -12788,7 +12788,7 @@ namespace Terraria
                     num3 /= 2f;
             }
 
-            float num4 = (float) ((double) this.statLifeMax2 / 400.0 * 0.850000023841858 + 0.150000005960464);
+            var num4 = (float) ((double) this.statLifeMax2 / 400.0 * 0.850000023841858 + 0.150000005960464);
             this.lifeRegen += (int) Math.Round((double) (num3 * num4));
             this.lifeRegenCount += this.lifeRegen;
             if (this.palladiumRegen)
@@ -12798,18 +12798,18 @@ namespace Terraria
                 ++this.lifeRegenCount;
                 if (flag && (Main.rand.Next(30000) < this.lifeRegenTime || Main.rand.Next(30) == 0))
                 {
-                    int index = Dust.NewDust(this.position, this.width, this.height, 55, 0.0f, 0.0f, 200, new Color(),
+                    var index = Dust.NewDust(this.position, this.width, this.height, 55, 0.0f, 0.0f, 200, new Color(),
                         0.5f);
                     Main.dust[index].noGravity = true;
                     Main.dust[index].velocity *= 0.75f;
                     Main.dust[index].fadeIn = 1.3f;
-                    Vector2 vector2_1 = new Vector2((float) Main.rand.Next(-100, 101),
+                    var vector2_1 = new Vector2((float) Main.rand.Next(-100, 101),
                         (float) Main.rand.Next(-100, 101));
                     vector2_1.Normalize();
-                    Vector2 vector2_2 = vector2_1 * ((float) Main.rand.Next(50, 100) * 0.04f);
+                    var vector2_2 = vector2_1 * ((float) Main.rand.Next(50, 100) * 0.04f);
                     Main.dust[index].velocity = vector2_2;
                     vector2_2.Normalize();
-                    Vector2 vector2_3 = vector2_2 * 34f;
+                    var vector2_3 = vector2_2 * 34f;
                     Main.dust[index].position = this.Center - vector2_3;
                 }
             }
@@ -12822,14 +12822,14 @@ namespace Terraria
                     ++this.statLife;
                     if (this.crimsonRegen)
                     {
-                        for (int index1 = 0; index1 < 10; ++index1)
+                        for (var index1 = 0; index1 < 10; ++index1)
                         {
-                            int index2 = Dust.NewDust(this.position, this.width, this.height, 5, 0.0f, 0.0f, 175,
+                            var index2 = Dust.NewDust(this.position, this.width, this.height, 5, 0.0f, 0.0f, 175,
                                 new Color(), 1.75f);
                             Main.dust[index2].noGravity = true;
                             Main.dust[index2].velocity *= 0.75f;
-                            int num2 = Main.rand.Next(-40, 41);
-                            int num5 = Main.rand.Next(-40, 41);
+                            var num2 = Main.rand.Next(-40, 41);
+                            var num5 = Main.rand.Next(-40, 41);
                             Main.dust[index2].position.X += (float) num2;
                             Main.dust[index2].position.Y += (float) num5;
                             Main.dust[index2].velocity.X = (float) -num2 * 0.075f;
@@ -12914,7 +12914,7 @@ namespace Terraria
         {
             if (this.nebulaLevelMana > 0)
             {
-                int num = 6;
+                var num = 6;
                 this.nebulaManaCounter += this.nebulaLevelMana;
                 if (this.nebulaManaCounter >= num)
                 {
@@ -12945,7 +12945,7 @@ namespace Terraria
                 if ((double) this.velocity.X == 0.0 && (double) this.velocity.Y == 0.0 ||
                     (this.grappling[0] >= 0 || this.manaRegenBuff))
                     this.manaRegen += this.statManaMax2 / 2;
-                float num = (float) ((double) this.statMana / (double) this.statManaMax2 * 0.800000011920929 +
+                var num = (float) ((double) this.statMana / (double) this.statManaMax2 * 0.800000011920929 +
                                      0.200000002980232);
                 if (this.manaRegenBuff)
                     num = 1f;
@@ -12957,7 +12957,7 @@ namespace Terraria
             this.manaRegenCount += this.manaRegen;
             while (this.manaRegenCount >= 120)
             {
-                bool flag = false;
+                var flag = false;
                 this.manaRegenCount -= 120;
                 if (this.statMana < this.statManaMax2)
                 {
@@ -12970,9 +12970,9 @@ namespace Terraria
                     if (this.whoAmI == Main.myPlayer && flag)
                     {
                         Main.PlaySound(25, -1, -1, 1, 1f, 0.0f);
-                        for (int index1 = 0; index1 < 5; ++index1)
+                        for (var index1 = 0; index1 < 5; ++index1)
                         {
-                            int index2 = Dust.NewDust(this.position, this.width, this.height, 45, 0.0f, 0.0f,
+                            var index2 = Dust.NewDust(this.position, this.width, this.height, 45, 0.0f, 0.0f,
                                 (int) byte.MaxValue, new Color(), (float) Main.rand.Next(20, 26) * 0.1f);
                             Main.dust[index2].noLight = true;
                             Main.dust[index2].noGravity = true;
@@ -13025,12 +13025,12 @@ namespace Terraria
         {
             if (!this.controlUp && !this.controlDown)
                 return;
-            int index1 = (int) ((double) this.position.X + (double) (this.width / 2)) / 16;
-            int index2 = (int) ((double) this.position.Y - 8.0) / 16;
+            var index1 = (int) ((double) this.position.X + (double) (this.width / 2)) / 16;
+            var index2 = (int) ((double) this.position.Y - 8.0) / 16;
             if (Main.tile[index1, index2] == null || !Main.tile[index1, index2].active() ||
                 !Main.tileRope[(int) Main.tile[index1, index2].type])
                 return;
-            float num1 = this.position.Y;
+            var num1 = this.position.Y;
             if (Main.tile[index1, index2 - 1] == null)
                 Main.tile[index1, index2 - 1] = new Tile();
             if (Main.tile[index1, index2 + 1] == null)
@@ -13038,12 +13038,12 @@ namespace Terraria
             if ((!Main.tile[index1, index2 - 1].active() || !Main.tileRope[(int) Main.tile[index1, index2 - 1].type]) &&
                 (!Main.tile[index1, index2 + 1].active() || !Main.tileRope[(int) Main.tile[index1, index2 + 1].type]))
                 num1 = (float) (index2 * 16 + 22);
-            float x1 = (float) (index1 * 16 + 8 - this.width / 2 + 6 * this.direction);
-            int num2 = index1 * 16 + 8 - this.width / 2 + 6;
-            int num3 = index1 * 16 + 8 - this.width / 2;
-            int num4 = index1 * 16 + 8 - this.width / 2 - 6;
-            int num5 = 1;
-            float num6 = Math.Abs(this.position.X - (float) num2);
+            var x1 = (float) (index1 * 16 + 8 - this.width / 2 + 6 * this.direction);
+            var num2 = index1 * 16 + 8 - this.width / 2 + 6;
+            var num3 = index1 * 16 + 8 - this.width / 2;
+            var num4 = index1 * 16 + 8 - this.width / 2 - 6;
+            var num5 = 1;
+            var num6 = Math.Abs(this.position.X - (float) num2);
             if ((double) Math.Abs(this.position.X - (float) num3) < (double) num6)
             {
                 num5 = 2;
@@ -13089,7 +13089,7 @@ namespace Terraria
             }
             else
             {
-                float x2 = (float) num2;
+                var x2 = (float) num2;
                 this.pulleyDir = (byte) 2;
                 this.direction = 1;
                 if (!Collision.SolidCollision(new Vector2(x2, this.position.Y), this.width, this.height))
@@ -13105,7 +13105,7 @@ namespace Terraria
                 }
                 else
                 {
-                    float x3 = (float) num4;
+                    var x3 = (float) num4;
                     this.pulleyDir = (byte) 2;
                     this.direction = -1;
                     if (Collision.SolidCollision(new Vector2(x3, this.position.Y), this.width, this.height))
@@ -13126,12 +13126,12 @@ namespace Terraria
         {
             if (this.chilled)
                 this.accRunSpeed = this.maxRunSpeed;
-            bool flag1 = (this.itemAnimation == 0 || this.inventory[this.selectedItem].useTurn) &&
+            var flag1 = (this.itemAnimation == 0 || this.inventory[this.selectedItem].useTurn) &&
                          this.mount.AllowDirectionChange;
-            bool flag2 = this.controlLeft || this.controlRight;
-            float num1 = (float) (((double) this.accRunSpeed + (double) this.maxRunSpeed) / 2.0);
-            float num2 = 0.0f;
-            bool flag3 = false;
+            var flag2 = this.controlLeft || this.controlRight;
+            var num1 = (float) (((double) this.accRunSpeed + (double) this.maxRunSpeed) / 2.0);
+            var num2 = 0.0f;
+            var flag3 = false;
             if (this.windPushed && (!this.mount.Active || (double) this.velocity.Y != 0.0 || !flag2))
             {
                 num2 = (float) Math.Sign(Main.windSpeed) * 0.07f;
@@ -13301,7 +13301,7 @@ namespace Terraria
 
                 if ((double) this.velocity.X < -(double) num1 && (double) this.velocity.Y == 0.0 && !this.mount.Active)
                 {
-                    int num3 = 0;
+                    var num3 = 0;
                     if ((double) this.gravDir == -1.0)
                         num3 -= this.height;
                     if (this.runSoundDelay == 0 && (double) this.velocity.Y == 0.0)
@@ -13313,13 +13313,13 @@ namespace Terraria
 
                     if (this.wings == 3)
                     {
-                        int index1 = Dust.NewDust(
+                        var index1 = Dust.NewDust(
                             new Vector2(this.position.X - 4f, this.position.Y + (float) this.height + (float) num3),
                             this.width + 8, 4, 186, (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f,
                             50, new Color(), 1.5f);
                         Main.dust[index1].velocity *= 0.025f;
                         Main.dust[index1].shader = GameShaders.Armor.GetSecondaryShader(this.cWings, this);
-                        int index2 = Dust.NewDust(
+                        var index2 = Dust.NewDust(
                             new Vector2(this.position.X - 4f, this.position.Y + (float) this.height + (float) num3),
                             this.width + 8, 4, 186, (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f,
                             50, new Color(), 1.5f);
@@ -13328,9 +13328,9 @@ namespace Terraria
                     }
                     else if (this.sailDash)
                     {
-                        for (int index1 = 0; index1 < 4; ++index1)
+                        for (var index1 = 0; index1 < 4; ++index1)
                         {
-                            int index2 = Dust.NewDust(new Vector2(this.position.X - 4f, this.position.Y),
+                            var index2 = Dust.NewDust(new Vector2(this.position.X - 4f, this.position.Y),
                                 this.width + 8, this.height, 253, (float) (-(double) this.velocity.X * 0.5),
                                 this.velocity.Y * 0.5f, 100, new Color(), 1.5f);
                             Main.dust[index2].noGravity = true;
@@ -13338,7 +13338,7 @@ namespace Terraria
                             Main.dust[index2].velocity.Y *= 0.2f;
                             Main.dust[index2].shader = GameShaders.Armor.GetSecondaryShader(this.cShoe, this);
                             Main.dust[index2].scale += (float) Main.rand.Next(-5, 3) * 0.1f;
-                            Vector2 vector2 = new Vector2((float) Main.rand.Next(-100, 101),
+                            var vector2 = new Vector2((float) Main.rand.Next(-100, 101),
                                 (float) Main.rand.Next(-100, 101));
                             vector2.Normalize();
                             vector2 *= (float) Main.rand.Next(81) * 0.1f;
@@ -13346,9 +13346,9 @@ namespace Terraria
                     }
                     else if (this.coldDash)
                     {
-                        for (int index1 = 0; index1 < 2; ++index1)
+                        for (var index1 = 0; index1 < 2; ++index1)
                         {
-                            int index2 = index1 != 0
+                            var index2 = index1 != 0
                                 ? Dust.NewDust(
                                     new Vector2(this.position.X + (float) (this.width / 2),
                                         this.position.Y + (float) this.height + this.gfxOffY), this.width / 2, 6, 76,
@@ -13367,7 +13367,7 @@ namespace Terraria
                     }
                     else
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.position.X - 4f, this.position.Y + (float) this.height + (float) num3),
                             this.width + 8, 4, 16, (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f,
                             50, new Color(), 1.5f);
@@ -13407,7 +13407,7 @@ namespace Terraria
 
                 if ((double) this.velocity.X > (double) num1 && (double) this.velocity.Y == 0.0 && !this.mount.Active)
                 {
-                    int num3 = 0;
+                    var num3 = 0;
                     if ((double) this.gravDir == -1.0)
                         num3 -= this.height;
                     if (this.runSoundDelay == 0 && (double) this.velocity.Y == 0.0)
@@ -13419,13 +13419,13 @@ namespace Terraria
 
                     if (this.wings == 3)
                     {
-                        int index1 = Dust.NewDust(
+                        var index1 = Dust.NewDust(
                             new Vector2(this.position.X - 4f, this.position.Y + (float) this.height + (float) num3),
                             this.width + 8, 4, 186, (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f,
                             50, new Color(), 1.5f);
                         Main.dust[index1].velocity *= 0.025f;
                         Main.dust[index1].shader = GameShaders.Armor.GetSecondaryShader(this.cWings, this);
-                        int index2 = Dust.NewDust(
+                        var index2 = Dust.NewDust(
                             new Vector2(this.position.X - 4f, this.position.Y + (float) this.height + (float) num3),
                             this.width + 8, 4, 186, (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f,
                             50, new Color(), 1.5f);
@@ -13434,9 +13434,9 @@ namespace Terraria
                     }
                     else if (this.sailDash)
                     {
-                        for (int index1 = 0; index1 < 4; ++index1)
+                        for (var index1 = 0; index1 < 4; ++index1)
                         {
-                            int index2 = Dust.NewDust(new Vector2(this.position.X - 4f, this.position.Y),
+                            var index2 = Dust.NewDust(new Vector2(this.position.X - 4f, this.position.Y),
                                 this.width + 8, this.height, 253, (float) (-(double) this.velocity.X * 0.5),
                                 this.velocity.Y * 0.5f, 100, new Color(), 1.5f);
                             Main.dust[index2].noGravity = true;
@@ -13444,7 +13444,7 @@ namespace Terraria
                             Main.dust[index2].velocity.Y *= 0.2f;
                             Main.dust[index2].shader = GameShaders.Armor.GetSecondaryShader(this.cShoe, this);
                             Main.dust[index2].scale += (float) Main.rand.Next(-5, 3) * 0.1f;
-                            Vector2 vector2 = new Vector2((float) Main.rand.Next(-100, 101),
+                            var vector2 = new Vector2((float) Main.rand.Next(-100, 101),
                                 (float) Main.rand.Next(-100, 101));
                             vector2.Normalize();
                             vector2 *= (float) Main.rand.Next(81) * 0.1f;
@@ -13452,9 +13452,9 @@ namespace Terraria
                     }
                     else if (this.coldDash)
                     {
-                        for (int index1 = 0; index1 < 2; ++index1)
+                        for (var index1 = 0; index1 < 2; ++index1)
                         {
-                            int index2 = index1 != 0
+                            var index2 = index1 != 0
                                 ? Dust.NewDust(
                                     new Vector2(this.position.X + (float) (this.width / 2),
                                         this.position.Y + (float) this.height + this.gfxOffY), this.width / 2, 6, 76,
@@ -13473,7 +13473,7 @@ namespace Terraria
                     }
                     else
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.position.X - 4f, this.position.Y + (float) this.height + (float) num3),
                             this.width + 8, 4, 16, (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f,
                             50, new Color(), 1.5f);
@@ -13547,47 +13547,47 @@ namespace Terraria
             if (this.mount.Active && this.mount.Type == 10 && (double) Math.Abs(this.velocity.X) >
                 (double) this.mount.DashSpeed - (double) this.mount.RunSpeed / 2.0)
             {
-                Microsoft.Xna.Framework.Rectangle rect = this.getRect();
+                var rect = this.getRect();
                 if (this.direction == 1)
                     rect.Offset(this.width - 1, 0);
                 rect.Width = 2;
                 rect.Inflate(6, 12);
-                float Damage = 80f * this.minionDamage;
-                float Knockback = 10f;
-                int NPCImmuneTime = 30;
-                int PlayerImmuneTime = 6;
+                var Damage = 80f * this.minionDamage;
+                var Knockback = 10f;
+                var NPCImmuneTime = 30;
+                var PlayerImmuneTime = 6;
                 this.CollideWithNPCs(rect, Damage, Knockback, NPCImmuneTime, PlayerImmuneTime);
             }
 
             if (!this.mount.Active || this.mount.Type != 14 ||
                 (double) Math.Abs(this.velocity.X) <= (double) this.mount.RunSpeed / 2.0)
                 return;
-            Microsoft.Xna.Framework.Rectangle rect1 = this.getRect();
+            var rect1 = this.getRect();
             if (this.direction == 1)
                 rect1.Offset(this.width - 1, 0);
             rect1.Width = 2;
             rect1.Inflate(6, 12);
-            float Damage1 = 90f * this.minionDamage;
-            float Knockback1 = 10f;
-            int NPCImmuneTime1 = 30;
-            int PlayerImmuneTime1 = 6;
+            var Damage1 = 90f * this.minionDamage;
+            var Knockback1 = 10f;
+            var NPCImmuneTime1 = 30;
+            var PlayerImmuneTime1 = 6;
             this.CollideWithNPCs(rect1, Damage1, Knockback1, NPCImmuneTime1, PlayerImmuneTime1);
         }
 
         private int CollideWithNPCs(Microsoft.Xna.Framework.Rectangle myRect, float Damage, float Knockback,
             int NPCImmuneTime, int PlayerImmuneTime)
         {
-            int num = 0;
-            for (int index = 0; index < 200; ++index)
+            var num = 0;
+            for (var index = 0; index < 200; ++index)
             {
-                NPC npc = Main.npc[index];
+                var npc = Main.npc[index];
                 if (npc.active && !npc.dontTakeDamage && (!npc.friendly && npc.immune[this.whoAmI] == 0))
                 {
-                    Microsoft.Xna.Framework.Rectangle rect = npc.getRect();
+                    var rect = npc.getRect();
                     if (myRect.Intersects(rect) && (npc.noTileCollide || Collision.CanHit(this.position, this.width,
                                                         this.height, npc.position, npc.width, npc.height)))
                     {
-                        int direction = this.direction;
+                        var direction = this.direction;
                         if ((double) this.velocity.X < 0.0)
                             direction = -1;
                         if ((double) this.velocity.X > 0.0)
@@ -13613,7 +13613,7 @@ namespace Terraria
             if (Main.netMode != 0)
                 NetMessage.SendData(28, -1, -1, (NetworkText) null, npc.whoAmI, (float) damage, knockback,
                     (float) direction, crit.ToInt(), 0, 0);
-            int num = Item.NPCtoBanner(npc.BannerID());
+            var num = Item.NPCtoBanner(npc.BannerID());
             if (num < 0)
                 return;
             this.lastCreatureHit = num;
@@ -13634,22 +13634,22 @@ namespace Terraria
             if (this.mount.Active && this.mount.Type == 3 &&
                 (this.wetSlime == (byte) 0 && (double) this.velocity.Y > 0.0))
             {
-                Microsoft.Xna.Framework.Rectangle rect1 = this.getRect();
+                var rect1 = this.getRect();
                 rect1.Offset(0, this.height - 1);
                 rect1.Height = 2;
                 rect1.Inflate(12, 6);
-                for (int index = 0; index < 200; ++index)
+                for (var index = 0; index < 200; ++index)
                 {
-                    NPC npc = Main.npc[index];
+                    var npc = Main.npc[index];
                     if (npc.active && !npc.dontTakeDamage && (!npc.friendly && npc.immune[this.whoAmI] == 0))
                     {
-                        Microsoft.Xna.Framework.Rectangle rect2 = npc.getRect();
+                        var rect2 = npc.getRect();
                         if (rect1.Intersects(rect2) && (npc.noTileCollide || Collision.CanHit(this.position, this.width,
                                                             this.height, npc.position, npc.width, npc.height)))
                         {
-                            float num = 40f * this.minionDamage;
-                            float knockback = 5f;
-                            int direction = this.direction;
+                            var num = 40f * this.minionDamage;
+                            var knockback = 5f;
+                            var direction = this.direction;
                             if ((double) this.velocity.X < 0.0)
                                 direction = -1;
                             if ((double) this.velocity.X > 0.0)
@@ -13669,7 +13669,7 @@ namespace Terraria
 
             if (this.controlJump)
             {
-                bool flag1 = false;
+                var flag1 = false;
                 if (this.mount.Active && this.mount.Type == 3 && this.wetSlime > (byte) 0)
                     flag1 = true;
                 if (this.jump > 0)
@@ -13699,7 +13699,7 @@ namespace Terraria
                 {
                     if (this.sliding || (double) this.velocity.Y == 0.0)
                         this.justJumped = true;
-                    bool flag2 = false;
+                    var flag2 = false;
                     if (this.wet && this.accFlipper)
                     {
                         if (this.swimTime == 0)
@@ -13707,11 +13707,11 @@ namespace Terraria
                         flag2 = true;
                     }
 
-                    bool flag3 = false;
-                    bool flag4 = false;
-                    bool flag5 = false;
-                    bool flag6 = false;
-                    bool flag7 = false;
+                    var flag3 = false;
+                    var flag4 = false;
+                    var flag5 = false;
+                    var flag6 = false;
+                    var flag7 = false;
                     if (!flag1)
                     {
                         if (this.jumpAgainUnicorn)
@@ -13773,8 +13773,8 @@ namespace Terraria
                     else if (flag3)
                     {
                         this.dJumpEffectSandstorm = true;
-                        int height = this.height;
-                        double gravDir = (double) this.gravDir;
+                        var height = this.height;
+                        var gravDir = (double) this.gravDir;
                         Main.PlaySound(16, (int) this.position.X, (int) this.position.Y, 1, 1f, 0.0f);
                         this.velocity.Y = -Player.jumpSpeed * this.gravDir;
                         this.jump = Player.jumpHeight * 3;
@@ -13782,8 +13782,8 @@ namespace Terraria
                     else if (flag4)
                     {
                         this.dJumpEffectBlizzard = true;
-                        int height = this.height;
-                        double gravDir = (double) this.gravDir;
+                        var height = this.height;
+                        var gravDir = (double) this.gravDir;
                         Main.PlaySound(16, (int) this.position.X, (int) this.position.Y, 1, 1f, 0.0f);
                         this.velocity.Y = -Player.jumpSpeed * this.gravDir;
                         this.jump = (int) ((double) Player.jumpHeight * 1.5);
@@ -13791,15 +13791,15 @@ namespace Terraria
                     else if (flag6)
                     {
                         this.dJumpEffectSail = true;
-                        int num = this.height;
+                        var num = this.height;
                         if ((double) this.gravDir == -1.0)
                             num = 0;
                         Main.PlaySound(16, (int) this.position.X, (int) this.position.Y, 1, 1f, 0.0f);
                         this.velocity.Y = -Player.jumpSpeed * this.gravDir;
                         this.jump = (int) ((double) Player.jumpHeight * 1.25);
-                        for (int index1 = 0; index1 < 30; ++index1)
+                        for (var index1 = 0; index1 < 30; ++index1)
                         {
-                            int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num),
+                            var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num),
                                 this.width, 12, 253, this.velocity.X * 0.3f, this.velocity.Y * 0.3f, 100, new Color(),
                                 1.5f);
                             if (index1 % 2 == 0)
@@ -13810,7 +13810,7 @@ namespace Terraria
                             Main.dust[index2].noGravity = true;
                             Main.dust[index2].scale += (float) Main.rand.Next(-10, 41) * 0.01f;
                             Main.dust[index2].velocity *= Main.dust[index2].scale * 0.7f;
-                            Vector2 vector2 = new Vector2((float) Main.rand.Next(-100, 101),
+                            var vector2 = new Vector2((float) Main.rand.Next(-100, 101),
                                 (float) Main.rand.Next(-100, 101));
                             vector2.Normalize();
                             vector2 *= (float) Main.rand.Next(81) * 0.1f;
@@ -13819,15 +13819,15 @@ namespace Terraria
                     else if (flag5)
                     {
                         this.dJumpEffectFart = true;
-                        int num = this.height;
+                        var num = this.height;
                         if ((double) this.gravDir == -1.0)
                             num = 0;
                         Main.PlaySound(SoundID.Item16, this.position);
                         this.velocity.Y = -Player.jumpSpeed * this.gravDir;
                         this.jump = Player.jumpHeight * 2;
-                        for (int index1 = 0; index1 < 10; ++index1)
+                        for (var index1 = 0; index1 < 10; ++index1)
                         {
-                            int index2 = Dust.NewDust(
+                            var index2 = Dust.NewDust(
                                 new Vector2(this.position.X - 34f,
                                     (float) ((double) this.position.Y + (double) num - 16.0)), 102, 32, 188,
                                 (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f, 100, new Color(),
@@ -13840,7 +13840,7 @@ namespace Terraria
                                          (double) this.velocity.Y * 0.300000011920929);
                         }
 
-                        int index3 = Gore.NewGore(
+                        var index3 = Gore.NewGore(
                             new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 16.0),
                                 (float) ((double) this.position.Y + (double) num - 16.0)),
                             new Vector2(-this.velocity.X, -this.velocity.Y), Main.rand.Next(435, 438), 1f);
@@ -13850,7 +13850,7 @@ namespace Terraria
                         Main.gore[index3].velocity.Y =
                             (float) ((double) Main.gore[index3].velocity.Y * 0.100000001490116 -
                                      (double) this.velocity.Y * 0.0500000007450581);
-                        int index4 =
+                        var index4 =
                             Gore.NewGore(
                                 new Vector2(this.position.X - 36f,
                                     (float) ((double) this.position.Y + (double) num - 16.0)),
@@ -13861,7 +13861,7 @@ namespace Terraria
                         Main.gore[index4].velocity.Y =
                             (float) ((double) Main.gore[index4].velocity.Y * 0.100000001490116 -
                                      (double) this.velocity.Y * 0.0500000007450581);
-                        int index5 = Gore.NewGore(
+                        var index5 = Gore.NewGore(
                             new Vector2((float) ((double) this.position.X + (double) this.width + 4.0),
                                 (float) ((double) this.position.Y + (double) num - 16.0)),
                             new Vector2(-this.velocity.X, -this.velocity.Y), Main.rand.Next(435, 438), 1f);
@@ -13875,26 +13875,26 @@ namespace Terraria
                     else if (flag7)
                     {
                         this.dJumpEffectUnicorn = true;
-                        int height = this.height;
-                        double gravDir = (double) this.gravDir;
+                        var height = this.height;
+                        var gravDir = (double) this.gravDir;
                         Main.PlaySound(16, (int) this.position.X, (int) this.position.Y, 1, 1f, 0.0f);
                         this.velocity.Y = -Player.jumpSpeed * this.gravDir;
                         this.jump = Player.jumpHeight * 2;
-                        Vector2 center = this.Center;
-                        Vector2 vector2_1 = new Vector2(50f, 20f);
-                        float num1 = 6.283185f * Main.rand.NextFloat();
-                        for (int index = 0; index < 5; ++index)
+                        var center = this.Center;
+                        var vector2_1 = new Vector2(50f, 20f);
+                        var num1 = 6.283185f * Main.rand.NextFloat();
+                        for (var index = 0; index < 5; ++index)
                         {
-                            for (float num2 = 0.0f; (double) num2 < 14.0; ++num2)
+                            for (var num2 = 0.0f; (double) num2 < 14.0; ++num2)
                             {
-                                Dust dust = Main.dust[Dust.NewDust(center, 0, 0, Utils.SelectRandom<int>(Main.rand,
+                                var dust = Main.dust[Dust.NewDust(center, 0, 0, Utils.SelectRandom<int>(Main.rand,
                                     new int[3]
                                     {
                                         176,
                                         177,
                                         179
                                     }), 0.0f, 0.0f, 0, new Color(), 1f)];
-                                Vector2 vector2_2 =
+                                var vector2_2 =
                                     Vector2.UnitY.RotatedBy((double) num2 * 6.28318548202515 / 14.0 + (double) num1,
                                         new Vector2()) * (0.2f * (float) index);
                                 dust.position = center + vector2_2 * vector2_1;
@@ -13909,15 +13909,15 @@ namespace Terraria
                     else
                     {
                         this.dJumpEffectCloud = true;
-                        int num = this.height;
+                        var num = this.height;
                         if ((double) this.gravDir == -1.0)
                             num = 0;
                         Main.PlaySound(16, (int) this.position.X, (int) this.position.Y, 1, 1f, 0.0f);
                         this.velocity.Y = -Player.jumpSpeed * this.gravDir;
                         this.jump = (int) ((double) Player.jumpHeight * 0.75);
-                        for (int index1 = 0; index1 < 10; ++index1)
+                        for (var index1 = 0; index1 < 10; ++index1)
                         {
-                            int index2 = Dust.NewDust(
+                            var index2 = Dust.NewDust(
                                 new Vector2(this.position.X - 34f,
                                     (float) ((double) this.position.Y + (double) num - 16.0)), 102, 32, 16,
                                 (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f, 100, new Color(),
@@ -13930,7 +13930,7 @@ namespace Terraria
                                          (double) this.velocity.Y * 0.300000011920929);
                         }
 
-                        int index3 = Gore.NewGore(
+                        var index3 = Gore.NewGore(
                             new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 16.0),
                                 (float) ((double) this.position.Y + (double) num - 16.0)),
                             new Vector2(-this.velocity.X, -this.velocity.Y), Main.rand.Next(11, 14), 1f);
@@ -13940,7 +13940,7 @@ namespace Terraria
                         Main.gore[index3].velocity.Y =
                             (float) ((double) Main.gore[index3].velocity.Y * 0.100000001490116 -
                                      (double) this.velocity.Y * 0.0500000007450581);
-                        int index4 =
+                        var index4 =
                             Gore.NewGore(
                                 new Vector2(this.position.X - 36f,
                                     (float) ((double) this.position.Y + (double) num - 16.0)),
@@ -13951,7 +13951,7 @@ namespace Terraria
                         Main.gore[index4].velocity.Y =
                             (float) ((double) Main.gore[index4].velocity.Y * 0.100000001490116 -
                                      (double) this.velocity.Y * 0.0500000007450581);
-                        int index5 = Gore.NewGore(
+                        var index5 = Gore.NewGore(
                             new Vector2((float) ((double) this.position.X + (double) this.width + 4.0),
                                 (float) ((double) this.position.Y + (double) num - 16.0)),
                             new Vector2(-this.velocity.X, -this.velocity.Y), Main.rand.Next(11, 14), 1f);
@@ -13980,28 +13980,28 @@ namespace Terraria
             {
                 if (this.eocHit < 0)
                 {
-                    Microsoft.Xna.Framework.Rectangle rectangle = new Microsoft.Xna.Framework.Rectangle(
+                    var rectangle = new Microsoft.Xna.Framework.Rectangle(
                         (int) ((double) this.position.X + (double) this.velocity.X * 0.5 - 4.0),
                         (int) ((double) this.position.Y + (double) this.velocity.Y * 0.5 - 4.0), this.width + 8,
                         this.height + 8);
-                    for (int index = 0; index < 200; ++index)
+                    for (var index = 0; index < 200; ++index)
                     {
                         if (Main.npc[index].active && !Main.npc[index].dontTakeDamage && !Main.npc[index].friendly)
                         {
-                            NPC npc = Main.npc[index];
-                            Microsoft.Xna.Framework.Rectangle rect = npc.getRect();
+                            var npc = Main.npc[index];
+                            var rect = npc.getRect();
                             if (rectangle.Intersects(rect) && (npc.noTileCollide || this.CanHit((Entity) npc)))
                             {
-                                float num = 30f * this.meleeDamage;
-                                float knockback = 9f;
-                                bool crit = false;
+                                var num = 30f * this.meleeDamage;
+                                var knockback = 9f;
+                                var crit = false;
                                 if (this.kbGlove)
                                     knockback *= 2f;
                                 if (this.kbBuff)
                                     knockback *= 1.5f;
                                 if (Main.rand.Next(100) < this.meleeCrit)
                                     crit = true;
-                                int direction = this.direction;
+                                var direction = this.direction;
                                 if ((double) this.velocity.X < 0.0)
                                     direction = -1;
                                 if ((double) this.velocity.X > 0.0)
@@ -14027,17 +14027,17 @@ namespace Terraria
 
             if (this.dash == 3 && this.dashDelay < 0 && this.whoAmI == Main.myPlayer)
             {
-                Microsoft.Xna.Framework.Rectangle rectangle = new Microsoft.Xna.Framework.Rectangle(
+                var rectangle = new Microsoft.Xna.Framework.Rectangle(
                     (int) ((double) this.position.X + (double) this.velocity.X * 0.5 - 4.0),
                     (int) ((double) this.position.Y + (double) this.velocity.Y * 0.5 - 4.0), this.width + 8,
                     this.height + 8);
-                for (int index1 = 0; index1 < 200; ++index1)
+                for (var index1 = 0; index1 < 200; ++index1)
                 {
                     if (Main.npc[index1].active && !Main.npc[index1].dontTakeDamage &&
                         (!Main.npc[index1].friendly && Main.npc[index1].immune[this.whoAmI] <= 0))
                     {
-                        NPC npc = Main.npc[index1];
-                        Microsoft.Xna.Framework.Rectangle rect = npc.getRect();
+                        var npc = Main.npc[index1];
+                        var rect = npc.getRect();
                         if (rectangle.Intersects(rect) && (npc.noTileCollide || this.CanHit((Entity) npc)))
                         {
                             if (!this.solarDashConsumedFlare)
@@ -14046,16 +14046,16 @@ namespace Terraria
                                 this.ConsumeSolarFlare();
                             }
 
-                            float num = 150f * this.meleeDamage;
-                            float knockback = 9f;
-                            bool crit = false;
+                            var num = 150f * this.meleeDamage;
+                            var knockback = 9f;
+                            var crit = false;
                             if (this.kbGlove)
                                 knockback *= 2f;
                             if (this.kbBuff)
                                 knockback *= 1.5f;
                             if (Main.rand.Next(100) < this.meleeCrit)
                                 crit = true;
-                            int direction = this.direction;
+                            var direction = this.direction;
                             if ((double) this.velocity.X < 0.0)
                                 direction = -1;
                             if ((double) this.velocity.X > 0.0)
@@ -14063,7 +14063,7 @@ namespace Terraria
                             if (this.whoAmI == Main.myPlayer)
                             {
                                 this.ApplyDamageToNPC(npc, (int) num, knockback, direction, crit);
-                                int index2 = Projectile.NewProjectile(this.Center.X, this.Center.Y, 0.0f, 0.0f, 608,
+                                var index2 = Projectile.NewProjectile(this.Center.X, this.Center.Y, 0.0f, 0.0f, 608,
                                     150, 15f, Main.myPlayer, 0.0f, 0.0f);
                                 Main.projectile[index2].Kill();
                             }
@@ -14087,16 +14087,16 @@ namespace Terraria
             }
             else if (this.dashDelay < 0)
             {
-                float num1 = 12f;
-                float num2 = 0.992f;
-                float num3 = Math.Max(this.accRunSpeed, this.maxRunSpeed);
-                float num4 = 0.96f;
-                int num5 = 20;
+                var num1 = 12f;
+                var num2 = 0.992f;
+                var num3 = Math.Max(this.accRunSpeed, this.maxRunSpeed);
+                var num4 = 0.96f;
+                var num5 = 20;
                 if (this.dash == 1)
                 {
-                    for (int index1 = 0; index1 < 2; ++index1)
+                    for (var index1 = 0; index1 < 2; ++index1)
                     {
-                        int index2 = (double) this.velocity.Y != 0.0
+                        var index2 = (double) this.velocity.Y != 0.0
                             ? Dust.NewDust(
                                 new Vector2(this.position.X,
                                     (float) ((double) this.position.Y + (double) (this.height / 2) - 8.0)), this.width,
@@ -14112,9 +14112,9 @@ namespace Terraria
                 }
                 else if (this.dash == 2)
                 {
-                    for (int index1 = 0; index1 < 0; ++index1)
+                    for (var index1 = 0; index1 < 0; ++index1)
                     {
-                        int index2 = (double) this.velocity.Y != 0.0
+                        var index2 = (double) this.velocity.Y != 0.0
                             ? Dust.NewDust(
                                 new Vector2(this.position.X,
                                     (float) ((double) this.position.Y + (double) (this.height / 2) - 8.0)), this.width,
@@ -14134,9 +14134,9 @@ namespace Terraria
                 }
                 else if (this.dash == 3)
                 {
-                    for (int index1 = 0; index1 < 4; ++index1)
+                    for (var index1 = 0; index1 < 4; ++index1)
                     {
-                        int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + 4f), this.width,
+                        var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + 4f), this.width,
                             this.height - 8, 6, 0.0f, 0.0f, 100, new Color(), 1.7f);
                         Main.dust[index2].velocity *= 0.1f;
                         Main.dust[index2].scale *= (float) (1.0 + (double) Main.rand.Next(20) * 0.00999999977648258);
@@ -14153,9 +14153,9 @@ namespace Terraria
                 }
                 else if (this.dash == 4)
                 {
-                    for (int index1 = 0; index1 < 2; ++index1)
+                    for (var index1 = 0; index1 < 2; ++index1)
                     {
-                        int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + 4f), this.width,
+                        var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + 4f), this.width,
                             this.height - 8, 229, 0.0f, 0.0f, 100, new Color(), 1.2f);
                         Main.dust[index2].velocity *= 0.1f;
                         Main.dust[index2].scale *= (float) (1.0 + (double) Main.rand.Next(20) * 0.00999999977648258);
@@ -14200,8 +14200,8 @@ namespace Terraria
                     return;
                 if (this.dash == 1)
                 {
-                    int num = 0;
-                    bool flag = false;
+                    var num = 0;
+                    var flag = false;
                     if (this.dashTime > 0)
                         --this.dashTime;
                     if (this.dashTime < 0)
@@ -14232,18 +14232,18 @@ namespace Terraria
                     if (!flag)
                         return;
                     this.velocity.X = 16.9f * (float) num;
-                    Point tileCoordinates1 = (this.Center + new Vector2((float) (num * this.width / 2 + 2),
+                    var tileCoordinates1 = (this.Center + new Vector2((float) (num * this.width / 2 + 2),
                                                   (float) ((double) this.gravDir * (double) -this.height / 2.0 +
                                                            (double) this.gravDir * 2.0))).ToTileCoordinates();
-                    Point tileCoordinates2 = (this.Center + new Vector2((float) (num * this.width / 2 + 2), 0.0f))
+                    var tileCoordinates2 = (this.Center + new Vector2((float) (num * this.width / 2 + 2), 0.0f))
                         .ToTileCoordinates();
                     if (WorldGen.SolidOrSlopedTile(tileCoordinates1.X, tileCoordinates1.Y) ||
                         WorldGen.SolidOrSlopedTile(tileCoordinates2.X, tileCoordinates2.Y))
                         this.velocity.X /= 2f;
                     this.dashDelay = -1;
-                    for (int index1 = 0; index1 < 20; ++index1)
+                    for (var index1 = 0; index1 < 20; ++index1)
                     {
-                        int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width,
+                        var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width,
                             this.height, 31, 0.0f, 0.0f, 100, new Color(), 2f);
                         Main.dust[index2].position.X += (float) Main.rand.Next(-5, 6);
                         Main.dust[index2].position.Y += (float) Main.rand.Next(-5, 6);
@@ -14252,7 +14252,7 @@ namespace Terraria
                         Main.dust[index2].shader = GameShaders.Armor.GetSecondaryShader(this.cShoe, this);
                     }
 
-                    int index3 =
+                    var index3 =
                         Gore.NewGore(
                             new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 24.0),
                                 (float) ((double) this.position.Y + (double) (this.height / 2) - 34.0)), new Vector2(),
@@ -14260,7 +14260,7 @@ namespace Terraria
                     Main.gore[index3].velocity.X = (float) Main.rand.Next(-50, 51) * 0.01f;
                     Main.gore[index3].velocity.Y = (float) Main.rand.Next(-50, 51) * 0.01f;
                     Main.gore[index3].velocity *= 0.4f;
-                    int index4 =
+                    var index4 =
                         Gore.NewGore(
                             new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 24.0),
                                 (float) ((double) this.position.Y + (double) (this.height / 2) - 14.0)), new Vector2(),
@@ -14271,8 +14271,8 @@ namespace Terraria
                 }
                 else if (this.dash == 2)
                 {
-                    int num = 0;
-                    bool flag = false;
+                    var num = 0;
+                    var flag = false;
                     if (this.dashTime > 0)
                         --this.dashTime;
                     if (this.dashTime < 0)
@@ -14303,19 +14303,19 @@ namespace Terraria
                     if (!flag)
                         return;
                     this.velocity.X = 14.5f * (float) num;
-                    Point tileCoordinates1 = (this.Center + new Vector2((float) (num * this.width / 2 + 2),
+                    var tileCoordinates1 = (this.Center + new Vector2((float) (num * this.width / 2 + 2),
                                                   (float) ((double) this.gravDir * (double) -this.height / 2.0 +
                                                            (double) this.gravDir * 2.0))).ToTileCoordinates();
-                    Point tileCoordinates2 = (this.Center + new Vector2((float) (num * this.width / 2 + 2), 0.0f))
+                    var tileCoordinates2 = (this.Center + new Vector2((float) (num * this.width / 2 + 2), 0.0f))
                         .ToTileCoordinates();
                     if (WorldGen.SolidOrSlopedTile(tileCoordinates1.X, tileCoordinates1.Y) ||
                         WorldGen.SolidOrSlopedTile(tileCoordinates2.X, tileCoordinates2.Y))
                         this.velocity.X /= 2f;
                     this.dashDelay = -1;
                     this.eocDash = 15;
-                    for (int index1 = 0; index1 < 0; ++index1)
+                    for (var index1 = 0; index1 < 0; ++index1)
                     {
-                        int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width,
+                        var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width,
                             this.height, 31, 0.0f, 0.0f, 100, new Color(), 2f);
                         Main.dust[index2].position.X += (float) Main.rand.Next(-5, 6);
                         Main.dust[index2].position.Y += (float) Main.rand.Next(-5, 6);
@@ -14328,8 +14328,8 @@ namespace Terraria
                 {
                     if (this.dash != 3)
                         return;
-                    int num = 0;
-                    bool flag = false;
+                    var num = 0;
+                    var flag = false;
                     if (this.dashTime > 0)
                         --this.dashTime;
                     if (this.dashTime < 0)
@@ -14364,18 +14364,18 @@ namespace Terraria
                     if (!flag)
                         return;
                     this.velocity.X = 21.9f * (float) num;
-                    Point tileCoordinates1 = (this.Center + new Vector2((float) (num * this.width / 2 + 2),
+                    var tileCoordinates1 = (this.Center + new Vector2((float) (num * this.width / 2 + 2),
                                                   (float) ((double) this.gravDir * (double) -this.height / 2.0 +
                                                            (double) this.gravDir * 2.0))).ToTileCoordinates();
-                    Point tileCoordinates2 = (this.Center + new Vector2((float) (num * this.width / 2 + 2), 0.0f))
+                    var tileCoordinates2 = (this.Center + new Vector2((float) (num * this.width / 2 + 2), 0.0f))
                         .ToTileCoordinates();
                     if (WorldGen.SolidOrSlopedTile(tileCoordinates1.X, tileCoordinates1.Y) ||
                         WorldGen.SolidOrSlopedTile(tileCoordinates2.X, tileCoordinates2.Y))
                         this.velocity.X /= 2f;
                     this.dashDelay = -1;
-                    for (int index1 = 0; index1 < 20; ++index1)
+                    for (var index1 = 0; index1 < 20; ++index1)
                     {
-                        int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width,
+                        var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width,
                             this.height, 6, 0.0f, 0.0f, 100, new Color(), 2f);
                         Main.dust[index2].position.X += (float) Main.rand.Next(-5, 6);
                         Main.dust[index2].position.Y += (float) Main.rand.Next(-5, 6);
@@ -14395,16 +14395,16 @@ namespace Terraria
             if (this.slideDir == 0 || this.spikedBoots <= 0 || this.mount.Active ||
                 (!this.controlLeft || this.slideDir != -1) && (!this.controlRight || this.slideDir != 1))
                 return;
-            bool flag = false;
-            float x = this.position.X;
+            var flag = false;
+            var x = this.position.X;
             if (this.slideDir == 1)
                 x += (float) this.width;
-            float num1 = x + (float) this.slideDir;
-            float num2 = (float) ((double) this.position.Y + (double) this.height + 1.0);
+            var num1 = x + (float) this.slideDir;
+            var num2 = (float) ((double) this.position.Y + (double) this.height + 1.0);
             if ((double) this.gravDir < 0.0)
                 num2 = this.position.Y - 1f;
-            float num3 = num1 / 16f;
-            float num4 = num2 / 16f;
+            var num3 = num1 / 16f;
+            var num4 = num2 / 16f;
             if (WorldGen.SolidTile((int) num3, (int) num4) && WorldGen.SolidTile((int) num3, (int) num4 - 1))
                 flag = true;
             if (this.spikedBoots >= 2)
@@ -14412,14 +14412,14 @@ namespace Terraria
                 if (!flag || ((double) this.velocity.Y <= 0.0 || (double) this.gravDir != 1.0) &&
                     ((double) this.velocity.Y >= (double) this.gravity || (double) this.gravDir != -1.0))
                     return;
-                float num5 = this.gravity;
+                var num5 = this.gravity;
                 if (this.slowFall)
                     num5 = !this.controlUp ? this.gravity / 3f * this.gravDir : this.gravity / 10f * this.gravDir;
                 this.fallStart = (int) ((double) this.position.Y / 16.0);
                 if (this.controlDown && (double) this.gravDir == 1.0 || this.controlUp && (double) this.gravDir == -1.0)
                 {
                     this.velocity.Y = 4f * this.gravDir;
-                    int index = Dust.NewDust(
+                    var index = Dust.NewDust(
                         new Vector2(
                             this.position.X + (float) (this.width / 2) + (float) ((this.width / 2 - 4) * this.slideDir),
                             (float) ((double) this.position.Y + (double) (this.height / 2) +
@@ -14452,7 +14452,7 @@ namespace Terraria
                 else
                     this.velocity.Y = 0.5f * this.gravDir;
                 this.sliding = true;
-                int index = Dust.NewDust(
+                var index = Dust.NewDust(
                     new Vector2(
                         this.position.X + (float) (this.width / 2) + (float) ((this.width / 2 - 4) * this.slideDir),
                         (float) ((double) this.position.Y + (double) (this.height / 2) +
@@ -14471,7 +14471,7 @@ namespace Terraria
 
         public void CarpetMovement()
         {
-            bool flag = false;
+            var flag = false;
             if (this.grappling[0] == -1 && this.carpet && (!this.jumpAgainCloud && !this.jumpAgainSandstorm) &&
                 (!this.jumpAgainBlizzard && !this.jumpAgainFart && (!this.jumpAgainSail && !this.jumpAgainUnicorn)) &&
                 (this.jump == 0 && (double) this.velocity.Y != 0.0 &&
@@ -14488,7 +14488,7 @@ namespace Terraria
                     this.fallStart = (int) ((double) this.position.Y / 16.0);
                     flag = true;
                     --this.carpetTime;
-                    float gravity = this.gravity;
+                    var gravity = this.gravity;
                     if ((double) this.gravDir == 1.0 && (double) this.velocity.Y > -(double) gravity)
                         this.velocity.Y = (float) -((double) gravity + 9.99999997475243E-07);
                     else if ((double) this.gravDir == -1.0 && (double) this.velocity.Y < (double) gravity)
@@ -14520,10 +14520,10 @@ namespace Terraria
                 ((double) this.gravDir == 1.0 && (double) this.velocity.Y < 0.0 ||
                  (double) this.gravDir == -1.0 && (double) this.velocity.Y > 0.0))
             {
-                int num = this.height;
+                var num = this.height;
                 if ((double) this.gravDir == -1.0)
                     num = -6;
-                int index = Dust.NewDust(new Vector2(this.position.X - 4f, this.position.Y + (float) num),
+                var index = Dust.NewDust(new Vector2(this.position.X - 4f, this.position.Y + (float) num),
                     this.width + 8, 4, 16, (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f, 100,
                     new Color(), 1.5f);
                 Main.dust[index].velocity.X = (float) ((double) Main.dust[index].velocity.X * 0.5 -
@@ -14536,13 +14536,13 @@ namespace Terraria
                 ((double) this.gravDir == 1.0 && (double) this.velocity.Y < 0.0 ||
                  (double) this.gravDir == -1.0 && (double) this.velocity.Y > 0.0))
             {
-                int num = this.height;
+                var num = this.height;
                 if ((double) this.gravDir == -1.0)
                     num = -6;
-                float Scale = (float) (((double) this.jump / 75.0 + 1.0) / 2.0);
-                for (int index1 = 0; index1 < 3; ++index1)
+                var Scale = (float) (((double) this.jump / 75.0 + 1.0) / 2.0);
+                for (var index1 = 0; index1 < 3; ++index1)
                 {
-                    int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) (num / 2)),
+                    var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) (num / 2)),
                         this.width, 32, 124, this.velocity.X * 0.3f, this.velocity.Y * 0.3f, 150, new Color(),
                         1f * Scale);
                     Main.dust[index2].velocity *= 0.5f * Scale;
@@ -14552,7 +14552,7 @@ namespace Terraria
                 this.sandStorm = true;
                 if (this.miscCounter % 3 == 0)
                 {
-                    int index = Gore.NewGore(
+                    var index = Gore.NewGore(
                         new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 18.0),
                             this.position.Y + (float) (num / 2)), new Vector2(-this.velocity.X, -this.velocity.Y),
                         Main.rand.Next(220, 223), Scale);
@@ -14565,10 +14565,10 @@ namespace Terraria
                 ((double) this.gravDir == 1.0 && (double) this.velocity.Y < 0.0 ||
                  (double) this.gravDir == -1.0 && (double) this.velocity.Y > 0.0))
             {
-                int num = this.height;
+                var num = this.height;
                 if ((double) this.gravDir == -1.0)
                     num = -6;
-                int index = Dust.NewDust(new Vector2(this.position.X - 4f, this.position.Y + (float) num),
+                var index = Dust.NewDust(new Vector2(this.position.X - 4f, this.position.Y + (float) num),
                     this.width + 8, 4, 188, (float) (-(double) this.velocity.X * 0.5), this.velocity.Y * 0.5f, 100,
                     new Color(), 1.5f);
                 Main.dust[index].velocity.X = (float) ((double) Main.dust[index].velocity.X * 0.5 -
@@ -14582,7 +14582,7 @@ namespace Terraria
                 ((double) this.gravDir == 1.0 && (double) this.velocity.Y < 0.0 ||
                  (double) this.gravDir == -1.0 && (double) this.velocity.Y > 0.0))
             {
-                Dust dust = Main.dust[Dust.NewDust(this.position, this.width, this.height, Utils.SelectRandom<int>(
+                var dust = Main.dust[Dust.NewDust(this.position, this.width, this.height, Utils.SelectRandom<int>(
                     Main.rand, new int[3]
                     {
                         176,
@@ -14600,15 +14600,15 @@ namespace Terraria
                 ((double) this.gravDir == 1.0 && (double) this.velocity.Y < 1.0 ||
                  (double) this.gravDir == -1.0 && (double) this.velocity.Y > 1.0))
             {
-                int num1 = 1;
+                var num1 = 1;
                 if (this.jump > 0)
                     num1 = 2;
-                int num2 = this.height - 6;
+                var num2 = this.height - 6;
                 if ((double) this.gravDir == -1.0)
                     num2 = 6;
-                for (int index1 = 0; index1 < num1; ++index1)
+                for (var index1 = 0; index1 < num1; ++index1)
                 {
-                    int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num2), this.width,
+                    var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num2), this.width,
                         12, 253, this.velocity.X * 0.3f, this.velocity.Y * 0.3f, 100, new Color(), 1.5f);
                     Main.dust[index2].scale += (float) Main.rand.Next(-5, 3) * 0.1f;
                     if (this.jump <= 0)
@@ -14616,7 +14616,7 @@ namespace Terraria
                     else
                         Main.dust[index2].velocity -= this.velocity / 5f;
                     Main.dust[index2].noGravity = true;
-                    Vector2 vector2 = new Vector2((float) Main.rand.Next(-100, 101), (float) Main.rand.Next(-100, 101));
+                    var vector2 = new Vector2((float) Main.rand.Next(-100, 101), (float) Main.rand.Next(-100, 101));
                     vector2.Normalize();
                     vector2 *= (float) Main.rand.Next(81) * 0.1f;
                 }
@@ -14626,12 +14626,12 @@ namespace Terraria
                 ((double) this.gravDir != 1.0 || (double) this.velocity.Y >= 0.0) &&
                 ((double) this.gravDir != -1.0 || (double) this.velocity.Y <= 0.0))
                 return;
-            int num3 = this.height - 6;
+            var num3 = this.height - 6;
             if ((double) this.gravDir == -1.0)
                 num3 = 6;
-            for (int index1 = 0; index1 < 2; ++index1)
+            for (var index1 = 0; index1 < 2; ++index1)
             {
-                int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num3), this.width, 12,
+                var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num3), this.width, 12,
                     76, this.velocity.X * 0.3f, this.velocity.Y * 0.3f, 0, new Color(), 1f);
                 Main.dust[index2].velocity *= 0.1f;
                 if (index1 == 0)
@@ -14643,9 +14643,9 @@ namespace Terraria
                 Main.dust[index2].noLight = true;
             }
 
-            for (int index1 = 0; index1 < 3; ++index1)
+            for (var index1 = 0; index1 < 3; ++index1)
             {
-                int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num3), this.width, 12,
+                var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num3), this.width, 12,
                     76, this.velocity.X * 0.3f, this.velocity.Y * 0.3f, 0, new Color(), 1f);
                 Main.dust[index2].fadeIn = 1.5f;
                 Main.dust[index2].velocity *= 0.6f;
@@ -14654,9 +14654,9 @@ namespace Terraria
                 Main.dust[index2].noLight = true;
             }
 
-            for (int index1 = 0; index1 < 3; ++index1)
+            for (var index1 = 0; index1 < 3; ++index1)
             {
-                int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num3), this.width, 12,
+                var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y + (float) num3), this.width, 12,
                     76, this.velocity.X * 0.3f, this.velocity.Y * 0.3f, 0, new Color(), 1f);
                 Main.dust[index2].fadeIn = 1.5f;
                 Main.dust[index2].velocity *= 0.6f;
@@ -14694,11 +14694,11 @@ namespace Terraria
             }
             else
             {
-                float num1 = 0.1f;
-                float num2 = 0.5f;
-                float num3 = 1.5f;
-                float num4 = 0.5f;
-                float num5 = 0.1f;
+                var num1 = 0.1f;
+                var num2 = 0.5f;
+                var num3 = 1.5f;
+                var num4 = 0.5f;
+                var num5 = 0.1f;
                 if (this.wingsLogic == 26)
                 {
                     num2 = 0.75f;
@@ -14764,8 +14764,8 @@ namespace Terraria
 
         public void MoonLeechRope()
         {
-            int index1 = -1;
-            for (int index2 = 0; index2 < 1000; ++index2)
+            var index1 = -1;
+            for (var index2 = 0; index2 < 1000; ++index2)
             {
                 if (Main.projectile[index2].active && Main.projectile[index2].type == 456 &&
                     (double) Main.projectile[index2].ai[1] == (double) this.whoAmI)
@@ -14777,13 +14777,13 @@ namespace Terraria
 
             if (index1 == -1 || (double) Main.projectile[index1].ai[0] < 0.0)
                 return;
-            Projectile projectile = Main.projectile[index1];
-            Vector2 vector2_1 = new Vector2(0.0f, 216f);
-            Vector2 vector2_2 = Main.npc[(int) Math.Abs(projectile.ai[0]) - 1].Center - this.Center + vector2_1;
+            var projectile = Main.projectile[index1];
+            var vector2_1 = new Vector2(0.0f, 216f);
+            var vector2_2 = Main.npc[(int) Math.Abs(projectile.ai[0]) - 1].Center - this.Center + vector2_1;
             if ((double) vector2_2.Length() <= 200.0)
                 return;
-            Vector2 vector2_3 = Vector2.Normalize(vector2_2);
-            Player player = this;
+            var vector2_3 = Vector2.Normalize(vector2_2);
+            var player = this;
             player.position = player.position + vector2_3 * (vector2_2.Length() - 200f);
         }
 
@@ -14791,7 +14791,7 @@ namespace Terraria
         {
             if (Main.wof < 0 || !Main.npc[Main.wof].active)
                 return;
-            float num1 = Main.npc[Main.wof].position.X + 40f;
+            var num1 = Main.npc[Main.wof].position.X + 40f;
             if (Main.npc[Main.wof].direction > 0)
                 num1 -= 96f;
             if ((double) this.position.X + (double) this.width > (double) num1 &&
@@ -14829,16 +14829,16 @@ namespace Terraria
                 return;
             this.controlHook = false;
             this.controlUseItem = false;
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                     Main.projectile[index].aiStyle == 7)
                     Main.projectile[index].Kill();
             }
 
-            Vector2 center = this.Center;
-            float num2 = Main.npc[Main.wof].position.X + (float) (Main.npc[Main.wof].width / 2) - center.X;
-            float num3 = Main.npc[Main.wof].position.Y + (float) (Main.npc[Main.wof].height / 2) - center.Y;
+            var center = this.Center;
+            var num2 = Main.npc[Main.wof].position.X + (float) (Main.npc[Main.wof].width / 2) - center.X;
+            var num3 = Main.npc[Main.wof].position.Y + (float) (Main.npc[Main.wof].height / 2) - center.Y;
             if (Math.Sqrt((double) num2 * (double) num2 + (double) num3 * (double) num3) > 3000.0)
             {
                 this.KillMe(PlayerDeathReason.ByOther(11), 1000.0, 0, false);
@@ -14856,7 +14856,7 @@ namespace Terraria
         {
             if (Main.expertMode && (npc.type == 266 && Main.rand.Next(3) == 0 || npc.type == 267))
             {
-                int num1 = Main.rand.Next(9);
+                var num1 = Main.rand.Next(9);
                 switch (num1)
                 {
                     case 2:
@@ -14865,7 +14865,7 @@ namespace Terraria
                         break;
                 }
 
-                float num2 = (float) Main.rand.Next(75, 150) * 0.01f;
+                var num2 = (float) Main.rand.Next(75, 150) * 0.01f;
                 if (num1 == 0)
                     this.AddBuff(20, (int) (60.0 * (double) num2 * 3.5), true);
                 else if (num1 == 1)
@@ -14923,7 +14923,7 @@ namespace Terraria
                 this.AddBuff(103, 60 * Main.rand.Next(3, 8), true);
             if (npc.type == 370 && Main.expertMode)
             {
-                int type = Utils.SelectRandom<int>(Main.rand, new int[3]
+                var type = Utils.SelectRandom<int>(Main.rand, new int[3]
                 {
                     0,
                     148,
@@ -15011,44 +15011,44 @@ namespace Terraria
             this.canRocket = false;
             this.rocketRelease = false;
             this.fallStart = (int) ((double) this.position.Y / 16.0);
-            int index1 = -1;
-            float num1 = 0.0f;
-            float num2 = 0.0f;
-            for (int index2 = 0; index2 < this.grapCount; ++index2)
+            var index1 = -1;
+            var num1 = 0.0f;
+            var num2 = 0.0f;
+            for (var index2 = 0; index2 < this.grapCount; ++index2)
             {
-                Projectile projectile = Main.projectile[this.grappling[index2]];
+                var projectile = Main.projectile[this.grappling[index2]];
                 num1 += projectile.position.X + (float) (projectile.width / 2);
                 num2 += projectile.position.Y + (float) (projectile.height / 2);
                 if (projectile.type == 403)
                     index1 = index2;
                 else if (projectile.type == 446)
                 {
-                    Vector2 vector2_1 = new Vector2((float) (this.controlRight.ToInt() - this.controlLeft.ToInt()),
+                    var vector2_1 = new Vector2((float) (this.controlRight.ToInt() - this.controlLeft.ToInt()),
                         (float) (this.controlDown.ToInt() - this.controlUp.ToInt()) * this.gravDir);
                     if (vector2_1 != Vector2.Zero)
                         vector2_1.Normalize();
                     vector2_1 *= 100f;
-                    Vector2 vector2_2 = Vector2.Normalize(this.Center - projectile.Center + vector2_1);
+                    var vector2_2 = Vector2.Normalize(this.Center - projectile.Center + vector2_1);
                     if (float.IsNaN(vector2_2.X) || float.IsNaN(vector2_2.Y))
                         vector2_2 = -Vector2.UnitY;
-                    float num3 = 200f;
+                    var num3 = 200f;
                     num1 += vector2_2.X * num3;
                     num2 += vector2_2.Y * num3;
                 }
                 else if (projectile.type == 652)
                 {
-                    Vector2 vector2_1 = new Vector2((float) (this.controlRight.ToInt() - this.controlLeft.ToInt()),
+                    var vector2_1 = new Vector2((float) (this.controlRight.ToInt() - this.controlLeft.ToInt()),
                         (float) (this.controlDown.ToInt() - this.controlUp.ToInt()) * this.gravDir);
                     if (vector2_1 != Vector2.Zero)
                         vector2_1.Normalize();
-                    Vector2 vector2_2 = projectile.Center - this.Center;
-                    Vector2 vector2_3 = vector2_2;
+                    var vector2_2 = projectile.Center - this.Center;
+                    var vector2_3 = vector2_2;
                     if (vector2_3 != Vector2.Zero)
                         vector2_3.Normalize();
-                    Vector2 vector2_4 = Vector2.Zero;
+                    var vector2_4 = Vector2.Zero;
                     if (vector2_1 != Vector2.Zero)
                         vector2_4 = vector2_3 * Vector2.Dot(vector2_3, vector2_1);
-                    float num3 = 6f;
+                    var num3 = 6f;
                     if ((double) Vector2.Dot(vector2_4, vector2_2) < 0.0 && (double) vector2_2.Length() >= 600.0)
                         num3 = 0.0f;
                     num1 += (float) (-(double) vector2_2.X + (double) vector2_4.X * (double) num3);
@@ -15056,35 +15056,35 @@ namespace Terraria
                 }
             }
 
-            float num4 = num1 / (float) this.grapCount;
-            float num5 = num2 / (float) this.grapCount;
-            Vector2 vector2 = new Vector2(this.position.X + (float) this.width * 0.5f,
+            var num4 = num1 / (float) this.grapCount;
+            var num5 = num2 / (float) this.grapCount;
+            var vector2 = new Vector2(this.position.X + (float) this.width * 0.5f,
                 this.position.Y + (float) this.height * 0.5f);
-            float num6 = num4 - vector2.X;
-            float num7 = num5 - vector2.Y;
-            float num8 = (float) Math.Sqrt((double) num6 * (double) num6 + (double) num7 * (double) num7);
-            float num9 = 11f;
+            var num6 = num4 - vector2.X;
+            var num7 = num5 - vector2.Y;
+            var num8 = (float) Math.Sqrt((double) num6 * (double) num6 + (double) num7 * (double) num7);
+            var num9 = 11f;
             if (Main.projectile[this.grappling[0]].type == 315)
                 num9 = 16f;
             if (Main.projectile[this.grappling[0]].type >= 646 && Main.projectile[this.grappling[0]].type <= 649)
                 num9 = 13f;
-            float num10 = (double) num8 <= (double) num9 ? 1f : num9 / num8;
-            float num11 = num6 * num10;
-            float num12 = num7 * num10;
+            var num10 = (double) num8 <= (double) num9 ? 1f : num9 / num8;
+            var num11 = num6 * num10;
+            var num12 = num7 * num10;
             if ((double) num12 > 0.0)
                 this.GoingDownWithGrapple = true;
             this.velocity.X = num11;
             this.velocity.Y = num12;
             if (index1 != -1)
             {
-                Projectile projectile = Main.projectile[this.grappling[index1]];
+                var projectile = Main.projectile[this.grappling[index1]];
                 if ((double) projectile.position.X < (double) this.position.X + (double) this.width &&
                     (double) projectile.position.X + (double) projectile.width >= (double) this.position.X &&
                     ((double) projectile.position.Y < (double) this.position.Y + (double) this.height &&
                      (double) projectile.position.Y + (double) projectile.height >= (double) this.position.Y))
                 {
-                    int tileX = (int) ((double) projectile.position.X + (double) (projectile.width / 2)) / 16;
-                    int tileY = (int) ((double) projectile.position.Y + (double) (projectile.height / 2)) / 16;
+                    var tileX = (int) ((double) projectile.position.X + (double) (projectile.width / 2)) / 16;
+                    var tileY = (int) ((double) projectile.position.Y + (double) (projectile.height / 2)) / 16;
                     this.velocity = Vector2.Zero;
                     if (Main.tile[tileX, tileY].type == (ushort) 314)
                     {
@@ -15094,19 +15094,19 @@ namespace Terraria
                                      (float) (this.height / 2);
                         this.grappling[0] = -1;
                         this.grapCount = 0;
-                        for (int index2 = 0; index2 < 1000; ++index2)
+                        for (var index2 = 0; index2 < 1000; ++index2)
                         {
                             if (Main.projectile[index2].active && Main.projectile[index2].owner == this.whoAmI &&
                                 Main.projectile[index2].aiStyle == 7)
                                 Main.projectile[index2].Kill();
                         }
 
-                        int num3 = 13;
+                        var num3 = 13;
                         if (this.miscEquips[2].stack > 0 && this.miscEquips[2].mountType >= 0 &&
                             MountID.Sets.Cart[this.miscEquips[2].mountType] &&
                             (!this.miscEquips[2].expertOnly || Main.expertMode))
                             num3 = this.miscEquips[2].mountType;
-                        int Height = this.height + Mount.GetHeightBoost(num3);
+                        var Height = this.height + Mount.GetHeightBoost(num3);
                         if (Minecart.GetOnTrack(tileX, tileY, ref Position, this.width, Height) &&
                             !Collision.SolidCollision(Position, this.width, Height - 20))
                         {
@@ -15160,7 +15160,7 @@ namespace Terraria
                     this.jumpAgainUnicorn = true;
                 this.grappling[0] = 0;
                 this.grapCount = 0;
-                for (int index2 = 0; index2 < 1000; ++index2)
+                for (var index2 = 0; index2 < 1000; ++index2)
                 {
                     if (Main.projectile[index2].active && Main.projectile[index2].owner == this.whoAmI &&
                         Main.projectile[index2].aiStyle == 7)
@@ -15173,21 +15173,21 @@ namespace Terraria
 
         public void StickyMovement()
         {
-            bool flag = false;
+            var flag = false;
             if (this.mount.Type == 6 && (double) Math.Abs(this.velocity.X) > 5.0)
                 flag = true;
             if (this.mount.Type == 13 && (double) Math.Abs(this.velocity.X) > 5.0)
                 flag = true;
             if (this.mount.Type == 11 && (double) Math.Abs(this.velocity.X) > 5.0)
                 flag = true;
-            Vector2 vector2_1 = new Vector2(this.position.X + (float) (this.width / 2) - (float) (this.width / 2 / 2),
+            var vector2_1 = new Vector2(this.position.X + (float) (this.width / 2) - (float) (this.width / 2 / 2),
                 this.position.Y + (float) (this.height / 2) - (float) (this.height / 2 / 2));
-            Vector2 vector2_2 = Collision.StickyTiles(this.position, this.velocity, this.width, this.height);
+            var vector2_2 = Collision.StickyTiles(this.position, this.velocity, this.width, this.height);
             if ((double) vector2_2.Y != -1.0 && (double) vector2_2.X != -1.0)
             {
-                int x = (int) vector2_2.X;
-                int y = (int) vector2_2.Y;
-                int type = (int) Main.tile[x, y].type;
+                var x = (int) vector2_2.X;
+                var y = (int) vector2_2.Y;
+                var type = (int) Main.tile[x, y].type;
                 if (this.whoAmI == Main.myPlayer && type == 51 &&
                     ((double) this.velocity.X != 0.0 || (double) this.velocity.Y != 0.0))
                 {
@@ -15227,7 +15227,7 @@ namespace Terraria
                     return;
                 if ((double) (x * 16) < (double) this.position.X + (double) (this.width / 2))
                 {
-                    int index = Dust.NewDust(new Vector2(this.position.X - 4f, (float) (y * 16)), 4, 16, 153, 0.0f,
+                    var index = Dust.NewDust(new Vector2(this.position.X - 4f, (float) (y * 16)), 4, 16, 153, 0.0f,
                         0.0f, 50, new Color(), 1f);
                     Main.dust[index].scale += (float) Main.rand.Next(0, 6) * 0.1f;
                     Main.dust[index].velocity *= 0.1f;
@@ -15235,7 +15235,7 @@ namespace Terraria
                 }
                 else
                 {
-                    int index = Dust.NewDust(
+                    var index = Dust.NewDust(
                         new Vector2((float) ((double) this.position.X + (double) this.width - 2.0), (float) (y * 16)),
                         4, 16, 153, 0.0f, 0.0f, 50, new Color(), 1f);
                     Main.dust[index].scale += (float) Main.rand.Next(0, 6) * 0.1f;
@@ -15248,7 +15248,7 @@ namespace Terraria
                 {
                     if ((double) (x * 16) < (double) this.position.X + (double) (this.width / 2))
                     {
-                        int index = Dust.NewDust(new Vector2(this.position.X - 4f, (float) (y * 16 + 16)), 4, 16, 153,
+                        var index = Dust.NewDust(new Vector2(this.position.X - 4f, (float) (y * 16 + 16)), 4, 16, 153,
                             0.0f, 0.0f, 50, new Color(), 1f);
                         Main.dust[index].scale += (float) Main.rand.Next(0, 6) * 0.1f;
                         Main.dust[index].velocity *= 0.1f;
@@ -15256,7 +15256,7 @@ namespace Terraria
                     }
                     else
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2((float) ((double) this.position.X + (double) this.width - 2.0),
                                 (float) (y * 16 + 16)), 4, 16, 153, 0.0f, 0.0f, 50, new Color(), 1f);
                         Main.dust[index].scale += (float) Main.rand.Next(0, 6) * 0.1f;
@@ -15270,7 +15270,7 @@ namespace Terraria
                     return;
                 if ((double) (x * 16) < (double) this.position.X + (double) (this.width / 2))
                 {
-                    int index = Dust.NewDust(new Vector2(this.position.X - 4f, (float) (y * 16 + 32)), 4, 16, 153, 0.0f,
+                    var index = Dust.NewDust(new Vector2(this.position.X - 4f, (float) (y * 16 + 32)), 4, 16, 153, 0.0f,
                         0.0f, 50, new Color(), 1f);
                     Main.dust[index].scale += (float) Main.rand.Next(0, 6) * 0.1f;
                     Main.dust[index].velocity *= 0.1f;
@@ -15278,7 +15278,7 @@ namespace Terraria
                 }
                 else
                 {
-                    int index = Dust.NewDust(
+                    var index = Dust.NewDust(
                         new Vector2((float) ((double) this.position.X + (double) this.width - 2.0),
                             (float) (y * 16 + 32)), 4, 16, 153, 0.0f, 0.0f, 50, new Color(), 1f);
                     Main.dust[index].scale += (float) Main.rand.Next(0, 6) * 0.1f;
@@ -15292,7 +15292,7 @@ namespace Terraria
 
         public bool IsStackingItems()
         {
-            for (int index = 0; index < this.inventoryChestStack.Length; ++index)
+            for (var index = 0; index < this.inventoryChestStack.Length; ++index)
             {
                 if (this.inventoryChestStack[index])
                 {
@@ -15311,7 +15311,7 @@ namespace Terraria
                 return;
             if (Main.netMode == 1)
             {
-                for (int number = 10; number < 50; ++number)
+                for (var number = 10; number < 50; ++number)
                 {
                     if (this.inventory[number].type > 0 && this.inventory[number].stack > 0 &&
                         !this.inventory[number].favorited &&
@@ -15326,14 +15326,14 @@ namespace Terraria
             }
             else
             {
-                bool flag = false;
-                for (int index = 10; index < 50; ++index)
+                var flag = false;
+                for (var index = 10; index < 50; ++index)
                 {
                     if (this.inventory[index].type > 0 && this.inventory[index].stack > 0 &&
                         !this.inventory[index].favorited)
                     {
-                        int type = this.inventory[index].type;
-                        int stack = this.inventory[index].stack;
+                        var type = this.inventory[index].type;
+                        var stack = this.inventory[index].stack;
                         this.inventory[index] = Chest.PutItemInNearbyChest(this.inventory[index], this.Center);
                         if (this.inventory[index].type != type || this.inventory[index].stack != stack)
                             flag = true;
@@ -15348,19 +15348,19 @@ namespace Terraria
 
         public void CheckDrowning()
         {
-            bool flag = Collision.DrownCollision(this.position, this.width, this.height, this.gravDir);
+            var flag = Collision.DrownCollision(this.position, this.width, this.height, this.gravDir);
             if (this.armor[0].type == 250)
                 flag = true;
             if (this.inventory[this.selectedItem].type == 186)
             {
                 try
                 {
-                    int index1 = (int) (((double) this.position.X + (double) (this.width / 2) +
+                    var index1 = (int) (((double) this.position.X + (double) (this.width / 2) +
                                          (double) (6 * this.direction)) / 16.0);
-                    int num = 0;
+                    var num = 0;
                     if ((double) this.gravDir == -1.0)
                         num = this.height;
-                    int index2 = (int) (((double) this.position.Y + (double) num - 44.0 * (double) this.gravDir) /
+                    var index2 = (int) (((double) this.position.Y + (double) num - 44.0 * (double) this.gravDir) /
                                         16.0);
                     if (Main.tile[index1, index2].liquid < (byte) 128)
                     {
@@ -15390,7 +15390,7 @@ namespace Terraria
                 if (flag)
                 {
                     ++this.breathCD;
-                    int num = 7;
+                    var num = 7;
                     if (this.inventory[this.selectedItem].type == 186)
                         num *= 2;
                     if (this.accDivingHelm)
@@ -15425,7 +15425,7 @@ namespace Terraria
 
             if (!flag || Main.rand.Next(20) != 0 || (this.lavaWet || this.honeyWet))
                 return;
-            int num1 = 0;
+            var num1 = 0;
             if ((double) this.gravDir == -1.0)
                 num1 += this.height - 12;
             if (this.inventory[this.selectedItem].type == 186)
@@ -15444,13 +15444,13 @@ namespace Terraria
         {
             if ((double) this.velocity.Y <= 7.0)
                 return;
-            Vector2 vector2 = this.position + this.velocity;
-            int num1 = (int) ((double) vector2.X / 16.0);
-            int num2 = (int) (((double) vector2.X + (double) this.width) / 16.0);
-            int num3 = (int) (((double) this.position.Y + (double) this.height + 1.0) / 16.0);
-            for (int i = num1; i <= num2; ++i)
+            var vector2 = this.position + this.velocity;
+            var num1 = (int) ((double) vector2.X / 16.0);
+            var num2 = (int) (((double) vector2.X + (double) this.width) / 16.0);
+            var num3 = (int) (((double) this.position.Y + (double) this.height + 1.0) / 16.0);
+            for (var i = num1; i <= num2; ++i)
             {
-                for (int j = num3; j <= num3 + 1; ++j)
+                for (var j = num3; j <= num3 + 1; ++j)
                 {
                     if (Main.tile[i, j].nactive() && Main.tile[i, j].type == (ushort) 162 &&
                         !WorldGen.SolidTile(i, j - 1))
@@ -15466,8 +15466,8 @@ namespace Terraria
         public void SlopeDownMovement()
         {
             this.sloping = false;
-            float y = this.velocity.Y;
-            Vector4 vector4 = Collision.WalkDownSlope(this.position, this.velocity, this.width, this.height,
+            var y = this.velocity.Y;
+            var vector4 = Collision.WalkDownSlope(this.position, this.velocity, this.width, this.height,
                 this.gravity * this.gravDir);
             this.position.X = vector4.X;
             this.position.Y = vector4.Y;
@@ -15480,55 +15480,55 @@ namespace Terraria
 
         public void HoneyCollision(bool fallThrough, bool ignorePlats)
         {
-            int Height = !this.onTrack ? this.height : this.height - 20;
-            Vector2 velocity = this.velocity;
+            var Height = !this.onTrack ? this.height : this.height - 20;
+            var velocity = this.velocity;
             this.velocity = Collision.TileCollision(this.position, this.velocity, this.width, Height, fallThrough,
                 ignorePlats, (int) this.gravDir);
-            Vector2 vector2 = this.velocity * 0.25f;
+            var vector2 = this.velocity * 0.25f;
             if ((double) this.velocity.X != (double) velocity.X)
                 vector2.X = this.velocity.X;
             if ((double) this.velocity.Y != (double) velocity.Y)
                 vector2.Y = this.velocity.Y;
-            Player player = this;
+            var player = this;
             player.position = player.position + vector2;
         }
 
         public void WaterCollision(bool fallThrough, bool ignorePlats)
         {
-            int Height = !this.onTrack ? this.height : this.height - 20;
-            Vector2 velocity = this.velocity;
+            var Height = !this.onTrack ? this.height : this.height - 20;
+            var velocity = this.velocity;
             this.velocity = Collision.TileCollision(this.position, this.velocity, this.width, Height, fallThrough,
                 ignorePlats, (int) this.gravDir);
-            Vector2 vector2 = this.velocity * 0.5f;
+            var vector2 = this.velocity * 0.5f;
             if ((double) this.velocity.X != (double) velocity.X)
                 vector2.X = this.velocity.X;
             if ((double) this.velocity.Y != (double) velocity.Y)
                 vector2.Y = this.velocity.Y;
-            Player player = this;
+            var player = this;
             player.position = player.position + vector2;
         }
 
         public void DryCollision(bool fallThrough, bool ignorePlats)
         {
-            int Height = !this.onTrack ? this.height : this.height - 10;
+            var Height = !this.onTrack ? this.height : this.height - 10;
             if ((double) this.velocity.Length() > 16.0)
             {
-                Vector2 vector2_1 = Collision.TileCollision(this.position, this.velocity, this.width, Height,
+                var vector2_1 = Collision.TileCollision(this.position, this.velocity, this.width, Height,
                     fallThrough, ignorePlats, (int) this.gravDir);
-                float num1 = this.velocity.Length();
-                Vector2 vector2_2 = Vector2.Normalize(this.velocity);
+                var num1 = this.velocity.Length();
+                var vector2_2 = Vector2.Normalize(this.velocity);
                 if ((double) vector2_1.Y == 0.0)
                     vector2_2.Y = 0.0f;
-                Vector2 zero1 = Vector2.Zero;
-                bool flag = this.mount.Type == 7 || this.mount.Type == 8 || this.mount.Type == 12;
-                Vector2 zero2 = Vector2.Zero;
+                var zero1 = Vector2.Zero;
+                var flag = this.mount.Type == 7 || this.mount.Type == 8 || this.mount.Type == 12;
+                var zero2 = Vector2.Zero;
                 while ((double) num1 > 0.0)
                 {
-                    float num2 = num1;
+                    var num2 = num1;
                     if ((double) num2 > 16.0)
                         num2 = 16f;
                     num1 -= num2;
-                    Vector2 velocity1 = vector2_2 * num2;
+                    var velocity1 = vector2_2 * num2;
                     this.velocity = velocity1;
                     this.SlopeDownMovement();
                     velocity1 = this.velocity;
@@ -15549,22 +15549,22 @@ namespace Terraria
                         Collision.StepUp(ref this.position, ref velocity1, this.width, this.height, ref this.stepSpeed,
                             ref this.gfxOffY, (int) this.gravDir, this.controlUp, 0);
 
-                    Vector2 Velocity = Collision.TileCollision(this.position, velocity1, this.width, Height,
+                    var Velocity = Collision.TileCollision(this.position, velocity1, this.width, Height,
                         fallThrough, ignorePlats, (int) this.gravDir);
                     if (Collision.up && (double) this.gravDir == 1.0)
                         this.jump = 0;
                     if (this.waterWalk || this.waterWalk2)
                     {
-                        Vector2 velocity2 = this.velocity;
+                        var velocity2 = this.velocity;
                         Velocity = Collision.WaterCollision(this.position, Velocity, this.width, this.height,
                             fallThrough, false, this.waterWalk);
                         if (velocity2 != this.velocity)
                             this.fallStart = (int) ((double) this.position.Y / 16.0);
                     }
 
-                    Player player = this;
+                    var player = this;
                     player.position = player.position + Velocity;
-                    bool Falling = false;
+                    var Falling = false;
                     if ((double) Velocity.Y > (double) this.gravity)
                         Falling = true;
                     if ((double) Velocity.Y < -(double) this.gravity)
@@ -15589,14 +15589,14 @@ namespace Terraria
                     this.jump = 0;
                 if (this.waterWalk || this.waterWalk2)
                 {
-                    Vector2 velocity = this.velocity;
+                    var velocity = this.velocity;
                     this.velocity = Collision.WaterCollision(this.position, this.velocity, this.width, this.height,
                         fallThrough, false, this.waterWalk);
                     if (velocity != this.velocity)
                         this.fallStart = (int) ((double) this.position.Y / 16.0);
                 }
 
-                Player player = this;
+                var player = this;
                 player.position = player.position + this.velocity;
             }
         }
@@ -15605,7 +15605,7 @@ namespace Terraria
         {
             if (this.controlDown || this.grappling[0] >= 0 || (double) this.gravDir == -1.0)
                 this.stairFall = true;
-            Vector4 vector4 = Collision.SlopeCollision(this.position, this.velocity, this.width, this.height,
+            var vector4 = Collision.SlopeCollision(this.position, this.velocity, this.width, this.height,
                 this.gravity, this.stairFall);
             if (Collision.stairFall)
                 this.stairFall = true;
@@ -15618,7 +15618,7 @@ namespace Terraria
                 this.stepSpeed = 4f;
             }
 
-            double y = (double) this.velocity.Y;
+            var y = (double) this.velocity.Y;
             this.position.X = vector4.X;
             this.position.Y = vector4.Y;
             this.velocity.X = vector4.Z;
@@ -15630,11 +15630,11 @@ namespace Terraria
 
         public void FloorVisuals(bool Falling)
         {
-            int index1 = (int) (((double) this.position.X + (double) (this.width / 2)) / 16.0);
-            int index2 = (int) (((double) this.position.Y + (double) this.height) / 16.0);
+            var index1 = (int) (((double) this.position.X + (double) (this.width / 2)) / 16.0);
+            var index2 = (int) (((double) this.position.Y + (double) this.height) / 16.0);
             if ((double) this.gravDir == -1.0)
                 index2 = (int) ((double) this.position.Y - 0.100000001490116) / 16;
-            int type = -1;
+            var type = -1;
             if (Main.tile[index1 - 1, index2] == null)
                 Main.tile[index1 - 1, index2] = new Tile();
             if (Main.tile[index1 + 1, index2] == null)
@@ -15679,13 +15679,13 @@ namespace Terraria
                 (type != 116 && type != 196 && (type != 193 && type != 195) &&
                  (type != 197 && type != 199 && (type != 229 && type != 371))))
                 return;
-            int num1 = 1;
+            var num1 = 1;
             if (Falling)
                 num1 = 20;
-            for (int index1 = 0; index1 < num1; ++index1)
+            for (var index1 = 0; index1 < num1; ++index1)
             {
-                bool flag = true;
-                int Type = 76;
+                var flag = true;
+                var Type = 76;
                 if (type == 53)
                     Type = 32;
                 if (type == 189)
@@ -15726,28 +15726,28 @@ namespace Terraria
                     flag = false;
                 if (Type == 53 && Main.rand.Next(3) != 0)
                     flag = false;
-                Color newColor = new Color();
+                var newColor = new Color();
                 if (type == 193)
                     newColor = new Color(30, 100, (int) byte.MaxValue, 100);
                 if (type == 197)
                     newColor = new Color(97, 200, (int) byte.MaxValue, 100);
                 if (!Falling)
                 {
-                    float num2 = Math.Abs(this.velocity.X) / 3f;
+                    var num2 = Math.Abs(this.velocity.X) / 3f;
                     if ((double) Main.rand.Next(100) > (double) num2 * 100.0)
                         flag = false;
                 }
 
                 if (flag)
                 {
-                    float num2 = this.velocity.X;
+                    var num2 = this.velocity.X;
                     if ((double) num2 > 6.0)
                         num2 = 6f;
                     if ((double) num2 < -6.0)
                         num2 = -6f;
                     if ((double) this.velocity.X != 0.0 || Falling)
                     {
-                        int index2 =
+                        var index2 =
                             Dust.NewDust(
                                 new Vector2(this.position.X,
                                     (float) ((double) this.position.Y + (double) this.height - 2.0)), this.width, 6,
@@ -15832,12 +15832,12 @@ namespace Terraria
 
         public void CollectTaxes()
         {
-            int num1 = Item.buyPrice(0, 0, 0, 50);
-            int num2 = Item.buyPrice(0, 10, 0, 0);
+            var num1 = Item.buyPrice(0, 0, 0, 50);
+            var num2 = Item.buyPrice(0, 10, 0, 0);
             if (!NPC.taxCollector || this.taxMoney >= num2)
                 return;
-            int num3 = 0;
-            for (int index = 0; index < 200; ++index)
+            var num3 = 0;
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.npc[index].active && !Main.npc[index].homeless &&
                     NPC.TypeToHeadIndex(Main.npc[index].type) > 0)
@@ -15913,7 +15913,7 @@ namespace Terraria
             }
 
             maxFallSpeed += 0.01f;
-            bool flag = false;
+            var flag = false;
             if (Main.mapFullscreen)
             {
                 GamepadEnableGrappleCooldown();
@@ -15976,8 +15976,8 @@ namespace Terraria
                     base.position.Y -= (float) height;
                     if (mount.Type == 0)
                     {
-                        int num = (int) (base.position.X + (float) (width / 2)) / 16;
-                        int j = (int) (base.position.Y + (float) (height / 2) - 14f) / 16;
+                        var num = (int) (base.position.X + (float) (width / 2)) / 16;
+                        var j = (int) (base.position.Y + (float) (height / 2) - 14f) / 16;
                         Lighting.AddLight(num, j, 0.5f, 0.2f, 0.05f);
                         Lighting.AddLight(num + base.direction, j, 0.5f, 0.2f, 0.05f);
                         Lighting.AddLight(num + base.direction * 2, j, 0.5f, 0.2f, 0.05f);
@@ -15994,8 +15994,8 @@ namespace Terraria
                 outOfRange = false;
                 if (whoAmI != Main.myPlayer)
                 {
-                    int num2 = (int) (base.position.X + (float) (width / 2)) / 16;
-                    int num3 = (int) (base.position.Y + (float) (height / 2)) / 16;
+                    var num2 = (int) (base.position.X + (float) (width / 2)) / 16;
+                    var num3 = (int) (base.position.Y + (float) (height / 2)) / 16;
                     if (!WorldGen.InWorld(num2, num3, 4))
                     {
                         flag = true;
@@ -16063,9 +16063,9 @@ namespace Terraria
                     infernoCounter = 0;
                 }
 
-                float num4 = (float) (Main.maxTilesX / 4200);
+                var num4 = (float) (Main.maxTilesX / 4200);
                 num4 *= num4;
-                float num5 =
+                var num5 =
                     (float) ((double) (base.position.Y / 16f - (60f + 10f * num4)) / (Main.worldSurface / 6.0));
                 if ((double) num5 < 0.25)
                 {
@@ -16373,7 +16373,7 @@ namespace Terraria
                                             talkNPC = -1;
                                             Main.npcChatCornerItem = 0;
                                             Main.PlaySound(10, -1, -1, 1, 1f, 0f);
-                                            float num6 = Main.mapFullscreenScale = 2.5f;
+                                            var num6 = Main.mapFullscreenScale = 2.5f;
                                             Main.mapFullscreen = true;
                                             Main.resetMapFull = true;
                                             Main.buffString = string.Empty;
@@ -16394,8 +16394,8 @@ namespace Terraria
 
                             if (confused)
                             {
-                                bool flag2 = controlLeft;
-                                bool flag3 = controlUp;
+                                var flag2 = controlLeft;
+                                var flag3 = controlUp;
                                 controlLeft = controlRight;
                                 controlRight = flag2;
                                 controlUp = controlRight;
@@ -16405,7 +16405,7 @@ namespace Terraria
                             {
                                 if (controlRight || controlLeft)
                                 {
-                                    bool flag4 = controlLeft;
+                                    var flag4 = controlLeft;
                                     controlLeft = controlRight;
                                     controlRight = flag4;
                                 }
@@ -16415,7 +16415,7 @@ namespace Terraria
                                 }
                             }
 
-                            for (int k = 0; k < doubleTapCardinalTimer.Length; k++)
+                            for (var k = 0; k < doubleTapCardinalTimer.Length; k++)
                             {
                                 doubleTapCardinalTimer[k]--;
                                 if (doubleTapCardinalTimer[k] < 0)
@@ -16424,10 +16424,10 @@ namespace Terraria
                                 }
                             }
 
-                            for (int l = 0; l < 4; l++)
+                            for (var l = 0; l < 4; l++)
                             {
-                                bool flag5 = false;
-                                bool flag6 = false;
+                                var flag5 = false;
+                                var flag6 = false;
                                 switch (l)
                                 {
                                     case 0:
@@ -16498,8 +16498,8 @@ namespace Terraria
                             if (itemAnimation == 0 && itemTime == 0 && reuseDelay == 0)
                             {
                                 dropItemCheck();
-                                int num7 = selectedItem;
-                                bool flag7 = false;
+                                var num7 = selectedItem;
+                                var flag7 = false;
                                 if (!Main.drawingPlayerChat && selectedItem != 58 && !Main.editSign && !Main.editChest)
                                 {
                                     if (PlayerInput.Triggers.Current.Hotbar1)
@@ -16562,9 +16562,9 @@ namespace Terraria
                                         flag7 = true;
                                     }
 
-                                    int selectedBinding = DpadRadial.SelectedBinding;
-                                    int selectedBinding2 = CircularRadial.SelectedBinding;
-                                    int selectedBinding3 = QuicksRadial.SelectedBinding;
+                                    var selectedBinding = DpadRadial.SelectedBinding;
+                                    var selectedBinding2 = CircularRadial.SelectedBinding;
+                                    var selectedBinding3 = QuicksRadial.SelectedBinding;
                                     DpadRadial.Update();
                                     CircularRadial.Update();
                                     QuicksRadial.Update();
@@ -16617,11 +16617,11 @@ namespace Terraria
                                     }
                                 }
 
-                                bool flag8 = Main.hairWindow;
+                                var flag8 = Main.hairWindow;
                                 if (flag8)
                                 {
-                                    int y = Main.screenHeight / 2 + 60;
-                                    int x = Main.screenWidth / 2 - Main.hairStyleBackTexture.Width / 2;
+                                    var y = Main.screenHeight / 2 + 60;
+                                    var x = Main.screenWidth / 2 - Main.hairStyleBackTexture.Width / 2;
                                     rectangle = new Rectangle(x, y, Main.hairStyleBackTexture.Width,
                                         Main.hairStyleBackTexture.Height);
                                     flag8 = rectangle.Contains(Main.MouseScreen.ToPoint());
@@ -16639,7 +16639,7 @@ namespace Terraria
 
                                 if (Main.mapFullscreen)
                                 {
-                                    float num8 = (float) (PlayerInput.ScrollWheelDelta / 120);
+                                    var num8 = (float) (PlayerInput.ScrollWheelDelta / 120);
                                     if (PlayerInput.UsingGamepad)
                                     {
                                         num8 += (float) (PlayerInput.Triggers.Current.HotbarPlus.ToInt() -
@@ -16660,21 +16660,21 @@ namespace Terraria
                                     }
                                     else
                                     {
-                                        int num9 = PlayerInput.ScrollWheelDelta / 120;
-                                        bool flag9 = true;
+                                        var num9 = PlayerInput.ScrollWheelDelta / 120;
+                                        var flag9 = true;
                                         if (Main.recBigList)
                                         {
-                                            int num10 = 42;
-                                            int num11 = 340;
-                                            int num12 = 310;
+                                            var num10 = 42;
+                                            var num11 = 340;
+                                            var num12 = 310;
                                             PlayerInput.SetZoom_UI();
-                                            int num13 = (Main.screenWidth - num12 - 280) / num10;
-                                            int num14 = (Main.screenHeight - num11 - 20) / num10;
+                                            var num13 = (Main.screenWidth - num12 - 280) / num10;
+                                            var num14 = (Main.screenHeight - num11 - 20) / num10;
                                             rectangle = new Rectangle(num12, num11, num13 * num10, num14 * num10);
                                             if (rectangle.Contains(Main.MouseScreen.ToPoint()))
                                             {
                                                 num9 *= -1;
-                                                int num15 = Math.Sign(num9);
+                                                var num15 = Math.Sign(num9);
                                                 while (num9 != 0)
                                                 {
                                                     if (num9 < 0)
@@ -16719,10 +16719,10 @@ namespace Terraria
                             }
                             else
                             {
-                                bool flag10 = false;
+                                var flag10 = false;
                                 if (!Main.drawingPlayerChat && selectedItem != 58 && !Main.editSign && !Main.editChest)
                                 {
-                                    int num16 = -1;
+                                    var num16 = -1;
                                     if (Main.keyState.IsKeyDown(Keys.D1))
                                     {
                                         num16 = 0;
@@ -16809,14 +16809,14 @@ namespace Terraria
                         {
                             if (whoAmI == Main.myPlayer && stoned)
                             {
-                                int damage = (int) (20.0 * (double) Main.damageMultiplier);
+                                var damage = (int) (20.0 * (double) Main.damageMultiplier);
                                 Hurt(PlayerDeathReason.ByOther(5), damage, 0, false, false, false, -1);
                             }
 
                             Main.PlaySound(0, (int) base.position.X, (int) base.position.Y, 1, 1f, 0f);
-                            for (int m = 0; m < 20; m++)
+                            for (var m = 0; m < 20; m++)
                             {
-                                int num17 = Dust.NewDust(base.position, width, height, 1, 0f, 0f, 0, default(Color),
+                                var num17 = Dust.NewDust(base.position, width, height, 1, 0f, 0f, 0, default(Color),
                                     1f);
                                 if (Main.rand.Next(2) == 0)
                                 {
@@ -16850,7 +16850,7 @@ namespace Terraria
 
                         if (Main.netMode == 1)
                         {
-                            bool flag11 = false;
+                            var flag11 = false;
                             if (controlUp != Main.clientPlayer.controlUp)
                             {
                                 flag11 = true;
@@ -16915,8 +16915,8 @@ namespace Terraria
                                 }
                                 else
                                 {
-                                    int num18 = (int) (((double) base.position.X + (double) width * 0.5) / 16.0);
-                                    int num19 = (int) (((double) base.position.Y + (double) height * 0.5) / 16.0);
+                                    var num18 = (int) (((double) base.position.X + (double) width * 0.5) / 16.0);
+                                    var num19 = (int) (((double) base.position.Y + (double) height * 0.5) / 16.0);
                                     chestX = (int) Main.projectile[flyingPigChest].Center.X / 16;
                                     chestY = (int) Main.projectile[flyingPigChest].Center.Y / 16;
                                     if (num18 < chestX - tileRangeX || num18 > chestX + tileRangeX + 1 ||
@@ -16934,8 +16934,8 @@ namespace Terraria
                             }
                             else
                             {
-                                int num20 = (int) (((double) base.position.X + (double) width * 0.5) / 16.0);
-                                int num21 = (int) (((double) base.position.Y + (double) height * 0.5) / 16.0);
+                                var num20 = (int) (((double) base.position.X + (double) width * 0.5) / 16.0);
+                                var num21 = (int) (((double) base.position.Y + (double) height * 0.5) / 16.0);
                                 if (Main.tile[chestX, chestY].type == 463 && num21 < chestY)
                                 {
                                     num21 += 2;
@@ -16972,9 +16972,9 @@ namespace Terraria
 
                         if (base.velocity.Y == 0f)
                         {
-                            int num22 = 25;
+                            var num22 = 25;
                             num22 += extraFall;
-                            int num23 = (int) (base.position.Y / 16f) - fallStart;
+                            var num23 = (int) (base.position.Y / 16f) - fallStart;
                             if (mount.CanFly)
                             {
                                 num23 = 0;
@@ -16991,8 +16991,8 @@ namespace Terraria
                             }
 
                             mount.FatigueRecovery();
-                            bool flag12 = false;
-                            for (int n = 3; n < 10; n++)
+                            var flag12 = false;
+                            for (var n = 3; n < 10; n++)
                             {
                                 if (armor[n].stack > 0 && armor[n].wingSlot > -1)
                                 {
@@ -17002,7 +17002,7 @@ namespace Terraria
 
                             if (stoned)
                             {
-                                int num24 = (int) (((float) num23 * gravDir - 2f) * 20f);
+                                var num24 = (int) (((float) num23 * gravDir - 2f) * 20f);
                                 if (num24 > 0)
                                 {
                                     Hurt(PlayerDeathReason.ByOther(5), num24, 0, false, false, false, -1);
@@ -17013,7 +17013,7 @@ namespace Terraria
                                      !noFallDmg && !flag12)
                             {
                                 immune = false;
-                                int num25 = (int) ((float) num23 * gravDir - (float) num22) * 10;
+                                var num25 = (int) ((float) num23 * gravDir - (float) num22) * 10;
                                 if (mount.Active)
                                 {
                                     num25 = (int) ((float) num25 * mount.FallDamage);
@@ -17040,8 +17040,8 @@ namespace Terraria
                         if (chest == -1 && lastChest >= 0 && Main.chest[lastChest] != null &&
                             Main.chest[lastChest] != null)
                         {
-                            int x2 = Main.chest[lastChest].x;
-                            int y2 = Main.chest[lastChest].y;
+                            var x2 = Main.chest[lastChest].x;
+                            var y2 = Main.chest[lastChest].y;
                             NPC.BigMimicSummonCheck(x2, y2);
                         }
 
@@ -17083,28 +17083,28 @@ namespace Terraria
 
                     if (Main.tile[tileTargetX - 1, tileTargetY] == null)
                     {
-                        Tile[,] tile = Main.tile;
-                        int num26 = tileTargetX - 1;
-                        int num27 = tileTargetY;
-                        Tile tile2 = new Tile();
+                        var tile = Main.tile;
+                        var num26 = tileTargetX - 1;
+                        var num27 = tileTargetY;
+                        var tile2 = new Tile();
                         tile[num26, num27] = tile2;
                     }
 
                     if (Main.tile[tileTargetX + 1, tileTargetY] == null)
                     {
-                        Tile[,] tile3 = Main.tile;
-                        int num28 = tileTargetX + 1;
-                        int num29 = tileTargetY;
-                        Tile tile4 = new Tile();
+                        var tile3 = Main.tile;
+                        var num28 = tileTargetX + 1;
+                        var num29 = tileTargetY;
+                        var tile4 = new Tile();
                         tile3[num28, num29] = tile4;
                     }
 
                     if (Main.tile[tileTargetX, tileTargetY] == null)
                     {
-                        Tile[,] tile5 = Main.tile;
-                        int num30 = tileTargetX;
-                        int num31 = tileTargetY;
-                        Tile tile6 = new Tile();
+                        var tile5 = Main.tile;
+                        var num30 = tileTargetX;
+                        var num31 = tileTargetY;
+                        var tile6 = new Tile();
                         tile5[num30, num31] = tile6;
                     }
 
@@ -17232,7 +17232,7 @@ namespace Terraria
                         }
                     }
 
-                    for (int num32 = 0; num32 < 206; num32++)
+                    for (var num32 = 0; num32 < 206; num32++)
                     {
                         buffImmune[num32] = false;
                     }
@@ -17249,7 +17249,7 @@ namespace Terraria
                         UpdatePetLight(i);
                     }
 
-                    bool flag13 = wet && !lavaWet && (!mount.Active || mount.Type != 3);
+                    var flag13 = wet && !lavaWet && (!mount.Active || mount.Type != 3);
                     if (accMerman && flag13)
                     {
                         releaseJump = true;
@@ -17286,7 +17286,7 @@ namespace Terraria
                     forceWerewolf = false;
                     if (whoAmI == Main.myPlayer)
                     {
-                        for (int num33 = 0; num33 < 22; num33++)
+                        for (var num33 = 0; num33 < 22; num33++)
                         {
                             if (buffType[num33] > 0 && buffTime[num33] <= 0)
                             {
@@ -17344,7 +17344,7 @@ namespace Terraria
                         gem = -1;
                         ownedLargeGems = (byte) 0;
                         gemCount = 0;
-                        for (int num34 = 0; num34 <= 58; num34++)
+                        for (var num34 = 0; num34 <= 58; num34++)
                         {
                             if (inventory[num34].type == 0 || inventory[num34].stack == 0)
                             {
@@ -17477,7 +17477,7 @@ namespace Terraria
                         }
                         else
                         {
-                            float num35 = Math.Abs(base.velocity.X) + Math.Abs(base.velocity.Y);
+                            var num35 = Math.Abs(base.velocity.X) + Math.Abs(base.velocity.Y);
                             stealth += num35 * 0.0075f;
                             if (stealth > 1f)
                             {
@@ -17500,10 +17500,10 @@ namespace Terraria
                     }
                     else if (setVortex)
                     {
-                        bool flag14 = false;
+                        var flag14 = false;
                         if (vortexStealthActive)
                         {
-                            float num36 = stealth;
+                            var num36 = stealth;
                             stealth -= 0.04f;
                             if (stealth < 0f)
                             {
@@ -17530,7 +17530,7 @@ namespace Terraria
                         }
                         else
                         {
-                            float num37 = stealth;
+                            var num37 = stealth;
                             stealth += 0.04f;
                             if (stealth > 1f)
                             {
@@ -17551,8 +17551,8 @@ namespace Terraria
                         {
                             if (Main.rand.Next(2) == 0)
                             {
-                                Vector2 vector = Vector2.UnitY.RotatedByRandom(6.2831854820251465);
-                                Dust dust = Main.dust[
+                                var vector = Vector2.UnitY.RotatedByRandom(6.2831854820251465);
+                                var dust = Main.dust[
                                     Dust.NewDust(base.Center - vector * 30f, 0, 0, 229, 0f, 0f, 0, default(Color), 1f)];
                                 dust.noGravity = true;
                                 dust.position = base.Center - vector * (float) Main.rand.Next(5, 11);
@@ -17563,8 +17563,8 @@ namespace Terraria
 
                             if (Main.rand.Next(2) == 0)
                             {
-                                Vector2 vector2 = Vector2.UnitY.RotatedByRandom(6.2831854820251465);
-                                Dust dust2 =
+                                var vector2 = Vector2.UnitY.RotatedByRandom(6.2831854820251465);
+                                var dust2 =
                                     Main.dust[
                                         Dust.NewDust(base.Center - vector2 * 30f, 0, 0, 240, 0f, 0f, 0, default(Color),
                                             1f)];
@@ -17685,7 +17685,7 @@ namespace Terraria
                     runAcceleration *= moveSpeed;
                     maxRunSpeed *= moveSpeed;
                     UpdateJumpHeight();
-                    for (int num38 = 0; num38 < 22; num38++)
+                    for (var num38 = 0; num38 < 22; num38++)
                     {
                         if (buffType[num38] > 0 && buffTime[num38] > 0 && buffImmune[buffType[num38]])
                         {
@@ -17823,9 +17823,9 @@ namespace Terraria
                         dJumpEffectFart = false;
                         dJumpEffectSail = false;
                         dJumpEffectUnicorn = false;
-                        int num39 = (int) (base.position.X + (float) (width / 2)) / 16;
-                        int num40 = (int) (base.position.Y - 8f) / 16;
-                        bool flag15 = false;
+                        var num39 = (int) (base.position.X + (float) (width / 2)) / 16;
+                        var num40 = (int) (base.position.Y - 8f) / 16;
+                        var flag15 = false;
                         if (pulleyDir == 0)
                         {
                             pulleyDir = 1;
@@ -17863,7 +17863,7 @@ namespace Terraria
                             if (base.direction == 1 && controlLeft)
                             {
                                 flag15 = true;
-                                int num41 = num39 * 16 + 8 - width / 2;
+                                var num41 = num39 * 16 + 8 - width / 2;
                                 if (!Collision.SolidCollision(new Vector2((float) num41, base.position.Y), width,
                                     height))
                                 {
@@ -17876,7 +17876,7 @@ namespace Terraria
                             if (base.direction == -1 && controlRight)
                             {
                                 flag15 = true;
-                                int num42 = num39 * 16 + 8 - width / 2;
+                                var num42 = num39 * 16 + 8 - width / 2;
                                 if (!Collision.SolidCollision(new Vector2((float) num42, base.position.Y), width,
                                     height))
                                 {
@@ -17887,23 +17887,23 @@ namespace Terraria
                             }
                         }
 
-                        bool flag16 = false;
+                        var flag16 = false;
                         if (!flag15 && ((controlLeft && (releaseLeft || leftTimer == 0)) ||
                                         (controlRight && (releaseRight || rightTimer == 0))))
                         {
-                            int num43 = 1;
+                            var num43 = 1;
                             if (controlLeft)
                             {
                                 num43 = -1;
                             }
 
-                            int num44 = num39 + num43;
+                            var num44 = num39 + num43;
                             if (Main.tile[num44, num40].active() && Main.tileRope[Main.tile[num44, num40].type])
                             {
                                 pulleyDir = 1;
                                 base.direction = num43;
-                                int num45 = num44 * 16 + 8 - width / 2;
-                                float y3 = base.position.Y;
+                                var num45 = num44 * 16 + 8 - width / 2;
+                                var y3 = base.position.Y;
                                 y3 = (float) (num40 * 16 + 22);
                                 if ((!Main.tile[num44, num40 - 1].active() ||
                                      !Main.tileRope[Main.tile[num44, num40 - 1].type]) &&
@@ -17956,10 +17956,10 @@ namespace Terraria
 
                         if (Main.tile[num39, num40] == null)
                         {
-                            Tile[,] tile7 = Main.tile;
-                            int num46 = num39;
-                            int num47 = num40;
-                            Tile tile8 = new Tile();
+                            var tile7 = Main.tile;
+                            var num46 = num39;
+                            var num47 = num40;
+                            var tile8 = new Tile();
                             tile7[num46, num47] = tile8;
                         }
 
@@ -18000,11 +18000,11 @@ namespace Terraria
                             wingFrame = 3;
                         }
 
-                        int num48 = (int) (base.position.X + (float) (width / 2)) / 16;
-                        int num49 = (int) (base.position.Y - 16f) / 16;
-                        int num50 = (int) (base.position.Y - 8f) / 16;
-                        bool flag17 = true;
-                        bool flag18 = false;
+                        var num48 = (int) (base.position.X + (float) (width / 2)) / 16;
+                        var num49 = (int) (base.position.Y - 16f) / 16;
+                        var num50 = (int) (base.position.Y - 8f) / 16;
+                        var flag17 = true;
+                        var flag18 = false;
                         if ((Main.tile[num48, num50 - 1].active() && Main.tileRope[Main.tile[num48, num50 - 1].type]) ||
                             (Main.tile[num48, num50 + 1].active() && Main.tileRope[Main.tile[num48, num50 + 1].type]))
                         {
@@ -18013,10 +18013,10 @@ namespace Terraria
 
                         if (Main.tile[num48, num49] == null)
                         {
-                            Tile[,] tile9 = Main.tile;
-                            int num51 = num48;
-                            int num52 = num49;
-                            Tile tile10 = new Tile();
+                            var tile9 = Main.tile;
+                            var num51 = num48;
+                            var num52 = num49;
+                            var tile10 = new Tile();
                             tile9[num51, num52] = tile10;
                         }
 
@@ -18033,8 +18033,8 @@ namespace Terraria
                         {
                             if (controlUp && flag17)
                             {
-                                float x3 = base.position.X;
-                                float y4 = base.position.Y - Math.Abs(base.velocity.Y) - 2f;
+                                var x3 = base.position.X;
+                                var y4 = base.position.Y - Math.Abs(base.velocity.Y) - 2f;
                                 if (Collision.SolidCollision(new Vector2(x3, y4), width, height))
                                 {
                                     x3 = (float) (num48 * 16 + 8 - width / 2 + 6);
@@ -18091,8 +18091,8 @@ namespace Terraria
                             }
                             else if (controlDown)
                             {
-                                float x4 = base.position.X;
-                                float y5 = base.position.Y;
+                                var x4 = base.position.X;
+                                var y5 = base.position.Y;
                                 if (Collision.SolidCollision(new Vector2(x4, y5), width,
                                     (int) ((float) height + Math.Abs(base.velocity.Y) + 2f)))
                                 {
@@ -18169,7 +18169,7 @@ namespace Terraria
                             base.position.Y = (float) (num49 * 16 + 22);
                         }
 
-                        float num53 = (float) (num48 * 16 + 8 - width / 2);
+                        var num53 = (float) (num48 * 16 + 8 - width / 2);
                         if (pulleyDir == 1)
                         {
                             num53 = (float) (num48 * 16 + 8 - width / 2);
@@ -18392,7 +18392,7 @@ namespace Terraria
 
                         if (inventory[selectedItem].type == 3106 && stealth < 1f)
                         {
-                            float num54 = maxRunSpeed / 2f * (1f - stealth);
+                            var num54 = maxRunSpeed / 2f * (1f - stealth);
                             maxRunSpeed -= num54;
                             accRunSpeed = maxRunSpeed;
                         }
@@ -18534,7 +18534,7 @@ namespace Terraria
                             canRocket = true;
                         }
 
-                        bool flag19 = false;
+                        var flag19 = false;
                         if (((base.velocity.Y == 0f || sliding) && releaseJump) || (autoJump && justJumped))
                         {
                             mount.ResetFlightTime(base.velocity.X);
@@ -18581,13 +18581,13 @@ namespace Terraria
                             {
                                 if (wings == 10 && Main.rand.Next(2) == 0)
                                 {
-                                    int num55 = 4;
+                                    var num55 = 4;
                                     if (base.direction == 1)
                                     {
                                         num55 = -40;
                                     }
 
-                                    int num56 = Dust.NewDust(
+                                    var num56 = Dust.NewDust(
                                         new Vector2(base.position.X + (float) (width / 2) + (float) num55,
                                             base.position.Y + (float) (height / 2) - 15f), 30, 30, 76, 0f, 0f, 50,
                                         default(Color), 0.6f);
@@ -18600,13 +18600,13 @@ namespace Terraria
 
                                 if (wings == 34 && Main.rand.Next(2) == 0)
                                 {
-                                    int num57 = 4;
+                                    var num57 = 4;
                                     if (base.direction == 1)
                                     {
                                         num57 = -40;
                                     }
 
-                                    int num58 = Dust.NewDust(
+                                    var num58 = Dust.NewDust(
                                         new Vector2(base.position.X + (float) (width / 2) + (float) num57,
                                             base.position.Y + (float) (height / 2) - 15f), 30, 30, 261, 0f, 0f, 50,
                                         default(Color), 0.6f);
@@ -18619,13 +18619,13 @@ namespace Terraria
 
                                 if (wings == 9 && Main.rand.Next(2) == 0)
                                 {
-                                    int num59 = 4;
+                                    var num59 = 4;
                                     if (base.direction == 1)
                                     {
                                         num59 = -40;
                                     }
 
-                                    int num60 = Dust.NewDust(
+                                    var num60 = Dust.NewDust(
                                         new Vector2(base.position.X + (float) (width / 2) + (float) num59,
                                             base.position.Y + (float) (height / 2) - 15f), 30, 30, 6, 0f, 0f, 200,
                                         default(Color), 2f);
@@ -18636,13 +18636,13 @@ namespace Terraria
 
                                 if (wings == 6 && Main.rand.Next(4) == 0)
                                 {
-                                    int num61 = 4;
+                                    var num61 = 4;
                                     if (base.direction == 1)
                                     {
                                         num61 = -40;
                                     }
 
-                                    int num62 = Dust.NewDust(
+                                    var num62 = Dust.NewDust(
                                         new Vector2(base.position.X + (float) (width / 2) + (float) num61,
                                             base.position.Y + (float) (height / 2) - 15f), 30, 30, 55, 0f, 0f, 200,
                                         default(Color), 1f);
@@ -18652,13 +18652,13 @@ namespace Terraria
 
                                 if (wings == 5 && Main.rand.Next(3) == 0)
                                 {
-                                    int num63 = 6;
+                                    var num63 = 6;
                                     if (base.direction == 1)
                                     {
                                         num63 = -30;
                                     }
 
-                                    int num64 = Dust.NewDust(
+                                    var num64 = Dust.NewDust(
                                         new Vector2(base.position.X + (float) (width / 2) + (float) num63,
                                             base.position.Y), 18, height, 58, 0f, 0f, 255, default(Color), 1.2f);
                                     Main.dust[num64].velocity *= 0.3f;
@@ -18667,13 +18667,13 @@ namespace Terraria
 
                                 if (wings == 26)
                                 {
-                                    int num65 = 6;
+                                    var num65 = 6;
                                     if (base.direction == 1)
                                     {
                                         num65 = -30;
                                     }
 
-                                    int num66 = Dust.NewDust(
+                                    var num66 = Dust.NewDust(
                                         new Vector2(base.position.X + (float) (width / 2) + (float) num65,
                                             base.position.Y), 18, height, 217, 0f, 0f, 100, default(Color), 1.4f);
                                     Main.dust[num66].noGravity = true;
@@ -18689,7 +18689,7 @@ namespace Terraria
                                             num65 = 12;
                                         }
 
-                                        float num67 = base.position.Y;
+                                        var num67 = base.position.Y;
                                         if (gravDir == -1f)
                                         {
                                             num67 += (float) (height / 2);
@@ -18708,13 +18708,13 @@ namespace Terraria
 
                                 if (wings == 37)
                                 {
-                                    int num68 = 6;
+                                    var num68 = 6;
                                     if (base.direction == 1)
                                     {
                                         num68 = -30;
                                     }
 
-                                    Dust dust3 = Dust.NewDustDirect(
+                                    var dust3 = Dust.NewDustDirect(
                                         new Vector2(base.position.X + (float) (width / 2) + (float) num68,
                                             base.position.Y), 24, height,
                                         Utils.SelectRandom<int>(Main.rand, 31, 31, 31), 0f, 0f, 100, default(Color),
@@ -18739,7 +18739,7 @@ namespace Terraria
                                             num68 = 12;
                                         }
 
-                                        float num69 = base.position.Y;
+                                        var num69 = base.position.Y;
                                         if (gravDir == -1f)
                                         {
                                             num69 += (float) (height / 2);
@@ -18765,13 +18765,13 @@ namespace Terraria
 
                                 if (wings == 29 && Main.rand.Next(3) == 0)
                                 {
-                                    int num70 = 4;
+                                    var num70 = 4;
                                     if (base.direction == 1)
                                     {
                                         num70 = -40;
                                     }
 
-                                    int num71 = Dust.NewDust(
+                                    var num71 = Dust.NewDust(
                                         new Vector2(base.position.X + (float) (width / 2) + (float) num70,
                                             base.position.Y + (float) (height / 2) - 15f), 30, 30, 6, 0f, 0f, 100,
                                         default(Color), 2.4f);
@@ -18789,13 +18789,13 @@ namespace Terraria
                                 {
                                     if (Main.rand.Next(6) == 0)
                                     {
-                                        int num72 = 4;
+                                        var num72 = 4;
                                         if (base.direction == 1)
                                         {
                                             num72 = -40;
                                         }
 
-                                        Dust dust4 =
+                                        var dust4 =
                                             Main.dust[
                                                 Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num72,
@@ -18811,13 +18811,13 @@ namespace Terraria
 
                                     if (Main.rand.Next(3) == 0)
                                     {
-                                        int num73 = 4;
+                                        var num73 = 4;
                                         if (base.direction == 1)
                                         {
                                             num73 = -40;
                                         }
 
-                                        Dust dust5 =
+                                        var dust5 =
                                             Main.dust[
                                                 Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num73,
@@ -18834,19 +18834,19 @@ namespace Terraria
                                     {
                                         if (Main.rand.Next(6) == 0)
                                         {
-                                            int num74 = -24;
+                                            var num74 = -24;
                                             if (base.direction == 1)
                                             {
                                                 num74 = 12;
                                             }
 
-                                            float num75 = base.position.Y;
+                                            var num75 = base.position.Y;
                                             if (gravDir == -1f)
                                             {
                                                 num75 += (float) (height / 2);
                                             }
 
-                                            Dust dust6 =
+                                            var dust6 =
                                                 Main.dust[
                                                     Dust.NewDust(
                                                         new Vector2(
@@ -18862,19 +18862,19 @@ namespace Terraria
 
                                         if (Main.rand.Next(3) == 0)
                                         {
-                                            int num74 = -24;
+                                            var num74 = -24;
                                             if (base.direction == 1)
                                             {
                                                 num74 = 12;
                                             }
 
-                                            float num76 = base.position.Y;
+                                            var num76 = base.position.Y;
                                             if (gravDir == -1f)
                                             {
                                                 num76 += (float) (height / 2);
                                             }
 
-                                            Dust dust7 =
+                                            var dust7 =
                                                 Main.dust[
                                                     Dust.NewDust(
                                                         new Vector2(
@@ -18904,29 +18904,29 @@ namespace Terraria
                                         rocketDelay2 = 60;
                                     }
 
-                                    int num77 = 2;
+                                    var num77 = 2;
                                     if (controlUp)
                                     {
                                         num77 = 4;
                                     }
 
-                                    for (int num78 = 0; num78 < num77; num78++)
+                                    for (var num78 = 0; num78 < num77; num78++)
                                     {
-                                        int type = 6;
+                                        var type = 6;
                                         if (head == 41)
                                         {
-                                            int body2 = body;
+                                            var body2 = body;
                                         }
 
-                                        float scale = 1.75f;
-                                        int alpha = 100;
-                                        float x5 = base.position.X + (float) (width / 2) + 16f;
+                                        var scale = 1.75f;
+                                        var alpha = 100;
+                                        var x5 = base.position.X + (float) (width / 2) + 16f;
                                         if (base.direction > 0)
                                         {
                                             x5 = base.position.X + (float) (width / 2) - 26f;
                                         }
 
-                                        float num79 = base.position.Y + (float) height - 18f;
+                                        var num79 = base.position.Y + (float) height - 18f;
                                         if (num78 == 1 || num78 == 3)
                                         {
                                             x5 = base.position.X + (float) (width / 2) + 8f;
@@ -18943,7 +18943,7 @@ namespace Terraria
                                             num79 += base.velocity.Y;
                                         }
 
-                                        int num80 = Dust.NewDust(new Vector2(x5, num79), 8, 8, type, 0f, 0f, alpha,
+                                        var num80 = Dust.NewDust(new Vector2(x5, num79), 8, 8, type, 0f, 0f, alpha,
                                             default(Color), scale);
                                         Main.dust[num80].velocity.X *= 0.1f;
                                         Main.dust[num80].velocity.Y =
@@ -18993,7 +18993,7 @@ namespace Terraria
                                         if (base.velocity.X != 0f)
                                         {
                                             wingFrameCounter++;
-                                            int num81 = 2;
+                                            var num81 = 2;
                                             if (wingFrameCounter < num81)
                                             {
                                                 wingFrame = 1;
@@ -19019,7 +19019,7 @@ namespace Terraria
                                         else
                                         {
                                             wingFrameCounter++;
-                                            int num82 = 6;
+                                            var num82 = 6;
                                             if (wingFrameCounter < num82)
                                             {
                                                 wingFrame = 4;
@@ -19042,7 +19042,7 @@ namespace Terraria
                                     else
                                     {
                                         wingFrameCounter++;
-                                        int num83 = 2;
+                                        var num83 = 2;
                                         if (wingFrameCounter < num83)
                                         {
                                             wingFrame = 4;
@@ -19069,7 +19069,7 @@ namespace Terraria
                                 else
                                 {
                                     wingFrameCounter++;
-                                    int num84 = 6;
+                                    var num84 = 6;
                                     if (wingFrameCounter < num84)
                                     {
                                         wingFrame = 4;
@@ -19094,7 +19094,7 @@ namespace Terraria
                                 if (flag19 || jump > 0)
                                 {
                                     wingFrameCounter++;
-                                    int num85 = 5;
+                                    var num85 = 5;
                                     if (wingFrameCounter < num85)
                                     {
                                         wingFrame = 1;
@@ -19131,7 +19131,7 @@ namespace Terraria
                                 if (flag19 || jump > 0)
                                 {
                                     wingFrameCounter++;
-                                    int num86 = 1;
+                                    var num86 = 1;
                                     if (wingFrameCounter < num86)
                                     {
                                         wingFrame = 1;
@@ -19158,7 +19158,7 @@ namespace Terraria
                                     if (controlJump)
                                     {
                                         wingFrameCounter++;
-                                        int num87 = 3;
+                                        var num87 = 3;
                                         if (wingFrameCounter < num87)
                                         {
                                             wingFrame = 1;
@@ -19196,11 +19196,11 @@ namespace Terraria
                             }
                             else if (wings == 30)
                             {
-                                bool flag20 = false;
+                                var flag20 = false;
                                 if (flag19 || jump > 0)
                                 {
                                     wingFrameCounter++;
-                                    int num88 = 2;
+                                    var num88 = 2;
                                     if (wingFrameCounter >= num88 * 3)
                                     {
                                         wingFrameCounter = 0;
@@ -19214,7 +19214,7 @@ namespace Terraria
                                     if (controlJump)
                                     {
                                         wingFrameCounter++;
-                                        int num89 = 2;
+                                        var num89 = 2;
                                         if (wingFrameCounter >= num89 * 3)
                                         {
                                             wingFrameCounter = 0;
@@ -19239,14 +19239,14 @@ namespace Terraria
 
                                 if (flag20)
                                 {
-                                    for (int num90 = 0; num90 < 4; num90++)
+                                    for (var num90 = 0; num90 < 4; num90++)
                                     {
                                         if (Main.rand.Next(4) == 0)
                                         {
-                                            Vector2 value =
+                                            var value =
                                                 (-0.745398164f + 0.3926991f * (float) num90 + 0.03f * (float) num90)
                                                 .ToRotationVector2() * new Vector2((float) (-base.direction * 20), 20f);
-                                            Dust dust8 =
+                                            var dust8 =
                                                 Main.dust[
                                                     Dust.NewDust(base.Center, 0, 0, 229, 0f, 0f, 100, Color.White,
                                                         0.8f)];
@@ -19266,15 +19266,15 @@ namespace Terraria
                                         }
                                     }
 
-                                    for (int num91 = 0; num91 < 4; num91++)
+                                    for (var num91 = 0; num91 < 4; num91++)
                                     {
                                         if (Main.rand.Next(8) == 0)
                                         {
-                                            Vector2 value2 =
+                                            var value2 =
                                                 (-0.7053982f + 0.3926991f * (float) num91 + 0.03f * (float) num91)
                                                 .ToRotationVector2() * new Vector2((float) (base.direction * 20), 24f) +
                                                 new Vector2((float) (-base.direction) * 16f, 0f);
-                                            Dust dust9 =
+                                            var dust9 =
                                                 Main.dust[
                                                     Dust.NewDust(base.Center, 0, 0, 229, 0f, 0f, 100, Color.White,
                                                         0.5f)];
@@ -19304,7 +19304,7 @@ namespace Terraria
                                 if (flag19 || jump > 0)
                                 {
                                     wingFrameCounter++;
-                                    int num92 = 4;
+                                    var num92 = 4;
                                     if (wingFrameCounter >= num92 * 6)
                                     {
                                         wingFrameCounter = 0;
@@ -19317,7 +19317,7 @@ namespace Terraria
                                     if (controlJump)
                                     {
                                         wingFrameCounter++;
-                                        int num93 = 9;
+                                        var num93 = 9;
                                         if (wingFrameCounter >= num93 * 6)
                                         {
                                             wingFrameCounter = 0;
@@ -19328,7 +19328,7 @@ namespace Terraria
                                     else
                                     {
                                         wingFrameCounter++;
-                                        int num94 = 6;
+                                        var num94 = 6;
                                         if (wingFrameCounter >= num94 * 6)
                                         {
                                             wingFrameCounter = 0;
@@ -19340,7 +19340,7 @@ namespace Terraria
                                 else
                                 {
                                     wingFrameCounter++;
-                                    int num95 = 4;
+                                    var num95 = 4;
                                     if (wingFrameCounter >= num95 * 6)
                                     {
                                         wingFrameCounter = 0;
@@ -19354,7 +19354,7 @@ namespace Terraria
                                 if (flag19 || jump > 0)
                                 {
                                     wingFrameCounter++;
-                                    int num96 = 4;
+                                    var num96 = 4;
                                     if (wingFrameCounter >= num96 * 6)
                                     {
                                         wingFrameCounter = 0;
@@ -19367,7 +19367,7 @@ namespace Terraria
                                     if (controlJump)
                                     {
                                         wingFrameCounter++;
-                                        int num97 = 9;
+                                        var num97 = 9;
                                         if (wingFrameCounter >= num97 * 6)
                                         {
                                             wingFrameCounter = 0;
@@ -19378,7 +19378,7 @@ namespace Terraria
                                     else
                                     {
                                         wingFrameCounter++;
-                                        int num98 = 6;
+                                        var num98 = 6;
                                         if (wingFrameCounter >= num98 * 6)
                                         {
                                             wingFrameCounter = 0;
@@ -19390,7 +19390,7 @@ namespace Terraria
                                 else
                                 {
                                     wingFrameCounter++;
-                                    int num99 = 4;
+                                    var num99 = 4;
                                     if (wingFrameCounter >= num99 * 6)
                                     {
                                         wingFrameCounter = 0;
@@ -19399,7 +19399,7 @@ namespace Terraria
                                     wingFrame = wingFrameCounter / num99;
                                 }
 
-                                int num100 = 1;
+                                var num100 = 1;
                                 if (wingFrame == 3)
                                 {
                                     num100 = 5;
@@ -19410,13 +19410,13 @@ namespace Terraria
                                     num100 = 0;
                                 }
 
-                                Rectangle r = Utils.CenteredRectangle(
+                                var r = Utils.CenteredRectangle(
                                     (gravDir == 1f)
                                         ? (base.Bottom + new Vector2(0f, -10f))
                                         : (base.Top + new Vector2(0f, 10f)), new Vector2(50f, 20f));
-                                for (int num101 = 0; num101 < num100; num101++)
+                                for (var num101 = 0; num101 < num100; num101++)
                                 {
-                                    Dust dust10 = Dust.NewDustDirect(r.TopLeft(), r.Width, r.Height, 31, 0f, 0f, 0,
+                                    var dust10 = Dust.NewDustDirect(r.TopLeft(), r.Width, r.Height, 31, 0f, 0f, 0,
                                         Color.Black, 1f);
                                     dust10.scale = 0.7f;
                                     dust10.velocity *= 0.4f;
@@ -19426,7 +19426,7 @@ namespace Terraria
                             }
                             else if (wings == 33)
                             {
-                                bool flag21 = false;
+                                var flag21 = false;
                                 if (flag19 || jump > 0)
                                 {
                                     flag21 = true;
@@ -19438,12 +19438,12 @@ namespace Terraria
 
                                 if (flag21)
                                 {
-                                    Color newColor = Main.hslToRgb(Main.rgbToHsl(eyeColor).X, 1f, 0.5f);
-                                    int num102 = (base.direction != 1) ? (-4) : 0;
-                                    int num103 = (gravDir == 1f) ? height : 0;
-                                    for (int num104 = 0; num104 < 2; num104++)
+                                    var newColor = Main.hslToRgb(Main.rgbToHsl(eyeColor).X, 1f, 0.5f);
+                                    var num102 = (base.direction != 1) ? (-4) : 0;
+                                    var num103 = (gravDir == 1f) ? height : 0;
+                                    for (var num104 = 0; num104 < 2; num104++)
                                     {
-                                        Dust dust11 =
+                                        var dust11 =
                                             Main.dust[
                                                 Dust.NewDust(base.position, width, height, 182, base.velocity.X,
                                                     base.velocity.Y, 127, newColor, 1f)];
@@ -19472,7 +19472,7 @@ namespace Terraria
                                                 break;
                                         }
 
-                                        Dust dust12 = Dust.CloneDust(dust11);
+                                        var dust12 = Dust.CloneDust(dust11);
                                         dust12.scale *= 0.65f;
                                         dust12.fadeIn *= 0.65f;
                                         dust12.color = new Color(255, 255, 255, 255);
@@ -19483,7 +19483,7 @@ namespace Terraria
                             }
                             else if (wings == 38)
                             {
-                                bool flag22 = false;
+                                var flag22 = false;
                                 if (flag19 || jump > 0)
                                 {
                                     wingFrameCounter++;
@@ -19530,13 +19530,13 @@ namespace Terraria
 
                                 if (flag22)
                                 {
-                                    Vector2 value3 = new Vector2((float) base.direction, gravDir);
-                                    Vector2 value4 = base.velocity * 0.5f;
-                                    int type2 = 267;
-                                    int num105 = miscCounter * base.direction;
-                                    for (int num106 = 0; num106 < 3; num106++)
+                                    var value3 = new Vector2((float) base.direction, gravDir);
+                                    var value4 = base.velocity * 0.5f;
+                                    var type2 = 267;
+                                    var num105 = miscCounter * base.direction;
+                                    for (var num106 = 0; num106 < 3; num106++)
                                     {
-                                        Vector2 value5 = Vector2.Zero;
+                                        var value5 = Vector2.Zero;
                                         switch (num106)
                                         {
                                             case 1:
@@ -19547,11 +19547,11 @@ namespace Terraria
                                                 break;
                                         }
 
-                                        Vector2 value6 = new Vector2(-39f, 6f) * value3 +
+                                        var value6 = new Vector2(-39f, 6f) * value3 +
                                                          new Vector2(2f, 0f).RotatedBy(
                                                              (double) ((float) num105 / -15f * 6.28318548f),
                                                              default(Vector2));
-                                        Dust dust13 = Dust.NewDustPerfect(base.Center + value6 + value5, type2, value4,
+                                        var dust13 = Dust.NewDustPerfect(base.Center + value6 + value5, type2, value4,
                                             0, underShirtColor, 1f);
                                         dust13.noGravity = true;
                                         dust13.noLight = true;
@@ -19580,7 +19580,7 @@ namespace Terraria
                             }
                             else
                             {
-                                int num107 = 4;
+                                var num107 = 4;
                                 if (wings == 32)
                                 {
                                     num107 = 3;
@@ -19609,13 +19609,13 @@ namespace Terraria
 
                                     if (wings == 29 && Main.rand.Next(5) == 0)
                                     {
-                                        int num108 = 4;
+                                        var num108 = 4;
                                         if (base.direction == 1)
                                         {
                                             num108 = -40;
                                         }
 
-                                        int num109 =
+                                        var num109 =
                                             Dust.NewDust(
                                                 new Vector2(base.position.X + (float) (width / 2) + (float) num108,
                                                     base.position.Y + (float) (height / 2) - 15f), 30, 30, 6, 0f, 0f,
@@ -19638,7 +19638,7 @@ namespace Terraria
 
                             if (wingsLogic > 0 && rocketBoots > 0 && base.velocity.Y != 0f)
                             {
-                                int num110 = 6;
+                                var num110 = 6;
                                 wingTime += (float) (rocketTime * num110);
                                 if (wingTime > (float) (wingTimeMax + rocketTimeMax * num110))
                                 {
@@ -19710,18 +19710,18 @@ namespace Terraria
 
                             if (rocketDelay > 0)
                             {
-                                int num111 = height;
+                                var num111 = height;
                                 if (gravDir == -1f)
                                 {
                                     num111 = 4;
                                 }
 
                                 rocketFrame = true;
-                                for (int num112 = 0; num112 < 2; num112++)
+                                for (var num112 = 0; num112 < 2; num112++)
                                 {
-                                    int type3 = 6;
-                                    float scale2 = 2.5f;
-                                    int alpha2 = 100;
+                                    var type3 = 6;
+                                    var scale2 = 2.5f;
+                                    var alpha2 = 100;
                                     if (rocketBoots == 2)
                                     {
                                         type3 = 16;
@@ -19742,7 +19742,7 @@ namespace Terraria
 
                                     if (num112 == 0)
                                     {
-                                        int num113 =
+                                        var num113 =
                                             Dust.NewDust(
                                                 new Vector2(base.position.X - 4f,
                                                     base.position.Y + (float) num111 - 10f), 8, 8, type3, 0f, 0f,
@@ -19776,7 +19776,7 @@ namespace Terraria
                                     }
                                     else
                                     {
-                                        int num114 =
+                                        var num114 =
                                             Dust.NewDust(
                                                 new Vector2(base.position.X + (float) width - 4f,
                                                     base.position.Y + (float) num111 - 10f), 8, 8, type3, 0f, 0f,
@@ -19922,13 +19922,13 @@ namespace Terraria
                                     {
                                         if (wings == 10 && Main.rand.Next(3) == 0)
                                         {
-                                            int num115 = 4;
+                                            var num115 = 4;
                                             if (base.direction == 1)
                                             {
                                                 num115 = -40;
                                             }
 
-                                            int num116 =
+                                            var num116 =
                                                 Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num115,
                                                         base.position.Y + (float) (height / 2) - 15f), 30, 30, 76, 0f,
@@ -19943,13 +19943,13 @@ namespace Terraria
 
                                         if (wings == 34 && Main.rand.Next(3) == 0)
                                         {
-                                            int num117 = 4;
+                                            var num117 = 4;
                                             if (base.direction == 1)
                                             {
                                                 num117 = -40;
                                             }
 
-                                            int num118 =
+                                            var num118 =
                                                 Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num117,
                                                         base.position.Y + (float) (height / 2) - 15f), 30, 30, 261, 0f,
@@ -19964,13 +19964,13 @@ namespace Terraria
 
                                         if (wings == 9 && Main.rand.Next(3) == 0)
                                         {
-                                            int num119 = 8;
+                                            var num119 = 8;
                                             if (base.direction == 1)
                                             {
                                                 num119 = -40;
                                             }
 
-                                            int num120 =
+                                            var num120 =
                                                 Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num119,
                                                         base.position.Y + (float) (height / 2) - 15f), 30, 30, 6, 0f,
@@ -19983,13 +19983,13 @@ namespace Terraria
 
                                         if (wings == 29 && Main.rand.Next(3) == 0)
                                         {
-                                            int num121 = 8;
+                                            var num121 = 8;
                                             if (base.direction == 1)
                                             {
                                                 num121 = -40;
                                             }
 
-                                            int num122 =
+                                            var num122 =
                                                 Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num121,
                                                         base.position.Y + (float) (height / 2) - 15f), 30, 30, 6, 0f,
@@ -20009,13 +20009,13 @@ namespace Terraria
                                         {
                                             if (Main.rand.Next(10) == 0)
                                             {
-                                                int num123 = 4;
+                                                var num123 = 4;
                                                 if (base.direction == 1)
                                                 {
                                                     num123 = -40;
                                                 }
 
-                                                int num124 = Dust.NewDust(
+                                                var num124 = Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num123,
                                                         base.position.Y + (float) (height / 2) - 12f), 30, 20, 55, 0f,
                                                     0f, 200, default(Color), 1f);
@@ -20026,13 +20026,13 @@ namespace Terraria
                                         }
                                         else if (wings == 5 && Main.rand.Next(6) == 0)
                                         {
-                                            int num125 = 6;
+                                            var num125 = 6;
                                             if (base.direction == 1)
                                             {
                                                 num125 = -30;
                                             }
 
-                                            int num126 =
+                                            var num126 =
                                                 Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num125,
                                                         base.position.Y), 18, height, 58, 0f, 0f, 255, default(Color),
@@ -20051,16 +20051,16 @@ namespace Terraria
                                                 rocketDelay2 = 60;
                                             }
 
-                                            int type4 = 6;
-                                            float scale3 = 1.5f;
-                                            int alpha3 = 100;
-                                            float x6 = base.position.X + (float) (width / 2) + 16f;
+                                            var type4 = 6;
+                                            var scale3 = 1.5f;
+                                            var alpha3 = 100;
+                                            var x6 = base.position.X + (float) (width / 2) + 16f;
                                             if (base.direction > 0)
                                             {
                                                 x6 = base.position.X + (float) (width / 2) - 26f;
                                             }
 
-                                            float num127 = base.position.Y + (float) height - 18f;
+                                            var num127 = base.position.Y + (float) height - 18f;
                                             if (Main.rand.Next(2) == 1)
                                             {
                                                 x6 = base.position.X + (float) (width / 2) + 8f;
@@ -20072,7 +20072,7 @@ namespace Terraria
                                                 num127 += 6f;
                                             }
 
-                                            int num128 = Dust.NewDust(new Vector2(x6, num127), 8, 8, type4, 0f, 0f,
+                                            var num128 = Dust.NewDust(new Vector2(x6, num127), 8, 8, type4, 0f, 0f,
                                                 alpha3, default(Color), scale3);
                                             Main.dust[num128].velocity.X *= 0.3f;
                                             Main.dust[num128].velocity.Y += 10f;
@@ -20095,7 +20095,7 @@ namespace Terraria
                                             if (wings == 30)
                                             {
                                                 wingFrameCounter++;
-                                                int num129 = 5;
+                                                var num129 = 5;
                                                 if (wingFrameCounter >= num129 * 3)
                                                 {
                                                     wingFrameCounter = 0;
@@ -20106,7 +20106,7 @@ namespace Terraria
                                             else if (wings == 34)
                                             {
                                                 wingFrameCounter++;
-                                                int num130 = 7;
+                                                var num130 = 7;
                                                 if (wingFrameCounter >= num130 * 6)
                                                 {
                                                     wingFrameCounter = 0;
@@ -20117,7 +20117,7 @@ namespace Terraria
                                             else if (wings == 39)
                                             {
                                                 wingFrameCounter++;
-                                                int num131 = 12;
+                                                var num131 = 12;
                                                 if (wingFrameCounter >= num131 * 6)
                                                 {
                                                     wingFrameCounter = 0;
@@ -20127,13 +20127,13 @@ namespace Terraria
                                             }
                                             else if (wings == 26)
                                             {
-                                                int num132 = 6;
+                                                var num132 = 6;
                                                 if (base.direction == 1)
                                                 {
                                                     num132 = -30;
                                                 }
 
-                                                int num133 = Dust.NewDust(
+                                                var num133 = Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num132,
                                                         base.position.Y), 18, height, 217, 0f, 0f, 100, default(Color),
                                                     1.4f);
@@ -20151,7 +20151,7 @@ namespace Terraria
                                                         num132 = 12;
                                                     }
 
-                                                    float num134 = base.position.Y;
+                                                    var num134 = base.position.Y;
                                                     if (gravDir == -1f)
                                                     {
                                                         num134 += (float) (height / 2);
@@ -20174,15 +20174,15 @@ namespace Terraria
                                             }
                                             else if (wings == 37)
                                             {
-                                                Color color = Color.Lerp(Color.Black, Color.White,
+                                                var color = Color.Lerp(Color.Black, Color.White,
                                                     Main.rand.NextFloat());
-                                                int num135 = 6;
+                                                var num135 = 6;
                                                 if (base.direction == 1)
                                                 {
                                                     num135 = -30;
                                                 }
 
-                                                int num136 = Dust.NewDust(
+                                                var num136 = Dust.NewDust(
                                                     new Vector2(base.position.X + (float) (width / 2) + (float) num135,
                                                         base.position.Y), 24, height,
                                                     Utils.SelectRandom<int>(Main.rand, 31, 31, 31), 0f, 0f, 100,
@@ -20206,7 +20206,7 @@ namespace Terraria
                                                         num135 = 12;
                                                     }
 
-                                                    float num137 = base.position.Y;
+                                                    var num137 = base.position.Y;
                                                     if (gravDir == -1f)
                                                     {
                                                         num137 += (float) (height / 2);
@@ -20338,18 +20338,18 @@ namespace Terraria
                     LookForTileInteractions();
                     if (tongued)
                     {
-                        bool flag23 = false;
+                        var flag23 = false;
                         if (Main.wof >= 0)
                         {
-                            float num138 = Main.npc[Main.wof].position.X + (float) (Main.npc[Main.wof].width / 2);
+                            var num138 = Main.npc[Main.wof].position.X + (float) (Main.npc[Main.wof].width / 2);
                             num138 += (float) (Main.npc[Main.wof].direction * 200);
-                            float num139 = Main.npc[Main.wof].position.Y + (float) (Main.npc[Main.wof].height / 2);
-                            Vector2 center = base.Center;
-                            float num140 = num138 - center.X;
-                            float num141 = num139 - center.Y;
-                            float num142 = (float) Math.Sqrt((double) (num140 * num140 + num141 * num141));
-                            float num143 = 11f;
-                            float num144 = num142;
+                            var num139 = Main.npc[Main.wof].position.Y + (float) (Main.npc[Main.wof].height / 2);
+                            var center = base.Center;
+                            var num140 = num138 - center.X;
+                            var num141 = num139 - center.Y;
+                            var num142 = (float) Math.Sqrt((double) (num140 * num140 + num141 * num141));
+                            var num143 = 11f;
+                            var num144 = num142;
                             if (num142 > num143)
                             {
                                 num144 = num143 / num142;
@@ -20372,7 +20372,7 @@ namespace Terraria
 
                         if (flag23 && Main.myPlayer == whoAmI)
                         {
-                            for (int num145 = 0; num145 < 22; num145++)
+                            for (var num145 = 0; num145 < 22; num145++)
                             {
                                 if (buffType[num145] == 38)
                                 {
@@ -20401,11 +20401,11 @@ namespace Terraria
 
                         if (talkNPC >= 0)
                         {
-                            Rectangle rectangle2 = new Rectangle(
+                            var rectangle2 = new Rectangle(
                                 (int) (base.position.X + (float) (width / 2) - (float) (tileRangeX * 16)),
                                 (int) (base.position.Y + (float) (height / 2) - (float) (tileRangeY * 16)),
                                 tileRangeX * 16 * 2, tileRangeY * 16 * 2);
-                            Rectangle value7 = new Rectangle((int) Main.npc[talkNPC].position.X,
+                            var value7 = new Rectangle((int) Main.npc[talkNPC].position.X,
                                 (int) Main.npc[talkNPC].position.Y, Main.npc[talkNPC].width, Main.npc[talkNPC].height);
                             if (!rectangle2.Intersects(value7) || chest != -1 || !Main.npc[talkNPC].active)
                             {
@@ -20422,13 +20422,13 @@ namespace Terraria
 
                         if (sign >= 0)
                         {
-                            Rectangle value8 = new Rectangle(
+                            var value8 = new Rectangle(
                                 (int) (base.position.X + (float) (width / 2) - (float) (tileRangeX * 16)),
                                 (int) (base.position.Y + (float) (height / 2) - (float) (tileRangeY * 16)),
                                 tileRangeX * 16 * 2, tileRangeY * 16 * 2);
                             try
                             {
-                                bool flag24 = false;
+                                var flag24 = false;
                                 if (Main.sign[sign] == null)
                                 {
                                     flag24 = true;
@@ -20482,9 +20482,9 @@ namespace Terraria
 
                         if (mount.Active && mount.Cart && Math.Abs(base.velocity.X) > 4f)
                         {
-                            Rectangle rectangle3 = new Rectangle((int) base.position.X, (int) base.position.Y, width,
+                            var rectangle3 = new Rectangle((int) base.position.X, (int) base.position.Y, width,
                                 height);
-                            for (int num146 = 0; num146 < 200; num146++)
+                            for (var num146 = 0; num146 < 200; num146++)
                             {
                                 if (Main.npc[num146].active && !Main.npc[num146].dontTakeDamage &&
                                     !Main.npc[num146].friendly && Main.npc[num146].immune[i] == 0 &&
@@ -20492,7 +20492,7 @@ namespace Terraria
                                         (int) Main.npc[num146].position.Y, Main.npc[num146].width,
                                         Main.npc[num146].height)))
                                 {
-                                    float num147 = (float) meleeCrit;
+                                    var num147 = (float) meleeCrit;
                                     if (num147 < (float) rangedCrit)
                                     {
                                         num147 = (float) rangedCrit;
@@ -20503,14 +20503,14 @@ namespace Terraria
                                         num147 = (float) magicCrit;
                                     }
 
-                                    bool crit = false;
+                                    var crit = false;
                                     if ((float) Main.rand.Next(1, 101) <= num147)
                                     {
                                         crit = true;
                                     }
 
-                                    float num148 = Math.Abs(base.velocity.X) / maxRunSpeed;
-                                    int damage2 = Main.DamageVar(25f + 55f * num148);
+                                    var num148 = Math.Abs(base.velocity.X) / maxRunSpeed;
+                                    var damage2 = Main.DamageVar(25f + 55f * num148);
                                     if (mount.Type == 11)
                                     {
                                         damage2 = Main.DamageVar(50f + 100f * num148);
@@ -20521,8 +20521,8 @@ namespace Terraria
                                         damage2 = Main.DamageVar(15f + 30f * num148);
                                     }
 
-                                    float knockback = 5f + 25f * num148;
-                                    int direction = 1;
+                                    var knockback = 5f + 25f * num148;
+                                    var direction = 1;
                                     if (base.velocity.X < 0f)
                                     {
                                         direction = -1;
@@ -20543,15 +20543,15 @@ namespace Terraria
                         }
 
                         Update_NPCCollision();
-                        Vector2 vector3 = (mount.Active && mount.Cart)
+                        var vector3 = (mount.Active && mount.Cart)
                             ? Collision.HurtTiles(base.position, base.velocity, width, height - 16, fireWalk)
                             : Collision.HurtTiles(base.position, base.velocity, width, height, fireWalk);
                         if (vector3.Y == 0f && !fireWalk)
                         {
-                            foreach (Point touchedTile in TouchedTiles)
+                            foreach (var touchedTile in TouchedTiles)
                             {
-                                Point current = touchedTile;
-                                Tile tile11 = Main.tile[current.X, current.Y];
+                                var current = touchedTile;
+                                var tile11 = Main.tile[current.X, current.Y];
                                 if (tile11 != null && tile11.active() && tile11.nactive() && !fireWalk &&
                                     TileID.Sets.TouchDamageHot[tile11.type] != 0)
                                 {
@@ -20581,7 +20581,7 @@ namespace Terraria
                         }
                         else if (vector3.Y != 0f)
                         {
-                            int damage3 = Main.DamageVar(vector3.Y);
+                            var damage3 = Main.DamageVar(vector3.Y);
                             Hurt(PlayerDeathReason.ByOther(3), damage3, 0, false, false, false, 0);
                         }
                         else
@@ -20638,13 +20638,13 @@ namespace Terraria
                         waterWalk2 = false;
                     }
 
-                    int num149 = height;
+                    var num149 = height;
                     if (waterWalk)
                     {
                         num149 -= 6;
                     }
 
-                    bool flag25 = Collision.LavaCollision(base.position, width, num149);
+                    var flag25 = Collision.LavaCollision(base.position, width, num149);
                     if (flag25)
                     {
                         if (!lavaImmune && Main.myPlayer == i && !immune)
@@ -20686,8 +20686,8 @@ namespace Terraria
                         num149 -= 6;
                     }
 
-                    bool flag26 = Collision.WetCollision(base.position, width, height);
-                    bool flag27 = Collision.honey;
+                    var flag26 = Collision.WetCollision(base.position, width, height);
+                    var flag27 = Collision.honey;
                     if (flag27)
                     {
                         AddBuff(48, 1800, true);
@@ -20698,7 +20698,7 @@ namespace Terraria
                     {
                         if (onFire && !lavaWet)
                         {
-                            for (int num150 = 0; num150 < 22; num150++)
+                            for (var num150 = 0; num150 < 22; num150++)
                             {
                                 if (buffType[num150] == 24)
                                 {
@@ -20716,9 +20716,9 @@ namespace Terraria
                                 {
                                     if (honeyWet)
                                     {
-                                        for (int num151 = 0; num151 < 20; num151++)
+                                        for (var num151 = 0; num151 < 20; num151++)
                                         {
-                                            int num152 =
+                                            var num152 =
                                                 Dust.NewDust(
                                                     new Vector2(base.position.X - 6f,
                                                         base.position.Y + (float) (height / 2) - 8f), width + 12, 24,
@@ -20734,9 +20734,9 @@ namespace Terraria
                                     }
                                     else
                                     {
-                                        for (int num153 = 0; num153 < 50; num153++)
+                                        for (var num153 = 0; num153 < 50; num153++)
                                         {
-                                            int num154 =
+                                            var num154 =
                                                 Dust.NewDust(
                                                     new Vector2(base.position.X - 6f,
                                                         base.position.Y + (float) (height / 2) - 8f), width + 12, 24,
@@ -20753,9 +20753,9 @@ namespace Terraria
                                 }
                                 else
                                 {
-                                    for (int num155 = 0; num155 < 20; num155++)
+                                    for (var num155 = 0; num155 < 20; num155++)
                                     {
-                                        int num156 =
+                                        var num156 =
                                             Dust.NewDust(
                                                 new Vector2(base.position.X - 6f,
                                                     base.position.Y + (float) (height / 2) - 8f), width + 12, 24, 35,
@@ -20789,9 +20789,9 @@ namespace Terraria
                             {
                                 if (honeyWet)
                                 {
-                                    for (int num157 = 0; num157 < 20; num157++)
+                                    for (var num157 = 0; num157 < 20; num157++)
                                     {
-                                        int num158 =
+                                        var num158 =
                                             Dust.NewDust(
                                                 new Vector2(base.position.X - 6f,
                                                     base.position.Y + (float) (height / 2) - 8f), width + 12, 24, 152,
@@ -20807,9 +20807,9 @@ namespace Terraria
                                 }
                                 else
                                 {
-                                    for (int num159 = 0; num159 < 50; num159++)
+                                    for (var num159 = 0; num159 < 50; num159++)
                                     {
-                                        int num160 =
+                                        var num160 =
                                             Dust.NewDust(
                                                 new Vector2(base.position.X - 6f,
                                                     base.position.Y + (float) (height / 2)), width + 12, 24,
@@ -20826,9 +20826,9 @@ namespace Terraria
                             }
                             else
                             {
-                                for (int num161 = 0; num161 < 20; num161++)
+                                for (var num161 = 0; num161 < 20; num161++)
                                 {
-                                    int num162 =
+                                    var num162 =
                                         Dust.NewDust(
                                             new Vector2(base.position.X - 6f,
                                                 base.position.Y + (float) (height / 2) - 8f), width + 12, 24, 35, 0f,
@@ -20900,7 +20900,7 @@ namespace Terraria
                         AddBuff(46, 150, true);
                     }
 
-                    float num163 = 1f + Math.Abs(base.velocity.X) / 3f;
+                    var num163 = 1f + Math.Abs(base.velocity.X) / 3f;
                     if (gfxOffY > 0f)
                     {
                         gfxOffY -= num163 * stepSpeed;
@@ -20934,7 +20934,7 @@ namespace Terraria
                     }
 
                     SlopeDownMovement();
-                    bool flag28 = mount.Type == 7 || mount.Type == 8 || mount.Type == 12;
+                    var flag28 = mount.Type == 7 || mount.Type == 8 || mount.Type == 12;
                     if (base.velocity.Y == gravity && (!mount.Active || (!mount.Cart && !flag28)))
                     {
                         Collision.StepDown(ref base.position, ref base.velocity, width, height, ref stepSpeed,
@@ -20958,7 +20958,7 @@ namespace Terraria
 
                     oldPosition = base.position;
                     oldDirection = base.direction;
-                    bool falling = false;
+                    var falling = false;
                     if (base.velocity.Y > gravity)
                     {
                         falling = true;
@@ -20969,10 +20969,10 @@ namespace Terraria
                         falling = true;
                     }
 
-                    Vector2 velocity = base.velocity;
+                    var velocity = base.velocity;
                     slideDir = 0;
-                    bool ignorePlats = false;
-                    bool fallThrough = controlDown;
+                    var ignorePlats = false;
+                    var fallThrough = controlDown;
                     if (gravDir == -1f || (mount.Active && mount.Cart) || GoingDownWithGrapple)
                     {
                         ignorePlats = true;
@@ -20980,14 +20980,14 @@ namespace Terraria
                     }
 
                     onTrack = false;
-                    bool flag29 = false;
+                    var flag29 = false;
                     if (mount.Active && mount.Cart)
                     {
-                        float num164 = (ignoreWater || merman) ? 1f : (honeyWet ? 0.25f : ((!wet) ? 1f : 0.5f));
+                        var num164 = (ignoreWater || merman) ? 1f : (honeyWet ? 0.25f : ((!wet) ? 1f : 0.5f));
                         base.velocity *= num164;
                         DelegateMethods.Minecart.rotation = fullRotation;
                         DelegateMethods.Minecart.rotationOrigin = fullRotationOrigin;
-                        BitsByte bitsByte = Minecart.TrackCollision(ref base.position, ref base.velocity, ref lastBoost,
+                        var bitsByte = Minecart.TrackCollision(ref base.position, ref base.velocity, ref lastBoost,
                             width, height, controlDown, controlUp, fallStart2, false, mount.MinecartDust);
                         if (bitsByte[0])
                         {
@@ -21046,8 +21046,8 @@ namespace Terraria
                         }
                     }
 
-                    bool flag30 = whoAmI == Main.myPlayer && !mount.Active;
-                    Vector2 position = base.position;
+                    var flag30 = whoAmI == Main.myPlayer && !mount.Active;
+                    var position = base.position;
                     if (vortexDebuff)
                     {
                         base.velocity.Y = base.velocity.Y * 0.8f +
@@ -21073,7 +21073,7 @@ namespace Terraria
                         DryCollision(fallThrough, ignorePlats);
                         if (mount.Active && mount.Type == 3 && base.velocity.Y != 0f && !SlimeDontHyperJump)
                         {
-                            Vector2 velocity2 = base.velocity;
+                            var velocity2 = base.velocity;
                             base.velocity.X = 0f;
                             DryCollision(fallThrough, ignorePlats);
                             base.velocity.X = velocity2.X;
@@ -21169,9 +21169,9 @@ namespace Terraria
         {
             if (this.vortexStealthActive)
                 return;
-            float num1 = 0.0f;
-            float num2 = 0.0f;
-            float num3 = 0.0f;
+            var num1 = 0.0f;
+            var num2 = 0.0f;
+            var num3 = 0.0f;
             switch (this.head)
             {
                 case 11:
@@ -21211,9 +21211,9 @@ namespace Terraria
                     break;
             }
 
-            float num4 = 0.0f;
-            float num5 = 0.0f;
-            float num6 = 0.0f;
+            var num4 = 0.0f;
+            var num5 = 0.0f;
+            var num6 = 0.0f;
             switch (this.body)
             {
                 case 175:
@@ -21243,9 +21243,9 @@ namespace Terraria
                     break;
             }
 
-            float num7 = 0.0f;
-            float num8 = 0.0f;
-            float num9 = 0.0f;
+            var num7 = 0.0f;
+            var num8 = 0.0f;
+            var num9 = 0.0f;
             switch (this.legs)
             {
                 case 110:
@@ -21272,12 +21272,12 @@ namespace Terraria
 
             if ((double) num1 != 0.0 || (double) num2 != 0.0 || (double) num3 != 0.0)
             {
-                float num10 = 1f;
+                var num10 = 1f;
                 if ((double) num1 == (double) num4 && (double) num2 == (double) num5 && (double) num3 == (double) num6)
                     num10 += 0.5f;
                 if ((double) num1 == (double) num7 && (double) num2 == (double) num8 && (double) num3 == (double) num9)
                     num10 += 0.5f;
-                Vector2 spinningpoint = new Vector2((float) (this.width / 2 + 8 * this.direction), 2f);
+                var spinningpoint = new Vector2((float) (this.width / 2 + 8 * this.direction), 2f);
                 if ((double) this.fullRotation != 0.0)
                     spinningpoint = spinningpoint.RotatedBy((double) this.fullRotation, this.fullRotationOrigin);
                 Lighting.AddLight((int) ((double) this.position.X + (double) spinningpoint.X) / 16,
@@ -21287,12 +21287,12 @@ namespace Terraria
 
             if ((double) num4 != 0.0 || (double) num5 != 0.0 || (double) num6 != 0.0)
             {
-                float num10 = 1f;
+                var num10 = 1f;
                 if ((double) num4 == (double) num1 && (double) num5 == (double) num2 && (double) num6 == (double) num3)
                     num10 += 0.5f;
                 if ((double) num4 == (double) num7 && (double) num5 == (double) num8 && (double) num6 == (double) num9)
                     num10 += 0.5f;
-                Vector2 spinningpoint = new Vector2((float) (this.width / 2 + 8), (float) (this.height / 2));
+                var spinningpoint = new Vector2((float) (this.width / 2 + 8), (float) (this.height / 2));
                 if ((double) this.fullRotation != 0.0)
                     spinningpoint = spinningpoint.RotatedBy((double) this.fullRotation, this.fullRotationOrigin);
                 Lighting.AddLight((int) ((double) this.position.X + (double) spinningpoint.X) / 16,
@@ -21302,12 +21302,12 @@ namespace Terraria
 
             if ((double) num7 == 0.0 && (double) num8 == 0.0 && (double) num9 == 0.0)
                 return;
-            float num11 = 1f;
+            var num11 = 1f;
             if ((double) num7 == (double) num4 && (double) num8 == (double) num5 && (double) num9 == (double) num6)
                 num11 += 0.5f;
             if ((double) num7 == (double) num1 && (double) num8 == (double) num2 && (double) num9 == (double) num3)
                 num11 += 0.5f;
-            Vector2 spinningpoint1 =
+            var spinningpoint1 =
                 new Vector2((float) (this.width / 2 + 8 * this.direction), (float) this.height * 0.75f);
             if ((double) this.fullRotation != 0.0)
                 spinningpoint1 = spinningpoint1.RotatedBy((double) this.fullRotation, this.fullRotationOrigin);
@@ -21318,14 +21318,14 @@ namespace Terraria
 
         private void Update_NPCCollision()
         {
-            Microsoft.Xna.Framework.Rectangle rectangle =
+            var rectangle =
                 new Microsoft.Xna.Framework.Rectangle((int) this.position.X, (int) this.position.Y, this.width,
                     this.height);
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.npc[index].active && !Main.npc[index].friendly && Main.npc[index].damage > 0)
                 {
-                    int specialHitSetter = -1;
+                    var specialHitSetter = -1;
                     switch (Main.npc[index].type)
                     {
                         case 396:
@@ -21341,19 +21341,19 @@ namespace Terraria
                         (this.dash != 2 || index != this.eocHit || this.eocDash <= 0) &&
                         !this.npcTypeNoAggro[Main.npc[index].type])
                     {
-                        float damageMultiplier = 1f;
-                        Microsoft.Xna.Framework.Rectangle npcRect =
+                        var damageMultiplier = 1f;
+                        var npcRect =
                             new Microsoft.Xna.Framework.Rectangle((int) Main.npc[index].position.X,
                                 (int) Main.npc[index].position.Y, Main.npc[index].width, Main.npc[index].height);
                         NPC.GetMeleeCollisionData(rectangle, index, ref specialHitSetter, ref damageMultiplier,
                             ref npcRect);
                         if (rectangle.Intersects(npcRect) && !this.npcTypeNoAggro[Main.npc[index].type])
                         {
-                            bool flag1 = true;
-                            bool flag2 = false;
-                            bool flag3 = this.CanParryAgainst(rectangle, npcRect, Main.npc[index].velocity);
-                            float num = this.thorns;
-                            float knockback = 10f;
+                            var flag1 = true;
+                            var flag2 = false;
+                            var flag3 = this.CanParryAgainst(rectangle, npcRect, Main.npc[index].velocity);
+                            var num = this.thorns;
+                            var knockback = 10f;
                             if (this.turtleThorns)
                                 num = 1f;
                             if (flag3)
@@ -21364,12 +21364,12 @@ namespace Terraria
                                 flag2 = true;
                             }
 
-                            int hitDirection = -1;
+                            var hitDirection = -1;
                             if ((double) Main.npc[index].position.X + (double) (Main.npc[index].width / 2) <
                                 (double) this.position.X + (double) (this.width / 2))
                                 hitDirection = 1;
-                            int Damage = Main.DamageVar((float) Main.npc[index].damage * damageMultiplier);
-                            int banner = Item.NPCtoBanner(Main.npc[index].BannerID());
+                            var Damage = Main.DamageVar((float) Main.npc[index].damage * damageMultiplier);
+                            var banner = Item.NPCtoBanner(Main.npc[index].BannerID());
                             if (banner > 0 && this.NPCBannerBuff[banner])
                                 Damage = !Main.expertMode
                                     ? (int) ((double) Damage * (double) ItemID.Sets
@@ -21379,7 +21379,7 @@ namespace Terraria
                             if (this.whoAmI == Main.myPlayer && (double) num > 0.0 &&
                                 (!this.immune && !Main.npc[index].dontTakeDamage))
                             {
-                                int damage = (int) ((double) Damage * (double) num);
+                                var damage = (int) ((double) Damage * (double) num);
                                 this.ApplyDamageToNPC(Main.npc[index], damage, knockback, -hitDirection, false);
                             }
 
@@ -21419,17 +21419,17 @@ namespace Terraria
         {
             if (this.trashItem.type == 3822)
                 this.trashItem.TurnToAir();
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
-                Item obj = this.inventory[index];
+                var obj = this.inventory[index];
                 if (obj.stack > 0 && obj.type == 3822)
                     obj.TurnToAir();
             }
 
             if (this.chest == -2)
             {
-                Chest bank = this.bank;
-                for (int index = 0; index < 40; ++index)
+                var bank = this.bank;
+                for (var index = 0; index < 40; ++index)
                 {
                     if (bank.item[index].stack > 0 && bank.item[index].type == 3822)
                         bank.item[index].TurnToAir();
@@ -21438,8 +21438,8 @@ namespace Terraria
 
             if (this.chest == -4)
             {
-                Chest bank3 = this.bank3;
-                for (int index = 0; index < 40; ++index)
+                var bank3 = this.bank3;
+                for (var index = 0; index < 40; ++index)
                 {
                     if (bank3.item[index].stack > 0 && bank3.item[index].type == 3822)
                         bank3.item[index].TurnToAir();
@@ -21448,8 +21448,8 @@ namespace Terraria
 
             if (this.chest == -3)
             {
-                Chest bank2 = this.bank2;
-                for (int index = 0; index < 40; ++index)
+                var bank2 = this.bank2;
+                for (var index = 0; index < 40; ++index)
                 {
                     if (bank2.item[index].stack > 0 && bank2.item[index].type == 3822)
                         bank2.item[index].TurnToAir();
@@ -21458,8 +21458,8 @@ namespace Terraria
 
             if (this.chest <= -1)
                 return;
-            Chest chest = Main.chest[this.chest];
-            for (int index = 0; index < 40; ++index)
+            var chest = Main.chest[this.chest];
+            for (var index = 0; index < 40; ++index)
             {
                 if (chest.item[index].stack > 0 && chest.item[index].type == 3822)
                 {
@@ -21473,7 +21473,7 @@ namespace Terraria
 
         public void ItemCheck_ManageRightClickFeatures()
         {
-            bool theGeneralCheck = this.selectedItem != 58 && this.controlUseTile &&
+            var theGeneralCheck = this.selectedItem != 58 && this.controlUseTile &&
                                    (!this.tileInteractionHappened && this.releaseUseItem) &&
                                    (!this.controlUseItem && !this.mouseInterface &&
                                     (!CaptureManager.Instance.Active && !Main.HoveringOverAnNPC)) &&
@@ -21521,7 +21521,7 @@ namespace Terraria
 
         public void ItemCheck_ManageRightClickFeatures_ShieldRaise(bool theGeneralCheck)
         {
-            bool flag = false;
+            var flag = false;
             if (theGeneralCheck && this.inventory[this.selectedItem].type == 3823 &&
                 (this.hasRaisableShield && !this.mount.Active) &&
                 (this.itemAnimation == 0 || PlayerInput.Triggers.JustPressed.MouseRight))
@@ -21532,9 +21532,9 @@ namespace Terraria
                 if (this.shield_parry_cooldown == 0)
                 {
                     Main.PlaySound(25, -1, -1, 1, 1f, 0.0f);
-                    for (int index1 = 0; index1 < 10; ++index1)
+                    for (var index1 = 0; index1 < 10; ++index1)
                     {
-                        int index2 = Dust.NewDust(
+                        var index2 = Dust.NewDust(
                             this.Center + new Vector2((float) (this.direction * 6 + (this.direction == -1 ? -10 : 0)),
                                 -14f), 10, 16, 45, 0.0f, 0.0f, (int) byte.MaxValue,
                             new Color((int) byte.MaxValue, 100, 0, (int) sbyte.MaxValue),
@@ -21568,12 +21568,12 @@ namespace Terraria
                 }
             }
 
-            int num = this.shieldRaised ? 1 : 0;
+            var num = this.shieldRaised ? 1 : 0;
         }
 
         private void HandleHotbar()
         {
-            int num = PlayerInput.Triggers.Current.HotbarPlus.ToInt() -
+            var num = PlayerInput.Triggers.Current.HotbarPlus.ToInt() -
                       PlayerInput.Triggers.Current.HotbarMinus.ToInt();
             if (PlayerInput.CurrentProfile.HotbarAllowsRadial && num != 0 &&
                 (PlayerInput.Triggers.Current.HotbarHoldTime >
@@ -21607,7 +21607,7 @@ namespace Terraria
         private void ItemCheckWrapped(int i)
         {
             LockOnHelper.SetUP();
-            int stack = this.inventory[this.selectedItem].stack;
+            var stack = this.inventory[this.selectedItem].stack;
             if (Main.ignoreErrors)
             {
                 try
@@ -21636,7 +21636,7 @@ namespace Terraria
             if (Offset != 0)
             {
                 Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
-                int num = this.selectedItem - Offset;
+                var num = this.selectedItem - Offset;
                 this.DpadRadial.ChangeSelection(-1);
                 this.CircularRadial.ChangeSelection(-1);
                 this.selectedItem = num + Offset;
@@ -21661,10 +21661,10 @@ namespace Terraria
 
         private void OldInput()
         {
-            bool flag1 = false;
-            bool flag2 = false;
-            Keys[] pressedKeys = Main.keyState.GetPressedKeys();
-            for (int index = 0; index < pressedKeys.Length; ++index)
+            var flag1 = false;
+            var flag2 = false;
+            var pressedKeys = Main.keyState.GetPressedKeys();
+            for (var index = 0; index < pressedKeys.Length; ++index)
             {
                 if (pressedKeys[index] == Keys.LeftShift || pressedKeys[index] == Keys.RightShift)
                     flag1 = true;
@@ -21674,8 +21674,8 @@ namespace Terraria
 
             if (Main.blockKey != Keys.None.ToString())
             {
-                bool flag3 = false;
-                for (int index = 0; index < pressedKeys.Length; ++index)
+                var flag3 = false;
+                for (var index = 0; index < pressedKeys.Length; ++index)
                 {
                     if (pressedKeys[index].ToString() == Main.blockKey)
                     {
@@ -21688,9 +21688,9 @@ namespace Terraria
                     Main.blockKey = Keys.None.ToString();
             }
 
-            for (int index = 0; index < pressedKeys.Length; ++index)
+            for (var index = 0; index < pressedKeys.Length; ++index)
             {
-                string str = string.Concat((object) pressedKeys[index]);
+                var str = string.Concat((object) pressedKeys[index]);
                 if (pressedKeys[index] != Keys.Tab || (!flag1 || SocialAPI.Mode != SocialMode.Steam) && !flag2)
                 {
                     if (str == Main.cUp)
@@ -21741,7 +21741,7 @@ namespace Terraria
 
             if (Main.gamePad)
             {
-                GamePadState state = GamePad.GetState(PlayerIndex.One);
+                var state = GamePad.GetState(PlayerIndex.One);
                 if (state.DPad.Up == ButtonState.Pressed)
                     this.controlUp = true;
                 if (state.DPad.Down == ButtonState.Pressed)
@@ -21779,15 +21779,15 @@ namespace Terraria
         {
             if (Main.mapFullscreen)
                 return;
-            int myX = Player.tileTargetX;
-            int myY = Player.tileTargetY;
+            var myX = Player.tileTargetX;
+            var myY = Player.tileTargetY;
             if (Main.SmartInteractShowingGenuine && Main.SmartInteractNPC == -1)
             {
                 myX = Main.SmartInteractX;
                 myY = Main.SmartInteractY;
             }
 
-            bool flag = this.controlUseTile;
+            var flag = this.controlUseTile;
             if (PlayerInput.UsingGamepad && Main.HoveringOverAnNPC)
                 flag = false;
             if (this.releaseUseTile)
@@ -21832,13 +21832,13 @@ namespace Terraria
 
             if (Main.tile[myX, myY].type == (ushort) 88)
             {
-                Tile tile = Main.tile[myX, myY];
-                int num = myX;
-                int Y = myY;
-                int X = num - (int) tile.frameX % 54 / 18;
+                var tile = Main.tile[myX, myY];
+                var num = myX;
+                var Y = myY;
+                var X = num - (int) tile.frameX % 54 / 18;
                 if ((int) tile.frameY % 36 != 0)
                     --Y;
-                int chest = Chest.FindChest(X, Y);
+                var chest = Chest.FindChest(X, Y);
                 this.showItemIcon2 = -1;
                 if (chest < 0)
                 {
@@ -21868,15 +21868,15 @@ namespace Terraria
             if (!Main.tileSign[(int) Main.tile[myX, myY].type])
                 return;
             this.noThrow = 2;
-            int num1 = (int) Main.tile[myX, myY].frameX / 18;
-            int num2 = (int) Main.tile[myX, myY].frameY / 18;
-            int num3 = num1 % 2;
-            int i = myX - num3;
-            int j = myY - num2;
+            var num1 = (int) Main.tile[myX, myY].frameX / 18;
+            var num2 = (int) Main.tile[myX, myY].frameY / 18;
+            var num3 = num1 % 2;
+            var i = myX - num3;
+            var j = myY - num2;
             Main.signBubble = true;
             Main.signX = i * 16 + 16;
             Main.signY = j * 16;
-            int num4 = Sign.ReadSign(i, j, true);
+            var num4 = Sign.ReadSign(i, j, true);
             if (num4 == -1)
                 return;
             Main.signHover = num4;
@@ -21888,16 +21888,16 @@ namespace Terraria
         {
             if (WiresUI.Open || this.ownedProjectileCounts[651] > 0)
                 return;
-            bool releaseUseTile = this.releaseUseTile;
+            var releaseUseTile = this.releaseUseTile;
             if (!this.tileInteractAttempted)
                 return;
-            bool flag1 = false;
+            var flag1 = false;
             if (Main.tile[myX, myY].type == (ushort) 212 && this.launcherWait <= 0)
             {
-                int index1 = myX;
-                int index2 = myY;
-                bool flag2 = false;
-                for (int index3 = 0; index3 < 58; ++index3)
+                var index1 = myX;
+                var index2 = myY;
+                var flag2 = false;
+                for (var index3 = 0; index3 < 58; ++index3)
                 {
                     if (this.inventory[index3].type == 949 && this.inventory[index3].stack > 0)
                     {
@@ -21914,26 +21914,26 @@ namespace Terraria
                     flag1 = true;
                     this.launcherWait = 10;
                     Main.PlaySound(SoundID.Item11, this.position);
-                    int num1 = (int) Main.tile[index1, index2].frameX / 18;
-                    int num2 = 0;
+                    var num1 = (int) Main.tile[index1, index2].frameX / 18;
+                    var num2 = 0;
                     while (num1 >= 3)
                     {
                         ++num2;
                         num1 -= 3;
                     }
 
-                    int num3 = index1 - num1;
-                    int num4 = (int) Main.tile[index1, index2].frameY / 18;
+                    var num3 = index1 - num1;
+                    var num4 = (int) Main.tile[index1, index2].frameY / 18;
                     while (num4 >= 3)
                         num4 -= 3;
-                    int num5 = index2 - num4;
-                    float num6 = (float) (12.0 + (double) Main.rand.Next(450) * 0.00999999977648258);
-                    float num7 = (float) Main.rand.Next(85, 105);
-                    float num8 = (float) Main.rand.Next(-35, 11);
-                    int Type = 166;
-                    int Damage = 35;
-                    float KnockBack = 3.5f;
-                    Vector2 vector2 = new Vector2((float) ((num3 + 2) * 16 - 8), (float) ((num5 + 2) * 16 - 8));
+                    var num5 = index2 - num4;
+                    var num6 = (float) (12.0 + (double) Main.rand.Next(450) * 0.00999999977648258);
+                    var num7 = (float) Main.rand.Next(85, 105);
+                    var num8 = (float) Main.rand.Next(-35, 11);
+                    var Type = 166;
+                    var Damage = 35;
+                    var KnockBack = 3.5f;
+                    var vector2 = new Vector2((float) ((num3 + 2) * 16 - 8), (float) ((num5 + 2) * 16 - 8));
                     if (num2 == 0)
                     {
                         num7 *= -1f;
@@ -21942,12 +21942,12 @@ namespace Terraria
                     else
                         vector2.X += 12f;
 
-                    float num9 = num7;
-                    float num10 = num8;
-                    float num11 = (float) Math.Sqrt((double) num9 * (double) num9 + (double) num10 * (double) num10);
-                    float num12 = num6 / num11;
-                    float SpeedX = num9 * num12;
-                    float SpeedY = num10 * num12;
+                    var num9 = num7;
+                    var num10 = num8;
+                    var num11 = (float) Math.Sqrt((double) num9 * (double) num9 + (double) num10 * (double) num10);
+                    var num12 = num6 / num11;
+                    var SpeedX = num9 * num12;
+                    var SpeedY = num10 * num12;
                     Projectile.NewProjectile(vector2.X, vector2.Y, SpeedX, SpeedY, Type, Damage, KnockBack,
                         Main.myPlayer, 0.0f, 0.0f);
                 }
@@ -21965,11 +21965,11 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 441 || Main.tile[myX, myY].type == (ushort) 468)
                 {
                     flag1 = true;
-                    int num1 = (int) Main.tile[myX, myY].frameX / 18;
+                    var num1 = (int) Main.tile[myX, myY].frameX / 18;
                     while (num1 > 1)
                         num1 -= 2;
-                    int num2 = myX - num1;
-                    int num3 = myY - (int) Main.tile[myX, myY].frameY / 18;
+                    var num2 = myX - num1;
+                    var num3 = myY - (int) Main.tile[myX, myY].frameY / 18;
                     Animation.NewTemporaryAnimation(2, Main.tile[myX, myY].type, num2, num3);
                     NetMessage.SendTemporaryAnimation(-1, 2, (int) Main.tile[myX, myY].type, num2, num3);
                     Wiring.HitSwitch(myX, myY);
@@ -21985,16 +21985,16 @@ namespace Terraria
                 {
                     flag1 = true;
                     Main.PlaySound(28, myX * 16, myY * 16, 0, 1f, 0.0f);
-                    int num1 = (int) Main.tile[myX, myY].frameX % 54 / 18;
-                    int num2 = (int) Main.tile[myX, myY].frameY % 36 / 18;
-                    int index1 = myX - num1;
-                    int index2 = myY - num2;
-                    int num3 = 36;
+                    var num1 = (int) Main.tile[myX, myY].frameX % 54 / 18;
+                    var num2 = (int) Main.tile[myX, myY].frameY % 36 / 18;
+                    var index1 = myX - num1;
+                    var index2 = myY - num2;
+                    var num3 = 36;
                     if (Main.tile[index1, index2].frameY >= (short) 36)
                         num3 = -36;
-                    for (int index3 = index1; index3 < index1 + 3; ++index3)
+                    for (var index3 = index1; index3 < index1 + 3; ++index3)
                     {
-                        for (int index4 = index2; index4 < index2 + 2; ++index4)
+                        for (var index4 = index2; index4 < index2 + 2; ++index4)
                             Main.tile[index3, index4].frameY += (short) num3;
                     }
 
@@ -22028,8 +22028,8 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 386 || Main.tile[myX, myY].type == (ushort) 387)
                 {
                     flag1 = true;
-                    bool flag2 = Main.tile[myX, myY].type == (ushort) 387;
-                    int num = WorldGen.ShiftTrapdoor(myX, myY, (double) (myY * 16) > (double) this.Center.Y, -1)
+                    var flag2 = Main.tile[myX, myY].type == (ushort) 387;
+                    var num = WorldGen.ShiftTrapdoor(myX, myY, (double) (myY * 16) > (double) this.Center.Y, -1)
                         .ToInt();
                     if (num == 0)
                         num = -WorldGen.ShiftTrapdoor(myX, myY, (double) (myY * 16) <= (double) this.Center.Y, -1)
@@ -22041,7 +22041,7 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 388 || Main.tile[myX, myY].type == (ushort) 389)
                 {
                     flag1 = true;
-                    bool closing = Main.tile[myX, myY].type == (ushort) 389;
+                    var closing = Main.tile[myX, myY].type == (ushort) 389;
                     WorldGen.ShiftTallGate(myX, myY, closing);
                     NetMessage.SendData(19, -1, -1, (NetworkText) null, 4 + closing.ToInt(), (float) myX, (float) myY,
                         0.0f, 0, 0, 0);
@@ -22060,12 +22060,12 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 338)
                 {
                     flag1 = true;
-                    int index1 = myX;
-                    int index2 = myY;
+                    var index1 = myX;
+                    var index2 = myY;
                     if (Main.tile[index1, index2].frameY == (short) 18)
                         --index2;
-                    bool flag2 = false;
-                    for (int index3 = 0; index3 < 1000; ++index3)
+                    var flag2 = false;
+                    for (var index3 = 0; index3 < 1000; ++index3)
                     {
                         if (Main.projectile[index3].active && Main.projectile[index3].aiStyle == 73 &&
                             ((double) Main.projectile[index3].ai[0] == (double) index1 &&
@@ -22095,15 +22095,15 @@ namespace Terraria
                 {
                     flag1 = true;
                     this.GamepadEnableGrappleCooldown();
-                    int y = myY;
-                    Tile tileSafely = Framing.GetTileSafely(myX, myY);
+                    var y = myY;
+                    var tileSafely = Framing.GetTileSafely(myX, myY);
                     if (tileSafely.frameY == (short) 0)
                         y += 3;
                     if (tileSafely.frameY == (short) 18)
                         y += 2;
                     if (tileSafely.frameY == (short) 36)
                         ++y;
-                    bool flag2 = !DD2Event.Ongoing && !NPC.AnyNPCs(548) && !Main.pumpkinMoon && !Main.snowMoon;
+                    var flag2 = !DD2Event.Ongoing && !NPC.AnyNPCs(548) && !Main.pumpkinMoon && !Main.snowMoon;
                     if (flag2)
                         flag2 = this.HasItem(3828);
                     if (flag2)
@@ -22128,15 +22128,15 @@ namespace Terraria
                     }
                     else
                     {
-                        int num1 = myX;
-                        int j = myY;
+                        var num1 = myX;
+                        var j = myY;
                         if (Main.tile[myX, myY].frameY == (short) 0)
                             ++j;
                         if (Main.tile[myX, myY].frameY == (short) 36)
                             --j;
-                        int frameX = (int) Main.tile[myX, j].frameX;
-                        int num2 = (int) Main.tile[myX, j].frameX;
-                        int num3 = 0;
+                        var frameX = (int) Main.tile[myX, j].frameX;
+                        var num2 = (int) Main.tile[myX, j].frameX;
+                        var num3 = 0;
                         while (num2 >= 5000)
                         {
                             num2 -= 5000;
@@ -22145,7 +22145,7 @@ namespace Terraria
 
                         if (num3 != 0)
                             num2 = (num3 - 1) * 18;
-                        int num4 = num2 % 54;
+                        var num4 = num2 % 54;
                         if (num4 == 18)
                         {
                             frameX = (int) Main.tile[myX - 1, j].frameX;
@@ -22155,7 +22155,7 @@ namespace Terraria
                         if (num4 == 36)
                         {
                             frameX = (int) Main.tile[myX - 2, j].frameX;
-                            int num5 = num1 - 2;
+                            var num5 = num1 - 2;
                         }
 
                         if (frameX >= 5000)
@@ -22171,13 +22171,13 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 440)
                 {
                     flag1 = true;
-                    int index = myX;
-                    int j = myY;
-                    int num1 = (int) Main.tile[index, j].frameX / 54;
-                    int num2 = (int) Main.tile[index, j].frameY / 54;
-                    int num3 = (int) Main.tile[index, j].frameX % 54 / 18;
-                    int num4 = (int) Main.tile[index, j].frameY % 54 / 18;
-                    int type = -1;
+                    var index = myX;
+                    var j = myY;
+                    var num1 = (int) Main.tile[index, j].frameX / 54;
+                    var num2 = (int) Main.tile[index, j].frameY / 54;
+                    var num3 = (int) Main.tile[index, j].frameX % 54 / 18;
+                    var num4 = (int) Main.tile[index, j].frameY % 54 / 18;
+                    var type = -1;
                     switch (num1)
                     {
                         case 0:
@@ -22242,13 +22242,13 @@ namespace Terraria
                     }
                     else
                     {
-                        int x = myX;
-                        int index1 = myY;
+                        var x = myX;
+                        var index1 = myY;
                         if ((int) Main.tile[x, index1].frameX % 36 != 0)
                             --x;
                         if ((int) Main.tile[x, index1].frameY % 36 != 0)
                             --index1;
-                        int index2 = TEItemFrame.Find(x, index1);
+                        var index2 = TEItemFrame.Find(x, index1);
                         if (index2 != -1 && ((TEItemFrame) TileEntity.ByID[index2]).item.stack > 0)
                         {
                             this.GamepadEnableGrappleCooldown();
@@ -22295,19 +22295,19 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 79)
                 {
                     flag1 = true;
-                    int num1 = myX;
-                    int num2 = myY;
-                    int num3 = num1 + (int) Main.tile[myX, myY].frameX / 18 * -1;
-                    int x = Main.tile[myX, myY].frameX < (short) 72 ? num3 + 2 : num3 + 4 + 1;
-                    int num4 = (int) Main.tile[myX, myY].frameY / 18;
-                    int num5 = 0;
+                    var num1 = myX;
+                    var num2 = myY;
+                    var num3 = num1 + (int) Main.tile[myX, myY].frameX / 18 * -1;
+                    var x = Main.tile[myX, myY].frameX < (short) 72 ? num3 + 2 : num3 + 4 + 1;
+                    var num4 = (int) Main.tile[myX, myY].frameY / 18;
+                    var num5 = 0;
                     while (num4 > 1)
                     {
                         num4 -= 2;
                         ++num5;
                     }
 
-                    int y = num2 - num4 + 2;
+                    var y = num2 - num4 + 2;
                     this.FindSpawn();
                     if (this.SpawnX == x && this.SpawnY == y)
                     {
@@ -22325,7 +22325,7 @@ namespace Terraria
                 else if (Main.tileSign[(int) Main.tile[myX, myY].type])
                 {
                     flag1 = true;
-                    bool flag2 = true;
+                    var flag2 = true;
                     if (this.sign >= 0 && Sign.ReadSign(myX, myY, true) == this.sign)
                     {
                         this.sign = -1;
@@ -22344,18 +22344,18 @@ namespace Terraria
                             Main.playerInventory = false;
                             Main.editSign = false;
                             Main.PlaySound(10, -1, -1, 1, 1f, 0.0f);
-                            int index = Sign.ReadSign(myX, myY, true);
+                            var index = Sign.ReadSign(myX, myY, true);
                             this.sign = index;
                             Main.npcChatText = Main.sign[index].text;
                         }
                         else
                         {
-                            int num1 = (int) Main.tile[myX, myY].frameX / 18;
-                            int num2 = (int) Main.tile[myX, myY].frameY / 18;
+                            var num1 = (int) Main.tile[myX, myY].frameX / 18;
+                            var num2 = (int) Main.tile[myX, myY].frameY / 18;
                             while (num1 > 1)
                                 num1 -= 2;
-                            int number = myX - num1;
-                            int index = myY - num2;
+                            var number = myX - num1;
+                            var index = myY - num2;
                             if (Main.tileSign[(int) Main.tile[number, index].type])
                                 NetMessage.SendData(46, -1, -1, (NetworkText) null, number, (float) index, 0.0f, 0.0f,
                                     0, 0, 0);
@@ -22365,18 +22365,18 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 104)
                 {
                     flag1 = true;
-                    string str1 = "AM";
-                    double time = Main.time;
+                    var str1 = "AM";
+                    var time = Main.time;
                     if (!Main.dayTime)
                         time += 54000.0;
-                    double num1 = time / 86400.0 * 24.0 - 7.5 - 12.0;
+                    var num1 = time / 86400.0 * 24.0 - 7.5 - 12.0;
                     if (num1 < 0.0)
                         num1 += 24.0;
                     if (num1 >= 12.0)
                         str1 = "PM";
-                    int num2 = (int) num1;
-                    double num3 = (double) (int) ((num1 - (double) num2) * 60.0);
-                    string str2 = string.Concat((object) num3);
+                    var num2 = (int) num1;
+                    var num3 = (double) (int) ((num1 - (double) num2) * 60.0);
+                    var str2 = string.Concat((object) num3);
                     if (num3 < 10.0)
                         str2 = "0" + str2;
                     if (num2 > 12)
@@ -22390,10 +22390,10 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 237)
                 {
                     flag1 = true;
-                    bool flag2 = false;
+                    var flag2 = false;
                     if (!NPC.AnyNPCs(245) && Main.hardMode && NPC.downedPlantBoss)
                     {
-                        for (int index = 0; index < 58; ++index)
+                        for (var index = 0; index < 58; ++index)
                         {
                             if (this.inventory[index].type == 1293)
                             {
@@ -22418,12 +22418,12 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 10)
                 {
                     flag1 = true;
-                    int num1 = myX;
-                    int num2 = myY;
+                    var num1 = myX;
+                    var num2 = myY;
                     if (WorldGen.IsLockedDoor(num1, num2))
                     {
-                        int num3 = 1141;
-                        for (int index = 0; index < 58; ++index)
+                        var num3 = 1141;
+                        for (var index = 0; index < 58; ++index)
                         {
                             if (this.inventory[index].type == num3 && this.inventory[index].stack > 0)
                             {
@@ -22458,9 +22458,9 @@ namespace Terraria
                     {
                         Main.CancelClothesWindow(true);
                         Main.mouseRightRelease = false;
-                        int num1 = (int) Main.tile[myX, myY].frameX / 18 % 3;
-                        int num2 = myX - num1;
-                        int Y = myY - (int) Main.tile[myX, myY].frameY / 18;
+                        var num1 = (int) Main.tile[myX, myY].frameX / 18 % 3;
+                        var num2 = myX - num1;
+                        var Y = myY - (int) Main.tile[myX, myY].frameY / 18;
                         if (this.sign > -1)
                         {
                             Main.PlaySound(11, -1, -1, 1, 1f, 0.0f);
@@ -22501,7 +22501,7 @@ namespace Terraria
                         else
                         {
                             this.flyingPigChest = -1;
-                            int chest = Chest.FindChest(num2, Y);
+                            var chest = Chest.FindChest(num2, Y);
                             if (chest != -1)
                             {
                                 Main.stackSplit = 600;
@@ -22551,17 +22551,17 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 209)
                 {
                     flag1 = true;
-                    Tile tile = Main.tile[myX, myY];
-                    int num1 = (int) tile.frameX % 72 / 18;
-                    int num2 = (int) tile.frameY % 54 / 18;
-                    int x = myX - num1;
-                    int y = myY - num2;
-                    int angle = (int) tile.frameY / 54;
-                    int num3 = (int) tile.frameX / 72;
-                    int num4 = -1;
+                    var tile = Main.tile[myX, myY];
+                    var num1 = (int) tile.frameX % 72 / 18;
+                    var num2 = (int) tile.frameY % 54 / 18;
+                    var x = myX - num1;
+                    var y = myY - num2;
+                    var angle = (int) tile.frameY / 54;
+                    var num3 = (int) tile.frameX / 72;
+                    var num4 = -1;
                     if (num1 == 1 || num1 == 2)
                         num4 = num2;
-                    int num5 = 0;
+                    var num5 = 0;
                     if (num1 == 3 || num1 == 2 && num3 != 3 && num3 != 4)
                         num5 = -54;
                     if (num1 == 0 || num1 == 1 && num3 != 3 && num3 != 4)
@@ -22570,12 +22570,12 @@ namespace Terraria
                         num5 = 0;
                     if (angle == 0 && num5 < 0)
                         num5 = 0;
-                    bool flag2 = false;
+                    var flag2 = false;
                     if (num5 != 0)
                     {
-                        for (int index1 = x; index1 < x + 4; ++index1)
+                        for (var index1 = x; index1 < x + 4; ++index1)
                         {
-                            for (int index2 = y; index2 < y + 3; ++index2)
+                            for (var index2 = y; index2 < y + 3; ++index2)
                                 Main.tile[index1, index2].frameY += (short) num5;
                         }
 
@@ -22584,10 +22584,10 @@ namespace Terraria
 
                     if ((num3 == 3 || num3 == 4) && (num4 == 1 || num4 == 0))
                     {
-                        int num6 = num3 == 3 ? 72 : -72;
-                        for (int index1 = x; index1 < x + 4; ++index1)
+                        var num6 = num3 == 3 ? 72 : -72;
+                        for (var index1 = x; index1 < x + 4; ++index1)
                         {
-                            for (int index2 = y; index2 < y + 3; ++index2)
+                            for (var index2 = y; index2 < y + 3; ++index2)
                                 Main.tile[index1, index2].frameX += (short) num6;
                         }
 
@@ -22598,7 +22598,7 @@ namespace Terraria
                         NetMessage.SendTileSquare(-1, x + 1, y + 1, 4, TileChangeType.None);
                     if (num4 != -1)
                     {
-                        bool flag3 = false;
+                        var flag3 = false;
                         if ((num3 == 3 || num3 == 4) && num4 == 2)
                             flag3 = true;
                         if (flag3)
@@ -22612,12 +22612,12 @@ namespace Terraria
                 {
                     flag1 = true;
                     Main.mouseRightRelease = false;
-                    int num1 = 0;
-                    int num2 = (int) Main.tile[myX, myY].frameX / 18;
+                    var num1 = 0;
+                    var num2 = (int) Main.tile[myX, myY].frameX / 18;
                     while (num2 > 1)
                         num2 -= 2;
-                    int index1 = myX - num2;
-                    int index2 = myY - (int) Main.tile[myX, myY].frameY / 18;
+                    var index1 = myX - num2;
+                    var index2 = myY - (int) Main.tile[myX, myY].frameY / 18;
                     if (Main.tile[myX, myY].type == (ushort) 29)
                         num1 = 1;
                     else if (Main.tile[myX, myY].type == (ushort) 97)
@@ -22683,7 +22683,7 @@ namespace Terraria
                     }
                     else
                     {
-                        int num3 = -1;
+                        var num3 = -1;
                         switch (num1)
                         {
                             case 1:
@@ -22696,18 +22696,18 @@ namespace Terraria
                                 num3 = -4;
                                 break;
                             default:
-                                bool flag2 = false;
+                                var flag2 = false;
                                 if (Chest.isLocked(index1, index2))
                                 {
-                                    int num4 = 327;
+                                    var num4 = 327;
                                     if (Main.tile[index1, index2].frameX >= (short) 144 &&
                                         Main.tile[index1, index2].frameX <= (short) 178)
                                         num4 = 329;
                                     if (Main.tile[index1, index2].frameX >= (short) 828 &&
                                         Main.tile[index1, index2].frameX <= (short) 1006)
                                     {
-                                        int num5 = (int) Main.tile[index1, index2].frameX / 18;
-                                        int num6 = 0;
+                                        var num5 = (int) Main.tile[index1, index2].frameX / 18;
+                                        var num6 = 0;
                                         while (num5 >= 2)
                                         {
                                             num5 -= 2;
@@ -22718,7 +22718,7 @@ namespace Terraria
                                     }
 
                                     flag2 = true;
-                                    for (int index3 = 0; index3 < 58; ++index3)
+                                    for (var index3 = 0; index3 < 58; ++index3)
                                     {
                                         if (this.inventory[index3].type == num4 && this.inventory[index3].stack > 0 &&
                                             Chest.Unlock(index1, index2))
@@ -22787,7 +22787,7 @@ namespace Terraria
                 else if (Main.tile[myX, myY].type == (ushort) 314 && (double) this.gravDir == 1.0)
                 {
                     flag1 = true;
-                    bool flag2 = true;
+                    var flag2 = true;
                     if (this.mount.Active)
                     {
                         if (this.mount.Cart)
@@ -22808,13 +22808,13 @@ namespace Terraria
 
         private void LaunchMinecartHook(int myX, int myY)
         {
-            Vector2 vector2 = new Vector2((float) Main.mouseX + Main.screenPosition.X,
+            var vector2 = new Vector2((float) Main.mouseX + Main.screenPosition.X,
                 (float) Main.mouseY + Main.screenPosition.Y);
             vector2 = new Vector2((float) (myX * 16 + 8), (float) (myY * 16 + 8));
             this.minecartLeft = this.direction <= 0;
             this.grappling[0] = -1;
             this.grapCount = 0;
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.projectile[index].active && Main.projectile[index].owner == this.whoAmI &&
                     Main.projectile[index].aiStyle == 7)
@@ -22832,7 +22832,7 @@ namespace Terraria
             {
                 this.noThrow = 2;
                 this.showItemIcon = true;
-                int num = (int) Main.tile[myX, myY].frameY / 36;
+                var num = (int) Main.tile[myX, myY].frameY / 36;
                 this.showItemIcon2 = num != 0
                     ? (num != 1
                         ? (num != 2
@@ -22899,7 +22899,7 @@ namespace Terraria
                 this.noThrow = 2;
                 this.showItemIcon = true;
                 this.showItemIcon2 = 105;
-                int num = (int) Main.tile[myX, myY].frameY / 22;
+                var num = (int) Main.tile[myX, myY].frameY / 22;
                 if (num == 1)
                     this.showItemIcon2 = 1405;
                 if (num == 2)
@@ -22946,17 +22946,17 @@ namespace Terraria
                 this.TileInteractionsMouseOver_Containers(myX, myY);
             if (Main.tile[myX, myY].type == (ushort) 441)
             {
-                Tile tile = Main.tile[myX, myY];
-                int num1 = myX;
-                int num2 = myY;
+                var tile = Main.tile[myX, myY];
+                var num1 = myX;
+                var num2 = myY;
                 if ((int) tile.frameX % 36 != 0)
                 {
-                    int num3 = num1 - 1;
+                    var num3 = num1 - 1;
                 }
 
                 if ((int) tile.frameY % 36 != 0)
                 {
-                    int num4 = num2 - 1;
+                    var num4 = num2 - 1;
                 }
 
                 this.showItemIcon2 = -1;
@@ -22967,17 +22967,17 @@ namespace Terraria
 
             if (Main.tile[myX, myY].type == (ushort) 468)
             {
-                Tile tile = Main.tile[myX, myY];
-                int num1 = myX;
-                int num2 = myY;
+                var tile = Main.tile[myX, myY];
+                var num1 = myX;
+                var num2 = myY;
                 if ((int) tile.frameX % 36 != 0)
                 {
-                    int num3 = num1 - 1;
+                    var num3 = num1 - 1;
                 }
 
                 if ((int) tile.frameY % 36 != 0)
                 {
-                    int num4 = num2 - 1;
+                    var num4 = num2 - 1;
                 }
 
                 this.showItemIcon2 = -1;
@@ -22988,13 +22988,13 @@ namespace Terraria
 
             if (Main.tile[myX, myY].type == (ushort) 88)
             {
-                Tile tile = Main.tile[myX, myY];
-                int num = myX;
-                int Y = myY;
-                int X = num - (int) tile.frameX % 54 / 18;
+                var tile = Main.tile[myX, myY];
+                var num = myX;
+                var Y = myY;
+                var X = num - (int) tile.frameX % 54 / 18;
                 if ((int) tile.frameY % 36 != 0)
                     --Y;
-                int chest = Chest.FindChest(X, Y);
+                var chest = Chest.FindChest(X, Y);
                 this.showItemIcon2 = -1;
                 if (chest < 0)
                 {
@@ -23020,11 +23020,11 @@ namespace Terraria
 
             if (Main.tile[myX, myY].type == (ushort) 10 || Main.tile[myX, myY].type == (ushort) 11)
             {
-                Tile tile = Main.tile[myX, myY];
+                var tile = Main.tile[myX, myY];
                 this.noThrow = 2;
                 this.showItemIcon = true;
-                int frameY = (int) tile.frameY;
-                int num = 0;
+                var frameY = (int) tile.frameY;
+                var num = 0;
                 while (frameY >= 54)
                 {
                     frameY -= 54;
@@ -23239,7 +23239,7 @@ namespace Terraria
                     this.showItemIcon2 = 3369;
                 else if (Main.tile[myX, myY].frameX < (short) 360)
                     this.showItemIcon2 = 3664;
-                int num = (int) Main.tile[myX, myY].frameX / 18;
+                var num = (int) Main.tile[myX, myY].frameX / 18;
                 while (num >= 4)
                     num -= 4;
                 this.showItemIconR = num < 2;
@@ -23249,8 +23249,8 @@ namespace Terraria
             {
                 this.noThrow = 2;
                 this.showItemIcon = true;
-                int frameY = (int) Main.tile[myX, myY].frameY;
-                int num = 0;
+                var frameY = (int) Main.tile[myX, myY].frameY;
+                var num = 0;
                 while (frameY >= 40)
                 {
                     frameY -= 40;
@@ -23264,8 +23264,8 @@ namespace Terraria
             {
                 this.noThrow = 2;
                 this.showItemIcon = true;
-                int x = 0;
-                int y = 0;
+                var x = 0;
+                var y = 0;
                 WorldGen.GetTopLeftAndStyles(ref x, ref y, 2, 1 + (Main.tile[myX, myY].type == (ushort) 386).ToInt(),
                     18, 18);
                 this.showItemIcon2 = 3239;
@@ -23346,7 +23346,7 @@ namespace Terraria
             {
                 this.noThrow = 2;
                 this.showItemIcon = true;
-                int num = (int) Main.tile[myX, myY].frameX / 54;
+                var num = (int) Main.tile[myX, myY].frameX / 54;
                 switch (num)
                 {
                     case 0:
@@ -23371,7 +23371,7 @@ namespace Terraria
             {
                 this.noThrow = 2;
                 this.showItemIcon = true;
-                int num = (int) Main.tile[myX, myY].frameY / 22;
+                var num = (int) Main.tile[myX, myY].frameY / 22;
                 switch (num)
                 {
                     case 0:
@@ -23484,10 +23484,10 @@ namespace Terraria
             if (Main.tile[myX, myY].type == (ushort) 139)
             {
                 this.noThrow = 2;
-                int index1 = myX;
-                int index2 = myY;
-                int num1 = 0;
-                int num2 = (int) Main.tile[index1, index2].frameY / 18;
+                var index1 = myX;
+                var index2 = myY;
+                var num1 = 0;
+                var num2 = (int) Main.tile[index1, index2].frameY / 18;
                 while (num2 >= 2)
                 {
                     ++num1;
@@ -23525,10 +23525,10 @@ namespace Terraria
             if (Main.tile[myX, myY].type == (ushort) 207)
             {
                 this.noThrow = 2;
-                int index1 = myX;
-                int index2 = myY;
-                int num1 = 0;
-                int num2 = (int) Main.tile[index1, index2].frameX / 18;
+                var index1 = myX;
+                var index2 = myY;
+                var num1 = 0;
+                var num2 = (int) Main.tile[index1, index2].frameX / 18;
                 while (num2 >= 2)
                 {
                     ++num1;
@@ -23568,15 +23568,15 @@ namespace Terraria
             if (Main.tileSign[(int) Main.tile[myX, myY].type])
             {
                 this.noThrow = 2;
-                int num1 = (int) Main.tile[myX, myY].frameX / 18;
-                int num2 = (int) Main.tile[myX, myY].frameY / 18;
-                int num3 = num1 % 2;
-                int i = myX - num3;
-                int j = myY - num2;
+                var num1 = (int) Main.tile[myX, myY].frameX / 18;
+                var num2 = (int) Main.tile[myX, myY].frameY / 18;
+                var num3 = num1 % 2;
+                var i = myX - num3;
+                var j = myY - num2;
                 Main.signBubble = true;
                 Main.signX = i * 16 + 16;
                 Main.signY = j * 16;
-                int num4 = Sign.ReadSign(i, j, false);
+                var num4 = Sign.ReadSign(i, j, false);
                 if (num4 != -1)
                     Main.signHover = num4;
                 if (num4 != -1)
@@ -23645,10 +23645,10 @@ namespace Terraria
 
             if (Main.tile[myX, myY].type != (ushort) 440)
                 return;
-            int index = myY;
-            int num5 = (int) Main.tile[myX, index].frameX / 54;
-            int num6 = (int) Main.tile[myX, index].frameY / 54;
-            int type = -1;
+            var index = myY;
+            var num5 = (int) Main.tile[myX, index].frameX / 54;
+            var num6 = (int) Main.tile[myX, index].frameY / 54;
+            var type = -1;
             switch (num5)
             {
                 case 0:
@@ -23696,22 +23696,22 @@ namespace Terraria
 
         private void TileInteractionsMouseOver_Containers(int myX, int myY)
         {
-            LocalizedText[] localizedTextArray = Lang.chestType;
-            int[] numArray = Chest.chestTypeToIcon;
-            Tile tile = Main.tile[myX, myY];
+            var localizedTextArray = Lang.chestType;
+            var numArray = Chest.chestTypeToIcon;
+            var tile = Main.tile[myX, myY];
             if (tile.type == (ushort) 467)
             {
                 localizedTextArray = Lang.chestType2;
                 numArray = Chest.chestTypeToIcon2;
             }
 
-            int X = myX;
-            int Y = myY;
+            var X = myX;
+            var Y = myY;
             if ((int) tile.frameX % 36 != 0)
                 --X;
             if ((int) tile.frameY % 36 != 0)
                 --Y;
-            int chest = Chest.FindChest(X, Y);
+            var chest = Chest.FindChest(X, Y);
             this.showItemIcon2 = -1;
             if (chest < 0)
             {
@@ -23737,8 +23737,8 @@ namespace Terraria
         {
             if (this.whoAmI != Main.myPlayer || (double) this.velocity.Y < 3.0)
                 return;
-            Point tileCoordinates = (this.Bottom + new Vector2(0.0f, 0.01f)).ToTileCoordinates();
-            Tile tileSafely = Framing.GetTileSafely(tileCoordinates.X, tileCoordinates.Y);
+            var tileCoordinates = (this.Bottom + new Vector2(0.0f, 0.01f)).ToTileCoordinates();
+            var tileSafely = Framing.GetTileSafely(tileCoordinates.X, tileCoordinates.Y);
             if (!tileSafely.active() || tileSafely.type != (ushort) 411 ||
                 (tileSafely.frameY != (short) 0 || tileSafely.frameX >= (short) 36))
                 return;
@@ -23751,11 +23751,11 @@ namespace Terraria
         {
             if ((double) this.velocity.Y < 5.0 && (double) this.velocity.Y > -5.0 || this.wet)
                 return;
-            int num = 0;
-            bool flag = false;
-            foreach (Point touchedTile in this.TouchedTiles)
+            var num = 0;
+            var flag = false;
+            foreach (var touchedTile in this.TouchedTiles)
             {
-                Tile tile = Main.tile[touchedTile.X, touchedTile.Y];
+                var tile = Main.tile[touchedTile.X, touchedTile.Y];
                 if (tile != null && tile.active() && (tile.nactive() && Main.tileBouncy[(int) tile.type]))
                 {
                     flag = true;
@@ -23779,11 +23779,11 @@ namespace Terraria
 
         private void GrabItems(int i)
         {
-            for (int number = 0; number < 400; ++number)
+            for (var number = 0; number < 400; ++number)
             {
                 if (Main.item[number].active && Main.item[number].noGrabDelay == 0 && Main.item[number].owner == i)
                 {
-                    int defaultItemGrabRange = Player.defaultItemGrabRange;
+                    var defaultItemGrabRange = Player.defaultItemGrabRange;
                     if (this.goldRing && Main.item[number].type >= 71 && Main.item[number].type <= 74)
                         defaultItemGrabRange += Item.coinGrabRange;
                     if (this.manaMagnet && (Main.item[number].type == 184 || Main.item[number].type == 1735 ||
@@ -23807,7 +23807,7 @@ namespace Terraria
                             if (ItemID.Sets.NebulaPickup[Main.item[number].type])
                             {
                                 Main.PlaySound(7, (int) this.position.X, (int) this.position.Y, 1, 1f, 0.0f);
-                                int buffType = Main.item[number].buffType;
+                                var buffType = Main.item[number].buffType;
                                 Main.item[number] = new Item();
                                 if (Main.netMode == 1)
                                 {
@@ -23869,18 +23869,18 @@ namespace Terraria
                         if (this.manaMagnet && (Main.item[number].type == 184 || Main.item[number].type == 1735 ||
                                                 Main.item[number].type == 1868))
                         {
-                            float num1 = 12f;
-                            Vector2 vector2 =
+                            var num1 = 12f;
+                            var vector2 =
                                 new Vector2(Main.item[number].position.X + (float) (Main.item[number].width / 2),
                                     Main.item[number].position.Y + (float) (Main.item[number].height / 2));
-                            float num2 = this.Center.X - vector2.X;
-                            float num3 = this.Center.Y - vector2.Y;
-                            float num4 =
+                            var num2 = this.Center.X - vector2.X;
+                            var num3 = this.Center.Y - vector2.Y;
+                            var num4 =
                                 (float) Math.Sqrt((double) num2 * (double) num2 + (double) num3 * (double) num3);
-                            float num5 = num1 / num4;
-                            float num6 = num2 * num5;
-                            float num7 = num3 * num5;
-                            int num8 = 5;
+                            var num5 = num1 / num4;
+                            var num6 = num2 * num5;
+                            var num7 = num3 * num5;
+                            var num8 = 5;
                             Main.item[number].velocity.X =
                                 (Main.item[number].velocity.X * (float) (num8 - 1) + num6) / (float) num8;
                             Main.item[number].velocity.Y =
@@ -23889,18 +23889,18 @@ namespace Terraria
                         else if (this.lifeMagnet && (Main.item[number].type == 58 || Main.item[number].type == 1734 ||
                                                      Main.item[number].type == 1867))
                         {
-                            float num1 = 15f;
-                            Vector2 vector2 =
+                            var num1 = 15f;
+                            var vector2 =
                                 new Vector2(Main.item[number].position.X + (float) (Main.item[number].width / 2),
                                     Main.item[number].position.Y + (float) (Main.item[number].height / 2));
-                            float num2 = this.Center.X - vector2.X;
-                            float num3 = this.Center.Y - vector2.Y;
-                            float num4 =
+                            var num2 = this.Center.X - vector2.X;
+                            var num3 = this.Center.Y - vector2.Y;
+                            var num4 =
                                 (float) Math.Sqrt((double) num2 * (double) num2 + (double) num3 * (double) num3);
-                            float num5 = num1 / num4;
-                            float num6 = num2 * num5;
-                            float num7 = num3 * num5;
-                            int num8 = 5;
+                            var num5 = num1 / num4;
+                            var num6 = num2 * num5;
+                            var num7 = num3 * num5;
+                            var num8 = 5;
                             Main.item[number].velocity.X =
                                 (Main.item[number].velocity.X * (float) (num8 - 1) + num6) / (float) num8;
                             Main.item[number].velocity.Y =
@@ -23908,18 +23908,18 @@ namespace Terraria
                         }
                         else if (this.goldRing && Main.item[number].type >= 71 && Main.item[number].type <= 74)
                         {
-                            float num1 = 12f;
-                            Vector2 vector2 =
+                            var num1 = 12f;
+                            var vector2 =
                                 new Vector2(Main.item[number].position.X + (float) (Main.item[number].width / 2),
                                     Main.item[number].position.Y + (float) (Main.item[number].height / 2));
-                            float num2 = this.Center.X - vector2.X;
-                            float num3 = this.Center.Y - vector2.Y;
-                            float num4 =
+                            var num2 = this.Center.X - vector2.X;
+                            var num3 = this.Center.Y - vector2.Y;
+                            var num4 =
                                 (float) Math.Sqrt((double) num2 * (double) num2 + (double) num3 * (double) num3);
-                            float num5 = num1 / num4;
-                            float num6 = num2 * num5;
-                            float num7 = num3 * num5;
-                            int num8 = 5;
+                            var num5 = num1 / num4;
+                            var num6 = num2 * num5;
+                            var num7 = num3 * num5;
+                            var num8 = 5;
                             Main.item[number].velocity.X =
                                 (Main.item[number].velocity.X * (float) (num8 - 1) + num6) / (float) num8;
                             Main.item[number].velocity.Y =
@@ -23927,18 +23927,18 @@ namespace Terraria
                         }
                         else if (ItemID.Sets.NebulaPickup[Main.item[number].type])
                         {
-                            float num1 = 12f;
-                            Vector2 vector2 =
+                            var num1 = 12f;
+                            var vector2 =
                                 new Vector2(Main.item[number].position.X + (float) (Main.item[number].width / 2),
                                     Main.item[number].position.Y + (float) (Main.item[number].height / 2));
-                            float num2 = this.Center.X - vector2.X;
-                            float num3 = this.Center.Y - vector2.Y;
-                            float num4 =
+                            var num2 = this.Center.X - vector2.X;
+                            var num3 = this.Center.Y - vector2.Y;
+                            var num4 =
                                 (float) Math.Sqrt((double) num2 * (double) num2 + (double) num3 * (double) num3);
-                            float num5 = num1 / num4;
-                            float num6 = num2 * num5;
-                            float num7 = num3 * num5;
-                            int num8 = 5;
+                            var num5 = num1 / num4;
+                            var num6 = num2 * num5;
+                            var num7 = num3 * num5;
+                            var num8 = 5;
                             Main.item[number].velocity.X =
                                 (Main.item[number].velocity.X * (float) (num8 - 1) + num6) / (float) num8;
                             Main.item[number].velocity.Y =
@@ -23989,22 +23989,22 @@ namespace Terraria
         {
             if (price <= 0)
                 return false;
-            Item[] objArray = new Item[58];
-            for (int index = 0; index < 58; ++index)
+            var objArray = new Item[58];
+            for (var index = 0; index < 58; ++index)
             {
                 objArray[index] = new Item();
                 objArray[index] = this.inventory[index].Clone();
             }
 
-            int num1 = price / 5;
+            var num1 = price / 5;
             if (num1 < 1)
                 num1 = 1;
-            int num2 = num1 * stack;
-            bool flag = false;
+            var num2 = num1 * stack;
+            var flag = false;
             while (num2 >= 1000000 && !flag)
             {
-                int index = -1;
-                for (int i = 53; i >= 0; --i)
+                var index = -1;
+                for (var i = 53; i >= 0; --i)
                 {
                     if (index == -1 && (this.inventory[i].type == 0 || this.inventory[i].stack == 0))
                         index = i;
@@ -24035,8 +24035,8 @@ namespace Terraria
 
             while (num2 >= 10000 && !flag)
             {
-                int index = -1;
-                for (int i = 53; i >= 0; --i)
+                var index = -1;
+                for (var i = 53; i >= 0; --i)
                 {
                     if (index == -1 && (this.inventory[i].type == 0 || this.inventory[i].stack == 0))
                         index = i;
@@ -24067,8 +24067,8 @@ namespace Terraria
 
             while (num2 >= 100 && !flag)
             {
-                int index = -1;
-                for (int i = 53; i >= 0; --i)
+                var index = -1;
+                for (var i = 53; i >= 0; --i)
                 {
                     if (index == -1 && (this.inventory[i].type == 0 || this.inventory[i].stack == 0))
                         index = i;
@@ -24099,8 +24099,8 @@ namespace Terraria
 
             while (num2 >= 1 && !flag)
             {
-                int index = -1;
-                for (int i = 53; i >= 0; --i)
+                var index = -1;
+                for (var i = 53; i >= 0; --i)
                 {
                     if (index == -1 && (this.inventory[i].type == 0 || this.inventory[i].stack == 0))
                         index = i;
@@ -24131,7 +24131,7 @@ namespace Terraria
 
             if (!flag)
                 return true;
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
                 this.inventory[index] = objArray[index].Clone();
             return false;
         }
@@ -24141,58 +24141,58 @@ namespace Terraria
             if (customCurrency != -1)
                 return CustomCurrencyManager.BuyItem(this, price, customCurrency);
             bool overFlowing;
-            long num1 = Utils.CoinsCount(out overFlowing, this.inventory, 58, 57, 56, 55, 54);
-            long num2 = Utils.CoinsCount(out overFlowing, this.bank.item);
-            long num3 = Utils.CoinsCount(out overFlowing, this.bank2.item);
-            long num4 = Utils.CoinsCount(out overFlowing, this.bank3.item);
+            var num1 = Utils.CoinsCount(out overFlowing, this.inventory, 58, 57, 56, 55, 54);
+            var num2 = Utils.CoinsCount(out overFlowing, this.bank.item);
+            var num3 = Utils.CoinsCount(out overFlowing, this.bank2.item);
+            var num4 = Utils.CoinsCount(out overFlowing, this.bank3.item);
             if (Utils.CoinsCombineStacks(out overFlowing, num1, num2, num3, num4) < (long) price)
                 return false;
-            List<Item[]> inv = new List<Item[]>();
-            Dictionary<int, List<int>> dictionary = new Dictionary<int, List<int>>();
-            List<Point> slotsEmpty = new List<Point>();
-            List<Point> slotCoins = new List<Point>();
-            List<Point> slotEmptyBank = new List<Point>();
-            List<Point> slotEmptyBank2 = new List<Point>();
-            List<Point> slotEmptyBank3 = new List<Point>();
+            var inv = new List<Item[]>();
+            var dictionary = new Dictionary<int, List<int>>();
+            var slotsEmpty = new List<Point>();
+            var slotCoins = new List<Point>();
+            var slotEmptyBank = new List<Point>();
+            var slotEmptyBank2 = new List<Point>();
+            var slotEmptyBank3 = new List<Point>();
             inv.Add(this.inventory);
             inv.Add(this.bank.item);
             inv.Add(this.bank2.item);
             inv.Add(this.bank3.item);
-            for (int index = 0; index < inv.Count; ++index)
+            for (var index = 0; index < inv.Count; ++index)
                 dictionary[index] = new List<int>();
             dictionary[0] = new List<int>() {58, 57, 56, 55, 54};
-            for (int x = 0; x < inv.Count; ++x)
+            for (var x = 0; x < inv.Count; ++x)
             {
-                for (int y = 0; y < inv[x].Length; ++y)
+                for (var y = 0; y < inv[x].Length; ++y)
                 {
                     if (!dictionary[x].Contains(y) && inv[x][y].type >= 71 && inv[x][y].type <= 74)
                         slotCoins.Add(new Point(x, y));
                 }
             }
 
-            int x1 = 0;
-            for (int y = inv[x1].Length - 1; y >= 0; --y)
+            var x1 = 0;
+            for (var y = inv[x1].Length - 1; y >= 0; --y)
             {
                 if (!dictionary[x1].Contains(y) && (inv[x1][y].type == 0 || inv[x1][y].stack == 0))
                     slotsEmpty.Add(new Point(x1, y));
             }
 
-            int x2 = 1;
-            for (int y = inv[x2].Length - 1; y >= 0; --y)
+            var x2 = 1;
+            for (var y = inv[x2].Length - 1; y >= 0; --y)
             {
                 if (!dictionary[x2].Contains(y) && (inv[x2][y].type == 0 || inv[x2][y].stack == 0))
                     slotEmptyBank.Add(new Point(x2, y));
             }
 
-            int x3 = 2;
-            for (int y = inv[x3].Length - 1; y >= 0; --y)
+            var x3 = 2;
+            for (var y = inv[x3].Length - 1; y >= 0; --y)
             {
                 if (!dictionary[x3].Contains(y) && (inv[x3][y].type == 0 || inv[x3][y].stack == 0))
                     slotEmptyBank2.Add(new Point(x3, y));
             }
 
-            int x4 = 3;
-            for (int y = inv[x4].Length - 1; y >= 0; --y)
+            var x4 = 3;
+            for (var y = inv[x4].Length - 1; y >= 0; --y)
             {
                 if (!dictionary[x4].Contains(y) && (inv[x4][y].type == 0 || inv[x4][y].stack == 0))
                     slotEmptyBank3.Add(new Point(x4, y));
@@ -24205,21 +24205,21 @@ namespace Terraria
         private static bool TryPurchasing(int price, List<Item[]> inv, List<Point> slotCoins, List<Point> slotsEmpty,
             List<Point> slotEmptyBank, List<Point> slotEmptyBank2, List<Point> slotEmptyBank3)
         {
-            long num1 = (long) price;
-            Dictionary<Point, Item> dictionary = new Dictionary<Point, Item>();
-            bool flag = false;
+            var num1 = (long) price;
+            var dictionary = new Dictionary<Point, Item>();
+            var flag = false;
             while (num1 > 0L)
             {
                 long num2 = 1000000;
-                for (int index = 0; index < 4; ++index)
+                for (var index = 0; index < 4; ++index)
                 {
                     if (num1 >= num2)
                     {
-                        foreach (Point slotCoin in slotCoins)
+                        foreach (var slotCoin in slotCoins)
                         {
                             if (inv[slotCoin.X][slotCoin.Y].type == 74 - index)
                             {
-                                long num3 = num1 / num2;
+                                var num3 = num1 / num2;
                                 dictionary[slotCoin] = inv[slotCoin.X][slotCoin.Y].Clone();
                                 if (num3 < (long) inv[slotCoin.X][slotCoin.Y].stack)
                                 {
@@ -24244,20 +24244,20 @@ namespace Terraria
                     if (slotsEmpty.Count > 0)
                     {
                         slotsEmpty.Sort(new Comparison<Point>(DelegateMethods.CompareYReverse));
-                        Point point = new Point(-1, -1);
-                        for (int index1 = 0; index1 < inv.Count; ++index1)
+                        var point = new Point(-1, -1);
+                        for (var index1 = 0; index1 < inv.Count; ++index1)
                         {
                             long num3 = 10000;
-                            for (int index2 = 0; index2 < 3; ++index2)
+                            for (var index2 = 0; index2 < 3; ++index2)
                             {
                                 if (num1 >= num3)
                                 {
-                                    foreach (Point slotCoin in slotCoins)
+                                    foreach (var slotCoin in slotCoins)
                                     {
                                         if (slotCoin.X == index1 && inv[slotCoin.X][slotCoin.Y].type == 74 - index2 &&
                                             inv[slotCoin.X][slotCoin.Y].stack >= 1)
                                         {
-                                            List<Point> pointList = slotsEmpty;
+                                            var pointList = slotsEmpty;
                                             if (index1 == 1 && slotEmptyBank.Count > 0)
                                                 pointList = slotEmptyBank;
                                             if (index1 == 2 && slotEmptyBank2.Count > 0)
@@ -24284,16 +24284,16 @@ namespace Terraria
                                     break;
                             }
 
-                            for (int index2 = 0; index2 < 2; ++index2)
+                            for (var index2 = 0; index2 < 2; ++index2)
                             {
                                 if (point.X == -1 && point.Y == -1)
                                 {
-                                    foreach (Point slotCoin in slotCoins)
+                                    foreach (var slotCoin in slotCoins)
                                     {
                                         if (slotCoin.X == index1 && inv[slotCoin.X][slotCoin.Y].type == 73 + index2 &&
                                             inv[slotCoin.X][slotCoin.Y].stack >= 1)
                                         {
-                                            List<Point> pointList = slotsEmpty;
+                                            var pointList = slotsEmpty;
                                             if (index1 == 1 && slotEmptyBank.Count > 0)
                                                 pointList = slotEmptyBank;
                                             if (index1 == 2 && slotEmptyBank2.Count > 0)
@@ -24331,7 +24331,7 @@ namespace Terraria
                     }
                     else
                     {
-                        foreach (KeyValuePair<Point, Item> keyValuePair in dictionary)
+                        foreach (var keyValuePair in dictionary)
                             inv[keyValuePair.Key.X][keyValuePair.Key.Y] = keyValuePair.Value.Clone();
                         flag = true;
                         break;
@@ -24347,8 +24347,8 @@ namespace Terraria
             if (price == 0)
                 return true;
             long num1 = 0;
-            Item[] objArray = new Item[54];
-            for (int index = 0; index < 54; ++index)
+            var objArray = new Item[54];
+            for (var index = 0; index < 54; ++index)
             {
                 objArray[index] = new Item();
                 objArray[index] = this.inventory[index].Clone();
@@ -24364,12 +24364,12 @@ namespace Terraria
 
             if (num1 < (long) price)
                 return false;
-            int num2 = price;
+            var num2 = price;
             while (num2 > 0)
             {
                 if (num2 >= 1000000)
                 {
-                    for (int index = 0; index < 54; ++index)
+                    for (var index = 0; index < 54; ++index)
                     {
                         if (this.inventory[index].type == 74)
                         {
@@ -24386,7 +24386,7 @@ namespace Terraria
 
                 if (num2 >= 10000)
                 {
-                    for (int index = 0; index < 54; ++index)
+                    for (var index = 0; index < 54; ++index)
                     {
                         if (this.inventory[index].type == 73)
                         {
@@ -24403,7 +24403,7 @@ namespace Terraria
 
                 if (num2 >= 100)
                 {
-                    for (int index = 0; index < 54; ++index)
+                    for (var index = 0; index < 54; ++index)
                     {
                         if (this.inventory[index].type == 72)
                         {
@@ -24420,7 +24420,7 @@ namespace Terraria
 
                 if (num2 >= 1)
                 {
-                    for (int index = 0; index < 54; ++index)
+                    for (var index = 0; index < 54; ++index)
                     {
                         if (this.inventory[index].type == 71)
                         {
@@ -24437,8 +24437,8 @@ namespace Terraria
 
                 if (num2 > 0)
                 {
-                    int index1 = -1;
-                    for (int index2 = 53; index2 >= 0; --index2)
+                    var index1 = -1;
+                    for (var index2 = 53; index2 >= 0; --index2)
                     {
                         if (this.inventory[index2].type == 0 || this.inventory[index2].stack == 0)
                         {
@@ -24449,10 +24449,10 @@ namespace Terraria
 
                     if (index1 >= 0)
                     {
-                        bool flag = true;
+                        var flag = true;
                         if (num2 >= 10000)
                         {
-                            for (int index2 = 0; index2 < 58; ++index2)
+                            for (var index2 = 0; index2 < 58; ++index2)
                             {
                                 if (this.inventory[index2].type == 74 && this.inventory[index2].stack >= 1)
                                 {
@@ -24468,7 +24468,7 @@ namespace Terraria
                         }
                         else if (num2 >= 100)
                         {
-                            for (int index2 = 0; index2 < 54; ++index2)
+                            for (var index2 = 0; index2 < 54; ++index2)
                             {
                                 if (this.inventory[index2].type == 73 && this.inventory[index2].stack >= 1)
                                 {
@@ -24484,7 +24484,7 @@ namespace Terraria
                         }
                         else if (num2 >= 1)
                         {
-                            for (int index2 = 0; index2 < 54; ++index2)
+                            for (var index2 = 0; index2 < 54; ++index2)
                             {
                                 if (this.inventory[index2].type == 72 && this.inventory[index2].stack >= 1)
                                 {
@@ -24503,7 +24503,7 @@ namespace Terraria
                         {
                             if (num2 < 10000)
                             {
-                                for (int index2 = 0; index2 < 54; ++index2)
+                                for (var index2 = 0; index2 < 54; ++index2)
                                 {
                                     if (this.inventory[index2].type == 73 && this.inventory[index2].stack >= 1)
                                     {
@@ -24520,7 +24520,7 @@ namespace Terraria
 
                             if (flag && num2 < 1000000)
                             {
-                                for (int index2 = 0; index2 < 54; ++index2)
+                                for (var index2 = 0; index2 < 54; ++index2)
                                 {
                                     if (this.inventory[index2].type == 74 && this.inventory[index2].stack >= 1)
                                     {
@@ -24537,7 +24537,7 @@ namespace Terraria
                     }
                     else
                     {
-                        for (int index2 = 0; index2 < 54; ++index2)
+                        for (var index2 = 0; index2 < 54; ++index2)
                             this.inventory[index2] = objArray[index2].Clone();
                         return false;
                     }
@@ -24549,9 +24549,9 @@ namespace Terraria
 
         public void AdjTiles()
         {
-            int num1 = 4;
-            int num2 = 3;
-            for (int index = 0; index < 470; ++index)
+            var num1 = 4;
+            var num2 = 3;
+            for (var index = 0; index < 470; ++index)
             {
                 this.oldAdjTile[index] = this.adjTile[index];
                 this.adjTile[index] = false;
@@ -24564,11 +24564,11 @@ namespace Terraria
             this.oldAdjLava = this.adjLava;
             this.adjLava = false;
             this.alchemyTable = false;
-            int num3 = (int) (((double) this.position.X + (double) (this.width / 2)) / 16.0);
-            int num4 = (int) (((double) this.position.Y + (double) this.height) / 16.0);
-            for (int index1 = num3 - num1; index1 <= num3 + num1; ++index1)
+            var num3 = (int) (((double) this.position.X + (double) (this.width / 2)) / 16.0);
+            var num4 = (int) (((double) this.position.Y + (double) this.height) / 16.0);
+            for (var index1 = num3 - num1; index1 <= num3 + num1; ++index1)
             {
-                for (int index2 = num4 - num2; index2 < num4 + num2; ++index2)
+                for (var index2 = num4 - num2; index2 < num4 + num2; ++index2)
                 {
                     if (Main.tile[index1, index2].active())
                     {
@@ -24610,8 +24610,8 @@ namespace Terraria
 
             if (!Main.playerInventory)
                 return;
-            bool flag = false;
-            for (int index = 0; index < 470; ++index)
+            var flag = false;
+            for (var index = 0; index < 470; ++index)
             {
                 if (this.oldAdjTile[index] != this.adjTile[index])
                 {
@@ -24643,7 +24643,7 @@ namespace Terraria
             this.head = this.armor[0].headSlot;
             this.body = this.armor[1].bodySlot;
             this.legs = this.armor[2].legSlot;
-            for (int index = 3; index < 8 + this.extraAccessorySlots; ++index)
+            for (var index = 3; index < 8 + this.extraAccessorySlots; ++index)
             {
                 if (this.armor[index].shieldSlot == (sbyte) 5 && this.eocDash > 0 && this.shield == (sbyte) -1)
                     this.shield = this.armor[index].shieldSlot;
@@ -24699,7 +24699,7 @@ namespace Terraria
                 }
             }
 
-            for (int index = 13; index < 18 + this.extraAccessorySlots; ++index)
+            for (var index = 13; index < 18 + this.extraAccessorySlots; ++index)
             {
                 if (this.armor[index].stringColor > 0)
                     this.stringColor = this.armor[index].stringColor;
@@ -24744,14 +24744,14 @@ namespace Terraria
             if (this.armor[12].legSlot >= 0)
                 this.legs = this.armor[12].legSlot;
             this.wearsRobe = false;
-            bool somethingSpecial = false;
-            int num1 = Player.SetMatch(1, this.body, this.Male, ref this.wearsRobe);
+            var somethingSpecial = false;
+            var num1 = Player.SetMatch(1, this.body, this.Male, ref this.wearsRobe);
             if (num1 != -1)
                 this.legs = num1;
-            int num2 = Player.SetMatch(2, this.legs, this.Male, ref somethingSpecial);
+            var num2 = Player.SetMatch(2, this.legs, this.Male, ref somethingSpecial);
             if (num2 != -1)
                 this.legs = num2;
-            int num3 = Player.SetMatch(0, this.head, this.Male, ref somethingSpecial);
+            var num3 = Player.SetMatch(0, this.head, this.Male, ref somethingSpecial);
             if (num3 != -1)
                 this.head = num3;
             if (this.body == 93)
@@ -24777,7 +24777,7 @@ namespace Terraria
                 this.head = 38;
             }
 
-            bool flag = this.wet && !this.lavaWet && (!this.mount.Active || this.mount.Type != 3);
+            var flag = this.wet && !this.lavaWet && (!this.mount.Active || this.mount.Type != 3);
             if (this.merman || this.forceMerman)
             {
                 if (!this.hideMerman)
@@ -24835,7 +24835,7 @@ namespace Terraria
             if ((this.body == 68 && this.legs == 57 && this.head == 106 ||
                  this.body == 74 && this.legs == 63 && this.head == 106) && Main.rand.Next(10) == 0)
             {
-                int index = Dust.NewDust(
+                var index = Dust.NewDust(
                     new Vector2(this.position.X - this.velocity.X * 2f,
                         (float) ((double) this.position.Y - 2.0 - (double) this.velocity.Y * 2.0)), this.width,
                     this.height, 43, 0.0f, 0.0f, 100, new Color((int) byte.MaxValue, 0, (int) byte.MaxValue), 0.3f);
@@ -24847,7 +24847,7 @@ namespace Terraria
 
             if (this.wings == 27)
             {
-                float R = 0.4f * this.stealth;
+                var R = 0.4f * this.stealth;
                 Lighting.AddLight((int) this.Center.X / 16, (int) this.Center.Y / 16, R, R * 0.9f, R * 0.2f);
             }
 
@@ -24855,7 +24855,7 @@ namespace Terraria
                 this.socialShadowRocketBoots = true;
             if (this.head == 5 && this.body == 5 && (this.legs == 5 && Main.rand.Next(10) == 0))
             {
-                int index = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width, this.height, 14,
+                var index = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width, this.height, 14,
                     0.0f, 0.0f, 200, new Color(), 1.2f);
                 Main.dust[index].shader = GameShaders.Armor.GetSecondaryShader(this.ArmorSetDye(), this);
             }
@@ -24866,19 +24866,19 @@ namespace Terraria
                 this.socialShadowRocketBoots = true;
             if (this.head == 74 && this.body == 48 && (this.legs == 44 && Main.rand.Next(10) == 0))
             {
-                int index = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width, this.height, 14,
+                var index = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width, this.height, 14,
                     0.0f, 0.0f, 200, new Color(), 1.2f);
                 Main.dust[index].shader = GameShaders.Armor.GetSecondaryShader(this.ArmorSetDye(), this);
             }
 
             if (this.head == 57 && this.body == 37 && this.legs == 35)
             {
-                int maxValue = 10;
+                var maxValue = 10;
                 if ((double) Math.Abs(this.velocity.X) + (double) Math.Abs(this.velocity.Y) > 1.0)
                     maxValue = 2;
                 if (Main.rand.Next(maxValue) == 0)
                 {
-                    int index = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width, this.height,
+                    var index = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width, this.height,
                         115, 0.0f, 0.0f, 140, new Color(), 0.75f);
                     Main.dust[index].noGravity = true;
                     Main.dust[index].fadeIn = 1.5f;
@@ -24892,9 +24892,9 @@ namespace Terraria
                 (this.legs == 6 && (double) Math.Abs(this.velocity.X) + (double) Math.Abs(this.velocity.Y) > 1.0) &&
                 !this.rocketFrame)
             {
-                for (int index1 = 0; index1 < 2; ++index1)
+                for (var index1 = 0; index1 < 2; ++index1)
                 {
-                    int index2 =
+                    var index2 =
                         Dust.NewDust(
                             new Vector2(this.position.X - this.velocity.X * 2f,
                                 (float) ((double) this.position.Y - 2.0 - (double) this.velocity.Y * 2.0)), this.width,
@@ -24911,7 +24911,7 @@ namespace Terraria
                                                      (double) Math.Abs(this.velocity.X) +
                                                      (double) Math.Abs(this.velocity.Y) > 1.0))
             {
-                int index = Dust.NewDust(
+                var index = Dust.NewDust(
                     new Vector2(this.position.X - this.velocity.X * 2f,
                         (float) ((double) this.position.Y - 2.0 - (double) this.velocity.Y * 2.0)), this.width,
                     this.height, 40, 0.0f, 0.0f, 50, new Color(), 1.4f);
@@ -24925,9 +24925,9 @@ namespace Terraria
                 (this.legs == 9 && (double) Math.Abs(this.velocity.X) + (double) Math.Abs(this.velocity.Y) > 1.0) &&
                 !this.rocketFrame)
             {
-                for (int index1 = 0; index1 < 2; ++index1)
+                for (var index1 = 0; index1 < 2; ++index1)
                 {
-                    int index2 =
+                    var index2 =
                         Dust.NewDust(
                             new Vector2(this.position.X - this.velocity.X * 2f,
                                 (float) ((double) this.position.Y - 2.0 - (double) this.velocity.Y * 2.0)), this.width,
@@ -24943,7 +24943,7 @@ namespace Terraria
             if (this.body == 18 && this.legs == 17 && (this.head == 32 || this.head == 33 || this.head == 34) &&
                 Main.rand.Next(10) == 0)
             {
-                int index = Dust.NewDust(
+                var index = Dust.NewDust(
                     new Vector2(this.position.X - this.velocity.X * 2f,
                         (float) ((double) this.position.Y - 2.0 - (double) this.velocity.Y * 2.0)), this.width,
                     this.height, 43, 0.0f, 0.0f, 100, new Color(), 0.3f);
@@ -24955,7 +24955,7 @@ namespace Terraria
             if (this.body == 24 && this.legs == 23 && (this.head == 42 || this.head == 43 || this.head == 41) &&
                 ((double) this.velocity.X != 0.0 && (double) this.velocity.Y != 0.0 && Main.rand.Next(10) == 0))
             {
-                int index = Dust.NewDust(
+                var index = Dust.NewDust(
                     new Vector2(this.position.X - this.velocity.X * 2f,
                         (float) ((double) this.position.Y - 2.0 - (double) this.velocity.Y * 2.0)), this.width,
                     this.height, 43, 0.0f, 0.0f, 100, new Color(), 0.3f);
@@ -24967,9 +24967,9 @@ namespace Terraria
             if (this.body == 36 && this.head == 56 &&
                 ((double) this.velocity.X != 0.0 && (double) this.velocity.Y == 0.0))
             {
-                for (int index1 = 0; index1 < 2; ++index1)
+                for (var index1 = 0; index1 < 2; ++index1)
                 {
-                    int index2 =
+                    var index2 =
                         Dust.NewDust(
                             new Vector2(this.position.X,
                                 this.position.Y + ((double) this.gravDir == 1.0 ? (float) (this.height - 2) : -4f)),
@@ -24986,9 +24986,9 @@ namespace Terraria
                 this.frostArmor = true;
                 if ((double) this.velocity.X != 0.0 && (double) this.velocity.Y == 0.0 && this.miscCounter % 2 == 0)
                 {
-                    for (int index1 = 0; index1 < 2; ++index1)
+                    for (var index1 = 0; index1 < 2; ++index1)
                     {
-                        int index2 = index1 != 0
+                        var index2 = index1 != 0
                             ? Dust.NewDust(
                                 new Vector2(this.position.X + (float) (this.width / 2),
                                     this.position.Y + (float) this.height + this.gfxOffY), this.width / 2, 6, 76, 0.0f,
@@ -25021,7 +25021,7 @@ namespace Terraria
                             {
                                 if (Main.rand.Next(4) == 0)
                                 {
-                                    int index = Dust.NewDust(
+                                    var index = Dust.NewDust(
                                         new Vector2(this.Center.X - 22f,
                                             (float) ((double) this.position.Y + (double) this.height - 6.0)), 20, 10,
                                         64, this.velocity.X * 0.25f, this.velocity.Y * 0.25f, (int) byte.MaxValue,
@@ -25032,7 +25032,7 @@ namespace Terraria
 
                                 if (Main.rand.Next(4) == 0)
                                 {
-                                    int index = Dust.NewDust(
+                                    var index = Dust.NewDust(
                                         new Vector2(this.Center.X + 12f,
                                             (float) ((double) this.position.Y + (double) this.height - 6.0)), 20, 10,
                                         64, this.velocity.X * 0.25f, this.velocity.Y * 0.25f, (int) byte.MaxValue,
@@ -25045,7 +25045,7 @@ namespace Terraria
                             {
                                 if (Main.rand.Next(4) == 0)
                                 {
-                                    int index = Dust.NewDust(
+                                    var index = Dust.NewDust(
                                         new Vector2(this.Center.X - 32f,
                                             (float) ((double) this.position.Y + (double) this.height - 6.0)), 20, 10,
                                         64, this.velocity.X * 0.25f, this.velocity.Y * 0.25f, (int) byte.MaxValue,
@@ -25056,7 +25056,7 @@ namespace Terraria
 
                                 if (Main.rand.Next(4) == 0)
                                 {
-                                    int index = Dust.NewDust(
+                                    var index = Dust.NewDust(
                                         new Vector2(this.Center.X + 2f,
                                             (float) ((double) this.position.Y + (double) this.height - 6.0)), 20, 10,
                                         64, this.velocity.X * 0.25f, this.velocity.Y * 0.25f, (int) byte.MaxValue,
@@ -25204,7 +25204,7 @@ namespace Terraria
                     }
                     else
                     {
-                        float num4 = this.itemRotation * (float) this.direction;
+                        var num4 = this.itemRotation * (float) this.direction;
                         this.bodyFrame.Y = this.bodyFrame.Height * 3;
                         if ((double) num4 < -0.75)
                         {
@@ -25253,11 +25253,11 @@ namespace Terraria
                 this.dJumpEffectFart = false;
                 this.dJumpEffectSail = false;
                 this.dJumpEffectUnicorn = false;
-                Vector2 vector2 = new Vector2(this.position.X + (float) this.width * 0.5f,
+                var vector2 = new Vector2(this.position.X + (float) this.width * 0.5f,
                     this.position.Y + (float) this.height * 0.5f);
-                float num4 = 0.0f;
-                float num5 = 0.0f;
-                for (int index = 0; index < this.grapCount; ++index)
+                var num4 = 0.0f;
+                var num5 = 0.0f;
+                for (var index = 0; index < this.grapCount; ++index)
                 {
                     num4 += Main.projectile[this.grappling[index]].position.X +
                             (float) (Main.projectile[this.grappling[index]].width / 2);
@@ -25265,10 +25265,10 @@ namespace Terraria
                             (float) (Main.projectile[this.grappling[index]].height / 2);
                 }
 
-                float num6 = num4 / (float) this.grapCount;
-                float num7 = num5 / (float) this.grapCount;
-                float num8 = num6 - vector2.X;
-                float num9 = num7 - vector2.Y;
+                var num6 = num4 / (float) this.grapCount;
+                var num7 = num5 / (float) this.grapCount;
+                var num8 = num6 - vector2.X;
+                var num9 = num7 - vector2.Y;
                 if ((double) num9 < 0.0 && (double) Math.Abs(num9) > (double) Math.Abs(num8))
                 {
                     this.bodyFrame.Y = this.bodyFrame.Height * 2;
@@ -25467,7 +25467,7 @@ namespace Terraria
 
             if (drawPlayer.head == 157 && drawPlayer.legs == 98 && drawPlayer.body != 105)
             {
-                int body = drawPlayer.body;
+                var body = drawPlayer.body;
             }
 
             if (drawPlayer.body == 36 && drawPlayer.head == 56)
@@ -25481,7 +25481,7 @@ namespace Terraria
 
         public static int SetMatch(int armorslot, int type, bool male, ref bool somethingSpecial)
         {
-            int num = -1;
+            var num = -1;
             if (armorslot == 0 && type == 201)
                 num = male ? 201 : 202;
             if (armorslot == 1)
@@ -25610,31 +25610,31 @@ namespace Terraria
             {
                 this.grappling[0] = -1;
                 this.grapCount = 0;
-                for (int index = 0; index < 1000; ++index)
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.projectile[index].active && Main.projectile[index].owner == this.whoAmI &&
                         Main.projectile[index].aiStyle == 7)
                         Main.projectile[index].Kill();
                 }
 
-                int extraInfo1 = 0;
+                var extraInfo1 = 0;
                 if (Style == 4)
                     extraInfo1 = this.lastPortalColorIndex;
-                float dustCountMult = MathHelper.Clamp((float) (1.0 - (double) this.teleportTime * 0.990000009536743),
+                var dustCountMult = MathHelper.Clamp((float) (1.0 - (double) this.teleportTime * 0.990000009536743),
                     0.01f, 1f);
                 Main.TeleportEffect(this.getRect(), Style, extraInfo1, dustCountMult);
-                float num = Vector2.Distance(this.position, newPos);
+                var num = Vector2.Distance(this.position, newPos);
                 PressurePlateHelper.UpdatePlayerPosition(this);
                 this.position = newPos;
                 this.fallStart = (int) ((double) this.position.Y / 16.0);
                 if (this.whoAmI == Main.myPlayer)
                 {
-                    bool flag = false;
+                    var flag = false;
                     if ((double) num <
                         (double) new Vector2((float) Main.screenWidth, (float) Main.screenHeight).Length() / 2.0 +
                         100.0)
                     {
-                        int time = 0;
+                        var time = 0;
                         if (Style == 1)
                             time = 10;
                         Main.SetCameraLerp(0.1f, time);
@@ -25670,7 +25670,7 @@ namespace Terraria
                 }
 
                 PressurePlateHelper.UpdatePlayerPosition(this);
-                for (int index = 0; index < 3; ++index)
+                for (var index = 0; index < 3; ++index)
                     this.UpdateSocialShadow();
                 this.oldPosition = this.position + this.BlehOldPositionFixer;
                 Main.TeleportEffect(this.getRect(), Style, extraInfo1, dustCountMult);
@@ -25715,7 +25715,7 @@ namespace Terraria
             this.lavaTime = this.lavaMax;
             if (this.statLife <= 0)
             {
-                int num = this.statLifeMax2 / 2;
+                var num = this.statLifeMax2 / 2;
                 this.statLife = 100;
                 if (num > this.statLife)
                     this.statLife = num;
@@ -25740,9 +25740,9 @@ namespace Terraria
             {
                 this.position.X = (float) (Main.spawnTileX * 16 + 8 - this.width / 2);
                 this.position.Y = (float) (Main.spawnTileY * 16 - this.height);
-                for (int i = Main.spawnTileX - 1; i < Main.spawnTileX + 2; ++i)
+                for (var i = Main.spawnTileX - 1; i < Main.spawnTileX + 2; ++i)
                 {
-                    for (int j = Main.spawnTileY - 3; j < Main.spawnTileY; ++j)
+                    for (var j = Main.spawnTileY - 3; j < Main.spawnTileY; ++j)
                     {
                         if (Main.tile[i, j] != null)
                         {
@@ -25767,7 +25767,7 @@ namespace Terraria
             this.fallStart2 = this.fallStart;
             this.velocity.X = 0.0f;
             this.velocity.Y = 0.0f;
-            for (int index = 0; index < 3; ++index)
+            for (var index = 0; index < 3; ++index)
                 this.UpdateSocialShadow();
             this.oldPosition = this.position + this.BlehOldPositionFixer;
             this.talkNPC = -1;
@@ -25798,11 +25798,11 @@ namespace Terraria
             this.immuneTime = 80;
             if (this.longInvince)
                 this.immuneTime += 40;
-            for (int index = 0; index < this.hurtCooldowns.Length; ++index)
+            for (var index = 0; index < this.hurtCooldowns.Length; ++index)
                 this.hurtCooldowns[index] = this.immuneTime;
             if (this.whoAmI != Main.myPlayer)
                 return;
-            for (int b = 0; b < 22; ++b)
+            for (var b = 0; b < 22; ++b)
             {
                 if (this.buffTime[b] > 0 && this.buffType[b] == 59)
                     this.DelBuff(b);
@@ -25817,11 +25817,11 @@ namespace Terraria
             this.immuneTime = 80;
             if (this.longInvince)
                 this.immuneTime += 40;
-            for (int index = 0; index < this.hurtCooldowns.Length; ++index)
+            for (var index = 0; index < this.hurtCooldowns.Length; ++index)
                 this.hurtCooldowns[index] = this.immuneTime;
-            for (int index1 = 0; index1 < 100; ++index1)
+            for (var index1 = 0; index1 < 100; ++index1)
             {
-                int index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width, this.height, 31,
+                var index2 = Dust.NewDust(new Vector2(this.position.X, this.position.Y), this.width, this.height, 31,
                     0.0f, 0.0f, 100, new Color(), 2f);
                 Main.dust[index2].position.X += (float) Main.rand.Next(-20, 21);
                 Main.dust[index2].position.Y += (float) Main.rand.Next(-20, 21);
@@ -25835,7 +25835,7 @@ namespace Terraria
                 }
             }
 
-            int index3 =
+            var index3 =
                 Gore.NewGore(
                     new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 24.0),
                         (float) ((double) this.position.Y + (double) (this.height / 2) - 24.0)), new Vector2(),
@@ -25844,7 +25844,7 @@ namespace Terraria
             Main.gore[index3].velocity.X = (float) Main.rand.Next(-50, 51) * 0.01f;
             Main.gore[index3].velocity.Y = (float) Main.rand.Next(-50, 51) * 0.01f;
             Main.gore[index3].velocity *= 0.4f;
-            int index4 =
+            var index4 =
                 Gore.NewGore(
                     new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 24.0),
                         (float) ((double) this.position.Y + (double) (this.height / 2) - 24.0)), new Vector2(),
@@ -25853,7 +25853,7 @@ namespace Terraria
             Main.gore[index4].velocity.X = (float) (1.5 + (double) Main.rand.Next(-50, 51) * 0.00999999977648258);
             Main.gore[index4].velocity.Y = (float) (1.5 + (double) Main.rand.Next(-50, 51) * 0.00999999977648258);
             Main.gore[index4].velocity *= 0.4f;
-            int index5 =
+            var index5 =
                 Gore.NewGore(
                     new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 24.0),
                         (float) ((double) this.position.Y + (double) (this.height / 2) - 24.0)), new Vector2(),
@@ -25862,7 +25862,7 @@ namespace Terraria
             Main.gore[index5].velocity.X = (float) (-1.5 - (double) Main.rand.Next(-50, 51) * 0.00999999977648258);
             Main.gore[index5].velocity.Y = (float) (1.5 + (double) Main.rand.Next(-50, 51) * 0.00999999977648258);
             Main.gore[index5].velocity *= 0.4f;
-            int index6 =
+            var index6 =
                 Gore.NewGore(
                     new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 24.0),
                         (float) ((double) this.position.Y + (double) (this.height / 2) - 24.0)), new Vector2(),
@@ -25871,7 +25871,7 @@ namespace Terraria
             Main.gore[index6].velocity.X = (float) (1.5 + (double) Main.rand.Next(-50, 51) * 0.00999999977648258);
             Main.gore[index6].velocity.Y = (float) (-1.5 - (double) Main.rand.Next(-50, 51) * 0.00999999977648258);
             Main.gore[index6].velocity *= 0.4f;
-            int index7 =
+            var index7 =
                 Gore.NewGore(
                     new Vector2((float) ((double) this.position.X + (double) (this.width / 2) - 24.0),
                         (float) ((double) this.position.Y + (double) (this.height / 2) - 24.0)), new Vector2(),
@@ -25894,9 +25894,9 @@ namespace Terraria
         public double Hurt(PlayerDeathReason damageSource, int Damage, int hitDirection, bool pvp = false,
             bool quiet = false, bool Crit = false, int cooldownCounter = -1)
         {
-            bool flag1 = !this.immune;
-            bool flag2 = false;
-            int hitContext = cooldownCounter;
+            var flag1 = !this.immune;
+            var flag2 = false;
+            var hitContext = cooldownCounter;
             if (cooldownCounter == 0)
                 flag1 = this.hurtCooldowns[cooldownCounter] <= 0;
             if (cooldownCounter == 1)
@@ -25928,15 +25928,15 @@ namespace Terraria
             this.stealth = 1f;
             if (Main.netMode == 1)
                 NetMessage.SendData(84, -1, -1, (NetworkText) null, this.whoAmI, 0.0f, 0.0f, 0.0f, 0, 0, 0);
-            int Damage1 = Damage;
-            double dmg = Main.CalculatePlayerDamage(Damage1, this.statDefense);
+            var Damage1 = Damage;
+            var dmg = Main.CalculatePlayerDamage(Damage1, this.statDefense);
             if (Crit)
                 Damage1 *= 2;
             if (dmg >= 1.0)
             {
                 if (this.invis)
                 {
-                    for (int b = 0; b < 22; ++b)
+                    for (var b = 0; b < 22; ++b)
                     {
                         if (this.buffType[b] == 10)
                             this.DelBuff(b);
@@ -25953,7 +25953,7 @@ namespace Terraria
                         dmg = 1.0;
                     if (this.whoAmI == Main.myPlayer)
                     {
-                        int index = Projectile.NewProjectile(this.Center.X, this.Center.Y, 0.0f, 0.0f, 608, 150, 15f,
+                        var index = Projectile.NewProjectile(this.Center.X, this.Center.Y, 0.0f, 0.0f, 608, 150, 15f,
                             Main.myPlayer, 0.0f, 0.0f);
                         Main.projectile[index].Kill();
                     }
@@ -25963,7 +25963,7 @@ namespace Terraria
                 {
                     dmg = (double) (int) ((1.0 - (double) (0.15f * (float) this.beetleOrbs)) * dmg);
                     --this.beetleOrbs;
-                    for (int b = 0; b < 22; ++b)
+                    for (var b = 0; b < 22; ++b)
                     {
                         if (this.buffType[b] >= 95 && this.buffType[b] <= 97)
                             this.DelBuff(b);
@@ -25978,7 +25978,7 @@ namespace Terraria
 
                 if (this.magicCuffs)
                 {
-                    int manaAmount = Damage1;
+                    var manaAmount = Damage1;
                     this.statMana += manaAmount;
                     if (this.statMana > this.statManaMax2)
                         this.statMana = this.statManaMax2;
@@ -25991,14 +25991,14 @@ namespace Terraria
                     {
                         if (Main.player[Main.myPlayer].hasPaladinShield)
                         {
-                            Player player = Main.player[Main.myPlayer];
+                            var player = Main.player[Main.myPlayer];
                             if (player.team == this.team && this.team != 0)
                             {
-                                float num1 = player.Distance(this.Center);
-                                bool flag3 = (double) num1 < 800.0;
+                                var num1 = player.Distance(this.Center);
+                                var flag3 = (double) num1 < 800.0;
                                 if (flag3)
                                 {
-                                    for (int index = 0; index < (int) byte.MaxValue; ++index)
+                                    for (var index = 0; index < (int) byte.MaxValue; ++index)
                                     {
                                         if (index != Main.myPlayer && Main.player[index].active &&
                                             (!Main.player[index].dead && !Main.player[index].immune) &&
@@ -26007,7 +26007,7 @@ namespace Terraria
                                              (double) Main.player[index].statLife >
                                              (double) Main.player[index].statLifeMax2 * 0.25))
                                         {
-                                            float num2 = Main.player[index].Distance(this.Center);
+                                            var num2 = Main.player[index].Distance(this.Center);
                                             if ((double) num1 > (double) num2 ||
                                                 (double) num1 == (double) num2 && index < Main.myPlayer)
                                             {
@@ -26020,7 +26020,7 @@ namespace Terraria
 
                                 if (flag3)
                                 {
-                                    int Damage2 = (int) (dmg * 0.25);
+                                    var Damage2 = (int) (dmg * 0.25);
                                     dmg = (double) (int) (dmg * 0.75);
                                     player.Hurt(PlayerDeathReason.LegacyEmpty(), Damage2, 0, false, false, false, -1);
                                 }
@@ -26029,8 +26029,8 @@ namespace Terraria
                     }
                     else
                     {
-                        bool flag3 = false;
-                        for (int index = 0; index < (int) byte.MaxValue; ++index)
+                        var flag3 = false;
+                        for (var index = 0; index < (int) byte.MaxValue; ++index)
                         {
                             if (index != Main.myPlayer && Main.player[index].active &&
                                 (!Main.player[index].dead && !Main.player[index].immune) &&
@@ -26050,15 +26050,15 @@ namespace Terraria
 
                 if (this.brainOfConfusion && Main.myPlayer == this.whoAmI)
                 {
-                    for (int index = 0; index < 200; ++index)
+                    for (var index = 0; index < 200; ++index)
                     {
                         if (Main.npc[index].active && !Main.npc[index].friendly)
                         {
-                            int num1 = 300 + (int) dmg * 2;
+                            var num1 = 300 + (int) dmg * 2;
                             if (Main.rand.Next(500) < num1)
                             {
-                                float num2 = (Main.npc[index].Center - this.Center).Length();
-                                float num3 = (float) Main.rand.Next(200 + (int) dmg / 2, 301 + (int) dmg * 2);
+                                var num2 = (Main.npc[index].Center - this.Center).Length();
+                                var num3 = (float) Main.rand.Next(200 + (int) dmg / 2, 301 + (int) dmg * 2);
                                 if ((double) num3 > 500.0)
                                     num3 = (float) (500.0 + ((double) num3 - 500.0) * 0.75);
                                 if ((double) num3 > 700.0)
@@ -26067,7 +26067,7 @@ namespace Terraria
                                     num3 = (float) (900.0 + ((double) num3 - 900.0) * 0.25);
                                 if ((double) num2 < (double) num3)
                                 {
-                                    float num4 = (float) Main.rand.Next(90 + (int) dmg / 3, 300 + (int) dmg / 2);
+                                    var num4 = (float) Main.rand.Next(90 + (int) dmg / 3, 300 + (int) dmg / 2);
                                     Main.npc[index].AddBuff(31, (int) num4, false);
                                 }
                             }
@@ -26131,19 +26131,19 @@ namespace Terraria
                 {
                     if (this.starCloak)
                     {
-                        for (int index1 = 0; index1 < 3; ++index1)
+                        for (var index1 = 0; index1 < 3; ++index1)
                         {
-                            float num1 = this.position.X + (float) Main.rand.Next(-400, 400);
-                            float num2 = this.position.Y - (float) Main.rand.Next(500, 800);
-                            Vector2 vector2 = new Vector2(num1, num2);
-                            float num3 = this.position.X + (float) (this.width / 2) - vector2.X;
-                            float num4 = this.position.Y + (float) (this.height / 2) - vector2.Y;
-                            float num5 = num3 + (float) Main.rand.Next(-100, 101);
-                            float num6 =
+                            var num1 = this.position.X + (float) Main.rand.Next(-400, 400);
+                            var num2 = this.position.Y - (float) Main.rand.Next(500, 800);
+                            var vector2 = new Vector2(num1, num2);
+                            var num3 = this.position.X + (float) (this.width / 2) - vector2.X;
+                            var num4 = this.position.Y + (float) (this.height / 2) - vector2.Y;
+                            var num5 = num3 + (float) Main.rand.Next(-100, 101);
+                            var num6 =
                                 23f / (float) Math.Sqrt((double) num5 * (double) num5 + (double) num4 * (double) num4);
-                            float SpeedX = num5 * num6;
-                            float SpeedY = num4 * num6;
-                            int index2 = Projectile.NewProjectile(num1, num2, SpeedX, SpeedY, 92, 30, 5f, this.whoAmI,
+                            var SpeedX = num5 * num6;
+                            var SpeedY = num4 * num6;
+                            var index2 = Projectile.NewProjectile(num1, num2, SpeedX, SpeedY, 92, 30, 5f, this.whoAmI,
                                 0.0f, 0.0f);
                             Main.projectile[index2].ai[1] = this.position.Y;
                         }
@@ -26151,14 +26151,14 @@ namespace Terraria
 
                     if (this.bee)
                     {
-                        int num = 1;
+                        var num = 1;
                         if (Main.rand.Next(3) == 0)
                             ++num;
                         if (Main.rand.Next(3) == 0)
                             ++num;
                         if (this.strongBees && Main.rand.Next(3) == 0)
                             ++num;
-                        for (int index = 0; index < num; ++index)
+                        for (var index = 0; index < num; ++index)
                             Projectile.NewProjectile(this.position.X, this.position.Y,
                                 (float) Main.rand.Next(-35, 36) * 0.02f, (float) Main.rand.Next(-35, 36) * 0.02f,
                                 this.beeType(), this.beeDamage(7), this.beeKB(0.0f), Main.myPlayer, 0.0f, 0.0f);
@@ -26169,8 +26169,8 @@ namespace Terraria
                 {
                     if (!this.mount.Active || !this.mount.Cart)
                     {
-                        float num1 = 10.5f;
-                        float num2 = -7.5f;
+                        var num1 = 10.5f;
+                        var num2 = -7.5f;
                         if (this.noKnockback)
                         {
                             num1 = 2.5f;
@@ -26201,29 +26201,29 @@ namespace Terraria
                     Main.PlaySound(1, (int) this.position.X, (int) this.position.Y, 1, 1f, 0.0f);
                 if (this.statLife > 0)
                 {
-                    double num1 = dmg / (double) this.statLifeMax2 * 100.0;
-                    float num2 = (float) (2 * hitDirection);
-                    float num3 = 0.0f;
+                    var num1 = dmg / (double) this.statLifeMax2 * 100.0;
+                    var num2 = (float) (2 * hitDirection);
+                    var num3 = 0.0f;
                     if (flag2)
                     {
                         num1 *= 12.0;
                         num3 = 6f;
                     }
 
-                    for (int index1 = 0; (double) index1 < num1; ++index1)
+                    for (var index1 = 0; (double) index1 < num1; ++index1)
                     {
                         if (this.stoned)
                             Dust.NewDust(this.position, this.width, this.height, 1,
                                 num2 + (float) hitDirection * num3 * Main.rand.NextFloat(), -2f, 0, new Color(), 1f);
                         else if (this.frostArmor)
                         {
-                            int index2 = Dust.NewDust(this.position, this.width, this.height, 135,
+                            var index2 = Dust.NewDust(this.position, this.width, this.height, 135,
                                 num2 + (float) hitDirection * num3 * Main.rand.NextFloat(), -2f, 0, new Color(), 1f);
                             Main.dust[index2].shader = GameShaders.Armor.GetSecondaryShader(this.ArmorSetDye(), this);
                         }
                         else if (this.boneArmor)
                         {
-                            int index2 = Dust.NewDust(this.position, this.width, this.height, 26,
+                            var index2 = Dust.NewDust(this.position, this.width, this.height, 26,
                                 num2 + (float) hitDirection * num3 * Main.rand.NextFloat(), -2f, 0, new Color(), 1f);
                             Main.dust[index2].shader = GameShaders.Armor.GetSecondaryShader(this.ArmorSetDye(), this);
                         }
@@ -26247,7 +26247,7 @@ namespace Terraria
 
         public void KillMeForGood()
         {
-            bool isCloudSave = Main.ActivePlayerFileData.IsCloudSave;
+            var isCloudSave = Main.ActivePlayerFileData.IsCloudSave;
             if (FileUtilities.Exists(Main.playerPathName, isCloudSave))
                 FileUtilities.Delete(Main.playerPathName, isCloudSave);
             if (FileUtilities.Exists(Main.playerPathName + ".bak", isCloudSave))
@@ -26271,7 +26271,7 @@ namespace Terraria
             this.lastDeathTime = DateTime.Now;
             this.showLastDeath = true;
             bool overFlowing;
-            int coinsOwned = (int) Utils.CoinsCount(out overFlowing, this.inventory);
+            var coinsOwned = (int) Utils.CoinsCount(out overFlowing, this.inventory);
             if (Main.myPlayer == this.whoAmI)
             {
                 this.lostCoins = coinsOwned;
@@ -26285,13 +26285,13 @@ namespace Terraria
                 this.trashItem.SetDefaults(0, false);
                 if (this.difficulty == (byte) 0)
                 {
-                    for (int index = 0; index < 59; ++index)
+                    for (var index = 0; index < 59; ++index)
                     {
                         if (this.inventory[index].stack > 0 &&
                             (this.inventory[index].type >= 1522 && this.inventory[index].type <= 1527 ||
                              this.inventory[index].type == 3643))
                         {
-                            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
+                            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width,
                                 this.height, this.inventory[index].type, 1, false, 0, false, false);
                             Main.item[number].netDefaults(this.inventory[index].netID);
                             Main.item[number].Prefix((int) this.inventory[index].prefix);
@@ -26330,20 +26330,20 @@ namespace Terraria
                 this.legPosition = Vector2.Zero;
             }
 
-            for (int index1 = 0; index1 < 100; ++index1)
+            for (var index1 = 0; index1 < 100; ++index1)
             {
                 if (this.stoned)
                     Dust.NewDust(this.position, this.width, this.height, 1, (float) (2 * hitDirection), -2f, 0,
                         new Color(), 1f);
                 else if (this.frostArmor)
                 {
-                    int index2 = Dust.NewDust(this.position, this.width, this.height, 135, (float) (2 * hitDirection),
+                    var index2 = Dust.NewDust(this.position, this.width, this.height, 135, (float) (2 * hitDirection),
                         -2f, 0, new Color(), 1f);
                     Main.dust[index2].shader = GameShaders.Armor.GetSecondaryShader(this.ArmorSetDye(), this);
                 }
                 else if (this.boneArmor)
                 {
-                    int index2 = Dust.NewDust(this.position, this.width, this.height, 26, (float) (2 * hitDirection),
+                    var index2 = Dust.NewDust(this.position, this.width, this.height, 26, (float) (2 * hitDirection),
                         -2f, 0, new Color(), 1f);
                     Main.dust[index2].shader = GameShaders.Armor.GetSecondaryShader(this.ArmorSetDye(), this);
                 }
@@ -26355,10 +26355,10 @@ namespace Terraria
             this.mount.Dismount(this);
             this.dead = true;
             this.respawnTimer = 600;
-            bool flag = false;
+            var flag = false;
             if (Main.netMode != 0 && !pvp)
             {
-                for (int index = 0; index < 200; ++index)
+                for (var index = 0; index < 200; ++index)
                 {
                     if (Main.npc[index].active &&
                         (Main.npc[index].boss || Main.npc[index].type == 13 ||
@@ -26380,7 +26380,7 @@ namespace Terraria
             this.palladiumRegen = false;
             this.iceBarrier = false;
             this.crystalLeaf = false;
-            NetworkText deathText = damageSource.GetDeathText(this.name);
+            var deathText = damageSource.GetDeathText(this.name);
             switch (Main.netMode)
             {
                 case 0:
@@ -26422,12 +26422,12 @@ namespace Terraria
         {
             if (Main.netMode == 1)
                 return;
-            float num1 = (float) Main.rand.Next(-35, 36) * 0.1f;
+            var num1 = (float) Main.rand.Next(-35, 36) * 0.1f;
             while ((double) num1 < 2.0 && (double) num1 > -2.0)
                 num1 += (float) Main.rand.Next(-30, 31) * 0.1f;
-            int num2 = Main.rand.Next(6);
-            int Type = coinsOwned <= 100000 ? (num2 != 0 ? 200 + num2 : 43) : Main.rand.Next(5) + 527;
-            int index = Projectile.NewProjectile(this.position.X + (float) (this.width / 2),
+            var num2 = Main.rand.Next(6);
+            var Type = coinsOwned <= 100000 ? (num2 != 0 ? 200 + num2 : 43) : Main.rand.Next(5) + 527;
+            var index = Projectile.NewProjectile(this.position.X + (float) (this.width / 2),
                 this.position.Y + (float) (this.height / 2),
                 (float) Main.rand.Next(10, 30) * 0.1f * (float) hitDirection + num1,
                 (float) Main.rand.Next(-40, -20) * 0.1f, Type, 0, 0.0f, Main.myPlayer, 0.0f, 0.0f);
@@ -26441,16 +26441,16 @@ namespace Terraria
             if (newItem.type == 58 || newItem.type == 184 || (newItem.type == 1734 || newItem.type == 1735) ||
                 (newItem.type == 1867 || newItem.type == 1868 || ItemID.Sets.NebulaPickup[newItem.type]))
                 return true;
-            int num = 50;
+            var num = 50;
             if (newItem.type == 71 || newItem.type == 72 || (newItem.type == 73 || newItem.type == 74))
                 num = 54;
-            for (int index = 0; index < num; ++index)
+            for (var index = 0; index < num; ++index)
             {
                 if (this.inventory[index].type == 0)
                     return true;
             }
 
-            for (int index = 0; index < num; ++index)
+            for (var index = 0; index < num; ++index)
             {
                 if (this.inventory[index].type > 0 && this.inventory[index].stack < this.inventory[index].maxStack &&
                     newItem.IsTheSameAs(this.inventory[index]))
@@ -26462,14 +26462,14 @@ namespace Terraria
                 if (newItem.type != 75 && newItem.type != 169 && (newItem.type != 23 && newItem.type != 408) &&
                     (newItem.type != 370 && newItem.type != 1246))
                 {
-                    for (int index = 54; index < 58; ++index)
+                    for (var index = 54; index < 58; ++index)
                     {
                         if (this.inventory[index].type == 0)
                             return true;
                     }
                 }
 
-                for (int index = 54; index < 58; ++index)
+                for (var index = 54; index < 58; ++index)
                 {
                     if (this.inventory[index].type > 0 &&
                         this.inventory[index].stack < this.inventory[index].maxStack &&
@@ -26478,7 +26478,7 @@ namespace Terraria
                 }
             }
 
-            for (int index = 54; index < 58; ++index)
+            for (var index = 54; index < 58; ++index)
             {
                 if (this.inventory[index].type > 0 && this.inventory[index].stack < this.inventory[index].maxStack &&
                     newItem.IsTheSameAs(this.inventory[index]))
@@ -26494,7 +26494,7 @@ namespace Terraria
                 this.inventory[i].type != 73)
                 return;
             this.inventory[i].SetDefaults(this.inventory[i].type + 1, false);
-            for (int i1 = 0; i1 < 54; ++i1)
+            for (var i1 = 0; i1 < 54; ++i1)
             {
                 if (this.inventory[i1].IsTheSameAs(this.inventory[i]) && i1 != i &&
                     (this.inventory[i1].type == this.inventory[i].type &&
@@ -26511,8 +26511,8 @@ namespace Terraria
 
         public Item FillAmmo(int plr, Item newItem, bool noText = false)
         {
-            Item obj = newItem;
-            for (int i = 54; i < 58; ++i)
+            var obj = newItem;
+            for (var i = 54; i < 58; ++i)
             {
                 if (this.inventory[i].type > 0 && this.inventory[i].stack < this.inventory[i].maxStack &&
                     obj.IsTheSameAs(this.inventory[i]))
@@ -26542,7 +26542,7 @@ namespace Terraria
             if (obj.bait <= 0 && obj.type != 169 && (obj.type != 75 && obj.type != 23) &&
                 (obj.type != 408 && obj.type != 370 && (obj.type != 1246 && obj.type != 154)) && !obj.notAmmo)
             {
-                for (int i = 54; i < 58; ++i)
+                for (var i = 54; i < 58; ++i)
                 {
                     if (this.inventory[i].type == 0)
                     {
@@ -26563,12 +26563,12 @@ namespace Terraria
 
         public Item GetItem(int plr, Item newItem, bool longText = false, bool noText = false)
         {
-            bool flag = newItem.type >= 71 && newItem.type <= 74;
-            Item newItem1 = newItem;
-            int num1 = 50;
+            var flag = newItem.type >= 71 && newItem.type <= 74;
+            var newItem1 = newItem;
+            var num1 = 50;
             if (newItem.noGrabDelay > 0)
                 return newItem1;
-            int num2 = 0;
+            var num2 = 0;
             if (newItem.uniqueStack && this.HasItem(newItem.type))
                 return newItem1;
             if (newItem.type == 71 || newItem.type == 72 || (newItem.type == 73 || newItem.type == 74))
@@ -26584,9 +26584,9 @@ namespace Terraria
                     return new Item();
             }
 
-            for (int index = num2; index < 50; ++index)
+            for (var index = num2; index < 50; ++index)
             {
-                int i = index;
+                var i = index;
                 if (i < 0)
                     i = 54 + index;
                 if (this.inventory[i].type > 0 && this.inventory[i].stack < this.inventory[i].maxStack &&
@@ -26624,7 +26624,7 @@ namespace Terraria
             if (newItem.type != 71 && newItem.type != 72 && (newItem.type != 73 && newItem.type != 74) &&
                 newItem.useStyle > 0)
             {
-                for (int i = 0; i < 10; ++i)
+                for (var i = 0; i < 10; ++i)
                 {
                     if (this.inventory[i].type == 0)
                     {
@@ -26646,7 +26646,7 @@ namespace Terraria
 
             if (newItem.favorited)
             {
-                for (int i = 0; i < num1; ++i)
+                for (var i = 0; i < num1; ++i)
                 {
                     if (this.inventory[i].type == 0)
                     {
@@ -26667,7 +26667,7 @@ namespace Terraria
             }
             else
             {
-                for (int i = num1 - 1; i >= 0; --i)
+                for (var i = num1 - 1; i >= 0; --i)
                 {
                     if (this.inventory[i].type == 0)
                     {
@@ -26706,16 +26706,16 @@ namespace Terraria
                  (double) this.inventory[this.selectedItem].tileBoost - 2.0 + (double) this.blockRange >=
                  (double) Player.tileTargetY))
             {
-                int tileTargetX = Player.tileTargetX;
-                int tileTargetY = Player.tileTargetY;
+                var tileTargetX = Player.tileTargetX;
+                var tileTargetY = Player.tileTargetY;
                 if (Main.tile[tileTargetX, tileTargetY] != null && Main.tile[tileTargetX, tileTargetY].active())
                 {
                     this.showItemIcon = true;
                     if (this.itemTime == 0 && this.itemAnimation > 0 && this.controlUseItem)
                     {
-                        int num1 = -1;
-                        int num2 = -1;
-                        for (int index = 0; index < 58; ++index)
+                        var num1 = -1;
+                        var num2 = -1;
+                        for (var index = 0; index < 58; ++index)
                         {
                             if (this.inventory[index].stack > 0 && this.inventory[index].paint > (byte) 0)
                             {
@@ -26728,7 +26728,7 @@ namespace Terraria
                         if (num1 > 0 && (int) Main.tile[tileTargetX, tileTargetY].color() != num1 &&
                             WorldGen.paintTile(tileTargetX, tileTargetY, (byte) num1, true))
                         {
-                            int index = num2;
+                            var index = num2;
                             --this.inventory[index].stack;
                             if (this.inventory[index].stack <= 0)
                                 this.inventory[index].SetDefaults(0, false);
@@ -26752,16 +26752,16 @@ namespace Terraria
                  (double) this.inventory[this.selectedItem].tileBoost - 2.0 + (double) this.blockRange >=
                  (double) Player.tileTargetY))
             {
-                int tileTargetX = Player.tileTargetX;
-                int tileTargetY = Player.tileTargetY;
+                var tileTargetX = Player.tileTargetX;
+                var tileTargetY = Player.tileTargetY;
                 if (Main.tile[tileTargetX, tileTargetY] != null && Main.tile[tileTargetX, tileTargetY].wall > (byte) 0)
                 {
                     this.showItemIcon = true;
                     if (this.itemTime == 0 && this.itemAnimation > 0 && this.controlUseItem)
                     {
-                        int num1 = -1;
-                        int num2 = -1;
-                        for (int index = 0; index < 58; ++index)
+                        var num1 = -1;
+                        var num2 = -1;
+                        for (var index = 0; index < 58; ++index)
                         {
                             if (this.inventory[index].stack > 0 && this.inventory[index].paint > (byte) 0)
                             {
@@ -26774,7 +26774,7 @@ namespace Terraria
                         if (num1 > 0 && (int) Main.tile[tileTargetX, tileTargetY].wallColor() != num1 &&
                             WorldGen.paintWall(tileTargetX, tileTargetY, (byte) num1, true))
                         {
-                            int index = num2;
+                            var index = num2;
                             --this.inventory[index].stack;
                             if (this.inventory[index].stack <= 0)
                                 this.inventory[index].SetDefaults(0, false);
@@ -26798,8 +26798,8 @@ namespace Terraria
                  (double) this.inventory[this.selectedItem].tileBoost - 2.0 + (double) this.blockRange >=
                  (double) Player.tileTargetY))
             {
-                int tileTargetX = Player.tileTargetX;
-                int tileTargetY = Player.tileTargetY;
+                var tileTargetX = Player.tileTargetX;
+                var tileTargetY = Player.tileTargetY;
                 if (Main.tile[tileTargetX, tileTargetY] != null &&
                     (Main.tile[tileTargetX, tileTargetY].wallColor() > (byte) 0 &&
                      Main.tile[tileTargetX, tileTargetY].wall > (byte) 0 ||
@@ -26837,8 +26837,8 @@ namespace Terraria
                   (double) this.inventory[this.selectedItem].tileBoost - 2.0 + (double) this.blockRange >=
                   (double) Player.tileTargetY)))
             {
-                int tileTargetX = Player.tileTargetX;
-                int tileTargetY = Player.tileTargetY;
+                var tileTargetX = Player.tileTargetX;
+                var tileTargetY = Player.tileTargetY;
                 if (Main.tile[tileTargetX, tileTargetY].active() &&
                     Main.tile[tileTargetX, tileTargetY].type == (ushort) 209)
                     this.ShootFromCannon(tileTargetX, tileTargetY);
@@ -26861,17 +26861,17 @@ namespace Terraria
                   (double) Player.tileTargetY)) &&
                 (this.itemTime == 0 && this.itemAnimation > 0 && this.controlUseItem))
             {
-                int type = this.inventory[this.selectedItem].type;
+                var type = this.inventory[this.selectedItem].type;
                 if (type >= 1874 && type <= 1877)
                 {
-                    int style = type - 1873;
+                    var style = type - 1873;
                     if (WorldGen.checkXmasTreeDrop(Player.tileTargetX, Player.tileTargetY, 0) != style)
                     {
                         this.itemTime = this.inventory[this.selectedItem].useTime;
                         WorldGen.dropXmasTree(Player.tileTargetX, Player.tileTargetY, 0);
                         WorldGen.setXmasTree(Player.tileTargetX, Player.tileTargetY, 0, style);
-                        int tileTargetX = Player.tileTargetX;
-                        int tileTargetY = Player.tileTargetY;
+                        var tileTargetX = Player.tileTargetX;
+                        var tileTargetY = Player.tileTargetY;
                         if (Main.tile[Player.tileTargetX, Player.tileTargetY].frameX < (short) 10)
                         {
                             tileTargetX -= (int) Main.tile[Player.tileTargetX, Player.tileTargetY].frameX;
@@ -26883,14 +26883,14 @@ namespace Terraria
                 }
                 else if (type >= 1878 && type <= 1883)
                 {
-                    int style = type - 1877;
+                    var style = type - 1877;
                     if (WorldGen.checkXmasTreeDrop(Player.tileTargetX, Player.tileTargetY, 1) != style)
                     {
                         this.itemTime = this.inventory[this.selectedItem].useTime;
                         WorldGen.dropXmasTree(Player.tileTargetX, Player.tileTargetY, 1);
                         WorldGen.setXmasTree(Player.tileTargetX, Player.tileTargetY, 1, style);
-                        int tileTargetX = Player.tileTargetX;
-                        int tileTargetY = Player.tileTargetY;
+                        var tileTargetX = Player.tileTargetX;
+                        var tileTargetY = Player.tileTargetY;
                         if (Main.tile[Player.tileTargetX, Player.tileTargetY].frameX < (short) 10)
                         {
                             tileTargetX -= (int) Main.tile[Player.tileTargetX, Player.tileTargetY].frameX;
@@ -26902,14 +26902,14 @@ namespace Terraria
                 }
                 else if (type >= 1884 && type <= 1894)
                 {
-                    int style = type - 1883;
+                    var style = type - 1883;
                     if (WorldGen.checkXmasTreeDrop(Player.tileTargetX, Player.tileTargetY, 2) != style)
                     {
                         this.itemTime = this.inventory[this.selectedItem].useTime;
                         WorldGen.dropXmasTree(Player.tileTargetX, Player.tileTargetY, 2);
                         WorldGen.setXmasTree(Player.tileTargetX, Player.tileTargetY, 2, style);
-                        int tileTargetX = Player.tileTargetX;
-                        int tileTargetY = Player.tileTargetY;
+                        var tileTargetX = Player.tileTargetX;
+                        var tileTargetY = Player.tileTargetY;
                         if (Main.tile[Player.tileTargetX, Player.tileTargetY].frameX < (short) 10)
                         {
                             tileTargetX -= (int) Main.tile[Player.tileTargetX, Player.tileTargetY].frameX;
@@ -26921,14 +26921,14 @@ namespace Terraria
                 }
                 else if (type >= 1895 && type <= 1905)
                 {
-                    int style = type - 1894;
+                    var style = type - 1894;
                     if (WorldGen.checkXmasTreeDrop(Player.tileTargetX, Player.tileTargetY, 3) != style)
                     {
                         this.itemTime = this.inventory[this.selectedItem].useTime;
                         WorldGen.dropXmasTree(Player.tileTargetX, Player.tileTargetY, 3);
                         WorldGen.setXmasTree(Player.tileTargetX, Player.tileTargetY, 3, style);
-                        int tileTargetX = Player.tileTargetX;
-                        int tileTargetY = Player.tileTargetY;
+                        var tileTargetX = Player.tileTargetX;
+                        var tileTargetY = Player.tileTargetY;
                         if (Main.tile[Player.tileTargetX, Player.tileTargetY].frameX < (short) 10)
                         {
                             tileTargetX -= (int) Main.tile[Player.tileTargetX, Player.tileTargetY].frameX;
@@ -26979,7 +26979,7 @@ namespace Terraria
                       (double) Player.tileTargetY))
             {
                 this.showItemIcon = true;
-                bool flag1 = false;
+                var flag1 = false;
                 if (Main.tile[Player.tileTargetX, Player.tileTargetY].liquid > (byte) 0 &&
                     Main.tile[Player.tileTargetX, Player.tileTargetY].lava())
                 {
@@ -26991,15 +26991,15 @@ namespace Terraria
                         flag1 = true;
                 }
 
-                bool flag2 = true;
+                var flag2 = true;
                 if (PlayerInput.UsingGamepad && this.inventory[this.selectedItem].createTile == 4 &&
                     (Main.SmartCursorEnabled && !Main.SmartCursorShowing))
                     flag2 = false;
                 if (this.inventory[this.selectedItem].tileWand > 0)
                 {
-                    int tileWand = this.inventory[this.selectedItem].tileWand;
+                    var tileWand = this.inventory[this.selectedItem].tileWand;
                     flag2 = false;
-                    for (int index = 0; index < 58; ++index)
+                    for (var index = 0; index < 58; ++index)
                     {
                         if (tileWand == this.inventory[index].type && this.inventory[index].stack > 0)
                         {
@@ -27013,9 +27013,9 @@ namespace Terraria
                     (Main.tile[Player.tileTargetX, Player.tileTargetY].active() &&
                      Main.tileRope[(int) Main.tile[Player.tileTargetX, Player.tileTargetY].type]))
                 {
-                    int tileTargetY = Player.tileTargetY;
-                    int tileTargetX = Player.tileTargetX;
-                    int createTile = this.inventory[this.selectedItem].createTile;
+                    var tileTargetY = Player.tileTargetY;
+                    var tileTargetX = Player.tileTargetX;
+                    var createTile = this.inventory[this.selectedItem].createTile;
                     while (Main.tile[tileTargetX, tileTargetY].active() &&
                            Main.tileRope[(int) Main.tile[tileTargetX, tileTargetY].type] &&
                            (tileTargetY < Main.maxTilesX - 5 && Main.tile[tileTargetX, tileTargetY + 2] != null) &&
@@ -27048,9 +27048,9 @@ namespace Terraria
                                     (int) Main.tile[Player.tileTargetX, Player.tileTargetY].type]))) &&
                     (this.itemTime == 0 && this.itemAnimation > 0 && this.controlUseItem))
                 {
-                    bool flag3 = false;
-                    bool flag4 = false;
-                    TileObject objectData = new TileObject();
+                    var flag3 = false;
+                    var flag4 = false;
+                    var objectData = new TileObject();
                     if (TileObjectData.CustomPlace(this.inventory[this.selectedItem].createTile,
                             this.inventory[this.selectedItem].placeStyle) &&
                         this.inventory[this.selectedItem].createTile != 82)
@@ -27059,10 +27059,10 @@ namespace Terraria
                         flag3 = TileObject.CanPlace(Player.tileTargetX, Player.tileTargetY,
                             (int) (ushort) this.inventory[this.selectedItem].createTile,
                             this.inventory[this.selectedItem].placeStyle, this.direction, out objectData, false);
-                        int width = 0;
-                        int height = 0;
-                        int x = 0;
-                        int y = 0;
+                        var width = 0;
+                        var height = 0;
+                        var x = 0;
+                        var y = 0;
                         switch (objectData.type)
                         {
                             case 138:
@@ -27081,11 +27081,11 @@ namespace Terraria
 
                         if (width != 0 && height != 0)
                         {
-                            Microsoft.Xna.Framework.Rectangle rectangle =
+                            var rectangle =
                                 new Microsoft.Xna.Framework.Rectangle(x, y, width, height);
-                            for (int index = 0; index < (int) byte.MaxValue; ++index)
+                            for (var index = 0; index < (int) byte.MaxValue; ++index)
                             {
-                                Player player = Main.player[index];
+                                var player = Main.player[index];
                                 if (player.active && !player.dead && player.Hitbox.Intersects(rectangle))
                                 {
                                     flag3 = false;
@@ -27096,9 +27096,9 @@ namespace Terraria
 
                         if (objectData.type == 454)
                         {
-                            for (int index = -2; index < 2; ++index)
+                            for (var index = -2; index < 2; ++index)
                             {
-                                Tile tile = Main.tile[Player.tileTargetX + index, Player.tileTargetY];
+                                var tile = Main.tile[Player.tileTargetX + index, Player.tileTargetY];
                                 if (tile.active() && tile.type == (ushort) 454)
                                     flag3 = false;
                             }
@@ -27106,9 +27106,9 @@ namespace Terraria
 
                         if (objectData.type == 254)
                         {
-                            for (int index1 = -1; index1 < 1; ++index1)
+                            for (var index1 = -1; index1 < 1; ++index1)
                             {
-                                for (int index2 = -1; index2 < 1; ++index2)
+                                for (var index2 = -1; index2 < 1; ++index2)
                                 {
                                     if (!WorldGen.CanCutTile(Player.tileTargetX + index2, Player.tileTargetY + index1,
                                         TileCuttingContext.TilePlacement))
@@ -27139,8 +27139,8 @@ namespace Terraria
                         else if (this.inventory[this.selectedItem].createTile >= 373 &&
                                  this.inventory[this.selectedItem].createTile <= 375)
                         {
-                            int tileTargetX = Player.tileTargetX;
-                            int index = Player.tileTargetY - 1;
+                            var tileTargetX = Player.tileTargetX;
+                            var index = Player.tileTargetY - 1;
                             if (Main.tile[tileTargetX, index].nactive() &&
                                 Main.tileSolid[(int) Main.tile[tileTargetX, index].type] &&
                                 !Main.tileSolidTop[(int) Main.tile[tileTargetX, index].type])
@@ -27148,8 +27148,8 @@ namespace Terraria
                         }
                         else if (this.inventory[this.selectedItem].createTile == 461)
                         {
-                            int tileTargetX = Player.tileTargetX;
-                            int index = Player.tileTargetY - 1;
+                            var tileTargetX = Player.tileTargetX;
+                            var index = Player.tileTargetY - 1;
                             if (Main.tile[tileTargetX, index].nactive() &&
                                 Main.tileSolid[(int) Main.tile[tileTargetX, index].type] &&
                                 !Main.tileSolidTop[(int) Main.tile[tileTargetX, index].type])
@@ -27221,15 +27221,15 @@ namespace Terraria
                                     }
                                 }
 
-                                int index1 = (int) Main.tile[Player.tileTargetX, Player.tileTargetY + 1].type;
+                                var index1 = (int) Main.tile[Player.tileTargetX, Player.tileTargetY + 1].type;
                                 if (Main.tile[Player.tileTargetX, Player.tileTargetY].halfBrick())
                                     index1 = -1;
-                                int index2 = (int) Main.tile[Player.tileTargetX - 1, Player.tileTargetY].type;
-                                int index3 = (int) Main.tile[Player.tileTargetX + 1, Player.tileTargetY].type;
-                                int num1 = (int) Main.tile[Player.tileTargetX - 1, Player.tileTargetY - 1].type;
-                                int num2 = (int) Main.tile[Player.tileTargetX + 1, Player.tileTargetY - 1].type;
-                                int num3 = (int) Main.tile[Player.tileTargetX - 1, Player.tileTargetY - 1].type;
-                                int num4 = (int) Main.tile[Player.tileTargetX + 1, Player.tileTargetY + 1].type;
+                                var index2 = (int) Main.tile[Player.tileTargetX - 1, Player.tileTargetY].type;
+                                var index3 = (int) Main.tile[Player.tileTargetX + 1, Player.tileTargetY].type;
+                                var num1 = (int) Main.tile[Player.tileTargetX - 1, Player.tileTargetY - 1].type;
+                                var num2 = (int) Main.tile[Player.tileTargetX + 1, Player.tileTargetY - 1].type;
+                                var num3 = (int) Main.tile[Player.tileTargetX - 1, Player.tileTargetY - 1].type;
+                                var num4 = (int) Main.tile[Player.tileTargetX + 1, Player.tileTargetY + 1].type;
                                 if (!Main.tile[Player.tileTargetX, Player.tileTargetY + 1].nactive())
                                     index1 = -1;
                                 if (!Main.tile[Player.tileTargetX - 1, Player.tileTargetY].nactive())
@@ -27316,11 +27316,11 @@ namespace Terraria
                         }
                         else if (this.inventory[this.selectedItem].createTile == 314)
                         {
-                            for (int index1 = Player.tileTargetX - 1; index1 <= Player.tileTargetX + 1; ++index1)
+                            for (var index1 = Player.tileTargetX - 1; index1 <= Player.tileTargetX + 1; ++index1)
                             {
-                                for (int index2 = Player.tileTargetY - 1; index2 <= Player.tileTargetY + 1; ++index2)
+                                for (var index2 = Player.tileTargetY - 1; index2 <= Player.tileTargetY + 1; ++index2)
                                 {
-                                    Tile tile = Main.tile[index1, index2];
+                                    var tile = Main.tile[index1, index2];
                                     if (tile.active() || tile.wall > (byte) 0)
                                     {
                                         flag3 = true;
@@ -27331,10 +27331,10 @@ namespace Terraria
                         }
                         else
                         {
-                            Tile tile1 = Main.tile[Player.tileTargetX - 1, Player.tileTargetY];
-                            Tile tile2 = Main.tile[Player.tileTargetX + 1, Player.tileTargetY];
-                            Tile tile3 = Main.tile[Player.tileTargetX, Player.tileTargetY - 1];
-                            Tile tile4 = Main.tile[Player.tileTargetX, Player.tileTargetY + 1];
+                            var tile1 = Main.tile[Player.tileTargetX - 1, Player.tileTargetY];
+                            var tile2 = Main.tile[Player.tileTargetX + 1, Player.tileTargetY];
+                            var tile3 = Main.tile[Player.tileTargetX, Player.tileTargetY - 1];
+                            var tile4 = Main.tile[Player.tileTargetX, Player.tileTargetY + 1];
                             if (tile2.active() && (Main.tileSolid[(int) tile2.type] ||
                                                    Main.tileRope[(int) tile2.type] || tile2.type == (ushort) 314) ||
                                 tile2.wall > (byte) 0 ||
@@ -27353,8 +27353,8 @@ namespace Terraria
                         if (this.inventory[this.selectedItem].type == 213 &&
                             Main.tile[Player.tileTargetX, Player.tileTargetY].active())
                         {
-                            int tileTargetX = Player.tileTargetX;
-                            int tileTargetY = Player.tileTargetY;
+                            var tileTargetX = Player.tileTargetX;
+                            var tileTargetY = Player.tileTargetY;
                             if (Main.tile[tileTargetX, tileTargetY].type == (ushort) 3 ||
                                 Main.tile[tileTargetX, tileTargetY].type == (ushort) 73 ||
                                 Main.tile[tileTargetX, tileTargetY].type == (ushort) 84)
@@ -27366,8 +27366,8 @@ namespace Terraria
                             }
                             else if (Main.tile[tileTargetX, tileTargetY].type == (ushort) 83)
                             {
-                                bool flag5 = false;
-                                int num = (int) Main.tile[tileTargetX, tileTargetY].frameX / 18;
+                                var flag5 = false;
+                                var num = (int) Main.tile[tileTargetX, tileTargetY].frameX / 18;
                                 if (num == 0 && Main.dayTime)
                                     flag5 = true;
                                 if (num == 1 && !Main.dayTime)
@@ -27422,9 +27422,9 @@ namespace Terraria
                         if (!flag3 && this.inventory[this.selectedItem].createTile >= 0 &&
                             TileID.Sets.Platforms[this.inventory[this.selectedItem].createTile])
                         {
-                            for (int index1 = Player.tileTargetX - 1; index1 <= Player.tileTargetX + 1; ++index1)
+                            for (var index1 = Player.tileTargetX - 1; index1 <= Player.tileTargetX + 1; ++index1)
                             {
-                                for (int index2 = Player.tileTargetY - 1; index2 <= Player.tileTargetY + 1; ++index2)
+                                for (var index2 = Player.tileTargetY - 1; index2 <= Player.tileTargetY + 1; ++index2)
                                 {
                                     if (Main.tile[index1, index2].active())
                                     {
@@ -27438,7 +27438,7 @@ namespace Terraria
 
                     if (flag3)
                     {
-                        int num1 = this.inventory[this.selectedItem].placeStyle;
+                        var num1 = this.inventory[this.selectedItem].placeStyle;
                         if (!flag4)
                         {
                             if (this.inventory[this.selectedItem].createTile == 36)
@@ -27461,16 +27461,16 @@ namespace Terraria
 
                         if (this.inventory[this.selectedItem].createTile == 314 && num1 == 2 && this.direction == 1)
                             ++num1;
-                        int[,] numArray = (int[,]) null;
+                        var numArray = (int[,]) null;
                         if (this.autoPaint || this.autoActuator)
                         {
                             numArray = new int[11, 11];
-                            for (int index1 = 0; index1 < 11; ++index1)
+                            for (var index1 = 0; index1 < 11; ++index1)
                             {
-                                for (int index2 = 0; index2 < 11; ++index2)
+                                for (var index2 = 0; index2 < 11; ++index2)
                                 {
-                                    int index3 = Player.tileTargetX - 5 + index1;
-                                    int index4 = Player.tileTargetY - 5 + index2;
+                                    var index3 = Player.tileTargetX - 5 + index1;
+                                    var index4 = Player.tileTargetY - 5 + index2;
                                     numArray[index1, index2] = !Main.tile[index3, index4].active()
                                         ? -1
                                         : (int) Main.tile[index3, index4].type;
@@ -27478,7 +27478,7 @@ namespace Terraria
                             }
                         }
 
-                        bool forced = false;
+                        var forced = false;
                         bool flag5;
                         if (flag4)
                         {
@@ -27494,10 +27494,10 @@ namespace Terraria
                             (Main.tile[Player.tileTargetX, Player.tileTargetY].type == (ushort) 1 &&
                              Main.tile[Player.tileTargetX, Player.tileTargetY].active()))
                         {
-                            int num2 = 0;
-                            int num3 = 0;
-                            Point tileCoordinates = this.Center.ToTileCoordinates();
-                            Dictionary<ushort, int> resultsOutput = new Dictionary<ushort, int>();
+                            var num2 = 0;
+                            var num3 = 0;
+                            var tileCoordinates = this.Center.ToTileCoordinates();
+                            var resultsOutput = new Dictionary<ushort, int>();
                             WorldUtils.Gen(new Point(tileCoordinates.X - 25, tileCoordinates.Y - 25),
                                 (GenShape) new Shapes.Rectangle(50, 50), (GenAction) new Actions.TileScanner(
                                     new ushort[6]
@@ -27509,7 +27509,7 @@ namespace Terraria
                                         (ushort) 181,
                                         (ushort) 381
                                     }).Output(resultsOutput));
-                            foreach (KeyValuePair<ushort, int> keyValuePair in resultsOutput)
+                            foreach (var keyValuePair in resultsOutput)
                             {
                                 if (keyValuePair.Value > num3)
                                 {
@@ -27597,15 +27597,15 @@ namespace Terraria
                                 TileID.Sets.Platforms[this.inventory[this.selectedItem].createTile] &&
                                 Main.SmartCursorEnabled)
                             {
-                                int tileTargetX = Player.tileTargetX;
-                                int tileTargetY = Player.tileTargetY;
-                                int slope1 = -1;
-                                int num2 = 0;
-                                int num3 = 0;
-                                bool flag6 = true;
-                                for (int index1 = -1; index1 < 2; ++index1)
+                                var tileTargetX = Player.tileTargetX;
+                                var tileTargetY = Player.tileTargetY;
+                                var slope1 = -1;
+                                var num2 = 0;
+                                var num3 = 0;
+                                var flag6 = true;
+                                for (var index1 = -1; index1 < 2; ++index1)
                                 {
-                                    for (int index2 = -1; index2 < 2; ++index2)
+                                    for (var index2 = -1; index2 < 2; ++index2)
                                     {
                                         if ((index1 != 0 || index2 != 0) &&
                                             TileID.Sets.Platforms[
@@ -27616,23 +27616,23 @@ namespace Terraria
 
                                 if (!flag6)
                                 {
-                                    Tile tile1 = Main.tile[tileTargetX - 1, tileTargetY - 1];
+                                    var tile1 = Main.tile[tileTargetX - 1, tileTargetY - 1];
                                     if (tile1.active() && TileID.Sets.Platforms[(int) tile1.type] &&
                                         tile1.slope() != (byte) 2)
                                         ++num2;
-                                    Tile tile2 = Main.tile[tileTargetX - 1, tileTargetY + 1];
+                                    var tile2 = Main.tile[tileTargetX - 1, tileTargetY + 1];
                                     if (tile2.active() && TileID.Sets.Platforms[(int) tile2.type] &&
                                         tile2.slope() != (byte) 1)
                                         ++num3;
-                                    Tile tile3 = Main.tile[tileTargetX + 1, tileTargetY - 1];
+                                    var tile3 = Main.tile[tileTargetX + 1, tileTargetY - 1];
                                     if (tile3.active() && TileID.Sets.Platforms[(int) tile3.type] &&
                                         tile3.slope() != (byte) 1)
                                         ++num3;
-                                    Tile tile4 = Main.tile[tileTargetX + 1, tileTargetY + 1];
+                                    var tile4 = Main.tile[tileTargetX + 1, tileTargetY + 1];
                                     if (tile4.active() && TileID.Sets.Platforms[(int) tile4.type] &&
                                         tile4.slope() != (byte) 2)
                                         ++num2;
-                                    Tile testTile1 = Main.tile[tileTargetX - 1, tileTargetY];
+                                    var testTile1 = Main.tile[tileTargetX - 1, tileTargetY];
                                     if (WorldGen.SolidTile(testTile1))
                                     {
                                         ++num2;
@@ -27641,7 +27641,7 @@ namespace Terraria
                                             ++num2;
                                     }
 
-                                    Tile testTile2 = Main.tile[tileTargetX + 1, tileTargetY];
+                                    var testTile2 = Main.tile[tileTargetX + 1, tileTargetY];
                                     if (WorldGen.SolidTile(testTile2))
                                     {
                                         ++num3;
@@ -27654,16 +27654,16 @@ namespace Terraria
                                         slope1 = 1;
                                     else if (num3 > num2)
                                         slope1 = 2;
-                                    Tile tile5 = Main.tile[tileTargetX - 1, tileTargetY];
+                                    var tile5 = Main.tile[tileTargetX - 1, tileTargetY];
                                     if (tile5.active() && TileID.Sets.Platforms[(int) tile5.type])
                                         slope1 = 0;
-                                    Tile tile6 = Main.tile[tileTargetX + 1, tileTargetY];
+                                    var tile6 = Main.tile[tileTargetX + 1, tileTargetY];
                                     if (tile6.active() && TileID.Sets.Platforms[(int) tile6.type])
                                         slope1 = 0;
                                     if (slope1 != -1)
                                     {
                                         WorldGen.SlopeTile(tileTargetX, tileTargetY, slope1);
-                                        int num4 = (int) Main.tile[tileTargetX, tileTargetY].slope();
+                                        var num4 = (int) Main.tile[tileTargetX, tileTargetY].slope();
                                         if (Main.netMode == 1)
                                             NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                 (float) Player.tileTargetX, (float) Player.tileTargetY, (float) num4, 0,
@@ -27681,7 +27681,7 @@ namespace Terraria
                                             num6 = -1;
                                         }
 
-                                        Tile tile7 = Main.tile[tileTargetX + num5, tileTargetY + num6];
+                                        var tile7 = Main.tile[tileTargetX + num5, tileTargetY + num6];
                                         if (tile7.active() && TileID.Sets.Platforms[(int) tile7.type] &&
                                             tile7.slope() == (byte) 0 &&
                                             (!Main.tile[tileTargetX + num5 + num5, tileTargetY + num6].active() ||
@@ -27690,7 +27690,7 @@ namespace Terraria
                                              !Main.tile[tileTargetX + num5 + num5, tileTargetY + num6].halfBrick()))
                                         {
                                             WorldGen.SlopeTile(tileTargetX + num5, tileTargetY + num6, slope1);
-                                            int num7 = (int) tile7.slope();
+                                            var num7 = (int) tile7.slope();
                                             if (Main.netMode == 1)
                                                 NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                     (float) (tileTargetX + num5), (float) (tileTargetY + num6),
@@ -27710,14 +27710,14 @@ namespace Terraria
                                             num9 = 1;
                                         }
 
-                                        Tile tile8 = Main.tile[tileTargetX + num8, tileTargetY + num9];
+                                        var tile8 = Main.tile[tileTargetX + num8, tileTargetY + num9];
                                         if (tile8.active() && TileID.Sets.Platforms[(int) tile8.type] &&
                                             (tile8.slope() == (byte) 0 &&
                                              WorldGen.PlatformProperSides(tileTargetX + num8, tileTargetY + num9,
                                                  true) <= 0))
                                         {
                                             WorldGen.SlopeTile(tileTargetX + num8, tileTargetY + num9, slope1);
-                                            int num7 = (int) tile8.slope();
+                                            var num7 = (int) tile8.slope();
                                             if (Main.netMode == 1)
                                                 NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                     (float) (tileTargetX + num8), (float) (tileTargetY + num9),
@@ -27726,14 +27726,14 @@ namespace Terraria
                                     }
                                     else
                                     {
-                                        int num4 = -1;
-                                        Tile tile7 = Main.tile[tileTargetX + num4, tileTargetY];
+                                        var num4 = -1;
+                                        var tile7 = Main.tile[tileTargetX + num4, tileTargetY];
                                         if (tile7.active() && TileID.Sets.Platforms[(int) tile7.type] &&
                                             tile7.slope() != (byte) 0)
                                         {
-                                            int num5 = (tile7.slope() == (byte) 1).ToDirectionInt() * num4;
-                                            int slope2 = num5 == -1 ? 0 : (int) tile7.slope();
-                                            bool flag7 = true;
+                                            var num5 = (tile7.slope() == (byte) 1).ToDirectionInt() * num4;
+                                            var slope2 = num5 == -1 ? 0 : (int) tile7.slope();
+                                            var flag7 = true;
                                             if (Main.tile[tileTargetX + num4 * 2, tileTargetY + num5].active() &&
                                                 TileID.Sets.Platforms[
                                                     (int) Main.tile[tileTargetX + num4 * 2, tileTargetY].type] &&
@@ -27749,7 +27749,7 @@ namespace Terraria
                                             if (flag7)
                                             {
                                                 WorldGen.SlopeTile(tileTargetX + num4, tileTargetY, slope2);
-                                                int num6 = (int) tile7.slope();
+                                                var num6 = (int) tile7.slope();
                                                 if (Main.netMode == 1)
                                                     NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                         (float) (tileTargetX + num4), (float) tileTargetY, (float) num6,
@@ -27757,15 +27757,15 @@ namespace Terraria
                                             }
                                         }
 
-                                        int num7 = 1;
-                                        int num8 = 0;
-                                        Tile tile8 = Main.tile[tileTargetX + num7, tileTargetY + num8];
+                                        var num7 = 1;
+                                        var num8 = 0;
+                                        var tile8 = Main.tile[tileTargetX + num7, tileTargetY + num8];
                                         if (tile8.active() && TileID.Sets.Platforms[(int) tile8.type] &&
                                             tile8.slope() != (byte) 0)
                                         {
-                                            int num5 = (tile8.slope() == (byte) 1).ToDirectionInt() * num7;
-                                            int slope2 = num5 == -1 ? 0 : (int) tile8.slope();
-                                            bool flag7 = true;
+                                            var num5 = (tile8.slope() == (byte) 1).ToDirectionInt() * num7;
+                                            var slope2 = num5 == -1 ? 0 : (int) tile8.slope();
+                                            var flag7 = true;
                                             if (Main.tile[tileTargetX + num7 * 2, tileTargetY + num5].active() &&
                                                 TileID.Sets.Platforms[
                                                     (int) Main.tile[tileTargetX + num7 * 2, tileTargetY].type] &&
@@ -27781,7 +27781,7 @@ namespace Terraria
                                             if (flag7)
                                             {
                                                 WorldGen.SlopeTile(tileTargetX + num7, tileTargetY, slope2);
-                                                int num6 = (int) tile8.slope();
+                                                var num6 = (int) tile8.slope();
                                                 if (Main.netMode == 1)
                                                     NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                         (float) (tileTargetX + num7), (float) tileTargetY, (float) num6,
@@ -27792,13 +27792,13 @@ namespace Terraria
                                         if (num2 == num3 &&
                                             WorldGen.PlatformProperSides(tileTargetX, tileTargetY, false) == 0)
                                         {
-                                            Tile tile9 = Main.tile[tileTargetX, tileTargetY + 1];
+                                            var tile9 = Main.tile[tileTargetX, tileTargetY + 1];
                                             if (tile9.active() && !tile9.halfBrick() &&
                                                 (tile9.slope() == (byte) 0 && Main.tileSolid[(int) tile9.type]))
                                             {
-                                                int slope2 = this.direction == 1 ? 2 : 1;
+                                                var slope2 = this.direction == 1 ? 2 : 1;
                                                 WorldGen.SlopeTile(tileTargetX, tileTargetY, slope2);
-                                                int num5 = (int) Main.tile[tileTargetX, tileTargetY].slope();
+                                                var num5 = (int) Main.tile[tileTargetX, tileTargetY].slope();
                                                 if (Main.netMode == 1)
                                                     NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                         (float) Player.tileTargetX, (float) Player.tileTargetY,
@@ -27813,8 +27813,8 @@ namespace Terraria
                                 (this.inventory[this.selectedItem].createTile < 0 ||
                                  !TileID.Sets.Platforms[this.inventory[this.selectedItem].createTile]))
                             {
-                                int tileTargetX1 = Player.tileTargetX;
-                                int j1 = Player.tileTargetY + 1;
+                                var tileTargetX1 = Player.tileTargetX;
+                                var j1 = Player.tileTargetY + 1;
                                 if (Main.tile[tileTargetX1, j1] != null &&
                                     !TileID.Sets.Platforms[(int) Main.tile[tileTargetX1, j1].type] &&
                                     (Main.tile[tileTargetX1, j1].topSlope() || Main.tile[tileTargetX1, j1].halfBrick()))
@@ -27825,8 +27825,8 @@ namespace Terraria
                                             (float) j1, 0.0f, 0, 0, 0);
                                 }
 
-                                int tileTargetX2 = Player.tileTargetX;
-                                int j2 = Player.tileTargetY - 1;
+                                var tileTargetX2 = Player.tileTargetX;
+                                var j2 = Player.tileTargetY - 1;
                                 if (Main.tile[tileTargetX2, j2] != null &&
                                     !TileID.Sets.Platforms[(int) Main.tile[tileTargetX2, j2].type] &&
                                     Main.tile[tileTargetX2, j2].bottomSlope())
@@ -27840,9 +27840,9 @@ namespace Terraria
 
                             if (Main.tileSolid[this.inventory[this.selectedItem].createTile])
                             {
-                                for (int i1 = Player.tileTargetX - 1; i1 <= Player.tileTargetX + 1; ++i1)
+                                for (var i1 = Player.tileTargetX - 1; i1 <= Player.tileTargetX + 1; ++i1)
                                 {
-                                    for (int j1 = Player.tileTargetY - 1; j1 <= Player.tileTargetY + 1; ++j1)
+                                    for (var j1 = Player.tileTargetY - 1; j1 <= Player.tileTargetY + 1; ++j1)
                                     {
                                         if (Main.tile[i1, j1].active() &&
                                             this.inventory[this.selectedItem].createTile !=
@@ -27854,10 +27854,10 @@ namespace Terraria
                                              (Main.tile[i1, j1].type == (ushort) 109 ||
                                               Main.tile[i1, j1].type == (ushort) 199)))
                                         {
-                                            bool flag6 = true;
-                                            for (int i2 = i1 - 1; i2 <= i1 + 1; ++i2)
+                                            var flag6 = true;
+                                            for (var i2 = i1 - 1; i2 <= i1 + 1; ++i2)
                                             {
-                                                for (int j2 = j1 - 1; j2 <= j1 + 1; ++j2)
+                                                for (var j2 = j1 - 1; j2 <= j1 + 1; ++j2)
                                                 {
                                                     if (!WorldGen.SolidTile(i2, j2))
                                                         flag6 = false;
@@ -27878,10 +27878,10 @@ namespace Terraria
 
                             if (this.autoPaint || this.autoActuator)
                             {
-                                int num2 = 0;
-                                int num3 = 0;
-                                int num4 = 11;
-                                int num5 = 11;
+                                var num2 = 0;
+                                var num3 = 0;
+                                var num4 = 11;
+                                var num5 = 11;
                                 if (!Main.tileFrameImportant[
                                     (int) Main.tile[Player.tileTargetX, Player.tileTargetY].type])
                                 {
@@ -27889,12 +27889,12 @@ namespace Terraria
                                     num4 = num5 = 6;
                                 }
 
-                                for (int index1 = num2; index1 < num4; ++index1)
+                                for (var index1 = num2; index1 < num4; ++index1)
                                 {
-                                    for (int index2 = num3; index2 < num5; ++index2)
+                                    for (var index2 = num3; index2 < num5; ++index2)
                                     {
-                                        int index3 = Player.tileTargetX - 5 + index1;
-                                        int index4 = Player.tileTargetY - 5 + index2;
+                                        var index3 = Player.tileTargetX - 5 + index1;
+                                        var index4 = Player.tileTargetY - 5 + index2;
                                         if ((Main.tile[index3, index4].active() || numArray[index1, index2] != -1) &&
                                             (!Main.tile[index3, index4].active() ||
                                              numArray[index1, index2] != (int) Main.tile[index3, index4].type &&
@@ -27903,9 +27903,9 @@ namespace Terraria
                                         {
                                             if (this.autoPaint && this.builderAccStatus[3] == 0)
                                             {
-                                                int num6 = -1;
-                                                int num7 = -1;
-                                                for (int index5 = 0; index5 < 58; ++index5)
+                                                var num6 = -1;
+                                                var num7 = -1;
+                                                for (var index5 = 0; index5 < 58; ++index5)
                                                 {
                                                     if (this.inventory[index5].stack > 0 &&
                                                         this.inventory[index5].paint > (byte) 0)
@@ -27919,7 +27919,7 @@ namespace Terraria
                                                 if (num6 > 0 && (int) Main.tile[index3, index4].color() != num6 &&
                                                     WorldGen.paintTile(index3, index4, (byte) num6, true))
                                                 {
-                                                    int index5 = num7;
+                                                    var index5 = num7;
                                                     --this.inventory[index5].stack;
                                                     if (this.inventory[index5].stack <= 0)
                                                         this.inventory[index5].SetDefaults(0, false);
@@ -27931,7 +27931,7 @@ namespace Terraria
 
                                             if (this.autoActuator && this.builderAccStatus[2] == 0)
                                             {
-                                                bool flag6 =
+                                                var flag6 =
                                                     Main.tileSolid[(int) Main.tile[index3, index4].type] &&
                                                     !TileID.Sets.NotReallySolid[(int) Main.tile[index3, index4].type];
                                                 switch (Main.tile[index3, index4].type)
@@ -27947,7 +27947,7 @@ namespace Terraria
 
                                                 if (flag6)
                                                 {
-                                                    int index5 = this.FindItem(849);
+                                                    var index5 = this.FindItem(849);
                                                     if (index5 > -1 && WorldGen.PlaceActuator(index3, index4))
                                                     {
                                                         NetMessage.SendData(17, -1, -1, (NetworkText) null, 8,
@@ -28023,11 +28023,11 @@ namespace Terraria
                         (float) Player.tileTargetY, (float) this.inventory[this.selectedItem].createWall, 0, 0, 0);
                 if (this.inventory[this.selectedItem].stack > 1)
                 {
-                    int createWall = this.inventory[this.selectedItem].createWall;
-                    for (int index1 = 0; index1 < 4; ++index1)
+                    var createWall = this.inventory[this.selectedItem].createWall;
+                    for (var index1 = 0; index1 < 4; ++index1)
                     {
-                        int tileTargetX = Player.tileTargetX;
-                        int tileTargetY = Player.tileTargetY;
+                        var tileTargetX = Player.tileTargetX;
+                        var tileTargetY = Player.tileTargetY;
                         if (index1 == 0)
                             --tileTargetX;
                         if (index1 == 1)
@@ -28038,11 +28038,11 @@ namespace Terraria
                             ++tileTargetY;
                         if (Main.tile[tileTargetX, tileTargetY].wall == (byte) 0)
                         {
-                            int num1 = 0;
-                            for (int index2 = 0; index2 < 4; ++index2)
+                            var num1 = 0;
+                            for (var index2 = 0; index2 < 4; ++index2)
                             {
-                                int index3 = tileTargetX;
-                                int index4 = tileTargetY;
+                                var index3 = tileTargetX;
+                                var index4 = tileTargetY;
                                 if (index2 == 0)
                                     --index3;
                                 if (index2 == 1)
@@ -28068,11 +28068,11 @@ namespace Terraria
                                             (float) tileTargetY, (float) createWall, 0, 0, 0);
                                     if (this.autoPaint && this.builderAccStatus[3] == 0)
                                     {
-                                        int x = tileTargetX;
-                                        int y = tileTargetY;
-                                        int num2 = -1;
-                                        int num3 = -1;
-                                        for (int index2 = 0; index2 < 58; ++index2)
+                                        var x = tileTargetX;
+                                        var y = tileTargetY;
+                                        var num2 = -1;
+                                        var num3 = -1;
+                                        for (var index2 = 0; index2 < 58; ++index2)
                                         {
                                             if (this.inventory[index2].stack > 0 &&
                                                 this.inventory[index2].paint > (byte) 0)
@@ -28086,7 +28086,7 @@ namespace Terraria
                                         if (num2 > 0 && (int) Main.tile[x, y].wallColor() != num2 &&
                                             WorldGen.paintWall(x, y, (byte) num2, true))
                                         {
-                                            int index2 = num3;
+                                            var index2 = num3;
                                             --this.inventory[index2].stack;
                                             if (this.inventory[index2].stack <= 0)
                                                 this.inventory[index2].SetDefaults(0, false);
@@ -28103,11 +28103,11 @@ namespace Terraria
 
                 if (!this.autoPaint || this.builderAccStatus[3] != 0)
                     return;
-                int tileTargetX1 = Player.tileTargetX;
-                int tileTargetY1 = Player.tileTargetY;
-                int num4 = -1;
-                int num5 = -1;
-                for (int index = 0; index < 58; ++index)
+                var tileTargetX1 = Player.tileTargetX;
+                var tileTargetY1 = Player.tileTargetY;
+                var num4 = -1;
+                var num5 = -1;
+                for (var index = 0; index < 58; ++index)
                 {
                     if (this.inventory[index].stack > 0 && this.inventory[index].paint > (byte) 0)
                     {
@@ -28120,7 +28120,7 @@ namespace Terraria
                 if (num4 <= 0 || (int) Main.tile[tileTargetX1, tileTargetY1].wallColor() == num4 ||
                     !WorldGen.paintWall(tileTargetX1, tileTargetY1, (byte) num4, true))
                     return;
-                int index5 = num5;
+                var index5 = num5;
                 --this.inventory[index5].stack;
                 if (this.inventory[index5].stack <= 0)
                     this.inventory[index5].SetDefaults(0, false);
@@ -28130,7 +28130,7 @@ namespace Terraria
 
         private void ShootFromCannon(int x, int y)
         {
-            int ammo = 0;
+            var ammo = 0;
             if (Main.tile[x, y].frameX < (short) 72)
             {
                 if (this.inventory[this.selectedItem].type == 929)
@@ -28149,34 +28149,34 @@ namespace Terraria
             this.showItemIcon = true;
             if (this.itemTime != 0 || this.itemAnimation <= 0 || !this.controlUseItem)
                 return;
-            int num1 = (int) Main.tile[x, y].frameX / 18;
-            int num2 = 0;
-            int angle = 0;
+            var num1 = (int) Main.tile[x, y].frameX / 18;
+            var num2 = 0;
+            var angle = 0;
             while (num1 >= 4)
             {
                 ++num2;
                 num1 -= 4;
             }
 
-            int x1 = x - num1;
-            int num3 = (int) Main.tile[x, y].frameY / 18;
+            var x1 = x - num1;
+            var num3 = (int) Main.tile[x, y].frameY / 18;
             while (num3 >= 3)
             {
                 ++angle;
                 num3 -= 3;
             }
 
-            int y1 = y - num3;
+            var y1 = y - num3;
             this.itemTime = this.inventory[this.selectedItem].useTime;
             WorldGen.ShootFromCannon(x1, y1, angle, ammo, this.inventory[this.selectedItem].damage, 8f, Main.myPlayer);
         }
 
         private static void ExtractinatorUse(int extractType)
         {
-            int maxValue1 = 5000;
-            int maxValue2 = 25;
-            int maxValue3 = 50;
-            int maxValue4 = -1;
+            var maxValue1 = 5000;
+            var maxValue2 = 25;
+            var maxValue3 = 50;
+            var maxValue4 = -1;
             if (extractType == 1)
             {
                 maxValue1 /= 3;
@@ -28185,7 +28185,7 @@ namespace Terraria
                 maxValue4 = 10;
             }
 
-            int Stack = 1;
+            var Stack = 1;
             int Type;
             if (maxValue4 != -1 && Main.rand.Next(maxValue4) == 0)
             {
@@ -28398,8 +28398,8 @@ namespace Terraria
 
             if (Type <= 0)
                 return;
-            Vector2 vector2 = Main.ReverseGravitySupport(Main.MouseScreen, 0.0f) + Main.screenPosition;
-            int number = Item.NewItem((int) vector2.X, (int) vector2.Y, 1, 1, Type, Stack, false, -1, false, false);
+            var vector2 = Main.ReverseGravitySupport(Main.MouseScreen, 0.0f) + Main.screenPosition;
+            var number = Item.NewItem((int) vector2.X, (int) vector2.Y, 1, 1, Type, Stack, false, -1, false, false);
             if (Main.netMode != 1)
                 return;
             NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -28415,7 +28415,7 @@ namespace Terraria
             {
                 if (this.pulleyDir == (byte) 2 && dir == this.direction)
                     return;
-                int num = (int) ((double) this.position.X + (double) (this.width / 2)) / 16 * 16 + 8 - this.width / 2;
+                var num = (int) ((double) this.position.X + (double) (this.width / 2)) / 16 * 16 + 8 - this.width / 2;
                 if (Collision.SolidCollision(new Vector2((float) num, this.position.Y), this.width, this.height))
                     return;
                 if (this.whoAmI == Main.myPlayer)
@@ -28434,35 +28434,35 @@ namespace Terraria
 
         private void pumpkinSword(int i, int dmg, float kb)
         {
-            int checkScreenHeight = Main.LogicCheckScreenHeight;
-            int checkScreenWidth = Main.LogicCheckScreenWidth;
-            int num1 = Main.rand.Next(100, 300);
-            int num2 = Main.rand.Next(100, 300);
-            int num3 = Main.rand.Next(2) != 0
+            var checkScreenHeight = Main.LogicCheckScreenHeight;
+            var checkScreenWidth = Main.LogicCheckScreenWidth;
+            var num1 = Main.rand.Next(100, 300);
+            var num2 = Main.rand.Next(100, 300);
+            var num3 = Main.rand.Next(2) != 0
                 ? num1 + (checkScreenWidth / 2 - num1)
                 : num1 - (checkScreenWidth / 2 + num1);
-            int num4 = Main.rand.Next(2) != 0
+            var num4 = Main.rand.Next(2) != 0
                 ? num2 + (checkScreenHeight / 2 - num2)
                 : num2 - (checkScreenHeight / 2 + num2);
-            int num5 = num3 + (int) this.position.X;
-            int num6 = num4 + (int) this.position.Y;
-            float num7 = 8f;
-            Vector2 vector2 = new Vector2((float) num5, (float) num6);
-            float num8 = Main.npc[i].position.X - vector2.X;
-            float num9 = Main.npc[i].position.Y - vector2.Y;
-            float num10 = (float) Math.Sqrt((double) num8 * (double) num8 + (double) num9 * (double) num9);
-            float num11 = num7 / num10;
-            float SpeedX = num8 * num11;
-            float SpeedY = num9 * num11;
+            var num5 = num3 + (int) this.position.X;
+            var num6 = num4 + (int) this.position.Y;
+            var num7 = 8f;
+            var vector2 = new Vector2((float) num5, (float) num6);
+            var num8 = Main.npc[i].position.X - vector2.X;
+            var num9 = Main.npc[i].position.Y - vector2.Y;
+            var num10 = (float) Math.Sqrt((double) num8 * (double) num8 + (double) num9 * (double) num9);
+            var num11 = num7 / num10;
+            var SpeedX = num8 * num11;
+            var SpeedY = num9 * num11;
             Projectile.NewProjectile((float) num5, (float) num6, SpeedX, SpeedY, 321, dmg, kb, this.whoAmI, (float) i,
                 0.0f);
         }
 
         public void PutItemInInventory(int type, int selItem = -1)
         {
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
-                Item obj = this.inventory[index];
+                var obj = this.inventory[index];
                 if (obj.stack > 0 && obj.type == type && obj.stack < obj.maxStack)
                 {
                     ++obj.stack;
@@ -28476,11 +28476,11 @@ namespace Terraria
             }
             else
             {
-                Item newItem = new Item();
+                var newItem = new Item();
                 newItem.SetDefaults(type, false);
                 if (this.GetItem(this.whoAmI, newItem, false, false).stack > 0)
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         type, 1, false, 0, true, false);
                     if (Main.netMode != 1)
                         return;
@@ -28498,7 +28498,7 @@ namespace Terraria
 
         public bool SummonItemCheck()
         {
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.npc[index].active &&
                     (this.inventory[this.selectedItem].type == 43 && Main.npc[index].type == 4 ||
@@ -28518,18 +28518,18 @@ namespace Terraria
 
         public int FishingLevel()
         {
-            int num1 = 0;
-            int fishingPole = this.inventory[this.selectedItem].fishingPole;
+            var num1 = 0;
+            var fishingPole = this.inventory[this.selectedItem].fishingPole;
             if (fishingPole == 0)
             {
-                for (int index = 0; index < 58; ++index)
+                for (var index = 0; index < 58; ++index)
                 {
                     if (this.inventory[index].fishingPole > fishingPole)
                         fishingPole = this.inventory[index].fishingPole;
                 }
             }
 
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
                 if (this.inventory[index].stack > 0 && this.inventory[index].bait > 0)
                 {
@@ -28542,7 +28542,7 @@ namespace Terraria
 
             if (num1 == 0 || fishingPole == 0)
                 return 0;
-            int num2 = num1 + fishingPole + this.fishingSkill;
+            var num2 = num1 + fishingPole + this.fishingSkill;
             if (Main.raining)
                 num2 = (int) ((double) num2 * 1.20000004768372);
             if ((double) Main.cloudBGAlpha > 0.0)
@@ -28566,7 +28566,7 @@ namespace Terraria
 
         public bool HasUnityPotion()
         {
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
                 if (this.inventory[index].type == 2997 && this.inventory[index].stack > 0)
                     return true;
@@ -28577,7 +28577,7 @@ namespace Terraria
 
         public void TakeUnityPotion()
         {
-            for (int index = 0; index < 400; ++index)
+            for (var index = 0; index < 400; ++index)
             {
                 if (this.inventory[index].type == 2997 && this.inventory[index].stack > 0)
                 {
@@ -28592,7 +28592,7 @@ namespace Terraria
 
         public void UnityTeleport(Vector2 telePos)
         {
-            int num = 3;
+            var num = 3;
             if (Main.netMode == 0)
                 this.Teleport(telePos, num, 0);
             else
@@ -28602,8 +28602,8 @@ namespace Terraria
 
         private void PayDD2CrystalsBeforeUse(Item item)
         {
-            int dd2CrystalsToUse = this.GetRequiredDD2CrystalsToUse(item);
-            for (int index = 0; index < dd2CrystalsToUse; ++index)
+            var dd2CrystalsToUse = this.GetRequiredDD2CrystalsToUse(item);
+            for (var index = 0; index < dd2CrystalsToUse; ++index)
                 this.ConsumeItem(3822, true);
         }
 
@@ -28611,7 +28611,7 @@ namespace Terraria
         {
             if (!DD2Event.Ongoing)
                 return true;
-            int dd2CrystalsToUse = this.GetRequiredDD2CrystalsToUse(item);
+            var dd2CrystalsToUse = this.GetRequiredDD2CrystalsToUse(item);
             return this.CountItem(3822, dd2CrystalsToUse) >= dd2CrystalsToUse;
         }
 
@@ -28642,12 +28642,12 @@ namespace Terraria
 
         public void SporeSac()
         {
-            int Damage = 70;
-            float KnockBack = 1.5f;
+            var Damage = 70;
+            var KnockBack = 1.5f;
             if (Main.rand.Next(15) != 0)
                 return;
-            int num1 = 0;
-            for (int index = 0; index < 1000; ++index)
+            var num1 = 0;
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.projectile[index].active && Main.projectile[index].owner == this.whoAmI &&
                     (Main.projectile[index].type == 567 || Main.projectile[index].type == 568))
@@ -28656,13 +28656,13 @@ namespace Terraria
 
             if (Main.rand.Next(15) < num1 || num1 >= 10)
                 return;
-            int num2 = 50;
-            int num3 = 24;
-            int num4 = 90;
-            for (int index1 = 0; index1 < num2; ++index1)
+            var num2 = 50;
+            var num3 = 24;
+            var num4 = 90;
+            for (var index1 = 0; index1 < num2; ++index1)
             {
-                int num5 = Main.rand.Next(200 - index1 * 2, 400 + index1 * 2);
-                Vector2 center = this.Center;
+                var num5 = Main.rand.Next(200 - index1 * 2, 400 + index1 * 2);
+                var center = this.Center;
                 center.X += (float) Main.rand.Next(-num5, num5 + 1);
                 center.Y += (float) Main.rand.Next(-num5, num5 + 1);
                 if (!Collision.SolidCollision(center, num3, num3) && !Collision.WetCollision(center, num3, num3))
@@ -28672,9 +28672,9 @@ namespace Terraria
                     if (Collision.CanHit(new Vector2(this.Center.X, this.position.Y), 1, 1, center, 1, 1) ||
                         Collision.CanHit(new Vector2(this.Center.X, this.position.Y - 50f), 1, 1, center, 1, 1))
                     {
-                        int index2 = (int) center.X / 16;
-                        int index3 = (int) center.Y / 16;
-                        bool flag = false;
+                        var index2 = (int) center.X / 16;
+                        var index3 = (int) center.Y / 16;
+                        var flag = false;
                         if (Main.rand.Next(3) == 0 && Main.tile[index2, index3] != null &&
                             Main.tile[index2, index3].wall > (byte) 0)
                         {
@@ -28694,7 +28694,7 @@ namespace Terraria
 
                         if (flag)
                         {
-                            for (int index4 = 0; index4 < 1000; ++index4)
+                            for (var index4 = 0; index4 < 1000; ++index4)
                             {
                                 if (Main.projectile[index4].active && Main.projectile[index4].owner == this.whoAmI &&
                                     Main.projectile[index4].aiStyle == 105 &&
@@ -28735,9 +28735,9 @@ namespace Terraria
         {
             if (this.webbed || this.frozen || this.stoned)
                 return;
-            bool flag1 = false;
-            float playerOffsetHitbox = (float) this.mount.PlayerOffsetHitbox;
-            Item sItem = this.inventory[this.selectedItem];
+            var flag1 = false;
+            var playerOffsetHitbox = (float) this.mount.PlayerOffsetHitbox;
+            var sItem = this.inventory[this.selectedItem];
             if (this.mount.Active)
             {
                 if (this.mount.Type == 8)
@@ -28756,7 +28756,7 @@ namespace Terraria
                     this.mount.Dismount(this);
             }
 
-            int weaponDamage = this.GetWeaponDamage(sItem);
+            var weaponDamage = this.GetWeaponDamage(sItem);
             if (sItem.autoReuse && !this.noItems)
             {
                 this.releaseUseItem = true;
@@ -28778,7 +28778,7 @@ namespace Terraria
                 sItem.holdStyle = 0;
                 if (this.itemTime == 0 && this.itemAnimation == 0)
                 {
-                    for (int index = 0; index < 1000; ++index)
+                    for (var index = 0; index < 1000; ++index)
                     {
                         if (Main.projectile[index].active && Main.projectile[index].owner == this.whoAmI &&
                             Main.projectile[index].bobber)
@@ -28808,14 +28808,14 @@ namespace Terraria
                      ((double) this.position.Y + (double) this.height) / 16.0 + (double) Player.tileRangeY +
                      (double) sItem.tileBoost - 2.0 >= (double) Player.tileTargetY))
                 {
-                    int tileTargetX = Player.tileTargetX;
-                    int tileTargetY = Player.tileTargetY;
+                    var tileTargetX = Player.tileTargetX;
+                    var tileTargetY = Player.tileTargetY;
                     if (Main.tile[tileTargetX, tileTargetY].active() &&
                         (Main.tile[tileTargetX, tileTargetY].type == (ushort) 128 ||
                          Main.tile[tileTargetX, tileTargetY].type == (ushort) 269))
                     {
-                        int frameY = (int) Main.tile[tileTargetX, tileTargetY].frameY;
-                        int num1 = 0;
+                        var frameY = (int) Main.tile[tileTargetX, tileTargetY].frameY;
+                        var num1 = 0;
                         if (sItem.bodySlot >= 0)
                             num1 = 1;
                         if (sItem.legSlot >= 0)
@@ -28827,13 +28827,13 @@ namespace Terraria
                             ++tileTargetY;
                         for (; num1 < num2; num2 = (int) Main.tile[tileTargetX, tileTargetY].frameY / 18)
                             --tileTargetY;
-                        int frameX1 = (int) Main.tile[tileTargetX, tileTargetY].frameX;
+                        var frameX1 = (int) Main.tile[tileTargetX, tileTargetY].frameX;
                         while (frameX1 >= 100)
                             frameX1 -= 100;
                         if (frameX1 >= 36)
                             frameX1 -= 36;
-                        int index = tileTargetX - frameX1 / 18;
-                        int frameX2 = (int) Main.tile[index, tileTargetY].frameX;
+                        var index = tileTargetX - frameX1 / 18;
+                        var frameX2 = (int) Main.tile[index, tileTargetY].frameX;
                         WorldGen.KillTile(index, tileTargetY, true, false, false);
                         if (Main.netMode == 1)
                             NetMessage.SendData(17, -1, -1, (NetworkText) null, 0, (float) index, (float) tileTargetY,
@@ -28913,7 +28913,7 @@ namespace Terraria
             {
                 if (this.altFunctionUse == 1)
                     this.altFunctionUse = 2;
-                bool canUse = true;
+                var canUse = true;
                 if (sItem.shoot == 0)
                     this.itemRotation = 0.0f;
                 if (sItem.type == 3335 && (this.extraAccessory || !Main.expertMode))
@@ -28964,8 +28964,8 @@ namespace Terraria
                     canUse = false;
                 if (sItem.type == 1071 || sItem.type == 1072)
                 {
-                    bool flag2 = false;
-                    for (int index = 0; index < 58; ++index)
+                    var flag2 = false;
+                    for (var index = 0; index < 58; ++index)
                     {
                         if (this.inventory[index].paint > (byte) 0)
                         {
@@ -28982,9 +28982,9 @@ namespace Terraria
                     canUse = false;
                 if (sItem.tileWand > 0)
                 {
-                    int tileWand = sItem.tileWand;
+                    var tileWand = sItem.tileWand;
                     canUse = false;
-                    for (int index = 0; index < 58; ++index)
+                    for (var index = 0; index < 58; ++index)
                     {
                         if (tileWand == this.inventory[index].type && this.inventory[index].stack > 0)
                         {
@@ -28996,7 +28996,7 @@ namespace Terraria
 
                 if (sItem.fishingPole > 0)
                 {
-                    for (int index1 = 0; index1 < 1000; ++index1)
+                    for (var index1 = 0; index1 < 1000; ++index1)
                     {
                         if (Main.projectile[index1].active && Main.projectile[index1].owner == this.whoAmI &&
                             Main.projectile[index1].bobber)
@@ -29005,7 +29005,7 @@ namespace Terraria
                             if (this.whoAmI == Main.myPlayer && (double) Main.projectile[index1].ai[0] == 0.0)
                             {
                                 Main.projectile[index1].ai[0] = 1f;
-                                float num1 = -10f;
+                                var num1 = -10f;
                                 if (Main.projectile[index1].wet &&
                                     (double) Main.projectile[index1].velocity.Y > (double) num1)
                                     Main.projectile[index1].velocity.Y = num1;
@@ -29013,14 +29013,14 @@ namespace Terraria
                                 if ((double) Main.projectile[index1].ai[1] < 0.0 &&
                                     (double) Main.projectile[index1].localAI[1] != 0.0)
                                 {
-                                    bool flag2 = false;
-                                    int num2 = 0;
-                                    for (int index2 = 0; index2 < 58; ++index2)
+                                    var flag2 = false;
+                                    var num2 = 0;
+                                    for (var index2 = 0; index2 < 58; ++index2)
                                     {
                                         if (this.inventory[index2].stack > 0 && this.inventory[index2].bait > 0)
                                         {
-                                            bool flag3 = false;
-                                            int maxValue = 1 + this.inventory[index2].bait / 5;
+                                            var flag3 = false;
+                                            var maxValue = 1 + this.inventory[index2].bait / 5;
                                             if (maxValue < 1)
                                                 maxValue = 1;
                                             if (this.accTackleBox)
@@ -29031,7 +29031,7 @@ namespace Terraria
                                                 flag3 = true;
                                             if ((double) Main.projectile[index1].localAI[1] > 0.0)
                                             {
-                                                Item obj = new Item();
+                                                var obj = new Item();
                                                 obj.SetDefaults((int) Main.projectile[index1].localAI[1], false);
                                                 if (obj.rare < 0)
                                                     flag3 = false;
@@ -29078,7 +29078,7 @@ namespace Terraria
                     (sItem.shoot == 113 || sItem.shoot == 320 || (sItem.shoot == 333 || sItem.shoot == 383)) ||
                     sItem.shoot == 491)
                 {
-                    for (int index = 0; index < 1000; ++index)
+                    for (var index = 0; index < 1000; ++index)
                     {
                         if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                             Main.projectile[index].type == sItem.shoot)
@@ -29088,8 +29088,8 @@ namespace Terraria
 
                 if (sItem.shoot == 106)
                 {
-                    int num = 0;
-                    for (int index = 0; index < 1000; ++index)
+                    var num = 0;
+                    for (var index = 0; index < 1000; ++index)
                     {
                         if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                             Main.projectile[index].type == sItem.shoot)
@@ -29102,8 +29102,8 @@ namespace Terraria
 
                 if (sItem.shoot == 272)
                 {
-                    int num = 0;
-                    for (int index = 0; index < 1000; ++index)
+                    var num = 0;
+                    for (var index = 0; index < 1000; ++index)
                     {
                         if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                             Main.projectile[index].type == sItem.shoot)
@@ -29117,7 +29117,7 @@ namespace Terraria
                 if (sItem.shoot == 13 || sItem.shoot == 32 || sItem.shoot >= 230 && sItem.shoot <= 235 ||
                     (sItem.shoot == 315 || sItem.shoot == 331 || sItem.shoot == 372))
                 {
-                    for (int index = 0; index < 1000; ++index)
+                    for (var index = 0; index < 1000; ++index)
                     {
                         if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                             (Main.projectile[index].type == sItem.shoot &&
@@ -29128,8 +29128,8 @@ namespace Terraria
 
                 if (sItem.shoot == 332)
                 {
-                    int num = 0;
-                    for (int index = 0; index < 1000; ++index)
+                    var num = 0;
+                    for (var index = 0; index < 1000; ++index)
                     {
                         if (Main.projectile[index].active && Main.projectile[index].owner == Main.myPlayer &&
                             (Main.projectile[index].type == sItem.shoot &&
@@ -29164,7 +29164,7 @@ namespace Terraria
                     canUse = false;
                 if (sItem.mana > 0 && canUse)
                 {
-                    bool flag2 = false;
+                    var flag2 = false;
                     if (sItem.type == 2795)
                         flag2 = true;
                     if (sItem.shoot > 0 && ProjectileID.Sets.TurretFeature[sItem.shoot] && this.altFunctionUse == 2)
@@ -29229,12 +29229,12 @@ namespace Terraria
                     canUse = false;
                 if (sItem.shoot == 17 && canUse && i == Main.myPlayer)
                 {
-                    int i1 = (int) ((double) Main.mouseX + (double) Main.screenPosition.X) / 16;
-                    int j = (int) ((double) Main.mouseY + (double) Main.screenPosition.Y) / 16;
+                    var i1 = (int) ((double) Main.mouseX + (double) Main.screenPosition.X) / 16;
+                    var j = (int) ((double) Main.mouseY + (double) Main.screenPosition.Y) / 16;
                     if ((double) this.gravDir == -1.0)
                         j = (int) ((double) Main.screenPosition.Y + (double) Main.screenHeight - (double) Main.mouseY) /
                             16;
-                    Tile tile = Main.tile[i1, j];
+                    var tile = Main.tile[i1, j];
                     if (tile.active() && (tile.type == (ushort) 0 || tile.type == (ushort) 2 ||
                                           (tile.type == (ushort) 23 || tile.type == (ushort) 109) ||
                                           tile.type == (ushort) 199))
@@ -29282,9 +29282,9 @@ namespace Terraria
                 {
                     if (ProjectileID.Sets.MinionSacrificable[sItem.shoot])
                     {
-                        List<int> intList = new List<int>();
-                        float num1 = 0.0f;
-                        for (int index1 = 0; index1 < 1000; ++index1)
+                        var intList = new List<int>();
+                        var num1 = 0.0f;
+                        for (var index1 = 0; index1 < 1000; ++index1)
                         {
                             if (Main.projectile[index1].active && Main.projectile[index1].owner == i &&
                                 Main.projectile[index1].minion)
@@ -29306,13 +29306,13 @@ namespace Terraria
                             }
                         }
 
-                        float num2 = (float) ItemID.Sets.StaffMinionSlotsRequired[sItem.type];
-                        float num3 = 0.0f;
-                        int num4 = 388;
-                        int index3 = -1;
-                        for (int index1 = 0; index1 < intList.Count; ++index1)
+                        var num2 = (float) ItemID.Sets.StaffMinionSlotsRequired[sItem.type];
+                        var num3 = 0.0f;
+                        var num4 = 388;
+                        var index3 = -1;
+                        for (var index1 = 0; index1 < intList.Count; ++index1)
                         {
-                            int type = Main.projectile[intList[index1]].type;
+                            var type = Main.projectile[intList[index1]].type;
                             if (type == 626)
                             {
                                 intList.RemoveAt(index1);
@@ -29335,12 +29335,12 @@ namespace Terraria
                                 Main.projectile[index3].ai[0]));
                         }
 
-                        for (int index1 = 0;
+                        for (var index1 = 0;
                             index1 < intList.Count &&
                             (double) num1 - (double) num3 > (double) this.maxMinions - (double) num2;
                             ++index1)
                         {
-                            int type = Main.projectile[intList[index1]].type;
+                            var type = Main.projectile[intList[index1]].type;
                             if (type != num4 && type != 625 && (type != 628 && type != 623))
                             {
                                 if (type == 388 && num4 == 387)
@@ -29350,14 +29350,14 @@ namespace Terraria
                                 num3 += Main.projectile[intList[index1]].minionSlots;
                                 if (type == 626 || type == 627)
                                 {
-                                    int byUuid = Projectile.GetByUUID(Main.projectile[intList[index1]].owner,
+                                    var byUuid = Projectile.GetByUUID(Main.projectile[intList[index1]].owner,
                                         Main.projectile[intList[index1]].ai[0]);
                                     if (byUuid >= 0)
                                     {
-                                        Projectile projectile1 = Main.projectile[byUuid];
+                                        var projectile1 = Main.projectile[byUuid];
                                         if (projectile1.type != 625)
                                             projectile1.localAI[1] = Main.projectile[intList[index1]].localAI[1];
-                                        Projectile projectile2 =
+                                        var projectile2 =
                                             Main.projectile[(int) Main.projectile[intList[index1]].localAI[1]];
                                         projectile2.ai[0] = Main.projectile[intList[index1]].ai[0];
                                         projectile2.ai[1] = 1f;
@@ -29375,7 +29375,7 @@ namespace Terraria
                     }
                     else
                     {
-                        for (int index = 0; index < 1000; ++index)
+                        for (var index = 0; index < 1000; ++index)
                         {
                             if (Main.projectile[index].active && Main.projectile[index].owner == i &&
                                 Main.projectile[index].type == sItem.shoot)
@@ -29396,7 +29396,7 @@ namespace Terraria
 
             if (!this.controlUseItem)
             {
-                int num = this.channel ? 1 : 0;
+                var num = this.channel ? 1 : 0;
                 this.channel = false;
             }
 
@@ -29427,7 +29427,7 @@ namespace Terraria
                         {
                             if ((double) this.itemAnimation < (double) this.itemAnimationMax * 0.333)
                             {
-                                float num = 10f;
+                                var num = 10f;
                                 this.itemLocation.X =
                                     (float) ((double) this.position.X + (double) this.width * 0.5 +
                                              ((double) Main.itemTexture[sItem.type].Width * 0.5 - (double) num) *
@@ -29436,7 +29436,7 @@ namespace Terraria
                             }
                             else if ((double) this.itemAnimation < (double) this.itemAnimationMax * 0.666)
                             {
-                                float num = 8f;
+                                var num = 8f;
                                 this.itemLocation.X =
                                     (float) ((double) this.position.X + (double) this.width * 0.5 +
                                              ((double) Main.itemTexture[sItem.type].Width * 0.5 - (double) num) *
@@ -29445,7 +29445,7 @@ namespace Terraria
                             }
                             else
                             {
-                                float num = 6f;
+                                var num = 6f;
                                 this.itemLocation.X =
                                     (float) ((double) this.position.X + (double) this.width * 0.5 -
                                              ((double) Main.itemTexture[sItem.type].Width * 0.5 - (double) num) *
@@ -29461,7 +29461,7 @@ namespace Terraria
                         {
                             if ((double) this.itemAnimation < (double) this.itemAnimationMax * 0.333)
                             {
-                                float num = 10f;
+                                var num = 10f;
                                 if (Main.itemTexture[sItem.type].Width > 32)
                                     num = 14f;
                                 if (Main.itemTexture[sItem.type].Width >= 52)
@@ -29480,7 +29480,7 @@ namespace Terraria
                             }
                             else if ((double) this.itemAnimation < (double) this.itemAnimationMax * 0.666)
                             {
-                                float num1 = 10f;
+                                var num1 = 10f;
                                 if (Main.itemTexture[sItem.type].Width > 32)
                                     num1 = 18f;
                                 if (Main.itemTexture[sItem.type].Width >= 52)
@@ -29495,7 +29495,7 @@ namespace Terraria
                                     (float) ((double) this.position.X + (double) this.width * 0.5 +
                                              ((double) Main.itemTexture[sItem.type].Width * 0.5 - (double) num1) *
                                              (double) this.direction);
-                                float num2 = 10f;
+                                var num2 = 10f;
                                 if (Main.itemTexture[sItem.type].Height > 32)
                                     num2 = 8f;
                                 if (Main.itemTexture[sItem.type].Height > 52)
@@ -29508,7 +29508,7 @@ namespace Terraria
                             }
                             else
                             {
-                                float num1 = 6f;
+                                var num1 = 6f;
                                 if (Main.itemTexture[sItem.type].Width > 32)
                                     num1 = 14f;
                                 if (Main.itemTexture[sItem.type].Width >= 48)
@@ -29525,7 +29525,7 @@ namespace Terraria
                                     (float) ((double) this.position.X + (double) this.width * 0.5 -
                                              ((double) Main.itemTexture[sItem.type].Width * 0.5 - (double) num1) *
                                              (double) this.direction);
-                                float num2 = 10f;
+                                var num2 = 10f;
                                 if (Main.itemTexture[sItem.type].Height > 32)
                                     num2 = 10f;
                                 if (Main.itemTexture[sItem.type].Height > 52)
@@ -29600,7 +29600,7 @@ namespace Terraria
                                          ((double) Main.itemTexture[sItem.type].Width * 0.5 - 4.0) *
                                          (double) this.direction);
                             this.itemLocation.Y = this.position.Y + 24f + playerOffsetHitbox;
-                            float num = (float) ((double) this.itemAnimation / (double) this.itemAnimationMax *
+                            var num = (float) ((double) this.itemAnimation / (double) this.itemAnimationMax *
                                                  (double) Main.itemTexture[sItem.type].Width * (double) this.direction *
                                                  (double) sItem.scale * 1.20000004768372) -
                                         (float) (10 * this.direction);
@@ -29622,7 +29622,7 @@ namespace Terraria
                     }
                     else if (sItem.useStyle == 4)
                     {
-                        int num = 0;
+                        var num = 0;
                         if (sItem.type == 3601)
                             num = 10;
                         this.itemRotation = 0.0f;
@@ -29651,7 +29651,7 @@ namespace Terraria
                         }
                         else if (Item.staff[sItem.type])
                         {
-                            float num = 6f;
+                            var num = 6f;
                             if (sItem.type == 3476)
                                 num = 14f;
                             this.itemLocation = this.MountedCenter;
@@ -29678,15 +29678,15 @@ namespace Terraria
                 {
                     this.itemLocation.X = (float) ((double) this.position.X + (double) (this.width / 2) * 0.5 - 12.0) -
                                           (float) (2 * this.direction);
-                    float x = this.position.X + (float) (this.width / 2) + (float) (38 * this.direction);
+                    var x = this.position.X + (float) (this.width / 2) + (float) (38 * this.direction);
                     if (this.direction == 1)
                         x -= 10f;
-                    float y = this.MountedCenter.Y - 4f * this.gravDir;
+                    var y = this.MountedCenter.Y - 4f * this.gravDir;
                     if ((double) this.gravDir == -1.0)
                         y -= 8f;
                     this.RotateRelativePoint(ref x, ref y);
-                    int Type = 0;
-                    for (int index = 54; index < 58; ++index)
+                    var Type = 0;
+                    for (var index = 54; index < 58; ++index)
                     {
                         if (this.inventory[index].stack > 0 && this.inventory[index].ammo == 931)
                         {
@@ -29697,7 +29697,7 @@ namespace Terraria
 
                     if (Type == 0)
                     {
-                        for (int index = 0; index < 54; ++index)
+                        for (var index = 0; index < 54; ++index)
                         {
                             if (this.inventory[index].stack > 0 && this.inventory[index].ammo == 931)
                             {
@@ -29713,7 +29713,7 @@ namespace Terraria
                         Type = 187;
                     if (Type > 0)
                     {
-                        int index = Dust.NewDust(new Vector2(x, y + this.gfxOffY), 6, 6, Type, 0.0f, 0.0f, 100,
+                        var index = Dust.NewDust(new Vector2(x, y + this.gfxOffY), 6, 6, Type, 0.0f, 0.0f, 100,
                             new Color(), 1.6f);
                         Main.dust[index].noGravity = true;
                         Main.dust[index].velocity.Y -= 4f * this.gravDir;
@@ -29724,9 +29724,9 @@ namespace Terraria
                     this.itemLocation.X = this.position.X + (float) this.width * 0.5f + (float) (8 * this.direction);
                     if (this.whoAmI == Main.myPlayer)
                     {
-                        int index1 = (int) ((double) this.itemLocation.X + (double) Main.itemTexture[sItem.type].Width *
+                        var index1 = (int) ((double) this.itemLocation.X + (double) Main.itemTexture[sItem.type].Width *
                                             0.800000011920929 * (double) this.direction) / 16;
-                        int index2 = (int) ((double) this.itemLocation.Y + (double) playerOffsetHitbox +
+                        var index2 = (int) ((double) this.itemLocation.Y + (double) playerOffsetHitbox +
                                             (double) (Main.itemTexture[sItem.type].Height / 2)) / 16;
                         if (Main.tile[index1, index2] == null)
                             Main.tile[index1, index2] = new Tile();
@@ -29742,7 +29742,7 @@ namespace Terraria
                                 sItem.SetDefaults(969, false);
                                 if (this.selectedItem == 58)
                                     Main.mouseItem.SetDefaults(969, false);
-                                for (int index3 = 0; index3 < 58; ++index3)
+                                for (var index3 = 0; index3 < 58; ++index3)
                                 {
                                     if (this.inventory[index3].type == sItem.type && index3 != this.selectedItem &&
                                         this.inventory[index3].stack < this.inventory[index3].maxStack)
@@ -29865,10 +29865,10 @@ namespace Terraria
                   sItem.type >= 427 && sItem.type <= 433) && !this.wet || (sItem.type == 523 || sItem.type == 1333)) &&
                 !this.pulley)
             {
-                float R = 1f;
-                float G = 0.95f;
-                float B = 0.8f;
-                int num1 = 0;
+                var R = 1f;
+                var G = 0.95f;
+                var B = 0.8f;
+                var num1 = 0;
                 if (sItem.type == 523)
                     num1 = 8;
                 else if (sItem.type == 974)
@@ -29966,7 +29966,7 @@ namespace Terraria
                         break;
                 }
 
-                int num2 = num1;
+                var num2 = num1;
                 int Type;
                 switch (num2)
                 {
@@ -30002,14 +30002,14 @@ namespace Terraria
                         break;
                 }
 
-                int maxValue = 30;
+                var maxValue = 30;
                 if (this.itemAnimation > 0)
                     maxValue = 7;
                 if (this.direction == -1)
                 {
                     if (Main.rand.Next(maxValue) == 0)
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.itemLocation.X - 16f, this.itemLocation.Y - 14f * this.gravDir), 4, 4,
                             Type, 0.0f, 0.0f, 100, new Color(), 1f);
                         if (Main.rand.Next(3) != 0)
@@ -30033,7 +30033,7 @@ namespace Terraria
                 {
                     if (Main.rand.Next(maxValue) == 0)
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.itemLocation.X + 6f, this.itemLocation.Y - 14f * this.gravDir), 4, 4, Type,
                             0.0f, 0.0f, 100, new Color(), 1f);
                         if (Main.rand.Next(3) != 0)
@@ -30057,14 +30057,14 @@ namespace Terraria
 
             if ((sItem.type == 105 || sItem.type == 713) && (!this.wet && !this.pulley))
             {
-                int maxValue = 20;
+                var maxValue = 20;
                 if (this.itemAnimation > 0)
                     maxValue = 7;
                 if (this.direction == -1)
                 {
                     if (Main.rand.Next(maxValue) == 0)
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.itemLocation.X - 12f, this.itemLocation.Y - 20f * this.gravDir), 4, 4, 6,
                             0.0f, 0.0f, 100, new Color(), 1f);
                         if (Main.rand.Next(3) != 0)
@@ -30083,7 +30083,7 @@ namespace Terraria
                 {
                     if (Main.rand.Next(maxValue) == 0)
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.itemLocation.X + 4f, this.itemLocation.Y - 20f * this.gravDir), 4, 4, 6,
                             0.0f, 0.0f, 100, new Color(), 1f);
                         if (Main.rand.Next(3) != 0)
@@ -30101,14 +30101,14 @@ namespace Terraria
             }
             else if (sItem.type == 148 && !this.wet)
             {
-                int maxValue = 10;
+                var maxValue = 10;
                 if (this.itemAnimation > 0)
                     maxValue = 7;
                 if (this.direction == -1)
                 {
                     if (Main.rand.Next(maxValue) == 0)
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.itemLocation.X - 12f, this.itemLocation.Y - 20f * this.gravDir), 4, 4, 172,
                             0.0f, 0.0f, 100, new Color(), 1f);
                         if (Main.rand.Next(3) != 0)
@@ -30127,7 +30127,7 @@ namespace Terraria
                 {
                     if (Main.rand.Next(maxValue) == 0)
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.itemLocation.X + 4f, this.itemLocation.Y - 20f * this.gravDir), 4, 4, 172,
                             0.0f, 0.0f, 100, new Color(), 1f);
                         if (Main.rand.Next(3) != 0)
@@ -30146,14 +30146,14 @@ namespace Terraria
             else if (sItem.type == 3117 && !this.wet)
             {
                 this.itemLocation.X -= (float) (this.direction * 4);
-                int maxValue = 10;
+                var maxValue = 10;
                 if (this.itemAnimation > 0)
                     maxValue = 7;
                 if (this.direction == -1)
                 {
                     if (Main.rand.Next(maxValue) == 0)
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.itemLocation.X - 10f, this.itemLocation.Y - 20f * this.gravDir), 4, 4, 242,
                             0.0f, 0.0f, 100, new Color(), 1f);
                         if (Main.rand.Next(3) != 0)
@@ -30172,7 +30172,7 @@ namespace Terraria
                 {
                     if (Main.rand.Next(maxValue) == 0)
                     {
-                        int index = Dust.NewDust(
+                        var index = Dust.NewDust(
                             new Vector2(this.itemLocation.X + 6f, this.itemLocation.Y - 20f * this.gravDir), 4, 4, 242,
                             0.0f, 0.0f, 100, new Color(), 1f);
                         if (Main.rand.Next(3) != 0)
@@ -30205,9 +30205,9 @@ namespace Terraria
 
             if (sItem.type == 3002 && !this.pulley)
             {
-                float R = 1.05f;
-                float G = 0.95f;
-                float B = 0.55f;
+                var R = 1.05f;
+                var G = 0.95f;
+                var B = 0.55f;
                 if (this.direction == -1)
                     Lighting.AddLight(
                         this.RotatedRelativePoint(
@@ -30222,12 +30222,12 @@ namespace Terraria
                 if (this.spelunkerTimer >= (byte) 10)
                 {
                     this.spelunkerTimer = (byte) 0;
-                    int num1 = 30;
-                    int num2 = (int) this.Center.X / 16;
-                    int num3 = (int) this.Center.Y / 16;
-                    for (int index1 = num2 - num1; index1 <= num2 + num1; ++index1)
+                    var num1 = 30;
+                    var num2 = (int) this.Center.X / 16;
+                    var num3 = (int) this.Center.Y / 16;
+                    for (var index1 = num2 - num1; index1 <= num2 + num1; ++index1)
                     {
-                        for (int index2 = num3 - num1; index2 <= num3 + num1; ++index2)
+                        for (var index2 = num3 - num1; index2 <= num3 + num1; ++index2)
                         {
                             if (Main.rand.Next(4) == 0 &&
                                 ((double) new Vector2((float) (num2 - index1), (float) (num3 - index2)).Length() <
@@ -30235,7 +30235,7 @@ namespace Terraria
                                  (index2 < Main.maxTilesY - 1 && Main.tile[index1, index2] != null &&
                                   Main.tile[index1, index2].active())))
                             {
-                                bool flag2 = false;
+                                var flag2 = false;
                                 if (Main.tile[index1, index2].type == (ushort) 185 &&
                                     Main.tile[index1, index2].frameY == (short) 18)
                                 {
@@ -30252,7 +30252,7 @@ namespace Terraria
                                     Main.tileAlch[(int) Main.tile[index1, index2].type] &&
                                     Main.tile[index1, index2].type != (ushort) 82)
                                 {
-                                    int index3 = Dust.NewDust(new Vector2((float) (index1 * 16), (float) (index2 * 16)),
+                                    var index3 = Dust.NewDust(new Vector2((float) (index1 * 16), (float) (index2 * 16)),
                                         16, 16, 204, 0.0f, 0.0f, 150, new Color(), 0.3f);
                                     Main.dust[index3].fadeIn = 0.75f;
                                     Main.dust[index3].velocity *= 0.1f;
@@ -30308,9 +30308,9 @@ namespace Terraria
                         case 1226:
                         case 1227:
                             Main.PlaySound(25, -1, -1, 1, 1f, 0.0f);
-                            for (int index1 = 0; index1 < 5; ++index1)
+                            for (var index1 = 0; index1 < 5; ++index1)
                             {
-                                int index2 = Dust.NewDust(this.position, this.width, this.height, 45, 0.0f, 0.0f,
+                                var index2 = Dust.NewDust(this.position, this.width, this.height, 45, 0.0f, 0.0f,
                                     (int) byte.MaxValue, new Color(), (float) Main.rand.Next(20, 26) * 0.1f);
                                 Main.dust[index2].noLight = true;
                                 Main.dust[index2].noGravity = true;
@@ -30324,8 +30324,8 @@ namespace Terraria
 
             if (i == Main.myPlayer)
             {
-                bool flag2 = true;
-                int type1 = sItem.type;
+                var flag2 = true;
+                var type1 = sItem.type;
                 if ((type1 == 65 || type1 == 676 || (type1 == 723 || type1 == 724) ||
                      (type1 == 757 || type1 == 674 || (type1 == 675 || type1 == 989)) ||
                      (type1 == 1226 || type1 == 1227)) && this.itemAnimation != this.itemAnimationMax - 1)
@@ -30342,9 +30342,9 @@ namespace Terraria
                     (this.altFunctionUse == 2 && flag2) && this.itemTime == 0)
                 {
                     this.itemTime = sItem.useTime;
-                    for (int index = 0; index < 1000; ++index)
+                    for (var index = 0; index < 1000; ++index)
                     {
-                        Projectile projectile = Main.projectile[index];
+                        var projectile = Main.projectile[index];
                         if (projectile.active && projectile.owner == Main.myPlayer &&
                             ProjectileID.Sets.TurretFeature[projectile.type])
                             projectile.Kill();
@@ -30360,8 +30360,8 @@ namespace Terraria
 
                 if (sItem.shoot > 0 && this.itemAnimation > 0 && (this.itemTime == 0 && flag2))
                 {
-                    int shoot = sItem.shoot;
-                    float speed = sItem.shootSpeed;
+                    var shoot = sItem.shoot;
+                    var speed = sItem.shootSpeed;
                     if (this.inventory[this.selectedItem].thrown && (double) speed < 16.0)
                     {
                         speed *= this.thrownVelocity;
@@ -30371,14 +30371,14 @@ namespace Terraria
 
                     if (sItem.melee && shoot != 25 && (shoot != 26 && shoot != 35))
                         speed /= this.meleeSpeed;
-                    bool canShoot = false;
-                    int Damage = weaponDamage;
-                    float knockBack = sItem.knockBack;
+                    var canShoot = false;
+                    var Damage = weaponDamage;
+                    var knockBack = sItem.knockBack;
                     if (shoot == 13 || shoot == 32 || shoot == 315 || (shoot >= 230 && shoot <= 235 || shoot == 331))
                     {
                         this.grappling[0] = -1;
                         this.grapCount = 0;
-                        for (int index = 0; index < 1000; ++index)
+                        for (var index = 0; index < 1000; ++index)
                         {
                             if (Main.projectile[index].active && Main.projectile[index].owner == i)
                             {
@@ -30433,7 +30433,7 @@ namespace Terraria
 
                     if (shoot == 73)
                     {
-                        for (int index = 0; index < 1000; ++index)
+                        for (var index = 0; index < 1000; ++index)
                         {
                             if (Main.projectile[index].active && Main.projectile[index].owner == i)
                             {
@@ -30447,7 +30447,7 @@ namespace Terraria
 
                     if (canShoot)
                     {
-                        float num1 = this.GetWeaponKnockback(sItem, knockBack);
+                        var num1 = this.GetWeaponKnockback(sItem, knockBack);
                         if (shoot == 228)
                             num1 = 0.0f;
                         if (shoot == 1 && sItem.type == 120)
@@ -30461,18 +30461,18 @@ namespace Terraria
                         if (sItem.type == 2223)
                             shoot = 357;
                         this.itemTime = sItem.useTime;
-                        Vector2 vector2_1 = this.RotatedRelativePoint(this.MountedCenter, true);
-                        bool flag3 = true;
+                        var vector2_1 = this.RotatedRelativePoint(this.MountedCenter, true);
+                        var flag3 = true;
                         if (sItem.type == 3611)
                             flag3 = false;
-                        Vector2 vector2_2 = Vector2.UnitX.RotatedBy((double) this.fullRotation, new Vector2());
-                        Vector2 v1 = Main.MouseWorld - vector2_1;
-                        Vector2 vector2_3 = this.itemRotation.ToRotationVector2() * (float) this.direction;
+                        var vector2_2 = Vector2.UnitX.RotatedBy((double) this.fullRotation, new Vector2());
+                        var v1 = Main.MouseWorld - vector2_1;
+                        var vector2_3 = this.itemRotation.ToRotationVector2() * (float) this.direction;
                         if (sItem.type == 3852 && this.itemAnimation != this.itemAnimationMax - 1)
                             v1 = vector2_3;
                         if (v1 != Vector2.Zero)
                             v1.Normalize();
-                        float num2 = Vector2.Dot(vector2_2, v1);
+                        var num2 = Vector2.Dot(vector2_2, v1);
                         if (flag3)
                         {
                             if ((double) num2 > 0.0)
@@ -30485,7 +30485,7 @@ namespace Terraria
                             vector2_1.Y = this.position.Y + (float) (this.height / 3);
                         if (sItem.type == 2611)
                         {
-                            Vector2 vector2_4 = v1;
+                            var vector2_4 = v1;
                             if (vector2_4 != Vector2.Zero)
                                 vector2_4.Normalize();
                             vector2_1 += vector2_4;
@@ -30518,19 +30518,19 @@ namespace Terraria
                             vector2_1.Y -= 1f * this.gravDir;
                         }
 
-                        float f1 = (float) Main.mouseX + Main.screenPosition.X - vector2_1.X;
-                        float f2 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
+                        var f1 = (float) Main.mouseX + Main.screenPosition.X - vector2_1.X;
+                        var f2 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
                         if (sItem.type == 3852 && this.itemAnimation != this.itemAnimationMax - 1)
                         {
-                            Vector2 vector2_4 = vector2_3;
+                            var vector2_4 = vector2_3;
                             f1 = vector2_4.X;
                             f2 = vector2_4.Y;
                         }
 
                         if ((double) this.gravDir == -1.0)
                             f2 = Main.screenPosition.Y + (float) Main.screenHeight - (float) Main.mouseY - vector2_1.Y;
-                        float num3 = (float) Math.Sqrt((double) f1 * (double) f1 + (double) f2 * (double) f2);
-                        float num4 = num3;
+                        var num3 = (float) Math.Sqrt((double) f1 * (double) f1 + (double) f2 * (double) f2);
+                        var num4 = num3;
                         float num5;
                         if (float.IsNaN(f1) && float.IsNaN(f2) || (double) f1 == 0.0 && (double) f2 == 0.0)
                         {
@@ -30547,13 +30547,13 @@ namespace Terraria
                             f2 += (float) Main.rand.Next(-50, 51) * 0.03f / num5;
                         }
 
-                        float num6 = f1 * num5;
-                        float num7 = f2 * num5;
+                        var num6 = f1 * num5;
+                        var num7 = f2 * num5;
                         if (sItem.type == 757)
                             Damage = (int) ((double) Damage * 1.25);
                         if (shoot == 250)
                         {
-                            for (int index = 0; index < 1000; ++index)
+                            for (var index = 0; index < 1000; ++index)
                             {
                                 if (Main.projectile[index].active && Main.projectile[index].owner == this.whoAmI &&
                                     (Main.projectile[index].type == 250 || Main.projectile[index].type == 251))
@@ -30571,7 +30571,7 @@ namespace Terraria
                         {
                             if (sItem.type == 3029)
                             {
-                                Vector2 vector2_4 = new Vector2(num6, num7);
+                                var vector2_4 = new Vector2(num6, num7);
                                 vector2_4.X = (float) Main.mouseX + Main.screenPosition.X - vector2_1.X;
                                 vector2_4.Y = (float) ((double) Main.mouseY + (double) Main.screenPosition.Y -
                                                        (double) vector2_1.Y - 1000.0);
@@ -30612,17 +30612,17 @@ namespace Terraria
                         if (shoot == 76)
                         {
                             shoot += Main.rand.Next(3);
-                            float num8 = num4 / (float) (Main.screenHeight / 2);
+                            var num8 = num4 / (float) (Main.screenHeight / 2);
                             if ((double) num8 > 1.0)
                                 num8 = 1f;
-                            float num9 = num6 + (float) Main.rand.Next(-40, 41) * 0.01f;
-                            float num10 = num7 + (float) Main.rand.Next(-40, 41) * 0.01f;
-                            float SpeedX = num9 * (num8 + 0.25f);
-                            float SpeedY = num10 * (num8 + 0.25f);
-                            int number = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
+                            var num9 = num6 + (float) Main.rand.Next(-40, 41) * 0.01f;
+                            var num10 = num7 + (float) Main.rand.Next(-40, 41) * 0.01f;
+                            var SpeedX = num9 * (num8 + 0.25f);
+                            var SpeedY = num10 * (num8 + 0.25f);
+                            var number = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
                                 Damage, num1, i, 0.0f, 0.0f);
                             Main.projectile[number].ai[1] = 1f;
-                            float num11 = (float) ((double) num8 * 2.0 - 1.0);
+                            var num11 = (float) ((double) num8 * 2.0 - 1.0);
                             if ((double) num11 < -1.0)
                                 num11 = -1f;
                             if ((double) num11 > 1.0)
@@ -30632,10 +30632,10 @@ namespace Terraria
                         }
                         else if (sItem.type == 3029)
                         {
-                            int num8 = 3;
+                            var num8 = 3;
                             if (Main.rand.Next(3) == 0)
                                 ++num8;
-                            for (int index1 = 0; index1 < num8; ++index1)
+                            for (var index1 = 0; index1 < num8; ++index1)
                             {
                                 vector2_1 = new Vector2(
                                     (float) ((double) this.position.X + (double) this.width * 0.5 +
@@ -30645,63 +30645,63 @@ namespace Terraria
                                 vector2_1.X = (float) (((double) vector2_1.X * 10.0 + (double) this.Center.X) / 11.0) +
                                               (float) Main.rand.Next(-100, 101);
                                 vector2_1.Y -= (float) (150 * index1);
-                                float num9 = (float) Main.mouseX + Main.screenPosition.X - vector2_1.X;
-                                float num10 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
+                                var num9 = (float) Main.mouseX + Main.screenPosition.X - vector2_1.X;
+                                var num10 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
                                 if ((double) num10 < 0.0)
                                     num10 *= -1f;
                                 if ((double) num10 < 20.0)
                                     num10 = 20f;
-                                float num11 =
+                                var num11 =
                                     (float) Math.Sqrt((double) num9 * (double) num9 + (double) num10 * (double) num10);
-                                float num12 = speed / num11;
-                                float num13 = num9 * num12;
-                                float num14 = num10 * num12;
-                                float num15 = num13 + (float) Main.rand.Next(-40, 41) * 0.03f;
-                                float SpeedY = num14 + (float) Main.rand.Next(-40, 41) * 0.03f;
-                                float SpeedX = num15 * ((float) Main.rand.Next(75, 150) * 0.01f);
+                                var num12 = speed / num11;
+                                var num13 = num9 * num12;
+                                var num14 = num10 * num12;
+                                var num15 = num13 + (float) Main.rand.Next(-40, 41) * 0.03f;
+                                var SpeedY = num14 + (float) Main.rand.Next(-40, 41) * 0.03f;
+                                var SpeedX = num15 * ((float) Main.rand.Next(75, 150) * 0.01f);
                                 vector2_1.X += (float) Main.rand.Next(-50, 51);
-                                int index2 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
+                                var index2 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
                                     Damage, num1, i, 0.0f, 0.0f);
                                 Main.projectile[index2].noDropItem = true;
                             }
                         }
                         else if (sItem.type == 98 || sItem.type == 533)
                         {
-                            float SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.01f;
-                            float SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.01f;
+                            var SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.01f;
+                            var SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.01f;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
                                 0.0f, 0.0f);
                         }
                         else if (sItem.type == 1319)
                         {
-                            float SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.02f;
-                            float SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.02f;
-                            int index = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
+                            var SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.02f;
+                            var SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.02f;
+                            var index = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
                                 Damage, num1, i, 0.0f, 0.0f);
                             Main.projectile[index].ranged = true;
                             Main.projectile[index].thrown = false;
                         }
                         else if (sItem.type == 3107)
                         {
-                            float SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.02f;
-                            float SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.02f;
+                            var SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.02f;
+                            var SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.02f;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
                                 0.0f, 0.0f);
                         }
                         else if (sItem.type == 3053)
                         {
-                            Vector2 vector2_4 = new Vector2(num6, num7);
+                            var vector2_4 = new Vector2(num6, num7);
                             vector2_4.Normalize();
-                            Vector2 vector2_5 = new Vector2((float) Main.rand.Next(-100, 101),
+                            var vector2_5 = new Vector2((float) Main.rand.Next(-100, 101),
                                 (float) Main.rand.Next(-100, 101));
                             vector2_5.Normalize();
-                            Vector2 vector2_6 = vector2_4 * 4f + vector2_5;
+                            var vector2_6 = vector2_4 * 4f + vector2_5;
                             vector2_6.Normalize();
                             vector2_6 *= sItem.shootSpeed;
-                            float ai1 = (float) Main.rand.Next(10, 80) * (1f / 1000f);
+                            var ai1 = (float) Main.rand.Next(10, 80) * (1f / 1000f);
                             if (Main.rand.Next(2) == 0)
                                 ai1 *= -1f;
-                            float ai0 = (float) Main.rand.Next(10, 80) * (1f / 1000f);
+                            var ai0 = (float) Main.rand.Next(10, 80) * (1f / 1000f);
                             if (Main.rand.Next(2) == 0)
                                 ai0 *= -1f;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, vector2_6.X, vector2_6.Y, shoot, Damage,
@@ -30709,45 +30709,45 @@ namespace Terraria
                         }
                         else if (sItem.type == 3019)
                         {
-                            Vector2 vector2_4 = new Vector2(num6, num7);
-                            float num8 = vector2_4.Length();
+                            var vector2_4 = new Vector2(num6, num7);
+                            var num8 = vector2_4.Length();
                             vector2_4.X += (float) ((double) Main.rand.Next(-100, 101) * 0.00999999977648258 *
                                                     (double) num8 * 0.150000005960464);
                             vector2_4.Y += (float) ((double) Main.rand.Next(-100, 101) * 0.00999999977648258 *
                                                     (double) num8 * 0.150000005960464);
-                            float num9 = num6 + (float) Main.rand.Next(-40, 41) * 0.03f;
-                            float num10 = num7 + (float) Main.rand.Next(-40, 41) * 0.03f;
+                            var num9 = num6 + (float) Main.rand.Next(-40, 41) * 0.03f;
+                            var num10 = num7 + (float) Main.rand.Next(-40, 41) * 0.03f;
                             vector2_4.Normalize();
-                            Vector2 vector2_5 = vector2_4 * num8;
-                            Vector2 vector2_6 = new Vector2(num9 * ((float) Main.rand.Next(50, 150) * 0.01f),
+                            var vector2_5 = vector2_4 * num8;
+                            var vector2_6 = new Vector2(num9 * ((float) Main.rand.Next(50, 150) * 0.01f),
                                 num10 * ((float) Main.rand.Next(50, 150) * 0.01f));
                             vector2_6.X += (float) Main.rand.Next(-100, 101) * 0.025f;
                             vector2_6.Y += (float) Main.rand.Next(-100, 101) * 0.025f;
                             vector2_6.Normalize();
                             vector2_6 *= num8;
-                            float x = vector2_6.X;
-                            float y = vector2_6.Y;
+                            var x = vector2_6.X;
+                            var y = vector2_6.Y;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, x, y, shoot, Damage, num1, i,
                                 vector2_5.X, vector2_5.Y);
                         }
                         else if (sItem.type == 2797)
                         {
-                            Vector2 vector2_4 = Vector2.Normalize(new Vector2(num6, num7)) * 40f * sItem.scale;
+                            var vector2_4 = Vector2.Normalize(new Vector2(num6, num7)) * 40f * sItem.scale;
                             if (Collision.CanHit(vector2_1, 0, 0, vector2_1 + vector2_4, 0, 0))
                                 vector2_1 += vector2_4;
-                            float rotation = new Vector2(num6, num7).ToRotation();
-                            float num8 = 2.094395f;
-                            int num9 = Main.rand.Next(4, 5);
+                            var rotation = new Vector2(num6, num7).ToRotation();
+                            var num8 = 2.094395f;
+                            var num9 = Main.rand.Next(4, 5);
                             if (Main.rand.Next(4) == 0)
                                 ++num9;
-                            for (int index1 = 0; index1 < num9; ++index1)
+                            for (var index1 = 0; index1 < num9; ++index1)
                             {
-                                float num10 = (float) (Main.rand.NextDouble() * 0.200000002980232 + 0.0500000007450581);
-                                Vector2 vector2_5 =
+                                var num10 = (float) (Main.rand.NextDouble() * 0.200000002980232 + 0.0500000007450581);
+                                var vector2_5 =
                                     new Vector2(num6, num7).RotatedBy(
                                         (double) num8 * Main.rand.NextDouble() - (double) num8 / 2.0, new Vector2()) *
                                     num10;
-                                int index2 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, vector2_5.X,
+                                var index2 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, vector2_5.X,
                                     vector2_5.Y, 444, Damage, num1, i, rotation, 0.0f);
                                 Main.projectile[index2].localAI[0] = (float) shoot;
                                 Main.projectile[index2].localAI[1] = speed;
@@ -30755,8 +30755,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 2270)
                         {
-                            float SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.05f;
-                            float SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.05f;
+                            var SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.05f;
+                            var SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.05f;
                             if (Main.rand.Next(3) == 0)
                             {
                                 SpeedX *= (float) (1.0 + (double) Main.rand.Next(-30, 31) * 0.0199999995529652);
@@ -30768,20 +30768,20 @@ namespace Terraria
                         }
                         else if (sItem.type == 1930)
                         {
-                            int num8 = 2 + Main.rand.Next(3);
-                            for (int index = 0; index < num8; ++index)
+                            var num8 = 2 + Main.rand.Next(3);
+                            for (var index = 0; index < num8; ++index)
                             {
-                                float num9 = num6;
-                                float num10 = num7;
-                                float num11 = 0.025f * (float) index;
-                                float num12 = num9 + (float) Main.rand.Next(-35, 36) * num11;
-                                float num13 = num10 + (float) Main.rand.Next(-35, 36) * num11;
-                                float num14 =
+                                var num9 = num6;
+                                var num10 = num7;
+                                var num11 = 0.025f * (float) index;
+                                var num12 = num9 + (float) Main.rand.Next(-35, 36) * num11;
+                                var num13 = num10 + (float) Main.rand.Next(-35, 36) * num11;
+                                var num14 =
                                     (float) Math.Sqrt((double) num12 * (double) num12 +
                                                       (double) num13 * (double) num13);
-                                float num15 = speed / num14;
-                                float SpeedX = num12 * num15;
-                                float SpeedY = num13 * num15;
+                                var num15 = speed / num14;
+                                var SpeedX = num12 * num15;
+                                var SpeedY = num13 * num15;
                                 Projectile.NewProjectile(
                                     vector2_1.X + (float) ((double) num6 * (double) (num8 - index) * 1.75),
                                     vector2_1.Y + (float) ((double) num7 * (double) (num8 - index) * 1.75), SpeedX,
@@ -30790,8 +30790,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 1931)
                         {
-                            int num8 = 2;
-                            for (int index = 0; index < num8; ++index)
+                            var num8 = 2;
+                            for (var index = 0; index < num8; ++index)
                             {
                                 vector2_1 = new Vector2(
                                     (float) ((double) this.position.X + (double) this.width * 0.5 +
@@ -30801,27 +30801,27 @@ namespace Terraria
                                 vector2_1.X = (float) (((double) vector2_1.X + (double) this.Center.X) / 2.0) +
                                               (float) Main.rand.Next(-200, 201);
                                 vector2_1.Y -= (float) (100 * index);
-                                float num9 = (float) Main.mouseX + Main.screenPosition.X - vector2_1.X;
-                                float num10 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
+                                var num9 = (float) Main.mouseX + Main.screenPosition.X - vector2_1.X;
+                                var num10 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
                                 if ((double) num10 < 0.0)
                                     num10 *= -1f;
                                 if ((double) num10 < 20.0)
                                     num10 = 20f;
-                                float num11 =
+                                var num11 =
                                     (float) Math.Sqrt((double) num9 * (double) num9 + (double) num10 * (double) num10);
-                                float num12 = speed / num11;
-                                float num13 = num9 * num12;
-                                float num14 = num10 * num12;
-                                float SpeedX = num13 + (float) Main.rand.Next(-40, 41) * 0.02f;
-                                float SpeedY = num14 + (float) Main.rand.Next(-40, 41) * 0.02f;
+                                var num12 = speed / num11;
+                                var num13 = num9 * num12;
+                                var num14 = num10 * num12;
+                                var SpeedX = num13 + (float) Main.rand.Next(-40, 41) * 0.02f;
+                                var SpeedY = num14 + (float) Main.rand.Next(-40, 41) * 0.02f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, (float) Main.rand.Next(5));
                             }
                         }
                         else if (sItem.type == 2750)
                         {
-                            int num8 = 1;
-                            for (int index = 0; index < num8; ++index)
+                            var num8 = 1;
+                            for (var index = 0; index < num8; ++index)
                             {
                                 vector2_1 = new Vector2(
                                     (float) ((double) this.position.X + (double) this.width * 0.5 +
@@ -30831,21 +30831,21 @@ namespace Terraria
                                 vector2_1.X = (float) (((double) vector2_1.X + (double) this.Center.X) / 2.0) +
                                               (float) Main.rand.Next(-200, 201);
                                 vector2_1.Y -= (float) (100 * index);
-                                float num9 = (float) ((double) Main.mouseX + (double) Main.screenPosition.X -
+                                var num9 = (float) ((double) Main.mouseX + (double) Main.screenPosition.X -
                                                       (double) vector2_1.X + (double) Main.rand.Next(-40, 41) *
                                                       0.0299999993294477);
-                                float num10 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
+                                var num10 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
                                 if ((double) num10 < 0.0)
                                     num10 *= -1f;
                                 if ((double) num10 < 20.0)
                                     num10 = 20f;
-                                float num11 =
+                                var num11 =
                                     (float) Math.Sqrt((double) num9 * (double) num9 + (double) num10 * (double) num10);
-                                float num12 = speed / num11;
-                                float num13 = num9 * num12;
-                                float num14 = num10 * num12;
-                                float num15 = num13;
-                                float num16 = num14 + (float) Main.rand.Next(-40, 41) * 0.02f;
+                                var num12 = speed / num11;
+                                var num13 = num9 * num12;
+                                var num14 = num10 * num12;
+                                var num15 = num13;
+                                var num16 = num14 + (float) Main.rand.Next(-40, 41) * 0.02f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num15 * 0.75f, num16 * 0.75f,
                                     shoot + Main.rand.Next(3), Damage, num1, i, 0.0f,
                                     (float) (0.5 + Main.rand.NextDouble() * 0.300000011920929));
@@ -30853,8 +30853,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 3570)
                         {
-                            int num8 = 3;
-                            for (int index = 0; index < num8; ++index)
+                            var num8 = 3;
+                            for (var index = 0; index < num8; ++index)
                             {
                                 vector2_1 = new Vector2(
                                     (float) ((double) this.position.X + (double) this.width * 0.5 +
@@ -30864,167 +30864,167 @@ namespace Terraria
                                 vector2_1.X = (float) (((double) vector2_1.X + (double) this.Center.X) / 2.0) +
                                               (float) Main.rand.Next(-200, 201);
                                 vector2_1.Y -= (float) (100 * index);
-                                float num9 = (float) Main.mouseX + Main.screenPosition.X - vector2_1.X;
-                                float num10 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
-                                float ai1 = num10 + vector2_1.Y;
+                                var num9 = (float) Main.mouseX + Main.screenPosition.X - vector2_1.X;
+                                var num10 = (float) Main.mouseY + Main.screenPosition.Y - vector2_1.Y;
+                                var ai1 = num10 + vector2_1.Y;
                                 if ((double) num10 < 0.0)
                                     num10 *= -1f;
                                 if ((double) num10 < 20.0)
                                     num10 = 20f;
-                                float num11 =
+                                var num11 =
                                     (float) Math.Sqrt((double) num9 * (double) num9 + (double) num10 * (double) num10);
-                                float num12 = speed / num11;
-                                Vector2 vector2_4 = new Vector2(num9 * num12, num10 * num12) / 2f;
+                                var num12 = speed / num11;
+                                var vector2_4 = new Vector2(num9 * num12, num10 * num12) / 2f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, vector2_4.X, vector2_4.Y, shoot,
                                     Damage, num1, i, 0.0f, ai1);
                             }
                         }
                         else if (sItem.type == 3065)
                         {
-                            Vector2 vector2_4 = Main.screenPosition +
+                            var vector2_4 = Main.screenPosition +
                                                 new Vector2((float) Main.mouseX, (float) Main.mouseY);
-                            float ai1 = vector2_4.Y;
+                            var ai1 = vector2_4.Y;
                             if ((double) ai1 > (double) this.Center.Y - 200.0)
                                 ai1 = this.Center.Y - 200f;
-                            for (int index = 0; index < 3; ++index)
+                            for (var index = 0; index < 3; ++index)
                             {
                                 vector2_1 = this.Center +
                                             new Vector2((float) (-Main.rand.Next(0, 401) * this.direction), -600f);
                                 vector2_1.Y -= (float) (100 * index);
-                                Vector2 vector2_5 = vector2_4 - vector2_1;
+                                var vector2_5 = vector2_4 - vector2_1;
                                 if ((double) vector2_5.Y < 0.0)
                                     vector2_5.Y *= -1f;
                                 if ((double) vector2_5.Y < 20.0)
                                     vector2_5.Y = 20f;
                                 vector2_5.Normalize();
                                 vector2_5 *= speed;
-                                float x = vector2_5.X;
-                                float y = vector2_5.Y;
-                                float SpeedX = x;
-                                float SpeedY = y + (float) Main.rand.Next(-40, 41) * 0.02f;
+                                var x = vector2_5.X;
+                                var y = vector2_5.Y;
+                                var SpeedX = x;
+                                var SpeedY = y + (float) Main.rand.Next(-40, 41) * 0.02f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage * 2,
                                     num1, i, 0.0f, ai1);
                             }
                         }
                         else if (sItem.type == 2624)
                         {
-                            float num8 = 0.3141593f;
-                            int num9 = 5;
-                            Vector2 spinningpoint = new Vector2(num6, num7);
+                            var num8 = 0.3141593f;
+                            var num9 = 5;
+                            var spinningpoint = new Vector2(num6, num7);
                             spinningpoint.Normalize();
                             spinningpoint *= 40f;
-                            bool flag4 = Collision.CanHit(vector2_1, 0, 0, vector2_1 + spinningpoint, 0, 0);
-                            for (int index1 = 0; index1 < num9; ++index1)
+                            var flag4 = Collision.CanHit(vector2_1, 0, 0, vector2_1 + spinningpoint, 0, 0);
+                            for (var index1 = 0; index1 < num9; ++index1)
                             {
-                                float num10 = (float) index1 - (float) (((double) num9 - 1.0) / 2.0);
-                                Vector2 vector2_4 =
+                                var num10 = (float) index1 - (float) (((double) num9 - 1.0) / 2.0);
+                                var vector2_4 =
                                     spinningpoint.RotatedBy((double) num8 * (double) num10, new Vector2());
                                 if (!flag4)
                                     vector2_4 -= spinningpoint;
-                                int index2 = Projectile.NewProjectile(vector2_1.X + vector2_4.X,
+                                var index2 = Projectile.NewProjectile(vector2_1.X + vector2_4.X,
                                     vector2_1.Y + vector2_4.Y, num6, num7, shoot, Damage, num1, i, 0.0f, 0.0f);
                                 Main.projectile[index2].noDropItem = true;
                             }
                         }
                         else if (sItem.type == 1929)
                         {
-                            float SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.03f;
-                            float SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.03f;
+                            var SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.03f;
+                            var SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.03f;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
                                 0.0f, 0.0f);
                         }
                         else if (sItem.type == 1553)
                         {
-                            float SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.005f;
-                            float SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.005f;
+                            var SpeedX = num6 + (float) Main.rand.Next(-40, 41) * 0.005f;
+                            var SpeedY = num7 + (float) Main.rand.Next(-40, 41) * 0.005f;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
                                 0.0f, 0.0f);
                         }
                         else if (sItem.type == 518)
                         {
-                            float num8 = num6;
-                            float num9 = num7;
-                            float SpeedX = num8 + (float) Main.rand.Next(-40, 41) * 0.04f;
-                            float SpeedY = num9 + (float) Main.rand.Next(-40, 41) * 0.04f;
+                            var num8 = num6;
+                            var num9 = num7;
+                            var SpeedX = num8 + (float) Main.rand.Next(-40, 41) * 0.04f;
+                            var SpeedY = num9 + (float) Main.rand.Next(-40, 41) * 0.04f;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
                                 0.0f, 0.0f);
                         }
                         else if (sItem.type == 1265)
                         {
-                            float num8 = num6;
-                            float num9 = num7;
-                            float SpeedX = num8 + (float) Main.rand.Next(-30, 31) * 0.03f;
-                            float SpeedY = num9 + (float) Main.rand.Next(-30, 31) * 0.03f;
+                            var num8 = num6;
+                            var num9 = num7;
+                            var SpeedX = num8 + (float) Main.rand.Next(-30, 31) * 0.03f;
+                            var SpeedY = num9 + (float) Main.rand.Next(-30, 31) * 0.03f;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
                                 0.0f, 0.0f);
                         }
                         else if (sItem.type == 534)
                         {
-                            int num8 = Main.rand.Next(4, 6);
-                            for (int index = 0; index < num8; ++index)
+                            var num8 = Main.rand.Next(4, 6);
+                            for (var index = 0; index < num8; ++index)
                             {
-                                float num9 = num6;
-                                float num10 = num7;
-                                float SpeedX = num9 + (float) Main.rand.Next(-40, 41) * 0.05f;
-                                float SpeedY = num10 + (float) Main.rand.Next(-40, 41) * 0.05f;
+                                var num9 = num6;
+                                var num10 = num7;
+                                var SpeedX = num9 + (float) Main.rand.Next(-40, 41) * 0.05f;
+                                var SpeedY = num10 + (float) Main.rand.Next(-40, 41) * 0.05f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, 0.0f);
                             }
                         }
                         else if (sItem.type == 2188)
                         {
-                            int num8 = 4;
+                            var num8 = 4;
                             if (Main.rand.Next(3) == 0)
                                 ++num8;
                             if (Main.rand.Next(4) == 0)
                                 ++num8;
                             if (Main.rand.Next(5) == 0)
                                 ++num8;
-                            for (int index = 0; index < num8; ++index)
+                            for (var index = 0; index < num8; ++index)
                             {
-                                float num9 = num6;
-                                float num10 = num7;
-                                float num11 = 0.05f * (float) index;
-                                float num12 = num9 + (float) Main.rand.Next(-35, 36) * num11;
-                                float num13 = num10 + (float) Main.rand.Next(-35, 36) * num11;
-                                float num14 =
+                                var num9 = num6;
+                                var num10 = num7;
+                                var num11 = 0.05f * (float) index;
+                                var num12 = num9 + (float) Main.rand.Next(-35, 36) * num11;
+                                var num13 = num10 + (float) Main.rand.Next(-35, 36) * num11;
+                                var num14 =
                                     (float) Math.Sqrt((double) num12 * (double) num12 +
                                                       (double) num13 * (double) num13);
-                                float num15 = speed / num14;
-                                float SpeedX = num12 * num15;
-                                float SpeedY = num13 * num15;
+                                var num15 = speed / num14;
+                                var SpeedX = num12 * num15;
+                                var SpeedY = num13 * num15;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, 0.0f);
                             }
                         }
                         else if (sItem.type == 1308)
                         {
-                            int num8 = 3;
+                            var num8 = 3;
                             if (Main.rand.Next(3) == 0)
                                 ++num8;
-                            for (int index = 0; index < num8; ++index)
+                            for (var index = 0; index < num8; ++index)
                             {
-                                float num9 = num6;
-                                float num10 = num7;
-                                float num11 = 0.05f * (float) index;
-                                float num12 = num9 + (float) Main.rand.Next(-35, 36) * num11;
-                                float num13 = num10 + (float) Main.rand.Next(-35, 36) * num11;
-                                float num14 =
+                                var num9 = num6;
+                                var num10 = num7;
+                                var num11 = 0.05f * (float) index;
+                                var num12 = num9 + (float) Main.rand.Next(-35, 36) * num11;
+                                var num13 = num10 + (float) Main.rand.Next(-35, 36) * num11;
+                                var num14 =
                                     (float) Math.Sqrt((double) num12 * (double) num12 +
                                                       (double) num13 * (double) num13);
-                                float num15 = speed / num14;
-                                float SpeedX = num12 * num15;
-                                float SpeedY = num13 * num15;
+                                var num15 = speed / num14;
+                                var SpeedX = num12 * num15;
+                                var SpeedY = num13 * num15;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, 0.0f);
                             }
                         }
                         else if (sItem.type == 1258)
                         {
-                            float num8 = num6;
-                            float num9 = num7;
-                            float SpeedX = num8 + (float) Main.rand.Next(-40, 41) * 0.01f;
-                            float SpeedY = num9 + (float) Main.rand.Next(-40, 41) * 0.01f;
+                            var num8 = num6;
+                            var num9 = num7;
+                            var SpeedX = num8 + (float) Main.rand.Next(-40, 41) * 0.01f;
+                            var SpeedY = num9 + (float) Main.rand.Next(-40, 41) * 0.01f;
                             vector2_1.X += (float) Main.rand.Next(-40, 41) * 0.05f;
                             vector2_1.Y += (float) Main.rand.Next(-45, 36) * 0.05f;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
@@ -31032,20 +31032,20 @@ namespace Terraria
                         }
                         else if (sItem.type == 964)
                         {
-                            int num8 = Main.rand.Next(3, 5);
-                            for (int index = 0; index < num8; ++index)
+                            var num8 = Main.rand.Next(3, 5);
+                            for (var index = 0; index < num8; ++index)
                             {
-                                float num9 = num6;
-                                float num10 = num7;
-                                float SpeedX = num9 + (float) Main.rand.Next(-35, 36) * 0.04f;
-                                float SpeedY = num10 + (float) Main.rand.Next(-35, 36) * 0.04f;
+                                var num9 = num6;
+                                var num10 = num7;
+                                var SpeedX = num9 + (float) Main.rand.Next(-35, 36) * 0.04f;
+                                var SpeedY = num10 + (float) Main.rand.Next(-35, 36) * 0.04f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, 0.0f);
                             }
                         }
                         else if (sItem.type == 1569)
                         {
-                            int num8 = 4;
+                            var num8 = 4;
                             if (Main.rand.Next(2) == 0)
                                 ++num8;
                             if (Main.rand.Next(4) == 0)
@@ -31054,28 +31054,28 @@ namespace Terraria
                                 ++num8;
                             if (Main.rand.Next(16) == 0)
                                 ++num8;
-                            for (int index = 0; index < num8; ++index)
+                            for (var index = 0; index < num8; ++index)
                             {
-                                float num9 = num6;
-                                float num10 = num7;
-                                float num11 = 0.05f * (float) index;
-                                float num12 = num9 + (float) Main.rand.Next(-35, 36) * num11;
-                                float num13 = num10 + (float) Main.rand.Next(-35, 36) * num11;
-                                float num14 =
+                                var num9 = num6;
+                                var num10 = num7;
+                                var num11 = 0.05f * (float) index;
+                                var num12 = num9 + (float) Main.rand.Next(-35, 36) * num11;
+                                var num13 = num10 + (float) Main.rand.Next(-35, 36) * num11;
+                                var num14 =
                                     (float) Math.Sqrt((double) num12 * (double) num12 +
                                                       (double) num13 * (double) num13);
-                                float num15 = speed / num14;
-                                float SpeedX = num12 * num15;
-                                float SpeedY = num13 * num15;
+                                var num15 = speed / num14;
+                                var SpeedX = num12 * num15;
+                                var SpeedY = num13 * num15;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, 0.0f);
                             }
                         }
                         else if (sItem.type == 1572 || sItem.type == 2366 || (sItem.type == 3571 || sItem.type == 3569))
                         {
-                            bool flag4 = sItem.type == 3571 || sItem.type == 3569;
-                            int i1 = (int) ((double) Main.mouseX + (double) Main.screenPosition.X) / 16;
-                            int j = (int) ((double) Main.mouseY + (double) Main.screenPosition.Y) / 16;
+                            var flag4 = sItem.type == 3571 || sItem.type == 3569;
+                            var i1 = (int) ((double) Main.mouseX + (double) Main.screenPosition.X) / 16;
+                            var j = (int) ((double) Main.mouseY + (double) Main.screenPosition.Y) / 16;
                             if ((double) this.gravDir == -1.0)
                                 j = (int) ((double) Main.screenPosition.Y + (double) Main.screenHeight -
                                            (double) Main.mouseY) / 16;
@@ -31095,20 +31095,20 @@ namespace Terraria
                         }
                         else if (sItem.type == 1244 || sItem.type == 1256)
                         {
-                            int index = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num6, num7, shoot, Damage,
+                            var index = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num6, num7, shoot, Damage,
                                 num1, i, 0.0f, 0.0f);
                             Main.projectile[index].ai[0] = (float) Main.mouseX + Main.screenPosition.X;
                             Main.projectile[index].ai[1] = (float) Main.mouseY + Main.screenPosition.Y;
                         }
                         else if (sItem.type == 1229)
                         {
-                            int num8 = Main.rand.Next(2, 4);
+                            var num8 = Main.rand.Next(2, 4);
                             if (Main.rand.Next(5) == 0)
                                 ++num8;
-                            for (int index1 = 0; index1 < num8; ++index1)
+                            for (var index1 = 0; index1 < num8; ++index1)
                             {
-                                float SpeedX = num6;
-                                float SpeedY = num7;
+                                var SpeedX = num6;
+                                var SpeedY = num7;
                                 if (index1 > 0)
                                 {
                                     SpeedX += (float) Main.rand.Next(-35, 36) * 0.04f;
@@ -31127,88 +31127,88 @@ namespace Terraria
                                     SpeedY += (float) Main.rand.Next(-35, 36) * 0.04f;
                                 }
 
-                                int index2 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
+                                var index2 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
                                     Damage, num1, i, 0.0f, 0.0f);
                                 Main.projectile[index2].noDropItem = true;
                             }
                         }
                         else if (sItem.type == 1121)
                         {
-                            int num8 = Main.rand.Next(1, 4);
+                            var num8 = Main.rand.Next(1, 4);
                             if (Main.rand.Next(6) == 0)
                                 ++num8;
                             if (Main.rand.Next(6) == 0)
                                 ++num8;
                             if (this.strongBees && Main.rand.Next(3) == 0)
                                 ++num8;
-                            for (int index1 = 0; index1 < num8; ++index1)
+                            for (var index1 = 0; index1 < num8; ++index1)
                             {
-                                float num9 = num6;
-                                float num10 = num7;
-                                float SpeedX = num9 + (float) Main.rand.Next(-35, 36) * 0.02f;
-                                float SpeedY = num10 + (float) Main.rand.Next(-35, 36) * 0.02f;
-                                int index2 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
+                                var num9 = num6;
+                                var num10 = num7;
+                                var SpeedX = num9 + (float) Main.rand.Next(-35, 36) * 0.02f;
+                                var SpeedY = num10 + (float) Main.rand.Next(-35, 36) * 0.02f;
+                                var index2 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
                                     this.beeType(), this.beeDamage(Damage), this.beeKB(num1), i, 0.0f, 0.0f);
                                 Main.projectile[index2].magic = true;
                             }
                         }
                         else if (sItem.type == 1155)
                         {
-                            int num8 = Main.rand.Next(2, 5);
+                            var num8 = Main.rand.Next(2, 5);
                             if (Main.rand.Next(5) == 0)
                                 ++num8;
                             if (Main.rand.Next(5) == 0)
                                 ++num8;
-                            for (int index = 0; index < num8; ++index)
+                            for (var index = 0; index < num8; ++index)
                             {
-                                float num9 = num6;
-                                float num10 = num7;
-                                float SpeedX = num9 + (float) Main.rand.Next(-35, 36) * 0.02f;
-                                float SpeedY = num10 + (float) Main.rand.Next(-35, 36) * 0.02f;
+                                var num9 = num6;
+                                var num10 = num7;
+                                var SpeedX = num9 + (float) Main.rand.Next(-35, 36) * 0.02f;
+                                var SpeedY = num10 + (float) Main.rand.Next(-35, 36) * 0.02f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, 0.0f);
                             }
                         }
                         else if (sItem.type == 1801)
                         {
-                            int num8 = Main.rand.Next(1, 4);
-                            for (int index = 0; index < num8; ++index)
+                            var num8 = Main.rand.Next(1, 4);
+                            for (var index = 0; index < num8; ++index)
                             {
-                                float num9 = num6;
-                                float num10 = num7;
-                                float SpeedX = num9 + (float) Main.rand.Next(-35, 36) * 0.05f;
-                                float SpeedY = num10 + (float) Main.rand.Next(-35, 36) * 0.05f;
+                                var num9 = num6;
+                                var num10 = num7;
+                                var SpeedX = num9 + (float) Main.rand.Next(-35, 36) * 0.05f;
+                                var SpeedY = num10 + (float) Main.rand.Next(-35, 36) * 0.05f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, 0.0f);
                             }
                         }
                         else if (sItem.type == 679)
                         {
-                            for (int index = 0; index < 6; ++index)
+                            for (var index = 0; index < 6; ++index)
                             {
-                                float num8 = num6;
-                                float num9 = num7;
-                                float SpeedX = num8 + (float) Main.rand.Next(-40, 41) * 0.05f;
-                                float SpeedY = num9 + (float) Main.rand.Next(-40, 41) * 0.05f;
+                                var num8 = num6;
+                                var num9 = num7;
+                                var SpeedX = num8 + (float) Main.rand.Next(-40, 41) * 0.05f;
+                                var SpeedY = num9 + (float) Main.rand.Next(-40, 41) * 0.05f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, 0.0f);
                             }
                         }
                         else if (sItem.type == 2623)
                         {
-                            for (int index = 0; index < 3; ++index)
+                            for (var index = 0; index < 3; ++index)
                             {
-                                float num8 = num6;
-                                float num9 = num7;
-                                float SpeedX = num8 + (float) Main.rand.Next(-40, 41) * 0.1f;
-                                float SpeedY = num9 + (float) Main.rand.Next(-40, 41) * 0.1f;
+                                var num8 = num6;
+                                var num9 = num7;
+                                var SpeedX = num8 + (float) Main.rand.Next(-40, 41) * 0.1f;
+                                var SpeedY = num9 + (float) Main.rand.Next(-40, 41) * 0.1f;
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1,
                                     i, 0.0f, 0.0f);
                             }
                         }
                         else if (sItem.type == 3210)
                         {
-                            Vector2 vector2_4 = new Vector2(num6, num7);
+                            var vector2_4 = new Vector2(num6, num7);
                             vector2_4.X += (float) Main.rand.Next(-30, 31) * 0.04f;
                             vector2_4.Y += (float) Main.rand.Next(-30, 31) * 0.03f;
                             vector2_4.Normalize();
@@ -31220,19 +31220,19 @@ namespace Terraria
                         }
                         else if (sItem.type == 434)
                         {
-                            float SpeedX = num6;
-                            float SpeedY = num7;
+                            var SpeedX = num6;
+                            var SpeedY = num7;
                             if (this.itemAnimation < 5)
                             {
-                                float num8 = SpeedX + (float) Main.rand.Next(-40, 41) * 0.01f;
-                                float num9 = SpeedY + (float) Main.rand.Next(-40, 41) * 0.01f;
+                                var num8 = SpeedX + (float) Main.rand.Next(-40, 41) * 0.01f;
+                                var num9 = SpeedY + (float) Main.rand.Next(-40, 41) * 0.01f;
                                 SpeedX = num8 * 1.1f;
                                 SpeedY = num9 * 1.1f;
                             }
                             else if (this.itemAnimation < 10)
                             {
-                                float num8 = SpeedX + (float) Main.rand.Next(-20, 21) * 0.01f;
-                                float num9 = SpeedY + (float) Main.rand.Next(-20, 21) * 0.01f;
+                                var num8 = SpeedX + (float) Main.rand.Next(-20, 21) * 0.01f;
+                                var num9 = SpeedY + (float) Main.rand.Next(-20, 21) * 0.01f;
                                 SpeedX = num8 * 1.05f;
                                 SpeedY = num9 * 1.05f;
                             }
@@ -31243,18 +31243,18 @@ namespace Terraria
                         else if (sItem.type == 1157)
                         {
                             shoot = Main.rand.Next(191, 195);
-                            float SpeedX = 0.0f;
-                            float SpeedY = 0.0f;
+                            var SpeedX = 0.0f;
+                            var SpeedY = 0.0f;
                             vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                             vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
-                            int index = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
+                            var index = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
                                 Damage, num1, i, 0.0f, 0.0f);
                             Main.projectile[index].localAI[0] = 30f;
                         }
                         else if (sItem.type == 1802)
                         {
-                            float SpeedX = 0.0f;
-                            float SpeedY = 0.0f;
+                            var SpeedX = 0.0f;
+                            var SpeedY = 0.0f;
                             vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                             vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
@@ -31262,8 +31262,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 2364 || sItem.type == 2365)
                         {
-                            float SpeedX = 0.0f;
-                            float SpeedY = 0.0f;
+                            var SpeedX = 0.0f;
+                            var SpeedY = 0.0f;
                             vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                             vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
@@ -31271,11 +31271,11 @@ namespace Terraria
                         }
                         else if (sItem.type == 2535)
                         {
-                            float x = 0.0f;
-                            float y = 0.0f;
+                            var x = 0.0f;
+                            var y = 0.0f;
                             vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                             vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
-                            Vector2 spinningpoint = new Vector2(x, y).RotatedBy(1.57079637050629, new Vector2());
+                            var spinningpoint = new Vector2(x, y).RotatedBy(1.57079637050629, new Vector2());
                             Projectile.NewProjectile(vector2_1.X + spinningpoint.X, vector2_1.Y + spinningpoint.Y,
                                 spinningpoint.X, spinningpoint.Y, shoot, Damage, num1, i, 0.0f, 0.0f);
                             spinningpoint = spinningpoint.RotatedBy(-3.14159274101257, new Vector2());
@@ -31284,8 +31284,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 2551)
                         {
-                            float SpeedX = 0.0f;
-                            float SpeedY = 0.0f;
+                            var SpeedX = 0.0f;
+                            var SpeedY = 0.0f;
                             vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                             vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
@@ -31293,8 +31293,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 2584)
                         {
-                            float SpeedX = 0.0f;
-                            float SpeedY = 0.0f;
+                            var SpeedX = 0.0f;
+                            var SpeedY = 0.0f;
                             vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                             vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
@@ -31302,8 +31302,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 2621)
                         {
-                            float SpeedX = 0.0f;
-                            float SpeedY = 0.0f;
+                            var SpeedX = 0.0f;
+                            var SpeedY = 0.0f;
                             vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                             vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
@@ -31311,8 +31311,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 2749 || sItem.type == 3249 || sItem.type == 3474)
                         {
-                            float SpeedX = 0.0f;
-                            float SpeedY = 0.0f;
+                            var SpeedX = 0.0f;
+                            var SpeedY = 0.0f;
                             vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                             vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
@@ -31320,9 +31320,9 @@ namespace Terraria
                         }
                         else if (sItem.type == 3531)
                         {
-                            int num8 = -1;
-                            int index1 = -1;
-                            for (int index2 = 0; index2 < 1000; ++index2)
+                            var num8 = -1;
+                            var index1 = -1;
+                            for (var index2 = 0; index2 < 1000; ++index2)
                             {
                                 if (Main.projectile[index2].active && Main.projectile[index2].owner == Main.myPlayer)
                                 {
@@ -31337,30 +31337,30 @@ namespace Terraria
 
                             if (num8 == -1 && index1 == -1)
                             {
-                                float SpeedX = 0.0f;
-                                float SpeedY = 0.0f;
+                                var SpeedX = 0.0f;
+                                var SpeedY = 0.0f;
                                 vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                                 vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
-                                int num9 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
+                                var num9 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot,
                                     Damage, num1, i, 0.0f, 0.0f);
-                                int num10 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
+                                var num10 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
                                     shoot + 1, Damage, num1, i, (float) num9, 0.0f);
-                                int index2 = num10;
-                                int num11 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
+                                var index2 = num10;
+                                var num11 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
                                     shoot + 2, Damage, num1, i, (float) num10, 0.0f);
                                 Main.projectile[index2].localAI[1] = (float) num11;
-                                int index3 = num11;
-                                int num12 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
+                                var index3 = num11;
+                                var num12 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY,
                                     shoot + 3, Damage, num1, i, (float) num11, 0.0f);
                                 Main.projectile[index3].localAI[1] = (float) num12;
                             }
                             else if (num8 != -1 && index1 != -1)
                             {
-                                int num9 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num6, num7, shoot + 1,
+                                var num9 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num6, num7, shoot + 1,
                                     Damage, num1, i,
                                     (float) Projectile.GetByUUID(Main.myPlayer, Main.projectile[index1].ai[0]), 0.0f);
-                                int index2 = num9;
-                                int index3 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num6, num7, shoot + 2,
+                                var index2 = num9;
+                                var index3 = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num6, num7, shoot + 2,
                                     Damage, num1, i, (float) num9, 0.0f);
                                 Main.projectile[index2].localAI[1] = (float) index3;
                                 Main.projectile[index2].netUpdate = true;
@@ -31375,8 +31375,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 1309)
                         {
-                            float SpeedX = 0.0f;
-                            float SpeedY = 0.0f;
+                            var SpeedX = 0.0f;
+                            var SpeedY = 0.0f;
                             vector2_1.X = (float) Main.mouseX + Main.screenPosition.X;
                             vector2_1.Y = (float) Main.mouseY + Main.screenPosition.Y;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX, SpeedY, shoot, Damage, num1, i,
@@ -31386,7 +31386,7 @@ namespace Terraria
                                  (Main.projPet[sItem.shoot] || sItem.shoot == 72 ||
                                   (sItem.shoot == 18 || sItem.shoot == 500) || sItem.shoot == 650) && !sItem.summon)
                         {
-                            for (int index = 0; index < 1000; ++index)
+                            for (var index = 0; index < 1000; ++index)
                             {
                                 if (Main.projectile[index].active && Main.projectile[index].owner == this.whoAmI)
                                 {
@@ -31441,26 +31441,26 @@ namespace Terraria
                                 }
                             }
 
-                            bool flag4 = false;
-                            int j1 = (int) vector2_1.Y / 16;
-                            int i1 = (int) vector2_1.X / 16;
-                            int num8 = j1;
+                            var flag4 = false;
+                            var j1 = (int) vector2_1.Y / 16;
+                            var i1 = (int) vector2_1.X / 16;
+                            var num8 = j1;
                             while (j1 < Main.maxTilesY - 10 && j1 - num8 < 30 &&
                                    (!WorldGen.SolidTile(i1, j1) &&
                                     !TileID.Sets.Platforms[(int) Main.tile[i1, j1].type]))
                                 ++j1;
                             if (!WorldGen.SolidTile(i1, j1) && !TileID.Sets.Platforms[(int) Main.tile[i1, j1].type])
                                 flag4 = true;
-                            float num9 = (float) (j1 * 16);
-                            int j2 = num8;
+                            var num9 = (float) (j1 * 16);
+                            var j2 = num8;
                             while (j2 > 10 && num8 - j2 < 30 && !WorldGen.SolidTile(i1, j2))
                                 --j2;
-                            float num10 = (float) (j2 * 16 + 16);
-                            float ai1 = num9 - num10;
-                            int num11 = 10;
+                            var num10 = (float) (j2 * 16 + 16);
+                            var ai1 = num9 - num10;
+                            var num11 = 10;
                             if ((double) ai1 > (double) (16 * num11))
                                 ai1 = (float) (16 * num11);
-                            float ai0 = num9 - ai1;
+                            var ai0 = num9 - ai1;
                             vector2_1.X = (float) ((int) ((double) vector2_1.X / 16.0) * 16);
                             if (!flag4)
                                 Projectile.NewProjectile(vector2_1.X, vector2_1.Y, 0.0f, 0.0f, shoot, Damage, num1, i,
@@ -31468,32 +31468,32 @@ namespace Terraria
                         }
                         else if (sItem.type == 3384)
                         {
-                            int num8 = this.altFunctionUse == 2 ? 1 : 0;
+                            var num8 = this.altFunctionUse == 2 ? 1 : 0;
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num6, num7, shoot, Damage, num1, i, 0.0f,
                                 (float) num8);
                         }
                         else if (sItem.type == 3473)
                         {
-                            float ai1 = (float) (((double) Main.rand.NextFloat() - 0.5) * 0.785398185253143);
-                            Vector2 vector2_4 = new Vector2(num6, num7);
+                            var ai1 = (float) (((double) Main.rand.NextFloat() - 0.5) * 0.785398185253143);
+                            var vector2_4 = new Vector2(num6, num7);
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, vector2_4.X, vector2_4.Y, shoot, Damage,
                                 num1, i, 0.0f, ai1);
                         }
                         else if (sItem.type == 3836)
                         {
-                            float ai0 = (float) ((double) Main.rand.NextFloat() * (double) speed * 0.75) *
+                            var ai0 = (float) ((double) Main.rand.NextFloat() * (double) speed * 0.75) *
                                         (float) this.direction;
-                            Vector2 velocity = new Vector2(num6, num7);
+                            var velocity = new Vector2(num6, num7);
                             Projectile.NewProjectile(vector2_1, velocity, shoot, Damage, num1, i, ai0, 0.0f);
                         }
                         else if (sItem.type == 3858)
                         {
-                            bool flag4 = this.altFunctionUse == 2;
-                            Vector2 velocity = new Vector2(num6, num7);
+                            var flag4 = this.altFunctionUse == 2;
+                            var velocity = new Vector2(num6, num7);
                             if (flag4)
                             {
                                 velocity *= 1.5f;
-                                float ai0 = (float) ((0.300000011920929 +
+                                var ai0 = (float) ((0.300000011920929 +
                                                       0.699999988079071 * (double) Main.rand.NextFloat()) *
                                                      (double) speed * 1.75) * (float) this.direction;
                                 Projectile.NewProjectile(vector2_1, velocity, 708, (int) ((double) Damage * 0.75),
@@ -31504,42 +31504,42 @@ namespace Terraria
                         }
                         else if (sItem.type == 3859)
                         {
-                            Vector2 vector2_4 = new Vector2(num6, num7);
+                            var vector2_4 = new Vector2(num6, num7);
                             shoot = 710;
                             Damage = (int) ((double) Damage * 0.699999988079071);
-                            Vector2 v2 = vector2_4 * 0.8f;
-                            Vector2 vector2_5 = v2.SafeNormalize(-Vector2.UnitY);
-                            float num8 = (float) Math.PI / 180f * (float) -this.direction;
-                            for (float num9 = -2.5f; (double) num9 < 3.0; ++num9)
+                            var v2 = vector2_4 * 0.8f;
+                            var vector2_5 = v2.SafeNormalize(-Vector2.UnitY);
+                            var num8 = (float) Math.PI / 180f * (float) -this.direction;
+                            for (var num9 = -2.5f; (double) num9 < 3.0; ++num9)
                                 Projectile.NewProjectile(vector2_1,
                                     (v2 + vector2_5 * num9 * 0.5f).RotatedBy((double) num9 * (double) num8,
                                         new Vector2()), shoot, Damage, num1, i, 0.0f, 0.0f);
                         }
                         else if (sItem.type == 3870)
                         {
-                            Vector2 vector2_4 = Vector2.Normalize(new Vector2(num6, num7)) * 40f * sItem.scale;
+                            var vector2_4 = Vector2.Normalize(new Vector2(num6, num7)) * 40f * sItem.scale;
                             if (Collision.CanHit(vector2_1, 0, 0, vector2_1 + vector2_4, 0, 0))
                                 vector2_1 += vector2_4;
-                            Vector2 v2 = new Vector2(num6, num7) * 0.8f;
-                            Vector2 vector2_5 = v2.SafeNormalize(-Vector2.UnitY);
-                            float num8 = (float) Math.PI / 180f * (float) -this.direction;
-                            for (int index = 0; index <= 2; ++index)
+                            var v2 = new Vector2(num6, num7) * 0.8f;
+                            var vector2_5 = v2.SafeNormalize(-Vector2.UnitY);
+                            var num8 = (float) Math.PI / 180f * (float) -this.direction;
+                            for (var index = 0; index <= 2; ++index)
                                 Projectile.NewProjectile(vector2_1,
                                     (v2 + vector2_5 * (float) index * 1f).RotatedBy((double) index * (double) num8,
                                         new Vector2()), shoot, Damage, num1, i, 0.0f, 0.0f);
                         }
                         else if (sItem.type == 3542)
                         {
-                            float num8 = (float) (((double) Main.rand.NextFloat() - 0.5) * 0.785398185253143 *
+                            var num8 = (float) (((double) Main.rand.NextFloat() - 0.5) * 0.785398185253143 *
                                                   0.699999988079071);
-                            for (int index = 0;
+                            for (var index = 0;
                                 index < 10 && !Collision.CanHit(vector2_1, 0, 0,
                                     vector2_1 + new Vector2(num6, num7).RotatedBy((double) num8, new Vector2()) * 100f,
                                     0, 0);
                                 ++index)
                                 num8 = (float) (((double) Main.rand.NextFloat() - 0.5) * 0.785398185253143 *
                                                 0.699999988079071);
-                            Vector2 vector2_4 = new Vector2(num6, num7).RotatedBy((double) num8, new Vector2()) *
+                            var vector2_4 = new Vector2(num6, num7).RotatedBy((double) num8, new Vector2()) *
                                                 (float) (0.949999988079071 +
                                                          (double) Main.rand.NextFloat() * 0.300000011920929);
                             Projectile.NewProjectile(vector2_1.X, vector2_1.Y, vector2_4.X, vector2_4.Y, shoot, Damage,
@@ -31547,14 +31547,14 @@ namespace Terraria
                         }
                         else if (sItem.type == 3779)
                         {
-                            float num8 = Main.rand.NextFloat() * 6.283185f;
-                            for (int index = 0;
+                            var num8 = Main.rand.NextFloat() * 6.283185f;
+                            for (var index = 0;
                                 index < 10 && !Collision.CanHit(vector2_1, 0, 0,
                                     vector2_1 + new Vector2(num6, num7).RotatedBy((double) num8, new Vector2()) * 100f,
                                     0, 0);
                                 ++index)
                                 num8 = Main.rand.NextFloat() * 6.283185f;
-                            Vector2 vector2_4 = new Vector2(num6, num7).RotatedBy((double) num8, new Vector2()) *
+                            var vector2_4 = new Vector2(num6, num7).RotatedBy((double) num8, new Vector2()) *
                                                 (float) (0.949999988079071 +
                                                          (double) Main.rand.NextFloat() * 0.300000011920929);
                             Projectile.NewProjectile(vector2_1 + vector2_4 * 30f, Vector2.Zero, shoot, Damage, num1, i,
@@ -31562,12 +31562,12 @@ namespace Terraria
                         }
                         else if (sItem.type == 3787)
                         {
-                            float f3 = Main.rand.NextFloat() * 6.283185f;
-                            float num8 = 20f;
-                            float num9 = 60f;
-                            Vector2 position = vector2_1 + f3.ToRotationVector2() *
+                            var f3 = Main.rand.NextFloat() * 6.283185f;
+                            var num8 = 20f;
+                            var num9 = 60f;
+                            var position = vector2_1 + f3.ToRotationVector2() *
                                                MathHelper.Lerp(num8, num9, Main.rand.NextFloat());
-                            for (int index = 0; index < 50; ++index)
+                            for (var index = 0; index < 50; ++index)
                             {
                                 position = vector2_1 + f3.ToRotationVector2() *
                                            MathHelper.Lerp(num8, num9, Main.rand.NextFloat());
@@ -31578,17 +31578,17 @@ namespace Terraria
                                     break;
                             }
 
-                            Vector2 v2 = Main.MouseWorld - position;
-                            Vector2 defaultValue = new Vector2(num6, num7).SafeNormalize(Vector2.UnitY) * speed;
-                            Vector2 velocity = Vector2.Lerp(v2.SafeNormalize(defaultValue) * speed, defaultValue,
+                            var v2 = Main.MouseWorld - position;
+                            var defaultValue = new Vector2(num6, num7).SafeNormalize(Vector2.UnitY) * speed;
+                            var velocity = Vector2.Lerp(v2.SafeNormalize(defaultValue) * speed, defaultValue,
                                 0.25f);
                             Projectile.NewProjectile(position, velocity, shoot, Damage, num1, i, 0.0f, 0.0f);
                         }
                         else if (sItem.type == 3788)
                         {
-                            Vector2 v2 = new Vector2(num6, num7);
-                            float num8 = 0.7853982f;
-                            for (int index = 0; index < 2; ++index)
+                            var v2 = new Vector2(num6, num7);
+                            var num8 = 0.7853982f;
+                            for (var index = 0; index < 2; ++index)
                             {
                                 Projectile.NewProjectile(vector2_1,
                                     v2 + v2.SafeNormalize(Vector2.Zero).RotatedBy(
@@ -31615,13 +31615,13 @@ namespace Terraria
                                 0.0f);
                         else if (sItem.type == 3546)
                         {
-                            for (int index = 0; index < 2; ++index)
+                            for (var index = 0; index < 2; ++index)
                             {
-                                float num8 = num6;
-                                float num9 = num7;
-                                float num10 = num8 + (float) Main.rand.Next(-40, 41) * 0.05f;
-                                float num11 = num9 + (float) Main.rand.Next(-40, 41) * 0.05f;
-                                Vector2 vector2_4 =
+                                var num8 = num6;
+                                var num9 = num7;
+                                var num10 = num8 + (float) Main.rand.Next(-40, 41) * 0.05f;
+                                var num11 = num9 + (float) Main.rand.Next(-40, 41) * 0.05f;
+                                var vector2_4 =
                                     vector2_1 + Vector2.Normalize(
                                         new Vector2(num10, num11).RotatedBy(-1.57079637050629 * (double) this.direction,
                                             new Vector2())) * 6f;
@@ -31631,10 +31631,10 @@ namespace Terraria
                         }
                         else if (sItem.type == 3350)
                         {
-                            float num8 = num6;
-                            float num9 = num7;
-                            float num10 = num8 + (float) Main.rand.Next(-1, 2) * 0.5f;
-                            float num11 = num9 + (float) Main.rand.Next(-1, 2) * 0.5f;
+                            var num8 = num6;
+                            var num9 = num7;
+                            var num10 = num8 + (float) Main.rand.Next(-1, 2) * 0.5f;
+                            var num11 = num9 + (float) Main.rand.Next(-1, 2) * 0.5f;
                             if (Collision.CanHitLine(this.Center, 0, 0, vector2_1 + new Vector2(num10, num11) * 2f, 0,
                                 0))
                                 vector2_1 += new Vector2(num10, num11);
@@ -31668,7 +31668,7 @@ namespace Terraria
                         }
                         else
                         {
-                            int index = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num6, num7, shoot, Damage,
+                            var index = Projectile.NewProjectile(vector2_1.X, vector2_1.Y, num6, num7, shoot, Damage,
                                 num1, i, 0.0f, 0.0f);
                             if (sItem.type == 726)
                                 Main.projectile[index].magic = true;
@@ -31719,12 +31719,12 @@ namespace Terraria
 
                     if (this.itemAnimation > 0 && this.itemTime == 0 && this.controlUseItem)
                     {
-                        int tileTargetX = Player.tileTargetX;
-                        int tileTargetY = Player.tileTargetY;
+                        var tileTargetX = Player.tileTargetX;
+                        var tileTargetY = Player.tileTargetY;
                         if (sItem.type == 509)
                         {
-                            int index1 = -1;
-                            for (int index2 = 0; index2 < 58; ++index2)
+                            var index1 = -1;
+                            for (var index2 = 0; index2 < 58; ++index2)
                             {
                                 if (this.inventory[index2].stack > 0 && this.inventory[index2].type == 530)
                                 {
@@ -31745,8 +31745,8 @@ namespace Terraria
                         }
                         else if (sItem.type == 850)
                         {
-                            int index1 = -1;
-                            for (int index2 = 0; index2 < 58; ++index2)
+                            var index1 = -1;
+                            for (var index2 = 0; index2 < 58; ++index2)
                             {
                                 if (this.inventory[index2].stack > 0 && this.inventory[index2].type == 530)
                                 {
@@ -31768,8 +31768,8 @@ namespace Terraria
 
                         if (sItem.type == 851)
                         {
-                            int index1 = -1;
-                            for (int index2 = 0; index2 < 58; ++index2)
+                            var index1 = -1;
+                            for (var index2 = 0; index2 < 58; ++index2)
                             {
                                 if (this.inventory[index2].stack > 0 && this.inventory[index2].type == 530)
                                 {
@@ -31791,8 +31791,8 @@ namespace Terraria
 
                         if (sItem.type == 3612)
                         {
-                            int index1 = -1;
-                            for (int index2 = 0; index2 < 58; ++index2)
+                            var index1 = -1;
+                            for (var index2 = 0; index2 < 58; ++index2)
                             {
                                 if (this.inventory[index2].stack > 0 && this.inventory[index2].type == 530)
                                 {
@@ -31857,10 +31857,10 @@ namespace Terraria
 
                         if (sItem.type == 3620)
                         {
-                            Tile tile = Main.tile[tileTargetX, tileTargetY];
+                            var tile = Main.tile[tileTargetX, tileTargetY];
                             if (tile != null && tile.actuator())
                             {
-                                bool flag3 = tile.inActive();
+                                var flag3 = tile.inActive();
                                 if ((!this.ActuationRodLock || this.ActuationRodLockSetting == tile.inActive()) &&
                                     (Wiring.Actuate(tileTargetX, tileTargetY) && flag3 != tile.inActive()))
                                 {
@@ -31875,9 +31875,9 @@ namespace Terraria
 
                         if (sItem.type == 3625)
                         {
-                            Point point = new Point(Player.tileTargetX, Player.tileTargetY);
+                            var point = new Point(Player.tileTargetX, Player.tileTargetY);
                             this.itemTime = sItem.useTime;
-                            WiresUI.Settings.MultiToolMode toolMode = WiresUI.Settings.ToolMode;
+                            var toolMode = WiresUI.Settings.ToolMode;
                             WiresUI.Settings.ToolMode &= ~WiresUI.Settings.MultiToolMode.Actuator;
                             if (Main.netMode == 1)
                                 NetMessage.SendData(109, -1, -1, (NetworkText) null, point.X, (float) point.Y,
@@ -31892,21 +31892,21 @@ namespace Terraria
                 if (this.itemAnimation > 0 && this.itemTime == 0 && (sItem.type == 507 || sItem.type == 508))
                 {
                     this.itemTime = sItem.useTime;
-                    Vector2 vector2 = new Vector2(this.position.X + (float) this.width * 0.5f,
+                    var vector2 = new Vector2(this.position.X + (float) this.width * 0.5f,
                         this.position.Y + (float) this.height * 0.5f);
-                    float num1 = (float) Main.mouseX + Main.screenPosition.X - vector2.X;
-                    float num2 = (float) Main.mouseY + Main.screenPosition.Y - vector2.Y;
-                    float num3 = (float) Math.Sqrt((double) num1 * (double) num1 + (double) num2 * (double) num2) /
+                    var num1 = (float) Main.mouseX + Main.screenPosition.X - vector2.X;
+                    var num2 = (float) Main.mouseY + Main.screenPosition.Y - vector2.Y;
+                    var num3 = (float) Math.Sqrt((double) num1 * (double) num1 + (double) num2 * (double) num2) /
                                  (float) (Main.screenHeight / 2);
                     if ((double) num3 > 1.0)
                         num3 = 1f;
-                    float number2 = (float) ((double) num3 * 2.0 - 1.0);
+                    var number2 = (float) ((double) num3 * 2.0 - 1.0);
                     if ((double) number2 < -1.0)
                         number2 = -1f;
                     if ((double) number2 > 1.0)
                         number2 = 1f;
                     Main.harpNote = number2;
-                    LegacySoundStyle type2 = SoundID.Item26;
+                    var type2 = SoundID.Item26;
                     if (sItem.type == 507)
                         type2 = SoundID.Item35;
                     Main.PlaySound(type2, this.position);
@@ -31937,11 +31937,11 @@ namespace Terraria
                         if (sItem.type == 205 || sItem.type == 3032 &&
                             Main.tile[Player.tileTargetX, Player.tileTargetY].liquidType() == (byte) 0)
                         {
-                            int num1 = (int) Main.tile[Player.tileTargetX, Player.tileTargetY].liquidType();
-                            int num2 = 0;
-                            for (int index1 = Player.tileTargetX - 1; index1 <= Player.tileTargetX + 1; ++index1)
+                            var num1 = (int) Main.tile[Player.tileTargetX, Player.tileTargetY].liquidType();
+                            var num2 = 0;
+                            for (var index1 = Player.tileTargetX - 1; index1 <= Player.tileTargetX + 1; ++index1)
                             {
-                                for (int index2 = Player.tileTargetY - 1; index2 <= Player.tileTargetY + 1; ++index2)
+                                for (var index2 = Player.tileTargetY - 1; index2 <= Player.tileTargetY + 1; ++index2)
                                 {
                                     if ((int) Main.tile[index1, index2].liquidType() == num1)
                                         num2 += (int) Main.tile[index1, index2].liquid;
@@ -31951,7 +31951,7 @@ namespace Terraria
                             if (Main.tile[Player.tileTargetX, Player.tileTargetY].liquid > (byte) 0 &&
                                 (num2 > 100 || sItem.type == 3032))
                             {
-                                int liquidType = (int) Main.tile[Player.tileTargetX, Player.tileTargetY].liquidType();
+                                var liquidType = (int) Main.tile[Player.tileTargetX, Player.tileTargetY].liquidType();
                                 if (sItem.type != 3032)
                                 {
                                     if (!Main.tile[Player.tileTargetX, Player.tileTargetY].lava())
@@ -31976,7 +31976,7 @@ namespace Terraria
 
                                 Main.PlaySound(19, (int) this.position.X, (int) this.position.Y, 1, 1f, 0.0f);
                                 this.itemTime = sItem.useTime;
-                                int liquid = (int) Main.tile[Player.tileTargetX, Player.tileTargetY].liquid;
+                                var liquid = (int) Main.tile[Player.tileTargetX, Player.tileTargetY].liquid;
                                 Main.tile[Player.tileTargetX, Player.tileTargetY].liquid = (byte) 0;
                                 Main.tile[Player.tileTargetX, Player.tileTargetY].lava(false);
                                 Main.tile[Player.tileTargetX, Player.tileTargetY].honey(false);
@@ -31985,15 +31985,15 @@ namespace Terraria
                                     NetMessage.sendWater(Player.tileTargetX, Player.tileTargetY);
                                 else
                                     Liquid.AddWater(Player.tileTargetX, Player.tileTargetY);
-                                for (int index1 = Player.tileTargetX - 1; index1 <= Player.tileTargetX + 1; ++index1)
+                                for (var index1 = Player.tileTargetX - 1; index1 <= Player.tileTargetX + 1; ++index1)
                                 {
-                                    for (int index2 = Player.tileTargetY - 1;
+                                    for (var index2 = Player.tileTargetY - 1;
                                         index2 <= Player.tileTargetY + 1;
                                         ++index2)
                                     {
                                         if (liquid < 256 && (int) Main.tile[index1, index2].liquidType() == num1)
                                         {
-                                            int num3 = (int) Main.tile[index1, index2].liquid;
+                                            var num3 = (int) Main.tile[index1, index2].liquid;
                                             if (num3 + liquid > (int) byte.MaxValue)
                                                 num3 = (int) byte.MaxValue - liquid;
                                             liquid += num3;
@@ -32089,7 +32089,7 @@ namespace Terraria
 
                 if (sItem.pick > 0 || sItem.axe > 0 || sItem.hammer > 0)
                 {
-                    bool flag3 =
+                    var flag3 =
                         (double) this.position.X / 16.0 - (double) Player.tileRangeX - (double) sItem.tileBoost <=
                         (double) Player.tileTargetX &&
                         ((double) this.position.X + (double) this.width) / 16.0 + (double) Player.tileRangeX +
@@ -32102,8 +32102,8 @@ namespace Terraria
                         flag3 = false;
                     if (flag3)
                     {
-                        int damageAmount1 = 0;
-                        bool flag4 = true;
+                        var damageAmount1 = 0;
+                        var flag4 = true;
                         if (!Main.GamepadDisableCursorItemIcon)
                         {
                             this.showItemIcon = true;
@@ -32131,7 +32131,7 @@ namespace Terraria
                                 flag4 = false;
                             if (this.toolTime == 0 && this.itemAnimation > 0 && this.controlUseItem)
                             {
-                                int tileId = this.hitTile.HitObject(Player.tileTargetX, Player.tileTargetY, 1);
+                                var tileId = this.hitTile.HitObject(Player.tileTargetX, Player.tileTargetY, 1);
                                 if (Main.tileNoFail[(int) Main.tile[Player.tileTargetX, Player.tileTargetY].type])
                                     damageAmount1 = 100;
                                 if (Main.tileHammer[(int) Main.tile[Player.tileTargetX, Player.tileTargetY].type])
@@ -32233,8 +32233,8 @@ namespace Terraria
                                 {
                                     flag4 = false;
                                     this.itemTime = sItem.useTime;
-                                    int num1 = damageAmount1 + (int) ((double) sItem.hammer * 1.25);
-                                    int damageAmount2 = 100;
+                                    var num1 = damageAmount1 + (int) ((double) sItem.hammer * 1.25);
+                                    var damageAmount2 = 100;
                                     if (Main.tile[Player.tileTargetX, Player.tileTargetY - 1].active() &&
                                         Main.tile[Player.tileTargetX, Player.tileTargetY - 1].type == (ushort) 10)
                                         damageAmount2 = 0;
@@ -32246,8 +32246,8 @@ namespace Terraria
                                         this.hitTile.Clear(tileId);
                                         if (this.poundRelease)
                                         {
-                                            int tileTargetX = Player.tileTargetX;
-                                            int tileTargetY = Player.tileTargetY;
+                                            var tileTargetX = Player.tileTargetX;
+                                            var tileTargetY = Player.tileTargetY;
                                             if (TileID.Sets.Platforms[(int) Main.tile[tileTargetX, tileTargetY].type])
                                             {
                                                 if (Main.tile[tileTargetX, tileTargetY].halfBrick())
@@ -32260,8 +32260,8 @@ namespace Terraria
                                                 }
                                                 else
                                                 {
-                                                    int slope1 = 1;
-                                                    int slope2 = 2;
+                                                    var slope1 = 1;
+                                                    var slope2 = 2;
                                                     if (TileID.Sets.Platforms
                                                             [(int) Main.tile[tileTargetX + 1, tileTargetY - 1].type] ||
                                                         TileID.Sets.Platforms[
@@ -32276,7 +32276,7 @@ namespace Terraria
                                                     if (Main.tile[tileTargetX, tileTargetY].slope() == (byte) 0)
                                                     {
                                                         WorldGen.SlopeTile(tileTargetX, tileTargetY, slope1);
-                                                        int num2 = (int) Main.tile[tileTargetX, tileTargetY].slope();
+                                                        var num2 = (int) Main.tile[tileTargetX, tileTargetY].slope();
                                                         if (Main.netMode == 1)
                                                             NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                                 (float) Player.tileTargetX, (float) Player.tileTargetY,
@@ -32286,7 +32286,7 @@ namespace Terraria
                                                              slope1)
                                                     {
                                                         WorldGen.SlopeTile(tileTargetX, tileTargetY, slope2);
-                                                        int num2 = (int) Main.tile[tileTargetX, tileTargetY].slope();
+                                                        var num2 = (int) Main.tile[tileTargetX, tileTargetY].slope();
                                                         if (Main.netMode == 1)
                                                             NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                                 (float) Player.tileTargetX, (float) Player.tileTargetY,
@@ -32295,7 +32295,7 @@ namespace Terraria
                                                     else
                                                     {
                                                         WorldGen.SlopeTile(tileTargetX, tileTargetY, 0);
-                                                        int num2 = (int) Main.tile[tileTargetX, tileTargetY].slope();
+                                                        var num2 = (int) Main.tile[tileTargetX, tileTargetY].slope();
                                                         if (Main.netMode == 1)
                                                             NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                                 (float) Player.tileTargetX, (float) Player.tileTargetY,
@@ -32318,7 +32318,7 @@ namespace Terraria
                                             }
                                             else if (Main.tile[tileTargetX, tileTargetY].type == (ushort) 137)
                                             {
-                                                int num2 = 0;
+                                                var num2 = 0;
                                                 switch ((int) Main.tile[tileTargetX, tileTargetY].frameY / 18)
                                                 {
                                                     case 0:
@@ -32388,22 +32388,22 @@ namespace Terraria
                                             }
                                             else if (Main.tile[tileTargetX, tileTargetY].type == (ushort) 442)
                                             {
-                                                Tile tile1 = Main.tile[tileTargetX, tileTargetY - 1];
-                                                Tile tile2 = Main.tile[tileTargetX, tileTargetY + 1];
-                                                Tile tile3 = Main.tile[tileTargetX - 1, tileTargetY];
-                                                Tile tile4 = Main.tile[tileTargetX + 1, tileTargetY];
-                                                Tile tile5 = Main.tile[tileTargetX - 1, tileTargetY + 1];
-                                                Tile tile6 = Main.tile[tileTargetX + 1, tileTargetY + 1];
-                                                Tile tile7 = Main.tile[tileTargetX - 1, tileTargetY - 1];
-                                                Tile tile8 = Main.tile[tileTargetX + 1, tileTargetY - 1];
-                                                int index1 = -1;
-                                                int index2 = -1;
-                                                int index3 = -1;
-                                                int index4 = -1;
-                                                int num2 = -1;
-                                                int num3 = -1;
-                                                int num4 = -1;
-                                                int num5 = -1;
+                                                var tile1 = Main.tile[tileTargetX, tileTargetY - 1];
+                                                var tile2 = Main.tile[tileTargetX, tileTargetY + 1];
+                                                var tile3 = Main.tile[tileTargetX - 1, tileTargetY];
+                                                var tile4 = Main.tile[tileTargetX + 1, tileTargetY];
+                                                var tile5 = Main.tile[tileTargetX - 1, tileTargetY + 1];
+                                                var tile6 = Main.tile[tileTargetX + 1, tileTargetY + 1];
+                                                var tile7 = Main.tile[tileTargetX - 1, tileTargetY - 1];
+                                                var tile8 = Main.tile[tileTargetX + 1, tileTargetY - 1];
+                                                var index1 = -1;
+                                                var index2 = -1;
+                                                var index3 = -1;
+                                                var index4 = -1;
+                                                var num2 = -1;
+                                                var num3 = -1;
+                                                var num4 = -1;
+                                                var num5 = -1;
                                                 if (tile1 != null && tile1.nactive() && !tile1.bottomSlope())
                                                     index2 = (int) tile1.type;
                                                 if (tile2 != null && tile2.nactive() &&
@@ -32423,10 +32423,10 @@ namespace Terraria
                                                     num4 = (int) tile7.type;
                                                 if (tile8 != null && tile8.nactive())
                                                     num5 = (int) tile8.type;
-                                                bool flag5 = false;
-                                                bool flag6 = false;
-                                                bool flag7 = false;
-                                                bool flag8 = false;
+                                                var flag5 = false;
+                                                var flag6 = false;
+                                                var flag7 = false;
+                                                var flag8 = false;
                                                 if (index1 >= 0 && Main.tileSolid[index1] &&
                                                     (!Main.tileNoAttach[index1] || TileID.Sets.Platforms[index1]) &&
                                                     ((tile2.bottomSlope() || tile2.slope() == (byte) 0) &&
@@ -32450,7 +32450,7 @@ namespace Terraria
                                                      !tile4.halfBrick()) ||
                                                     (index4 == 124 || index4 == 5 && num5 == 5 && num3 == 5))
                                                     flag7 = true;
-                                                int num6 = (int) Main.tile[tileTargetX, tileTargetY].frameX / 22;
+                                                var num6 = (int) Main.tile[tileTargetX, tileTargetY].frameX / 22;
                                                 short num7 = -2;
                                                 switch (num6)
                                                 {
@@ -32495,9 +32495,9 @@ namespace Terraria
                                                      !Main.tileSolidTop[
                                                          (int) Main.tile[Player.tileTargetX, Player.tileTargetY].type])
                                             {
-                                                int num2 = 1;
-                                                int slope1 = 1;
-                                                int slope2 = 2;
+                                                var num2 = 1;
+                                                var slope1 = 1;
+                                                var slope2 = 2;
                                                 if ((WorldGen.SolidTile(tileTargetX + 1, tileTargetY) ||
                                                      Main.tile[tileTargetX + 1, tileTargetY].slope() == (byte) 1 ||
                                                      Main.tile[tileTargetX + 1, tileTargetY].slope() == (byte) 3) &&
@@ -32539,7 +32539,7 @@ namespace Terraria
                                                 else
                                                     WorldGen.SlopeTile(tileTargetX, tileTargetY, 0);
 
-                                                int num3 = (int) Main.tile[tileTargetX, tileTargetY].slope();
+                                                var num3 = (int) Main.tile[tileTargetX, tileTargetY].slope();
                                                 if (Main.netMode == 1)
                                                     NetMessage.SendData(17, -1, -1, (NetworkText) null, 14,
                                                         (float) Player.tileTargetX, (float) Player.tileTargetY,
@@ -32572,16 +32572,16 @@ namespace Terraria
 
                         if (this.releaseUseItem)
                             this.poundRelease = true;
-                        int index5 = Player.tileTargetX;
-                        int index6 = Player.tileTargetY;
-                        bool flag9 = true;
+                        var index5 = Player.tileTargetX;
+                        var index6 = Player.tileTargetY;
+                        var flag9 = true;
                         if (Main.tile[index5, index6].wall > (byte) 0)
                         {
                             if (!Main.wallHouse[(int) Main.tile[index5, index6].wall])
                             {
-                                for (int index1 = index5 - 1; index1 < index5 + 2; ++index1)
+                                for (var index1 = index5 - 1; index1 < index5 + 2; ++index1)
                                 {
-                                    for (int index2 = index6 - 1; index2 < index6 + 2; ++index2)
+                                    for (var index2 = index6 - 1; index2 < index6 + 2; ++index2)
                                     {
                                         if ((int) Main.tile[index1, index2].wall !=
                                             (int) Main.tile[index5, index6].wall)
@@ -32598,19 +32598,19 @@ namespace Terraria
 
                         if (flag9 && !Main.tile[index5, index6].active())
                         {
-                            int num1 = -1;
+                            var num1 = -1;
                             if (((double) Main.mouseX + (double) Main.screenPosition.X) / 16.0 <
                                 Math.Round(((double) Main.mouseX + (double) Main.screenPosition.X) / 16.0))
                                 num1 = 0;
-                            int num2 = -1;
+                            var num2 = -1;
                             if (((double) Main.mouseY + (double) Main.screenPosition.Y) / 16.0 <
                                 Math.Round(((double) Main.mouseY + (double) Main.screenPosition.Y) / 16.0))
                                 num2 = 0;
-                            for (int index1 = Player.tileTargetX + num1;
+                            for (var index1 = Player.tileTargetX + num1;
                                 index1 <= Player.tileTargetX + num1 + 1;
                                 ++index1)
                             {
-                                for (int index2 = Player.tileTargetY + num2;
+                                for (var index2 = Player.tileTargetY + num2;
                                     index2 <= Player.tileTargetY + num2 + 1;
                                     ++index2)
                                 {
@@ -32622,9 +32622,9 @@ namespace Terraria
                                         {
                                             if (!Main.wallHouse[(int) Main.tile[index5, index6].wall])
                                             {
-                                                for (int index3 = index5 - 1; index3 < index5 + 2; ++index3)
+                                                for (var index3 = index5 - 1; index3 < index5 + 2; ++index3)
                                                 {
-                                                    for (int index4 = index6 - 1; index4 < index6 + 2; ++index4)
+                                                    for (var index4 = index6 - 1; index4 < index6 + 2; ++index4)
                                                     {
                                                         if ((int) Main.tile[index3, index4].wall !=
                                                             (int) Main.tile[index5, index6].wall)
@@ -32649,13 +32649,13 @@ namespace Terraria
                              !Main.tileHammer[(int) Main.tile[index5, index6].type] && !this.poundRelease) &&
                             (this.toolTime == 0 && this.itemAnimation > 0 && (this.controlUseItem && sItem.hammer > 0)))
                         {
-                            bool flag5 = true;
+                            var flag5 = true;
                             if (!Main.wallHouse[(int) Main.tile[index5, index6].wall])
                             {
                                 flag5 = false;
-                                for (int index1 = index5 - 1; index1 < index5 + 2; ++index1)
+                                for (var index1 = index5 - 1; index1 < index5 + 2; ++index1)
                                 {
-                                    for (int index2 = index6 - 1; index2 < index6 + 2; ++index2)
+                                    for (var index2 = index6 - 1; index2 < index6 + 2; ++index2)
                                     {
                                         if (Main.tile[index1, index2].wall == (byte) 0 ||
                                             Main.wallHouse[(int) Main.tile[index1, index2].wall])
@@ -32669,8 +32669,8 @@ namespace Terraria
 
                             if (flag5)
                             {
-                                int tileId = this.hitTile.HitObject(index5, index6, 2);
-                                int damageAmount2 = (int) ((double) sItem.hammer * 1.5);
+                                var tileId = this.hitTile.HitObject(index5, index6, 2);
+                                var damageAmount2 = (int) ((double) sItem.hammer * 1.5);
                                 if (this.hitTile.AddDamage(tileId, damageAmount2, true) >= 100)
                                 {
                                     this.hitTile.Clear(tileId);
@@ -32708,8 +32708,8 @@ namespace Terraria
                     if ((double) vector2.X > 50.0 && (double) vector2.X < (double) (Main.maxTilesX * 16 - 50) &&
                         ((double) vector2.Y > 50.0 && (double) vector2.Y < (double) (Main.maxTilesY * 16 - 50)))
                     {
-                        int index1 = (int) ((double) vector2.X / 16.0);
-                        int index2 = (int) ((double) vector2.Y / 16.0);
+                        var index1 = (int) ((double) vector2.X / 16.0);
+                        var index2 = (int) ((double) vector2.Y / 16.0);
                         if ((Main.tile[index1, index2].wall != (byte) 87 || (double) index2 <= Main.worldSurface ||
                              NPC.downedPlantBoss) && !Collision.SolidCollision(vector2, this.width, this.height))
                         {
@@ -32719,7 +32719,7 @@ namespace Terraria
                             if (this.chaosState)
                             {
                                 this.statLife -= this.statLifeMax2 / 7;
-                                PlayerDeathReason damageSource = PlayerDeathReason.ByOther(13);
+                                var damageSource = PlayerDeathReason.ByOther(13);
                                 if (Main.rand.Next(2) == 0)
                                     damageSource = PlayerDeathReason.ByOther(this.Male ? 14 : 15);
                                 if (this.statLife <= 0)
@@ -32780,17 +32780,17 @@ namespace Terraria
 
             if (sItem.type == 3542)
             {
-                Vector2 vector2_1 = Main.OffsetsPlayerOnhand[this.bodyFrame.Y / 56] * 2f;
+                var vector2_1 = Main.OffsetsPlayerOnhand[this.bodyFrame.Y / 56] * 2f;
                 if (this.direction != 1)
                     vector2_1.X = (float) this.bodyFrame.Width - vector2_1.X;
                 if ((double) this.gravDir != 1.0)
                     vector2_1.Y = (float) this.bodyFrame.Height - vector2_1.Y;
                 vector2_1 -= new Vector2((float) (this.bodyFrame.Width - this.width),
                                  (float) (this.bodyFrame.Height - 42)) / 2f;
-                Vector2 vector2_2 = this.RotatedRelativePoint(this.position + vector2_1, true) - this.velocity;
-                for (int index = 0; index < 4; ++index)
+                var vector2_2 = this.RotatedRelativePoint(this.position + vector2_1, true) - this.velocity;
+                for (var index = 0; index < 4; ++index)
                 {
-                    Dust dust = Main.dust[
+                    var dust = Main.dust[
                         Dust.NewDust(this.Center, 0, 0, 242, (float) (this.direction * 2), 0.0f, 150, new Color(),
                             1.3f)];
                     dust.position = vector2_2;
@@ -32812,8 +32812,8 @@ namespace Terraria
                  (sItem.type == 1450 || sItem.type == 1991 || (sItem.type == 3183 || sItem.type == 3542)) ||
                  sItem.type == 3779) && this.itemAnimation > 0)
             {
-                bool flag2 = false;
-                Microsoft.Xna.Framework.Rectangle r =
+                var flag2 = false;
+                var r =
                     new Microsoft.Xna.Framework.Rectangle((int) this.itemLocation.X, (int) this.itemLocation.Y, 32, 32);
                 if (!Main.dedServ)
                     r = new Microsoft.Xna.Framework.Rectangle((int) this.itemLocation.X, (int) this.itemLocation.Y,
@@ -32859,12 +32859,12 @@ namespace Terraria
                     }
                 }
 
-                double gravDir = (double) this.gravDir;
+                var gravDir = (double) this.gravDir;
                 if (sItem.type == 1450 && Main.rand.Next(3) == 0)
                 {
-                    int index = -1;
-                    float x = (float) (r.X + Main.rand.Next(r.Width));
-                    float y = (float) (r.Y + Main.rand.Next(r.Height));
+                    var index = -1;
+                    var x = (float) (r.X + Main.rand.Next(r.Width));
+                    var y = (float) (r.Y + Main.rand.Next(r.Height));
                     if (Main.rand.Next(500) == 0)
                         index = Gore.NewGore(new Vector2(x, y), new Vector2(), 415,
                             (float) Main.rand.Next(51, 101) * 0.01f);
@@ -32892,16 +32892,16 @@ namespace Terraria
                 if (sItem.type == 3779)
                 {
                     flag2 = true;
-                    Vector2 vector2_1 = this.itemLocation + new Vector2((float) (this.direction * 30), -8f);
-                    int itemAnimation = this.itemAnimation;
-                    int num = this.itemAnimationMax - 2;
-                    Vector2 vector2_2 = vector2_1 - this.position;
-                    float amount = 0.0f;
+                    var vector2_1 = this.itemLocation + new Vector2((float) (this.direction * 30), -8f);
+                    var itemAnimation = this.itemAnimation;
+                    var num = this.itemAnimationMax - 2;
+                    var vector2_2 = vector2_1 - this.position;
+                    var amount = 0.0f;
                     while ((double) amount < 1.0)
                     {
-                        Vector2 vector2_3 = Vector2.Lerp(this.oldPosition + vector2_2 + new Vector2(0.0f, this.gfxOffY),
+                        var vector2_3 = Vector2.Lerp(this.oldPosition + vector2_2 + new Vector2(0.0f, this.gfxOffY),
                             vector2_1, amount);
-                        Dust dust = Main.dust[
+                        var dust = Main.dust[
                             Dust.NewDust(vector2_1 - Vector2.One * 8f, 16, 16, 27, 0.0f, -2f, 0, new Color(), 1f)];
                         dust.noGravity = true;
                         dust.position = vector2_3;
@@ -32930,19 +32930,19 @@ namespace Terraria
                                 break;
                         }
 
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, Type,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, Type,
                             (float) (this.direction * 2), 0.0f, 150, new Color(), 1.3f);
                         Main.dust[index].velocity *= 0.2f;
                     }
 
                     if (sItem.type == 2880 && Main.rand.Next(2) == 0)
                     {
-                        int Type = Utils.SelectRandom<int>(Main.rand, new int[2]
+                        var Type = Utils.SelectRandom<int>(Main.rand, new int[2]
                         {
                             226,
                             229
                         });
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, Type,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, Type,
                             (float) (this.direction * 2), 0.0f, 150, new Color(), 1f);
                         Main.dust[index].velocity *= 0.2f;
                         Main.dust[index].noGravity = true;
@@ -32957,7 +32957,7 @@ namespace Terraria
                         if (Main.rand.Next(5) == 0)
                             Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 14,
                                 (float) (this.direction * 2), 0.0f, 150, new Color(), 1.4f);
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 27,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 27,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                             new Color(), 1.2f);
                         Main.dust[index].noGravity = true;
@@ -32967,7 +32967,7 @@ namespace Terraria
 
                     if (sItem.type == 723 && Main.rand.Next(2) == 0)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 64, 0.0f,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 64, 0.0f,
                             0.0f, 150, new Color(), 1.2f);
                         Main.dust[index].noGravity = true;
                     }
@@ -32984,12 +32984,12 @@ namespace Terraria
 
                     if (sItem.type == 3065)
                     {
-                        int index1 = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 58, 0.0f,
+                        var index1 = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 58, 0.0f,
                             0.0f, 150, new Color(), 1.2f);
                         Main.dust[index1].velocity *= 0.5f;
                         if (Main.rand.Next(8) == 0)
                         {
-                            int index2 = Gore.NewGore(new Vector2((float) r.Center.X, (float) r.Center.Y),
+                            var index2 = Gore.NewGore(new Vector2((float) r.Center.X, (float) r.Center.Y),
                                 new Vector2(), 16, 1f);
                             Main.gore[index2].velocity *= 0.5f;
                             Main.gore[index2].velocity += new Vector2((float) this.direction, 0.0f);
@@ -32998,14 +32998,14 @@ namespace Terraria
 
                     if (sItem.type == 190)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 40,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 40,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 0,
                             new Color(), 1.2f);
                         Main.dust[index].noGravity = true;
                     }
                     else if (sItem.type == 213)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 3,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 3,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 0,
                             new Color(), 1.2f);
                         Main.dust[index].noGravity = true;
@@ -33013,9 +33013,9 @@ namespace Terraria
 
                     if (sItem.type == 121)
                     {
-                        for (int index1 = 0; index1 < 2; ++index1)
+                        for (var index1 = 0; index1 < 2; ++index1)
                         {
-                            int index2 = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 6,
+                            var index2 = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 6,
                                 this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                                 new Color(), 2.5f);
                             Main.dust[index2].noGravity = true;
@@ -33026,7 +33026,7 @@ namespace Terraria
 
                     if (sItem.type == 122 || sItem.type == 217)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 6,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 6,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                             new Color(), 1.9f);
                         Main.dust[index].noGravity = true;
@@ -33034,7 +33034,7 @@ namespace Terraria
 
                     if (sItem.type == 155)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 172,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 172,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                             new Color(), 0.9f);
                         Main.dust[index].noGravity = true;
@@ -33043,7 +33043,7 @@ namespace Terraria
 
                     if (sItem.type == 676 && Main.rand.Next(3) == 0)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 67,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 67,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 90,
                             new Color(), 1.5f);
                         Main.dust[index].noGravity = true;
@@ -33052,7 +33052,7 @@ namespace Terraria
 
                     if (sItem.type == 3063)
                     {
-                        int index = Dust.NewDust(r.TopLeft(), r.Width, r.Height, 66, 0.0f, 0.0f, 150, Color.Transparent,
+                        var index = Dust.NewDust(r.TopLeft(), r.Width, r.Height, 66, 0.0f, 0.0f, 150, Color.Transparent,
                             0.85f);
                         Main.dust[index].color = Main.hslToRgb(Main.rand.NextFloat(), 1f, 0.5f);
                         Main.dust[index].noGravity = true;
@@ -33061,7 +33061,7 @@ namespace Terraria
 
                     if (sItem.type == 3823)
                     {
-                        Dust dust = Dust.NewDustDirect(r.TopLeft(), r.Width, r.Height, 6,
+                        var dust = Dust.NewDustDirect(r.TopLeft(), r.Width, r.Height, 6,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                             Color.Transparent, 0.7f);
                         dust.noGravity = true;
@@ -33071,7 +33071,7 @@ namespace Terraria
 
                     if (sItem.type == 724 && Main.rand.Next(5) == 0)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 67,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 67,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 90,
                             new Color(), 1.5f);
                         Main.dust[index].noGravity = true;
@@ -33080,7 +33080,7 @@ namespace Terraria
 
                     if (sItem.type >= 795 && sItem.type <= 802 && Main.rand.Next(3) == 0)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 115,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 115,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 140,
                             new Color(), 1.5f);
                         Main.dust[index].noGravity = true;
@@ -33091,7 +33091,7 @@ namespace Terraria
                     {
                         if (Main.rand.Next(3) == 0)
                         {
-                            int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 57,
+                            var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 57,
                                 this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                                 new Color(), 1.1f);
                             Main.dust[index].noGravity = true;
@@ -33102,7 +33102,7 @@ namespace Terraria
 
                         if (Main.rand.Next(4) == 0)
                         {
-                            int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 43, 0.0f,
+                            var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 43, 0.0f,
                                 0.0f, 254, new Color(), 0.3f);
                             Main.dust[index].velocity *= 0.0f;
                         }
@@ -33110,9 +33110,9 @@ namespace Terraria
 
                     if (sItem.type >= 198 && sItem.type <= 203 || sItem.type >= 3764 && sItem.type <= 3769)
                     {
-                        float R = 0.5f;
-                        float G = 0.5f;
-                        float B = 0.5f;
+                        var R = 0.5f;
+                        var G = 0.5f;
+                        var B = 0.5f;
                         if (sItem.type == 198 || sItem.type == 3764)
                         {
                             R *= 0.1f;
@@ -33158,7 +33158,7 @@ namespace Terraria
                     if (this.frostBurn && sItem.melee && (!sItem.noMelee && !sItem.noUseGraphic) &&
                         Main.rand.Next(2) == 0)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 135,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 135,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                             new Color(), 2.5f);
                         Main.dust[index].noGravity = true;
@@ -33172,7 +33172,7 @@ namespace Terraria
                         {
                             if (Main.rand.Next(3) == 0)
                             {
-                                int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 171,
+                                var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 171,
                                     0.0f, 0.0f, 100, new Color(), 1f);
                                 Main.dust[index].noGravity = true;
                                 Main.dust[index].fadeIn = 1.5f;
@@ -33183,7 +33183,7 @@ namespace Terraria
                         {
                             if (Main.rand.Next(2) == 0)
                             {
-                                int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 75,
+                                var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 75,
                                     this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                                     new Color(), 2.5f);
                                 Main.dust[index].noGravity = true;
@@ -33195,7 +33195,7 @@ namespace Terraria
                         {
                             if (Main.rand.Next(2) == 0)
                             {
-                                int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 6,
+                                var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 6,
                                     this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                                     new Color(), 2.5f);
                                 Main.dust[index].noGravity = true;
@@ -33207,7 +33207,7 @@ namespace Terraria
                         {
                             if (Main.rand.Next(2) == 0)
                             {
-                                int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 57,
+                                var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 57,
                                     this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                                     new Color(), 1.1f);
                                 Main.dust[index].noGravity = true;
@@ -33219,7 +33219,7 @@ namespace Terraria
                         {
                             if (Main.rand.Next(2) == 0)
                             {
-                                int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 169,
+                                var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 169,
                                     0.0f, 0.0f, 100, new Color(), 1f);
                                 Main.dust[index].velocity.X += (float) this.direction;
                                 Main.dust[index].velocity.Y += 0.2f;
@@ -33230,7 +33230,7 @@ namespace Terraria
                         {
                             if (Main.rand.Next(2) == 0)
                             {
-                                int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 135,
+                                var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 135,
                                     0.0f, 0.0f, 100, new Color(), 1f);
                                 Main.dust[index].velocity.X += (float) this.direction;
                                 Main.dust[index].velocity.Y += 0.2f;
@@ -33241,8 +33241,8 @@ namespace Terraria
                         {
                             if (Main.rand.Next(20) == 0)
                             {
-                                int Type = Main.rand.Next(139, 143);
-                                int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, Type,
+                                var Type = Main.rand.Next(139, 143);
+                                var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, Type,
                                     this.velocity.X, this.velocity.Y, 0, new Color(), 1.2f);
                                 Main.dust[index].velocity.X *=
                                     (float) (1.0 + (double) Main.rand.Next(-50, 51) * 0.00999999977648258);
@@ -33256,8 +33256,8 @@ namespace Terraria
 
                             if (Main.rand.Next(40) == 0)
                             {
-                                int Type = Main.rand.Next(276, 283);
-                                int index = Gore.NewGore(new Vector2((float) r.X, (float) r.Y), this.velocity, Type,
+                                var Type = Main.rand.Next(276, 283);
+                                var index = Gore.NewGore(new Vector2((float) r.X, (float) r.Y), this.velocity, Type,
                                     1f);
                                 Main.gore[index].velocity.X *=
                                     (float) (1.0 + (double) Main.rand.Next(-50, 51) * 0.00999999977648258);
@@ -33271,7 +33271,7 @@ namespace Terraria
                         }
                         else if (this.meleeEnchant == (byte) 8 && Main.rand.Next(4) == 0)
                         {
-                            int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 46, 0.0f,
+                            var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 46, 0.0f,
                                 0.0f, 100, new Color(), 1f);
                             Main.dust[index].noGravity = true;
                             Main.dust[index].fadeIn = 1.5f;
@@ -33282,7 +33282,7 @@ namespace Terraria
                     if (this.magmaStone && sItem.melee && (!sItem.noMelee && !sItem.noUseGraphic) &&
                         Main.rand.Next(3) != 0)
                     {
-                        int index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 6,
+                        var index = Dust.NewDust(new Vector2((float) r.X, (float) r.Y), r.Width, r.Height, 6,
                             this.velocity.X * 0.2f + (float) (this.direction * 3), this.velocity.Y * 0.2f, 100,
                             new Color(), 2.5f);
                         Main.dust[index].noGravity = true;
@@ -33292,11 +33292,11 @@ namespace Terraria
 
                     if (Main.myPlayer == i && (sItem.type == 1991 || sItem.type == 3183))
                     {
-                        for (int i1 = 0; i1 < 200; ++i1)
+                        for (var i1 = 0; i1 < 200; ++i1)
                         {
                             if (Main.npc[i1].active && Main.npc[i1].catchItem > (short) 0)
                             {
-                                Microsoft.Xna.Framework.Rectangle rectangle =
+                                var rectangle =
                                     new Microsoft.Xna.Framework.Rectangle((int) Main.npc[i1].position.X,
                                         (int) Main.npc[i1].position.Y, Main.npc[i1].width, Main.npc[i1].height);
                                 if (r.Intersects(rectangle) &&
@@ -33309,7 +33309,7 @@ namespace Terraria
 
                     if (Main.myPlayer == i && (sItem.damage > 0 || sItem.type == 3183))
                     {
-                        int num1 = sItem.damage;
+                        var num1 = sItem.damage;
                         if (sItem.melee)
                             num1 = (int) ((double) sItem.damage * (double) this.meleeDamage);
                         if (sItem.ranged)
@@ -33320,16 +33320,16 @@ namespace Terraria
                             num1 = (int) ((double) sItem.damage * (double) this.minionDamage);
                         if (sItem.thrown)
                             num1 = (int) ((double) sItem.damage * (double) this.thrownDamage);
-                        float knockBack = sItem.knockBack;
-                        float num2 = 1f;
+                        var knockBack = sItem.knockBack;
+                        var num2 = 1f;
                         if (this.kbGlove)
                             ++num2;
                         if (this.kbBuff)
                             num2 += 0.5f;
-                        float num3 = knockBack * num2;
+                        var num3 = knockBack * num2;
                         if (this.inventory[this.selectedItem].type == 3106)
                             num3 += num3 * (1f - this.stealth);
-                        List<ushort> ushortList = (List<ushort>) null;
+                        var ushortList = (List<ushort>) null;
                         if (sItem.type == 213)
                             ushortList = new List<ushort>((IEnumerable<ushort>) new ushort[17]
                             {
@@ -33351,13 +33351,13 @@ namespace Terraria
                                 (ushort) 205,
                                 (ushort) 201
                             });
-                        int num4 = r.X / 16;
-                        int num5 = (r.X + r.Width) / 16 + 1;
-                        int num6 = r.Y / 16;
-                        int num7 = (r.Y + r.Height) / 16 + 1;
-                        for (int index1 = num4; index1 < num5; ++index1)
+                        var num4 = r.X / 16;
+                        var num5 = (r.X + r.Width) / 16 + 1;
+                        var num6 = r.Y / 16;
+                        var num7 = (r.Y + r.Height) / 16 + 1;
+                        for (var index1 = num4; index1 < num5; ++index1)
                         {
-                            for (int index2 = num6; index2 < num7; ++index2)
+                            for (var index2 = num6; index2 < num7; ++index2)
                             {
                                 if (Main.tile[index1, index2] != null &&
                                     Main.tileCut[(int) Main.tile[index1, index2].type] &&
@@ -33366,18 +33366,18 @@ namespace Terraria
                                 {
                                     if (sItem.type == 1786)
                                     {
-                                        int type = (int) Main.tile[index1, index2].type;
+                                        var type = (int) Main.tile[index1, index2].type;
                                         WorldGen.KillTile(index1, index2, false, false, false);
                                         if (!Main.tile[index1, index2].active())
                                         {
-                                            int Stack = 0;
+                                            var Stack = 0;
                                             if (type == 3 || type == 24 || (type == 61 || type == 110) || type == 201)
                                                 Stack = Main.rand.Next(1, 3);
                                             if (type == 73 || type == 74 || type == 113)
                                                 Stack = Main.rand.Next(2, 5);
                                             if (Stack > 0)
                                             {
-                                                int number = Item.NewItem(index1 * 16, index2 * 16, 16, 16, 1727, Stack,
+                                                var number = Item.NewItem(index1 * 16, index2 * 16, 16, 16, 1727, Stack,
                                                     false, 0, false, false);
                                                 if (Main.netMode == 1)
                                                     NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f,
@@ -33402,7 +33402,7 @@ namespace Terraria
 
                         if (sItem.type != 3183)
                         {
-                            for (int index1 = 0; index1 < 200; ++index1)
+                            for (var index1 = 0; index1 < 200; ++index1)
                             {
                                 if (Main.npc[index1].active && Main.npc[index1].immune[i] == 0 && this.attackCD == 0)
                                 {
@@ -33412,7 +33412,7 @@ namespace Terraria
                                             Main.npc[index1].type == 22 && this.killGuide ||
                                             Main.npc[index1].type == 54 && this.killClothier)
                                         {
-                                            Microsoft.Xna.Framework.Rectangle rectangle =
+                                            var rectangle =
                                                 new Microsoft.Xna.Framework.Rectangle((int) Main.npc[index1].position.X,
                                                     (int) Main.npc[index1].position.Y, Main.npc[index1].width,
                                                     Main.npc[index1].height);
@@ -33420,7 +33420,7 @@ namespace Terraria
                                                 (Main.npc[index1].noTileCollide ||
                                                  this.CanHit((Entity) Main.npc[index1])))
                                             {
-                                                bool crit = false;
+                                                var crit = false;
                                                 if (sItem.melee && Main.rand.Next(1, 101) <= this.meleeCrit)
                                                     crit = true;
                                                 if (sItem.ranged && Main.rand.Next(1, 101) <= this.rangedCrit)
@@ -33429,7 +33429,7 @@ namespace Terraria
                                                     crit = true;
                                                 if (sItem.thrown && Main.rand.Next(1, 101) <= this.thrownCrit)
                                                     crit = true;
-                                                int banner = Item.NPCtoBanner(Main.npc[index1].BannerID());
+                                                var banner = Item.NPCtoBanner(Main.npc[index1].BannerID());
                                                 if (banner > 0 && this.NPCBannerBuff[banner])
                                                     num1 = !Main.expertMode
                                                         ? (int) ((double) num1 * (double) ItemID.Sets
@@ -33445,23 +33445,23 @@ namespace Terraria
                                                     this.ClearBuff(198);
                                                 }
 
-                                                int num8 = Main.DamageVar((float) num1);
+                                                var num8 = Main.DamageVar((float) num1);
                                                 this.StatusNPC(sItem.type, index1);
                                                 this.OnHit(Main.npc[index1].Center.X, Main.npc[index1].Center.Y,
                                                     (Entity) Main.npc[index1]);
                                                 if (this.armorPenetration > 0)
                                                     num8 += Main.npc[index1]
                                                         .checkArmorPenetration(this.armorPenetration);
-                                                int num9 = (int) Main.npc[index1].StrikeNPC(num8, num3, this.direction,
+                                                var num9 = (int) Main.npc[index1].StrikeNPC(num8, num3, this.direction,
                                                     crit, false, false);
                                                 if (this.inventory[this.selectedItem].type == 3211)
                                                 {
-                                                    Vector2 vector2_1 = new Vector2(
+                                                    var vector2_1 = new Vector2(
                                                         (float) (this.direction * 100 + Main.rand.Next(-25, 26)),
                                                         (float) Main.rand.Next(-75, 76));
                                                     vector2_1.Normalize();
                                                     vector2_1 *= (float) Main.rand.Next(30, 41) * 0.1f;
-                                                    Vector2 vector2_2 = new Vector2(
+                                                    var vector2_2 = new Vector2(
                                                         (float) (r.X + Main.rand.Next(r.Width)),
                                                         (float) (r.Y + Main.rand.Next(r.Height)));
                                                     vector2_2 = (vector2_2 + Main.npc[index1].Center * 2f) / 3f;
@@ -33470,7 +33470,7 @@ namespace Terraria
                                                         this.whoAmI, 0.0f, 0.0f);
                                                 }
 
-                                                bool flag3 = !Main.npc[index1].immortal;
+                                                var flag3 = !Main.npc[index1].immortal;
                                                 if (this.beetleOffense && flag3)
                                                 {
                                                     this.beetleCounter += (float) num9;
@@ -33496,17 +33496,17 @@ namespace Terraria
 
                                                 if (sItem.type == 1123 && flag3)
                                                 {
-                                                    int num10 = Main.rand.Next(1, 4);
+                                                    var num10 = Main.rand.Next(1, 4);
                                                     if (this.strongBees && Main.rand.Next(3) == 0)
                                                         ++num10;
-                                                    for (int index2 = 0; index2 < num10; ++index2)
+                                                    for (var index2 = 0; index2 < num10; ++index2)
                                                     {
-                                                        float num11 =
+                                                        var num11 =
                                                             (float) (this.direction * 2) +
                                                             (float) Main.rand.Next(-35, 36) * 0.02f;
-                                                        float num12 = (float) Main.rand.Next(-35, 36) * 0.02f;
-                                                        float SpeedX = num11 * 0.2f;
-                                                        float SpeedY = num12 * 0.2f;
+                                                        var num12 = (float) Main.rand.Next(-35, 36) * 0.02f;
+                                                        var SpeedX = num11 * 0.2f;
+                                                        var SpeedY = num12 * 0.2f;
                                                         Projectile.NewProjectile((float) (r.X + r.Width / 2),
                                                             (float) (r.Y + r.Height / 2), SpeedX, SpeedY,
                                                             this.beeType(), this.beeDamage(num8 / 3), this.beeKB(0.0f),
@@ -33517,12 +33517,12 @@ namespace Terraria
                                                 if ((double) Main.npc[index1].value > 0.0 && this.coins &&
                                                     Main.rand.Next(5) == 0)
                                                 {
-                                                    int Type = 71;
+                                                    var Type = 71;
                                                     if (Main.rand.Next(10) == 0)
                                                         Type = 72;
                                                     if (Main.rand.Next(100) == 0)
                                                         Type = 73;
-                                                    int number = Item.NewItem((int) Main.npc[index1].position.X,
+                                                    var number = Item.NewItem((int) Main.npc[index1].position.X,
                                                         (int) Main.npc[index1].position.Y, Main.npc[index1].width,
                                                         Main.npc[index1].height, Type, 1, false, 0, false, false);
                                                     Main.item[number].stack = Main.rand.Next(1, 11);
@@ -33535,7 +33535,7 @@ namespace Terraria
                                                             0.0f, 0.0f, 0.0f, 0, 0, 0);
                                                 }
 
-                                                int num13 = Item.NPCtoBanner(Main.npc[index1].BannerID());
+                                                var num13 = Item.NPCtoBanner(Main.npc[index1].BannerID());
                                                 if (num13 >= 0)
                                                     this.lastCreatureHit = num13;
                                                 if (Main.netMode != 0)
@@ -33558,7 +33558,7 @@ namespace Terraria
                                     else if (Main.npc[index1].type == 63 || Main.npc[index1].type == 64 ||
                                              (Main.npc[index1].type == 103 || Main.npc[index1].type == 242))
                                     {
-                                        Microsoft.Xna.Framework.Rectangle rectangle =
+                                        var rectangle =
                                             new Microsoft.Xna.Framework.Rectangle((int) Main.npc[index1].position.X,
                                                 (int) Main.npc[index1].position.Y, Main.npc[index1].width,
                                                 Main.npc[index1].height);
@@ -33577,38 +33577,38 @@ namespace Terraria
 
                             if (this.hostile)
                             {
-                                for (int index1 = 0; index1 < (int) byte.MaxValue; ++index1)
+                                for (var index1 = 0; index1 < (int) byte.MaxValue; ++index1)
                                 {
                                     if (index1 != i && Main.player[index1].active &&
                                         (Main.player[index1].hostile && !Main.player[index1].immune) &&
                                         !Main.player[index1].dead &&
                                         (Main.player[i].team == 0 || Main.player[i].team != Main.player[index1].team))
                                     {
-                                        Microsoft.Xna.Framework.Rectangle rectangle =
+                                        var rectangle =
                                             new Microsoft.Xna.Framework.Rectangle((int) Main.player[index1].position.X,
                                                 (int) Main.player[index1].position.Y, Main.player[index1].width,
                                                 Main.player[index1].height);
                                         if (r.Intersects(rectangle) && this.CanHit((Entity) Main.player[index1]))
                                         {
-                                            bool flag3 = false;
+                                            var flag3 = false;
                                             if (Main.rand.Next(1, 101) <= 10)
                                                 flag3 = true;
-                                            int num8 = Main.DamageVar((float) num1);
+                                            var num8 = Main.DamageVar((float) num1);
                                             this.StatusPvP(sItem.type, index1);
                                             this.OnHit(Main.player[index1].Center.X, Main.player[index1].Center.Y,
                                                 (Entity) Main.player[index1]);
-                                            PlayerDeathReason playerDeathReason =
+                                            var playerDeathReason =
                                                 PlayerDeathReason.ByPlayer(this.whoAmI);
-                                            int num9 = (int) Main.player[index1].Hurt(playerDeathReason, num8,
+                                            var num9 = (int) Main.player[index1].Hurt(playerDeathReason, num8,
                                                 this.direction, true, false, flag3, -1);
                                             if (this.inventory[this.selectedItem].type == 3211)
                                             {
-                                                Vector2 vector2_1 = new Vector2(
+                                                var vector2_1 = new Vector2(
                                                     (float) (this.direction * 100 + Main.rand.Next(-25, 26)),
                                                     (float) Main.rand.Next(-75, 76));
                                                 vector2_1.Normalize();
                                                 vector2_1 *= (float) Main.rand.Next(30, 41) * 0.1f;
-                                                Vector2 vector2_2 = new Vector2((float) (r.X + Main.rand.Next(r.Width)),
+                                                var vector2_2 = new Vector2((float) (r.X + Main.rand.Next(r.Width)),
                                                     (float) (r.Y + Main.rand.Next(r.Height)));
                                                 vector2_2 = (vector2_2 + Main.player[index1].Center * 2f) / 3f;
                                                 Projectile.NewProjectile(vector2_2.X, vector2_2.Y, vector2_1.X,
@@ -33629,17 +33629,17 @@ namespace Terraria
                                                     0.0f);
                                             if (sItem.type == 1123)
                                             {
-                                                int num10 = Main.rand.Next(1, 4);
+                                                var num10 = Main.rand.Next(1, 4);
                                                 if (this.strongBees && Main.rand.Next(3) == 0)
                                                     ++num10;
-                                                for (int index2 = 0; index2 < num10; ++index2)
+                                                for (var index2 = 0; index2 < num10; ++index2)
                                                 {
-                                                    float num11 =
+                                                    var num11 =
                                                         (float) (this.direction * 2) +
                                                         (float) Main.rand.Next(-35, 36) * 0.02f;
-                                                    float num12 = (float) Main.rand.Next(-35, 36) * 0.02f;
-                                                    float SpeedX = num11 * 0.2f;
-                                                    float SpeedY = num12 * 0.2f;
+                                                    var num12 = (float) Main.rand.Next(-35, 36) * 0.02f;
+                                                    var SpeedX = num11 * 0.2f;
+                                                    var SpeedY = num12 * 0.2f;
                                                     Projectile.NewProjectile((float) (r.X + r.Width / 2),
                                                         (float) (r.Y + r.Height / 2), SpeedX, SpeedY, this.beeType(),
                                                         this.beeDamage(num8 / 3), this.beeKB(0.0f), i, 0.0f, 0.0f);
@@ -33672,10 +33672,10 @@ namespace Terraria
                                   this.itemAnimation == (int) ((double) this.itemAnimationMax * 0.7)) ||
                                  this.itemAnimation == (int) ((double) this.itemAnimationMax * 0.9)))
                             {
-                                float num8 = 0.0f;
-                                float num9 = 0.0f;
-                                float num10 = 0.0f;
-                                float num11 = 0.0f;
+                                var num8 = 0.0f;
+                                var num9 = 0.0f;
+                                var num10 = 0.0f;
+                                var num11 = 0.0f;
                                 if (this.itemAnimation == (int) ((double) this.itemAnimationMax * 0.9))
                                     num8 = -7f;
                                 if (this.itemAnimation == (int) ((double) this.itemAnimationMax * 0.7))
@@ -33716,10 +33716,10 @@ namespace Terraria
                                         num11 -= 6f;
                                 }
 
-                                float num12 = num8 * 1.5f;
-                                float num13 = num9 * 1.5f;
-                                float num14 = num11 * (float) this.direction;
-                                float num15 = num10 * this.gravDir;
+                                var num12 = num8 * 1.5f;
+                                var num13 = num9 * 1.5f;
+                                var num14 = num11 * (float) this.direction;
+                                var num15 = num10 * this.gravDir;
                                 Projectile.NewProjectile((float) (r.X + r.Width / 2) + num14,
                                     (float) (r.Y + r.Height / 2) + num15, (float) this.direction * num13,
                                     num12 * this.gravDir, 131, num1 / 2, 0.0f, i, 0.0f, 0.0f);
@@ -33904,8 +33904,8 @@ namespace Terraria
                       ((double) this.position.Y + (double) this.height) / 16.0 + (double) Player.tileRangeY +
                       (double) sItem.tileBoost - 2.0 >= (double) Player.tileTargetY)))
                 {
-                    int x = Main.mouseX + (int) Main.screenPosition.X;
-                    int y = Main.mouseY + (int) Main.screenPosition.Y;
+                    var x = Main.mouseX + (int) Main.screenPosition.X;
+                    var y = Main.mouseY + (int) Main.screenPosition.Y;
                     this.itemTime = sItem.useTime;
                     if (!WorldGen.SolidTile(x / 16, y / 16))
                         NPC.ReleaseNPC(x, y, (int) sItem.makeNPC, sItem.placeStyle, this.whoAmI);
@@ -34026,12 +34026,12 @@ namespace Terraria
                     this.itemTime = sItem.useTime;
                 else if (this.itemTime == sItem.useTime / 2)
                 {
-                    for (int index = 0; index < 70; ++index)
+                    for (var index = 0; index < 70; ++index)
                         Dust.NewDust(this.position, this.width, this.height, 15, this.velocity.X * 0.5f,
                             this.velocity.Y * 0.5f, 150, new Color(), 1.5f);
                     this.grappling[0] = -1;
                     this.grapCount = 0;
-                    for (int index = 0; index < 1000; ++index)
+                    for (var index = 0; index < 1000; ++index)
                     {
                         if (Main.projectile[index].active && Main.projectile[index].owner == i &&
                             Main.projectile[index].aiStyle == 7)
@@ -34039,7 +34039,7 @@ namespace Terraria
                     }
 
                     this.Spawn();
-                    for (int index = 0; index < 70; ++index)
+                    for (var index = 0; index < 70; ++index)
                         Dust.NewDust(this.position, this.width, this.height, 15, 0.0f, 0.0f, 150, new Color(), 1.5f);
                 }
             }
@@ -34050,25 +34050,25 @@ namespace Terraria
                     this.itemTime = sItem.useTime;
                 else if (this.itemTime == 2)
                 {
-                    for (int index = 0; index < 70; ++index)
+                    for (var index = 0; index < 70; ++index)
                         Main.dust[
                             Dust.NewDust(this.position, this.width, this.height, 15, this.velocity.X * 0.2f,
                                 this.velocity.Y * 0.2f, 150, Color.Cyan, 1.2f)].velocity *= 0.5f;
                     this.grappling[0] = -1;
                     this.grapCount = 0;
-                    for (int index = 0; index < 1000; ++index)
+                    for (var index = 0; index < 1000; ++index)
                     {
                         if (Main.projectile[index].active && Main.projectile[index].owner == i &&
                             Main.projectile[index].aiStyle == 7)
                             Main.projectile[index].Kill();
                     }
 
-                    bool immune = this.immune;
-                    int immuneTime = this.immuneTime;
+                    var immune = this.immune;
+                    var immuneTime = this.immuneTime;
                     this.Spawn();
                     this.immune = immune;
                     this.immuneTime = immuneTime;
-                    for (int index = 0; index < 70; ++index)
+                    for (var index = 0; index < 70; ++index)
                         Main.dust[
                                 Dust.NewDust(this.position, this.width, this.height, 15, 0.0f, 0.0f, 150, Color.Cyan,
                                     1.2f)]
@@ -34122,26 +34122,26 @@ namespace Terraria
                 }
                 else
                 {
-                    float useTime = (float) sItem.useTime;
-                    float num1 = (useTime - (float) this.itemTime) / useTime;
-                    float x = 15f;
-                    float num2 = 44f;
-                    float num3 = 9.424778f;
-                    Vector2 vector2 = new Vector2(x, 0.0f).RotatedBy((double) num3 * (double) num1, new Vector2());
+                    var useTime = (float) sItem.useTime;
+                    var num1 = (useTime - (float) this.itemTime) / useTime;
+                    var x = 15f;
+                    var num2 = 44f;
+                    var num3 = 9.424778f;
+                    var vector2 = new Vector2(x, 0.0f).RotatedBy((double) num3 * (double) num1, new Vector2());
                     vector2.X *= (float) this.direction;
-                    for (int index1 = 0; index1 < 2; ++index1)
+                    for (var index1 = 0; index1 < 2; ++index1)
                     {
-                        int Type = 221;
+                        var Type = 221;
                         if (index1 == 1)
                         {
                             vector2.X *= -1f;
                             Type = 219;
                         }
 
-                        Vector2 Position = new Vector2(vector2.X,
+                        var Position = new Vector2(vector2.X,
                             num2 * (1f - num1) - num2 + (float) (this.height / 2));
                         Position += this.Center;
-                        int index2 = Dust.NewDust(Position, 0, 0, Type, 0.0f, 0.0f, 100, new Color(), 1f);
+                        var index2 = Dust.NewDust(Position, 0, 0, Type, 0.0f, 0.0f, 100, new Color(), 1f);
                         Main.dust[index2].position = Position;
                         Main.dust[index2].noGravity = true;
                         Main.dust[index2].velocity = Vector2.Zero;
@@ -34155,8 +34155,8 @@ namespace Terraria
                 return;
             if (this.itemTime == (int) ((double) sItem.useTime * (double) this.tileSpeed) && sItem.tileWand > 0)
             {
-                int tileWand = sItem.tileWand;
-                for (int index = 0; index < 58; ++index)
+                var tileWand = sItem.tileWand;
+                for (var index = 0; index < 58; ++index)
                 {
                     if (tileWand == this.inventory[index].type && this.inventory[index].stack > 0)
                     {
@@ -34176,7 +34176,7 @@ namespace Terraria
                     ? (sItem.createWall <= 0 ? sItem.useTime : (int) ((double) sItem.useTime * (double) this.wallSpeed))
                     : (int) ((double) sItem.useTime * (double) this.tileSpeed)) && sItem.consumable)
             {
-                bool flag2 = true;
+                var flag2 = true;
                 if (sItem.type == 2350 || sItem.type == 2351)
                     flag2 = false;
                 if (sItem.type == 2756)
@@ -34220,16 +34220,16 @@ namespace Terraria
 
         public static bool WouldSpotOverlapWithSentry(int worldX, int worldY)
         {
-            Point point1 = new Point(worldX, worldY - 8);
-            Point point2 = new Point(worldX + 16, worldY - 8);
-            Point point3 = new Point(worldX - 16, worldY - 8);
-            bool flag = false;
-            for (int index = 0; index < 1000; ++index)
+            var point1 = new Point(worldX, worldY - 8);
+            var point2 = new Point(worldX + 16, worldY - 8);
+            var point3 = new Point(worldX - 16, worldY - 8);
+            var flag = false;
+            for (var index = 0; index < 1000; ++index)
             {
-                Projectile projectile = Main.projectile[index];
+                var projectile = Main.projectile[index];
                 if (projectile.active && projectile.sentry)
                 {
-                    Microsoft.Xna.Framework.Rectangle hitbox = projectile.Hitbox;
+                    var hitbox = projectile.Hitbox;
                     if (hitbox.Contains(point1) || hitbox.Contains(point2) || hitbox.Contains(point3))
                     {
                         flag = true;
@@ -34243,9 +34243,9 @@ namespace Terraria
 
         public void FindSentryRestingSpot(int checkProj, out int worldX, out int worldY, out int pushYUp)
         {
-            bool flag = false;
-            int i = (int) ((double) Main.mouseX + (double) Main.screenPosition.X) / 16;
-            int j = (int) ((double) Main.mouseY + (double) Main.screenPosition.Y) / 16;
+            var flag = false;
+            var i = (int) ((double) Main.mouseX + (double) Main.screenPosition.X) / 16;
+            var j = (int) ((double) Main.mouseY + (double) Main.screenPosition.Y) / 16;
             if ((double) this.gravDir == -1.0)
                 j = (int) ((double) Main.screenPosition.Y + (double) Main.screenHeight - (double) Main.mouseY) / 16;
             worldX = i * 16 + 8;
@@ -34286,15 +34286,15 @@ namespace Terraria
                 ++j;
             }
 
-            int num = j - 1;
+            var num = j - 1;
             pushYUp -= 14;
             worldY = num * 16;
         }
 
         public void WipeOldestTurret()
         {
-            List<Projectile> projectileList = new List<Projectile>();
-            for (int index = 0; index < 1000; ++index)
+            var projectileList = new List<Projectile>();
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.projectile[index].WipableTurret)
                     projectileList.Add(Main.projectile[index]);
@@ -34302,8 +34302,8 @@ namespace Terraria
 
             if (projectileList.Count == 0)
                 return;
-            Projectile projectile = projectileList[0];
-            for (int index = 1; index < projectileList.Count; ++index)
+            var projectile = projectileList[0];
+            for (var index = 1; index < projectileList.Count; ++index)
             {
                 if (projectileList[index].timeLeft < projectile.timeLeft)
                     projectile = projectileList[index];
@@ -34314,18 +34314,18 @@ namespace Terraria
 
         public void UpdateMaxTurrets()
         {
-            List<Projectile> projectileList = new List<Projectile>();
-            for (int index = 0; index < 1000; ++index)
+            var projectileList = new List<Projectile>();
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.projectile[index].WipableTurret)
                     projectileList.Add(Main.projectile[index]);
             }
 
-            int num = 0;
+            var num = 0;
             while (projectileList.Count > this.maxTurrets && ++num < 1000)
             {
-                Projectile projectile = projectileList[0];
-                for (int index = 1; index < projectileList.Count; ++index)
+                var projectile = projectileList[0];
+                for (var index = 1; index < projectileList.Count; ++index)
                 {
                     if (projectileList[index].timeLeft < projectile.timeLeft)
                         projectile = projectileList[index];
@@ -34354,14 +34354,14 @@ namespace Terraria
                 this.AddBuff(sItem.buffType, 3600, true);
             if (this.whoAmI == Main.myPlayer && sItem.type == 425)
             {
-                int type = Main.rand.Next(3);
+                var type = Main.rand.Next(3);
                 if (type == 0)
                     type = 27;
                 if (type == 1)
                     type = 101;
                 if (type == 2)
                     type = 102;
-                for (int b = 0; b < 22; ++b)
+                for (var b = 0; b < 22; ++b)
                 {
                     if (this.buffType[b] == 27 || this.buffType[b] == 101 || this.buffType[b] == 102)
                     {
@@ -34472,7 +34472,7 @@ namespace Terraria
 
         public int GetWeaponDamage(Item sItem)
         {
-            int num = sItem.damage;
+            var num = sItem.damage;
             if (num > 0)
             {
                 if (sItem.melee)
@@ -34529,7 +34529,7 @@ namespace Terraria
             if (sItem.useAmmo > 0)
             {
                 canUse = false;
-                for (int index = 0; index < 58; ++index)
+                for (var index = 0; index < 58; ++index)
                 {
                     if (this.inventory[index].ammo == sItem.useAmmo && this.inventory[index].stack > 0)
                     {
@@ -34545,9 +34545,9 @@ namespace Terraria
         public void PickAmmo(Item sItem, ref int shoot, ref float speed, ref bool canShoot, ref int Damage,
             ref float KnockBack, bool dontConsume = false)
         {
-            Item obj = new Item();
-            bool flag1 = false;
-            for (int index = 54; index < 58; ++index)
+            var obj = new Item();
+            var flag1 = false;
+            for (var index = 54; index < 58; ++index)
             {
                 if (this.inventory[index].ammo == sItem.useAmmo && this.inventory[index].stack > 0)
                 {
@@ -34560,7 +34560,7 @@ namespace Terraria
 
             if (!flag1)
             {
-                for (int index = 0; index < 54; ++index)
+                for (var index = 0; index < 54; ++index)
                 {
                     if (this.inventory[index].ammo == sItem.useAmmo && this.inventory[index].stack > 0)
                     {
@@ -34636,7 +34636,7 @@ namespace Terraria
             }
 
             KnockBack += obj.knockBack;
-            bool flag2 = dontConsume;
+            var flag2 = dontConsume;
             if (sItem.type == 3245)
             {
                 if (Main.rand.Next(3) == 0)
@@ -34691,12 +34691,12 @@ namespace Terraria
 
         public void PickTile(int x, int y, int pickPower)
         {
-            int num1 = 0;
-            int tileId = this.hitTile.HitObject(x, y, 1);
-            Tile tile = Main.tile[x, y];
+            var num1 = 0;
+            var tileId = this.hitTile.HitObject(x, y, 1);
+            var tile = Main.tile[x, y];
             if (Main.tileNoFail[(int) tile.type])
                 num1 = 100;
-            int damageAmount =
+            var damageAmount =
                 Main.tileDungeon[(int) tile.type] || tile.type == (ushort) 25 ||
                 (tile.type == (ushort) 58 || tile.type == (ushort) 117) || tile.type == (ushort) 203
                     ? num1 + pickPower / 2
@@ -34796,12 +34796,12 @@ namespace Terraria
                     this.hitTile.UpdatePosition(tileId, x, y);
                 }
 
-                int frameX1 = (int) tile.frameX;
-                bool flag1 = frameX1 >= 5000;
-                bool flag2 = false;
+                var frameX1 = (int) tile.frameX;
+                var flag1 = frameX1 >= 5000;
+                var flag2 = false;
                 if (!flag1)
                 {
-                    int num2 = frameX1 / 18 % 3;
+                    var num2 = frameX1 / 18 % 3;
                     x -= num2;
                     tile = Main.tile[x, y];
                     if (tile.frameX >= (short) 5000)
@@ -34810,8 +34810,8 @@ namespace Terraria
 
                 if (flag1)
                 {
-                    int frameX2 = (int) tile.frameX;
-                    int num2 = 0;
+                    var frameX2 = (int) tile.frameX;
+                    var num2 = 0;
                     while (frameX2 >= 5000)
                     {
                         frameX2 -= 5000;
@@ -34848,8 +34848,8 @@ namespace Terraria
                 }
                 else
                 {
-                    int j = y;
-                    bool flag = Main.tile[x, j].active();
+                    var j = y;
+                    var flag = Main.tile[x, j].active();
                     WorldGen.KillTile(x, j, false, false, false);
                     if (flag && !Main.tile[x, j].active())
                         AchievementsHelper.HandleMining();
@@ -34873,7 +34873,7 @@ namespace Terraria
 
         public bool ItemFitsWeaponRack(Item i)
         {
-            bool flag = false;
+            var flag = false;
             if (i.fishingPole > 0)
                 flag = true;
             switch (i.netID)
@@ -34893,15 +34893,15 @@ namespace Terraria
         {
             if (!Main.tile[x, y].active() || Main.tile[x, y].type != (ushort) 334)
                 return;
-            int frameY = (int) Main.tile[x, y].frameY;
-            int num1 = 1;
+            var frameY = (int) Main.tile[x, y].frameY;
+            var num1 = 1;
             int num2;
             for (num2 = frameY / 18; num1 > num2; num2 = (int) Main.tile[x, y].frameY / 18)
                 ++y;
             for (; num1 < num2; num2 = (int) Main.tile[x, y].frameY / 18)
                 --y;
-            int num3 = (int) Main.tile[x, y].frameX;
-            int num4 = 0;
+            var num3 = (int) Main.tile[x, y].frameX;
+            var num4 = 0;
             while (num3 >= 5000)
             {
                 num3 -= 5000;
@@ -34910,7 +34910,7 @@ namespace Terraria
 
             if (num4 != 0)
                 num3 = (num4 - 1) * 18;
-            bool flag = false;
+            var flag = false;
             if (num3 >= 54)
             {
                 num3 -= 54;
@@ -34918,7 +34918,7 @@ namespace Terraria
             }
 
             x -= num3 / 18;
-            int frameX = (int) Main.tile[x, y].frameX;
+            var frameX = (int) Main.tile[x, y].frameX;
             WorldGen.KillTile(x, y, true, false, false);
             if (Main.netMode == 1)
                 NetMessage.SendData(17, -1, -1, (NetworkText) null, 0, (float) x, (float) y, 1f, 0, 0, 0);
@@ -34927,8 +34927,8 @@ namespace Terraria
             while (frameX >= 5000)
                 frameX -= 5000;
             Main.blockMouse = true;
-            int num5 = 5000;
-            int num6 = 10000;
+            var num5 = 5000;
+            var num6 = 10000;
             if (flag)
             {
                 num5 = 20000;
@@ -34965,7 +34965,7 @@ namespace Terraria
                 --x;
             if ((int) Main.tile[x, y].frameY % 36 != 0)
                 --y;
-            int index = TEItemFrame.Find(x, y);
+            var index = TEItemFrame.Find(x, y);
             if (index == -1)
                 return;
             if (((TEItemFrame) TileEntity.ByID[index]).item.stack > 0)
@@ -34997,7 +34997,7 @@ namespace Terraria
 
         public Color GetImmuneAlpha(Color newColor, float alphaReduction)
         {
-            float scale = (float) ((int) byte.MaxValue - this.immuneAlpha) / (float) byte.MaxValue;
+            var scale = (float) ((int) byte.MaxValue - this.immuneAlpha) / (float) byte.MaxValue;
             if ((double) alphaReduction > 0.0)
                 scale *= 1f - alphaReduction;
             if (this.immuneAlpha > 125)
@@ -35007,7 +35007,7 @@ namespace Terraria
 
         public Color GetImmuneAlphaPure(Color newColor, float alphaReduction)
         {
-            float scale = (float) ((int) byte.MaxValue - this.immuneAlpha) / (float) byte.MaxValue;
+            var scale = (float) ((int) byte.MaxValue - this.immuneAlpha) / (float) byte.MaxValue;
             if ((double) alphaReduction > 0.0)
                 scale *= 1f - alphaReduction;
             return Color.Multiply(newColor, scale);
@@ -35015,10 +35015,10 @@ namespace Terraria
 
         public Color GetDeathAlpha(Color newColor)
         {
-            int r = (int) newColor.R + (int) ((double) this.immuneAlpha * 0.9);
-            int g = (int) newColor.G + (int) ((double) this.immuneAlpha * 0.5);
-            int b = (int) newColor.B + (int) ((double) this.immuneAlpha * 0.5);
-            int a = (int) newColor.A + (int) ((double) this.immuneAlpha * 0.4);
+            var r = (int) newColor.R + (int) ((double) this.immuneAlpha * 0.9);
+            var g = (int) newColor.G + (int) ((double) this.immuneAlpha * 0.5);
+            var b = (int) newColor.B + (int) ((double) this.immuneAlpha * 0.5);
+            var a = (int) newColor.A + (int) ((double) this.immuneAlpha * 0.4);
             if (a < 0)
                 a = 0;
             if (a > (int) byte.MaxValue)
@@ -35053,15 +35053,15 @@ namespace Terraria
 
         public int getDPS()
         {
-            TimeSpan timeSpan1 = this.dpsEnd - this.dpsStart;
-            float num = (float) timeSpan1.Milliseconds / 1000f + (float) timeSpan1.Seconds +
+            var timeSpan1 = this.dpsEnd - this.dpsStart;
+            var num = (float) timeSpan1.Milliseconds / 1000f + (float) timeSpan1.Seconds +
                         (float) timeSpan1.Minutes / 60f;
             if ((double) num >= 3.0)
             {
                 this.dpsStart = DateTime.Now;
                 this.dpsStart = this.dpsStart.AddSeconds(-1.0);
                 this.dpsDamage = (int) ((double) this.dpsDamage / (double) num);
-                TimeSpan timeSpan2 = this.dpsEnd - this.dpsStart;
+                var timeSpan2 = this.dpsEnd - this.dpsStart;
                 num = (float) timeSpan2.Milliseconds / 1000f + (float) timeSpan2.Seconds +
                       (float) timeSpan2.Minutes / 60f;
             }
@@ -35073,17 +35073,17 @@ namespace Terraria
 
         public int DropCoins()
         {
-            int num1 = 0;
-            for (int index = 0; index < 59; ++index)
+            var num1 = 0;
+            for (var index = 0; index < 59; ++index)
             {
                 if (this.inventory[index].type >= 71 && this.inventory[index].type <= 74)
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         this.inventory[index].type, 1, false, 0, false, false);
-                    int num2 = this.inventory[index].stack / 2;
+                    var num2 = this.inventory[index].stack / 2;
                     if (Main.expertMode)
                         num2 = (int) ((double) this.inventory[index].stack * 0.25);
-                    int num3 = this.inventory[index].stack - num2;
+                    var num3 = this.inventory[index].stack - num2;
                     this.inventory[index].stack -= num3;
                     if (this.inventory[index].type == 71)
                         num1 += num3;
@@ -35113,12 +35113,12 @@ namespace Terraria
 
         public void DropItems()
         {
-            for (int index = 0; index < 59; ++index)
+            for (var index = 0; index < 59; ++index)
             {
                 if (this.inventory[index].stack > 0 && this.inventory[index].Name != "Copper Pickaxe" &&
                     (this.inventory[index].Name != "Copper Axe" && this.inventory[index].Name != "Copper Shortsword"))
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         this.inventory[index].type, 1, false, 0, false, false);
                     Main.item[number].netDefaults(this.inventory[index].netID);
                     Main.item[number].Prefix((int) this.inventory[index].prefix);
@@ -35136,7 +35136,7 @@ namespace Terraria
                 {
                     if (this.armor[index].stack > 0)
                     {
-                        int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                        var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                             this.armor[index].type, 1, false, 0, false, false);
                         Main.item[number].netDefaults(this.armor[index].netID);
                         Main.item[number].Prefix((int) this.armor[index].prefix);
@@ -35156,7 +35156,7 @@ namespace Terraria
                 {
                     if (this.dye[index].stack > 0)
                     {
-                        int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                        var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                             this.dye[index].type, 1, false, 0, false, false);
                         Main.item[number].netDefaults(this.dye[index].netID);
                         Main.item[number].Prefix((int) this.dye[index].prefix);
@@ -35176,7 +35176,7 @@ namespace Terraria
                 {
                     if (this.miscEquips[index].stack > 0)
                     {
-                        int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                        var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                             this.miscEquips[index].type, 1, false, 0, false, false);
                         Main.item[number].netDefaults(this.miscEquips[index].netID);
                         Main.item[number].Prefix((int) this.miscEquips[index].prefix);
@@ -35196,7 +35196,7 @@ namespace Terraria
                 {
                     if (this.miscDyes[index].stack > 0)
                     {
-                        int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                        var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                             this.miscDyes[index].type, 1, false, 0, false, false);
                         Main.item[number].netDefaults(this.miscDyes[index].netID);
                         Main.item[number].Prefix((int) this.miscDyes[index].prefix);
@@ -35229,7 +35229,7 @@ namespace Terraria
 
         public object clientClone()
         {
-            Player player = new Player();
+            var player = new Player();
             player.zone1 = this.zone1;
             player.zone2 = this.zone2;
             player.zone3 = this.zone3;
@@ -35254,7 +35254,7 @@ namespace Terraria
             player.talkNPC = this.talkNPC;
             player.hideVisual = this.hideVisual;
             player.hideMisc = this.hideMisc;
-            for (int index = 0; index < 59; ++index)
+            for (var index = 0; index < 59; ++index)
             {
                 player.inventory[index] = this.inventory[index].Clone();
                 if (index < this.armor.Length)
@@ -35274,7 +35274,7 @@ namespace Terraria
             }
 
             player.trashItem = this.trashItem.Clone();
-            for (int index = 0; index < 22; ++index)
+            for (var index = 0; index < 22; ++index)
             {
                 player.buffType[index] = this.buffType[index];
                 player.buffTime[index] = this.buffTime[index];
@@ -35291,9 +35291,9 @@ namespace Terraria
                 (Main.tile[x, y - 1] == null || !Main.tile[x, y - 1].active() ||
                  Main.tile[x, y - 1].type != (ushort) 79))
                 return false;
-            for (int index1 = x - 1; index1 <= x + 1; ++index1)
+            for (var index1 = x - 1; index1 <= x + 1; ++index1)
             {
-                for (int index2 = y - 3; index2 < y; ++index2)
+                for (var index2 = y - 3; index2 < y; ++index2)
                 {
                     if (Main.tile[index1, index2] == null)
                         return false;
@@ -35312,7 +35312,7 @@ namespace Terraria
 
         public void FindSpawn()
         {
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
             {
                 if (this.spN[index] == null)
                 {
@@ -35334,11 +35334,11 @@ namespace Terraria
         {
             this.SpawnX = -1;
             this.SpawnY = -1;
-            for (int index1 = 0; index1 < 200 && this.spN[index1] != null; ++index1)
+            for (var index1 = 0; index1 < 200 && this.spN[index1] != null; ++index1)
             {
                 if (this.spN[index1] == Main.worldName && this.spI[index1] == Main.worldID)
                 {
-                    for (int index2 = index1; index2 < 199; ++index2)
+                    for (var index2 = index1; index2 < 199; ++index2)
                     {
                         this.spN[index2] = this.spN[index2 + 1];
                         this.spI[index2] = this.spI[index2 + 1];
@@ -35357,11 +35357,11 @@ namespace Terraria
 
         public void ChangeSpawn(int x, int y)
         {
-            for (int index1 = 0; index1 < 200 && this.spN[index1] != null; ++index1)
+            for (var index1 = 0; index1 < 200 && this.spN[index1] != null; ++index1)
             {
                 if (this.spN[index1] == Main.worldName && this.spI[index1] == Main.worldID)
                 {
-                    for (int index2 = index1; index2 > 0; --index2)
+                    for (var index2 = index1; index2 > 0; --index2)
                     {
                         this.spN[index2] = this.spN[index2 - 1];
                         this.spI[index2] = this.spI[index2 - 1];
@@ -35377,7 +35377,7 @@ namespace Terraria
                 }
             }
 
-            for (int index = 199; index > 0; --index)
+            for (var index = 199; index > 0; --index)
             {
                 if (this.spN[index - 1] != null)
                 {
@@ -35397,9 +35397,9 @@ namespace Terraria
         public static void SavePlayer(PlayerFileData playerFile, bool skipMapSave = false)
         {
             Main.Achievements.Save();
-            string path = playerFile.Path;
-            Player player = playerFile.Player;
-            bool isCloudSave = playerFile.IsCloudSave;
+            var path = playerFile.Path;
+            var player = playerFile.Player;
+            var isCloudSave = playerFile.IsCloudSave;
             if (!skipMapSave)
             {
                 if (!string.IsNullOrEmpty(Main.playerPathName))
@@ -35428,16 +35428,16 @@ namespace Terraria
                 return;
             if (FileUtilities.Exists(path, isCloudSave))
                 FileUtilities.Copy(path, path + ".bak", isCloudSave, true);
-            RijndaelManaged rijndaelManaged = new RijndaelManaged();
-            using (Stream stream = isCloudSave
+            var rijndaelManaged = new RijndaelManaged();
+            using (var stream = isCloudSave
                 ? (Stream) new MemoryStream(2000)
                 : (Stream) new FileStream(path, FileMode.Create))
             {
-                using (CryptoStream cryptoStream = new CryptoStream(stream,
+                using (var cryptoStream = new CryptoStream(stream,
                     rijndaelManaged.CreateEncryptor(Player.ENCRYPTION_KEY, Player.ENCRYPTION_KEY),
                     CryptoStreamMode.Write))
                 {
-                    using (BinaryWriter writer = new BinaryWriter((Stream) cryptoStream))
+                    using (var writer = new BinaryWriter((Stream) cryptoStream))
                     {
                         writer.Write(193);
                         playerFile.Metadata.Write(writer);
@@ -35446,12 +35446,12 @@ namespace Terraria
                         writer.Write(playerFile.GetPlayTime().Ticks);
                         writer.Write(player.hair);
                         writer.Write(player.hairDye);
-                        BitsByte bitsByte1 = (BitsByte) (byte) 0;
-                        for (int index = 0; index < 8; ++index)
+                        var bitsByte1 = (BitsByte) (byte) 0;
+                        for (var index = 0; index < 8; ++index)
                             bitsByte1[index] = player.hideVisual[index];
                         writer.Write((byte) bitsByte1);
-                        BitsByte bitsByte2 = (BitsByte) (byte) 0;
-                        for (int index = 0; index < 2; ++index)
+                        var bitsByte2 = (BitsByte) (byte) 0;
+                        for (var index = 0; index < 2; ++index)
                             bitsByte2[index] = player.hideVisual[index + 8];
                         writer.Write((byte) bitsByte2);
                         writer.Write((byte) player.hideMisc);
@@ -35484,19 +35484,19 @@ namespace Terraria
                         writer.Write(player.shoeColor.R);
                         writer.Write(player.shoeColor.G);
                         writer.Write(player.shoeColor.B);
-                        for (int index = 0; index < player.armor.Length; ++index)
+                        for (var index = 0; index < player.armor.Length; ++index)
                         {
                             writer.Write(player.armor[index].netID);
                             writer.Write(player.armor[index].prefix);
                         }
 
-                        for (int index = 0; index < player.dye.Length; ++index)
+                        for (var index = 0; index < player.dye.Length; ++index)
                         {
                             writer.Write(player.dye[index].netID);
                             writer.Write(player.dye[index].prefix);
                         }
 
-                        for (int index = 0; index < 58; ++index)
+                        for (var index = 0; index < 58; ++index)
                         {
                             writer.Write(player.inventory[index].netID);
                             writer.Write(player.inventory[index].stack);
@@ -35504,7 +35504,7 @@ namespace Terraria
                             writer.Write(player.inventory[index].favorited);
                         }
 
-                        for (int index = 0; index < player.miscEquips.Length; ++index)
+                        for (var index = 0; index < player.miscEquips.Length; ++index)
                         {
                             writer.Write(player.miscEquips[index].netID);
                             writer.Write(player.miscEquips[index].prefix);
@@ -35512,28 +35512,28 @@ namespace Terraria
                             writer.Write(player.miscDyes[index].prefix);
                         }
 
-                        for (int index = 0; index < 40; ++index)
+                        for (var index = 0; index < 40; ++index)
                         {
                             writer.Write(player.bank.item[index].netID);
                             writer.Write(player.bank.item[index].stack);
                             writer.Write(player.bank.item[index].prefix);
                         }
 
-                        for (int index = 0; index < 40; ++index)
+                        for (var index = 0; index < 40; ++index)
                         {
                             writer.Write(player.bank2.item[index].netID);
                             writer.Write(player.bank2.item[index].stack);
                             writer.Write(player.bank2.item[index].prefix);
                         }
 
-                        for (int index = 0; index < 40; ++index)
+                        for (var index = 0; index < 40; ++index)
                         {
                             writer.Write(player.bank3.item[index].netID);
                             writer.Write(player.bank3.item[index].stack);
                             writer.Write(player.bank3.item[index].prefix);
                         }
 
-                        for (int index = 0; index < 22; ++index)
+                        for (var index = 0; index < 22; ++index)
                         {
                             if (Main.buffNoSave[player.buffType[index]])
                             {
@@ -35547,7 +35547,7 @@ namespace Terraria
                             }
                         }
 
-                        for (int index = 0; index < 200; ++index)
+                        for (var index = 0; index < 200; ++index)
                         {
                             if (player.spN[index] == null)
                             {
@@ -35562,12 +35562,12 @@ namespace Terraria
                         }
 
                         writer.Write(player.hbLocked);
-                        for (int index = 0; index < player.hideInfo.Length; ++index)
+                        for (var index = 0; index < player.hideInfo.Length; ++index)
                             writer.Write(player.hideInfo[index]);
                         writer.Write(player.anglerQuestsFinished);
-                        for (int index = 0; index < player.DpadRadial.Bindings.Length; ++index)
+                        for (var index = 0; index < player.DpadRadial.Bindings.Length; ++index)
                             writer.Write(player.DpadRadial.Bindings[index]);
-                        for (int index = 0; index < player.builderAccStatus.Length; ++index)
+                        for (var index = 0; index < player.builderAccStatus.Length; ++index)
                             writer.Write(player.builderAccStatus[index]);
                         writer.Write(player.bartenderQuestLog);
                         writer.Flush();
@@ -35583,25 +35583,25 @@ namespace Terraria
 
         public static PlayerFileData LoadPlayer(string playerPath, bool cloudSave)
         {
-            PlayerFileData playerFileData = new PlayerFileData(playerPath, cloudSave);
+            var playerFileData = new PlayerFileData(playerPath, cloudSave);
             if (cloudSave && SocialAPI.Cloud == null)
                 return playerFileData;
             if (Main.rand == null)
                 Main.rand = new UnifiedRandom((int) DateTime.Now.Ticks);
-            Player player1 = new Player();
+            var player1 = new Player();
             try
             {
-                RijndaelManaged rijndaelManaged = new RijndaelManaged();
+                var rijndaelManaged = new RijndaelManaged();
                 rijndaelManaged.Padding = PaddingMode.None;
-                using (MemoryStream memoryStream = new MemoryStream(FileUtilities.ReadAllBytes(playerPath, cloudSave)))
+                using (var memoryStream = new MemoryStream(FileUtilities.ReadAllBytes(playerPath, cloudSave)))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream) memoryStream,
+                    using (var cryptoStream = new CryptoStream((Stream) memoryStream,
                         rijndaelManaged.CreateDecryptor(Player.ENCRYPTION_KEY, Player.ENCRYPTION_KEY),
                         CryptoStreamMode.Read))
                     {
-                        using (BinaryReader binaryReader = new BinaryReader((Stream) cryptoStream))
+                        using (var binaryReader = new BinaryReader((Stream) cryptoStream))
                         {
-                            int release = binaryReader.ReadInt32();
+                            var release = binaryReader.ReadInt32();
                             if (release >= 135)
                                 playerFileData.Metadata = FileMetadata.Read(binaryReader, FileType.Player);
                             else
@@ -35632,17 +35632,17 @@ namespace Terraria
                                 player1.hairDye = binaryReader.ReadByte();
                             if (release >= 124)
                             {
-                                BitsByte bitsByte = (BitsByte) binaryReader.ReadByte();
-                                for (int index = 0; index < 8; ++index)
+                                var bitsByte = (BitsByte) binaryReader.ReadByte();
+                                for (var index = 0; index < 8; ++index)
                                     player1.hideVisual[index] = bitsByte[index];
                                 bitsByte = (BitsByte) binaryReader.ReadByte();
-                                for (int index = 0; index < 2; ++index)
+                                for (var index = 0; index < 2; ++index)
                                     player1.hideVisual[index + 8] = bitsByte[index];
                             }
                             else if (release >= 83)
                             {
-                                BitsByte bitsByte = (BitsByte) binaryReader.ReadByte();
-                                for (int index = 0; index < 8; ++index)
+                                var bitsByte = (BitsByte) binaryReader.ReadByte();
+                                for (var index = 0; index < 8; ++index)
                                     player1.hideVisual[index] = bitsByte[index];
                             }
 
@@ -35687,12 +35687,12 @@ namespace Terraria
                             {
                                 if (release < 124)
                                 {
-                                    int num = 11;
+                                    var num = 11;
                                     if (release >= 81)
                                         num = 16;
-                                    for (int index1 = 0; index1 < num; ++index1)
+                                    for (var index1 = 0; index1 < num; ++index1)
                                     {
-                                        int index2 = index1;
+                                        var index2 = index1;
                                         if (index2 >= 8)
                                             index2 += 2;
                                         player1.armor[index2].netDefaults(binaryReader.ReadInt32());
@@ -35701,8 +35701,8 @@ namespace Terraria
                                 }
                                 else
                                 {
-                                    int num = 20;
-                                    for (int index = 0; index < num; ++index)
+                                    var num = 20;
+                                    for (var index = 0; index < num; ++index)
                                     {
                                         player1.armor[index].netDefaults(binaryReader.ReadInt32());
                                         player1.armor[index].Prefix((int) binaryReader.ReadByte());
@@ -35711,14 +35711,14 @@ namespace Terraria
 
                                 if (release >= 47)
                                 {
-                                    int num = 3;
+                                    var num = 3;
                                     if (release >= 81)
                                         num = 8;
                                     if (release >= 124)
                                         num = 10;
-                                    for (int index1 = 0; index1 < num; ++index1)
+                                    for (var index1 = 0; index1 < num; ++index1)
                                     {
-                                        int index2 = index1;
+                                        var index2 = index1;
                                         player1.dye[index2].netDefaults(binaryReader.ReadInt32());
                                         player1.dye[index2].Prefix((int) binaryReader.ReadByte());
                                     }
@@ -35726,14 +35726,14 @@ namespace Terraria
 
                                 if (release >= 58)
                                 {
-                                    for (int index = 0; index < 58; ++index)
+                                    for (var index = 0; index < 58; ++index)
                                     {
-                                        int type = binaryReader.ReadInt32();
+                                        var type = binaryReader.ReadInt32();
                                         if (type >= 3930)
                                         {
                                             player1.inventory[index].netDefaults(0);
                                             binaryReader.ReadInt32();
-                                            int num = (int) binaryReader.ReadByte();
+                                            var num = (int) binaryReader.ReadByte();
                                             if (release >= 114)
                                                 binaryReader.ReadBoolean();
                                         }
@@ -35749,14 +35749,14 @@ namespace Terraria
                                 }
                                 else
                                 {
-                                    for (int index = 0; index < 48; ++index)
+                                    for (var index = 0; index < 48; ++index)
                                     {
-                                        int type = binaryReader.ReadInt32();
+                                        var type = binaryReader.ReadInt32();
                                         if (type >= 3930)
                                         {
                                             player1.inventory[index].netDefaults(0);
                                             binaryReader.ReadInt32();
-                                            int num = (int) binaryReader.ReadByte();
+                                            var num = (int) binaryReader.ReadByte();
                                         }
                                         else
                                         {
@@ -35771,15 +35771,15 @@ namespace Terraria
                                 {
                                     if (release < 136)
                                     {
-                                        for (int index = 0; index < 5; ++index)
+                                        for (var index = 0; index < 5; ++index)
                                         {
                                             if (index != 1)
                                             {
-                                                int type1 = binaryReader.ReadInt32();
+                                                var type1 = binaryReader.ReadInt32();
                                                 if (type1 >= 3930)
                                                 {
                                                     player1.miscEquips[index].netDefaults(0);
-                                                    int num = (int) binaryReader.ReadByte();
+                                                    var num = (int) binaryReader.ReadByte();
                                                 }
                                                 else
                                                 {
@@ -35787,11 +35787,11 @@ namespace Terraria
                                                     player1.miscEquips[index].Prefix((int) binaryReader.ReadByte());
                                                 }
 
-                                                int type2 = binaryReader.ReadInt32();
+                                                var type2 = binaryReader.ReadInt32();
                                                 if (type2 >= 3930)
                                                 {
                                                     player1.miscDyes[index].netDefaults(0);
-                                                    int num = (int) binaryReader.ReadByte();
+                                                    var num = (int) binaryReader.ReadByte();
                                                 }
                                                 else
                                                 {
@@ -35803,13 +35803,13 @@ namespace Terraria
                                     }
                                     else
                                     {
-                                        for (int index = 0; index < 5; ++index)
+                                        for (var index = 0; index < 5; ++index)
                                         {
-                                            int type1 = binaryReader.ReadInt32();
+                                            var type1 = binaryReader.ReadInt32();
                                             if (type1 >= 3930)
                                             {
                                                 player1.miscEquips[index].netDefaults(0);
-                                                int num = (int) binaryReader.ReadByte();
+                                                var num = (int) binaryReader.ReadByte();
                                             }
                                             else
                                             {
@@ -35817,11 +35817,11 @@ namespace Terraria
                                                 player1.miscEquips[index].Prefix((int) binaryReader.ReadByte());
                                             }
 
-                                            int type2 = binaryReader.ReadInt32();
+                                            var type2 = binaryReader.ReadInt32();
                                             if (type2 >= 3930)
                                             {
                                                 player1.miscDyes[index].netDefaults(0);
-                                                int num = (int) binaryReader.ReadByte();
+                                                var num = (int) binaryReader.ReadByte();
                                             }
                                             else
                                             {
@@ -35834,14 +35834,14 @@ namespace Terraria
 
                                 if (release >= 58)
                                 {
-                                    for (int index = 0; index < 40; ++index)
+                                    for (var index = 0; index < 40; ++index)
                                     {
                                         player1.bank.item[index].netDefaults(binaryReader.ReadInt32());
                                         player1.bank.item[index].stack = binaryReader.ReadInt32();
                                         player1.bank.item[index].Prefix((int) binaryReader.ReadByte());
                                     }
 
-                                    for (int index = 0; index < 40; ++index)
+                                    for (var index = 0; index < 40; ++index)
                                     {
                                         player1.bank2.item[index].netDefaults(binaryReader.ReadInt32());
                                         player1.bank2.item[index].stack = binaryReader.ReadInt32();
@@ -35850,14 +35850,14 @@ namespace Terraria
                                 }
                                 else
                                 {
-                                    for (int index = 0; index < 20; ++index)
+                                    for (var index = 0; index < 20; ++index)
                                     {
                                         player1.bank.item[index].netDefaults(binaryReader.ReadInt32());
                                         player1.bank.item[index].stack = binaryReader.ReadInt32();
                                         player1.bank.item[index].Prefix((int) binaryReader.ReadByte());
                                     }
 
-                                    for (int index = 0; index < 20; ++index)
+                                    for (var index = 0; index < 20; ++index)
                                     {
                                         player1.bank2.item[index].netDefaults(binaryReader.ReadInt32());
                                         player1.bank2.item[index].stack = binaryReader.ReadInt32();
@@ -35867,7 +35867,7 @@ namespace Terraria
 
                                 if (release >= 182)
                                 {
-                                    for (int index = 0; index < 40; ++index)
+                                    for (var index = 0; index < 40; ++index)
                                     {
                                         player1.bank3.item[index].netDefaults(binaryReader.ReadInt32());
                                         player1.bank3.item[index].stack = binaryReader.ReadInt32();
@@ -35877,7 +35877,7 @@ namespace Terraria
                             }
                             else
                             {
-                                for (int index = 0; index < 8; ++index)
+                                for (var index = 0; index < 8; ++index)
                                 {
                                     player1.armor[index]
                                         .SetDefaults((int) ItemID.FromLegacyName(binaryReader.ReadString(), release),
@@ -35888,7 +35888,7 @@ namespace Terraria
 
                                 if (release >= 6)
                                 {
-                                    for (int index = 8; index < 11; ++index)
+                                    for (var index = 8; index < 11; ++index)
                                     {
                                         player1.armor[index]
                                             .SetDefaults(
@@ -35898,7 +35898,7 @@ namespace Terraria
                                     }
                                 }
 
-                                for (int index = 0; index < 44; ++index)
+                                for (var index = 0; index < 44; ++index)
                                 {
                                     player1.inventory[index]
                                         .SetDefaults((int) ItemID.FromLegacyName(binaryReader.ReadString(), release),
@@ -35910,7 +35910,7 @@ namespace Terraria
 
                                 if (release >= 15)
                                 {
-                                    for (int index = 44; index < 48; ++index)
+                                    for (var index = 44; index < 48; ++index)
                                     {
                                         player1.inventory[index]
                                             .SetDefaults(
@@ -35921,7 +35921,7 @@ namespace Terraria
                                     }
                                 }
 
-                                for (int index = 0; index < 20; ++index)
+                                for (var index = 0; index < 20; ++index)
                                 {
                                     player1.bank.item[index]
                                         .SetDefaults((int) ItemID.FromLegacyName(binaryReader.ReadString(), release),
@@ -35933,7 +35933,7 @@ namespace Terraria
 
                                 if (release >= 20)
                                 {
-                                    for (int index = 0; index < 20; ++index)
+                                    for (var index = 0; index < 20; ++index)
                                     {
                                         player1.bank2.item[index]
                                             .SetDefaults(
@@ -35947,7 +35947,7 @@ namespace Terraria
 
                             if (release < 58)
                             {
-                                for (int index = 40; index < 48; ++index)
+                                for (var index = 40; index < 48; ++index)
                                 {
                                     player1.inventory[index + 10] = player1.inventory[index].Clone();
                                     player1.inventory[index].SetDefaults(0, false);
@@ -35956,10 +35956,10 @@ namespace Terraria
 
                             if (release >= 11)
                             {
-                                int num = 22;
+                                var num = 22;
                                 if (release < 74)
                                     num = 10;
-                                for (int index = 0; index < num; ++index)
+                                for (var index = 0; index < num; ++index)
                                 {
                                     player1.buffType[index] = binaryReader.ReadInt32();
                                     player1.buffTime[index] = binaryReader.ReadInt32();
@@ -35971,9 +35971,9 @@ namespace Terraria
                                 }
                             }
 
-                            for (int index = 0; index < 200; ++index)
+                            for (var index = 0; index < 200; ++index)
                             {
-                                int num = binaryReader.ReadInt32();
+                                var num = binaryReader.ReadInt32();
                                 if (num != -1)
                                 {
                                     player1.spX[index] = num;
@@ -35989,8 +35989,8 @@ namespace Terraria
                                 player1.hbLocked = binaryReader.ReadBoolean();
                             if (release >= 115)
                             {
-                                int num = 13;
-                                for (int index = 0; index < num; ++index)
+                                var num = 13;
+                                for (var index = 0; index < num; ++index)
                                     player1.hideInfo[index] = binaryReader.ReadBoolean();
                             }
 
@@ -35998,25 +35998,25 @@ namespace Terraria
                                 player1.anglerQuestsFinished = binaryReader.ReadInt32();
                             if (release >= 162)
                             {
-                                for (int index = 0; index < 4; ++index)
+                                for (var index = 0; index < 4; ++index)
                                     player1.DpadRadial.Bindings[index] = binaryReader.ReadInt32();
                             }
 
                             if (release >= 164)
                             {
-                                int num = 8;
+                                var num = 8;
                                 if (release >= 167)
                                     num = 10;
-                                for (int index = 0; index < num; ++index)
+                                for (var index = 0; index < num; ++index)
                                     player1.builderAccStatus[index] = binaryReader.ReadInt32();
                             }
 
                             if (release >= 181)
                                 player1.bartenderQuestLog = binaryReader.ReadInt32();
                             player1.skinVariant = (int) MathHelper.Clamp((float) player1.skinVariant, 0.0f, 9f);
-                            for (int index = 3; index < 8 + player1.extraAccessorySlots; ++index)
+                            for (var index = 3; index < 8 + player1.extraAccessorySlots; ++index)
                             {
-                                int type = player1.armor[index].type;
+                                var type = player1.armor[index].type;
                                 if (type == 908)
                                     player1.lavaMax += 420;
                                 if (type == 906)
@@ -36040,7 +36040,7 @@ namespace Terraria
             {
             }
 
-            Player player2 = new Player();
+            var player2 = new Player();
             player2.loadStatus = 2;
             if (player1.name != "")
             {
@@ -36048,7 +36048,7 @@ namespace Terraria
             }
             else
             {
-                string[] strArray = playerPath.Split(Path.DirectorySeparatorChar);
+                var strArray = playerPath.Split(Path.DirectorySeparatorChar);
                 player1.name = strArray[strArray.Length - 1].Split('.')[0];
             }
 
@@ -36060,7 +36060,7 @@ namespace Terraria
         {
             if (file == null || cloudSave && SocialAPI.Cloud == null)
                 return (PlayerFileData) null;
-            PlayerFileData playerFileData = Player.LoadPlayer(file, cloudSave);
+            var playerFileData = Player.LoadPlayer(file, cloudSave);
             if (playerFileData.Player == null)
                 return (PlayerFileData) null;
             if (playerFileData.Player.loadStatus != 0 && playerFileData.Player.loadStatus != 1)
@@ -36077,14 +36077,14 @@ namespace Terraria
 
         public Color GetHairColor(bool useLighting = true)
         {
-            Color color = Lighting.GetColor((int) ((double) this.position.X + (double) this.width * 0.5) / 16,
+            var color = Lighting.GetColor((int) ((double) this.position.X + (double) this.width * 0.5) / 16,
                 (int) (((double) this.position.Y + (double) this.height * 0.25) / 16.0));
             return GameShaders.Hair.GetColor((short) this.hairDye, this, useLighting ? color : Color.White);
         }
 
         public bool HasItem(int type)
         {
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
                 if (type == this.inventory[index].type && this.inventory[index].stack > 0)
                     return true;
@@ -36095,7 +36095,7 @@ namespace Terraria
 
         public int FindItem(int netid)
         {
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
                 if (netid == this.inventory[index].netID && this.inventory[index].stack > 0)
                     return index;
@@ -36106,7 +36106,7 @@ namespace Terraria
 
         public int FindItem(List<int> netids)
         {
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
                 if (this.inventory[index].stack > 0 && netids.Contains(this.inventory[index].netID))
                     return index;
@@ -36117,7 +36117,7 @@ namespace Terraria
 
         public int FindItem(bool[] validtypes)
         {
-            for (int index = 0; index < 58; ++index)
+            for (var index = 0; index < 58; ++index)
             {
                 if (this.inventory[index].stack > 0 && validtypes[this.inventory[index].type])
                     return index;
@@ -36135,25 +36135,25 @@ namespace Terraria
             this.bodyFrame.Height = 56;
             this.legFrame.Width = 40;
             this.legFrame.Height = 56;
-            for (int index = 0; index < 59; ++index)
+            for (var index = 0; index < 59; ++index)
             {
                 if (index < this.armor.Length)
                     this.armor[index] = new Item();
                 this.inventory[index] = new Item();
             }
 
-            for (int index = 0; index < 40; ++index)
+            for (var index = 0; index < 40; ++index)
             {
                 this.bank.item[index] = new Item();
                 this.bank2.item[index] = new Item();
                 this.bank3.item[index] = new Item();
             }
 
-            for (int index = 0; index < this.dye.Length; ++index)
+            for (var index = 0; index < this.dye.Length; ++index)
                 this.dye[index] = new Item();
-            for (int index = 0; index < this.miscEquips.Length; ++index)
+            for (var index = 0; index < this.miscEquips.Length; ++index)
                 this.miscEquips[index] = new Item();
-            for (int index = 0; index < this.miscDyes.Length; ++index)
+            for (var index = 0; index < this.miscDyes.Length; ++index)
                 this.miscDyes[index] = new Item();
             this.trashItem = new Item();
             this.grappling[0] = -1;
@@ -36164,7 +36164,7 @@ namespace Terraria
             this.extraAccessory = false;
             if (Main.cEd)
                 this.inventory[3].SetDefaults(603, false);
-            for (int index = 0; index < 470; ++index)
+            for (var index = 0; index < 470; ++index)
             {
                 this.adjTile[index] = false;
                 this.oldAdjTile[index] = false;
@@ -36176,16 +36176,16 @@ namespace Terraria
 
         public void TeleportationPotion()
         {
-            bool canSpawn = false;
-            int teleportStartX = 100;
-            int teleportRangeX = Main.maxTilesX - 200;
-            int teleportStartY = 100;
-            int teleportRangeY = Main.maxTilesY - 200;
-            Vector2 vector2 = this.TestTeleport(ref canSpawn, teleportStartX, teleportRangeX, teleportStartY,
+            var canSpawn = false;
+            var teleportStartX = 100;
+            var teleportRangeX = Main.maxTilesX - 200;
+            var teleportStartY = 100;
+            var teleportRangeY = Main.maxTilesY - 200;
+            var vector2 = this.TestTeleport(ref canSpawn, teleportStartX, teleportRangeX, teleportStartY,
                 teleportRangeY);
             if (!canSpawn)
                 return;
-            Vector2 newPos = vector2;
+            var newPos = vector2;
             this.Teleport(newPos, 2, 0);
             this.velocity = Vector2.Zero;
             if (Main.netMode != 2)
@@ -36197,17 +36197,17 @@ namespace Terraria
         private Vector2 TestTeleport(ref bool canSpawn, int teleportStartX, int teleportRangeX, int teleportStartY,
             int teleportRangeY)
         {
-            int num1 = 0;
-            int num2 = 0;
-            int num3 = 0;
-            int width = this.width;
-            Vector2 Position = new Vector2((float) num2, (float) num3) * 16f +
+            var num1 = 0;
+            var num2 = 0;
+            var num3 = 0;
+            var width = this.width;
+            var Position = new Vector2((float) num2, (float) num3) * 16f +
                                new Vector2((float) (-width / 2 + 8), (float) -this.height);
             while (!canSpawn && num1 < 1000)
             {
                 ++num1;
-                int index1 = teleportStartX + Main.rand.Next(teleportRangeX);
-                int index2 = teleportStartY + Main.rand.Next(teleportRangeY);
+                var index1 = teleportStartX + Main.rand.Next(teleportRangeX);
+                var index2 = teleportStartY + Main.rand.Next(teleportRangeY);
                 Position = new Vector2((float) index1, (float) index2) * 16f +
                            new Vector2((float) (-width / 2 + 8), (float) -this.height);
                 if (!Collision.SolidCollision(Position, width, this.height))
@@ -36218,20 +36218,20 @@ namespace Terraria
                          NPC.downedPlantBoss) && (!Main.wallDungeon[(int) Main.tile[index1, index2].wall] ||
                                                   (double) index2 <= Main.worldSurface || NPC.downedBoss3))
                     {
-                        int num4 = 0;
+                        var num4 = 0;
                         while (num4 < 100)
                         {
                             if (Main.tile[index1, index2 + num4] == null)
                                 Main.tile[index1, index2 + num4] = new Tile();
-                            Tile tile = Main.tile[index1, index2 + num4];
+                            var tile = Main.tile[index1, index2 + num4];
                             Position = new Vector2((float) index1, (float) (index2 + num4)) * 16f +
                                        new Vector2((float) (-width / 2 + 8), (float) -this.height);
-                            Vector4 vector4 = Collision.SlopeCollision(Position, this.velocity, width, this.height,
+                            var vector4 = Collision.SlopeCollision(Position, this.velocity, width, this.height,
                                 this.gravDir, false);
-                            bool flag = !Collision.SolidCollision(Position, width, this.height);
+                            var flag = !Collision.SolidCollision(Position, width, this.height);
                             if ((double) vector4.Z == (double) this.velocity.X)
                             {
-                                double y = (double) this.velocity.Y;
+                                var y = (double) this.velocity.Y;
                             }
 
                             if (flag)
@@ -36248,24 +36248,24 @@ namespace Terraria
                             Collision.SlopeCollision(Position, this.velocity, width, this.height, this.gravDir, false);
                             if (Collision.SolidCollision(Position, width, this.height) && num4 < 99)
                             {
-                                Vector2 Velocity1 = Vector2.UnitX * 16f;
+                                var Velocity1 = Vector2.UnitX * 16f;
                                 if (!(Collision.TileCollision(Position - Velocity1, Velocity1, this.width, this.height,
                                           false, false, (int) this.gravDir) != Velocity1))
                                 {
-                                    Vector2 Velocity2 = -Vector2.UnitX * 16f;
+                                    var Velocity2 = -Vector2.UnitX * 16f;
                                     if (!(Collision.TileCollision(Position - Velocity2, Velocity2, this.width,
                                               this.height, false, false, (int) this.gravDir) != Velocity2))
                                     {
-                                        Vector2 Velocity3 = Vector2.UnitY * 16f;
+                                        var Velocity3 = Vector2.UnitY * 16f;
                                         if (!(Collision.TileCollision(Position - Velocity3, Velocity3, this.width,
                                                   this.height, false, false, (int) this.gravDir) != Velocity3))
                                         {
-                                            Vector2 Velocity4 = -Vector2.UnitY * 16f;
+                                            var Velocity4 = -Vector2.UnitY * 16f;
                                             if (!(Collision.TileCollision(Position - Velocity4, Velocity4, this.width,
                                                       this.height, false, false, (int) this.gravDir) != Velocity4))
                                             {
                                                 canSpawn = true;
-                                                int num5 = index2 + num4;
+                                                var num5 = index2 + num4;
                                                 break;
                                             }
                                         }
@@ -36282,9 +36282,9 @@ namespace Terraria
 
         public void GetAnglerReward()
         {
-            Item newItem1 = new Item();
+            var newItem1 = new Item();
             newItem1.type = 0;
-            float num1 = 1f;
+            var num1 = 1f;
             if (this.anglerQuestsFinished <= 50)
                 num1 -= (float) this.anglerQuestsFinished * 0.01f;
             else if (this.anglerQuestsFinished <= 100)
@@ -36403,10 +36403,10 @@ namespace Terraria
             }
 
             newItem1.position = this.Center;
-            Item obj1 = this.GetItem(this.whoAmI, newItem1, true, false);
+            var obj1 = this.GetItem(this.whoAmI, newItem1, true, false);
             if (obj1.stack > 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                     obj1.type, obj1.stack, false, 0, true, false);
                 if (Main.netMode == 1)
                     NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -36414,14 +36414,14 @@ namespace Terraria
 
             if (newItem1.type == 2417)
             {
-                Item newItem2 = new Item();
-                Item newItem3 = new Item();
+                var newItem2 = new Item();
+                var newItem3 = new Item();
                 newItem2.SetDefaults(2418, false);
                 newItem2.position = this.Center;
-                Item obj2 = this.GetItem(this.whoAmI, newItem2, true, false);
+                var obj2 = this.GetItem(this.whoAmI, newItem2, true, false);
                 if (obj2.stack > 0)
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         obj2.type, obj2.stack, false, 0, true, false);
                     if (Main.netMode == 1)
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -36429,10 +36429,10 @@ namespace Terraria
 
                 newItem3.SetDefaults(2419, false);
                 newItem3.position = this.Center;
-                Item obj3 = this.GetItem(this.whoAmI, newItem3, true, false);
+                var obj3 = this.GetItem(this.whoAmI, newItem3, true, false);
                 if (obj3.stack > 0)
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         obj3.type, obj3.stack, false, 0, true, false);
                     if (Main.netMode == 1)
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -36440,14 +36440,14 @@ namespace Terraria
             }
             else if (newItem1.type == 2498)
             {
-                Item newItem2 = new Item();
-                Item newItem3 = new Item();
+                var newItem2 = new Item();
+                var newItem3 = new Item();
                 newItem2.SetDefaults(2499, false);
                 newItem2.position = this.Center;
-                Item obj2 = this.GetItem(this.whoAmI, newItem2, true, false);
+                var obj2 = this.GetItem(this.whoAmI, newItem2, true, false);
                 if (obj2.stack > 0)
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         obj2.type, obj2.stack, false, 0, true, false);
                     if (Main.netMode == 1)
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -36455,25 +36455,25 @@ namespace Terraria
 
                 newItem3.SetDefaults(2500, false);
                 newItem3.position = this.Center;
-                Item obj3 = this.GetItem(this.whoAmI, newItem3, true, false);
+                var obj3 = this.GetItem(this.whoAmI, newItem3, true, false);
                 if (obj3.stack > 0)
                 {
-                    int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                    var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                         obj3.type, obj3.stack, false, 0, true, false);
                     if (Main.netMode == 1)
                         NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
                 }
             }
 
-            Item newItem4 = new Item();
-            int num2 =
+            var newItem4 = new Item();
+            var num2 =
                 (int) ((double) (int) ((double) ((this.anglerQuestsFinished + 50) / 2 * Main.rand.Next(50, 201)) *
                                        0.0149999996647239) * 1.5);
             if (Main.expertMode)
                 num2 *= 2;
             if (num2 > 100)
             {
-                int num3 = num2 / 100;
+                var num3 = num2 / 100;
                 if (num3 > 10)
                     num3 = 10;
                 if (num3 < 1)
@@ -36492,10 +36492,10 @@ namespace Terraria
             }
 
             newItem4.position = this.Center;
-            Item obj4 = this.GetItem(this.whoAmI, newItem4, true, false);
+            var obj4 = this.GetItem(this.whoAmI, newItem4, true, false);
             if (obj4.stack > 0)
             {
-                int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
+                var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height,
                     obj4.type, obj4.stack, false, 0, true, false);
                 if (Main.netMode == 1)
                     NetMessage.SendData(21, -1, -1, (NetworkText) null, number, 1f, 0.0f, 0.0f, 0, 0, 0);
@@ -36503,7 +36503,7 @@ namespace Terraria
 
             if (Main.rand.Next((int) (100.0 * (double) num1)) > 50)
                 return;
-            Item newItem5 = new Item();
+            var newItem5 = new Item();
             if (Main.rand.Next((int) (15.0 * (double) num1)) == 0)
                 newItem5.SetDefaults(2676, false);
             else if (Main.rand.Next((int) (5.0 * (double) num1)) == 0)
@@ -36523,10 +36523,10 @@ namespace Terraria
             if (Main.rand.Next(250) <= this.anglerQuestsFinished)
                 ++newItem5.stack;
             newItem5.position = this.Center;
-            Item obj5 = this.GetItem(this.whoAmI, newItem5, true, false);
+            var obj5 = this.GetItem(this.whoAmI, newItem5, true, false);
             if (obj5.stack <= 0)
                 return;
-            int number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, obj5.type,
+            var number1 = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, obj5.type,
                 obj5.stack, false, 0, true, false);
             if (Main.netMode != 1)
                 return;
@@ -36535,7 +36535,7 @@ namespace Terraria
 
         public void GetDyeTraderReward()
         {
-            List<int> intList = new List<int>()
+            var intList = new List<int>()
             {
                 3560,
                 3028,
@@ -36588,15 +36588,15 @@ namespace Terraria
                     intList.Add(3024);
             }
 
-            int Type = intList[Main.rand.Next(intList.Count)];
-            Item newItem = new Item();
+            var Type = intList[Main.rand.Next(intList.Count)];
+            var newItem = new Item();
             newItem.SetDefaults(Type, false);
             newItem.stack = 3;
             newItem.position = this.Center;
-            Item obj = this.GetItem(this.whoAmI, newItem, true, false);
+            var obj = this.GetItem(this.whoAmI, newItem, true, false);
             if (obj.stack <= 0)
                 return;
-            int number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, obj.type,
+            var number = Item.NewItem((int) this.position.X, (int) this.position.Y, this.width, this.height, obj.type,
                 obj.stack, false, 0, true, false);
             if (Main.netMode != 1)
                 return;
@@ -36605,7 +36605,7 @@ namespace Terraria
 
         public bool CheckMana(int amount, bool pay = false, bool blockQuickMana = false)
         {
-            int num = (int) ((double) amount * (double) this.manaCost);
+            var num = (int) ((double) amount * (double) this.manaCost);
             if (this.statMana >= num)
             {
                 if (pay)
@@ -36637,7 +36637,7 @@ namespace Terraria
             if (Main.netMode == 1 && this.whoAmI != Main.myPlayer)
                 return true;
             --this.solarShields;
-            for (int b = 0; b < 22; ++b)
+            for (var b = 0; b < 22; ++b)
             {
                 if (this.buffType[b] >= 170 && this.buffType[b] <= 172)
                     this.DelBuff(b);
@@ -36651,7 +36651,7 @@ namespace Terraria
 
         public void KeyDoubleTap(int keyDir)
         {
-            int num = 0;
+            var num = 0;
             if (Main.ReversedUpDownArmorSetBonuses)
                 num = 1;
             if (keyDir != num)
@@ -36670,10 +36670,10 @@ namespace Terraria
 
         public void UpdateForbiddenSetLock()
         {
-            List<int> intList = new List<int>();
-            for (int index = 0; index < 1000; ++index)
+            var intList = new List<int>();
+            for (var index = 0; index < 1000; ++index)
             {
-                Projectile projectile = Main.projectile[index];
+                var projectile = Main.projectile[index];
                 if (projectile.active && projectile.type == 656 && projectile.owner == this.whoAmI)
                     intList.Add(index);
             }
@@ -36683,32 +36683,32 @@ namespace Terraria
 
         public void CommandForbiddenStorm()
         {
-            List<int> intList = new List<int>();
-            for (int index = 0; index < 1000; ++index)
+            var intList = new List<int>();
+            for (var index = 0; index < 1000; ++index)
             {
-                Projectile projectile = Main.projectile[index];
+                var projectile = Main.projectile[index];
                 if (projectile.active && projectile.type == 656 && projectile.owner == this.whoAmI)
                     intList.Add(index);
             }
 
-            bool flag1 = StrayMethods.CanSpawnSandstormFriendly(this.MinionRestTargetPoint, 30, 30);
-            bool flag2 = this.MinionRestTargetPoint == Vector2.Zero;
-            Vector2 center = this.Center;
-            Vector2 vector2_1 = this.MinionRestTargetPoint;
+            var flag1 = StrayMethods.CanSpawnSandstormFriendly(this.MinionRestTargetPoint, 30, 30);
+            var flag2 = this.MinionRestTargetPoint == Vector2.Zero;
+            var center = this.Center;
+            var vector2_1 = this.MinionRestTargetPoint;
             if (flag2)
                 vector2_1 = center;
-            bool flag3 = false;
-            float[] samples = new float[10];
-            Vector2 v = vector2_1 - center;
+            var flag3 = false;
+            var samples = new float[10];
+            var v = vector2_1 - center;
             Collision.LaserScan(center, v.SafeNormalize(Vector2.Zero), 60f, v.Length(), samples);
-            float num1 = 0.0f;
-            for (int index = 0; index < samples.Length; ++index)
+            var num1 = 0.0f;
+            for (var index = 0; index < samples.Length; ++index)
             {
                 if ((double) samples[index] > (double) num1)
                     num1 = samples[index];
             }
 
-            foreach (float num2 in samples)
+            foreach (var num2 in samples)
             {
                 if ((double) Math.Abs(num2 - v.Length()) < 10.0)
                 {
@@ -36719,15 +36719,15 @@ namespace Terraria
 
             if (intList.Count <= 1)
             {
-                Vector2 Position1 = center + v.SafeNormalize(Vector2.Zero) * num1;
-                Vector2 vector2_2 = Position1 - center;
+                var Position1 = center + v.SafeNormalize(Vector2.Zero) * num1;
+                var vector2_2 = Position1 - center;
                 if ((double) vector2_2.Length() > 0.0)
                 {
-                    float num2 = 0.0f;
+                    var num2 = 0.0f;
                     while ((double) num2 < (double) vector2_2.Length())
                     {
-                        Vector2 Position2 = center + vector2_2 * (num2 / vector2_2.Length());
-                        Dust dust = Main.dust[Dust.NewDust(Position2, 0, 0, 269, 0.0f, 0.0f, 0, new Color(), 1f)];
+                        var Position2 = center + vector2_2 * (num2 / vector2_2.Length());
+                        var dust = Main.dust[Dust.NewDust(Position2, 0, 0, 269, 0.0f, 0.0f, 0, new Color(), 1f)];
                         dust.position = Position2;
                         dust.fadeIn = 0.5f;
                         dust.scale = 0.7f;
@@ -36737,10 +36737,10 @@ namespace Terraria
                     }
                 }
 
-                float num3 = 0.0f;
+                var num3 = 0.0f;
                 while ((double) num3 < 6.28318548202515)
                 {
-                    Dust dust = Main.dust[Dust.NewDust(Position1, 0, 0, 269, 0.0f, 0.0f, 0, new Color(), 1f)];
+                    var dust = Main.dust[Dust.NewDust(Position1, 0, 0, 269, 0.0f, 0.0f, 0, new Color(), 1f)];
                     dust.position = Position1;
                     dust.fadeIn = 1f;
                     dust.scale = 0.3f;
@@ -36749,7 +36749,7 @@ namespace Terraria
                 }
             }
 
-            bool flag4 = flag1 & intList.Count <= 1 & flag3;
+            var flag4 = flag1 & intList.Count <= 1 & flag3;
             if (flag4)
             {
                 flag4 = this.CheckMana(20, true, false);
@@ -36759,9 +36759,9 @@ namespace Terraria
 
             if (!flag4)
                 return;
-            foreach (int index in intList)
+            foreach (var index in intList)
             {
-                Projectile projectile = Main.projectile[index];
+                var projectile = Main.projectile[index];
                 if ((double) projectile.ai[0] < 780.0)
                 {
                     projectile.ai[0] = (float) (780.0 + (double) projectile.ai[0] % 60.0);
@@ -36769,8 +36769,8 @@ namespace Terraria
                 }
             }
 
-            int Damage = (int) (20.0 * (1.0 + (double) this.magicDamage + (double) this.minionDamage - 2.0));
-            Projectile projectile1 =
+            var Damage = (int) (20.0 * (1.0 + (double) this.magicDamage + (double) this.minionDamage - 2.0));
+            var projectile1 =
                 Main.projectile[
                     Projectile.NewProjectile(this.MinionRestTargetPoint, Vector2.Zero, 656, Damage, 0.0f, Main.myPlayer,
                         0.0f, 0.0f)];
@@ -36778,7 +36778,7 @@ namespace Terraria
 
         public void KeyHoldDown(int keyDir, int holdTime)
         {
-            int num = 0;
+            var num = 0;
             if (Main.ReversedUpDownArmorSetBonuses)
                 num = 1;
             if (keyDir != num)
@@ -36792,9 +36792,9 @@ namespace Terraria
 
         public void MinionNPCTargetAim()
         {
-            Vector2 mouseWorld = Main.MouseWorld;
-            int index1 = -1;
-            for (int index2 = 0; index2 < 200; ++index2)
+            var mouseWorld = Main.MouseWorld;
+            var index1 = -1;
+            for (var index2 = 0; index2 < 200; ++index2)
             {
                 if (Main.npc[index2].CanBeChasedBy((object) this, false) &&
                     (index1 == -1 || (double) Main.npc[index2].Hitbox.Distance(mouseWorld) <
@@ -36810,18 +36810,18 @@ namespace Terraria
 
         public void MinionRestTargetAim()
         {
-            Vector2 mouseWorld = Main.MouseWorld;
-            float y = mouseWorld.Y;
-            int i = (int) mouseWorld.X / 16;
-            int index1 = (int) y / 16;
-            int num1 = 0;
+            var mouseWorld = Main.MouseWorld;
+            var y = mouseWorld.Y;
+            var i = (int) mouseWorld.X / 16;
+            var index1 = (int) y / 16;
+            var num1 = 0;
             if (Main.tile[i, index1].nactive() && Main.tileSolid[(int) Main.tile[i, index1].type] &&
                 !Main.tileSolidTop[(int) Main.tile[i, index1].type])
             {
-                int num2 = 0;
-                for (int index2 = 0; index2 > -20 && index1 + index2 > 1; --index2)
+                var num2 = 0;
+                for (var index2 = 0; index2 > -20 && index1 + index2 > 1; --index2)
                 {
-                    int index3 = index1 + index2;
+                    var index3 = index1 + index2;
                     if (Main.tile[i, index3].nactive() && Main.tileSolid[(int) Main.tile[i, index3].type] &&
                         !Main.tileSolidTop[(int) Main.tile[i, index3].type])
                     {
@@ -36834,10 +36834,10 @@ namespace Terraria
                     }
                 }
 
-                int num3 = 0;
-                for (int index2 = 0; index2 < 20 && index1 + index2 < Main.maxTilesY; ++index2)
+                var num3 = 0;
+                for (var index2 = 0; index2 < 20 && index1 + index2 < Main.maxTilesY; ++index2)
                 {
-                    int index3 = index1 + index2;
+                    var index3 = index1 + index2;
                     if (Main.tile[i, index3].nactive() && Main.tileSolid[(int) Main.tile[i, index3].type] &&
                         !Main.tileSolidTop[(int) Main.tile[i, index3].type])
                     {
@@ -36853,9 +36853,9 @@ namespace Terraria
                 num1 = num3 <= -num2 ? num3 + 3 : num2 - 2;
             }
 
-            int num4 = index1 + num1;
-            bool flag = false;
-            for (int j = num4; j < num4 + 5; ++j)
+            var num4 = index1 + num1;
+            var flag = false;
+            for (var j = num4; j < num4 + 5; ++j)
             {
                 if (WorldGen.SolidTileAllowBottomSlope(i, j))
                     flag = true;
@@ -36864,14 +36864,14 @@ namespace Terraria
             while (!flag)
             {
                 ++num4;
-                for (int j = num4; j < num4 + 5; ++j)
+                for (var j = num4; j < num4 + 5; ++j)
                 {
                     if (WorldGen.SolidTileAllowBottomSlope(i, j))
                         flag = true;
                 }
             }
 
-            Vector2 Other = new Vector2((float) (i * 16 + 8), (float) (num4 * 16));
+            var Other = new Vector2((float) (i * 16 + 8), (float) (num4 * 16));
             if ((double) this.Distance(Other) > 1000.0)
                 return;
             this.MinionRestTargetPoint = Other;
@@ -36889,12 +36889,12 @@ namespace Terraria
                 this.MinionAttackTargetNPC = -1;
             if (this.stardustGuardian && this.HasMinionRestTarget)
             {
-                Vector2 minionRestTargetPoint = this.MinionRestTargetPoint;
-                float num1 = (float) this.miscCounter / 150f;
-                float num2 = 2.094395f;
-                for (int index1 = 0; index1 < 3; ++index1)
+                var minionRestTargetPoint = this.MinionRestTargetPoint;
+                var num1 = (float) this.miscCounter / 150f;
+                var num2 = 2.094395f;
+                for (var index1 = 0; index1 < 3; ++index1)
                 {
-                    int index2 = Dust.NewDust(minionRestTargetPoint, 0, 0, 135, 0.0f, 0.0f, 100, new Color(), 1.5f);
+                    var index2 = Dust.NewDust(minionRestTargetPoint, 0, 0, 135, 0.0f, 0.0f, 100, new Color(), 1.5f);
                     Main.dust[index2].noGravity = true;
                     Main.dust[index2].velocity = Vector2.Zero;
                     Main.dust[index2].noLight = true;
@@ -36907,12 +36907,12 @@ namespace Terraria
 
             if (this.MinionAttackTargetNPC == -1)
                 return;
-            Vector2 center = Main.npc[this.MinionAttackTargetNPC].Center;
-            float num3 = (float) this.miscCounter / 60f;
-            float num4 = 2.094395f;
-            for (int index1 = 0; index1 < 3; ++index1)
+            var center = Main.npc[this.MinionAttackTargetNPC].Center;
+            var num3 = (float) this.miscCounter / 60f;
+            var num4 = 2.094395f;
+            for (var index1 = 0; index1 < 3; ++index1)
             {
-                int index2 = Dust.NewDust(center, 0, 0, 272, 0.0f, 0.0f, 100, new Color(), 0.5f);
+                var index2 = Dust.NewDust(center, 0, 0, 272, 0.0f, 0.0f, 100, new Color(), 0.5f);
                 Main.dust[index2].noGravity = true;
                 Main.dust[index2].velocity = Vector2.Zero;
                 Main.dust[index2].noLight = true;
@@ -36926,8 +36926,8 @@ namespace Terraria
         {
             if (this.whoAmI != Main.myPlayer)
                 return;
-            int time1 = 480;
-            for (int b = 0; b < 22; ++b)
+            var time1 = 480;
+            for (var b = 0; b < 22; ++b)
             {
                 if (this.buffType[b] >= type && this.buffType[b] < type + 3)
                     this.DelBuff(b);
@@ -36953,8 +36953,8 @@ namespace Terraria
         public void UpdateTouchingTiles()
         {
             this.TouchedTiles.Clear();
-            List<Point> pointList1 = (List<Point>) null;
-            List<Point> pointList2 = (List<Point>) null;
+            var pointList1 = (List<Point>) null;
+            var pointList2 = (List<Point>) null;
             if (!Collision.IsClearSpotTest(this.position + this.velocity, 16f, this.width, this.height, false, false,
                 (int) this.gravDir, true, true))
                 pointList1 = Collision.FindCollisionTile(Math.Sign(this.velocity.Y) == 1 ? 2 : 3,
@@ -36966,7 +36966,7 @@ namespace Terraria
                     Math.Abs(this.velocity.Y), this.width, this.height, false, false, (int) this.gravDir, true, true);
             if (pointList1 != null && pointList2 != null)
             {
-                for (int index = 0; index < pointList2.Count; ++index)
+                for (var index = 0; index < pointList2.Count; ++index)
                 {
                     if (!pointList1.Contains(pointList2[index]))
                         pointList1.Add(pointList2[index]);
@@ -37035,7 +37035,7 @@ namespace Terraria
                 Player.SelectionRadial.SelectionMode mode = Player.SelectionRadial.SelectionMode.Dpad4)
             {
                 this.Mode = mode;
-                int num = 0;
+                var num = 0;
                 switch (mode)
                 {
                     case Player.SelectionRadial.SelectionMode.Dpad4:
@@ -37051,7 +37051,7 @@ namespace Terraria
 
                 this.RadialCount = num;
                 this.Bindings = new int[this.RadialCount];
-                for (int index = 0; index < this.RadialCount; ++index)
+                for (var index = 0; index < this.RadialCount; ++index)
                     this.Bindings[index] = -1;
             }
 
@@ -37072,21 +37072,21 @@ namespace Terraria
                         break;
                     case Player.SelectionRadial.SelectionMode.RadialCircular:
                     case Player.SelectionRadial.SelectionMode.RadialQuicks:
-                        for (int index = 0; index < this.RadialCount; ++index)
+                        for (var index = 0; index < this.RadialCount; ++index)
                             this.Bindings[index] = index;
                         if ((this.Mode != Player.SelectionRadial.SelectionMode.RadialCircular ||
                              !PlayerInput.Triggers.Current.RadialHotbar) &&
                             (this.Mode != Player.SelectionRadial.SelectionMode.RadialQuicks ||
                              !PlayerInput.Triggers.Current.RadialQuickbar))
                             break;
-                        bool flag = this.Mode == Player.SelectionRadial.SelectionMode.RadialCircular;
-                        float num = (float) (6.28318548202515 / (double) this.RadialCount / 2.0);
-                        Vector2 v = PlayerInput.GamepadThumbstickRight.RotatedBy((double) num - 1.57079637050629,
+                        var flag = this.Mode == Player.SelectionRadial.SelectionMode.RadialCircular;
+                        var num = (float) (6.28318548202515 / (double) this.RadialCount / 2.0);
+                        var v = PlayerInput.GamepadThumbstickRight.RotatedBy((double) num - 1.57079637050629,
                             new Vector2());
                         if ((double) v.Length() == 0.0)
                             v = PlayerInput.GamepadThumbstickLeft.RotatedBy((double) num - 1.57079637050629,
                                 new Vector2());
-                        int to = -1;
+                        var to = -1;
                         if ((double) v.Length() > 0.300000011920929)
                         {
                             to = (int) ((double) (v.ToRotation() + 3.141593f) /
@@ -37134,7 +37134,7 @@ namespace Terraria
                 }
                 else
                 {
-                    for (int index = 0; index < this.RadialCount; ++index)
+                    for (var index = 0; index < this.RadialCount; ++index)
                     {
                         if (this.Bindings[index] == itemslot)
                             this.Bindings[index] = -1;
@@ -37148,7 +37148,7 @@ namespace Terraria
             {
                 if (this.SelectedBinding != -1 && this.Bindings[this.SelectedBinding] == itemslot)
                     return 2;
-                for (int index = 0; index < this.RadialCount; ++index)
+                for (var index = 0; index < this.RadialCount; ++index)
                 {
                     if (this.Bindings[index] == itemslot)
                         return 1;
@@ -37163,7 +37163,7 @@ namespace Terraria
                 that.Mode = this.Mode;
                 that.RadialCount = this.RadialCount;
                 Array.Resize<int>(ref that.Bindings, this.RadialCount);
-                for (int index = 0; index < this.RadialCount; ++index)
+                for (var index = 0; index < this.RadialCount; ++index)
                     that.Bindings[index] = this.Bindings[index];
             }
 

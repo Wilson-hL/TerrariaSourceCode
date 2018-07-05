@@ -38,9 +38,9 @@ namespace Terraria.GameContent.UI.Elements
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
-            float num1 = 6f;
+            var num1 = 6f;
             base.DrawSelf(spriteBatch);
-            int lockState = 0;
+            var lockState = 0;
             IngameOptions.rightHover = -1;
             if (!Main.mouseLeft)
                 IngameOptions.rightLock = -1;
@@ -48,20 +48,20 @@ namespace Terraria.GameContent.UI.Elements
                 lockState = 1;
             else if (IngameOptions.rightLock != -1)
                 lockState = 2;
-            CalculatedStyle dimensions = this.GetDimensions();
-            float num2 = dimensions.Width + 1f;
-            Vector2 vector2 = new Vector2(dimensions.X, dimensions.Y);
-            bool flag1 = false;
-            bool flag2 = this.IsMouseHovering;
+            var dimensions = this.GetDimensions();
+            var num2 = dimensions.Width + 1f;
+            var vector2 = new Vector2(dimensions.X, dimensions.Y);
+            var flag1 = false;
+            var flag2 = this.IsMouseHovering;
             if (lockState == 1)
                 flag2 = true;
             if (lockState == 2)
                 flag2 = false;
-            Vector2 baseScale = new Vector2(0.8f);
-            Color baseColor = Color.Lerp(flag1 ? Color.Gold : (flag2 ? Color.White : Color.Silver), Color.White,
+            var baseScale = new Vector2(0.8f);
+            var baseColor = Color.Lerp(flag1 ? Color.Gold : (flag2 ? Color.White : Color.Silver), Color.White,
                 flag2 ? 0.5f : 0.0f);
-            Color color = flag2 ? this._color : this._color.MultiplyRGBA(new Color(180, 180, 180));
-            Vector2 position = vector2;
+            var color = flag2 ? this._color : this._color.MultiplyRGBA(new Color(180, 180, 180));
+            var position = vector2;
             Utils.DrawSettingsPanel(spriteBatch, position, num2, color);
             position.X += 8f;
             position.Y += 2f + num1;
@@ -72,7 +72,7 @@ namespace Terraria.GameContent.UI.Elements
             position = new Vector2((float) ((double) dimensions.X + (double) dimensions.Width - 10.0),
                 dimensions.Y + 10f + num1);
             IngameOptions.valuePosition = position;
-            float num3 = IngameOptions.DrawValueBar(spriteBatch, 1f, this._GetStatusFunction(), lockState,
+            var num3 = IngameOptions.DrawValueBar(spriteBatch, 1f, this._GetStatusFunction(), lockState,
                 (Utils.ColorLerpMethod) null);
             if (IngameOptions.inBar || IngameOptions.rightLock == this._sliderIDInPage)
             {

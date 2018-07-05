@@ -58,27 +58,27 @@ namespace Terraria.World.Generation
 
         public void Add(ShapeData shapeData, Point localOrigin, Point remoteOrigin)
         {
-            foreach (Point16 point16 in shapeData.GetData())
+            foreach (var point16 in shapeData.GetData())
                 this.Add(remoteOrigin.X - localOrigin.X + (int) point16.X,
                     remoteOrigin.Y - localOrigin.Y + (int) point16.Y);
         }
 
         public void Subtract(ShapeData shapeData, Point localOrigin, Point remoteOrigin)
         {
-            foreach (Point16 point16 in shapeData.GetData())
+            foreach (var point16 in shapeData.GetData())
                 this.Remove(remoteOrigin.X - localOrigin.X + (int) point16.X,
                     remoteOrigin.Y - localOrigin.Y + (int) point16.Y);
         }
 
         public static Microsoft.Xna.Framework.Rectangle GetBounds(Point origin, params ShapeData[] shapes)
         {
-            int val1_1 = (int) shapes[0]._points.First<Point16>().X;
-            int val1_2 = val1_1;
-            int val1_3 = (int) shapes[0]._points.First<Point16>().Y;
-            int val1_4 = val1_3;
-            for (int index = 0; index < shapes.Length; ++index)
+            var val1_1 = (int) shapes[0]._points.First<Point16>().X;
+            var val1_2 = val1_1;
+            var val1_3 = (int) shapes[0]._points.First<Point16>().Y;
+            var val1_4 = val1_3;
+            for (var index = 0; index < shapes.Length; ++index)
             {
-                foreach (Point16 point in shapes[index]._points)
+                foreach (var point in shapes[index]._points)
                 {
                     val1_1 = Math.Max(val1_1, (int) point.X);
                     val1_2 = Math.Min(val1_2, (int) point.X);

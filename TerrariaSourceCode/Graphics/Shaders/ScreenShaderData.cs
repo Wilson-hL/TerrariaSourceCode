@@ -57,11 +57,11 @@ namespace Terraria.Graphics.Shaders
 
         public new virtual void Apply()
         {
-            Vector2 vector2_1 = new Vector2((float) Main.offScreenRange, (float) Main.offScreenRange);
-            Vector2 vector2_2 = new Vector2((float) Main.screenWidth, (float) Main.screenHeight) /
+            var vector2_1 = new Vector2((float) Main.offScreenRange, (float) Main.offScreenRange);
+            var vector2_2 = new Vector2((float) Main.screenWidth, (float) Main.screenHeight) /
                                 Main.GameViewMatrix.Zoom;
-            Vector2 vector2_3 = new Vector2((float) Main.screenWidth, (float) Main.screenHeight) * 0.5f;
-            Vector2 vector2_4 =
+            var vector2_3 = new Vector2((float) Main.screenWidth, (float) Main.screenHeight) * 0.5f;
+            var vector2_4 =
                 Main.screenPosition + vector2_3 * (Vector2.One - Vector2.One / Main.GameViewMatrix.Zoom);
             this.Shader.Parameters["uColor"].SetValue(this._uColor);
             this.Shader.Parameters["uOpacity"].SetValue(this.CombinedOpacity);
@@ -75,13 +75,13 @@ namespace Terraria.Graphics.Shaders
             this.Shader.Parameters["uProgress"].SetValue(this._uProgress);
             this.Shader.Parameters["uDirection"].SetValue(this._uDirection);
             this.Shader.Parameters["uZoom"].SetValue(Main.GameViewMatrix.Zoom);
-            for (int index = 0; index < this._uImages.Length; ++index)
+            for (var index = 0; index < this._uImages.Length; ++index)
             {
                 if (this._uImages[index] != null && this._uImages[index].Value != null)
                 {
                     Main.graphics.GraphicsDevice.Textures[index + 1] = (Texture) this._uImages[index].Value;
-                    int width = this._uImages[index].Value.Width;
-                    int height = this._uImages[index].Value.Height;
+                    var width = this._uImages[index].Value.Width;
+                    var height = this._uImages[index].Value.Height;
                     Main.graphics.GraphicsDevice.SamplerStates[index + 1] = this._samplerStates[index] == null
                         ? (!Utils.IsPowerOfTwo(width) || !Utils.IsPowerOfTwo(height)
                             ? SamplerState.AnisotropicClamp

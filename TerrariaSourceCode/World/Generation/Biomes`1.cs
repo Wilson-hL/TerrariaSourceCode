@@ -30,7 +30,7 @@ namespace Terraria.World.Generation
 
         private static T CreateInstance()
         {
-            T instance = Activator.CreateInstance<T>();
+            var instance = Activator.CreateInstance<T>();
             BiomeCollection.Biomes.Add((MicroBiome) instance);
             return instance;
         }

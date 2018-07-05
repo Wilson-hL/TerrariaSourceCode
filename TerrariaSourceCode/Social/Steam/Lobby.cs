@@ -32,7 +32,7 @@ namespace Terraria.Social.Steam
 
         public void Create(bool inviteOnly, CallResult<LobbyCreated_t>.APIDispatchDelegate callResult)
         {
-            SteamAPICall_t lobby = SteamMatchmaking.CreateLobby(inviteOnly ? (ELobbyType) 0 : (ELobbyType) 1, 256);
+            var lobby = SteamMatchmaking.CreateLobby(inviteOnly ? (ELobbyType) 0 : (ELobbyType) 1, 256);
             this._lobbyCreatedExternalCallback = callResult;
             this._lobbyCreated.Set(lobby, (CallResult<LobbyCreated_t>.APIDispatchDelegate) null);
             this.State = LobbyState.Creating;
@@ -60,9 +60,9 @@ namespace Terraria.Social.Steam
         {
             CSteamID csteamId;
             EChatEntryType echatEntryType;
-            int lobbyChatEntry = SteamMatchmaking.GetLobbyChatEntry(this.Id, index, out csteamId, this._messageBuffer,
+            var lobbyChatEntry = SteamMatchmaking.GetLobbyChatEntry(this.Id, index, out csteamId, this._messageBuffer,
                 this._messageBuffer.Length, out echatEntryType);
-            byte[] numArray = new byte[lobbyChatEntry];
+            var numArray = new byte[lobbyChatEntry];
             Array.Copy((Array) this._messageBuffer, (Array) numArray, lobbyChatEntry);
             return numArray;
         }

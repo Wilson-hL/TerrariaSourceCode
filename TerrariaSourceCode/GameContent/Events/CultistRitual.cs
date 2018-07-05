@@ -58,25 +58,25 @@ namespace Terraria.GameContent.Events
             if (CultistRitual.delay != 0 || !Main.hardMode || (!NPC.downedGolemBoss || !NPC.downedBoss3) ||
                 (y < 7 || WorldGen.SolidTile(Main.tile[x, y - 7]) || NPC.AnyNPCs(437)))
                 return false;
-            Vector2 Center = new Vector2((float) (x * 16 + 8), (float) (y * 16 - 64 - 8 - 27));
-            Point[] spawnPoints = (Point[]) null;
+            var Center = new Vector2((float) (x * 16 + 8), (float) (y * 16 - 64 - 8 - 27));
+            var spawnPoints = (Point[]) null;
             return CultistRitual.CheckFloor(Center, out spawnPoints);
         }
 
         public static bool CheckFloor(Vector2 Center, out Point[] spawnPoints)
         {
-            Point[] pointArray = new Point[4];
-            int num1 = 0;
-            Point tileCoordinates = Center.ToTileCoordinates();
-            int num2 = -5;
+            var pointArray = new Point[4];
+            var num1 = 0;
+            var tileCoordinates = Center.ToTileCoordinates();
+            var num2 = -5;
             while (num2 <= 5)
             {
                 if (num2 != -1 && num2 != 1)
                 {
-                    for (int index = -5; index < 12; ++index)
+                    for (var index = -5; index < 12; ++index)
                     {
-                        int num3 = tileCoordinates.X + num2 * 2;
-                        int num4 = tileCoordinates.Y + index;
+                        var num3 = tileCoordinates.X + num2 * 2;
+                        var num4 = tileCoordinates.Y + index;
                         if (WorldGen.SolidTile(num3, num4) &&
                             !Collision.SolidTiles(num3 - 1, num3 + 1, num4 - 3, num4 - 1))
                         {

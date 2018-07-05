@@ -29,13 +29,13 @@ namespace Terraria.GameContent.UI.States
 
         public override void OnInitialize()
         {
-            UIElement element = new UIElement();
+            var element = new UIElement();
             element.Width.Set(0.0f, 0.8f);
             element.MaxWidth.Set(650f, 0.0f);
             element.Top.Set(220f, 0.0f);
             element.Height.Set(-220f, 1f);
             element.HAlign = 0.5f;
-            UIPanel uiPanel = new UIPanel();
+            var uiPanel = new UIPanel();
             uiPanel.Width.Set(0.0f, 1f);
             uiPanel.Height.Set(-110f, 1f);
             uiPanel.BackgroundColor = new Color(33, 43, 79) * 0.8f;
@@ -46,20 +46,20 @@ namespace Terraria.GameContent.UI.States
             this._worldList.Height.Set(0.0f, 1f);
             this._worldList.ListPadding = 5f;
             uiPanel.Append((UIElement) this._worldList);
-            UIScrollbar scrollbar = new UIScrollbar();
+            var scrollbar = new UIScrollbar();
             scrollbar.SetView(100f, 1000f);
             scrollbar.Height.Set(0.0f, 1f);
             scrollbar.HAlign = 1f;
             uiPanel.Append((UIElement) scrollbar);
             this._worldList.SetScrollbar(scrollbar);
-            UITextPanel<LocalizedText> uiTextPanel1 =
+            var uiTextPanel1 =
                 new UITextPanel<LocalizedText>(Language.GetText("UI.SelectWorld"), 0.8f, true);
             uiTextPanel1.HAlign = 0.5f;
             uiTextPanel1.Top.Set(-35f, 0.0f);
             uiTextPanel1.SetPadding(15f);
             uiTextPanel1.BackgroundColor = new Color(73, 94, 171);
             element.Append((UIElement) uiTextPanel1);
-            UITextPanel<LocalizedText> uiTextPanel2 =
+            var uiTextPanel2 =
                 new UITextPanel<LocalizedText>(Language.GetText("UI.Back"), 0.7f, true);
             uiTextPanel2.Width.Set(-10f, 0.5f);
             uiTextPanel2.Height.Set(50f, 0.0f);
@@ -70,7 +70,7 @@ namespace Terraria.GameContent.UI.States
             uiTextPanel2.OnClick += new UIElement.MouseEvent(this.GoBackClick);
             element.Append((UIElement) uiTextPanel2);
             this._backPanel = uiTextPanel2;
-            UITextPanel<LocalizedText> uiTextPanel3 =
+            var uiTextPanel3 =
                 new UITextPanel<LocalizedText>(Language.GetText("UI.New"), 0.7f, true);
             uiTextPanel3.CopyStyle((UIElement) uiTextPanel2);
             uiTextPanel3.HAlign = 1f;
@@ -118,7 +118,7 @@ namespace Terraria.GameContent.UI.States
         private void UpdateWorldsList()
         {
             this._worldList.Clear();
-            List<WorldFileData> worldFileDataList =
+            var worldFileDataList =
                 new List<WorldFileData>((IEnumerable<WorldFileData>) Main.WorldList);
             worldFileDataList.Sort((Comparison<WorldFileData>) ((x, y) =>
             {
@@ -130,8 +130,8 @@ namespace Terraria.GameContent.UI.States
                     return x.Name.CompareTo(y.Name);
                 return x.GetFileName(true).CompareTo(y.GetFileName(true));
             }));
-            int num = 0;
-            foreach (WorldFileData data in worldFileDataList)
+            var num = 0;
+            foreach (var data in worldFileDataList)
                 this._worldList.Add((UIElement) new UIWorldListItem(data, num++));
         }
 
@@ -156,7 +156,7 @@ namespace Terraria.GameContent.UI.States
 
         private bool UpdateFavoritesCache()
         {
-            List<WorldFileData> worldFileDataList =
+            var worldFileDataList =
                 new List<WorldFileData>((IEnumerable<WorldFileData>) Main.WorldList);
             worldFileDataList.Sort((Comparison<WorldFileData>) ((x, y) =>
             {
@@ -168,14 +168,14 @@ namespace Terraria.GameContent.UI.States
                     return x.Name.CompareTo(y.Name);
                 return x.GetFileName(true).CompareTo(y.GetFileName(true));
             }));
-            bool flag = false;
+            var flag = false;
             if (!flag && worldFileDataList.Count != this.favoritesCache.Count)
                 flag = true;
             if (!flag)
             {
-                for (int index = 0; index < this.favoritesCache.Count; ++index)
+                for (var index = 0; index < this.favoritesCache.Count; ++index)
                 {
-                    Tuple<string, bool> tuple = this.favoritesCache[index];
+                    var tuple = this.favoritesCache[index];
                     if (!(worldFileDataList[index].Name == tuple.Item1) ||
                         worldFileDataList[index].IsFavorite != tuple.Item2)
                     {
@@ -188,7 +188,7 @@ namespace Terraria.GameContent.UI.States
             if (flag)
             {
                 this.favoritesCache.Clear();
-                foreach (WorldFileData worldFileData in worldFileDataList)
+                foreach (var worldFileData in worldFileDataList)
                     this.favoritesCache.Add(Tuple.Create<string, bool>(worldFileData.Name, worldFileData.IsFavorite));
                 this.UpdateWorldsList();
             }
@@ -199,24 +199,24 @@ namespace Terraria.GameContent.UI.States
         private void SetupGamepadPoints(SpriteBatch spriteBatch)
         {
             UILinkPointNavigator.Shortcuts.BackButtonCommand = 2;
-            int ID1 = 3000;
+            var ID1 = 3000;
             UILinkPointNavigator.SetPosition(ID1,
                 this._backPanel.GetInnerDimensions().ToRectangle().Center.ToVector2());
             UILinkPointNavigator.SetPosition(ID1 + 1,
                 this._newPanel.GetInnerDimensions().ToRectangle().Center.ToVector2());
-            int index1 = ID1;
-            UILinkPoint point1 = UILinkPointNavigator.Points[index1];
+            var index1 = ID1;
+            var point1 = UILinkPointNavigator.Points[index1];
             point1.Unlink();
             point1.Right = index1 + 1;
-            int index2 = ID1 + 1;
-            UILinkPoint point2 = UILinkPointNavigator.Points[index2];
+            var index2 = ID1 + 1;
+            var point2 = UILinkPointNavigator.Points[index2];
             point2.Unlink();
             point2.Left = index2 - 1;
-            Rectangle clippingRectangle = this._containerPanel.GetClippingRectangle(spriteBatch);
-            Vector2 minimum = clippingRectangle.TopLeft();
-            Vector2 maximum = clippingRectangle.BottomRight();
-            List<SnapPoint> snapPoints = this.GetSnapPoints();
-            for (int index3 = 0; index3 < snapPoints.Count; ++index3)
+            var clippingRectangle = this._containerPanel.GetClippingRectangle(spriteBatch);
+            var minimum = clippingRectangle.TopLeft();
+            var maximum = clippingRectangle.BottomRight();
+            var snapPoints = this.GetSnapPoints();
+            for (var index3 = 0; index3 < snapPoints.Count; ++index3)
             {
                 if (!snapPoints[index3].Position.Between(minimum, maximum))
                 {
@@ -225,34 +225,34 @@ namespace Terraria.GameContent.UI.States
                 }
             }
 
-            SnapPoint[,] snapPointArray = new SnapPoint[this._worldList.Count, 5];
-            foreach (SnapPoint snapPoint in snapPoints.Where<SnapPoint>((Func<SnapPoint, bool>) (a => a.Name == "Play"))
+            var snapPointArray = new SnapPoint[this._worldList.Count, 5];
+            foreach (var snapPoint in snapPoints.Where<SnapPoint>((Func<SnapPoint, bool>) (a => a.Name == "Play"))
             )
                 snapPointArray[snapPoint.ID, 0] = snapPoint;
-            foreach (SnapPoint snapPoint in snapPoints.Where<SnapPoint>(
+            foreach (var snapPoint in snapPoints.Where<SnapPoint>(
                 (Func<SnapPoint, bool>) (a => a.Name == "Favorite")))
                 snapPointArray[snapPoint.ID, 1] = snapPoint;
-            foreach (SnapPoint snapPoint in snapPoints.Where<SnapPoint>(
+            foreach (var snapPoint in snapPoints.Where<SnapPoint>(
                 (Func<SnapPoint, bool>) (a => a.Name == "Cloud")))
                 snapPointArray[snapPoint.ID, 2] = snapPoint;
-            foreach (SnapPoint snapPoint in snapPoints.Where<SnapPoint>((Func<SnapPoint, bool>) (a => a.Name == "Seed"))
+            foreach (var snapPoint in snapPoints.Where<SnapPoint>((Func<SnapPoint, bool>) (a => a.Name == "Seed"))
             )
                 snapPointArray[snapPoint.ID, 3] = snapPoint;
-            foreach (SnapPoint snapPoint in snapPoints.Where<SnapPoint>(
+            foreach (var snapPoint in snapPoints.Where<SnapPoint>(
                 (Func<SnapPoint, bool>) (a => a.Name == "Delete")))
                 snapPointArray[snapPoint.ID, 4] = snapPoint;
-            int ID2 = ID1 + 2;
-            int[] numArray = new int[this._worldList.Count];
-            for (int index3 = 0; index3 < numArray.Length; ++index3)
+            var ID2 = ID1 + 2;
+            var numArray = new int[this._worldList.Count];
+            for (var index3 = 0; index3 < numArray.Length; ++index3)
                 numArray[index3] = -1;
-            for (int index3 = 0; index3 < 5; ++index3)
+            for (var index3 = 0; index3 < 5; ++index3)
             {
-                int index4 = -1;
-                for (int index5 = 0; index5 < snapPointArray.GetLength(0); ++index5)
+                var index4 = -1;
+                for (var index5 = 0; index5 < snapPointArray.GetLength(0); ++index5)
                 {
                     if (snapPointArray[index5, index3] != null)
                     {
-                        UILinkPoint point3 = UILinkPointNavigator.Points[ID2];
+                        var point3 = UILinkPointNavigator.Points[ID2];
                         point3.Unlink();
                         UILinkPointNavigator.SetPosition(ID2, snapPointArray[index5, index3].Position);
                         if (index4 != -1)

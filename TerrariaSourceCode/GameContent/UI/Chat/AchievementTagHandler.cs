@@ -15,7 +15,7 @@ namespace Terraria.GameContent.UI.Chat
     {
         TextSnippet ITagHandler.Parse(string text, Color baseColor, string options)
         {
-            Achievement achievement = Main.Achievements.GetAchievement(text);
+            var achievement = Main.Achievements.GetAchievement(text);
             if (achievement == null)
                 return new TextSnippet(text);
             return (TextSnippet) new AchievementTagHandler.AchievementSnippet(achievement);

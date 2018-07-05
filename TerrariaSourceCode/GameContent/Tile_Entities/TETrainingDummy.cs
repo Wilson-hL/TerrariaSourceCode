@@ -41,10 +41,10 @@ namespace Terraria.GameContent.Tile_Entities
 
         public override void Update()
         {
-            Rectangle rectangle = new Rectangle(0, 0, 32, 48);
+            var rectangle = new Rectangle(0, 0, 32, 48);
             rectangle.Inflate(1600, 1600);
-            int x = rectangle.X;
-            int y = rectangle.Y;
+            var x = rectangle.X;
+            var y = rectangle.Y;
             if (this.npc != -1)
             {
                 if (Main.npc[this.npc].active && Main.npc[this.npc].type == 488 &&
@@ -58,8 +58,8 @@ namespace Terraria.GameContent.Tile_Entities
                 TETrainingDummy.FillPlayerHitboxes();
                 rectangle.X = (int) this.Position.X * 16 + x;
                 rectangle.Y = (int) this.Position.Y * 16 + y;
-                bool flag = false;
-                foreach (KeyValuePair<int, Rectangle> keyValuePair in TETrainingDummy.playerBox)
+                var flag = false;
+                foreach (var keyValuePair in TETrainingDummy.playerBox)
                 {
                     if (keyValuePair.Value.Intersects(rectangle))
                     {
@@ -78,7 +78,7 @@ namespace Terraria.GameContent.Tile_Entities
         {
             if (TETrainingDummy.playerBoxFilled)
                 return;
-            for (int index = 0; index < (int) byte.MaxValue; ++index)
+            for (var index = 0; index < (int) byte.MaxValue; ++index)
             {
                 if (Main.player[index].active)
                     TETrainingDummy.playerBox[index] = Main.player[index].getRect();
@@ -100,7 +100,7 @@ namespace Terraria.GameContent.Tile_Entities
 
         public static int Place(int x, int y)
         {
-            TETrainingDummy teTrainingDummy = new TETrainingDummy();
+            var teTrainingDummy = new TETrainingDummy();
             teTrainingDummy.Position = new Point16(x, y);
             teTrainingDummy.ID = TileEntity.AssignNewID();
             teTrainingDummy.type = (byte) 0;
@@ -147,7 +147,7 @@ namespace Terraria.GameContent.Tile_Entities
 
         public void Activate()
         {
-            int index = NPC.NewNPC((int) this.Position.X * 16 + 16, (int) this.Position.Y * 16 + 48, 488, 100, 0.0f,
+            var index = NPC.NewNPC((int) this.Position.X * 16 + 16, (int) this.Position.Y * 16 + 48, 488, 100, 0.0f,
                 0.0f, 0.0f, 0.0f, (int) byte.MaxValue);
             Main.npc[index].ai[0] = (float) this.Position.X;
             Main.npc[index].ai[1] = (float) this.Position.Y;

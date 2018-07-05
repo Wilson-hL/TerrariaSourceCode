@@ -42,14 +42,14 @@ namespace Terraria
         {
             if (Main.netMode == 2)
                 return 100;
-            for (int index1 = 0; index1 < 100; ++index1)
+            for (var index1 = 0; index1 < 100; ++index1)
             {
                 if (!Main.combatText[index1].active)
                 {
-                    int index2 = 0;
+                    var index2 = 0;
                     if (dramatic)
                         index2 = 1;
-                    Vector2 vector2 = Main.fontCombatText[index2].MeasureString(text);
+                    var vector2 = Main.fontCombatText[index2].MeasureString(text);
                     Main.combatText[index1].alpha = 1f;
                     Main.combatText[index1].alphaDir = -1;
                     Main.combatText[index1].active = true;
@@ -102,7 +102,7 @@ namespace Terraria
 
         public static void clearAll()
         {
-            for (int index = 0; index < 100; ++index)
+            for (var index = 0; index < 100; ++index)
                 Main.combatText[index].active = false;
         }
 
@@ -115,7 +115,7 @@ namespace Terraria
         {
             if (!this.active)
                 return;
-            float targetScale = CombatText.TargetScale;
+            var targetScale = CombatText.TargetScale;
             this.alpha += (float) this.alphaDir * 0.05f;
             if ((double) this.alpha <= 0.6)
                 this.alphaDir = 1;
@@ -180,7 +180,7 @@ namespace Terraria
 
         public static void UpdateCombatText()
         {
-            for (int index = 0; index < 100; ++index)
+            for (var index = 0; index < 100; ++index)
             {
                 if (Main.combatText[index].active)
                     Main.combatText[index].Update();

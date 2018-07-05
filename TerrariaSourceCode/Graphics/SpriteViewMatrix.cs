@@ -96,14 +96,14 @@ namespace Terraria.Graphics
         {
             if (!this._overrideSystemViewport)
                 this._viewport = this._graphicsDevice.Viewport;
-            Vector2 vector2_1 = new Vector2((float) this._viewport.Width, (float) this._viewport.Height);
-            Matrix identity = Matrix.Identity;
+            var vector2_1 = new Vector2((float) this._viewport.Width, (float) this._viewport.Height);
+            var identity = Matrix.Identity;
             if (this._effects.HasFlag((Enum) SpriteEffects.FlipHorizontally))
                 identity *= Matrix.CreateScale(-1f, 1f, 1f) * Matrix.CreateTranslation(vector2_1.X, 0.0f, 0.0f);
             if (this._effects.HasFlag((Enum) SpriteEffects.FlipVertically))
                 identity *= Matrix.CreateScale(1f, -1f, 1f) * Matrix.CreateTranslation(0.0f, vector2_1.Y, 0.0f);
-            Vector2 vector2_2 = vector2_1 * 0.5f;
-            Vector2 vector2_3 = vector2_2 - vector2_2 / this._zoom;
+            var vector2_2 = vector2_1 * 0.5f;
+            var vector2_3 = vector2_2 - vector2_2 / this._zoom;
             this._translation = vector2_3;
             this._zoomMatrix = Matrix.CreateTranslation(-vector2_3.X, -vector2_3.Y, 0.0f) *
                                Matrix.CreateScale(this._zoom.X, this._zoom.Y, 1f);

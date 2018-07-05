@@ -73,12 +73,12 @@ namespace Terraria.GameContent.Shaders
         private void StepLiquids()
         {
             this._isWaveBufferDirty = true;
-            Vector2 vector2_1 = Main.drawToScreen
+            var vector2_1 = Main.drawToScreen
                 ? Vector2.Zero
                 : new Vector2((float) Main.offScreenRange, (float) Main.offScreenRange);
-            Vector2 vector2_2 = vector2_1 - Main.screenPosition;
-            TileBatch tileBatch = Main.tileBatch;
-            GraphicsDevice graphicsDevice = Main.instance.GraphicsDevice;
+            var vector2_2 = vector2_1 - Main.screenPosition;
+            var tileBatch = Main.tileBatch;
+            var graphicsDevice = Main.instance.GraphicsDevice;
             graphicsDevice.SetRenderTarget(this._distortionTarget);
             if (this._clearNextFrame)
             {
@@ -90,10 +90,10 @@ namespace Terraria.GameContent.Shaders
             graphicsDevice.SetRenderTarget(this._distortionTargetSwap);
             graphicsDevice.Clear(new Color(0.5f, 0.5f, 0.5f, 1f));
             Main.tileBatch.Begin();
-            Vector2 vector2_3 = vector2_2 * 0.25f;
+            var vector2_3 = vector2_2 * 0.25f;
             vector2_3.X = (float) Math.Floor((double) vector2_3.X);
             vector2_3.Y = (float) Math.Floor((double) vector2_3.Y);
-            Vector2 vector2_4 = vector2_3 - this._lastDistortionDrawOffset;
+            var vector2_4 = vector2_3 - this._lastDistortionDrawOffset;
             this._lastDistortionDrawOffset = vector2_3;
             tileBatch.Draw((Texture2D) this._distortionTarget,
                 new Vector4(vector2_4.X, vector2_4.Y, (float) this._distortionTarget.Width,
@@ -101,21 +101,21 @@ namespace Terraria.GameContent.Shaders
             GameShaders.Misc["WaterProcessor"]
                 .Apply(new DrawData?(new DrawData((Texture2D) this._distortionTarget, Vector2.Zero, Color.White)));
             tileBatch.End();
-            RenderTarget2D distortionTarget = this._distortionTarget;
+            var distortionTarget = this._distortionTarget;
             this._distortionTarget = this._distortionTargetSwap;
             this._distortionTargetSwap = distortionTarget;
             if (this._useViscosityFilter)
             {
                 LiquidRenderer.Instance.SetWaveMaskData(ref this._viscosityMaskChain[this._activeViscosityMask]);
                 tileBatch.Begin();
-                Rectangle cachedDrawArea = LiquidRenderer.Instance.GetCachedDrawArea();
-                Rectangle rectangle = new Rectangle(0, 0, cachedDrawArea.Height, cachedDrawArea.Width);
-                Vector4 vector4 = new Vector4((float) (cachedDrawArea.X + cachedDrawArea.Width),
+                var cachedDrawArea = LiquidRenderer.Instance.GetCachedDrawArea();
+                var rectangle = new Rectangle(0, 0, cachedDrawArea.Height, cachedDrawArea.Width);
+                var vector4 = new Vector4((float) (cachedDrawArea.X + cachedDrawArea.Width),
                                       (float) cachedDrawArea.Y, (float) cachedDrawArea.Height,
                                       (float) cachedDrawArea.Width) * 16f;
                 vector4.X -= vector2_1.X;
                 vector4.Y -= vector2_1.Y;
-                Vector4 destination = vector4 * 0.25f;
+                var destination = vector4 * 0.25f;
                 destination.X += vector2_3.X;
                 destination.Y += vector2_3.Y;
                 graphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
@@ -132,37 +132,37 @@ namespace Terraria.GameContent.Shaders
 
         private void DrawWaves()
         {
-            Vector2 screenPosition = Main.screenPosition;
-            Vector2 vector2_1 = -this._lastDistortionDrawOffset / 0.25f + (Main.drawToScreen
+            var screenPosition = Main.screenPosition;
+            var vector2_1 = -this._lastDistortionDrawOffset / 0.25f + (Main.drawToScreen
                                     ? Vector2.Zero
                                     : new Vector2((float) Main.offScreenRange, (float) Main.offScreenRange));
-            TileBatch tileBatch = Main.tileBatch;
-            GraphicsDevice graphicsDevice = Main.instance.GraphicsDevice;
-            Vector2 dimensions1 = new Vector2((float) Main.screenWidth, (float) Main.screenHeight);
-            Vector2 vector2_2 = new Vector2(16f, 16f);
+            var tileBatch = Main.tileBatch;
+            var graphicsDevice = Main.instance.GraphicsDevice;
+            var dimensions1 = new Vector2((float) Main.screenWidth, (float) Main.screenHeight);
+            var vector2_2 = new Vector2(16f, 16f);
             tileBatch.Begin();
             GameShaders.Misc["WaterDistortionObject"].Apply(new DrawData?());
             if (this._useNPCWaves)
             {
-                for (int index = 0; index < 200; ++index)
+                for (var index = 0; index < 200; ++index)
                 {
                     if (Main.npc[index] != null && Main.npc[index].active &&
                         (Main.npc[index].wet || Main.npc[index].wetCount != (byte) 0) &&
                         Collision.CheckAABBvAABBCollision(screenPosition, dimensions1,
                             Main.npc[index].position - vector2_2, Main.npc[index].Size + vector2_2))
                     {
-                        NPC npc = Main.npc[index];
-                        Vector2 vector2_3 = npc.Center - vector2_1;
-                        Vector2 vector2_4 = npc.velocity.RotatedBy(-(double) npc.rotation, new Vector2()) /
+                        var npc = Main.npc[index];
+                        var vector2_3 = npc.Center - vector2_1;
+                        var vector2_4 = npc.velocity.RotatedBy(-(double) npc.rotation, new Vector2()) /
                                             new Vector2((float) npc.height, (float) npc.width);
-                        float num1 = vector2_4.LengthSquared();
-                        float num2 =
+                        var num1 = vector2_4.LengthSquared();
+                        var num2 =
                             Math.Min(
                                 (float) ((double) num1 * 0.300000011920929 + 0.699999988079071 * (double) num1 *
                                          (1024.0 / (double) (npc.height * npc.width))), 0.08f) +
                             (npc.velocity - npc.oldVelocity).Length() * 0.5f;
                         vector2_4.Normalize();
-                        Vector2 velocity = npc.velocity;
+                        var velocity = npc.velocity;
                         velocity.Normalize();
                         vector2_3 -= velocity * 10f;
                         if (!this._useViscosityFilter && (npc.honeyWet || npc.lavaWet))
@@ -177,8 +177,8 @@ namespace Terraria.GameContent.Shaders
                                 SpriteEffects.None, npc.rotation);
                         if (npc.wetCount != (byte) 0)
                         {
-                            float num3 = 0.195f * (float) Math.Sqrt((double) npc.velocity.Length());
-                            float num4 = 5f;
+                            var num3 = 0.195f * (float) Math.Sqrt((double) npc.velocity.Length());
+                            var num4 = 5f;
                             if (!npc.wet)
                                 num4 = -20f;
                             this.QueueRipple(npc.Center + velocity * num4,
@@ -193,19 +193,19 @@ namespace Terraria.GameContent.Shaders
 
             if (this._usePlayerWaves)
             {
-                for (int index = 0; index < (int) byte.MaxValue; ++index)
+                for (var index = 0; index < (int) byte.MaxValue; ++index)
                 {
                     if (Main.player[index] != null && Main.player[index].active &&
                         (Main.player[index].wet || Main.player[index].wetCount != (byte) 0) &&
                         Collision.CheckAABBvAABBCollision(screenPosition, dimensions1,
                             Main.player[index].position - vector2_2, Main.player[index].Size + vector2_2))
                     {
-                        Player player = Main.player[index];
-                        Vector2 vector2_3 = player.Center - vector2_1;
-                        float num1 = 0.05f * (float) Math.Sqrt((double) player.velocity.Length());
-                        Vector2 velocity = player.velocity;
+                        var player = Main.player[index];
+                        var vector2_3 = player.Center - vector2_1;
+                        var num1 = 0.05f * (float) Math.Sqrt((double) player.velocity.Length());
+                        var velocity = player.velocity;
                         velocity.Normalize();
-                        Vector2 vector2_4 = vector2_3 - velocity * 10f;
+                        var vector2_4 = vector2_3 - velocity * 10f;
                         if (!this._useViscosityFilter && (player.honeyWet || player.lavaWet))
                             num1 *= 0.3f;
                         if (player.wet)
@@ -217,10 +217,10 @@ namespace Terraria.GameContent.Shaders
                                     (float) ((double) velocity.Y * 0.5 + 0.5), 0.5f * num1)));
                         if (player.wetCount != (byte) 0)
                         {
-                            float num2 = 5f;
+                            var num2 = 5f;
                             if (!player.wet)
                                 num2 = -20f;
-                            float num3 = num1 * 3f;
+                            var num3 = num1 * 3f;
                             this.QueueRipple(player.Center + velocity * num2, player.wet ? num3 : -num3,
                                 new Vector2((float) player.width,
                                     (float) player.height * ((float) player.wetCount / 9f)) *
@@ -232,13 +232,13 @@ namespace Terraria.GameContent.Shaders
 
             if (this._useProjectileWaves)
             {
-                for (int index = 0; index < 1000; ++index)
+                for (var index = 0; index < 1000; ++index)
                 {
-                    Projectile projectile = Main.projectile[index];
-                    bool flag1 = projectile.wet && !projectile.lavaWet && !projectile.honeyWet;
-                    bool flag2 = projectile.lavaWet;
-                    bool flag3 = projectile.honeyWet;
-                    bool flag4 = projectile.wet;
+                    var projectile = Main.projectile[index];
+                    var flag1 = projectile.wet && !projectile.lavaWet && !projectile.honeyWet;
+                    var flag2 = projectile.lavaWet;
+                    var flag3 = projectile.honeyWet;
+                    var flag4 = projectile.wet;
                     if (projectile.ignoreWater)
                         flag4 = true;
                     if (projectile != null && projectile.active &&
@@ -249,7 +249,7 @@ namespace Terraria.GameContent.Shaders
                     {
                         if (projectile.ignoreWater)
                         {
-                            bool flag5 = Collision.LavaCollision(projectile.position, projectile.width,
+                            var flag5 = Collision.LavaCollision(projectile.position, projectile.width,
                                 projectile.height);
                             flag2 = Collision.WetCollision(projectile.position, projectile.width, projectile.height);
                             flag3 = Collision.honey;
@@ -257,14 +257,14 @@ namespace Terraria.GameContent.Shaders
                                 continue;
                         }
 
-                        Vector2 vector2_3 = projectile.Center - vector2_1;
-                        float num = 2f * (float) Math.Sqrt(0.0500000007450581 * (double) projectile.velocity.Length());
-                        Vector2 velocity = projectile.velocity;
+                        var vector2_3 = projectile.Center - vector2_1;
+                        var num = 2f * (float) Math.Sqrt(0.0500000007450581 * (double) projectile.velocity.Length());
+                        var velocity = projectile.velocity;
                         velocity.Normalize();
                         if (!this._useViscosityFilter && (flag3 || flag2))
                             num *= 0.3f;
-                        float z = Math.Max(12f, (float) projectile.width * 0.75f);
-                        float w = Math.Max(12f, (float) projectile.height * 0.75f);
+                        var z = Math.Max(12f, (float) projectile.width * 0.75f);
+                        var w = Math.Max(12f, (float) projectile.height * 0.75f);
                         tileBatch.Draw(Main.magicPixel,
                             new Vector4(vector2_3.X - z * 0.5f, vector2_3.Y - w * 0.5f, z, w) * 0.25f,
                             new VertexColors(new Color((float) ((double) velocity.X * 0.5 + 0.5),
@@ -277,12 +277,12 @@ namespace Terraria.GameContent.Shaders
             if (this._useRippleWaves)
             {
                 tileBatch.Begin();
-                for (int index = 0; index < this._rippleQueueCount; ++index)
+                for (var index = 0; index < this._rippleQueueCount; ++index)
                 {
-                    Vector2 vector2_3 = this._rippleQueue[index].Position - vector2_1;
-                    Vector2 size = this._rippleQueue[index].Size;
-                    Rectangle sourceRectangle = this._rippleQueue[index].SourceRectangle;
-                    Texture2D rippleShapeTexture = this._rippleShapeTexture;
+                    var vector2_3 = this._rippleQueue[index].Position - vector2_1;
+                    var size = this._rippleQueue[index].Size;
+                    var sourceRectangle = this._rippleQueue[index].SourceRectangle;
+                    var rippleShapeTexture = this._rippleShapeTexture;
                     tileBatch.Draw(rippleShapeTexture, new Vector4(vector2_3.X, vector2_3.Y, size.X, size.Y) * 0.25f,
                         new Rectangle?(sourceRectangle), new VertexColors(this._rippleQueue[index].WaveData),
                         new Vector2((float) (sourceRectangle.Width / 2), (float) (sourceRectangle.Height / 2)),
@@ -307,12 +307,12 @@ namespace Terraria.GameContent.Shaders
                 return;
             if (this._useProjectileWaves || this._useRippleWaves || (this._useCustomWaves || this._usePlayerWaves))
             {
-                for (int index = 0; index < Math.Min(this._queuedSteps, 2); ++index)
+                for (var index = 0; index < Math.Min(this._queuedSteps, 2); ++index)
                     this.StepLiquids();
             }
             else if (this._isWaveBufferDirty || this._clearNextFrame)
             {
-                GraphicsDevice graphicsDevice = Main.instance.GraphicsDevice;
+                var graphicsDevice = Main.instance.GraphicsDevice;
                 graphicsDevice.SetRenderTarget(this._distortionTarget);
                 graphicsDevice.Clear(new Color(0.5f, 0.5f, 0.0f, 1f));
                 this._clearNextFrame = false;
@@ -329,9 +329,9 @@ namespace Terraria.GameContent.Shaders
                 return;
             this.UseProgress(this._progress);
             Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-            Vector2 vector2_1 = new Vector2((float) Main.screenWidth, (float) Main.screenHeight) * 0.5f *
+            var vector2_1 = new Vector2((float) Main.screenWidth, (float) Main.screenHeight) * 0.5f *
                                 (Vector2.One - Vector2.One / Main.GameViewMatrix.Zoom);
-            Vector2 vector2_2 =
+            var vector2_2 =
                 (Main.drawToScreen
                     ? Vector2.Zero
                     : new Vector2((float) Main.offScreenRange, (float) Main.offScreenRange)) - Main.screenPosition -
@@ -348,9 +348,9 @@ namespace Terraria.GameContent.Shaders
 
         private void ValidateRenderTargets()
         {
-            int backBufferWidth = Main.instance.GraphicsDevice.PresentationParameters.BackBufferWidth;
-            int backBufferHeight = Main.instance.GraphicsDevice.PresentationParameters.BackBufferHeight;
-            bool flag = !Main.drawToScreen;
+            var backBufferWidth = Main.instance.GraphicsDevice.PresentationParameters.BackBufferWidth;
+            var backBufferHeight = Main.instance.GraphicsDevice.PresentationParameters.BackBufferHeight;
+            var flag = !Main.drawToScreen;
             if (this._usingRenderTargets && !flag)
                 this.ReleaseRenderTargets();
             else if (!this._usingRenderTargets && flag)
@@ -411,8 +411,8 @@ namespace Terraria.GameContent.Shaders
         public void QueueRipple(Vector2 position, float strength = 1f, RippleShape shape = RippleShape.Square,
             float rotation = 0.0f)
         {
-            float g = (float) ((double) strength * 0.5 + 0.5);
-            float num = Math.Min(Math.Abs(strength), 1f);
+            var g = (float) ((double) strength * 0.5 + 0.5);
+            var num = Math.Min(Math.Abs(strength), 1f);
             this.QueueRipple(position, new Color(0.5f, g, 0.0f, 1f) * num,
                 new Vector2(4f * Math.Max(Math.Abs(strength), 1f)), shape, rotation);
         }
@@ -420,8 +420,8 @@ namespace Terraria.GameContent.Shaders
         public void QueueRipple(Vector2 position, float strength, Vector2 size, RippleShape shape = RippleShape.Square,
             float rotation = 0.0f)
         {
-            float g = (float) ((double) strength * 0.5 + 0.5);
-            float num = Math.Min(Math.Abs(strength), 1f);
+            var g = (float) ((double) strength * 0.5 + 0.5);
+            var num = Math.Min(Math.Abs(strength), 1f);
             this.QueueRipple(position, new Color(0.5f, g, 0.0f, 1f) * num, size, shape, rotation);
         }
 

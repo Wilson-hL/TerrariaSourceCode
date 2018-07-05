@@ -18,7 +18,7 @@ namespace Terraria.GameContent.NetModules
     {
         public static NetPacket SerializeClientMessage(ChatMessage message)
         {
-            NetPacket packet = NetModule.CreatePacket<NetTextModule>(message.GetMaxSerializedSize());
+            var packet = NetModule.CreatePacket<NetTextModule>(message.GetMaxSerializedSize());
             message.Serialize(packet.Writer);
             return packet;
         }
@@ -30,7 +30,7 @@ namespace Terraria.GameContent.NetModules
 
         public static NetPacket SerializeServerMessage(NetworkText text, Color color, byte authorId)
         {
-            NetPacket packet = NetModule.CreatePacket<NetTextModule>(1 + text.GetMaxSerializedSize() + 3);
+            var packet = NetModule.CreatePacket<NetTextModule>(1 + text.GetMaxSerializedSize() + 3);
             packet.Writer.Write(authorId);
             text.Serialize(packet.Writer);
             packet.Writer.WriteRGB(color);
@@ -39,9 +39,9 @@ namespace Terraria.GameContent.NetModules
 
         private bool DeserializeAsClient(BinaryReader reader, int senderPlayerId)
         {
-            byte num = reader.ReadByte();
-            string str = NetworkText.Deserialize(reader).ToString();
-            Color c = reader.ReadRGB();
+            var num = reader.ReadByte();
+            var str = NetworkText.Deserialize(reader).ToString();
+            var c = reader.ReadRGB();
             if (num < byte.MaxValue)
             {
                 Main.player[(int) num].chatOverhead.NewMessage(str, Main.chatLength / 2);
@@ -54,7 +54,7 @@ namespace Terraria.GameContent.NetModules
 
         private bool DeserializeAsServer(BinaryReader reader, int senderPlayerId)
         {
-            ChatMessage message = ChatMessage.Deserialize(reader);
+            var message = ChatMessage.Deserialize(reader);
             ChatManager.Commands.ProcessReceivedMessage(message, senderPlayerId);
             return true;
         }

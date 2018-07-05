@@ -89,10 +89,10 @@ namespace Terraria.ID
 
         public bool[] CreateBoolSet(bool defaultState, params int[] types)
         {
-            bool[] boolBuffer = this.GetBoolBuffer();
-            for (int index = 0; index < boolBuffer.Length; ++index)
+            var boolBuffer = this.GetBoolBuffer();
+            for (var index = 0; index < boolBuffer.Length; ++index)
                 boolBuffer[index] = defaultState;
-            for (int index = 0; index < types.Length; ++index)
+            for (var index = 0; index < types.Length; ++index)
                 boolBuffer[types[index]] = !defaultState;
             return boolBuffer;
         }
@@ -101,10 +101,10 @@ namespace Terraria.ID
         {
             if (inputs.Length % 2 != 0)
                 throw new Exception("You have a bad length for inputs on CreateArraySet");
-            int[] intBuffer = this.GetIntBuffer();
-            for (int index = 0; index < intBuffer.Length; ++index)
+            var intBuffer = this.GetIntBuffer();
+            for (var index = 0; index < intBuffer.Length; ++index)
                 intBuffer[index] = defaultState;
-            int index1 = 0;
+            var index1 = 0;
             while (index1 < inputs.Length)
             {
                 intBuffer[inputs[index1]] = inputs[index1 + 1];
@@ -118,10 +118,10 @@ namespace Terraria.ID
         {
             if (inputs.Length % 2 != 0)
                 throw new Exception("You have a bad length for inputs on CreateArraySet");
-            ushort[] ushortBuffer = this.GetUshortBuffer();
-            for (int index = 0; index < ushortBuffer.Length; ++index)
+            var ushortBuffer = this.GetUshortBuffer();
+            for (var index = 0; index < ushortBuffer.Length; ++index)
                 ushortBuffer[index] = defaultState;
-            int index1 = 0;
+            var index1 = 0;
             while (index1 < inputs.Length)
             {
                 ushortBuffer[(int) inputs[index1]] = inputs[index1 + 1];
@@ -135,10 +135,10 @@ namespace Terraria.ID
         {
             if (inputs.Length % 2 != 0)
                 throw new Exception("You have a bad length for inputs on CreateArraySet");
-            float[] floatBuffer = this.GetFloatBuffer();
-            for (int index = 0; index < floatBuffer.Length; ++index)
+            var floatBuffer = this.GetFloatBuffer();
+            for (var index = 0; index < floatBuffer.Length; ++index)
                 floatBuffer[index] = defaultState;
-            int index1 = 0;
+            var index1 = 0;
             while (index1 < inputs.Length)
             {
                 floatBuffer[(int) inputs[index1]] = inputs[index1 + 1];
@@ -152,12 +152,12 @@ namespace Terraria.ID
         {
             if (inputs.Length % 2 != 0)
                 throw new Exception("You have a bad length for inputs on CreateCustomSet");
-            T[] objArray = new T[this._size];
-            for (int index = 0; index < objArray.Length; ++index)
+            var objArray = new T[this._size];
+            for (var index = 0; index < objArray.Length; ++index)
                 objArray[index] = defaultState;
             if (inputs != null)
             {
-                int index = 0;
+                var index = 0;
                 while (index < inputs.Length)
                 {
                     objArray[(int) (short) inputs[index]] = (T) inputs[index + 1];

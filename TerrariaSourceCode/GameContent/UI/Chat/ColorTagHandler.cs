@@ -15,7 +15,7 @@ namespace Terraria.GameContent.UI.Chat
     {
         TextSnippet ITagHandler.Parse(string text, Color baseColor, string options)
         {
-            TextSnippet textSnippet = new TextSnippet(text);
+            var textSnippet = new TextSnippet(text);
             int result;
             if (!int.TryParse(options, NumberStyles.AllowHexSpecifier, (IFormatProvider) CultureInfo.InvariantCulture,
                 out result))

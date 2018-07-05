@@ -17,9 +17,9 @@ namespace Terraria.World.Generation
 
             public override void Apply(GenerationProgress progress)
             {
-                for (int index1 = 0; index1 < GenBase._worldWidth; ++index1)
+                for (var index1 = 0; index1 < GenBase._worldWidth; ++index1)
                 {
-                    for (int index2 = 0; index2 < GenBase._worldHeight; ++index2)
+                    for (var index2 = 0; index2 < GenBase._worldHeight; ++index2)
                     {
                         if (GenBase._tiles[index1, index2] == null)
                             GenBase._tiles[index1, index2] = new Tile();
@@ -49,7 +49,7 @@ namespace Terraria.World.Generation
 
             public override void Apply(GenerationProgress progress)
             {
-                int count = this._count;
+                var count = this._count;
                 while (count > 0)
                 {
                     if (this._perUnit(GenBase._random.Next(1, GenBase._worldWidth),

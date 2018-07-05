@@ -51,7 +51,7 @@ namespace Terraria
         {
             if (x < 0 || x >= Main.maxTilesX || (y < 0 || y >= Main.maxTilesY))
                 return false;
-            int index = Dust.NewDust(new Vector2((float) x, (float) y) * 16f + new Vector2(8f), 0, 0, 6, 0.0f, 0.0f, 0,
+            var index = Dust.NewDust(new Vector2((float) x, (float) y) * 16f + new Vector2(8f), 0, 0, 6, 0.0f, 0.0f, 0,
                 new Color(), 1f);
             Main.dust[index].noGravity = true;
             Main.dust[index].noLight = true;
@@ -146,7 +146,7 @@ namespace Terraria
                     break;
                 case 1:
                     ++DelegateMethods.i_1;
-                    int num = DelegateMethods.i_1 % 5;
+                    var num = DelegateMethods.i_1 % 5;
                     frame = new Rectangle(0, 22 * (num + 1), 22, 20);
                     distCovered = (float) (frame.Height - 1);
                     origin = new Vector2((float) (frame.Width / 2), 0.0f);
@@ -215,7 +215,7 @@ namespace Terraria
                 dustPosition +=
                     new Vector2(Main.rand.Next(2) == 0 ? 13f : -13f, 0.0f).RotatedBy(
                         (double) DelegateMethods.Minecart.rotation, new Vector2());
-                int index = Dust.NewDust(dustPosition, 1, 1, 213, (float) Main.rand.Next(-2, 3),
+                var index = Dust.NewDust(dustPosition, 1, 1, 213, (float) Main.rand.Next(-2, 3),
                     (float) Main.rand.Next(-2, 3), 0, new Color(), 1f);
                 Main.dust[index].noGravity = true;
                 Main.dust[index].fadeIn = (float) ((double) Main.dust[index].scale + 1.0 +
@@ -236,7 +236,7 @@ namespace Terraria
                 dustPosition +=
                     new Vector2(Main.rand.Next(2) == 0 ? 13f : -13f, 0.0f).RotatedBy(
                         (double) DelegateMethods.Minecart.rotation, new Vector2());
-                int index = Dust.NewDust(dustPosition, 1, 1, 260, (float) Main.rand.Next(-2, 3),
+                var index = Dust.NewDust(dustPosition, 1, 1, 260, (float) Main.rand.Next(-2, 3),
                     (float) Main.rand.Next(-2, 3), 0, new Color(), 1f);
                 Main.dust[index].noGravity = true;
                 Main.dust[index].fadeIn = (float) ((double) Main.dust[index].scale + 0.5 +

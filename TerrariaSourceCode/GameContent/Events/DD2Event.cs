@@ -68,7 +68,7 @@ namespace Terraria.GameContent.Events
         {
             get
             {
-                int num = DD2Event.Ongoing ? 1 : 0;
+                var num = DD2Event.Ongoing ? 1 : 0;
                 return true;
             }
         }
@@ -288,12 +288,12 @@ namespace Terraria.GameContent.Events
             int requiredKillCount;
             int currentKillCount;
             DD2Event.GetInvasionStatus(out currentWave, out requiredKillCount, out currentKillCount, false);
-            float monsterPointsWorth = (float) DD2Event.GetMonsterPointsWorth(slainMonsterID);
-            float waveKills = NPC.waveKills;
+            var monsterPointsWorth = (float) DD2Event.GetMonsterPointsWorth(slainMonsterID);
+            var waveKills = NPC.waveKills;
             NPC.waveKills += monsterPointsWorth;
             currentKillCount += (int) monsterPointsWorth;
-            bool flag = false;
-            int progressWave = currentWave;
+            var flag = false;
+            var progressWave = currentWave;
             if ((double) NPC.waveKills >= (double) requiredKillCount && requiredKillCount != 0)
             {
                 NPC.waveKills = 0.0f;
@@ -313,7 +313,7 @@ namespace Terraria.GameContent.Events
                     return;
                 }
 
-                int num = currentWave;
+                var num = currentWave;
                 WorldGen.BroadcastText(NetworkText.FromKey("DungeonDefenders2.WaveComplete"),
                     DD2Event.INFO_NEW_WAVE_COLOR);
                 DD2Event.SetEnemySpawningOnHold(1800);
@@ -352,8 +352,8 @@ namespace Terraria.GameContent.Events
                 return;
             if (flag)
             {
-                int num = 1;
-                int progressMax = 1;
+                var num = 1;
+                var progressMax = 1;
                 if (Main.netMode != 1)
                     Main.ReportInvasionProgress(num, progressMax, 3, progressWave);
                 if (Main.netMode != 2)
@@ -375,13 +375,13 @@ namespace Terraria.GameContent.Events
         public static void StartVictoryScene()
         {
             DD2Event.WonThisRun = true;
-            int firstNpc = NPC.FindFirstNPC(548);
+            var firstNpc = NPC.FindFirstNPC(548);
             if (firstNpc == -1)
                 return;
             Main.npc[firstNpc].ai[1] = 2f;
             Main.npc[firstNpc].ai[0] = 2f;
             Main.npc[firstNpc].netUpdate = true;
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.npc[index] != null && Main.npc[index].active && Main.npc[index].type == 549)
                 {
@@ -475,10 +475,10 @@ namespace Terraria.GameContent.Events
         {
             if (NPC.AnyNPCs(548))
                 return;
-            Tile tileSafely = Framing.GetTileSafely(x, y);
+            var tileSafely = Framing.GetTileSafely(x, y);
             if (!tileSafely.active() || tileSafely.type != (ushort) 466)
                 return;
-            Point point = new Point(x * 16, y * 16);
+            var point = new Point(x * 16, y * 16);
             point.X -= (int) tileSafely.frameX / 18 * 16;
             point.Y -= (int) tileSafely.frameY / 18 * 16;
             point.X += 40;
@@ -499,8 +499,8 @@ namespace Terraria.GameContent.Events
 
         public static void FailureMessage(int client)
         {
-            LocalizedText text = Language.GetText("DungeonDefenders2.BartenderWarning");
-            Color color = new Color((int) byte.MaxValue, (int) byte.MaxValue, 0);
+            var text = Language.GetText("DungeonDefenders2.BartenderWarning");
+            var color = new Color((int) byte.MaxValue, (int) byte.MaxValue, 0);
             if (Main.netMode == 2)
                 NetMessage.SendChatMessageToClient(NetworkText.FromKey(text.Key), color, client);
             else
@@ -518,7 +518,7 @@ namespace Terraria.GameContent.Events
 
         public static void ClearAllTowersInGame()
         {
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.projectile[index].active && ProjectileID.Sets.IsADD2Turret[Main.projectile[index].type])
                     Main.projectile[index].Kill();
@@ -527,7 +527,7 @@ namespace Terraria.GameContent.Events
 
         public static void ClearAllDD2HostilesInGame()
         {
-            for (int number = 0; number < 200; ++number)
+            for (var number = 0; number < 200; ++number)
             {
                 if (Main.npc[number].active && NPCID.Sets.BelongsToInvasionOldOnesArmy[Main.npc[number].type])
                 {
@@ -540,9 +540,9 @@ namespace Terraria.GameContent.Events
 
         public static void ClearAllDD2EnergyCrystalsInGame()
         {
-            for (int number = 0; number < 400; ++number)
+            for (var number = 0; number < 400; ++number)
             {
-                Item obj = Main.item[number];
+                var obj = Main.item[number];
                 if (obj.active && obj.type == 3822)
                 {
                     obj.active = false;
@@ -559,8 +559,8 @@ namespace Terraria.GameContent.Events
 
         public static bool CanRaiseGoblinsHere(Vector2 spot)
         {
-            int num = 0;
-            foreach (Vector2 deadGoblinSpot in DD2Event._deadGoblinSpots)
+            var num = 0;
+            foreach (var deadGoblinSpot in DD2Event._deadGoblinSpots)
             {
                 if ((double) Vector2.DistanceSquared(deadGoblinSpot, spot) <= 640000.0)
                 {
@@ -575,19 +575,19 @@ namespace Terraria.GameContent.Events
 
         public static void RaiseGoblins(Vector2 spot)
         {
-            List<Vector2> vector2List = new List<Vector2>();
-            foreach (Vector2 deadGoblinSpot in DD2Event._deadGoblinSpots)
+            var vector2List = new List<Vector2>();
+            foreach (var deadGoblinSpot in DD2Event._deadGoblinSpots)
             {
                 if ((double) Vector2.DistanceSquared(deadGoblinSpot, spot) <= 722500.0)
                     vector2List.Add(deadGoblinSpot);
             }
 
-            foreach (Vector2 vector2 in vector2List)
+            foreach (var vector2 in vector2List)
                 DD2Event._deadGoblinSpots.Remove(vector2);
-            int num = 0;
-            foreach (Vector2 vec in vector2List)
+            var num = 0;
+            foreach (var vec in vector2List)
             {
-                Point tileCoordinates = vec.ToTileCoordinates();
+                var tileCoordinates = vec.ToTileCoordinates();
                 tileCoordinates.X += Main.rand.Next(-15, 16);
                 Point result;
                 if (WorldUtils.Find(tileCoordinates,
@@ -615,14 +615,14 @@ namespace Terraria.GameContent.Events
             else
             {
                 DD2Event._arenaHitboxingCooldown = 60;
-                Vector2 vector2_1 = new Vector2(float.MaxValue, float.MaxValue);
-                Vector2 vector2_2 = new Vector2(0.0f, 0.0f);
-                for (int index = 0; index < 200; ++index)
+                var vector2_1 = new Vector2(float.MaxValue, float.MaxValue);
+                var vector2_2 = new Vector2(0.0f, 0.0f);
+                for (var index = 0; index < 200; ++index)
                 {
-                    NPC npc = Main.npc[index];
+                    var npc = Main.npc[index];
                     if (npc.active && (npc.type == 549 || npc.type == 548))
                     {
-                        Vector2 vector2_3 = npc.TopLeft;
+                        var vector2_3 = npc.TopLeft;
                         if ((double) vector2_1.X > (double) vector2_3.X)
                             vector2_1.X = vector2_3.X;
                         if ((double) vector2_1.Y > (double) vector2_3.Y)
@@ -635,10 +635,10 @@ namespace Terraria.GameContent.Events
                     }
                 }
 
-                Vector2 vector2_4 = new Vector2(16f, 16f) * 50f;
+                var vector2_4 = new Vector2(16f, 16f) * 50f;
                 vector2_1 -= vector2_4;
                 vector2_2 += vector2_4;
-                Vector2 vector2_5 = vector2_2 - vector2_1;
+                var vector2_5 = vector2_2 - vector2_1;
                 DD2Event.ArenaHitbox.X = (int) vector2_1.X;
                 DD2Event.ArenaHitbox.Y = (int) vector2_1.Y;
                 DD2Event.ArenaHitbox.Width = (int) vector2_5.X;
@@ -653,7 +653,7 @@ namespace Terraria.GameContent.Events
 
         public static void DropMedals(int numberOfMedals)
         {
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.npc[index].active && Main.npc[index].type == 548)
                     Main.npc[index].DropItemInstanced(Main.npc[index].position, Main.npc[index].Size, 3817,
@@ -752,7 +752,7 @@ namespace Terraria.GameContent.Events
                 }
             }
 
-            float num = (float) currentKillCount / (float) requiredKillCount;
+            var num = (float) currentKillCount / (float) requiredKillCount;
             if ((double) DD2Event._crystalsDropping_alreadyDropped >=
                 (double) DD2Event._crystalsDropping_toDrop * (double) num)
                 return false;
@@ -764,8 +764,8 @@ namespace Terraria.GameContent.Events
         {
             if (DD2Event._spawnedBetsyT3 || NPC.AnyNPCs(551))
                 return;
-            Vector2 Position = new Vector2(1f, 1f);
-            int firstNpc = NPC.FindFirstNPC(548);
+            var Position = new Vector2(1f, 1f);
+            var firstNpc = NPC.FindFirstNPC(548);
             if (firstNpc != -1)
                 Position = Main.npc[firstNpc].Center;
             NPC.SpawnOnPlayer((int) Player.FindClosest(Position, 1, 1), 551);
@@ -774,11 +774,11 @@ namespace Terraria.GameContent.Events
 
         private static void DropStarterCrystals()
         {
-            for (int index1 = 0; index1 < 200; ++index1)
+            for (var index1 = 0; index1 < 200; ++index1)
             {
                 if (Main.npc[index1].active && Main.npc[index1].type == 548)
                 {
-                    for (int index2 = 0; index2 < 5; ++index2)
+                    for (var index2 = 0; index2 < 5; ++index2)
                         Item.NewItem(Main.npc[index1].position, Main.npc[index1].width, Main.npc[index1].height, 3822,
                             2, false, 0, false, false);
                     break;
@@ -852,25 +852,25 @@ namespace Terraria.GameContent.Events
 
         private static void Difficulty_1_SpawnMonsterFromGate(Vector2 gateBottom)
         {
-            int x = (int) gateBottom.X;
-            int y = (int) gateBottom.Y;
-            int num1 = 50;
-            int num2 = 6;
+            var x = (int) gateBottom.X;
+            var y = (int) gateBottom.Y;
+            var num1 = 50;
+            var num2 = 6;
             if (NPC.waveNumber > 4)
                 num2 = 12;
             else if (NPC.waveNumber > 3)
                 num2 = 8;
-            int num3 = 6;
+            var num3 = 6;
             if (NPC.waveNumber > 4)
                 num3 = 8;
-            for (int index = 1; index < Main.ActivePlayersCount; ++index)
+            for (var index = 1; index < Main.ActivePlayersCount; ++index)
             {
                 num1 = (int) ((double) num1 * 1.3);
                 num2 = (int) ((double) num2 * 1.3);
                 num3 = (int) ((double) num3 * 1.3);
             }
 
-            int number = 200;
+            var number = 200;
             switch (NPC.waveNumber)
             {
                 case 1:
@@ -1129,27 +1129,27 @@ namespace Terraria.GameContent.Events
 
         private static void Difficulty_2_SpawnMonsterFromGate(Vector2 gateBottom)
         {
-            int x = (int) gateBottom.X;
-            int y = (int) gateBottom.Y;
-            int num1 = 50;
-            int num2 = 5;
+            var x = (int) gateBottom.X;
+            var y = (int) gateBottom.Y;
+            var num1 = 50;
+            var num2 = 5;
             if (NPC.waveNumber > 1)
                 num2 = 8;
             if (NPC.waveNumber > 3)
                 num2 = 10;
             if (NPC.waveNumber > 5)
                 num2 = 12;
-            int num3 = 5;
+            var num3 = 5;
             if (NPC.waveNumber > 4)
                 num3 = 7;
-            int num4 = 2;
-            int num5 = 8;
+            var num4 = 2;
+            var num5 = 8;
             if (NPC.waveNumber > 3)
                 num5 = 12;
-            int num6 = 3;
+            var num6 = 3;
             if (NPC.waveNumber > 5)
                 num6 = 5;
-            for (int index = 1; index < Main.ActivePlayersCount; ++index)
+            for (var index = 1; index < Main.ActivePlayersCount; ++index)
             {
                 num1 = (int) ((double) num1 * 1.3);
                 num2 = (int) ((double) num2 * 1.3);
@@ -1157,8 +1157,8 @@ namespace Terraria.GameContent.Events
                 num6 = (int) ((double) num1 * 1.35);
             }
 
-            int number1 = 200;
-            int number2 = 200;
+            var number1 = 200;
+            var number2 = 200;
             switch (NPC.waveNumber)
             {
                 case 1:
@@ -1442,7 +1442,7 @@ namespace Terraria.GameContent.Events
                 case 6:
                     return 180;
                 case 7:
-                    int firstNpc = NPC.FindFirstNPC(551);
+                    var firstNpc = NPC.FindFirstNPC(551);
                     if (firstNpc == -1)
                         return 1;
                     currentKillCount =
@@ -1499,30 +1499,30 @@ namespace Terraria.GameContent.Events
 
         private static void Difficulty_3_SpawnMonsterFromGate(Vector2 gateBottom)
         {
-            int x = (int) gateBottom.X;
-            int y = (int) gateBottom.Y;
-            int num1 = 60;
-            int num2 = 7;
+            var x = (int) gateBottom.X;
+            var y = (int) gateBottom.Y;
+            var num1 = 60;
+            var num2 = 7;
             if (NPC.waveNumber > 1)
                 num2 = 9;
             if (NPC.waveNumber > 3)
                 num2 = 12;
             if (NPC.waveNumber > 5)
                 num2 = 15;
-            int num3 = 7;
+            var num3 = 7;
             if (NPC.waveNumber > 4)
                 num3 = 10;
-            int num4 = 2;
+            var num4 = 2;
             if (NPC.waveNumber > 5)
                 num4 = 3;
-            int num5 = 12;
+            var num5 = 12;
             if (NPC.waveNumber > 3)
                 num5 = 18;
-            int num6 = 4;
+            var num6 = 4;
             if (NPC.waveNumber > 5)
                 num6 = 6;
-            int num7 = 4;
-            for (int index = 1; index < Main.ActivePlayersCount; ++index)
+            var num7 = 4;
+            for (var index = 1; index < Main.ActivePlayersCount; ++index)
             {
                 num1 = (int) ((double) num1 * 1.3);
                 num2 = (int) ((double) num2 * 1.3);
@@ -1531,8 +1531,8 @@ namespace Terraria.GameContent.Events
                 num7 = (int) ((double) num7 * 1.3);
             }
 
-            int number1 = 200;
-            int number2 = 200;
+            var number1 = 200;
+            var number2 = 200;
             switch (NPC.waveNumber)
             {
                 case 1:

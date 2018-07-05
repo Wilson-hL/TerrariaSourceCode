@@ -34,7 +34,7 @@ namespace Terraria.Social.Steam
             {
                 if (!SteamAPI.Init())
                 {
-                    int num = (int) MessageBox.Show(Language.GetTextValue("Error.LaunchFromSteam"),
+                    var num = (int) MessageBox.Show(Language.GetTextValue("Error.LaunchFromSteam"),
                         Language.GetTextValue("Error.Error"));
                     Environment.Exit(1);
                 }

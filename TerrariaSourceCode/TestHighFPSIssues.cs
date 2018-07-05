@@ -56,7 +56,7 @@ namespace Terraria
                 TestHighFPSIssues.race = num;
             }
 
-            double num1 = gt.TotalGameTime.TotalMilliseconds - 5000.0;
+            var num1 = gt.TotalGameTime.TotalMilliseconds - 5000.0;
             while (TestHighFPSIssues._tapUpdates.Count > 0 && TestHighFPSIssues._tapUpdates[0] < num1)
                 TestHighFPSIssues._tapUpdates.RemoveAt(0);
             while (TestHighFPSIssues._tapDraws.Count > 0 && TestHighFPSIssues._tapDraws[0] < num1)

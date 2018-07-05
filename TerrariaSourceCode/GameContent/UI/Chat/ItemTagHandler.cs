@@ -16,7 +16,7 @@ namespace Terraria.GameContent.UI.Chat
     {
         TextSnippet ITagHandler.Parse(string text, Color baseColor, string options)
         {
-            Item obj = new Item();
+            var obj = new Item();
             int result1;
             if (int.TryParse(text, out result1))
                 obj.netDefaults(result1);
@@ -25,8 +25,8 @@ namespace Terraria.GameContent.UI.Chat
             obj.stack = 1;
             if (options != null)
             {
-                string[] strArray = options.Split(',');
-                for (int index = 0; index < strArray.Length; ++index)
+                var strArray = options.Split(',');
+                for (var index = 0; index < strArray.Length; ++index)
                 {
                     if (strArray[index].Length != 0)
                     {
@@ -58,10 +58,10 @@ namespace Terraria.GameContent.UI.Chat
                 }
             }
 
-            string str = "";
+            var str = "";
             if (obj.stack > 1)
                 str = " (" + (object) obj.stack + ")";
-            ItemTagHandler.ItemSnippet itemSnippet = new ItemTagHandler.ItemSnippet(obj);
+            var itemSnippet = new ItemTagHandler.ItemSnippet(obj);
             itemSnippet.Text = "[" + obj.AffixName() + str + "]";
             itemSnippet.CheckForHover = true;
             itemSnippet.DeleteWhole = true;
@@ -70,7 +70,7 @@ namespace Terraria.GameContent.UI.Chat
 
         public static string GenerateTag(Item I)
         {
-            string str = "[i";
+            var str = "[i";
             if (I.prefix != (byte) 0)
                 str = str + "/p" + (object) I.prefix;
             if (I.stack != 1)
@@ -98,25 +98,25 @@ namespace Terraria.GameContent.UI.Chat
             public override bool UniqueDraw(bool justCheckingString, out Vector2 size, SpriteBatch spriteBatch,
                 Vector2 position = default(Vector2), Color color = default(Color), float scale = 1f)
             {
-                float num1 = 1f;
-                float num2 = 1f;
+                var num1 = 1f;
+                var num2 = 1f;
                 if (Main.netMode != 2 && !Main.dedServ)
                 {
-                    Texture2D texture2D = Main.itemTexture[this._item.type];
-                    Rectangle rectangle = Main.itemAnimations[this._item.type] == null
+                    var texture2D = Main.itemTexture[this._item.type];
+                    var rectangle = Main.itemAnimations[this._item.type] == null
                         ? texture2D.Frame(1, 1, 0, 0)
                         : Main.itemAnimations[this._item.type].GetFrame(texture2D);
                     if (rectangle.Height > 32)
                         num2 = 32f / (float) rectangle.Height;
                 }
 
-                float num3 = num2 * scale;
-                float num4 = num1 * num3;
+                var num3 = num2 * scale;
+                var num4 = num1 * num3;
                 if ((double) num4 > 0.75)
                     num4 = 0.75f;
                 if (!justCheckingString && color != Color.Black)
                 {
-                    float inventoryScale = Main.inventoryScale;
+                    var inventoryScale = Main.inventoryScale;
                     Main.inventoryScale = scale * num4;
                     ItemSlot.Draw(spriteBatch, ref this._item, 14, position - new Vector2(10f) * scale * num4,
                         Color.White);

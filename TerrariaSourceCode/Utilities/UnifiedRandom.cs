@@ -25,12 +25,12 @@ namespace Terraria.Utilities
 
         public UnifiedRandom(int Seed)
         {
-            int num1 = 161803398 - (Seed == int.MinValue ? int.MaxValue : Math.Abs(Seed));
+            var num1 = 161803398 - (Seed == int.MinValue ? int.MaxValue : Math.Abs(Seed));
             this.SeedArray[55] = num1;
-            int num2 = 1;
-            for (int index1 = 1; index1 < 55; ++index1)
+            var num2 = 1;
+            for (var index1 = 1; index1 < 55; ++index1)
             {
-                int index2 = 21 * index1 % 55;
+                var index2 = 21 * index1 % 55;
                 this.SeedArray[index2] = num2;
                 num2 = num1 - num2;
                 if (num2 < 0)
@@ -38,9 +38,9 @@ namespace Terraria.Utilities
                 num1 = this.SeedArray[index2];
             }
 
-            for (int index1 = 1; index1 < 5; ++index1)
+            for (var index1 = 1; index1 < 5; ++index1)
             {
-                for (int index2 = 1; index2 < 56; ++index2)
+                for (var index2 = 1; index2 < 56; ++index2)
                 {
                     this.SeedArray[index2] -= this.SeedArray[1 + (index2 + 30) % 55];
                     if (this.SeedArray[index2] < 0)
@@ -60,15 +60,15 @@ namespace Terraria.Utilities
 
         private int InternalSample()
         {
-            int inext = this.inext;
-            int inextp = this.inextp;
+            var inext = this.inext;
+            var inextp = this.inextp;
             int index1;
             if ((index1 = inext + 1) >= 56)
                 index1 = 1;
             int index2;
             if ((index2 = inextp + 1) >= 56)
                 index2 = 1;
-            int num = this.SeedArray[index1] - this.SeedArray[index2];
+            var num = this.SeedArray[index1] - this.SeedArray[index2];
             if (num == int.MaxValue)
                 --num;
             if (num < 0)
@@ -86,7 +86,7 @@ namespace Terraria.Utilities
 
         private double GetSampleForLargeRange()
         {
-            int num = this.InternalSample();
+            var num = this.InternalSample();
             if (this.InternalSample() % 2 == 0)
                 num = -num;
             return ((double) num + 2147483646.0) / 4294967293.0;
@@ -96,7 +96,7 @@ namespace Terraria.Utilities
         {
             if (minValue > maxValue)
                 throw new ArgumentOutOfRangeException(nameof(minValue), "minValue must be less than maxValue");
-            long num = (long) maxValue - (long) minValue;
+            var num = (long) maxValue - (long) minValue;
             if (num <= (long) int.MaxValue)
                 return (int) (this.Sample() * (double) num) + minValue;
             return (int) ((long) (this.GetSampleForLargeRange() * (double) num) + (long) minValue);
@@ -118,7 +118,7 @@ namespace Terraria.Utilities
         {
             if (buffer == null)
                 throw new ArgumentNullException(nameof(buffer));
-            for (int index = 0; index < buffer.Length; ++index)
+            for (var index = 0; index < buffer.Length; ++index)
                 buffer[index] = (byte) (this.InternalSample() % 256);
         }
     }

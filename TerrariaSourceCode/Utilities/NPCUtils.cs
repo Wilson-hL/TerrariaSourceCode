@@ -29,20 +29,20 @@ namespace Terraria.Utilities
             NPCUtils.TargetSearchFlag flags = NPCUtils.TargetSearchFlag.All,
             NPCUtils.SearchFilter<Player> playerFilter = null, NPCUtils.SearchFilter<NPC> npcFilter = null)
         {
-            float num1 = float.MaxValue;
-            int nearestNPCIndex = -1;
-            float adjustedTankDistance = float.MaxValue;
-            float nearestTankDistance = float.MaxValue;
-            int nearestTankIndex = -1;
-            NPCUtils.TargetType tankType = NPCUtils.TargetType.Player;
+            var num1 = float.MaxValue;
+            var nearestNPCIndex = -1;
+            var adjustedTankDistance = float.MaxValue;
+            var nearestTankDistance = float.MaxValue;
+            var nearestTankIndex = -1;
+            var tankType = NPCUtils.TargetType.Player;
             if (flags.HasFlag((Enum) NPCUtils.TargetSearchFlag.NPCs))
             {
-                for (int index = 0; index < 200; ++index)
+                for (var index = 0; index < 200; ++index)
                 {
-                    NPC entity = Main.npc[index];
+                    var entity = Main.npc[index];
                     if (entity.active && (npcFilter == null || npcFilter(entity)))
                     {
-                        float num2 = Vector2.DistanceSquared(position, entity.Center);
+                        var num2 = Vector2.DistanceSquared(position, entity.Center);
                         if ((double) num2 < (double) num1)
                         {
                             nearestNPCIndex = index;
@@ -54,15 +54,15 @@ namespace Terraria.Utilities
 
             if (flags.HasFlag((Enum) NPCUtils.TargetSearchFlag.Players))
             {
-                for (int index = 0; index < (int) byte.MaxValue; ++index)
+                for (var index = 0; index < (int) byte.MaxValue; ++index)
                 {
-                    Player entity = Main.player[index];
+                    var entity = Main.player[index];
                     if (entity.active && !entity.dead && !entity.ghost &&
                         (playerFilter == null || playerFilter(entity)))
                     {
-                        float num2 = Vector2.Distance(position, entity.Center);
-                        float num3 = num2 - (float) entity.aggro;
-                        bool flag = searcher != null && entity.npcTypeNoAggro[searcher.type];
+                        var num2 = Vector2.Distance(position, entity.Center);
+                        var num3 = num2 - (float) entity.aggro;
+                        var flag = searcher != null && entity.npcTypeNoAggro[searcher.type];
                         if (searcher != null && flag && searcher.direction == 0)
                             num3 += 1000f;
                         if ((double) num3 < (double) adjustedTankDistance)
@@ -75,9 +75,9 @@ namespace Terraria.Utilities
 
                         if (entity.tankPet >= 0 && !flag)
                         {
-                            Vector2 center = Main.projectile[entity.tankPet].Center;
-                            float num4 = Vector2.Distance(position, center);
-                            float num5 = num4 - 200f;
+                            var center = Main.projectile[entity.tankPet].Center;
+                            var num4 = Vector2.Distance(position, center);
+                            var num5 = num4 - 200f;
                             if ((double) num5 < (double) adjustedTankDistance && (double) num5 < 200.0 &&
                                 Collision.CanHit(position, 0, 0, center, 0, 0))
                             {
@@ -98,7 +98,7 @@ namespace Terraria.Utilities
         public static void TargetClosestOldOnesInvasion(NPC searcher, bool faceTarget = true,
             Vector2? checkPosition = null)
         {
-            NPCUtils.TargetSearchResults searchResults = NPCUtils.SearchForTarget(searcher,
+            var searchResults = NPCUtils.SearchForTarget(searcher,
                 NPCUtils.TargetSearchFlag.All,
                 NPCUtils.SearchFilters.OnlyPlayersInCertainDistance(searcher.Center, 200f),
                 new NPCUtils.SearchFilter<NPC>(NPCUtils.SearchFilters.OnlyCrystal));
@@ -113,12 +113,12 @@ namespace Terraria.Utilities
 
         public static void TargetClosestBetsy(NPC searcher, bool faceTarget = true, Vector2? checkPosition = null)
         {
-            NPCUtils.TargetSearchResults searchResults = NPCUtils.SearchForTarget(searcher,
+            var searchResults = NPCUtils.SearchForTarget(searcher,
                 NPCUtils.TargetSearchFlag.All, (NPCUtils.SearchFilter<Player>) null,
                 new NPCUtils.SearchFilter<NPC>(NPCUtils.SearchFilters.OnlyCrystal));
             if (!searchResults.FoundTarget)
                 return;
-            NPCUtils.TargetType targetType = searchResults.NearestTargetType;
+            var targetType = searchResults.NearestTargetType;
             if (searchResults.FoundTank && !searchResults.NearestTankOwner.dead)
                 targetType = NPCUtils.TargetType.Player;
             searcher.target = searchResults.NearestTargetIndex;

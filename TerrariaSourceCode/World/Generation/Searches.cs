@@ -26,7 +26,7 @@ namespace Terraria.World.Generation
 
             public override Point Find(Point origin)
             {
-                for (int index = 0; index < this._maxDistance; ++index)
+                for (var index = 0; index < this._maxDistance; ++index)
                 {
                     if (this.Check(origin.X - index, origin.Y))
                         return new Point(origin.X - index, origin.Y);
@@ -47,7 +47,7 @@ namespace Terraria.World.Generation
 
             public override Point Find(Point origin)
             {
-                for (int index = 0; index < this._maxDistance; ++index)
+                for (var index = 0; index < this._maxDistance; ++index)
                 {
                     if (this.Check(origin.X + index, origin.Y))
                         return new Point(origin.X + index, origin.Y);
@@ -68,7 +68,7 @@ namespace Terraria.World.Generation
 
             public override Point Find(Point origin)
             {
-                for (int index = 0; index < this._maxDistance; ++index)
+                for (var index = 0; index < this._maxDistance; ++index)
                 {
                     if (this.Check(origin.X, origin.Y + index))
                         return new Point(origin.X, origin.Y + index);
@@ -89,7 +89,7 @@ namespace Terraria.World.Generation
 
             public override Point Find(Point origin)
             {
-                for (int index = 0; index < this._maxDistance; ++index)
+                for (var index = 0; index < this._maxDistance; ++index)
                 {
                     if (this.Check(origin.X, origin.Y - index))
                         return new Point(origin.X, origin.Y - index);
@@ -112,9 +112,9 @@ namespace Terraria.World.Generation
 
             public override Point Find(Point origin)
             {
-                for (int index1 = 0; index1 < this._width; ++index1)
+                for (var index1 = 0; index1 < this._width; ++index1)
                 {
-                    for (int index2 = 0; index2 < this._height; ++index2)
+                    for (var index2 = 0; index2 < this._height; ++index2)
                     {
                         if (this.Check(origin.X + index1, origin.Y + index2))
                             return new Point(origin.X + index1, origin.Y + index2);

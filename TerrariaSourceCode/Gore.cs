@@ -36,7 +36,7 @@ namespace Terraria
         {
             if (Main.netMode == 2 || !this.active)
                 return;
-            bool flag = this.type >= 1024 && this.type <= 1026;
+            var flag = this.type >= 1024 && this.type <= 1026;
             if (this.type >= 276 && this.type <= 282)
             {
                 this.velocity.X *= 0.98f;
@@ -67,12 +67,12 @@ namespace Terraria
             else if (this.type >= 706 && this.type <= 717 || this.type == 943)
             {
                 this.alpha = (double) this.position.Y >= Main.worldSurface * 16.0 + 8.0 ? 100 : 0;
-                int num1 = 4;
+                var num1 = 4;
                 ++this.frameCounter;
                 if (this.frame <= (byte) 4)
                 {
-                    int x = (int) ((double) this.position.X / 16.0);
-                    int y = (int) ((double) this.position.Y / 16.0) - 1;
+                    var x = (int) ((double) this.position.X / 16.0);
+                    var y = (int) ((double) this.position.Y / 16.0) - 1;
                     if (WorldGen.InWorld(x, y, 0) && !Main.tile[x, y].active())
                         this.active = false;
                     if (this.frame == (byte) 0)
@@ -97,7 +97,7 @@ namespace Terraria
                         ++this.frame;
                         if (this.frame == (byte) 5)
                         {
-                            int index = Gore.NewGore(this.position, this.velocity, this.type, 1f);
+                            var index = Gore.NewGore(this.position, this.velocity, this.type, 1f);
                             Main.gore[index].frame = (byte) 9;
                             Main.gore[index].velocity *= 0.0f;
                         }
@@ -106,7 +106,7 @@ namespace Terraria
                         {
                             if (Main.rand.Next(2) == 0)
                             {
-                                Gore gore = Main.gore[
+                                var gore = Main.gore[
                                     Gore.NewGore(this.position, this.velocity, this.type, this.scale)];
                                 gore.frameCounter = (byte) 0;
                                 gore.frame = (byte) 7;
@@ -115,7 +115,7 @@ namespace Terraria
 
                             if (Main.rand.Next(2) == 0)
                             {
-                                Gore gore = Main.gore[
+                                var gore = Main.gore[
                                     Gore.NewGore(this.position, this.velocity, this.type, this.scale)];
                                 gore.frameCounter = (byte) 0;
                                 gore.frame = (byte) 7;
@@ -126,7 +126,7 @@ namespace Terraria
                 }
                 else if (this.frame <= (byte) 6)
                 {
-                    int num2 = 8;
+                    var num2 = 8;
                     if (this.type == 716)
                         num2 *= 2;
                     if (this.type == 717)
@@ -141,7 +141,7 @@ namespace Terraria
                 }
                 else if (this.frame <= (byte) 9)
                 {
-                    int num2 = 6;
+                    var num2 = 6;
                     if (this.type == 716)
                     {
                         num2 = (int) ((double) num2 * 1.5);
@@ -228,7 +228,7 @@ namespace Terraria
                 if (++this.frameCounter >= (byte) 8 && (double) this.velocity.Y > 0.200000002980232)
                 {
                     this.frameCounter = (byte) 0;
-                    int num = (int) this.frame / 4;
+                    var num = (int) this.frame / 4;
                     if ((int) ++this.frame >= 4 + num * 4)
                         this.frame = (byte) (num * 4);
                 }
@@ -275,23 +275,23 @@ namespace Terraria
                     this.timeLeft = 0;
                 this.velocity.X = (float) (((double) this.velocity.X * 50.0 + (double) Main.windSpeed * 2.0 +
                                             (double) Main.rand.Next(-10, 11) * 0.100000001490116) / 51.0);
-                float num1 = 0.0f;
+                var num1 = 0.0f;
                 if ((double) this.velocity.X < 0.0)
                     num1 = this.velocity.X * 0.2f;
                 this.velocity.Y = (float) (((double) this.velocity.Y * 50.0 - 0.349999994039536 + (double) num1 +
                                             (double) Main.rand.Next(-10, 11) * 0.200000002980232) / 51.0);
                 this.rotation = this.velocity.X * 0.6f;
-                float num2 = -1f;
+                var num2 = -1f;
                 if (Main.goreLoaded[this.type])
                 {
-                    Rectangle rectangle1 = new Rectangle((int) this.position.X, (int) this.position.Y,
+                    var rectangle1 = new Rectangle((int) this.position.X, (int) this.position.Y,
                         (int) ((double) Main.goreTexture[this.type].Width * (double) this.scale),
                         (int) ((double) Main.goreTexture[this.type].Height * (double) this.scale));
-                    for (int index = 0; index < (int) byte.MaxValue; ++index)
+                    for (var index = 0; index < (int) byte.MaxValue; ++index)
                     {
                         if (Main.player[index].active && !Main.player[index].dead)
                         {
-                            Rectangle rectangle2 = new Rectangle((int) Main.player[index].position.X,
+                            var rectangle2 = new Rectangle((int) Main.player[index].position.X,
                                 (int) Main.player[index].position.Y, Main.player[index].width,
                                 Main.player[index].height);
                             if (rectangle1.Intersects(rectangle2))
@@ -318,16 +318,16 @@ namespace Terraria
                     this.alpha = (int) byte.MaxValue;
                     if (Main.goreLoaded[this.type] && (double) num2 != -1.0)
                     {
-                        float num3 = (float) ((double) Main.goreTexture[this.type].Width * (double) this.scale *
+                        var num3 = (float) ((double) Main.goreTexture[this.type].Width * (double) this.scale *
                                               0.800000011920929);
-                        float x = this.position.X;
-                        float y = this.position.Y;
-                        float num4 = (float) Main.goreTexture[this.type].Width * this.scale;
-                        float num5 = (float) Main.goreTexture[this.type].Height * this.scale;
-                        int Type = 31;
-                        for (int index1 = 0; (double) index1 < (double) num3; ++index1)
+                        var x = this.position.X;
+                        var y = this.position.Y;
+                        var num4 = (float) Main.goreTexture[this.type].Width * this.scale;
+                        var num5 = (float) Main.goreTexture[this.type].Height * this.scale;
+                        var Type = 31;
+                        for (var index1 = 0; (double) index1 < (double) num3; ++index1)
                         {
-                            int index2 = Dust.NewDust(new Vector2(x, y), (int) num4, (int) num5, Type, 0.0f, 0.0f, 0,
+                            var index2 = Dust.NewDust(new Vector2(x, y), (int) num4, (int) num5, Type, 0.0f, 0.0f, 0,
                                 new Color(), 1f);
                             Main.dust[index2].velocity *= (float) ((1.0 + (double) num2) / 3.0);
                             Main.dust[index2].noGravity = true;
@@ -348,14 +348,14 @@ namespace Terraria
                 this.rotation = this.velocity.X * 0.3f;
                 if (Main.goreLoaded[this.type])
                 {
-                    Rectangle rectangle1 = new Rectangle((int) this.position.X, (int) this.position.Y,
+                    var rectangle1 = new Rectangle((int) this.position.X, (int) this.position.Y,
                         (int) ((double) Main.goreTexture[this.type].Width * (double) this.scale),
                         (int) ((double) Main.goreTexture[this.type].Height * (double) this.scale));
-                    for (int index = 0; index < (int) byte.MaxValue; ++index)
+                    for (var index = 0; index < (int) byte.MaxValue; ++index)
                     {
                         if (Main.player[index].active && !Main.player[index].dead)
                         {
-                            Rectangle rectangle2 = new Rectangle((int) Main.player[index].position.X,
+                            var rectangle2 = new Rectangle((int) Main.player[index].position.X,
                                 (int) Main.player[index].position.Y, Main.player[index].width,
                                 Main.player[index].height);
                             if (rectangle1.Intersects(rectangle2))
@@ -383,22 +383,22 @@ namespace Terraria
                     this.alpha = (int) byte.MaxValue;
                     if (Main.goreLoaded[this.type])
                     {
-                        float num1 = (float) ((double) Main.goreTexture[this.type].Width * (double) this.scale *
+                        var num1 = (float) ((double) Main.goreTexture[this.type].Width * (double) this.scale *
                                               0.800000011920929);
-                        float x = this.position.X;
-                        float y = this.position.Y;
-                        float num2 = (float) Main.goreTexture[this.type].Width * this.scale;
-                        float num3 = (float) Main.goreTexture[this.type].Height * this.scale;
-                        int Type = 176;
+                        var x = this.position.X;
+                        var y = this.position.Y;
+                        var num2 = (float) Main.goreTexture[this.type].Width * this.scale;
+                        var num3 = (float) Main.goreTexture[this.type].Height * this.scale;
+                        var Type = 176;
                         if (this.type >= 416 && this.type <= 420)
                             Type = 177;
                         if (this.type >= 421 && this.type <= 425)
                             Type = 178;
                         if (this.type >= 426 && this.type <= 430)
                             Type = 179;
-                        for (int index1 = 0; (double) index1 < (double) num1; ++index1)
+                        for (var index1 = 0; (double) index1 < (double) num1; ++index1)
                         {
-                            int index2 = Dust.NewDust(new Vector2(x, y), (int) num2, (int) num3, Type, 0.0f, 0.0f, 0,
+                            var index2 = Dust.NewDust(new Vector2(x, y), (int) num2, (int) num3, Type, 0.0f, 0.0f, 0,
                                 new Color(), 1f);
                             Main.dust[index2].noGravity = true;
                             Main.dust[index2].alpha = 100;
@@ -413,8 +413,8 @@ namespace Terraria
                 {
                     if (this.type == 716)
                     {
-                        float num1 = 0.6f;
-                        float num2 = this.frame != (byte) 0
+                        var num1 = 0.6f;
+                        var num2 = this.frame != (byte) 0
                             ? (this.frame != (byte) 1
                                 ? (this.frame != (byte) 2
                                     ? (this.frame != (byte) 3
@@ -442,7 +442,7 @@ namespace Terraria
                         Lighting.AddLight(this.position + new Vector2(8f, 8f), 1f * num2, 0.5f * num2, 0.1f * num2);
                     }
 
-                    Vector2 velocity = this.velocity;
+                    var velocity = this.velocity;
                     this.velocity = Collision.TileCollision(this.position, this.velocity, 16, 14, false, false, 1);
                     if (this.velocity != velocity)
                     {
@@ -467,8 +467,8 @@ namespace Terraria
                                 this.position + new Vector2(8f, 8f), 1f, RippleShape.Square, 0.0f);
                         }
 
-                        int index1 = (int) ((double) this.position.X + 8.0) / 16;
-                        int index2 = (int) ((double) this.position.Y + 14.0) / 16;
+                        var index1 = (int) ((double) this.position.X + 8.0) / 16;
+                        var index2 = (int) ((double) this.position.Y + 14.0) / 16;
                         if (Main.tile[index1, index2] != null && Main.tile[index1, index2].liquid > (byte) 0)
                         {
                             this.velocity *= 0.0f;
@@ -478,7 +478,7 @@ namespace Terraria
                 }
                 else if (this.sticky)
                 {
-                    int num1 = 32;
+                    var num1 = 32;
                     if (Main.goreLoaded[this.type])
                     {
                         num1 = Main.goreTexture[this.type].Width;
@@ -488,7 +488,7 @@ namespace Terraria
 
                     if (flag)
                         num1 = 4;
-                    int num2 = (int) ((double) num1 * 0.899999976158142);
+                    var num2 = (int) ((double) num1 * 0.899999976158142);
                     this.velocity = Collision.TileCollision(this.position, this.velocity,
                         (int) ((double) num2 * (double) this.scale), (int) ((double) num2 * (double) this.scale), false,
                         false, 1);
@@ -513,7 +513,7 @@ namespace Terraria
 
             if (this.type >= 907 && this.type <= 909)
             {
-                int num1 = 32;
+                var num1 = 32;
                 if (Main.goreLoaded[this.type])
                 {
                     num1 = Main.goreTexture[this.type].Width;
@@ -521,8 +521,8 @@ namespace Terraria
                         num1 = Main.goreTexture[this.type].Height;
                 }
 
-                int num2 = (int) ((double) num1 * 0.899999976158142);
-                Vector4 vector4 = Collision.SlopeCollision(this.position, this.velocity, num2, num2, 0.0f, true);
+                var num2 = (int) ((double) num1 * 0.899999976158142);
+                var vector4 = Collision.SlopeCollision(this.position, this.velocity, num2, num2, 0.0f, true);
                 this.position.X = vector4.X;
                 this.position.Y = vector4.Y;
                 this.velocity.X = vector4.Z;
@@ -533,8 +533,8 @@ namespace Terraria
             {
                 if ((double) this.velocity.Y < 0.0)
                 {
-                    Vector2 Velocity = new Vector2(this.velocity.X, 0.6f);
-                    int num1 = 32;
+                    var Velocity = new Vector2(this.velocity.X, 0.6f);
+                    var num1 = 32;
                     if (Main.goreLoaded[this.type])
                     {
                         num1 = Main.goreTexture[this.type].Width;
@@ -542,8 +542,8 @@ namespace Terraria
                             num1 = Main.goreTexture[this.type].Height;
                     }
 
-                    int num2 = (int) ((double) num1 * 0.899999976158142);
-                    Vector2 vector2 = Collision.TileCollision(this.position, Velocity,
+                    var num2 = (int) ((double) num1 * 0.899999976158142);
+                    var vector2 = Collision.TileCollision(this.position, Velocity,
                         (int) ((double) num2 * (double) this.scale), (int) ((double) num2 * (double) this.scale), false,
                         false, 1);
                     vector2.X *= 0.97f;
@@ -558,10 +558,10 @@ namespace Terraria
                 else
                 {
                     this.velocity.Y += (float) Math.PI / 60f;
-                    Vector2 Velocity =
+                    var Velocity =
                         new Vector2(Vector2.UnitY.RotatedBy((double) this.velocity.Y, new Vector2()).X * 2f,
                             Math.Abs(Vector2.UnitY.RotatedBy((double) this.velocity.Y, new Vector2()).Y) * 3f) * 2f;
-                    int num = 32;
+                    var num = 32;
                     if (Main.goreLoaded[this.type])
                     {
                         num = Main.goreTexture[this.type].Width;
@@ -569,8 +569,8 @@ namespace Terraria
                             num = Main.goreTexture[this.type].Height;
                     }
 
-                    Vector2 vector2 = Velocity;
-                    Vector2 v = Collision.TileCollision(this.position, Velocity,
+                    var vector2 = Velocity;
+                    var v = Collision.TileCollision(this.position, Velocity,
                         (int) ((double) num * (double) this.scale), (int) ((double) num * (double) this.scale), false,
                         false, 1);
                     if (v != vector2)
@@ -587,8 +587,8 @@ namespace Terraria
             {
                 if ((double) this.velocity.Y < 0.0)
                 {
-                    Vector2 Velocity = new Vector2(this.velocity.X, -0.2f);
-                    int num1 = 8;
+                    var Velocity = new Vector2(this.velocity.X, -0.2f);
+                    var num1 = 8;
                     if (Main.goreLoaded[this.type])
                     {
                         num1 = Main.goreTexture[this.type].Width;
@@ -596,8 +596,8 @@ namespace Terraria
                             num1 = Main.goreTexture[this.type].Height;
                     }
 
-                    int num2 = (int) ((double) num1 * 0.899999976158142);
-                    Vector2 vector2 = Collision.TileCollision(this.position, Velocity,
+                    var num2 = (int) ((double) num1 * 0.899999976158142);
+                    var vector2 = Collision.TileCollision(this.position, Velocity,
                         (int) ((double) num2 * (double) this.scale), (int) ((double) num2 * (double) this.scale), false,
                         false, 1);
                     vector2.X *= 0.94f;
@@ -612,10 +612,10 @@ namespace Terraria
                 else
                 {
                     this.velocity.Y += (float) Math.PI / 180f;
-                    Vector2 Velocity =
+                    var Velocity =
                         new Vector2(Vector2.UnitY.RotatedBy((double) this.velocity.Y, new Vector2()).X * 1f,
                             Math.Abs(Vector2.UnitY.RotatedBy((double) this.velocity.Y, new Vector2()).Y) * 1f);
-                    int num = 8;
+                    var num = 8;
                     if (Main.goreLoaded[this.type])
                     {
                         num = Main.goreTexture[this.type].Width;
@@ -623,8 +623,8 @@ namespace Terraria
                             num = Main.goreTexture[this.type].Height;
                     }
 
-                    Vector2 vector2 = Velocity;
-                    Vector2 v = Collision.TileCollision(this.position, Velocity,
+                    var vector2 = Velocity;
+                    var v = Collision.TileCollision(this.position, Velocity,
                         (int) ((double) num * (double) this.scale), (int) ((double) num * (double) this.scale), false,
                         false, 1);
                     if (v != vector2)
@@ -644,9 +644,9 @@ namespace Terraria
                 this.active = false;
             if ((double) this.light <= 0.0)
                 return;
-            float R = this.light * this.scale;
-            float G = this.light * this.scale;
-            float B = this.light * this.scale;
+            var R = this.light * this.scale;
+            var G = this.light * this.scale;
+            var B = this.light * this.scale;
             if (this.type == 16)
             {
                 B *= 0.3f;
@@ -671,7 +671,7 @@ namespace Terraria
 
         public static Gore NewGorePerfect(Vector2 Position, Vector2 Velocity, int Type, float Scale = 1f)
         {
-            Gore gore = Gore.NewGoreDirect(Position, Velocity, Type, Scale);
+            var gore = Gore.NewGoreDirect(Position, Velocity, Type, Scale);
             gore.position = Position;
             gore.velocity = Velocity;
             return gore;
@@ -688,8 +688,8 @@ namespace Terraria
                 return 500;
             if (Main.rand == null)
                 Main.rand = new UnifiedRandom();
-            int index1 = 500;
-            for (int index2 = 0; index2 < 500; ++index2)
+            var index1 = 500;
+            for (var index2 = 0; index2 < 500; ++index2)
             {
                 if (!Main.gore[index2].active)
                 {
@@ -771,7 +771,7 @@ namespace Terraria
                 Main.gore[index1].position.Y = Position.Y - (float) Main.goreTexture[Type].Height * Scale;
                 Main.gore[index1].velocity.Y *= (float) Main.rand.Next(90, 150) * 0.01f;
                 Main.gore[index1].velocity.X *= (float) Main.rand.Next(40, 90) * 0.01f;
-                int num = Main.rand.Next(4) * 5;
+                var num = Main.rand.Next(4) * 5;
                 Main.gore[index1].type += num;
                 Main.gore[index1].timeLeft = Main.rand.Next(Gore.goreTime / 2, Gore.goreTime * 2);
                 Main.gore[index1].sticky = true;
@@ -807,7 +807,7 @@ namespace Terraria
 
         public Color GetAlpha(Color newColor)
         {
-            float num1 = (float) ((int) byte.MaxValue - this.alpha) / (float) byte.MaxValue;
+            var num1 = (float) ((int) byte.MaxValue - this.alpha) / (float) byte.MaxValue;
             int r;
             int g;
             int b;
@@ -823,7 +823,7 @@ namespace Terraria
                     return new Color((int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue, 200);
                 if (this.type >= 570 && this.type <= 572)
                 {
-                    byte num2 = (byte) ((int) byte.MaxValue - this.alpha);
+                    var num2 = (byte) ((int) byte.MaxValue - this.alpha);
                     return new Color((int) num2, (int) num2, (int) num2, (int) num2 / 2);
                 }
 
@@ -834,7 +834,7 @@ namespace Terraria
                 b = (int) ((double) newColor.B * (double) num1);
             }
 
-            int a = (int) newColor.A - this.alpha;
+            var a = (int) newColor.A - this.alpha;
             if (a < 0)
                 a = 0;
             if (a > (int) byte.MaxValue)

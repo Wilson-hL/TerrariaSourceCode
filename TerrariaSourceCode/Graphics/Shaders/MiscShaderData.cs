@@ -32,8 +32,8 @@ namespace Terraria.Graphics.Shaders
             this.Shader.Parameters["uOpacity"].SetValue(this._uOpacity);
             if (drawData.HasValue)
             {
-                DrawData drawData1 = drawData.Value;
-                Vector4 vector4 = Vector4.Zero;
+                var drawData1 = drawData.Value;
+                var vector4 = Vector4.Zero;
                 if (drawData.Value.sourceRect.HasValue)
                     vector4 = new Vector4((float) drawData1.sourceRect.Value.X, (float) drawData1.sourceRect.Value.Y,
                         (float) drawData1.sourceRect.Value.Width, (float) drawData1.sourceRect.Value.Height);

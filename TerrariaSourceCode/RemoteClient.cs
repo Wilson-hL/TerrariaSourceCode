@@ -88,13 +88,13 @@ namespace Terraria
 
         public static void CheckSection(int playerIndex, Vector2 position, int fluff = 1)
         {
-            int index1 = playerIndex;
-            int sectionX = Netplay.GetSectionX((int) ((double) position.X / 16.0));
-            int sectionY1 = Netplay.GetSectionY((int) ((double) position.Y / 16.0));
-            int num = 0;
-            for (int index2 = sectionX - fluff; index2 < sectionX + fluff + 1; ++index2)
+            var index1 = playerIndex;
+            var sectionX = Netplay.GetSectionX((int) ((double) position.X / 16.0));
+            var sectionY1 = Netplay.GetSectionY((int) ((double) position.Y / 16.0));
+            var num = 0;
+            for (var index2 = sectionX - fluff; index2 < sectionX + fluff + 1; ++index2)
             {
-                for (int index3 = sectionY1 - fluff; index3 < sectionY1 + fluff + 1; ++index3)
+                for (var index3 = sectionY1 - fluff; index3 < sectionY1 + fluff + 1; ++index3)
                 {
                     if (index2 >= 0 && index2 < Main.maxSectionsX && (index3 >= 0 && index3 < Main.maxSectionsY) &&
                         !Netplay.Clients[index1].TileSections[index2, index3])
@@ -104,13 +104,13 @@ namespace Terraria
 
             if (num <= 0)
                 return;
-            int number = num;
+            var number = num;
             NetMessage.SendData(9, index1, -1, Lang.inter[44].ToNetworkText(), number, 0.0f, 0.0f, 0.0f, 0, 0, 0);
             Netplay.Clients[index1].StatusText2 = Language.GetTextValue("Net.IsReceivingTileData");
             Netplay.Clients[index1].StatusMax += number;
-            for (int index2 = sectionX - fluff; index2 < sectionX + fluff + 1; ++index2)
+            for (var index2 = sectionX - fluff; index2 < sectionX + fluff + 1; ++index2)
             {
-                for (int sectionY2 = sectionY1 - fluff; sectionY2 < sectionY1 + fluff + 1; ++sectionY2)
+                for (var sectionY2 = sectionY1 - fluff; sectionY2 < sectionY1 + fluff + 1; ++sectionY2)
                 {
                     if (index2 >= 0 && index2 < Main.maxSectionsX &&
                         (sectionY2 >= 0 && sectionY2 < Main.maxSectionsY) &&
@@ -126,10 +126,10 @@ namespace Terraria
 
         public bool SectionRange(int size, int firstX, int firstY)
         {
-            for (int index = 0; index < 4; ++index)
+            for (var index = 0; index < 4; ++index)
             {
-                int x = firstX;
-                int y = firstY;
+                var x = firstX;
+                var y = firstY;
                 if (index == 1)
                     x += size;
                 if (index == 2)
@@ -149,9 +149,9 @@ namespace Terraria
 
         public void ResetSections()
         {
-            for (int index1 = 0; index1 < Main.maxSectionsX; ++index1)
+            for (var index1 = 0; index1 < Main.maxSectionsX; ++index1)
             {
-                for (int index2 = 0; index2 < Main.maxSectionsY; ++index2)
+                for (var index2 = 0; index2 < Main.maxSectionsY; ++index2)
                     this.TileSections[index1, index2] = false;
             }
         }
@@ -189,7 +189,7 @@ namespace Terraria
         {
             if (!Netplay.disconnect)
             {
-                int streamLength = length;
+                var streamLength = length;
                 if (streamLength == 0)
                     this.PendingTermination = true;
                 else if (Main.ignoreErrors)

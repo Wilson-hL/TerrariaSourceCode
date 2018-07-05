@@ -14,7 +14,7 @@ namespace Terraria.World.Generation
 
         public static void ResetAll()
         {
-            foreach (MicroBiome biome in BiomeCollection.Biomes)
+            foreach (var biome in BiomeCollection.Biomes)
                 biome.Reset();
         }
     }

@@ -28,7 +28,7 @@ namespace Terraria.GameContent.Skies
             this._planetTexture = TextureManager.Load("Images/Misc/StarDustSky/Planet");
             this._bgTexture = TextureManager.Load("Images/Misc/StarDustSky/Background");
             this._starTextures = new Texture2D[2];
-            for (int index = 0; index < this._starTextures.Length; ++index)
+            for (var index = 0; index < this._starTextures.Length; ++index)
                 this._starTextures[index] = TextureManager.Load("Images/Misc/StarDustSky/Star " + (object) index);
         }
 
@@ -58,8 +58,8 @@ namespace Terraria.GameContent.Skies
                                    0.100000001490116)), Main.screenWidth, Main.screenHeight),
                     Color.White * Math.Min(1f,
                         (float) (((double) Main.screenPosition.Y - 800.0) / 1000.0) * this._fadeOpacity));
-                Vector2 vector2_1 = new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-                Vector2 vector2_2 = 0.01f * (new Vector2((float) Main.maxTilesX * 8f, (float) Main.worldSurface / 2f) -
+                var vector2_1 = new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
+                var vector2_2 = 0.01f * (new Vector2((float) Main.maxTilesX * 8f, (float) Main.worldSurface / 2f) -
                                              Main.screenPosition);
                 spriteBatch.Draw(this._planetTexture, vector2_1 + new Vector2(-200f, -200f) + vector2_2,
                     new Rectangle?(), Color.White * 0.9f * this._fadeOpacity, 0.0f,
@@ -67,11 +67,11 @@ namespace Terraria.GameContent.Skies
                     1f, SpriteEffects.None, 1f);
             }
 
-            int num1 = -1;
-            int num2 = 0;
-            for (int index = 0; index < this._stars.Length; ++index)
+            var num1 = -1;
+            var num2 = 0;
+            for (var index = 0; index < this._stars.Length; ++index)
             {
-                float depth = this._stars[index].Depth;
+                var depth = this._stars[index].Depth;
                 if (num1 == -1 && (double) depth < (double) maxDepth)
                     num1 = index;
                 if ((double) depth > (double) minDepth)
@@ -82,27 +82,27 @@ namespace Terraria.GameContent.Skies
 
             if (num1 == -1)
                 return;
-            float num3 = Math.Min(1f, (float) (((double) Main.screenPosition.Y - 1000.0) / 1000.0));
-            Vector2 vector2_3 = Main.screenPosition +
+            var num3 = Math.Min(1f, (float) (((double) Main.screenPosition.Y - 1000.0) / 1000.0));
+            var vector2_3 = Main.screenPosition +
                                 new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-            Rectangle rectangle = new Rectangle(-1000, -1000, 4000, 4000);
-            for (int index = num1; index < num2; ++index)
+            var rectangle = new Rectangle(-1000, -1000, 4000, 4000);
+            for (var index = num1; index < num2; ++index)
             {
-                Vector2 vector2_1 = new Vector2(1f / this._stars[index].Depth, 1.1f / this._stars[index].Depth);
-                Vector2 position = (this._stars[index].Position - vector2_3) * vector2_1 + vector2_3 -
+                var vector2_1 = new Vector2(1f / this._stars[index].Depth, 1.1f / this._stars[index].Depth);
+                var position = (this._stars[index].Position - vector2_3) * vector2_1 + vector2_3 -
                                    Main.screenPosition;
                 if (rectangle.Contains((int) position.X, (int) position.Y))
                 {
-                    float num4 =
+                    var num4 =
                         (float) Math.Sin((double) this._stars[index].AlphaFrequency * (double) Main.GlobalTime +
                                          (double) this._stars[index].SinOffset) * this._stars[index].AlphaAmplitude +
                         this._stars[index].AlphaAmplitude;
-                    float num5 =
+                    var num5 =
                         (float) (Math.Sin((double) this._stars[index].AlphaFrequency * (double) Main.GlobalTime * 5.0 +
                                           (double) this._stars[index].SinOffset) * 0.100000001490116 -
                                  0.100000001490116);
-                    float num6 = MathHelper.Clamp(num4, 0.0f, 1f);
-                    Texture2D starTexture = this._starTextures[this._stars[index].TextureIndex];
+                    var num6 = MathHelper.Clamp(num4, 0.0f, 1f);
+                    var starTexture = this._starTextures[this._stars[index].TextureIndex];
                     spriteBatch.Draw(starTexture, position, new Rectangle?(),
                         Color.White * num3 * num6 * 0.8f * (1f - num5) * this._fadeOpacity, 0.0f,
                         new Vector2((float) (starTexture.Width >> 1), (float) (starTexture.Height >> 1)),
@@ -121,16 +121,16 @@ namespace Terraria.GameContent.Skies
         {
             this._fadeOpacity = 1f / 500f;
             this._isActive = true;
-            int num1 = 200;
-            int num2 = 10;
+            var num1 = 200;
+            var num2 = 10;
             this._stars = new StardustSky.Star[num1 * num2];
-            int index1 = 0;
-            for (int index2 = 0; index2 < num1; ++index2)
+            var index1 = 0;
+            for (var index2 = 0; index2 < num1; ++index2)
             {
-                float num3 = (float) index2 / (float) num1;
-                for (int index3 = 0; index3 < num2; ++index3)
+                var num3 = (float) index2 / (float) num1;
+                for (var index3 = 0; index3 < num2; ++index3)
                 {
-                    float num4 = (float) index3 / (float) num2;
+                    var num4 = (float) index3 / (float) num2;
                     this._stars[index1].Position.X = (float) ((double) num3 * (double) Main.maxTilesX * 16.0);
                     this._stars[index1].Position.Y =
                         (float) ((double) num4 * (Main.worldSurface * 16.0 + 2000.0) - 1000.0);

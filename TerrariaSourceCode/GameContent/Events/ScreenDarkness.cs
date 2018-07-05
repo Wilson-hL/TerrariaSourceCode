@@ -15,10 +15,10 @@ namespace Terraria.GameContent.Events
 
         public static void Update()
         {
-            float num = 0.0f;
-            float amount = 0.1f;
-            Vector2 mountedCenter = Main.player[Main.myPlayer].MountedCenter;
-            for (int index = 0; index < 200; ++index)
+            var num = 0.0f;
+            var amount = 0.1f;
+            var mountedCenter = Main.player[Main.myPlayer].MountedCenter;
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.npc[index].active && Main.npc[index].type == 370 &&
                     (double) Main.npc[index].Distance(mountedCenter) < 3000.0 &&
@@ -37,7 +37,7 @@ namespace Terraria.GameContent.Events
         {
             if ((double) ScreenDarkness.screenObstruction == 0.0)
                 return;
-            Color color = Color.Black * ScreenDarkness.screenObstruction;
+            var color = Color.Black * ScreenDarkness.screenObstruction;
             spriteBatch.Draw(Main.magicPixel, new Rectangle(-2, -2, Main.screenWidth + 4, Main.screenHeight + 4),
                 new Rectangle?(new Rectangle(0, 0, 1, 1)), color);
         }
@@ -46,7 +46,7 @@ namespace Terraria.GameContent.Events
         {
             if ((double) ScreenDarkness.screenObstruction == 0.0)
                 return;
-            Color color = new Color(0, 0, 120) * ScreenDarkness.screenObstruction * 0.3f;
+            var color = new Color(0, 0, 120) * ScreenDarkness.screenObstruction * 0.3f;
             spriteBatch.Draw(Main.magicPixel, new Rectangle(-2, -2, Main.screenWidth + 4, Main.screenHeight + 4),
                 new Rectangle?(new Rectangle(0, 0, 1, 1)), color);
         }

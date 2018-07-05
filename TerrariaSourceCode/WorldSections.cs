@@ -100,7 +100,7 @@ namespace Terraria
 
         public void ClearMapDraw()
         {
-            for (int index = 0; index < this.data.Length; ++index)
+            for (var index = 0; index < this.data.Length; ++index)
                 this.data[index][2] = false;
             this.prevMap.Reset();
             this.mapSectionsLeft = this.data.Length;
@@ -124,7 +124,7 @@ namespace Terraria
 
         public void SetAllFramesLoaded()
         {
-            for (int index = 0; index < this.data.Length; ++index)
+            for (var index = 0; index < this.data.Length; ++index)
             {
                 if (!this.data[index][0])
                 {
@@ -143,16 +143,16 @@ namespace Terraria
                 return false;
             }
 
-            Stopwatch stopwatch = new Stopwatch();
+            var stopwatch = new Stopwatch();
             stopwatch.Start();
-            int num1 = 0;
-            int num2 = 0;
-            Vector2 vector2 = this.prevMap.centerPos;
+            var num1 = 0;
+            var num2 = 0;
+            var vector2 = this.prevMap.centerPos;
             playerPos *= 1f / 16f;
-            int sectionX = Netplay.GetSectionX((int) playerPos.X);
-            int sectionY = Netplay.GetSectionY((int) playerPos.Y);
-            int num3 = Netplay.GetSectionX((int) vector2.X);
-            int num4 = Netplay.GetSectionY((int) vector2.Y);
+            var sectionX = Netplay.GetSectionX((int) playerPos.X);
+            var sectionY = Netplay.GetSectionY((int) playerPos.Y);
+            var num3 = Netplay.GetSectionX((int) vector2.X);
+            var num4 = Netplay.GetSectionY((int) vector2.Y);
             int num5;
             if (num3 != sectionX || num4 != sectionY)
             {
@@ -172,17 +172,17 @@ namespace Terraria
                 num2 = this.prevMap.yDir;
             }
 
-            int num6 = (int) ((double) playerPos.X - ((double) num3 + 0.5) * 200.0);
-            int num7 = (int) ((double) playerPos.Y - ((double) num4 + 0.5) * 150.0);
+            var num6 = (int) ((double) playerPos.X - ((double) num3 + 0.5) * 200.0);
+            var num7 = (int) ((double) playerPos.Y - ((double) num4 + 0.5) * 150.0);
             if (num1 == 0)
             {
                 num1 = num6 <= 0 ? 1 : -1;
                 num2 = num7 <= 0 ? 1 : -1;
             }
 
-            int num8 = 0;
-            bool flag1 = false;
-            bool flag2 = false;
+            var num8 = 0;
+            var flag1 = false;
+            var flag2 = false;
             while (true)
             {
                 if (num8 == 4)
@@ -210,8 +210,8 @@ namespace Terraria
                         goto label_14;
                 }
 
-                int num9 = x - num3;
-                int num10 = y - num4;
+                var num9 = x - num3;
+                var num10 = y - num4;
                 if (num9 == 0 || num10 == 0)
                 {
                     if (num5 == 4)
@@ -281,16 +281,16 @@ namespace Terraria
                 return false;
             }
 
-            Stopwatch stopwatch = new Stopwatch();
+            var stopwatch = new Stopwatch();
             stopwatch.Start();
-            int num1 = 0;
-            int num2 = 0;
-            Vector2 vector2 = this.prevFrame.centerPos;
+            var num1 = 0;
+            var num2 = 0;
+            var vector2 = this.prevFrame.centerPos;
             playerPos *= 1f / 16f;
-            int sectionX = Netplay.GetSectionX((int) playerPos.X);
-            int sectionY = Netplay.GetSectionY((int) playerPos.Y);
-            int num3 = Netplay.GetSectionX((int) vector2.X);
-            int num4 = Netplay.GetSectionY((int) vector2.Y);
+            var sectionX = Netplay.GetSectionX((int) playerPos.X);
+            var sectionY = Netplay.GetSectionY((int) playerPos.Y);
+            var num3 = Netplay.GetSectionX((int) vector2.X);
+            var num4 = Netplay.GetSectionY((int) vector2.Y);
             int num5;
             if (num3 != sectionX || num4 != sectionY)
             {
@@ -310,17 +310,17 @@ namespace Terraria
                 num2 = this.prevFrame.yDir;
             }
 
-            int num6 = (int) ((double) playerPos.X - ((double) num3 + 0.5) * 200.0);
-            int num7 = (int) ((double) playerPos.Y - ((double) num4 + 0.5) * 150.0);
+            var num6 = (int) ((double) playerPos.X - ((double) num3 + 0.5) * 200.0);
+            var num7 = (int) ((double) playerPos.Y - ((double) num4 + 0.5) * 150.0);
             if (num1 == 0)
             {
                 num1 = num6 <= 0 ? 1 : -1;
                 num2 = num7 <= 0 ? 1 : -1;
             }
 
-            int num8 = 0;
-            bool flag1 = false;
-            bool flag2 = false;
+            var num8 = 0;
+            var flag1 = false;
+            var flag2 = false;
             while (true)
             {
                 if (num8 == 4)
@@ -348,8 +348,8 @@ namespace Terraria
                         goto label_14;
                 }
 
-                int num9 = x - num3;
-                int num10 = y - num4;
+                var num9 = x - num3;
+                var num10 = y - num4;
                 if (num9 == 0 || num10 == 0)
                 {
                     if (num5 == 4)

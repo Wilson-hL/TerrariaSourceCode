@@ -25,21 +25,21 @@ namespace Terraria.GameContent.UI.Elements
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
-            float num1 = 6f;
+            var num1 = 6f;
             base.DrawSelf(spriteBatch);
-            CalculatedStyle dimensions = this.GetDimensions();
-            float num2 = dimensions.Width + 1f;
-            Vector2 vector2 = new Vector2(dimensions.X, dimensions.Y);
-            Vector2 baseScale = new Vector2(0.8f);
-            Color baseColor = Color.Lerp(this.IsMouseHovering ? Color.White : Color.Silver, Color.White,
+            var dimensions = this.GetDimensions();
+            var num2 = dimensions.Width + 1f;
+            var vector2 = new Vector2(dimensions.X, dimensions.Y);
+            var baseScale = new Vector2(0.8f);
+            var baseColor = Color.Lerp(this.IsMouseHovering ? Color.White : Color.Silver, Color.White,
                 this.IsMouseHovering ? 0.5f : 0.0f);
-            Color color = this.IsMouseHovering ? this._color : this._color.MultiplyRGBA(new Color(180, 180, 180));
-            Vector2 position = vector2;
+            var color = this.IsMouseHovering ? this._color : this._color.MultiplyRGBA(new Color(180, 180, 180));
+            var position = vector2;
             Utils.DrawSettings2Panel(spriteBatch, position, num2, color);
             position.X += 8f;
             position.Y += 2f + num1;
-            string text = this._GetTextFunction();
-            Vector2 stringSize = ChatManager.GetStringSize(Main.fontItemStack, text, baseScale, -1f);
+            var text = this._GetTextFunction();
+            var stringSize = ChatManager.GetStringSize(Main.fontItemStack, text, baseScale, -1f);
             position.X =
                 (float) ((double) dimensions.X + (double) dimensions.Width / 2.0 - (double) stringSize.X / 2.0);
             ChatManager.DrawColorCodedStringWithShadow(spriteBatch, Main.fontItemStack, text, position, baseColor, 0.0f,

@@ -27,12 +27,12 @@ namespace Terraria.GameContent.Generation
 
         private bool DoRoot(Point origin, GenAction action, float angle, float distance, float startingSize)
         {
-            float x = (float) origin.X;
-            float y = (float) origin.Y;
-            for (float num1 = 0.0f; (double) num1 < (double) distance * 0.850000023841858; ++num1)
+            var x = (float) origin.X;
+            var y = (float) origin.Y;
+            for (var num1 = 0.0f; (double) num1 < (double) distance * 0.850000023841858; ++num1)
             {
-                float amount = num1 / distance;
-                float num2 = MathHelper.Lerp(startingSize, this._endingSize, amount);
+                var amount = num1 / distance;
+                var num2 = MathHelper.Lerp(startingSize, this._endingSize, amount);
                 x += (float) Math.Cos((double) angle);
                 y += (float) Math.Sin((double) angle);
                 angle += (float) ((double) GenBase._random.NextFloat() - 0.5 + (double) GenBase._random.NextFloat() *
@@ -43,9 +43,9 @@ namespace Terraria.GameContent.Generation
                                      this._angle - (float) (2.0 * (1.0 - 0.5 * (double) amount)),
                                      this._angle + (float) (2.0 * (1.0 - 0.5 * (double) amount))) +
                                  (double) MathHelper.Lerp(this._angle, 1.570796f, amount) * 0.150000005960464);
-                for (int index1 = 0; index1 < (int) num2; ++index1)
+                for (var index1 = 0; index1 < (int) num2; ++index1)
                 {
-                    for (int index2 = 0; index2 < (int) num2; ++index2)
+                    for (var index2 = 0; index2 < (int) num2; ++index2)
                     {
                         if (!this.UnitApply(action, origin, (int) x + index1, (int) y + index2) && this._quitOnFail)
                             return false;

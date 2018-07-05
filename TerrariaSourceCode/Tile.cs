@@ -144,7 +144,7 @@ namespace Terraria
         {
             if (this.halfBrick())
                 return 1;
-            int num = (int) this.slope();
+            var num = (int) this.slope();
             if (num > 0)
                 ++num;
             return num;
@@ -203,14 +203,14 @@ namespace Terraria
         {
             if (!this.inActive())
                 return oldColor;
-            double num = 0.4;
+            var num = 0.4;
             return new Color((int) (byte) (num * (double) oldColor.R), (int) (byte) (num * (double) oldColor.G),
                 (int) (byte) (num * (double) oldColor.B), (int) oldColor.A);
         }
 
         public bool topSlope()
         {
-            byte num = this.slope();
+            var num = this.slope();
             if (num != (byte) 1)
                 return num == (byte) 2;
             return true;
@@ -218,7 +218,7 @@ namespace Terraria
 
         public bool bottomSlope()
         {
-            byte num = this.slope();
+            var num = this.slope();
             if (num != (byte) 3)
                 return num == (byte) 4;
             return true;
@@ -226,7 +226,7 @@ namespace Terraria
 
         public bool leftSlope()
         {
-            byte num = this.slope();
+            var num = this.slope();
             if (num != (byte) 2)
                 return num == (byte) 4;
             return true;
@@ -234,7 +234,7 @@ namespace Terraria
 
         public bool rightSlope()
         {
-            byte num = this.slope();
+            var num = this.slope();
             if (num != (byte) 1)
                 return num == (byte) 3;
             return true;
@@ -485,14 +485,14 @@ namespace Terraria
                 Tile.SmoothSlope(x, y - 1, false);
             }
 
-            Tile tile = Main.tile[x, y];
+            var tile = Main.tile[x, y];
             if (!WorldGen.SolidOrSlopedTile(x, y))
                 return;
-            bool flag1 = !WorldGen.TileEmpty(x, y - 1);
-            bool flag2 = !WorldGen.SolidOrSlopedTile(x, y - 1) && flag1;
-            bool flag3 = WorldGen.SolidOrSlopedTile(x, y + 1);
-            bool flag4 = WorldGen.SolidOrSlopedTile(x - 1, y);
-            bool flag5 = WorldGen.SolidOrSlopedTile(x + 1, y);
+            var flag1 = !WorldGen.TileEmpty(x, y - 1);
+            var flag2 = !WorldGen.SolidOrSlopedTile(x, y - 1) && flag1;
+            var flag3 = WorldGen.SolidOrSlopedTile(x, y + 1);
+            var flag4 = WorldGen.SolidOrSlopedTile(x - 1, y);
+            var flag5 = WorldGen.SolidOrSlopedTile(x + 1, y);
             switch ((flag1 ? 1 : 0) << 3 | (flag3 ? 1 : 0) << 2 | (flag4 ? 1 : 0) << 1 | (flag5 ? 1 : 0))
             {
                 case 4:

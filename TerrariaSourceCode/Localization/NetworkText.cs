@@ -25,10 +25,10 @@ namespace Terraria.Localization
 
         private static NetworkText[] ConvertSubstitutionsToNetworkText(object[] substitutions)
         {
-            NetworkText[] networkTextArray = new NetworkText[substitutions.Length];
-            for (int index = 0; index < substitutions.Length; ++index)
+            var networkTextArray = new NetworkText[substitutions.Length];
+            for (var index = 0; index < substitutions.Length; ++index)
             {
-                NetworkText networkText = substitutions[index] as NetworkText ??
+                var networkText = substitutions[index] as NetworkText ??
                                           NetworkText.FromLiteral(substitutions[index].ToString());
                 networkTextArray[index] = networkText;
             }
@@ -59,11 +59,11 @@ namespace Terraria.Localization
 
         public int GetMaxSerializedSize()
         {
-            int num = 0 + 1 + (4 + Encoding.UTF8.GetByteCount(this._text));
+            var num = 0 + 1 + (4 + Encoding.UTF8.GetByteCount(this._text));
             if (this._mode != NetworkText.Mode.Literal)
             {
                 ++num;
-                for (int index = 0; index < this._substitutions.Length; ++index)
+                for (var index = 0; index < this._substitutions.Length; ++index)
                     num += this._substitutions[index].GetMaxSerializedSize();
             }
 
@@ -82,22 +82,22 @@ namespace Terraria.Localization
             if (this._mode == NetworkText.Mode.Literal)
                 return;
             writer.Write((byte) this._substitutions.Length);
-            for (int index = 0; index < (this._substitutions.Length & (int) byte.MaxValue); ++index)
+            for (var index = 0; index < (this._substitutions.Length & (int) byte.MaxValue); ++index)
                 this._substitutions[index].Serialize(writer);
         }
 
         public static NetworkText Deserialize(BinaryReader reader)
         {
-            NetworkText.Mode mode = (NetworkText.Mode) reader.ReadByte();
-            NetworkText networkText = new NetworkText(reader.ReadString(), mode);
+            var mode = (NetworkText.Mode) reader.ReadByte();
+            var networkText = new NetworkText(reader.ReadString(), mode);
             networkText.DeserializeSubstitutionList(reader);
             return networkText;
         }
 
         public static NetworkText DeserializeLiteral(BinaryReader reader)
         {
-            NetworkText.Mode mode = (NetworkText.Mode) reader.ReadByte();
-            NetworkText networkText = new NetworkText(reader.ReadString(), mode);
+            var mode = (NetworkText.Mode) reader.ReadByte();
+            var networkText = new NetworkText(reader.ReadString(), mode);
             networkText.DeserializeSubstitutionList(reader);
             if (mode != NetworkText.Mode.Literal)
                 networkText.SetToEmptyLiteral();
@@ -109,7 +109,7 @@ namespace Terraria.Localization
             if (this._mode == NetworkText.Mode.Literal)
                 return;
             this._substitutions = new NetworkText[(int) reader.ReadByte()];
-            for (int index = 0; index < this._substitutions.Length; ++index)
+            for (var index = 0; index < this._substitutions.Length; ++index)
                 this._substitutions[index] = NetworkText.Deserialize(reader);
         }
 
@@ -138,7 +138,7 @@ namespace Terraria.Localization
             }
             catch (Exception ex)
             {
-                string str = "NetworkText.ToString() threw an exception.\n" + this.ToDebugInfoString("") + "\n" +
+                var str = "NetworkText.ToString() threw an exception.\n" + this.ToDebugInfoString("") + "\n" +
                              "Exception: " + ex.ToString();
                 this.SetToEmptyLiteral();
             }
@@ -148,14 +148,14 @@ namespace Terraria.Localization
 
         private string ToDebugInfoString(string linePrefix = "")
         {
-            string str = string.Format("{0}Mode: {1}\n{0}Text: {2}\n", (object) linePrefix, (object) this._mode,
+            var str = string.Format("{0}Mode: {1}\n{0}Text: {2}\n", (object) linePrefix, (object) this._mode,
                 (object) this._text);
             if (this._mode == NetworkText.Mode.LocalizationKey)
                 str += string.Format("{0}Localized Text: {1}\n", (object) linePrefix,
                     (object) Language.GetTextValue(this._text));
             if (this._mode != NetworkText.Mode.Literal)
             {
-                for (int index = 0; index < this._substitutions.Length; ++index)
+                for (var index = 0; index < this._substitutions.Length; ++index)
                     str = str + string.Format("{0}Substitution {1}:\n", (object) linePrefix, (object) index) +
                           this._substitutions[index].ToDebugInfoString(linePrefix + (object) '\t');
             }

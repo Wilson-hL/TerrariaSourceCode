@@ -76,11 +76,11 @@ namespace Terraria.UI
             if (this._currentState == null)
                 return;
             this.MousePosition = new Vector2((float) Main.mouseX, (float) Main.mouseY);
-            bool flag1 = Main.mouseLeft && Main.hasFocus;
-            UIElement target = Main.hasFocus ? this._currentState.GetElementAt(this.MousePosition) : (UIElement) null;
+            var flag1 = Main.mouseLeft && Main.hasFocus;
+            var target = Main.hasFocus ? this._currentState.GetElementAt(this.MousePosition) : (UIElement) null;
             this._clickDisabledTimeRemaining = Math.Max(0.0,
                 this._clickDisabledTimeRemaining - time.ElapsedGameTime.TotalMilliseconds);
-            bool flag2 = this._clickDisabledTimeRemaining > 0.0;
+            var flag2 = this._clickDisabledTimeRemaining > 0.0;
             if (target != this._lastElementHover)
             {
                 if (this._lastElementHover != null)
@@ -104,7 +104,7 @@ namespace Terraria.UI
             }
             else if (!flag1 && this._wasMouseDown && (this._lastElementDown != null && !flag2))
             {
-                UIElement lastElementDown = this._lastElementDown;
+                var lastElementDown = this._lastElementDown;
                 if (lastElementDown.ContainsPoint(this.MousePosition))
                 {
                     lastElementDown.Click(new UIMouseEvent(lastElementDown, this.MousePosition));
@@ -154,7 +154,7 @@ namespace Terraria.UI
         {
             if (this._history.Count < 2)
                 return;
-            UIState state = this._history[this._history.Count - 2];
+            var state = this._history[this._history.Count - 2];
             this._history.RemoveRange(this._history.Count - 2, 2);
             this.SetState(state);
         }

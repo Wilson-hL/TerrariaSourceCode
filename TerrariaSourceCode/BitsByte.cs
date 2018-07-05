@@ -116,18 +116,18 @@ namespace Terraria
 
         public static BitsByte[] ComposeBitsBytesChain(bool optimizeLength, params bool[] flags)
         {
-            int length1 = flags.Length;
-            int length2 = 0;
+            var length1 = flags.Length;
+            var length2 = 0;
             while (length1 > 0)
             {
                 ++length2;
                 length1 -= 7;
             }
 
-            BitsByte[] array = new BitsByte[length2];
-            int index1 = 0;
-            int index2 = 0;
-            for (int index3 = 0; index3 < flags.Length; ++index3)
+            var array = new BitsByte[length2];
+            var index1 = 0;
+            var index2 = 0;
+            for (var index3 = 0; index3 < flags.Length; ++index3)
             {
                 array[index2][index1] = flags[index3];
                 ++index1;
@@ -152,7 +152,7 @@ namespace Terraria
 
         public static BitsByte[] DecomposeBitsBytesChain(BinaryReader reader)
         {
-            List<BitsByte> bitsByteList = new List<BitsByte>();
+            var bitsByteList = new List<BitsByte>();
             BitsByte bitsByte;
             do
             {
@@ -165,28 +165,28 @@ namespace Terraria
 
         public static void SortOfAUnitTest()
         {
-            MemoryStream memoryStream = new MemoryStream();
-            BinaryWriter binaryWriter = new BinaryWriter((Stream) memoryStream);
-            BinaryReader reader = new BinaryReader((Stream) memoryStream);
-            int num1 = 0;
-            bool[] flagArray1 = new bool[28];
+            var memoryStream = new MemoryStream();
+            var binaryWriter = new BinaryWriter((Stream) memoryStream);
+            var reader = new BinaryReader((Stream) memoryStream);
+            var num1 = 0;
+            var flagArray1 = new bool[28];
             flagArray1[3] = true;
             flagArray1[14] = true;
-            bool[] flagArray2 = flagArray1;
-            BitsByte[] bitsByteArray1 = BitsByte.ComposeBitsBytesChain(num1 != 0, flagArray2);
-            foreach (BitsByte bitsByte in bitsByteArray1)
+            var flagArray2 = flagArray1;
+            var bitsByteArray1 = BitsByte.ComposeBitsBytesChain(num1 != 0, flagArray2);
+            foreach (var bitsByte in bitsByteArray1)
             {
-                byte num2 = (byte) bitsByte;
+                var num2 = (byte) bitsByte;
                 binaryWriter.Write(num2);
             }
 
             memoryStream.Position = 0L;
-            BitsByte[] bitsByteArray2 = BitsByte.DecomposeBitsBytesChain(reader);
-            string str1 = "";
-            string str2 = "";
-            foreach (BitsByte bitsByte in bitsByteArray1)
+            var bitsByteArray2 = BitsByte.DecomposeBitsBytesChain(reader);
+            var str1 = "";
+            var str2 = "";
+            foreach (var bitsByte in bitsByteArray1)
                 str1 = str1 + (object) (byte) bitsByte + ", ";
-            foreach (BitsByte bitsByte in bitsByteArray2)
+            foreach (var bitsByte in bitsByteArray2)
                 str2 = str2 + (object) (byte) bitsByte + ", ";
             Main.NewText("done", byte.MaxValue, byte.MaxValue, byte.MaxValue, false);
         }

@@ -18,7 +18,7 @@ namespace Terraria.Graphics.Effects
 
         public void Reset()
         {
-            foreach (CustomSky customSky in this._effects.Values)
+            foreach (var customSky in this._effects.Values)
                 customSky.Reset();
             this._activeSkies.Clear();
         }
@@ -26,9 +26,9 @@ namespace Terraria.Graphics.Effects
         public void Update(GameTime gameTime)
         {
             LinkedListNode<CustomSky> next;
-            for (LinkedListNode<CustomSky> node = this._activeSkies.First; node != null; node = next)
+            for (var node = this._activeSkies.First; node != null; node = next)
             {
-                CustomSky customSky = node.Value;
+                var customSky = node.Value;
                 next = node.Next;
                 customSky.Update(gameTime);
                 if (!customSky.IsActive())
@@ -51,7 +51,7 @@ namespace Terraria.Graphics.Effects
 
         public void DrawDepthRange(SpriteBatch spriteBatch, float minDepth, float maxDepth)
         {
-            foreach (CustomSky activeSky in this._activeSkies)
+            foreach (var activeSky in this._activeSkies)
                 activeSky.Draw(spriteBatch, minDepth, maxDepth);
         }
 
@@ -79,15 +79,15 @@ namespace Terraria.Graphics.Effects
 
         public Color ProcessTileColor(Color color)
         {
-            foreach (CustomSky activeSky in this._activeSkies)
+            foreach (var activeSky in this._activeSkies)
                 color = activeSky.OnTileColor(color);
             return color;
         }
 
         public float ProcessCloudAlpha()
         {
-            float num = 1f;
-            foreach (CustomSky activeSky in this._activeSkies)
+            var num = 1f;
+            foreach (var activeSky in this._activeSkies)
                 num *= activeSky.GetCloudAlpha();
             return MathHelper.Clamp(num, 0.0f, 1f);
         }

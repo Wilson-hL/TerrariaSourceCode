@@ -21,7 +21,7 @@ namespace Terraria.GameContent
         {
             if (!PressurePlateHelper.NeedsFirstUpdate)
                 return;
-            foreach (Point key in PressurePlateHelper.PressurePlatesPressed.Keys)
+            foreach (var key in PressurePlateHelper.PressurePlatesPressed.Keys)
                 PressurePlateHelper.PokeLocation(key);
             PressurePlateHelper.PressurePlatesPressed.Clear();
             PressurePlateHelper.NeedsFirstUpdate = false;
@@ -30,33 +30,33 @@ namespace Terraria.GameContent
         public static void Reset()
         {
             PressurePlateHelper.PressurePlatesPressed.Clear();
-            for (int index = 0; index < PressurePlateHelper.PlayerLastPosition.Length; ++index)
+            for (var index = 0; index < PressurePlateHelper.PlayerLastPosition.Length; ++index)
                 PressurePlateHelper.PlayerLastPosition[index] = Vector2.Zero;
         }
 
         public static void ResetPlayer(int player)
         {
-            foreach (bool[] flagArray in PressurePlateHelper.PressurePlatesPressed.Values)
+            foreach (var flagArray in PressurePlateHelper.PressurePlatesPressed.Values)
                 flagArray[player] = false;
         }
 
         public static void UpdatePlayerPosition(Player player)
         {
-            Point p = new Point(1, 1);
-            Vector2 vector2 = p.ToVector2();
-            List<Point> tilesIn1 = Collision.GetTilesIn(PressurePlateHelper.PlayerLastPosition[player.whoAmI] + vector2,
+            var p = new Point(1, 1);
+            var vector2 = p.ToVector2();
+            var tilesIn1 = Collision.GetTilesIn(PressurePlateHelper.PlayerLastPosition[player.whoAmI] + vector2,
                 PressurePlateHelper.PlayerLastPosition[player.whoAmI] + player.Size - vector2 * 2f);
-            List<Point> tilesIn2 = Collision.GetTilesIn(player.TopLeft + vector2, player.BottomRight - vector2 * 2f);
-            Rectangle hitbox1 = player.Hitbox;
-            Rectangle hitbox2 = player.Hitbox;
+            var tilesIn2 = Collision.GetTilesIn(player.TopLeft + vector2, player.BottomRight - vector2 * 2f);
+            var hitbox1 = player.Hitbox;
+            var hitbox2 = player.Hitbox;
             hitbox1.Inflate(-p.X, -p.Y);
             hitbox2.Inflate(-p.X, -p.Y);
             hitbox2.X = (int) PressurePlateHelper.PlayerLastPosition[player.whoAmI].X;
             hitbox2.Y = (int) PressurePlateHelper.PlayerLastPosition[player.whoAmI].Y;
-            for (int index = 0; index < tilesIn1.Count; ++index)
+            for (var index = 0; index < tilesIn1.Count; ++index)
             {
-                Point location = tilesIn1[index];
-                Tile tile = Main.tile[location.X, location.Y];
+                var location = tilesIn1[index];
+                var tile = Main.tile[location.X, location.Y];
                 if (tile.active() && tile.type == (ushort) 428)
                 {
                     PressurePlateHelper.pressurePlateBounds.X = location.X * 16;
@@ -67,10 +67,10 @@ namespace Terraria.GameContent
                 }
             }
 
-            for (int index = 0; index < tilesIn2.Count; ++index)
+            for (var index = 0; index < tilesIn2.Count; ++index)
             {
-                Point location = tilesIn2[index];
-                Tile tile = Main.tile[location.X, location.Y];
+                var location = tilesIn2[index];
+                var tile = Main.tile[location.X, location.Y];
                 if (tile.active() && tile.type == (ushort) 428)
                 {
                     PressurePlateHelper.pressurePlateBounds.X = location.X * 16;
@@ -123,8 +123,8 @@ namespace Terraria.GameContent
             if (!PressurePlateHelper.PressurePlatesPressed.TryGetValue(location, out flagArray))
                 return;
             flagArray[player] = false;
-            bool flag = false;
-            for (int index = 0; index < flagArray.Length; ++index)
+            var flag = false;
+            for (var index = 0; index < flagArray.Length; ++index)
             {
                 if (flagArray[index])
                 {

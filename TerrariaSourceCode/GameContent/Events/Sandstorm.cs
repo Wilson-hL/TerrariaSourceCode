@@ -40,8 +40,8 @@ namespace Terraria.GameContent.Events
                 }
                 else
                 {
-                    int num = (int) ((double) Main.windSpeed * 100.0);
-                    for (int index = 0; index < Main.dayRate; ++index)
+                    var num = (int) ((double) Main.windSpeed * 100.0);
+                    for (var index = 0; index < Main.dayRate; ++index)
                     {
                         if (Main.rand.Next(777600) == 0)
                             Sandstorm.StartSandstorm();
@@ -69,9 +69,9 @@ namespace Terraria.GameContent.Events
 
         private static void UpdateSeverity()
         {
-            int num1 = Math.Sign(Sandstorm.IntendedSeverity - Sandstorm.Severity);
+            var num1 = Math.Sign(Sandstorm.IntendedSeverity - Sandstorm.Severity);
             Sandstorm.Severity = MathHelper.Clamp(Sandstorm.Severity + 3f / 1000f * (float) num1, 0.0f, 1f);
-            int num2 = Math.Sign(Sandstorm.IntendedSeverity - Sandstorm.Severity);
+            var num2 = Math.Sign(Sandstorm.IntendedSeverity - Sandstorm.Severity);
             if (num1 == num2)
                 return;
             Sandstorm.Severity = Sandstorm.IntendedSeverity;
@@ -96,7 +96,7 @@ namespace Terraria.GameContent.Events
             if (toState == Sandstorm._effectsUp)
                 return;
             Sandstorm._effectsUp = toState;
-            Vector2 center = Main.player[Main.myPlayer].Center;
+            var center = Main.player[Main.myPlayer].Center;
             if (Sandstorm._effectsUp)
             {
                 SkyManager.Instance.Activate(nameof(Sandstorm), center);
@@ -115,35 +115,35 @@ namespace Terraria.GameContent.Events
         {
             if (Main.gamePaused)
                 return;
-            int sandTiles = Main.sandTiles;
-            Player player = Main.player[Main.myPlayer];
-            bool flag = Sandstorm.Happening && player.ZoneSandstorm &&
+            var sandTiles = Main.sandTiles;
+            var player = Main.player[Main.myPlayer];
+            var flag = Sandstorm.Happening && player.ZoneSandstorm &&
                         ((Main.bgStyle == 2 || Main.bgStyle == 5) && Main.bgDelay < 50);
             Sandstorm.HandleEffectAndSky(flag && Main.UseStormEffects);
             if (sandTiles < 100 || (double) player.position.Y > Main.worldSurface * 16.0 || player.ZoneBeach)
                 return;
-            int maxValue1 = 1;
+            var maxValue1 = 1;
             if (!flag || Main.rand.Next(maxValue1) != 0)
                 return;
-            int num1 = Math.Sign(Main.windSpeed);
-            float amount = Math.Abs(Main.windSpeed);
+            var num1 = Math.Sign(Main.windSpeed);
+            var amount = Math.Abs(Main.windSpeed);
             if ((double) amount < 0.00999999977648258)
                 return;
-            float num2 = (float) num1 * MathHelper.Lerp(0.9f, 1f, amount);
-            float num3 = 2000f / (float) sandTiles;
-            float num4 = MathHelper.Clamp(3f / num3, 0.77f, 1f);
-            int num5 = (int) num3;
-            int num6 = (int) (1000.0 * (double) ((float) Main.screenWidth / (float) Main.maxScreenW));
-            float num7 = 20f * Sandstorm.Severity;
-            float num8 =
+            var num2 = (float) num1 * MathHelper.Lerp(0.9f, 1f, amount);
+            var num3 = 2000f / (float) sandTiles;
+            var num4 = MathHelper.Clamp(3f / num3, 0.77f, 1f);
+            var num5 = (int) num3;
+            var num6 = (int) (1000.0 * (double) ((float) Main.screenWidth / (float) Main.maxScreenW));
+            var num7 = 20f * Sandstorm.Severity;
+            var num8 =
                 (float) ((double) num6 * ((double) Main.gfxQuality * 0.5 + 0.5) + (double) num6 * 0.100000001490116) -
                 (float) Dust.SandStormCount;
             if ((double) num8 <= 0.0)
                 return;
-            float num9 = (float) Main.screenWidth + 1000f;
-            float screenHeight = (float) Main.screenHeight;
-            Vector2 vector2 = Main.screenPosition + player.velocity;
-            WeightedRandom<Color> weightedRandom = new WeightedRandom<Color>();
+            var num9 = (float) Main.screenWidth + 1000f;
+            var screenHeight = (float) Main.screenHeight;
+            var vector2 = Main.screenPosition + player.velocity;
+            var weightedRandom = new WeightedRandom<Color>();
             weightedRandom.Add(new Color(200, 160, 20, 180),
                 (double) (Main.screenTileCounts[53] + Main.screenTileCounts[396] + Main.screenTileCounts[397]));
             weightedRandom.Add(new Color(103, 98, 122, 180),
@@ -152,15 +152,15 @@ namespace Terraria.GameContent.Events
                 (double) (Main.screenTileCounts[234] + Main.screenTileCounts[401] + Main.screenTileCounts[399]));
             weightedRandom.Add(new Color(213, 196, 197, 180),
                 (double) (Main.screenTileCounts[116] + Main.screenTileCounts[403] + Main.screenTileCounts[402]));
-            float num10 = MathHelper.Lerp(0.2f, 0.35f, Sandstorm.Severity);
-            float num11 = MathHelper.Lerp(0.5f, 0.7f, Sandstorm.Severity);
-            int maxValue2 = (int) MathHelper.Lerp(1f, 10f,
+            var num10 = MathHelper.Lerp(0.2f, 0.35f, Sandstorm.Severity);
+            var num11 = MathHelper.Lerp(0.5f, 0.7f, Sandstorm.Severity);
+            var maxValue2 = (int) MathHelper.Lerp(1f, 10f,
                 (float) (((double) num4 - 0.769999980926514) / 0.230000019073486));
-            for (int index1 = 0; (double) index1 < (double) num7; ++index1)
+            for (var index1 = 0; (double) index1 < (double) num7; ++index1)
             {
                 if (Main.rand.Next(num5 / 4) == 0)
                 {
-                    Vector2 Position = new Vector2((float) ((double) Main.rand.NextFloat() * (double) num9 - 500.0),
+                    var Position = new Vector2((float) ((double) Main.rand.NextFloat() * (double) num9 - 500.0),
                         Main.rand.NextFloat() * -50f);
                     if (Main.rand.Next(3) == 0 && num1 == 1)
                         Position.X = (float) (Main.rand.Next(500) - 500);
@@ -170,13 +170,13 @@ namespace Terraria.GameContent.Events
                         Position.Y +=
                             (float) ((double) Main.rand.NextFloat() * (double) screenHeight * 0.899999976158142);
                     Position += vector2;
-                    int index2 = (int) Position.X / 16;
-                    int index3 = (int) Position.Y / 16;
+                    var index2 = (int) Position.X / 16;
+                    var index3 = (int) Position.Y / 16;
                     if (Main.tile[index2, index3] != null && Main.tile[index2, index3].wall == (byte) 0)
                     {
-                        for (int index4 = 0; index4 < 1; ++index4)
+                        for (var index4 = 0; index4 < 1; ++index4)
                         {
-                            Dust dust = Main.dust[Dust.NewDust(Position, 10, 10, 268, 0.0f, 0.0f, 0, new Color(), 1f)];
+                            var dust = Main.dust[Dust.NewDust(Position, 10, 10, 268, 0.0f, 0.0f, 0, new Color(), 1f)];
                             dust.velocity.Y = (float) (2.0 + (double) Main.rand.NextFloat() * 0.200000002980232);
                             dust.velocity.Y *= dust.scale;
                             dust.velocity.Y *= 0.35f;
@@ -195,11 +195,11 @@ namespace Terraria.GameContent.Events
                                 {
                                     --index4;
                                     Position += Utils.RandomVector2(Main.rand, -10f, 10f) + dust.velocity * -1.1f;
-                                    int x = (int) Position.X / 16;
-                                    int y = (int) Position.Y / 16;
+                                    var x = (int) Position.X / 16;
+                                    var y = (int) Position.Y / 16;
                                     if (WorldGen.InWorld(x, y, 10) && Main.tile[x, y] != null)
                                     {
-                                        int wall = (int) Main.tile[x, y].wall;
+                                        var wall = (int) Main.tile[x, y].wall;
                                     }
                                 }
                             }

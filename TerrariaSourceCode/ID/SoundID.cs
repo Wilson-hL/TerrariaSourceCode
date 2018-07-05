@@ -608,14 +608,14 @@ namespace Terraria.ID
         {
             if (SoundID._trackableLegacySoundPathList == null)
                 SoundID._trackableLegacySoundPathList = new List<string>();
-            int count = SoundID._trackableLegacySoundPathList.Count;
+            var count = SoundID._trackableLegacySoundPathList.Count;
             if (variations == 1)
             {
                 SoundID._trackableLegacySoundPathList.Add(name);
             }
             else
             {
-                for (int index = 0; index < variations; ++index)
+                for (var index = 0; index < variations; ++index)
                     SoundID._trackableLegacySoundPathList.Add(name + "_" + (object) index);
             }
 

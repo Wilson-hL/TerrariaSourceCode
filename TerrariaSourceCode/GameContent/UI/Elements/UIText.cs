@@ -68,7 +68,7 @@ namespace Terraria.GameContent.UI.Elements
 
         private void InternalSetText(object text, float textScale, bool large)
         {
-            Vector2 vector2 =
+            var vector2 =
                 new Vector2((large ? Main.fontDeathText : Main.fontMouseText).MeasureString(text.ToString()).X,
                     large ? 32f : 16f) * textScale;
             this._text = text;
@@ -82,8 +82,8 @@ namespace Terraria.GameContent.UI.Elements
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             base.DrawSelf(spriteBatch);
-            CalculatedStyle innerDimensions = this.GetInnerDimensions();
-            Vector2 pos = innerDimensions.Position();
+            var innerDimensions = this.GetInnerDimensions();
+            var pos = innerDimensions.Position();
             if (this._isLarge)
                 pos.Y -= 10f * this._textScale;
             else

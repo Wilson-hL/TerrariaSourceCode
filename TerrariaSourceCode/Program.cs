@@ -58,9 +58,9 @@ namespace Terraria
 
         private static void ForceJITOnAssembly(Assembly assembly)
         {
-            foreach (Type type in assembly.GetTypes())
+            foreach (var type in assembly.GetTypes())
             {
-                foreach (MethodInfo method in type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance |
+                foreach (var method in type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance |
                                                               BindingFlags.Static | BindingFlags.Public |
                                                               BindingFlags.NonPublic))
                 {
@@ -74,7 +74,7 @@ namespace Terraria
 
         private static void ForceStaticInitializers(Assembly assembly)
         {
-            foreach (Type type in assembly.GetTypes())
+            foreach (var type in assembly.GetTypes())
             {
                 if (!type.IsGenericType)
                     RuntimeHelpers.RunClassConstructor(type.TypeHandle);
@@ -92,9 +92,9 @@ namespace Terraria
 
         private static void ForceLoadAssembly(string name, bool initializeStaticMembers)
         {
-            Assembly assembly = (Assembly) null;
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            for (int index = 0; index < assemblies.Length; ++index)
+            var assembly = (Assembly) null;
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            for (var index = 0; index < assemblies.Length; ++index)
             {
                 if (assemblies[index].GetName().Name.Equals(name))
                 {
@@ -112,7 +112,7 @@ namespace Terraria
         {
             if (Program.LaunchParameters.ContainsKey("-logfile"))
             {
-                string launchParameter = Program.LaunchParameters["-logfile"];
+                var launchParameter = Program.LaunchParameters["-logfile"];
                 ConsoleOutputMirror.ToFile(launchParameter == null || launchParameter.Trim() == ""
                     ? Path.Combine(Main.SavePath, "Logs",
                         string.Format("Log_{0}.log", (object) DateTime.Now.ToString("yyyyMMddHHmmssfff")))
@@ -127,10 +127,10 @@ namespace Terraria
 
         private static void HookAllExceptions()
         {
-            bool useMiniDumps = Program.LaunchParameters.ContainsKey("-minidump");
-            bool useFullDumps = Program.LaunchParameters.ContainsKey("-fulldump");
+            var useMiniDumps = Program.LaunchParameters.ContainsKey("-minidump");
+            var useFullDumps = Program.LaunchParameters.ContainsKey("-fulldump");
             Console.WriteLine("Error Logging Enabled.");
-            CrashDump.Options dumpOptions = CrashDump.Options.WithFullMemory;
+            var dumpOptions = CrashDump.Options.WithFullMemory;
             if (useFullDumps)
                 Console.WriteLine("Full Dump logs enabled.");
             AppDomain.CurrentDomain.FirstChanceException +=
@@ -181,13 +181,12 @@ namespace Terraria
             ThreadPool.SetMinThreads(8, 8);
             LanguageManager.Instance.SetLanguage(GameCulture.English);
             Program.SetupLogging();
-            using (Main game = new Main())
+            using (var game = new Main())
             {
 #if DEBUG
                 Program.InitializeConsoleOutput();
           Lang.InitializeLegacyLocalization();
-                if (monoArgs)
-                    if (args[1] != "offline")
+                if (args.Length < 1 || args[1] != "offline")
                         SocialAPI.Initialize(new SocialMode?());
           LaunchInitializer.LoadParameters(game);
           Main.OnEnginePreload += new Action(Program.StartForceLoad);
@@ -214,14 +213,14 @@ namespace Terraria
         {
             try
             {
-                using (StreamWriter streamWriter = new StreamWriter("client-crashlog.txt", true))
+                using (var streamWriter = new StreamWriter("client-crashlog.txt", true))
                 {
                     streamWriter.WriteLine((object) DateTime.Now);
                     streamWriter.WriteLine((object) e);
                     streamWriter.WriteLine("");
                 }
 
-                int num = (int) MessageBox.Show(e.ToString(), "Terraria: Error");
+                var num = (int) MessageBox.Show(e.ToString(), "Terraria: Error");
             }
             catch
             {

@@ -26,7 +26,7 @@ namespace Terraria
 
         public static int RegisterGroup(string name, RecipeGroup rec)
         {
-            int key = RecipeGroup.nextRecipeGroupIndex++;
+            var key = RecipeGroup.nextRecipeGroupIndex++;
             RecipeGroup.recipeGroups.Add(key, rec);
             RecipeGroup.recipeGroupIDs.Add(name, key);
             return key;

@@ -54,7 +54,7 @@ namespace Terraria.GameContent.UI.Chat
             int result;
             if (!int.TryParse(text, out result) || result >= 26)
                 return new TextSnippet(text);
-            GlyphTagHandler.GlyphSnippet glyphSnippet = new GlyphTagHandler.GlyphSnippet(result);
+            var glyphSnippet = new GlyphTagHandler.GlyphSnippet(result);
             glyphSnippet.DeleteWhole = true;
             glyphSnippet.Text = "[g:" + (object) result + "]";
             return (TextSnippet) glyphSnippet;
@@ -89,10 +89,10 @@ namespace Terraria.GameContent.UI.Chat
             {
                 if (!justCheckingString && color != Color.Black)
                 {
-                    int frameX = this._glyphIndex;
+                    var frameX = this._glyphIndex;
                     if (this._glyphIndex == 25)
                         frameX = (double) Main.GlobalTime % 0.600000023841858 < 0.300000011920929 ? 17 : 18;
-                    Texture2D texture2D = Main.textGlyphTexture[0];
+                    var texture2D = Main.textGlyphTexture[0];
                     spriteBatch.Draw(texture2D, position, new Rectangle?(texture2D.Frame(25, 1, frameX, frameX / 25)),
                         color, 0.0f, Vector2.Zero, GlyphTagHandler.GlyphsScale, SpriteEffects.None, 0.0f);
                 }

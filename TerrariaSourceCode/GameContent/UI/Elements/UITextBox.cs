@@ -69,9 +69,9 @@ namespace Terraria.GameContent.UI.Elements
             ++this._frameCount;
             if ((this._frameCount %= 40) > 20)
                 return;
-            CalculatedStyle innerDimensions = this.GetInnerDimensions();
-            Vector2 pos = innerDimensions.Position();
-            Vector2 vector2 =
+            var innerDimensions = this.GetInnerDimensions();
+            var pos = innerDimensions.Position();
+            var vector2 =
                 new Vector2(
                     (this.IsLarge ? Main.fontDeathText : Main.fontMouseText)
                     .MeasureString(this.Text.Substring(0, this._cursor)).X, this.IsLarge ? 32f : 16f) * this.TextScale;

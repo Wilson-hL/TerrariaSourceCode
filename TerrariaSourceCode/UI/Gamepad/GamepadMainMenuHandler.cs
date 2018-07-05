@@ -22,9 +22,9 @@ namespace Terraria.UI.Gamepad
         {
             if (!GamepadMainMenuHandler.CanRun)
             {
-                UILinkPage page = UILinkPointNavigator.Pages[1000];
+                var page = UILinkPointNavigator.Pages[1000];
                 page.CurrentPoint = page.DefaultPoint;
-                Vector2 vector2 =
+                var vector2 =
                     new Vector2((float) Math.Cos((double) Main.GlobalTime * 6.28318548202515),
                         (float) Math.Sin((double) Main.GlobalTime * 6.28318548202515 * 2.0)) * new Vector2(30f, 15f) +
                     Vector2.UnitY * 20f;
@@ -35,7 +35,7 @@ namespace Terraria.UI.Gamepad
             {
                 if (!Main.gameMenu || Main.MenuUI.IsVisible || GamepadMainMenuHandler.LastDrew != Main.menuMode)
                     return;
-                int lastMainMenu = GamepadMainMenuHandler.LastMainMenu;
+                var lastMainMenu = GamepadMainMenuHandler.LastMainMenu;
                 GamepadMainMenuHandler.LastMainMenu = Main.menuMode;
                 switch (Main.menuMode)
                 {
@@ -49,7 +49,7 @@ namespace Terraria.UI.Gamepad
                     case 26:
                         if (GamepadMainMenuHandler.MenuItemPositions.Count >= 4)
                         {
-                            Vector2 menuItemPosition = GamepadMainMenuHandler.MenuItemPositions[3];
+                            var menuItemPosition = GamepadMainMenuHandler.MenuItemPositions[3];
                             GamepadMainMenuHandler.MenuItemPositions.RemoveAt(3);
                             if (Main.menuMode == 17)
                             {
@@ -71,10 +71,10 @@ namespace Terraria.UI.Gamepad
                         break;
                 }
 
-                UILinkPage page = UILinkPointNavigator.Pages[1000];
+                var page = UILinkPointNavigator.Pages[1000];
                 if (lastMainMenu != Main.menuMode)
                     page.CurrentPoint = page.DefaultPoint;
-                for (int index = 0; index < GamepadMainMenuHandler.MenuItemPositions.Count; ++index)
+                for (var index = 0; index < GamepadMainMenuHandler.MenuItemPositions.Count; ++index)
                 {
                     if (index == 0 && lastMainMenu != GamepadMainMenuHandler.LastMainMenu &&
                         (PlayerInput.UsingGamepad && Main.InvisibleCursorForGamepad))
@@ -84,7 +84,7 @@ namespace Terraria.UI.Gamepad
                         Main.menuFocus = -1;
                     }
 
-                    UILinkPoint link = page.LinkMap[2000 + index];
+                    var link = page.LinkMap[2000 + index];
                     link.Position = GamepadMainMenuHandler.MenuItemPositions[index];
                     link.Up = index != 0 ? 2000 + index - 1 : -1;
                     link.Left = -3;

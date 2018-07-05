@@ -64,15 +64,15 @@ namespace Terraria.World.Generation
 
         public static void WireLine(Point start, Point end)
         {
-            Point point1 = start;
-            Point point2 = end;
+            var point1 = start;
+            var point2 = end;
             if (end.X < start.X)
                 Utils.Swap<int>(ref end.X, ref start.X);
             if (end.Y < start.Y)
                 Utils.Swap<int>(ref end.Y, ref start.Y);
-            for (int x = start.X; x <= end.X; ++x)
+            for (var x = start.X; x <= end.X; ++x)
                 WorldGen.PlaceWire(x, point1.Y);
-            for (int y = start.Y; y <= end.Y; ++y)
+            for (var y = start.Y; y <= end.Y; ++y)
                 WorldGen.PlaceWire(point2.X, y);
         }
 
@@ -85,16 +85,16 @@ namespace Terraria.World.Generation
 
         public static void DebugRotate()
         {
-            int num1 = 0;
-            int num2 = 0;
-            int maxTilesY = Main.maxTilesY;
-            for (int index1 = 0; index1 < Main.maxTilesX / Main.maxTilesY; ++index1)
+            var num1 = 0;
+            var num2 = 0;
+            var maxTilesY = Main.maxTilesY;
+            for (var index1 = 0; index1 < Main.maxTilesX / Main.maxTilesY; ++index1)
             {
-                for (int index2 = 0; index2 < maxTilesY / 2; ++index2)
+                for (var index2 = 0; index2 < maxTilesY / 2; ++index2)
                 {
-                    for (int index3 = index2; index3 < maxTilesY - index2; ++index3)
+                    for (var index3 = index2; index3 < maxTilesY - index2; ++index3)
                     {
-                        Tile tile = Main.tile[index3 + num1, index2 + num2];
+                        var tile = Main.tile[index3 + num1, index2 + num2];
                         Main.tile[index3 + num1, index2 + num2] = Main.tile[index2 + num1, maxTilesY - index3 + num2];
                         Main.tile[index2 + num1, maxTilesY - index3 + num2] =
                             Main.tile[maxTilesY - index3 + num1, maxTilesY - index2 + num2];

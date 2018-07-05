@@ -74,7 +74,7 @@ namespace Terraria.Utilities
             }
             else
             {
-                using (FileStream fileStream = File.OpenRead(path))
+                using (var fileStream = File.OpenRead(path))
                     fileStream.Read(buffer, 0, length);
             }
         }
@@ -99,10 +99,10 @@ namespace Terraria.Utilities
             }
             else
             {
-                string parentFolderPath = FileUtilities.GetParentFolderPath(path, true);
+                var parentFolderPath = FileUtilities.GetParentFolderPath(path, true);
                 if (parentFolderPath != "")
                     Directory.CreateDirectory(parentFolderPath);
-                using (FileStream fileStream = File.Open(path, FileMode.Create))
+                using (var fileStream = File.Open(path, FileMode.Create))
                 {
                     while (fileStream.Position < (long) length)
                         fileStream.Write(data, (int) fileStream.Position,
@@ -131,7 +131,7 @@ namespace Terraria.Utilities
 
         public static string GetFileName(string path, bool includeExtension = true)
         {
-            Match match = FileUtilities.FileNameRegex.Match(path);
+            var match = FileUtilities.FileNameRegex.Match(path);
             if (match == null || match.Groups["fileName"] == null)
                 return "";
             includeExtension &= match.Groups["extension"] != null;
@@ -140,7 +140,7 @@ namespace Terraria.Utilities
 
         public static string GetParentFolderPath(string path, bool includeExtension = true)
         {
-            Match match = FileUtilities.FileNameRegex.Match(path);
+            var match = FileUtilities.FileNameRegex.Match(path);
             if (match == null || match.Groups[nameof(path)] == null)
                 return "";
             return match.Groups[nameof(path)].Value;
@@ -149,9 +149,9 @@ namespace Terraria.Utilities
         public static void CopyFolder(string sourcePath, string destinationPath)
         {
             Directory.CreateDirectory(destinationPath);
-            foreach (string directory in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+            foreach (var directory in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
                 Directory.CreateDirectory(directory.Replace(sourcePath, destinationPath));
-            foreach (string file in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+            foreach (var file in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
                 File.Copy(file, file.Replace(sourcePath, destinationPath), true);
         }
     }

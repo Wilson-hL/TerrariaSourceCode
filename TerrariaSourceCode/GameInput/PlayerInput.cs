@@ -193,8 +193,8 @@ namespace Terraria.GameInput
         {
             if (PlayerInput._invalidatorCheck.Length == 0)
                 return false;
-            string str = "";
-            foreach (Keys pressedKey in Main.keyState.GetPressedKeys())
+            var str = "";
+            foreach (var pressedKey in Main.keyState.GetPressedKeys())
                 str = str + pressedKey.ToString() + ", ";
             if (str == PlayerInput._invalidatorCheck)
                 return true;
@@ -204,7 +204,7 @@ namespace Terraria.GameInput
 
         public static void ResetInputsOnActiveStateChange()
         {
-            bool isActive = Main.instance.IsActive;
+            var isActive = Main.instance.IsActive;
             if (PlayerInput._lastActivityState != isActive)
             {
                 PlayerInput.MouseInfo = new MouseState();
@@ -215,8 +215,8 @@ namespace Terraria.GameInput
                 Main.keyCount = 0;
                 PlayerInput.Triggers.Reset();
                 PlayerInput.Triggers.Reset();
-                string str = "";
-                foreach (Keys pressedKey in Main.keyState.GetPressedKeys())
+                var str = "";
+                foreach (var pressedKey in Main.keyState.GetPressedKeys())
                     str = str + pressedKey.ToString() + ", ";
                 PlayerInput._invalidatorCheck = str;
             }
@@ -236,7 +236,7 @@ namespace Terraria.GameInput
             Main.SmartCursorEnabled = true;
             if (Main.mouseItem.stack > 0)
                 return;
-            int pointForBuildingMode = PlayerInput._UIPointForBuildingMode;
+            var pointForBuildingMode = PlayerInput._UIPointForBuildingMode;
             if (pointForBuildingMode >= 50 || pointForBuildingMode < 0 ||
                 Main.player[Main.myPlayer].inventory[pointForBuildingMode].stack <= 0)
                 return;
@@ -249,7 +249,7 @@ namespace Terraria.GameInput
             UILinkPointNavigator.ChangePoint(PlayerInput._UIPointForBuildingMode);
             if (Main.mouseItem.stack > 0 && Main.player[Main.myPlayer].itemAnimation == 0)
             {
-                int pointForBuildingMode = PlayerInput._UIPointForBuildingMode;
+                var pointForBuildingMode = PlayerInput._UIPointForBuildingMode;
                 if (pointForBuildingMode < 50 && pointForBuildingMode >= 0 &&
                     Main.player[Main.myPlayer].inventory[pointForBuildingMode].stack <= 0)
                     Utils.Swap<Item>(ref Main.mouseItem,
@@ -263,8 +263,8 @@ namespace Terraria.GameInput
         {
             if (!PlayerInput._InBuildingMode)
                 return;
-            Player player = Main.player[Main.myPlayer];
-            bool flag = false;
+            var player = Main.player[Main.myPlayer];
+            var flag = false;
             if (Main.mouseItem.stack <= 0)
                 flag = true;
             if (player.dead)
@@ -296,31 +296,31 @@ namespace Terraria.GameInput
         {
             Main.InputProfiles.OnProcessText += new Preferences.TextProcessAction(PlayerInput.PrettyPrintProfiles);
             Player.Hooks.OnEnterWorld += new Action<Player>(PlayerInput.Hook_OnEnterWorld);
-            PlayerInputProfile playerInputProfile1 = new PlayerInputProfile("Redigit's Pick");
+            var playerInputProfile1 = new PlayerInputProfile("Redigit's Pick");
             playerInputProfile1.Initialize(PresetProfiles.Redigit);
             PlayerInput.Profiles.Add(playerInputProfile1.Name, playerInputProfile1);
-            PlayerInputProfile playerInputProfile2 = new PlayerInputProfile("Yoraiz0r's Pick");
+            var playerInputProfile2 = new PlayerInputProfile("Yoraiz0r's Pick");
             playerInputProfile2.Initialize(PresetProfiles.Yoraiz0r);
             PlayerInput.Profiles.Add(playerInputProfile2.Name, playerInputProfile2);
-            PlayerInputProfile playerInputProfile3 = new PlayerInputProfile("Console (Playstation)");
+            var playerInputProfile3 = new PlayerInputProfile("Console (Playstation)");
             playerInputProfile3.Initialize(PresetProfiles.ConsolePS);
             PlayerInput.Profiles.Add(playerInputProfile3.Name, playerInputProfile3);
-            PlayerInputProfile playerInputProfile4 = new PlayerInputProfile("Console (Xbox)");
+            var playerInputProfile4 = new PlayerInputProfile("Console (Xbox)");
             playerInputProfile4.Initialize(PresetProfiles.ConsoleXBox);
             PlayerInput.Profiles.Add(playerInputProfile4.Name, playerInputProfile4);
-            PlayerInputProfile playerInputProfile5 = new PlayerInputProfile("Custom");
+            var playerInputProfile5 = new PlayerInputProfile("Custom");
             playerInputProfile5.Initialize(PresetProfiles.Redigit);
             PlayerInput.Profiles.Add(playerInputProfile5.Name, playerInputProfile5);
-            PlayerInputProfile playerInputProfile6 = new PlayerInputProfile("Redigit's Pick");
+            var playerInputProfile6 = new PlayerInputProfile("Redigit's Pick");
             playerInputProfile6.Initialize(PresetProfiles.Redigit);
             PlayerInput.OriginalProfiles.Add(playerInputProfile6.Name, playerInputProfile6);
-            PlayerInputProfile playerInputProfile7 = new PlayerInputProfile("Yoraiz0r's Pick");
+            var playerInputProfile7 = new PlayerInputProfile("Yoraiz0r's Pick");
             playerInputProfile7.Initialize(PresetProfiles.Yoraiz0r);
             PlayerInput.OriginalProfiles.Add(playerInputProfile7.Name, playerInputProfile7);
-            PlayerInputProfile playerInputProfile8 = new PlayerInputProfile("Console (Playstation)");
+            var playerInputProfile8 = new PlayerInputProfile("Console (Playstation)");
             playerInputProfile8.Initialize(PresetProfiles.ConsolePS);
             PlayerInput.OriginalProfiles.Add(playerInputProfile8.Name, playerInputProfile8);
-            PlayerInputProfile playerInputProfile9 = new PlayerInputProfile("Console (Xbox)");
+            var playerInputProfile9 = new PlayerInputProfile("Console (Xbox)");
             playerInputProfile9.Initialize(PresetProfiles.ConsoleXBox);
             PlayerInput.OriginalProfiles.Add(playerInputProfile9.Name, playerInputProfile9);
             PlayerInput.SetSelectedProfile("Custom");
@@ -338,7 +338,7 @@ namespace Terraria.GameInput
         {
             Main.InputProfiles.Clear();
             Main.InputProfiles.Put("Selected Profile", (object) PlayerInput._selectedProfile);
-            foreach (KeyValuePair<string, PlayerInputProfile> profile in PlayerInput.Profiles)
+            foreach (var profile in PlayerInput.Profiles)
                 Main.InputProfiles.Put(profile.Value.Name, (object) profile.Value.Save());
             return Main.InputProfiles.Save(true);
         }
@@ -346,20 +346,20 @@ namespace Terraria.GameInput
         public static void Load()
         {
             Main.InputProfiles.Load();
-            Dictionary<string, PlayerInputProfile> dictionary = new Dictionary<string, PlayerInputProfile>();
-            string currentValue1 = (string) null;
+            var dictionary = new Dictionary<string, PlayerInputProfile>();
+            var currentValue1 = (string) null;
             Main.InputProfiles.Get<string>("Selected Profile", ref currentValue1);
-            List<string> allKeys = Main.InputProfiles.GetAllKeys();
-            for (int index = 0; index < allKeys.Count; ++index)
+            var allKeys = Main.InputProfiles.GetAllKeys();
+            for (var index = 0; index < allKeys.Count; ++index)
             {
-                string str = allKeys[index];
+                var str = allKeys[index];
                 if (!(str == "Selected Profile") && !string.IsNullOrEmpty(str))
                 {
-                    Dictionary<string, object> currentValue2 = new Dictionary<string, object>();
+                    var currentValue2 = new Dictionary<string, object>();
                     Main.InputProfiles.Get<Dictionary<string, object>>(str, ref currentValue2);
                     if (currentValue2.Count > 0)
                     {
-                        PlayerInputProfile playerInputProfile = new PlayerInputProfile(str);
+                        var playerInputProfile = new PlayerInputProfile(str);
                         playerInputProfile.Initialize(PresetProfiles.None);
                         if (playerInputProfile.Load(currentValue2))
                             dictionary.Add(str, playerInputProfile);
@@ -378,8 +378,8 @@ namespace Terraria.GameInput
 
         public static void ManageVersion_1_3()
         {
-            PlayerInputProfile profile = PlayerInput.Profiles["Custom"];
-            string[,] strArray = new string[20, 2]
+            var profile = PlayerInput.Profiles["Custom"];
+            var strArray = new string[20, 2]
             {
                 {"KeyUp", "Up"}, {"KeyDown", "Down"}, {"KeyLeft", "Left"}, {"KeyRight", "Right"}, {"KeyJump", "Jump"},
                 {"KeyThrowItem", "Throw"}, {"KeyInventory", "Inventory"}, {"KeyQuickHeal", "QuickHeal"},
@@ -388,9 +388,9 @@ namespace Terraria.GameInput
                 {"KeyMapStyle", "MapStyle"}, {"KeyFullscreenMap", "MapFull"}, {"KeyMapZoomIn", "MapZoomIn"},
                 {"KeyMapZoomOut", "MapZoomOut"}, {"KeyMapAlphaUp", "MapAlphaUp"}, {"KeyMapAlphaDown", "MapAlphaDown"}
             };
-            for (int index = 0; index < strArray.GetLength(0); ++index)
+            for (var index = 0; index < strArray.GetLength(0); ++index)
             {
-                string currentValue = (string) null;
+                var currentValue = (string) null;
                 Main.Configuration.Get<string>(strArray[index, 0], ref currentValue);
                 if (currentValue != null)
                 {
@@ -471,7 +471,7 @@ namespace Terraria.GameInput
 
         public static void CacheMousePositionForZoom()
         {
-            float num = 1f;
+            var num = 1f;
             PlayerInput._originalMouseX = (int) ((double) Main.mouseX * (double) num);
             PlayerInput._originalMouseY = (int) ((double) Main.mouseY * (double) num);
         }
@@ -492,13 +492,13 @@ namespace Terraria.GameInput
 
         private static void GamePadInput()
         {
-            bool flag1 = false;
+            var flag1 = false;
             PlayerInput.ScrollWheelValue += PlayerInput.GamepadScrollValue;
-            GamePadState gamePadState = new GamePadState();
-            bool flag2 = false;
-            for (int index = 0; index < 4; ++index)
+            var gamePadState = new GamePadState();
+            var flag2 = false;
+            for (var index = 0; index < 4; ++index)
             {
-                GamePadState state = GamePad.GetState((PlayerIndex) index);
+                var state = GamePad.GetState((PlayerIndex) index);
                 if (state.IsConnected)
                 {
                     flag2 = true;
@@ -509,9 +509,9 @@ namespace Terraria.GameInput
 
             if (!flag2 || !Main.instance.IsActive && !Main.AllowUnfocusedInputOnGamepad)
                 return;
-            Player player = Main.player[Main.myPlayer];
-            bool flag3 = UILinkPointNavigator.Available && !PlayerInput.InBuildingMode;
-            InputMode index1 = InputMode.XBoxGamepad;
+            var player = Main.player[Main.myPlayer];
+            var flag3 = UILinkPointNavigator.Available && !PlayerInput.InBuildingMode;
+            var index1 = InputMode.XBoxGamepad;
             if (Main.gameMenu || flag3 || (player.talkNPC != -1 || player.sign != -1) || IngameFancyUI.CanCover())
                 index1 = InputMode.XBoxGamepadUI;
             if (!Main.gameMenu && PlayerInput.InBuildingMode)
@@ -522,9 +522,9 @@ namespace Terraria.GameInput
                 flag1 = true;
             if (flag1)
                 PlayerInput.CurrentInputMode = index1;
-            KeyConfiguration inputMode = PlayerInput.CurrentProfile.InputModes[index1];
-            int num1 = 2145386496;
-            for (int index2 = 0; index2 < PlayerInput.ButtonsGamepad.Length; ++index2)
+            var inputMode = PlayerInput.CurrentProfile.InputModes[index1];
+            var num1 = 2145386496;
+            for (var index2 = 0; index2 < PlayerInput.ButtonsGamepad.Length; ++index2)
             {
                 if (((Buttons) num1 & PlayerInput.ButtonsGamepad[index2]) <= (Buttons) 0 &&
                     gamePadState.IsButtonDown(PlayerInput.ButtonsGamepad[index2]))
@@ -548,16 +548,16 @@ namespace Terraria.GameInput
                                                                   .ToDirectionInt() * -1),
                                                      (float) (PlayerInput.CurrentProfile.RightThumbstickInvertY
                                                                   .ToDirectionInt() * -1));
-            Vector2 gamepadThumbstickRight = PlayerInput.GamepadThumbstickRight;
-            Vector2 gamepadThumbstickLeft = PlayerInput.GamepadThumbstickLeft;
-            Vector2 vector2_1 = gamepadThumbstickRight;
+            var gamepadThumbstickRight = PlayerInput.GamepadThumbstickRight;
+            var gamepadThumbstickLeft = PlayerInput.GamepadThumbstickLeft;
+            var vector2_1 = gamepadThumbstickRight;
             if (vector2_1 != Vector2.Zero)
                 vector2_1.Normalize();
-            Vector2 vector2_2 = gamepadThumbstickLeft;
+            var vector2_2 = gamepadThumbstickLeft;
             if (vector2_2 != Vector2.Zero)
                 vector2_2.Normalize();
-            float num2 = 0.6f;
-            float triggersDeadzone = PlayerInput.CurrentProfile.TriggersDeadzone;
+            var num2 = 0.6f;
+            var triggersDeadzone = PlayerInput.CurrentProfile.TriggersDeadzone;
             if (index1 == InputMode.XBoxGamepadUI)
             {
                 num2 = 0.4f;
@@ -654,9 +654,9 @@ namespace Terraria.GameInput
                 flag1 = true;
             }
 
-            bool flag4 = ItemID.Sets.GamepadWholeScreenUseRange[player.inventory[player.selectedItem].type] ||
+            var flag4 = ItemID.Sets.GamepadWholeScreenUseRange[player.inventory[player.selectedItem].type] ||
                          player.scope;
-            int num3 = player.inventory[player.selectedItem].tileBoost +
+            var num3 = player.inventory[player.selectedItem].tileBoost +
                        ItemID.Sets.GamepadExtraRange[player.inventory[player.selectedItem].type];
             if (player.yoyoString && ItemID.Sets.Yoyo[player.inventory[player.selectedItem].type])
                 num3 += 5;
@@ -670,16 +670,16 @@ namespace Terraria.GameInput
                 num3 += 30;
             if (player.mount.Active && player.mount.Type == 8)
                 num3 = 10;
-            bool flag5 = false;
-            bool flag6 = !Main.gameMenu && !flag3 && Main.SmartCursorEnabled;
+            var flag5 = false;
+            var flag6 = !Main.gameMenu && !flag3 && Main.SmartCursorEnabled;
             if (!PlayerInput.CursorIsBusy)
             {
-                bool flag7 = Main.mapFullscreen || !Main.gameMenu && !flag3;
-                int num4 = Main.screenWidth / 2;
-                int num5 = Main.screenHeight / 2;
+                var flag7 = Main.mapFullscreen || !Main.gameMenu && !flag3;
+                var num4 = Main.screenWidth / 2;
+                var num5 = Main.screenHeight / 2;
                 if (!Main.mapFullscreen && flag7 && !flag4)
                 {
-                    Point point = Main.ReverseGravitySupport(player.Center - Main.screenPosition, 0.0f).ToPoint();
+                    var point = Main.ReverseGravitySupport(player.Center - Main.screenPosition, 0.0f).ToPoint();
                     num4 = point.X;
                     num5 = point.Y;
                 }
@@ -689,7 +689,7 @@ namespace Terraria.GameInput
                     num4 += player.direction * 10;
                 if (gamepadThumbstickRight != Vector2.Zero && flag7)
                 {
-                    Vector2 vector2_3 = new Vector2(8f);
+                    var vector2_3 = new Vector2(8f);
                     if (!Main.gameMenu && Main.mapFullscreen)
                         vector2_3 = new Vector2(16f);
                     if (flag6)
@@ -708,18 +708,18 @@ namespace Terraria.GameInput
                             vector2_3 += new Vector2((float) num3) / 4f;
                     }
 
-                    float m11 = Main.GameViewMatrix.ZoomMatrix.M11;
-                    Vector2 vector2_4 = gamepadThumbstickRight * vector2_3 * m11;
-                    int num6 = PlayerInput.MouseX - num4;
-                    int num7 = PlayerInput.MouseY - num5;
+                    var m11 = Main.GameViewMatrix.ZoomMatrix.M11;
+                    var vector2_4 = gamepadThumbstickRight * vector2_3 * m11;
+                    var num6 = PlayerInput.MouseX - num4;
+                    var num7 = PlayerInput.MouseY - num5;
                     if (flag6)
                     {
                         num6 = 0;
                         num7 = 0;
                     }
 
-                    int num8 = num6 + (int) vector2_4.X;
-                    int num9 = num7 + (int) vector2_4.Y;
+                    var num8 = num6 + (int) vector2_4.X;
+                    var num9 = num7 + (int) vector2_4.Y;
                     PlayerInput.MouseX = num8 + num4;
                     PlayerInput.MouseY = num9 + num5;
                     flag1 = true;
@@ -728,18 +728,18 @@ namespace Terraria.GameInput
 
                 if (gamepadThumbstickLeft != Vector2.Zero && flag7)
                 {
-                    float num6 = 8f;
+                    var num6 = 8f;
                     if (!Main.gameMenu && Main.mapFullscreen)
                         num6 = 3f;
                     if (Main.mapFullscreen)
                     {
-                        Vector2 vector2_3 = gamepadThumbstickLeft * num6;
+                        var vector2_3 = gamepadThumbstickLeft * num6;
                         Main.mapFullscreenPos += vector2_3 * num6 * (1f / Main.mapFullscreenScale);
                     }
                     else if (!flag5 && Main.SmartCursorEnabled)
                     {
-                        float m11 = Main.GameViewMatrix.ZoomMatrix.M11;
-                        Vector2 vector2_3 = gamepadThumbstickLeft * new Vector2((float) (Player.tileRangeX * 16),
+                        var m11 = Main.GameViewMatrix.ZoomMatrix.M11;
+                        var vector2_3 = gamepadThumbstickLeft * new Vector2((float) (Player.tileRangeX * 16),
                                                 (float) (Player.tileRangeY * 16)) * m11;
                         if (num3 != 0)
                             vector2_3 = gamepadThumbstickLeft * new Vector2((float) ((Player.tileRangeX + num3) * 16),
@@ -747,8 +747,8 @@ namespace Terraria.GameInput
                         if (flag4)
                             vector2_3 = new Vector2((float) (Math.Max(Main.screenWidth, Main.screenHeight) / 2)) *
                                         gamepadThumbstickLeft;
-                        int x = (int) vector2_3.X;
-                        int y = (int) vector2_3.Y;
+                        var x = (int) vector2_3.X;
+                        var y = (int) vector2_3.Y;
                         PlayerInput.MouseX = x + num4;
                         PlayerInput.MouseY = y + num5;
                     }
@@ -759,17 +759,17 @@ namespace Terraria.GameInput
                 if (PlayerInput.CurrentInputMode == InputMode.XBoxGamepad)
                 {
                     PlayerInput.HandleDpadSnap();
-                    int num6 = PlayerInput.MouseX - num4;
-                    int num7 = PlayerInput.MouseY - num5;
+                    var num6 = PlayerInput.MouseX - num4;
+                    var num7 = PlayerInput.MouseY - num5;
                     int num8;
                     int num9;
                     if (!Main.gameMenu && !flag3)
                     {
                         if (flag4 && !Main.mapFullscreen)
                         {
-                            float num10 = 1f;
-                            int num11 = Main.screenWidth / 2;
-                            int num12 = Main.screenHeight / 2;
+                            var num10 = 1f;
+                            var num11 = Main.screenWidth / 2;
+                            var num12 = Main.screenHeight / 2;
                             num8 = (int) Utils.Clamp<float>((float) num6, (float) -num11 * num10,
                                 (float) num11 * num10);
                             num9 = (int) Utils.Clamp<float>((float) num7, (float) -num12 * num10,
@@ -777,7 +777,7 @@ namespace Terraria.GameInput
                         }
                         else
                         {
-                            float m11 = Main.GameViewMatrix.ZoomMatrix.M11;
+                            var m11 = Main.GameViewMatrix.ZoomMatrix.M11;
                             num8 = (int) Utils.Clamp<float>((float) num6,
                                 (float) (-(Player.tileRangeX + num3) * 16) * m11,
                                 (float) ((Player.tileRangeX + num3) * 16) * m11);
@@ -788,7 +788,7 @@ namespace Terraria.GameInput
 
                         if (flag6 && (!flag1 || flag4))
                         {
-                            float num10 = 0.81f;
+                            var num10 = 0.81f;
                             if (flag4)
                                 num10 = 0.95f;
                             num8 = (int) ((double) num8 * (double) num10);
@@ -815,7 +815,7 @@ namespace Terraria.GameInput
 
         private static void MouseInput()
         {
-            bool flag = false;
+            var flag = false;
             PlayerInput.MouseInfoOld = PlayerInput.MouseInfo;
             PlayerInput.MouseInfo = Mouse.GetState();
             PlayerInput.ScrollWheelValue += PlayerInput.MouseInfo.ScrollWheelValue;
@@ -870,12 +870,12 @@ namespace Terraria.GameInput
 
         private static void KeyboardInput()
         {
-            bool flag1 = false;
-            bool flag2 = false;
-            Keys[] pressedKeys = Main.keyState.GetPressedKeys();
+            var flag1 = false;
+            var flag2 = false;
+            var pressedKeys = Main.keyState.GetPressedKeys();
             if (PlayerInput.InvalidateKeyboardSwap() && PlayerInput.MouseKeys.Count == 0)
                 return;
-            for (int index = 0; index < pressedKeys.Length; ++index)
+            for (var index = 0; index < pressedKeys.Length; ++index)
             {
                 if (pressedKeys[index] == Keys.LeftShift || pressedKeys[index] == Keys.RightShift)
                     flag1 = true;
@@ -885,8 +885,8 @@ namespace Terraria.GameInput
 
             if (Main.blockKey != Keys.None.ToString())
             {
-                bool flag3 = false;
-                for (int index = 0; index < pressedKeys.Length; ++index)
+                var flag3 = false;
+                for (var index = 0; index < pressedKeys.Length; ++index)
                 {
                     if (pressedKeys[index].ToString() == Main.blockKey)
                     {
@@ -899,26 +899,26 @@ namespace Terraria.GameInput
                     Main.blockKey = Keys.None.ToString();
             }
 
-            KeyConfiguration inputMode = PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard];
+            var inputMode = PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard];
             if (Main.gameMenu && !PlayerInput.WritingText)
                 inputMode = PlayerInput.CurrentProfile.InputModes[InputMode.KeyboardUI];
-            List<string> stringList = new List<string>(pressedKeys.Length);
-            for (int index = 0; index < pressedKeys.Length; ++index)
+            var stringList = new List<string>(pressedKeys.Length);
+            for (var index = 0; index < pressedKeys.Length; ++index)
                 stringList.Add(pressedKeys[index].ToString());
             if (PlayerInput.WritingText)
                 stringList.Clear();
-            int count = stringList.Count;
+            var count = stringList.Count;
             stringList.AddRange((IEnumerable<string>) PlayerInput.MouseKeys);
-            bool flag4 = false;
-            for (int index = 0; index < stringList.Count; ++index)
+            var flag4 = false;
+            for (var index = 0; index < stringList.Count; ++index)
             {
-                string newKey = stringList[index].ToString();
+                var newKey = stringList[index].ToString();
                 if (!(stringList[index] == Keys.Tab.ToString()) ||
                     (!flag1 || SocialAPI.Mode != SocialMode.Steam) && !flag2)
                 {
                     if (PlayerInput.CheckRebindingProcessKeyboard(newKey))
                         return;
-                    KeyboardState oldKeyState = Main.oldKeyState;
+                    var oldKeyState = Main.oldKeyState;
                     if (index >= count || !Main.oldKeyState.IsKeyDown(pressedKeys[index]))
                         inputMode.Processkey(PlayerInput.Triggers.Current, newKey);
                     else
@@ -935,16 +935,16 @@ namespace Terraria.GameInput
 
         private static void FixDerpedRebinds()
         {
-            List<string> stringList = new List<string>() {"MouseLeft", "MouseRight", "Inventory"};
+            var stringList = new List<string>() {"MouseLeft", "MouseRight", "Inventory"};
             foreach (InputMode index1 in Enum.GetValues(typeof(InputMode)))
             {
                 if (index1 != InputMode.Mouse)
                 {
-                    foreach (string index2 in stringList)
+                    foreach (var index2 in stringList)
                     {
                         if (PlayerInput.CurrentProfile.InputModes[index1].KeyStatus[index2].Count < 1)
                         {
-                            string index3 = "Redigit's Pick";
+                            var index3 = "Redigit's Pick";
                             if (PlayerInput.OriginalProfiles.ContainsKey(PlayerInput._selectedProfile))
                                 index3 = PlayerInput._selectedProfile;
                             PlayerInput.CurrentProfile.InputModes[index1].KeyStatus[index2].AddRange(
@@ -1057,7 +1057,7 @@ namespace Terraria.GameInput
                     : -0.05f), 0.0f, 1f);
             if (PlayerInput.CurrentProfile.HotbarAllowsRadial)
             {
-                int num = PlayerInput.Triggers.Current.HotbarPlus.ToInt() -
+                var num = PlayerInput.Triggers.Current.HotbarPlus.ToInt() -
                           PlayerInput.Triggers.Current.HotbarMinus.ToInt();
                 if (PlayerInput.MiscSettingsTEMP.HotbarRadialShouldBeUsed)
                 {
@@ -1080,12 +1080,12 @@ namespace Terraria.GameInput
 
         private static void HandleDpadSnap()
         {
-            Vector2 zero = Vector2.Zero;
-            Player player = Main.player[Main.myPlayer];
-            for (int index = 0; index < 4; ++index)
+            var zero = Vector2.Zero;
+            var player = Main.player[Main.myPlayer];
+            for (var index = 0; index < 4; ++index)
             {
-                bool flag = false;
-                Vector2 vector2 = Vector2.Zero;
+                var flag = false;
+                var vector2 = Vector2.Zero;
                 if (Main.gameMenu || UILinkPointNavigator.Available && !PlayerInput.InBuildingMode)
                     return;
                 switch (index)
@@ -1114,7 +1114,7 @@ namespace Terraria.GameInput
                 {
                     if (PlayerInput.DpadSnapCooldown[index] == 0)
                     {
-                        int num = 6;
+                        var num = 6;
                         if (ItemSlot.IsABuildingItem(player.inventory[player.selectedItem]))
                             num = player.inventory[player.selectedItem].useTime;
                         PlayerInput.DpadSnapCooldown[index] = num;
@@ -1128,7 +1128,7 @@ namespace Terraria.GameInput
             if (!(zero != Vector2.Zero))
                 return;
             Main.SmartCursorEnabled = false;
-            Point tileCoordinates =
+            var tileCoordinates =
                 (Main.MouseScreen + Main.screenPosition + zero * new Vector2(16f)).ToTileCoordinates();
             PlayerInput.MouseX = tileCoordinates.X * 16 + 8 - (int) Main.screenPosition.X;
             PlayerInput.MouseY = tileCoordinates.Y * 16 + 8 - (int) Main.screenPosition.Y;
@@ -1136,15 +1136,15 @@ namespace Terraria.GameInput
 
         public static string ComposeInstructionsForGamepad()
         {
-            string str1 = "";
+            var str1 = "";
             if (!PlayerInput.UsingGamepad)
                 return str1;
-            InputMode index = InputMode.XBoxGamepad;
+            var index = InputMode.XBoxGamepad;
             if (Main.gameMenu || UILinkPointNavigator.Available)
                 index = InputMode.XBoxGamepadUI;
             if (PlayerInput.InBuildingMode && !Main.gameMenu)
                 index = InputMode.XBoxGamepad;
-            KeyConfiguration inputMode = PlayerInput.CurrentProfile.InputModes[index];
+            var inputMode = PlayerInput.CurrentProfile.InputModes[index];
             string str2;
             if (Main.mapFullscreen && !Main.gameMenu)
             {
@@ -1169,7 +1169,7 @@ namespace Terraria.GameInput
                     (!Main.SmartInteractShowingGenuine || Main.SmartInteractNPC == -1 &&
                      (Main.SmartInteractX == -1 || Main.SmartInteractY == -1)))
                     str1 += PlayerInput.BuildCommand(Lang.misc[57].Value, false, inputMode.KeyStatus["Grapple"]);
-                string str3 = str1 + PlayerInput.BuildCommand(Lang.misc[58].Value, false, inputMode.KeyStatus["Jump"]) +
+                var str3 = str1 + PlayerInput.BuildCommand(Lang.misc[58].Value, false, inputMode.KeyStatus["Jump"]) +
                               PlayerInput.BuildCommand(Lang.misc[59].Value, false, inputMode.KeyStatus["HotbarMinus"],
                                   inputMode.KeyStatus["HotbarPlus"]);
                 if (PlayerInput.InBuildingMode)
@@ -1183,7 +1183,7 @@ namespace Terraria.GameInput
                 }
                 else
                 {
-                    Item obj = Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem];
+                    var obj = Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem];
                     if (obj.damage > 0 && obj.ammo == 0)
                         str2 = str3 + PlayerInput.BuildCommand(Lang.misc[60].Value, false,
                                    inputMode.KeyStatus["MouseLeft"]);
@@ -1200,7 +1200,7 @@ namespace Terraria.GameInput
                                 inputMode.KeyStatus["MouseRight"]);
                         else if (Main.SmartInteractX != -1 && Main.SmartInteractY != -1)
                         {
-                            Tile tile = Main.tile[Main.SmartInteractX, Main.SmartInteractY];
+                            var tile = Main.tile[Main.SmartInteractX, Main.SmartInteractY];
                             if (TileID.Sets.TileInteractRead[(int) tile.type])
                                 str2 += PlayerInput.BuildCommand(Lang.misc[81].Value, false,
                                     inputMode.KeyStatus["MouseRight"]);
@@ -1219,13 +1219,13 @@ namespace Terraria.GameInput
 
         public static string BuildCommand(string CommandText, bool Last, params List<string>[] Bindings)
         {
-            string str1 = "";
+            var str1 = "";
             if (Bindings.Length == 0)
                 return str1;
-            string str2 = str1 + PlayerInput.GenInput(Bindings[0]);
-            for (int index = 1; index < Bindings.Length; ++index)
+            var str2 = str1 + PlayerInput.GenInput(Bindings[0]);
+            for (var index = 1; index < Bindings.Length; ++index)
             {
-                string str3 = PlayerInput.GenInput(Bindings[index]);
+                var str3 = PlayerInput.GenInput(Bindings[index]);
                 if (str3.Length > 0)
                     str2 = str2 + "/" + str3;
             }
@@ -1244,8 +1244,8 @@ namespace Terraria.GameInput
         {
             if (list.Count == 0)
                 return "";
-            string str = GlyphTagHandler.GenerateTag(list[0]);
-            for (int index = 1; index < list.Count; ++index)
+            var str = GlyphTagHandler.GenerateTag(list[0]);
+            for (var index = 1; index < list.Count; ++index)
                 str = str + "/" + GlyphTagHandler.GenerateTag(list[index]);
             return str;
         }
@@ -1276,16 +1276,16 @@ namespace Terraria.GameInput
 
         public static void PrettyPrintProfiles(ref string text)
         {
-            string str1 = text;
-            string[] separator = new string[1] {"\r\n"};
-            int num = 0;
-            foreach (string str2 in str1.Split(separator, (StringSplitOptions) num))
+            var str1 = text;
+            var separator = new string[1] {"\r\n"};
+            var num = 0;
+            foreach (var str2 in str1.Split(separator, (StringSplitOptions) num))
             {
                 if (str2.Contains(": {"))
                 {
-                    string str3 = str2.Substring(0, str2.IndexOf('"'));
-                    string oldValue = str2 + "\r\n  ";
-                    string newValue = oldValue.Replace(": {\r\n  ", ": \r\n" + str3 + "{\r\n  ");
+                    var str3 = str2.Substring(0, str2.IndexOf('"'));
+                    var oldValue = str2 + "\r\n  ";
+                    var newValue = oldValue.Replace(": {\r\n  ", ": \r\n" + str3 + "{\r\n  ");
                     text = text.Replace(oldValue, newValue);
                 }
             }
@@ -1770,23 +1770,23 @@ namespace Terraria.GameInput
 
         public static void SetZoom_Test()
         {
-            Vector2 vector2_1 = Main.screenPosition +
+            var vector2_1 = Main.screenPosition +
                                 new Vector2((float) Main.screenWidth, (float) Main.screenHeight) / 2f;
-            Vector2 vector2_2 = Main.screenPosition +
+            var vector2_2 = Main.screenPosition +
                                 new Vector2((float) PlayerInput._originalMouseX, (float) PlayerInput._originalMouseY);
-            Vector2 vector2_3 = Main.screenPosition + new Vector2((float) PlayerInput._originalLastMouseX,
+            var vector2_3 = Main.screenPosition + new Vector2((float) PlayerInput._originalLastMouseX,
                                     (float) PlayerInput._originalLastMouseY);
-            Vector2 vector2_4 = Main.screenPosition + new Vector2(0.0f, 0.0f);
-            Vector2 vector2_5 = Main.screenPosition + new Vector2((float) Main.screenWidth, (float) Main.screenHeight);
-            Vector2 vector2_6 = vector2_2 - vector2_1;
-            Vector2 vector2_7 = vector2_3 - vector2_1;
-            Vector2 vector2_8 = vector2_4 - vector2_1;
-            Vector2 vector2_9 = vector2_5 - vector2_1;
-            float num1 = 1f / Main.GameViewMatrix.Zoom.X;
-            float num2 = 1f;
-            Vector2 vector2_10 = vector2_1 - Main.screenPosition + vector2_6 * num1;
-            Vector2 vector2_11 = vector2_1 - Main.screenPosition + vector2_7 * num1;
-            Vector2 vector2_12 = vector2_1 + vector2_8 * num2;
+            var vector2_4 = Main.screenPosition + new Vector2(0.0f, 0.0f);
+            var vector2_5 = Main.screenPosition + new Vector2((float) Main.screenWidth, (float) Main.screenHeight);
+            var vector2_6 = vector2_2 - vector2_1;
+            var vector2_7 = vector2_3 - vector2_1;
+            var vector2_8 = vector2_4 - vector2_1;
+            var vector2_9 = vector2_5 - vector2_1;
+            var num1 = 1f / Main.GameViewMatrix.Zoom.X;
+            var num2 = 1f;
+            var vector2_10 = vector2_1 - Main.screenPosition + vector2_6 * num1;
+            var vector2_11 = vector2_1 - Main.screenPosition + vector2_7 * num1;
+            var vector2_12 = vector2_1 + vector2_8 * num2;
             Main.mouseX = (int) vector2_10.X;
             Main.mouseY = (int) vector2_10.Y;
             Main.lastMouseX = (int) vector2_11.X;
@@ -1798,19 +1798,19 @@ namespace Terraria.GameInput
 
         public static void SetZoom_MouseInWorld()
         {
-            Vector2 vector2_1 = Main.screenPosition +
+            var vector2_1 = Main.screenPosition +
                                 new Vector2((float) Main.screenWidth, (float) Main.screenHeight) / 2f;
-            Vector2 vector2_2 = Main.screenPosition +
+            var vector2_2 = Main.screenPosition +
                                 new Vector2((float) PlayerInput._originalMouseX, (float) PlayerInput._originalMouseY);
-            Vector2 vector2_3 = Main.screenPosition + new Vector2((float) PlayerInput._originalLastMouseX,
+            var vector2_3 = Main.screenPosition + new Vector2((float) PlayerInput._originalLastMouseX,
                                     (float) PlayerInput._originalLastMouseY);
-            Vector2 vector2_4 = vector2_2 - vector2_1;
-            Vector2 vector2_5 = vector2_3 - vector2_1;
-            float num = 1f / Main.GameViewMatrix.Zoom.X;
-            Vector2 vector2_6 = vector2_1 - Main.screenPosition + vector2_4 * num;
+            var vector2_4 = vector2_2 - vector2_1;
+            var vector2_5 = vector2_3 - vector2_1;
+            var num = 1f / Main.GameViewMatrix.Zoom.X;
+            var vector2_6 = vector2_1 - Main.screenPosition + vector2_4 * num;
             Main.mouseX = (int) vector2_6.X;
             Main.mouseY = (int) vector2_6.Y;
-            Vector2 vector2_7 = vector2_1 - Main.screenPosition + vector2_5 * num;
+            var vector2_7 = vector2_1 - Main.screenPosition + vector2_5 * num;
             Main.lastMouseX = (int) vector2_7.X;
             Main.lastMouseY = (int) vector2_7.Y;
         }

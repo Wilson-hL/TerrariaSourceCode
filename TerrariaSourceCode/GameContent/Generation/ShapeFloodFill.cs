@@ -22,13 +22,13 @@ namespace Terraria.GameContent.Generation
 
         public override bool Perform(Point origin, GenAction action)
         {
-            Queue<Point> pointQueue = new Queue<Point>();
-            HashSet<Point16> point16Set = new HashSet<Point16>();
+            var pointQueue = new Queue<Point>();
+            var point16Set = new HashSet<Point16>();
             pointQueue.Enqueue(origin);
-            int maximumActions = this._maximumActions;
+            var maximumActions = this._maximumActions;
             while (pointQueue.Count > 0 && maximumActions > 0)
             {
-                Point point = pointQueue.Dequeue();
+                var point = pointQueue.Dequeue();
                 if (!point16Set.Contains(new Point16(point.X, point.Y)) &&
                     this.UnitApply(action, origin, point.X, point.Y))
                 {
@@ -47,7 +47,7 @@ namespace Terraria.GameContent.Generation
 
             while (pointQueue.Count > 0)
             {
-                Point point = pointQueue.Dequeue();
+                var point = pointQueue.Dequeue();
                 if (!point16Set.Contains(new Point16(point.X, point.Y)))
                 {
                     pointQueue.Enqueue(point);

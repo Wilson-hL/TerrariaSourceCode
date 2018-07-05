@@ -32,7 +32,7 @@ namespace Terraria.Graphics
         {
             if (TextureManager._textures.ContainsKey(name))
                 return TextureManager._textures[name];
-            Texture2D texture2D = TextureManager.BlankTexture;
+            var texture2D = TextureManager.BlankTexture;
             if (name != "")
             {
                 if (name != null)
@@ -59,7 +59,7 @@ namespace Terraria.Graphics
 
         private static void Run(object context)
         {
-            bool looping = true;
+            var looping = true;
             Main.instance.Exiting += (EventHandler<EventArgs>) ((obj, args) =>
             {
                 looping = false;

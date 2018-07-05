@@ -31,15 +31,15 @@ namespace Terraria
             if (Main.dedServ || Main.cloudLimit < 10)
                 return;
             Main.windSpeed = Main.windSpeedSet;
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
                 Main.cloud[index].active = false;
-            for (int index = 0; index < Main.numClouds; ++index)
+            for (var index = 0; index < Main.numClouds; ++index)
             {
                 Cloud.addCloud();
                 Main.cloud[index].Alpha = 1f;
             }
 
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
                 Main.cloud[index].Alpha = 1f;
         }
 
@@ -47,8 +47,8 @@ namespace Terraria
         {
             if (Main.netMode == 2)
                 return;
-            int index1 = -1;
-            for (int index2 = 0; index2 < 200; ++index2)
+            var index1 = -1;
+            for (var index2 = 0; index2 < 200; ++index2)
             {
                 if (!Main.cloud[index2].active)
                 {
@@ -72,17 +72,17 @@ namespace Terraria
             Main.cloud[index1].spriteDir = SpriteEffects.None;
             if (Cloud.rand.Next(2) == 0)
                 Main.cloud[index1].spriteDir = SpriteEffects.FlipHorizontally;
-            float num1 = Main.windSpeed;
+            var num1 = Main.windSpeed;
             if (!Main.gameMenu)
                 num1 = Main.windSpeed - Main.player[Main.myPlayer].velocity.X * 0.1f;
-            int num2 = 0;
-            int num3 = 0;
+            var num2 = 0;
+            var num3 = 0;
             if ((double) num1 > 0.0)
                 num2 -= 200;
             if ((double) num1 < 0.0)
                 num3 += 200;
-            int num4 = 300;
-            float num5 = (float) WorldGen.genRand.Next(num2 - num4, Main.screenWidth + num3 + num4);
+            var num4 = 300;
+            var num5 = (float) WorldGen.genRand.Next(num2 - num4, Main.screenWidth + num3 + num4);
             Main.cloud[index1].Alpha = 0.0f;
             Main.cloud[index1].position.Y = (float) Cloud.rand.Next((int) ((double) -Main.screenHeight * 0.25),
                 (int) ((double) Main.screenHeight * 0.25));
@@ -129,13 +129,13 @@ namespace Terraria
             if ((double) Main.cloud[index1].position.X + (double) Main.cloudTexture[Main.cloud[index1].type].Width *
                 (double) Main.cloud[index1].scale < -100.0)
                 Main.cloud[index1].Alpha = 1f;
-            Rectangle rectangle1 = new Rectangle((int) Main.cloud[index1].position.X,
+            var rectangle1 = new Rectangle((int) Main.cloud[index1].position.X,
                 (int) Main.cloud[index1].position.Y, Main.cloud[index1].width, Main.cloud[index1].height);
-            for (int index2 = 0; index2 < 200; ++index2)
+            for (var index2 = 0; index2 < 200; ++index2)
             {
                 if (index1 != index2 && Main.cloud[index2].active)
                 {
-                    Rectangle rectangle2 = new Rectangle((int) Main.cloud[index2].position.X,
+                    var rectangle2 = new Rectangle((int) Main.cloud[index2].position.X,
                         (int) Main.cloud[index2].position.Y, Main.cloud[index2].width, Main.cloud[index2].height);
                     if (rectangle1.Intersects(rectangle2))
                         Main.cloud[index1].active = false;
@@ -145,7 +145,7 @@ namespace Terraria
 
         public Color cloudColor(Color bgColor)
         {
-            float num = this.scale * this.Alpha;
+            var num = this.scale * this.Alpha;
             if ((double) num > 1.0)
                 num = 1f;
             return new Color((int) (byte) (float) (int) ((double) bgColor.R * (double) num),
@@ -163,8 +163,8 @@ namespace Terraria
         {
             if (Main.netMode == 2)
                 return;
-            int maxValue = 0;
-            for (int index = 0; index < 200; ++index)
+            var maxValue = 0;
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.cloud[index].active)
                 {
@@ -174,14 +174,14 @@ namespace Terraria
                 }
             }
 
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
             {
                 if (Main.cloud[index].active)
                 {
                     if (index > 1 && (!Main.cloud[index - 1].active ||
                                       (double) Main.cloud[index - 1].scale > (double) Main.cloud[index].scale + 0.02))
                     {
-                        Cloud cloud = (Cloud) Main.cloud[index - 1].Clone();
+                        var cloud = (Cloud) Main.cloud[index - 1].Clone();
                         Main.cloud[index - 1] = (Cloud) Main.cloud[index].Clone();
                         Main.cloud[index] = cloud;
                     }
@@ -189,7 +189,7 @@ namespace Terraria
                     if (index < 199 && (!Main.cloud[index].active ||
                                         (double) Main.cloud[index + 1].scale < (double) Main.cloud[index].scale - 0.02))
                     {
-                        Cloud cloud = (Cloud) Main.cloud[index + 1].Clone();
+                        var cloud = (Cloud) Main.cloud[index + 1].Clone();
                         Main.cloud[index + 1] = (Cloud) Main.cloud[index].Clone();
                         Main.cloud[index] = cloud;
                     }
@@ -204,8 +204,8 @@ namespace Terraria
             {
                 if (maxValue <= Main.numClouds)
                     return;
-                int index1 = Cloud.rand.Next(maxValue);
-                for (int index2 = 0; Main.cloud[index1].kill && index2 < 100; index1 = Cloud.rand.Next(maxValue))
+                var index1 = Cloud.rand.Next(maxValue);
+                for (var index2 = 0; Main.cloud[index1].kill && index2 < 100; index1 = Cloud.rand.Next(maxValue))
                     ++index2;
                 Main.cloud[index1].kill = true;
             }
@@ -226,23 +226,23 @@ namespace Terraria
                 float num1;
                 if ((double) this.scale < 1.0)
                 {
-                    float num2 = 0.07f;
-                    float num3 = (float) (((double) (this.scale + 0.15f) + 1.0) / 2.0);
-                    float num4 = num3 * num3;
+                    var num2 = 0.07f;
+                    var num3 = (float) (((double) (this.scale + 0.15f) + 1.0) / 2.0);
+                    var num4 = num3 * num3;
                     num1 = num2 * num4;
                 }
                 else if ((double) this.scale <= 1.15)
                 {
-                    float num2 = 0.19f;
-                    float num3 = this.scale - 0.075f;
-                    float num4 = num3 * num3;
+                    var num2 = 0.19f;
+                    var num3 = this.scale - 0.075f;
+                    var num4 = num3 * num3;
                     num1 = num2 * num4;
                 }
                 else
                 {
-                    float num2 = 0.23f;
-                    float num3 = (float) ((double) this.scale - 0.150000005960464 - 0.0750000029802322);
-                    float num4 = num3 * num3;
+                    var num2 = 0.23f;
+                    var num3 = (float) ((double) this.scale - 0.150000005960464 - 0.0750000029802322);
+                    var num4 = num3 * num3;
                     num1 = num2 * num4;
                 }
 
@@ -250,7 +250,7 @@ namespace Terraria
                 this.position.X -= (Main.screenPosition.X - Main.screenLastPosition.X) * num1;
             }
 
-            float num = 600f;
+            var num = 600f;
             if (!this.kill)
             {
                 if ((double) this.Alpha < 1.0)

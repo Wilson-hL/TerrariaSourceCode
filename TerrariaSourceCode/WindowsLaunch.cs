@@ -18,7 +18,7 @@ namespace Terraria
 
         private static bool ConsoleCtrlCheck(WindowsLaunch.CtrlTypes ctrlType)
         {
-            bool flag = false;
+            var flag = false;
             switch (ctrlType)
             {
                 case WindowsLaunch.CtrlTypes.CTRL_C_EVENT:
@@ -49,14 +49,14 @@ namespace Terraria
         {
             AppDomain.CurrentDomain.AssemblyResolve += (ResolveEventHandler) ((sender, sargs) =>
             {
-                string resourceName = new AssemblyName(sargs.Name).Name + ".dll";
-                string name = Array.Find<string>(typeof(Program).Assembly.GetManifestResourceNames(),
+                var resourceName = new AssemblyName(sargs.Name).Name + ".dll";
+                var name = Array.Find<string>(typeof(Program).Assembly.GetManifestResourceNames(),
                     (Predicate<string>) (element => element.EndsWith(resourceName)));
                 if (name == null)
                     return (Assembly) null;
-                using (Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(name))
+                using (var manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(name))
                 {
-                    byte[] numArray = new byte[manifestResourceStream.Length];
+                    var numArray = new byte[manifestResourceStream.Length];
                     manifestResourceStream.Read(numArray, 0, numArray.Length);
                     return Assembly.Load(numArray);
                 }

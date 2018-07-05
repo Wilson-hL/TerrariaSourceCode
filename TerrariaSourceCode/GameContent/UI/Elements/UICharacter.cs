@@ -28,12 +28,12 @@ namespace Terraria.GameContent.UI.Elements
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
-            CalculatedStyle dimensions = this.GetDimensions();
+            var dimensions = this.GetDimensions();
             spriteBatch.Draw(this._texture, dimensions.Position(), Color.White);
-            Vector2 vector2 = dimensions.Position() +
+            var vector2 = dimensions.Position() +
                               new Vector2(dimensions.Width * 0.5f - (float) (this._player.width >> 1),
                                   dimensions.Height * 0.5f - (float) (this._player.height >> 1));
-            Item obj = this._player.inventory[this._player.selectedItem];
+            var obj = this._player.inventory[this._player.selectedItem];
             this._player.inventory[this._player.selectedItem] = UICharacter._blankItem;
             Main.instance.DrawPlayer(this._player, vector2 + Main.screenPosition, 0.0f, Vector2.Zero, 0.0f);
             this._player.inventory[this._player.selectedItem] = obj;

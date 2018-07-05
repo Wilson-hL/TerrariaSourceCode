@@ -325,14 +325,14 @@ namespace Terraria.GameInput
 
         public void Reset()
         {
-            foreach (string index in this.KeyStatus.Keys.ToArray<string>())
+            foreach (var index in this.KeyStatus.Keys.ToArray<string>())
                 this.KeyStatus[index] = false;
         }
 
         public TriggersSet Clone()
         {
-            TriggersSet triggersSet = new TriggersSet();
-            foreach (string key in this.KeyStatus.Keys)
+            var triggersSet = new TriggersSet();
+            foreach (var key in this.KeyStatus.Keys)
                 triggersSet.KeyStatus.Add(key, this.KeyStatus[key]);
             triggersSet.UsedMovementKey = this.UsedMovementKey;
             triggersSet.HotbarScrollCD = this.HotbarScrollCD;
@@ -343,7 +343,7 @@ namespace Terraria.GameInput
         public void SetupKeys()
         {
             this.KeyStatus.Clear();
-            foreach (string knownTrigger in PlayerInput.KnownTriggers)
+            foreach (var knownTrigger in PlayerInput.KnownTriggers)
                 this.KeyStatus.Add(knownTrigger, false);
         }
 
@@ -358,12 +358,12 @@ namespace Terraria.GameInput
 
         public Vector2 GetNavigatorDirections()
         {
-            bool flag1 = Main.gameMenu || Main.ingameOptionsWindow || (Main.editChest || Main.editSign) ||
+            var flag1 = Main.gameMenu || Main.ingameOptionsWindow || (Main.editChest || Main.editSign) ||
                          Main.playerInventory && PlayerInput.CurrentProfile.UsingDpadMovekeys();
-            bool flag2 = this.Up || flag1 && this.MenuUp;
-            bool flag3 = this.Right || flag1 && this.MenuRight;
-            bool flag4 = this.Down || flag1 && this.MenuDown;
-            bool flag5 = this.Left || flag1 && this.MenuLeft;
+            var flag2 = this.Up || flag1 && this.MenuUp;
+            var flag3 = this.Right || flag1 && this.MenuRight;
+            var flag4 = this.Down || flag1 && this.MenuDown;
+            var flag5 = this.Left || flag1 && this.MenuLeft;
             return new Vector2((float) (flag3.ToInt() - flag5.ToInt()), (float) (flag4.ToInt() - flag2.ToInt()));
         }
 
@@ -409,7 +409,7 @@ namespace Terraria.GameInput
                 p.controlUseTile = true;
             if (PlayerInput.InBuildingMode && this.MouseRight)
                 p.controlInv = true;
-            bool flag = PlayerInput.Triggers.Current.HotbarPlus || PlayerInput.Triggers.Current.HotbarMinus;
+            var flag = PlayerInput.Triggers.Current.HotbarPlus || PlayerInput.Triggers.Current.HotbarMinus;
             if (flag)
                 ++this.HotbarHoldTime;
             else
@@ -435,7 +435,7 @@ namespace Terraria.GameInput
             if (this.MouseRight && !p.mouseInterface &&
                 (!Main.blockMouse & !PlayerInput.LockTileUseButton && !PlayerInput.InBuildingMode))
                 p.controlUseTile = true;
-            bool flag = PlayerInput.Triggers.Current.HotbarPlus || PlayerInput.Triggers.Current.HotbarMinus;
+            var flag = PlayerInput.Triggers.Current.HotbarPlus || PlayerInput.Triggers.Current.HotbarMinus;
             if (flag)
                 ++this.HotbarHoldTime;
             else

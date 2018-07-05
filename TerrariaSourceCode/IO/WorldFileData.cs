@@ -96,7 +96,7 @@ namespace Terraria.IO
 
         public static WorldFileData FromInvalidWorld(string path, bool cloudSave)
         {
-            WorldFileData worldFileData = new WorldFileData(path, cloudSave);
+            var worldFileData = new WorldFileData(path, cloudSave);
             worldFileData.IsExpertMode = false;
             worldFileData.SetSeedToEmpty();
             worldFileData.WorldGeneratorVersion = 0UL;
@@ -133,7 +133,7 @@ namespace Terraria.IO
         {
             if (this.IsCloudSave)
                 return;
-            string worldPathFromName = Main.GetWorldPathFromName(this.Name, true);
+            var worldPathFromName = Main.GetWorldPathFromName(this.Name, true);
             if (!FileUtilities.MoveToCloud(this.Path, worldPathFromName))
                 return;
             Main.LocalFavoriteData.ClearEntry((FileData) this);
@@ -146,7 +146,7 @@ namespace Terraria.IO
         {
             if (!this.IsCloudSave)
                 return;
-            string worldPathFromName = Main.GetWorldPathFromName(this.Name, false);
+            var worldPathFromName = Main.GetWorldPathFromName(this.Name, false);
             if (!FileUtilities.MoveToLocal(this.Path, worldPathFromName))
                 return;
             Main.CloudFavoritesData.ClearEntry((FileData) this);

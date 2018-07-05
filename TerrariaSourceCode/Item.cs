@@ -155,7 +155,7 @@ namespace Terraria
     {
       get
       {
-        string str = this.AffixName();
+        var str = this.AffixName();
         if (this.stack > 1)
           str = str + " (" + (object) this.stack + ")";
         return str;
@@ -173,13 +173,13 @@ namespace Terraria
     {
       if (Item.itemCaches[t] == -1)
         return;
-      int itemCach = Item.itemCaches[t];
+      var itemCach = Item.itemCaches[t];
       Item.itemCaches[t] = stopCaching ? -1 : 0;
-      Item obj = new Item();
+      var obj = new Item();
       obj.SetDefaults(t, false);
       while (itemCach > 0)
       {
-        int Stack = obj.maxStack;
+        var Stack = obj.maxStack;
         if (itemCach < Stack)
           Stack = itemCach;
         Item.NewItem((int) pos.X, (int) pos.Y, (int) spread.X, (int) spread.Y, t, Stack, false, 0, false, false);
@@ -198,16 +198,16 @@ namespace Terraria
         Main.rand = new UnifiedRandom();
       if (pre == 0 || this.type == 0)
         return false;
-      UnifiedRandom unifiedRandom = WorldGen.gen ? WorldGen.genRand : Main.rand;
-      int num1 = pre;
-      float num2 = 1f;
-      float num3 = 1f;
-      float num4 = 1f;
-      float num5 = 1f;
-      float num6 = 1f;
-      float num7 = 1f;
-      int num8 = 0;
-      bool flag = true;
+      var unifiedRandom = WorldGen.gen ? WorldGen.genRand : Main.rand;
+      var num1 = pre;
+      var num2 = 1f;
+      var num3 = 1f;
+      var num4 = 1f;
+      var num5 = 1f;
+      var num6 = 1f;
+      var num7 = 1f;
+      var num8 = 0;
+      var flag = true;
       while (flag)
       {
         num2 = 1f;
@@ -226,7 +226,7 @@ namespace Terraria
         {
           if (this.type == 1 || this.type == 4 || (this.type == 6 || this.type == 7) || (this.type == 10 || this.type == 24 || (this.type == 45 || this.type == 46)) || (this.type == 65 || this.type == 103 || (this.type == 104 || this.type == 121) || (this.type == 122 || this.type == 155 || (this.type == 190 || this.type == 196))) || (this.type == 198 || this.type == 199 || (this.type == 200 || this.type == 201) || (this.type == 202 || this.type == 203 || (this.type == 204 || this.type == 213)) || (this.type == 217 || this.type == 273 || (this.type == 367 || this.type == 368) || (this.type == 426 || this.type == 482 || (this.type == 483 || this.type == 484)))) || (this.type == 653 || this.type == 654 || (this.type == 656 || this.type == 657) || (this.type == 659 || this.type == 660 || (this.type == 671 || this.type == 672)) || (this.type == 674 || this.type == 675 || (this.type == 676 || this.type == 723) || (this.type == 724 || this.type == 757 || (this.type == 776 || this.type == 777))) || (this.type == 778 || this.type == 787 || (this.type == 795 || this.type == 797) || (this.type == 798 || this.type == 799 || (this.type == 881 || this.type == 882)) || (this.type == 921 || this.type == 922 || (this.type == 989 || this.type == 990) || (this.type == 991 || this.type == 992 || (this.type == 993 || this.type == 1123))))) || (this.type == 1166 || this.type == 1185 || (this.type == 1188 || this.type == 1192) || (this.type == 1195 || this.type == 1199 || (this.type == 1202 || this.type == 1222)) || (this.type == 1223 || this.type == 1224 || (this.type == 1226 || this.type == 1227) || (this.type == 1230 || this.type == 1233 || (this.type == 1234 || this.type == 1294))) || (this.type == 1304 || this.type == 1305 || (this.type == 1306 || this.type == 1320) || (this.type == 1327 || this.type == 1506 || (this.type == 1507 || this.type == 1786)) || (this.type == 1826 || this.type == 1827 || (this.type == 1909 || this.type == 1917) || (this.type == 1928 || this.type == 2176 || (this.type == 2273 || this.type == 2608)))) || (this.type == 2341 || this.type == 2330 || (this.type == 2320 || this.type == 2516) || (this.type == 2517 || this.type == 2746 || (this.type == 2745 || this.type == 3063)) || (this.type == 3018 || this.type == 3211 || (this.type == 3013 || this.type == 3258) || (this.type == 3106 || this.type == 3065 || (this.type == 2880 || this.type == 3481))) || (this.type == 3482 || this.type == 3483 || (this.type == 3484 || this.type == 3485) || (this.type == 3487 || this.type == 3488 || (this.type == 3489 || this.type == 3490)) || (this.type == 3491 || this.type == 3493 || (this.type == 3494 || this.type == 3495) || (this.type == 3496 || this.type == 3497 || (this.type == 3498 || this.type == 3500)))))) || (this.type == 3501 || this.type == 3502 || (this.type == 3503 || this.type == 3504) || (this.type == 3505 || this.type == 3506 || (this.type == 3507 || this.type == 3508)) || (this.type == 3509 || this.type == 3511 || (this.type == 3512 || this.type == 3513) || (this.type == 3514 || this.type == 3515 || (this.type == 3517 || this.type == 3518))) || (this.type == 3519 || this.type == 3520 || (this.type == 3521 || this.type == 3522) || (this.type == 3523 || this.type == 3524 || this.type == 3525) || (this.type >= 3462 && this.type <= 3466 || this.type >= 2772 && this.type <= 2786 || (this.type == 3349 || this.type == 3352 || this.type == 3351))) || (this.type >= 3764 && this.type <= 3769 || (this.type == 3772 || this.type == 3823) || this.type == 3827)))
           {
-            int num9 = unifiedRandom.Next(40);
+            var num9 = unifiedRandom.Next(40);
             if (num9 == 0)
               num1 = 1;
             if (num9 == 1)
@@ -310,7 +310,7 @@ namespace Terraria
           }
           else if (this.type == 162 || this.type == 160 || (this.type == 163 || this.type == 220) || (this.type == 274 || this.type == 277 || (this.type == 280 || this.type == 383)) || (this.type == 384 || this.type == 385 || (this.type == 386 || this.type == 387) || (this.type == 388 || this.type == 389 || (this.type == 390 || this.type == 406))) || (this.type == 537 || this.type == 550 || (this.type == 579 || this.type == 756) || (this.type == 759 || this.type == 801 || (this.type == 802 || this.type == 1186)) || (this.type == 1189 || this.type == 1190 || (this.type == 1193 || this.type == 1196) || (this.type == 1197 || this.type == 1200 || (this.type == 1203 || this.type == 1204)))) || (this.type == 1228 || this.type == 1231 || (this.type == 1232 || this.type == 1259) || (this.type == 1262 || this.type == 1297 || (this.type == 1314 || this.type == 1325)) || (this.type == 1947 || this.type == 2332 || (this.type == 2331 || this.type == 2342) || (this.type == 2424 || this.type == 2611 || (this.type == 2798 || this.type == 3012))) || (this.type == 3473 || this.type == 3098 || (this.type == 3368 || this.type == 3835) || (this.type == 3836 || this.type == 3858))))
           {
-            int num9 = unifiedRandom.Next(14);
+            var num9 = unifiedRandom.Next(14);
             if (num9 == 0)
               num1 = 36;
             if (num9 == 1)
@@ -342,7 +342,7 @@ namespace Terraria
           }
           else if (this.type == 39 || this.type == 44 || (this.type == 95 || this.type == 96) || (this.type == 98 || this.type == 99 || (this.type == 120 || this.type == 164)) || (this.type == 197 || this.type == 219 || (this.type == 266 || this.type == 281) || (this.type == 434 || this.type == 435 || (this.type == 436 || this.type == 481))) || (this.type == 506 || this.type == 533 || (this.type == 534 || this.type == 578) || (this.type == 655 || this.type == 658 || (this.type == 661 || this.type == 679)) || (this.type == 682 || this.type == 725 || (this.type == 758 || this.type == 759) || (this.type == 760 || this.type == 796 || (this.type == 800 || this.type == 905)))) || (this.type == 923 || this.type == 964 || (this.type == 986 || this.type == 1156) || (this.type == 1187 || this.type == 1194 || (this.type == 1201 || this.type == 1229)) || (this.type == 1254 || this.type == 1255 || (this.type == 1258 || this.type == 1265) || (this.type == 1319 || this.type == 1553 || (this.type == 1782 || this.type == 1784))) || (this.type == 1835 || this.type == 1870 || (this.type == 1910 || this.type == 1929) || (this.type == 1946 || this.type == 2223 || (this.type == 2269 || this.type == 2270)) || (this.type == 2624 || this.type == 2515 || (this.type == 2747 || this.type == 2796) || (this.type == 2797 || this.type == 3052 || (this.type == 2888 || this.type == 3019))))) || (this.type == 3029 || this.type == 3007 || (this.type == 3008 || this.type == 3210) || (this.type == 3107 || this.type == 3245 || (this.type == 3475 || this.type == 3540)) || (this.type == 3854 || this.type == 3859 || (this.type == 3821 || this.type == 3480) || (this.type == 3486 || this.type == 3492 || (this.type == 3498 || this.type == 3504))) || (this.type == 3510 || this.type == 3516 || (this.type == 3350 || this.type == 3546) || this.type == 3788)))
           {
-            int num9 = unifiedRandom.Next(36);
+            var num9 = unifiedRandom.Next(36);
             if (num9 == 0)
               num1 = 16;
             if (num9 == 1)
@@ -418,7 +418,7 @@ namespace Terraria
           }
           else if (this.type == 64 || this.type == 112 || (this.type == 113 || this.type == (int) sbyte.MaxValue) || (this.type == 157 || this.type == 165 || (this.type == 218 || this.type == 272)) || (this.type == 494 || this.type == 495 || (this.type == 496 || this.type == 514) || (this.type == 517 || this.type == 518 || (this.type == 519 || this.type == 683))) || (this.type == 726 || this.type == 739 || (this.type == 740 || this.type == 741) || (this.type == 742 || this.type == 743 || (this.type == 744 || this.type == 788)) || (this.type == 1121 || this.type == 1155 || (this.type == 1157 || this.type == 1178) || (this.type == 1244 || this.type == 1256 || (this.type == 1260 || this.type == 1264)))) || (this.type == 1266 || this.type == 1295 || (this.type == 1296 || this.type == 1308) || (this.type == 1309 || this.type == 1313 || (this.type == 1336 || this.type == 1444)) || (this.type == 1445 || this.type == 1446 || (this.type == 1572 || this.type == 1801) || (this.type == 1802 || this.type == 1930 || (this.type == 1931 || this.type == 2188))) || (this.type == 2622 || this.type == 2621 || (this.type == 2584 || this.type == 2551) || (this.type == 2366 || this.type == 2535 || (this.type == 2365 || this.type == 2364)) || (this.type == 2623 || this.type == 2750 || (this.type == 2795 || this.type == 3053) || (this.type == 3051 || this.type == 3209 || (this.type == 3014 || this.type == 3105))))) || (this.type == 2882 || this.type == 3269 || (this.type == 3006 || this.type == 3377) || (this.type == 3069 || this.type == 2749 || (this.type == 3249 || this.type == 3476)) || (this.type == 3474 || this.type == 3531 || (this.type == 3541 || this.type == 3542) || (this.type == 3569 || this.type == 3570 || (this.type == 3571 || this.type == 3779))) || (this.type == 3787 || this.type == 3531 || (this.type == 3852 || this.type == 3870) || (this.type == 3824 || this.type == 3818 || (this.type == 3829 || this.type == 3832)) || (this.type == 3825 || this.type == 3819 || (this.type == 3830 || this.type == 3833) || (this.type == 3826 || this.type == 3820 || (this.type == 3831 || this.type == 3834))))))
           {
-            int num9 = unifiedRandom.Next(36);
+            var num9 = unifiedRandom.Next(36);
             if (num9 == 0)
               num1 = 26;
             if (num9 == 1)
@@ -494,7 +494,7 @@ namespace Terraria
           }
           else if (this.type == 55 || this.type == 119 || (this.type == 191 || this.type == 284) || (this.type == 670 || this.type == 1122 || (this.type == 1513 || this.type == 1569)) || (this.type == 1571 || this.type == 1825 || (this.type == 1918 || this.type == 3054) || (this.type == 3262 || this.type >= 3278 && this.type <= 3292)) || (this.type >= 3315 && this.type <= 3317 || (this.type == 3389 || this.type == 3030) || this.type == 3543))
           {
-            int num9 = unifiedRandom.Next(14);
+            var num9 = unifiedRandom.Next(14);
             if (num9 == 0)
               num1 = 36;
             if (num9 == 1)
@@ -848,7 +848,7 @@ namespace Terraria
       this.scale *= num5;
       this.shootSpeed *= num6;
       this.crit += num8;
-      float num10 = (float) (1.0 * (double) num2 * (2.0 - (double) num4) * (2.0 - (double) num7) * (double) num5 * (double) num3 * (double) num6 * (1.0 + (double) this.crit * 0.0199999995529652));
+      var num10 = (float) (1.0 * (double) num2 * (2.0 - (double) num4) * (2.0 - (double) num7) * (double) num5 * (double) num3 * (double) num6 * (1.0 + (double) this.crit * 0.0199999995529652));
       if (num1 == 62 || num1 == 69 || (num1 == 73 || num1 == 77))
         num10 *= 1.05f;
       if (num1 == 63 || num1 == 70 || (num1 == 74 || num1 == 78) || num1 == 67)
@@ -881,7 +881,7 @@ namespace Terraria
     {
       if (this.prefix < (byte) 0 || (int) this.prefix >= Lang.prefix.Length)
         return this.Name;
-      string str = Lang.prefix[(int) this.prefix].Value;
+      var str = Lang.prefix[(int) this.prefix].Value;
       if (str == "")
         return this.Name;
       if (str.StartsWith("("))
@@ -906,9 +906,9 @@ namespace Terraria
         this.material = false;
         return false;
       }
-      for (int index1 = 0; index1 < Recipe.numRecipes; ++index1)
+      for (var index1 = 0; index1 < Recipe.numRecipes; ++index1)
       {
-        for (int index2 = 0; Main.recipe[index1].requiredItem[index2].type > 0; ++index2)
+        for (var index2 = 0; Main.recipe[index1].requiredItem[index2].type > 0; ++index2)
         {
           if (this.netID == Main.recipe[index1].requiredItem[index2].netID)
           {
@@ -23247,7 +23247,7 @@ namespace Terraria
                                                       this.makeNPC = (short) 356;
                                                       this.placeStyle = 1 + type - 1994;
                                                       this.noUseGraphic = true;
-                                                      int num = type - 1994;
+                                                      var num = type - 1994;
                                                       if (num == 0)
                                                         this.bait = 5;
                                                       if (num == 4)
@@ -37149,7 +37149,7 @@ namespace Terraria
       }
       if (this.type >= 1994 && this.type <= 2001)
       {
-        int num = this.type - 1994;
+        var num = this.type - 1994;
         if (num == 0)
           this.value = Item.sellPrice(0, 0, 5, 0);
         if (num == 4)
@@ -37388,11 +37388,11 @@ namespace Terraria
         case 3822:
           return Color.Lerp(Color.White, newColor, 0.5f) * (float) (((double) byte.MaxValue - (double) this.alpha) / (double) byte.MaxValue);
         default:
-          float num = (float) ((int) byte.MaxValue - this.alpha) / (float) byte.MaxValue;
-          int r = (int) ((double) newColor.R * (double) num);
-          int g = (int) ((double) newColor.G * (double) num);
-          int b = (int) ((double) newColor.B * (double) num);
-          int a = (int) newColor.A - this.alpha;
+          var num = (float) ((int) byte.MaxValue - this.alpha) / (float) byte.MaxValue;
+          var r = (int) ((double) newColor.R * (double) num);
+          var g = (int) ((double) newColor.G * (double) num);
+          var b = (int) ((double) newColor.B * (double) num);
+          var a = (int) newColor.A - this.alpha;
           if (a < 0)
             a = 0;
           if (a > (int) byte.MaxValue)
@@ -37403,10 +37403,10 @@ namespace Terraria
 
     public Color GetColor(Color newColor)
     {
-      int r = (int) this.color.R - ((int) byte.MaxValue - (int) newColor.R);
-      int g = (int) this.color.G - ((int) byte.MaxValue - (int) newColor.G);
-      int b = (int) this.color.B - ((int) byte.MaxValue - (int) newColor.B);
-      int a = (int) this.color.A - ((int) byte.MaxValue - (int) newColor.A);
+      var r = (int) this.color.R - ((int) byte.MaxValue - (int) newColor.R);
+      var g = (int) this.color.G - ((int) byte.MaxValue - (int) newColor.G);
+      var b = (int) this.color.B - ((int) byte.MaxValue - (int) newColor.B);
+      var a = (int) this.color.A - ((int) byte.MaxValue - (int) newColor.A);
       if (r < 0)
         r = 0;
       if (r > (int) byte.MaxValue)
@@ -37428,18 +37428,18 @@ namespace Terraria
 
     public static bool MechSpawn(float x, float y, int type)
     {
-      int num1 = 0;
-      int num2 = 0;
-      int num3 = 0;
-      for (int index = 0; index < 200; ++index)
+      var num1 = 0;
+      var num2 = 0;
+      var num3 = 0;
+      for (var index = 0; index < 200; ++index)
       {
         if (Main.item[index].active && Main.item[index].type == type)
         {
           ++num1;
-          Vector2 vector2 = new Vector2(x, y);
-          float num4 = Main.item[index].position.X - vector2.X;
-          float num5 = Main.item[index].position.Y - vector2.Y;
-          float num6 = (float) Math.Sqrt((double) num4 * (double) num4 + (double) num5 * (double) num5);
+          var vector2 = new Vector2(x, y);
+          var num4 = Main.item[index].position.X - vector2.X;
+          var num5 = Main.item[index].position.Y - vector2.Y;
+          var num6 = (float) Math.Sqrt((double) num4 * (double) num4 + (double) num5 * (double) num5);
           if ((double) num6 < 300.0)
             ++num2;
           if ((double) num6 < 800.0)
@@ -37480,12 +37480,12 @@ namespace Terraria
         }
         if (Main.netMode == 0)
           this.owner = Main.myPlayer;
-        float gravity = 0.1f;
-        float num1 = 7f;
+        var gravity = 0.1f;
+        var num1 = 7f;
         if (Main.netMode == 1)
         {
-          int index1 = (int) ((double) this.position.X + (double) (this.width / 2)) / 16;
-          int index2 = (int) ((double) this.position.Y + (double) (this.height / 2)) / 16;
+          var index1 = (int) ((double) this.position.X + (double) (this.width / 2)) / 16;
+          var index2 = (int) ((double) this.position.Y + (double) (this.height / 2)) / 16;
           if (index1 >= 0 && index2 >= 0 && (index1 < Main.maxTilesX && index2 < Main.maxTilesY) && Main.tile[index1, index2] == null)
           {
             gravity = 0.0f;
@@ -37510,10 +37510,10 @@ namespace Terraria
         if (this.keepTime > 0)
           --this.keepTime;
         this.isBeingGrabbed = this.beingGrabbed;
-        Vector2 vector2 = this.velocity * 0.5f;
+        var vector2 = this.velocity * 0.5f;
         if (!this.beingGrabbed)
         {
-          bool flag1 = true;
+          var flag1 = true;
           switch (this.type)
           {
             case 71:
@@ -37527,13 +37527,13 @@ namespace Terraria
             flag1 = false;
           if (this.owner == Main.myPlayer && flag1 && (this.createTile >= 0 || this.createWall > 0 || this.ammo > 0 && !this.notAmmo || (this.consumable || this.type >= 205 && this.type <= 207) || (this.type == 1128 || this.type == 530 || (this.dye > (byte) 0 || this.paint > (byte) 0) || this.material)) && this.stack < this.maxStack)
           {
-            for (int number = i + 1; number < 400; ++number)
+            for (var number = i + 1; number < 400; ++number)
             {
               if (Main.item[number].active && Main.item[number].type == this.type && (Main.item[number].stack > 0 && Main.item[number].owner == this.owner) && (double) (Math.Abs((float) ((double) this.position.X + (double) (this.width / 2) - ((double) Main.item[number].position.X + (double) (Main.item[number].width / 2)))) + Math.Abs((float) ((double) this.position.Y + (double) (this.height / 2) - ((double) Main.item[number].position.Y + (double) (Main.item[number].height / 2))))) < 30.0)
               {
                 this.position = (this.position + Main.item[number].position) / 2f;
                 this.velocity = (this.velocity + Main.item[number].velocity) / 2f;
-                int num2 = Main.item[number].stack;
+                var num2 = Main.item[number].stack;
                 if (num2 > this.maxStack - this.stack)
                   num2 = this.maxStack - this.stack;
                 Main.item[number].stack -= num2;
@@ -37553,46 +37553,46 @@ namespace Terraria
           }
           if (Main.netMode != 2 && Main.expertMode && (this.owner == Main.myPlayer && this.type >= 71) && this.type <= 74)
           {
-            Rectangle rectangle1 = new Rectangle((int) this.position.X, (int) this.position.Y, this.width, this.height);
-            for (int index1 = 0; index1 < 200; ++index1)
+            var rectangle1 = new Rectangle((int) this.position.X, (int) this.position.Y, this.width, this.height);
+            for (var index1 = 0; index1 < 200; ++index1)
             {
               if (Main.npc[index1].active && Main.npc[index1].lifeMax > 5 && (!Main.npc[index1].friendly && !Main.npc[index1].immortal) && !Main.npc[index1].dontTakeDamage)
               {
-                float stack = (float) this.stack;
-                float num2 = 1f;
+                var stack = (float) this.stack;
+                var num2 = 1f;
                 if (this.type == 72)
                   num2 = 100f;
                 if (this.type == 73)
                   num2 = 10000f;
                 if (this.type == 74)
                   num2 = 1000000f;
-                float num3 = stack * num2;
-                float extraValue = Main.npc[index1].extraValue;
-                int index2 = Main.npc[index1].realLife;
+                var num3 = stack * num2;
+                var extraValue = Main.npc[index1].extraValue;
+                var index2 = Main.npc[index1].realLife;
                 if (index2 >= 0 && Main.npc[index2].active)
                   extraValue = Main.npc[index2].extraValue;
                 else
                   index2 = -1;
                 if ((double) extraValue < (double) num3)
                 {
-                  Rectangle rectangle2 = new Rectangle((int) Main.npc[index1].position.X, (int) Main.npc[index1].position.Y, Main.npc[index1].width, Main.npc[index1].height);
+                  var rectangle2 = new Rectangle((int) Main.npc[index1].position.X, (int) Main.npc[index1].position.Y, Main.npc[index1].width, Main.npc[index1].height);
                   if (rectangle1.Intersects(rectangle2))
                   {
-                    float num4 = (float) Main.rand.Next(50, 76) * 0.01f;
+                    var num4 = (float) Main.rand.Next(50, 76) * 0.01f;
                     if (this.type == 71)
                       num4 += (float) Main.rand.Next(51) * 0.01f;
                     if (this.type == 72)
                       num4 += (float) Main.rand.Next(26) * 0.01f;
                     if ((double) num4 > 1.0)
                       num4 = 1f;
-                    int num5 = (int) ((double) this.stack * (double) num4);
+                    var num5 = (int) ((double) this.stack * (double) num4);
                     if (num5 < 1)
                       num5 = 1;
                     if (num5 > this.stack)
                       num5 = this.stack;
                     this.stack -= num5;
-                    float number2 = (float) num5 * num2;
-                    int number = index1;
+                    var number2 = (float) num5 * num2;
+                    var number = index1;
                     if (index2 >= 0)
                       number = index2;
                     Main.npc[number].extraValue += number2;
@@ -37629,10 +37629,10 @@ namespace Terraria
             if ((double) this.velocity.X < 0.1 && (double) this.velocity.X > -0.1)
               this.velocity.X = 0.0f;
           }
-          bool flag2 = Collision.LavaCollision(this.position, this.width, this.height);
+          var flag2 = Collision.LavaCollision(this.position, this.width, this.height);
           if (flag2)
             this.lavaWet = true;
-          bool flag3 = Collision.WetCollision(this.position, this.width, this.height);
+          var flag3 = Collision.WetCollision(this.position, this.width, this.height);
           if (Collision.honey)
             this.honeyWet = true;
           if (flag3)
@@ -37646,9 +37646,9 @@ namespace Terraria
                 {
                   if (this.honeyWet)
                   {
-                    for (int index1 = 0; index1 < 5; ++index1)
+                    for (var index1 = 0; index1 < 5; ++index1)
                     {
-                      int index2 = Dust.NewDust(new Vector2(this.position.X - 6f, (float) ((double) this.position.Y + (double) (this.height / 2) - 8.0)), this.width + 12, 24, 152, 0.0f, 0.0f, 0, new Color(), 1f);
+                      var index2 = Dust.NewDust(new Vector2(this.position.X - 6f, (float) ((double) this.position.Y + (double) (this.height / 2) - 8.0)), this.width + 12, 24, 152, 0.0f, 0.0f, 0, new Color(), 1f);
                       --Main.dust[index2].velocity.Y;
                       Main.dust[index2].velocity.X *= 2.5f;
                       Main.dust[index2].scale = 1.3f;
@@ -37659,9 +37659,9 @@ namespace Terraria
                   }
                   else
                   {
-                    for (int index1 = 0; index1 < 10; ++index1)
+                    for (var index1 = 0; index1 < 10; ++index1)
                     {
-                      int index2 = Dust.NewDust(new Vector2(this.position.X - 6f, (float) ((double) this.position.Y + (double) (this.height / 2) - 8.0)), this.width + 12, 24, Dust.dustWater(), 0.0f, 0.0f, 0, new Color(), 1f);
+                      var index2 = Dust.NewDust(new Vector2(this.position.X - 6f, (float) ((double) this.position.Y + (double) (this.height / 2) - 8.0)), this.width + 12, 24, Dust.dustWater(), 0.0f, 0.0f, 0, new Color(), 1f);
                       Main.dust[index2].velocity.Y -= 4f;
                       Main.dust[index2].velocity.X *= 2.5f;
                       Main.dust[index2].scale *= 0.8f;
@@ -37673,9 +37673,9 @@ namespace Terraria
                 }
                 else
                 {
-                  for (int index1 = 0; index1 < 5; ++index1)
+                  for (var index1 = 0; index1 < 5; ++index1)
                   {
-                    int index2 = Dust.NewDust(new Vector2(this.position.X - 6f, (float) ((double) this.position.Y + (double) (this.height / 2) - 8.0)), this.width + 12, 24, 35, 0.0f, 0.0f, 0, new Color(), 1f);
+                    var index2 = Dust.NewDust(new Vector2(this.position.X - 6f, (float) ((double) this.position.Y + (double) (this.height / 2) - 8.0)), this.width + 12, 24, 35, 0.0f, 0.0f, 0, new Color(), 1f);
                     Main.dust[index2].velocity.Y -= 1.5f;
                     Main.dust[index2].velocity.X *= 2.5f;
                     Main.dust[index2].scale = 1.3f;
@@ -37691,7 +37691,7 @@ namespace Terraria
           else if (this.wet)
           {
             this.wet = false;
-            int wetCount = (int) this.wetCount;
+            var wetCount = (int) this.wetCount;
           }
           if (!this.wet)
           {
@@ -37704,7 +37704,7 @@ namespace Terraria
           {
             if (this.wet)
             {
-              Vector2 velocity = this.velocity;
+              var velocity = this.velocity;
               this.velocity = Collision.TileCollision(this.position, this.velocity, this.width, this.height, false, false, 1);
               if ((double) this.velocity.X != (double) velocity.X)
                 vector2.X = this.velocity.X;
@@ -37714,7 +37714,7 @@ namespace Terraria
           }
           else
             this.velocity = Collision.TileCollision(this.position, this.velocity, this.width, this.height, false, false, 1);
-          Vector4 vector4 = Collision.SlopeCollision(this.position, this.velocity, this.width, this.height, gravity, false);
+          var vector4 = Collision.SlopeCollision(this.position, this.velocity, this.width, this.height, gravity, false);
           this.position.X = vector4.X;
           this.position.Y = vector4.Y;
           this.velocity.X = vector4.Z;
@@ -37729,7 +37729,7 @@ namespace Terraria
                 this.active = false;
                 this.type = 0;
                 this.stack = 0;
-                for (int number = 0; number < 200; ++number)
+                for (var number = 0; number < 200; ++number)
                 {
                   if (Main.npc[number].active && Main.npc[number].type == 22)
                   {
@@ -37753,57 +37753,57 @@ namespace Terraria
           }
           if (this.type == 3191)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * (float) (((double) Main.essScale + 0.5) / 2.0);
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * (float) (((double) Main.essScale + 0.5) / 2.0);
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.3f * num2, 0.1f * num2, 0.25f * num2);
           }
           else if (this.type == 520 || this.type == 3454)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.5f * num2, 0.1f * num2, 0.25f * num2);
           }
           else if (this.type == 521 || this.type == 3455)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.25f * num2, 0.1f * num2, 0.5f * num2);
           }
           else if (this.type == 547 || this.type == 3453)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.5f * num2, 0.3f * num2, 0.05f * num2);
           }
           else if (this.type == 548)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.1f * num2, 0.1f * num2, 0.6f * num2);
           }
           else if (this.type == 575)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.1f * num2, 0.3f * num2, 0.5f * num2);
           }
           else if (this.type == 549)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * Main.essScale;
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.1f * num2, 0.5f * num2, 0.2f * num2);
           }
           else if (this.type == 58 || this.type == 1734 || this.type == 1867)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * (Main.essScale * 0.5f);
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * (Main.essScale * 0.5f);
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.5f * num2, 0.1f * num2, 0.1f * num2);
           }
           else if (this.type == 184 || this.type == 1735 || this.type == 1868)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * (Main.essScale * 0.5f);
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * (Main.essScale * 0.5f);
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.1f * num2, 0.1f * num2, 0.5f * num2);
           }
           else if (this.type == 522)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * (Main.essScale * 0.2f);
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * (Main.essScale * 0.2f);
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.5f * num2, 1f * num2, 0.1f * num2);
           }
           else if (this.type == 1332)
           {
-            float num2 = (float) Main.rand.Next(90, 111) * 0.01f * (Main.essScale * 0.2f);
+            var num2 = (float) Main.rand.Next(90, 111) * 0.01f * (Main.essScale * 0.2f);
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 1f * num2, 1f * num2, 0.1f * num2);
           }
           else if (this.type == 3456)
@@ -37816,9 +37816,9 @@ namespace Terraria
             Lighting.AddLight(this.Center, new Vector3(0.2f, 0.2f, 0.5f) * Main.essScale);
           if (this.type == 75 && Main.dayTime)
           {
-            for (int index = 0; index < 10; ++index)
+            for (var index = 0; index < 10; ++index)
               Dust.NewDust(this.position, this.width, this.height, 15, this.velocity.X, this.velocity.Y, 150, new Color(), 1.2f);
-            for (int index = 0; index < 3; ++index)
+            for (var index = 0; index < 3; ++index)
               Gore.NewGore(this.position, new Vector2(this.velocity.X, this.velocity.Y), Main.rand.Next(16, 18), 1f);
             this.active = false;
             this.type = 0;
@@ -37828,10 +37828,10 @@ namespace Terraria
           }
           if (this.type == 3822 && !DD2Event.Ongoing)
           {
-            int num2 = Main.rand.Next(18, 24);
-            for (int index1 = 0; index1 < num2; ++index1)
+            var num2 = Main.rand.Next(18, 24);
+            for (var index1 = 0; index1 < num2; ++index1)
             {
-              int index2 = Dust.NewDust(this.Center, 0, 0, 61, 0.0f, 0.0f, 0, new Color(), 1.7f);
+              var index2 = Dust.NewDust(this.Center, 0, 0, 61, 0.0f, 0.0f, 0, new Color(), 1.7f);
               Main.dust[index2].velocity *= 8f;
               --Main.dust[index2].velocity.Y;
               Main.dust[index2].position = Vector2.Lerp(Main.dust[index2].position, this.Center, 0.5f);
@@ -37851,7 +37851,7 @@ namespace Terraria
         {
           if (Main.rand.Next(6) == 0)
           {
-            int index = Dust.NewDust(this.position, this.width, this.height, 55, 0.0f, 0.0f, 200, this.color, 1f);
+            var index = Dust.NewDust(this.position, this.width, this.height, 55, 0.0f, 0.0f, 200, this.color, 1f);
             Main.dust[index].velocity *= 0.3f;
             Main.dust[index].scale *= 0.5f;
           }
@@ -37908,9 +37908,9 @@ namespace Terraria
           Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), 0.95f, 0.65f, 1.3f);
         else if (this.type == 2274)
         {
-          float R = 0.75f;
-          float G = 1.35f;
-          float B = 1.5f;
+          var R = 0.75f;
+          var G = 1.35f;
+          var B = 1.5f;
           if (!this.wet)
             Lighting.AddLight((int) (((double) this.position.X + (double) (this.width / 2)) / 16.0), (int) (((double) this.position.Y + (double) (this.height / 2)) / 16.0), R, G, B);
         }
@@ -37918,10 +37918,10 @@ namespace Terraria
         {
           if (!this.wet)
           {
-            float R = 0.0f;
-            float G = 0.0f;
-            float B = 0.0f;
-            int num2 = this.type - 426;
+            var R = 0.0f;
+            var G = 0.0f;
+            var B = 0.0f;
+            var num2 = this.type - 426;
             if (num2 == 1)
             {
               R = 0.1f;
@@ -38017,12 +38017,12 @@ namespace Terraria
         }
         if (this.wet)
         {
-          Item obj = this;
+          var obj = this;
           obj.position = obj.position + vector2;
         }
         else
         {
-          Item obj = this;
+          var obj = this;
           obj.position = obj.position + this.velocity;
         }
         if (this.noGrabDelay <= 0)
@@ -38047,7 +38047,7 @@ namespace Terraria
         return 0;
       if (Main.rand == null)
         Main.rand = new UnifiedRandom();
-      int index1 = 400;
+      var index1 = 400;
       Main.item[400] = new Item();
       if (Main.halloween)
       {
@@ -38072,7 +38072,7 @@ namespace Terraria
       {
         if (reverseLookup)
         {
-          for (int index2 = 399; index2 >= 0; --index2)
+          for (var index2 = 399; index2 >= 0; --index2)
           {
             if (!Main.item[index2].active && Main.itemLockoutTime[index2] == 0)
             {
@@ -38083,7 +38083,7 @@ namespace Terraria
         }
         else
         {
-          for (int index2 = 0; index2 < 400; ++index2)
+          for (var index2 = 0; index2 < 400; ++index2)
           {
             if (!Main.item[index2].active && Main.itemLockoutTime[index2] == 0)
             {
@@ -38095,8 +38095,8 @@ namespace Terraria
       }
       if (index1 == 400 && Main.netMode != 1)
       {
-        int num = 0;
-        for (int index2 = 0; index2 < 400; ++index2)
+        var num = 0;
+        for (var index2 = 0; index2 < 400; ++index2)
         {
           if (Main.item[index2].spawnTime - Main.itemLockoutTime[index2] > num)
           {
@@ -38116,7 +38116,7 @@ namespace Terraria
       Main.item[index1].velocity.Y = (float) Main.rand.Next(-40, -15) * 0.1f;
       if (Type == 859)
       {
-        Item obj = Main.item[index1];
+        var obj = Main.item[index1];
         obj.velocity = obj.velocity * 0.0f;
       }
       if (Type == 520 || Type == 521 || Main.item[index1].type >= 0 && ItemID.Sets.NebulaPickup[Main.item[index1].type])
@@ -38131,7 +38131,7 @@ namespace Terraria
         Main.item[index1].newAndShiny = true;
       if (Main.netMode == 2 && !noBroadcast)
       {
-        int num = 0;
+        var num = 0;
         if (noGrabDelay)
           num = 1;
         NetMessage.SendData(21, -1, -1, (NetworkText) null, index1, (float) num, 0.0f, 0.0f, 0, 0, 0);
@@ -38146,14 +38146,14 @@ namespace Terraria
     {
       if (this.keepTime > 0)
         return;
-      int owner = this.owner;
+      var owner = this.owner;
       this.owner = (int) byte.MaxValue;
-      float num1 = 999999f;
-      for (int index = 0; index < (int) byte.MaxValue; ++index)
+      var num1 = 999999f;
+      for (var index = 0; index < (int) byte.MaxValue; ++index)
       {
         if (this.ownIgnore != index && Main.player[index].active && Main.player[index].ItemSpace(Main.item[whoAmI]))
         {
-          float num2 = Math.Abs(Main.player[index].position.X + (float) (Main.player[index].width / 2) - this.position.X - (float) (this.width / 2)) + Math.Abs(Main.player[index].position.Y + (float) (Main.player[index].height / 2) - this.position.Y - (float) this.height);
+          var num2 = Math.Abs(Main.player[index].position.X + (float) (Main.player[index].width / 2) - this.position.X - (float) (this.width / 2)) + Math.Abs(Main.player[index].position.Y + (float) (Main.player[index].height / 2) - this.position.Y - (float) this.height);
           if (Main.player[index].manaMagnet && (this.type == 184 || this.type == 1735 || this.type == 1868))
             num2 -= (float) Item.manaGrabRange;
           if (Main.player[index].lifeMagnet && (this.type == 58 || this.type == 1734 || this.type == 1867))

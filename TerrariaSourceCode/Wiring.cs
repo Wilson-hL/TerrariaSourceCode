@@ -87,7 +87,7 @@ namespace Terraria
         public static void UpdateMech()
         {
             Wiring.SetCurrentUser(-1);
-            for (int index1 = Wiring._numMechs - 1; index1 >= 0; --index1)
+            for (var index1 = Wiring._numMechs - 1; index1 >= 0; --index1)
             {
                 --Wiring._mechTime[index1];
                 if (Main.tile[Wiring._mechX[index1], Wiring._mechY[index1]].active() &&
@@ -99,7 +99,7 @@ namespace Terraria
                     }
                     else
                     {
-                        int num = (int) Main.tile[Wiring._mechX[index1], Wiring._mechY[index1]].frameX / 18;
+                        var num = (int) Main.tile[Wiring._mechX[index1], Wiring._mechY[index1]].frameX / 18;
                         switch (num)
                         {
                             case 0:
@@ -134,24 +134,24 @@ namespace Terraria
                     if (Main.tile[Wiring._mechX[index1], Wiring._mechY[index1]].active() &&
                         Main.tile[Wiring._mechX[index1], Wiring._mechY[index1]].type == (ushort) 411)
                     {
-                        Tile tile = Main.tile[Wiring._mechX[index1], Wiring._mechY[index1]];
-                        int num1 = (int) tile.frameX % 36 / 18;
-                        int num2 = (int) tile.frameY % 36 / 18;
-                        int tileX = Wiring._mechX[index1] - num1;
-                        int tileY = Wiring._mechY[index1] - num2;
-                        int num3 = 36;
+                        var tile = Main.tile[Wiring._mechX[index1], Wiring._mechY[index1]];
+                        var num1 = (int) tile.frameX % 36 / 18;
+                        var num2 = (int) tile.frameY % 36 / 18;
+                        var tileX = Wiring._mechX[index1] - num1;
+                        var tileY = Wiring._mechY[index1] - num2;
+                        var num3 = 36;
                         if (Main.tile[tileX, tileY].frameX >= (short) 36)
                             num3 = -36;
-                        for (int index2 = tileX; index2 < tileX + 2; ++index2)
+                        for (var index2 = tileX; index2 < tileX + 2; ++index2)
                         {
-                            for (int index3 = tileY; index3 < tileY + 2; ++index3)
+                            for (var index3 = tileY; index3 < tileY + 2; ++index3)
                                 Main.tile[index2, index3].frameX += (short) num3;
                         }
 
                         NetMessage.SendTileSquare(-1, tileX, tileY, 2, TileChangeType.None);
                     }
 
-                    for (int index2 = index1; index2 < Wiring._numMechs; ++index2)
+                    for (var index2 = index1; index2 < Wiring._numMechs; ++index2)
                     {
                         Wiring._mechX[index2] = Wiring._mechX[index2 + 1];
                         Wiring._mechY[index2] = Wiring._mechY[index2 + 1];
@@ -200,13 +200,13 @@ namespace Terraria
             }
             else if (Main.tile[i, j].type == (ushort) 441 || Main.tile[i, j].type == (ushort) 468)
             {
-                int num1 = (int) Main.tile[i, j].frameX / 18 * -1;
-                int num2 = (int) Main.tile[i, j].frameY / 18 * -1;
-                int num3 = num1 % 4;
+                var num1 = (int) Main.tile[i, j].frameX / 18 * -1;
+                var num2 = (int) Main.tile[i, j].frameY / 18 * -1;
+                var num3 = num1 % 4;
                 if (num3 < -1)
                     num3 += 2;
-                int left = num3 + i;
-                int top = num2 + j;
+                var left = num3 + i;
+                var top = num2 + j;
                 Main.PlaySound(28, i * 16, j * 16, 0, 1f, 0.0f);
                 Wiring.TripWire(left, top, 2, 2);
             }
@@ -215,22 +215,22 @@ namespace Terraria
                 if (Main.tile[i, j].type != (ushort) 132 && Main.tile[i, j].type != (ushort) 411)
                     return;
                 short num1 = 36;
-                int num2 = (int) Main.tile[i, j].frameX / 18 * -1;
-                int num3 = (int) Main.tile[i, j].frameY / 18 * -1;
-                int num4 = num2 % 4;
+                var num2 = (int) Main.tile[i, j].frameX / 18 * -1;
+                var num3 = (int) Main.tile[i, j].frameY / 18 * -1;
+                var num4 = num2 % 4;
                 if (num4 < -1)
                 {
                     num4 += 2;
                     num1 = (short) -36;
                 }
 
-                int index1 = num4 + i;
-                int index2 = num3 + j;
+                var index1 = num4 + i;
+                var index2 = num3 + j;
                 if (Main.netMode != 1 && Main.tile[index1, index2].type == (ushort) 411)
                     Wiring.CheckMech(index1, index2, 60);
-                for (int index3 = index1; index3 < index1 + 2; ++index3)
+                for (var index3 = index1; index3 < index1 + 2; ++index3)
                 {
-                    for (int index4 = index2; index4 < index2 + 2; ++index4)
+                    for (var index4 = index2; index4 < index2 + 2; ++index4)
                     {
                         if (Main.tile[index3, index4].type == (ushort) 132 ||
                             Main.tile[index3, index4].type == (ushort) 411)
@@ -254,7 +254,7 @@ namespace Terraria
 
         public static bool Actuate(int i, int j)
         {
-            Tile tile = Main.tile[i, j];
+            var tile = Main.tile[i, j];
             if (!tile.actuator())
                 return false;
             if ((tile.type != (ushort) 226 || (double) j <= Main.worldSurface || NPC.downedPlantBoss) &&
@@ -271,7 +271,7 @@ namespace Terraria
 
         public static void ActuateForced(int i, int j)
         {
-            Tile tile = Main.tile[i, j];
+            var tile = Main.tile[i, j];
             if (tile.type == (ushort) 226 && (double) j > Main.worldSurface && !NPC.downedPlantBoss)
                 return;
             if (tile.inActive())
@@ -282,9 +282,9 @@ namespace Terraria
 
         public static void MassWireOperation(Point ps, Point pe, Player master)
         {
-            int wireCount = 0;
-            int actuatorCount = 0;
-            for (int index = 0; index < 58; ++index)
+            var wireCount = 0;
+            var actuatorCount = 0;
+            for (var index = 0; index < 58; ++index)
             {
                 if (master.inventory[index].type == 530)
                     wireCount += master.inventory[index].stack;
@@ -292,12 +292,12 @@ namespace Terraria
                     actuatorCount += master.inventory[index].stack;
             }
 
-            int num1 = wireCount;
-            int num2 = actuatorCount;
+            var num1 = wireCount;
+            var num2 = actuatorCount;
             Wiring.MassWireOperationInner(ps, pe, master.Center, master.direction == 1, ref wireCount,
                 ref actuatorCount);
-            int num3 = num1 - wireCount;
-            int num4 = num2 - actuatorCount;
+            var num3 = num1 - wireCount;
+            var num4 = num2 - actuatorCount;
             if (Main.netMode == 2)
             {
                 NetMessage.SendData(110, master.whoAmI, -1, (NetworkText) null, 530, (float) num3,
@@ -307,16 +307,16 @@ namespace Terraria
             }
             else
             {
-                for (int index = 0; index < num3; ++index)
+                for (var index = 0; index < num3; ++index)
                     master.ConsumeItem(530, false);
-                for (int index = 0; index < num4; ++index)
+                for (var index = 0; index < num4; ++index)
                     master.ConsumeItem(849, false);
             }
         }
 
         private static bool CheckMech(int i, int j, int time)
         {
-            for (int index = 0; index < Wiring._numMechs; ++index)
+            for (var index = 0; index < Wiring._numMechs; ++index)
             {
                 if (Wiring._mechX[index] == i && Wiring._mechY[index] == j)
                     return false;
@@ -333,24 +333,24 @@ namespace Terraria
 
         private static void XferWater()
         {
-            for (int index1 = 0; index1 < Wiring._numInPump; ++index1)
+            for (var index1 = 0; index1 < Wiring._numInPump; ++index1)
             {
-                int i1 = Wiring._inPumpX[index1];
-                int j1 = Wiring._inPumpY[index1];
-                int liquid1 = (int) Main.tile[i1, j1].liquid;
+                var i1 = Wiring._inPumpX[index1];
+                var j1 = Wiring._inPumpY[index1];
+                var liquid1 = (int) Main.tile[i1, j1].liquid;
                 if (liquid1 > 0)
                 {
-                    bool lava = Main.tile[i1, j1].lava();
-                    bool honey = Main.tile[i1, j1].honey();
-                    for (int index2 = 0; index2 < Wiring._numOutPump; ++index2)
+                    var lava = Main.tile[i1, j1].lava();
+                    var honey = Main.tile[i1, j1].honey();
+                    for (var index2 = 0; index2 < Wiring._numOutPump; ++index2)
                     {
-                        int i2 = Wiring._outPumpX[index2];
-                        int j2 = Wiring._outPumpY[index2];
-                        int liquid2 = (int) Main.tile[i2, j2].liquid;
+                        var i2 = Wiring._outPumpX[index2];
+                        var j2 = Wiring._outPumpY[index2];
+                        var liquid2 = (int) Main.tile[i2, j2].liquid;
                         if (liquid2 < (int) byte.MaxValue)
                         {
-                            bool flag1 = Main.tile[i2, j2].lava();
-                            bool flag2 = Main.tile[i2, j2].honey();
+                            var flag1 = Main.tile[i2, j2].lava();
+                            var flag2 = Main.tile[i2, j2].honey();
                             if (liquid2 == 0)
                             {
                                 flag1 = lava;
@@ -359,7 +359,7 @@ namespace Terraria
 
                             if (lava == flag1 && honey == flag2)
                             {
-                                int num = liquid1;
+                                var num = liquid1;
                                 if (num + liquid2 > (int) byte.MaxValue)
                                     num = (int) byte.MaxValue - liquid2;
                                 Main.tile[i2, j2].liquid += (byte) num;
@@ -392,15 +392,15 @@ namespace Terraria
                 Wiring._wireList.Clear(true);
             if (Wiring._wireDirectionList.Count != 0)
                 Wiring._wireDirectionList.Clear(true);
-            Vector2[] vector2Array1 = new Vector2[8];
-            int num1 = 0;
+            var vector2Array1 = new Vector2[8];
+            var num1 = 0;
             Point16 back;
-            for (int X = left; X < left + width; ++X)
+            for (var X = left; X < left + width; ++X)
             {
-                for (int Y = top; Y < top + height; ++Y)
+                for (var Y = top; Y < top + height; ++Y)
                 {
                     back = new Point16(X, Y);
-                    Tile tile = Main.tile[X, Y];
+                    var tile = Main.tile[X, Y];
                     if (tile != null && tile.wire())
                         Wiring._wireList.PushBack(back);
                 }
@@ -419,20 +419,20 @@ namespace Terraria
                     Wiring.XferWater();
             }
 
-            Vector2[] vector2Array2 = vector2Array1;
-            int index1 = num1;
-            int num2 = index1 + 1;
+            var vector2Array2 = vector2Array1;
+            var index1 = num1;
+            var num2 = index1 + 1;
             vector2Array2[index1] = Wiring._teleport[0];
-            Vector2[] vector2Array3 = vector2Array1;
-            int index2 = num2;
-            int num3 = index2 + 1;
+            var vector2Array3 = vector2Array1;
+            var index2 = num2;
+            var num3 = index2 + 1;
             vector2Array3[index2] = Wiring._teleport[1];
-            for (int X = left; X < left + width; ++X)
+            for (var X = left; X < left + width; ++X)
             {
-                for (int Y = top; Y < top + height; ++Y)
+                for (var Y = top; Y < top + height; ++Y)
                 {
                     back = new Point16(X, Y);
-                    Tile tile = Main.tile[X, Y];
+                    var tile = Main.tile[X, Y];
                     if (tile != null && tile.wire2())
                         Wiring._wireList.PushBack(back);
                 }
@@ -451,24 +451,24 @@ namespace Terraria
                     Wiring.XferWater();
             }
 
-            Vector2[] vector2Array4 = vector2Array1;
-            int index3 = num3;
-            int num4 = index3 + 1;
+            var vector2Array4 = vector2Array1;
+            var index3 = num3;
+            var num4 = index3 + 1;
             vector2Array4[index3] = Wiring._teleport[0];
-            Vector2[] vector2Array5 = vector2Array1;
-            int index4 = num4;
-            int num5 = index4 + 1;
+            var vector2Array5 = vector2Array1;
+            var index4 = num4;
+            var num5 = index4 + 1;
             vector2Array5[index4] = Wiring._teleport[1];
             Wiring._teleport[0].X = -1f;
             Wiring._teleport[0].Y = -1f;
             Wiring._teleport[1].X = -1f;
             Wiring._teleport[1].Y = -1f;
-            for (int X = left; X < left + width; ++X)
+            for (var X = left; X < left + width; ++X)
             {
-                for (int Y = top; Y < top + height; ++Y)
+                for (var Y = top; Y < top + height; ++Y)
                 {
                     back = new Point16(X, Y);
-                    Tile tile = Main.tile[X, Y];
+                    var tile = Main.tile[X, Y];
                     if (tile != null && tile.wire3())
                         Wiring._wireList.PushBack(back);
                 }
@@ -483,24 +483,24 @@ namespace Terraria
                     Wiring.XferWater();
             }
 
-            Vector2[] vector2Array6 = vector2Array1;
-            int index5 = num5;
-            int num6 = index5 + 1;
+            var vector2Array6 = vector2Array1;
+            var index5 = num5;
+            var num6 = index5 + 1;
             vector2Array6[index5] = Wiring._teleport[0];
-            Vector2[] vector2Array7 = vector2Array1;
-            int index6 = num6;
-            int num7 = index6 + 1;
+            var vector2Array7 = vector2Array1;
+            var index6 = num6;
+            var num7 = index6 + 1;
             vector2Array7[index6] = Wiring._teleport[1];
             Wiring._teleport[0].X = -1f;
             Wiring._teleport[0].Y = -1f;
             Wiring._teleport[1].X = -1f;
             Wiring._teleport[1].Y = -1f;
-            for (int X = left; X < left + width; ++X)
+            for (var X = left; X < left + width; ++X)
             {
-                for (int Y = top; Y < top + height; ++Y)
+                for (var Y = top; Y < top + height; ++Y)
                 {
                     back = new Point16(X, Y);
-                    Tile tile = Main.tile[X, Y];
+                    var tile = Main.tile[X, Y];
                     if (tile != null && tile.wire4())
                         Wiring._wireList.PushBack(back);
                 }
@@ -515,15 +515,15 @@ namespace Terraria
                     Wiring.XferWater();
             }
 
-            Vector2[] vector2Array8 = vector2Array1;
-            int index7 = num7;
-            int num8 = index7 + 1;
+            var vector2Array8 = vector2Array1;
+            var index7 = num7;
+            var num8 = index7 + 1;
             vector2Array8[index7] = Wiring._teleport[0];
-            Vector2[] vector2Array9 = vector2Array1;
-            int index8 = num8;
-            int num9 = index8 + 1;
+            var vector2Array9 = vector2Array1;
+            var index8 = num8;
+            var num9 = index8 + 1;
             vector2Array9[index8] = Wiring._teleport[1];
-            int index9 = 0;
+            var index9 = 0;
             while (index9 < 8)
             {
                 Wiring._teleport[0] = vector2Array1[index9];
@@ -539,7 +539,7 @@ namespace Terraria
 
         private static void PixelBoxPass()
         {
-            foreach (KeyValuePair<Point16, byte> pixelBoxTrigger in Wiring._PixelBoxTriggers)
+            foreach (var pixelBoxTrigger in Wiring._PixelBoxTriggers)
             {
                 if (pixelBoxTrigger.Value != (byte) 2)
                 {
@@ -574,7 +574,7 @@ namespace Terraria
             {
                 while (Wiring._LampsToCheck.Count > 0)
                 {
-                    Point16 point16 = Wiring._LampsToCheck.Dequeue();
+                    var point16 = Wiring._LampsToCheck.Dequeue();
                     Wiring.CheckLogicGate((int) point16.X, (int) point16.Y);
                 }
 
@@ -583,7 +583,7 @@ namespace Terraria
                     Utils.Swap<Queue<Point16>>(ref Wiring._GatesCurrent, ref Wiring._GatesNext);
                     while (Wiring._GatesCurrent.Count > 0)
                     {
-                        Point16 key = Wiring._GatesCurrent.Peek();
+                        var key = Wiring._GatesCurrent.Peek();
                         bool flag;
                         if (Wiring._GatesDone.TryGetValue(key, out flag) && flag)
                         {
@@ -609,26 +609,26 @@ namespace Terraria
         {
             if (!WorldGen.InWorld(lampX, lampY, 1))
                 return;
-            for (int index1 = lampY; index1 < Main.maxTilesY; ++index1)
+            for (var index1 = lampY; index1 < Main.maxTilesY; ++index1)
             {
-                Tile tile1 = Main.tile[lampX, index1];
+                var tile1 = Main.tile[lampX, index1];
                 if (!tile1.active())
                     break;
                 if (tile1.type == (ushort) 420)
                 {
                     bool flag1;
                     Wiring._GatesDone.TryGetValue(new Point16(lampX, index1), out flag1);
-                    int num1 = (int) tile1.frameY / 18;
-                    bool flag2 = tile1.frameX == (short) 18;
-                    bool flag3 = tile1.frameX == (short) 36;
+                    var num1 = (int) tile1.frameY / 18;
+                    var flag2 = tile1.frameX == (short) 18;
+                    var flag3 = tile1.frameX == (short) 36;
                     if (num1 < 0)
                         break;
-                    int num2 = 0;
-                    int num3 = 0;
-                    bool flag4 = false;
-                    for (int index2 = index1 - 1; index2 > 0; --index2)
+                    var num2 = 0;
+                    var num3 = 0;
+                    var flag4 = false;
+                    for (var index2 = index1 - 1; index2 > 0; --index2)
                     {
-                        Tile tile2 = Main.tile[lampX, index2];
+                        var tile2 = Main.tile[lampX, index2];
                         if (tile2.active() && tile2.type == (ushort) 419)
                         {
                             if (tile2.frameX == (short) 36)
@@ -669,20 +669,20 @@ namespace Terraria
                             return;
                     }
 
-                    bool flag6 = !flag4 && flag3;
-                    bool flag7 = false;
+                    var flag6 = !flag4 && flag3;
+                    var flag7 = false;
                     if (flag4 && Framing.GetTileSafely(lampX, lampY).frameX == (short) 36)
                         flag7 = true;
                     if (flag5 == flag2 && !flag6 && !flag7)
                         break;
-                    int num4 = (int) tile1.frameX % 18 / 18;
+                    var num4 = (int) tile1.frameX % 18 / 18;
                     tile1.frameX = (short) (18 * flag5.ToInt());
                     if (flag4)
                         tile1.frameX = (short) 36;
                     Wiring.SkipWire(lampX, index1);
                     WorldGen.SquareTileFrame(lampX, index1, true);
                     NetMessage.SendTileSquare(-1, lampX, index1, 1, TileChangeType.None);
-                    bool flag8 = !flag4 || flag7;
+                    var flag8 = !flag4 || flag7;
                     if (flag7)
                     {
                         if (num3 == 0 || num2 == 0)
@@ -700,7 +700,7 @@ namespace Terraria
                         break;
                     }
 
-                    Vector2 position = new Vector2((float) lampX, (float) index1) * 16f - new Vector2(10f);
+                    var position = new Vector2((float) lampX, (float) index1) * 16f - new Vector2(10f);
                     Utils.PoofOfSmoke(position);
                     NetMessage.SendData(106, -1, -1, (NetworkText) null, (int) position.X, position.Y, 0.0f, 0.0f, 0, 0,
                         0);
@@ -715,9 +715,9 @@ namespace Terraria
         private static void HitWire(DoubleStack<Point16> next, int wireType)
         {
             Wiring._wireDirectionList.Clear(true);
-            for (int index = 0; index < next.Count; ++index)
+            for (var index = 0; index < next.Count; ++index)
             {
-                Point16 point16 = next.PopFront();
+                var point16 = next.PopFront();
                 Wiring.SkipWire(point16);
                 Wiring._toProcess.Add(point16, (byte) 4);
                 next.PushBack(point16);
@@ -727,13 +727,13 @@ namespace Terraria
             Wiring._currentWireColor = wireType;
             while (next.Count > 0)
             {
-                Point16 key = next.PopFront();
-                int num1 = (int) Wiring._wireDirectionList.PopFront();
-                int x = (int) key.X;
-                int y = (int) key.Y;
+                var key = next.PopFront();
+                var num1 = (int) Wiring._wireDirectionList.PopFront();
+                var x = (int) key.X;
+                var y = (int) key.Y;
                 if (!Wiring._wireSkip.ContainsKey(key))
                     Wiring.HitWireSingle(x, y);
-                for (int index1 = 0; index1 < 4; ++index1)
+                for (var index1 = 0; index1 < 4; ++index1)
                 {
                     int X;
                     int Y;
@@ -763,10 +763,10 @@ namespace Terraria
 
                     if (X >= 2 && X < Main.maxTilesX - 2 && (Y >= 2 && Y < Main.maxTilesY - 2))
                     {
-                        Tile tile1 = Main.tile[X, Y];
+                        var tile1 = Main.tile[X, Y];
                         if (tile1 != null)
                         {
-                            Tile tile2 = Main.tile[x, y];
+                            var tile2 = Main.tile[x, y];
                             if (tile2 != null)
                             {
                                 byte num2 = 3;
@@ -801,7 +801,7 @@ namespace Terraria
                                         {
                                             Dictionary<Point16, byte> pixelBoxTriggers;
                                             Point16 index2;
-                                            int num3 =
+                                            var num3 =
                                                 (int) (byte)
                                                 ((int) (pixelBoxTriggers = Wiring._PixelBoxTriggers)[index2 = key] |
                                                  (index1 == 0 | index1 == 1 ? 2 : 1));
@@ -837,7 +837,7 @@ namespace Terraria
 
                                 if (flag)
                                 {
-                                    Point16 index2 = new Point16(X, Y);
+                                    var index2 = new Point16(X, Y);
                                     byte num3;
                                     if (Wiring._toProcess.TryGetValue(index2, out num3))
                                     {
@@ -868,8 +868,8 @@ namespace Terraria
 
         private static void HitWireSingle(int i, int j)
         {
-            Tile tile1 = Main.tile[i, j];
-            int type = (int) tile1.type;
+            var tile1 = Main.tile[i, j];
+            var type = (int) tile1.type;
             if (tile1.actuator())
                 Wiring.ActuateForced(i, j);
             if (!tile1.active())
@@ -934,16 +934,16 @@ namespace Terraria
                         NetMessage.SendTileSquare(-1, i, j, 1, TileChangeType.None);
                         break;
                     case 209:
-                        int num1 = (int) tile1.frameX % 72 / 18;
-                        int num2 = (int) tile1.frameY % 54 / 18;
-                        int num3 = i - num1;
-                        int num4 = j - num2;
-                        int angle = (int) tile1.frameY / 54;
-                        int num5 = (int) tile1.frameX / 72;
-                        int num6 = -1;
+                        var num1 = (int) tile1.frameX % 72 / 18;
+                        var num2 = (int) tile1.frameY % 54 / 18;
+                        var num3 = i - num1;
+                        var num4 = j - num2;
+                        var angle = (int) tile1.frameY / 54;
+                        var num5 = (int) tile1.frameX / 72;
+                        var num6 = -1;
                         if (num1 == 1 || num1 == 2)
                             num6 = num2;
-                        int num7 = 0;
+                        var num7 = 0;
                         if (num1 == 3)
                             num7 = -54;
                         if (num1 == 0)
@@ -952,12 +952,12 @@ namespace Terraria
                             num7 = 0;
                         if (angle == 0 && num7 < 0)
                             num7 = 0;
-                        bool flag1 = false;
+                        var flag1 = false;
                         if (num7 != 0)
                         {
-                            for (int x = num3; x < num3 + 4; ++x)
+                            for (var x = num3; x < num3 + 4; ++x)
                             {
-                                for (int y = num4; y < num4 + 3; ++y)
+                                for (var y = num4; y < num4 + 3; ++y)
                                 {
                                     Wiring.SkipWire(x, y);
                                     Main.tile[x, y].frameY += (short) num7;
@@ -969,10 +969,10 @@ namespace Terraria
 
                         if ((num5 == 3 || num5 == 4) && (num6 == 0 || num6 == 1))
                         {
-                            int num8 = num5 == 3 ? 72 : -72;
-                            for (int x = num3; x < num3 + 4; ++x)
+                            var num8 = num5 == 3 ? 72 : -72;
+                            for (var x = num3; x < num3 + 4; ++x)
                             {
-                                for (int y = num4; y < num4 + 3; ++y)
+                                for (var y = num4; y < num4 + 3; ++y)
                                 {
                                     Wiring.SkipWire(x, y);
                                     Main.tile[x, y].frameX += (short) num8;
@@ -986,7 +986,7 @@ namespace Terraria
                             NetMessage.SendTileSquare(-1, num3 + 1, num4 + 1, 4, TileChangeType.None);
                         if (num6 == -1)
                             break;
-                        bool flag2 = true;
+                        var flag2 = true;
                         if ((num5 == 3 || num5 == 4) && num6 < 2)
                             flag2 = false;
                         if (!Wiring.CheckMech(num3, num4, 30) || !flag2)
@@ -994,15 +994,15 @@ namespace Terraria
                         WorldGen.ShootFromCannon(num3, num4, angle, num5 + 1, 0, 0.0f, Wiring.CurrentUser);
                         break;
                     case 212:
-                        int num9 = (int) tile1.frameX % 54 / 18;
-                        int num10 = (int) tile1.frameY % 54 / 18;
-                        int i1 = i - num9;
-                        int j1 = j - num10;
-                        int num11 = (int) tile1.frameX / 54;
-                        int num12 = -1;
+                        var num9 = (int) tile1.frameX % 54 / 18;
+                        var num10 = (int) tile1.frameY % 54 / 18;
+                        var i1 = i - num9;
+                        var j1 = j - num10;
+                        var num11 = (int) tile1.frameX / 54;
+                        var num12 = -1;
                         if (num9 == 1)
                             num12 = num10;
-                        int num13 = 0;
+                        var num13 = 0;
                         if (num9 == 0)
                             num13 = -54;
                         if (num9 == 2)
@@ -1011,12 +1011,12 @@ namespace Terraria
                             num13 = 0;
                         if (num11 == 0 && num13 < 0)
                             num13 = 0;
-                        bool flag3 = false;
+                        var flag3 = false;
                         if (num13 != 0)
                         {
-                            for (int x = i1; x < i1 + 3; ++x)
+                            for (var x = i1; x < i1 + 3; ++x)
                             {
-                                for (int y = j1; y < j1 + 3; ++y)
+                                for (var y = j1; y < j1 + 3; ++y)
                                 {
                                     Wiring.SkipWire(x, y);
                                     Main.tile[x, y].frameX += (short) num13;
@@ -1030,13 +1030,13 @@ namespace Terraria
                             NetMessage.SendTileSquare(-1, i1 + 1, j1 + 1, 4, TileChangeType.None);
                         if (num12 == -1 || !Wiring.CheckMech(i1, j1, 10))
                             break;
-                        float num14 = (float) (12.0 + (double) Main.rand.Next(450) * 0.00999999977648258);
-                        float num15 = (float) Main.rand.Next(85, 105);
-                        float num16 = (float) Main.rand.Next(-35, 11);
-                        int Type1 = 166;
-                        int Damage1 = 0;
-                        float KnockBack = 0.0f;
-                        Vector2 vector2_1 = new Vector2((float) ((i1 + 2) * 16 - 8), (float) ((j1 + 2) * 16 - 8));
+                        var num14 = (float) (12.0 + (double) Main.rand.Next(450) * 0.00999999977648258);
+                        var num15 = (float) Main.rand.Next(85, 105);
+                        var num16 = (float) Main.rand.Next(-35, 11);
+                        var Type1 = 166;
+                        var Damage1 = 0;
+                        var KnockBack = 0.0f;
+                        var vector2_1 = new Vector2((float) ((i1 + 2) * 16 - 8), (float) ((j1 + 2) * 16 - 8));
                         if ((int) tile1.frameX / 54 == 0)
                         {
                             num15 *= -1f;
@@ -1045,27 +1045,27 @@ namespace Terraria
                         else
                             vector2_1.X += 12f;
 
-                        float num17 = num15;
-                        float num18 = num16;
-                        float num19 =
+                        var num17 = num15;
+                        var num18 = num16;
+                        var num19 =
                             (float) Math.Sqrt((double) num17 * (double) num17 + (double) num18 * (double) num18);
-                        float num20 = num14 / num19;
-                        float SpeedX1 = num17 * num20;
-                        float SpeedY1 = num18 * num20;
+                        var num20 = num14 / num19;
+                        var SpeedX1 = num17 * num20;
+                        var SpeedY1 = num18 * num20;
                         Projectile.NewProjectile(vector2_1.X, vector2_1.Y, SpeedX1, SpeedY1, Type1, Damage1, KnockBack,
                             Wiring.CurrentUser, 0.0f, 0.0f);
                         break;
                     case 215:
-                        int num21 = (int) tile1.frameX % 54 / 18;
-                        int num22 = (int) tile1.frameY % 36 / 18;
-                        int index1 = i - num21;
-                        int index2 = j - num22;
-                        int num23 = 36;
+                        var num21 = (int) tile1.frameX % 54 / 18;
+                        var num22 = (int) tile1.frameY % 36 / 18;
+                        var index1 = i - num21;
+                        var index2 = j - num22;
+                        var num23 = 36;
                         if (Main.tile[index1, index2].frameY >= (short) 36)
                             num23 = -36;
-                        for (int x = index1; x < index1 + 3; ++x)
+                        for (var x = index1; x < index1 + 3; ++x)
                         {
-                            for (int y = index2; y < index2 + 2; ++y)
+                            for (var y = index2; y < index2 + 2; ++y)
                             {
                                 Wiring.SkipWire(x, y);
                                 Main.tile[x, y].frameY += (short) num23;
@@ -1075,16 +1075,16 @@ namespace Terraria
                         NetMessage.SendTileSquare(-1, index1 + 1, index2 + 1, 3, TileChangeType.None);
                         break;
                     case 405:
-                        int num24 = (int) tile1.frameX % 54 / 18;
-                        int num25 = (int) tile1.frameY % 36 / 18;
-                        int index3 = i - num24;
-                        int index4 = j - num25;
-                        int num26 = 54;
+                        var num24 = (int) tile1.frameX % 54 / 18;
+                        var num25 = (int) tile1.frameY % 36 / 18;
+                        var index3 = i - num24;
+                        var index4 = j - num25;
+                        var num26 = 54;
                         if (Main.tile[index3, index4].frameX >= (short) 54)
                             num26 = -54;
-                        for (int x = index3; x < index3 + 3; ++x)
+                        for (var x = index3; x < index3 + 3; ++x)
                         {
-                            for (int y = index4; y < index4 + 2; ++y)
+                            for (var y = index4; y < index4 + 2; ++y)
                             {
                                 Wiring.SkipWire(x, y);
                                 Main.tile[x, y].frameX += (short) num26;
@@ -1094,16 +1094,16 @@ namespace Terraria
                         NetMessage.SendTileSquare(-1, index3 + 1, index4 + 1, 3, TileChangeType.None);
                         break;
                     case 406:
-                        int num27 = (int) tile1.frameX % 54 / 18;
-                        int num28 = (int) tile1.frameY % 54 / 18;
-                        int index5 = i - num27;
-                        int index6 = j - num28;
-                        int num29 = 54;
+                        var num27 = (int) tile1.frameX % 54 / 18;
+                        var num28 = (int) tile1.frameY % 54 / 18;
+                        var index5 = i - num27;
+                        var index6 = j - num28;
+                        var num29 = 54;
                         if (Main.tile[index5, index6].frameY >= (short) 108)
                             num29 = -108;
-                        for (int x = index5; x < index5 + 3; ++x)
+                        for (var x = index5; x < index5 + 3; ++x)
                         {
-                            for (int y = index6; y < index6 + 3; ++y)
+                            for (var y = index6; y < index6 + 3; ++y)
                             {
                                 Wiring.SkipWire(x, y);
                                 Main.tile[x, y].frameY += (short) num29;
@@ -1113,16 +1113,16 @@ namespace Terraria
                         NetMessage.SendTileSquare(-1, index5 + 1, index6 + 1, 3, TileChangeType.None);
                         break;
                     case 411:
-                        int num30 = (int) tile1.frameX % 36 / 18;
-                        int num31 = (int) tile1.frameY % 36 / 18;
-                        int tileX = i - num30;
-                        int tileY = j - num31;
-                        int num32 = 36;
+                        var num30 = (int) tile1.frameX % 36 / 18;
+                        var num31 = (int) tile1.frameY % 36 / 18;
+                        var tileX = i - num30;
+                        var tileY = j - num31;
+                        var num32 = 36;
                         if (Main.tile[tileX, tileY].frameX >= (short) 36)
                             num32 = -36;
-                        for (int x = tileX; x < tileX + 2; ++x)
+                        for (var x = tileX; x < tileX + 2; ++x)
                         {
-                            for (int y = tileY; y < tileY + 2; ++y)
+                            for (var y = tileY; y < tileY + 2; ++y)
                             {
                                 Wiring.SkipWire(x, y);
                                 Main.tile[x, y].frameX += (short) num32;
@@ -1132,7 +1132,7 @@ namespace Terraria
                         NetMessage.SendTileSquare(-1, tileX, tileY, 2, TileChangeType.None);
                         break;
                     case 419:
-                        int num33 = 18;
+                        var num33 = 18;
                         if ((int) tile1.frameX >= num33)
                             num33 = -num33;
                         if (tile1.frameX == (short) 36)
@@ -1144,20 +1144,20 @@ namespace Terraria
                         Wiring._LampsToCheck.Enqueue(new Point16(i, j));
                         break;
                     case 425:
-                        int num34 = (int) tile1.frameX % 36 / 18;
-                        int num35 = (int) tile1.frameY % 36 / 18;
-                        int i2 = i - num34;
-                        int j2 = j - num35;
-                        for (int x = i2; x < i2 + 2; ++x)
+                        var num34 = (int) tile1.frameX % 36 / 18;
+                        var num35 = (int) tile1.frameY % 36 / 18;
+                        var i2 = i - num34;
+                        var j2 = j - num35;
+                        for (var x = i2; x < i2 + 2; ++x)
                         {
-                            for (int y = j2; y < j2 + 2; ++y)
+                            for (var y = j2; y < j2 + 2; ++y)
                                 Wiring.SkipWire(x, y);
                         }
 
                         if (Main.AnnouncementBoxDisabled)
                             break;
-                        Color pink = Color.Pink;
-                        int index7 = Sign.ReadSign(i2, j2, false);
+                        var pink = Color.Pink;
+                        var index7 = Sign.ReadSign(i2, j2, false);
                         if (index7 == -1 || Main.sign[index7] == null ||
                             string.IsNullOrWhiteSpace(Main.sign[index7].text))
                             break;
@@ -1186,7 +1186,7 @@ namespace Terraria
                                 Main.NewTextMultiline(Main.sign[index7].text, false, pink, 460);
                                 return;
                             case 2:
-                                for (int remoteClient = 0; remoteClient < (int) byte.MaxValue; ++remoteClient)
+                                for (var remoteClient = 0; remoteClient < (int) byte.MaxValue; ++remoteClient)
                                 {
                                     if (Main.player[remoteClient].active &&
                                         (double) Main.player[remoteClient]
@@ -1202,16 +1202,16 @@ namespace Terraria
                                 return;
                         }
                     case 452:
-                        int num36 = (int) tile1.frameX % 54 / 18;
-                        int num37 = (int) tile1.frameY % 54 / 18;
-                        int index8 = i - num36;
-                        int index9 = j - num37;
-                        int num38 = 54;
+                        var num36 = (int) tile1.frameX % 54 / 18;
+                        var num37 = (int) tile1.frameY % 54 / 18;
+                        var index8 = i - num36;
+                        var index9 = j - num37;
+                        var num38 = 54;
                         if (Main.tile[index8, index9].frameX >= (short) 54)
                             num38 = -54;
-                        for (int x = index8; x < index8 + 3; ++x)
+                        for (var x = index8; x < index8 + 3; ++x)
                         {
-                            for (int y = index9; y < index9 + 3; ++y)
+                            for (var y = index9; y < index9 + 3; ++y)
                             {
                                 Wiring.SkipWire(x, y);
                                 Main.tile[x, y].frameX += (short) num38;
@@ -1223,8 +1223,8 @@ namespace Terraria
                     default:
                         if (type == 387 || type == 386)
                         {
-                            bool flag4 = type == 387;
-                            int num8 = WorldGen.ShiftTrapdoor(i, j, true, -1).ToInt();
+                            var flag4 = type == 387;
+                            var num8 = WorldGen.ShiftTrapdoor(i, j, true, -1).ToInt();
                             if (num8 == 0)
                                 num8 = -WorldGen.ShiftTrapdoor(i, j, false, -1).ToInt();
                             if (num8 == 0)
@@ -1236,7 +1236,7 @@ namespace Terraria
 
                         if (type == 389 || type == 388)
                         {
-                            bool closing = type == 389;
+                            var closing = type == 389;
                             WorldGen.ShiftTallGate(i, j, closing);
                             NetMessage.SendData(19, -1, -1, (NetworkText) null, 4 + closing.ToInt(), (float) i,
                                 (float) j, 0.0f, 0, 0, 0);
@@ -1253,7 +1253,7 @@ namespace Terraria
                                 NetMessage.SendTileSquare(-1, i, j, 1, TileChangeType.None);
                                 return;
                             case 10:
-                                int direction = 1;
+                                var direction = 1;
                                 if (Main.rand.Next(2) == 0)
                                     direction = -1;
                                 if (!WorldGen.OpenDoor(i, j, direction))
@@ -1275,10 +1275,10 @@ namespace Terraria
                                     0);
                                 return;
                             case 42:
-                                int num39 = (int) tile1.frameY / 18;
+                                var num39 = (int) tile1.frameY / 18;
                                 while (num39 >= 2)
                                     num39 -= 2;
-                                int y1 = j - num39;
+                                var y1 = j - num39;
                                 short num40 = 18;
                                 if (tile1.frameX > (short) 0)
                                     num40 = (short) -18;
@@ -1289,10 +1289,10 @@ namespace Terraria
                                 NetMessage.SendTileSquare(-1, i, j, 2, TileChangeType.None);
                                 return;
                             case 93:
-                                int num41 = (int) tile1.frameY / 18;
+                                var num41 = (int) tile1.frameY / 18;
                                 while (num41 >= 3)
                                     num41 -= 3;
-                                int y2 = j - num41;
+                                var y2 = j - num41;
                                 short num42 = 18;
                                 if (tile1.frameX > (short) 0)
                                     num42 = (short) -18;
@@ -1316,7 +1316,7 @@ namespace Terraria
                                 Wiring.SkipWire(i, j);
                                 return;
                             case 235:
-                                int num43 = i - (int) tile1.frameX / 18;
+                                var num43 = i - (int) tile1.frameX / 18;
                                 if (tile1.wall == (byte) 87 && (double) j > Main.worldSurface && !NPC.downedPlantBoss)
                                     return;
                                 if ((double) Wiring._teleport[0].X == -1.0)
@@ -1339,20 +1339,20 @@ namespace Terraria
                                 Wiring._teleport[1].Y += 0.5f;
                                 return;
                             case 244:
-                                int num44 = (int) tile1.frameX / 18;
+                                var num44 = (int) tile1.frameX / 18;
                                 while (num44 >= 3)
                                     num44 -= 3;
-                                int num45 = (int) tile1.frameY / 18;
+                                var num45 = (int) tile1.frameY / 18;
                                 while (num45 >= 3)
                                     num45 -= 3;
-                                int index10 = i - num44;
-                                int index11 = j - num45;
-                                int num46 = 54;
+                                var index10 = i - num44;
+                                var index11 = j - num45;
+                                var num46 = 54;
                                 if (Main.tile[index10, index11].frameX >= (short) 54)
                                     num46 = -54;
-                                for (int x = index10; x < index10 + 3; ++x)
+                                for (var x = index10; x < index10 + 3; ++x)
                                 {
-                                    for (int y3 = index11; y3 < index11 + 2; ++y3)
+                                    for (var y3 = index11; y3 < index11 + 2; ++y3)
                                     {
                                         Wiring.SkipWire(x, y3);
                                         Main.tile[x, y3].frameX += (short) num46;
@@ -1362,8 +1362,8 @@ namespace Terraria
                                 NetMessage.SendTileSquare(-1, index10 + 1, index11 + 1, 3, TileChangeType.None);
                                 return;
                             case 335:
-                                int num47 = j - (int) tile1.frameY / 18;
-                                int num48 = i - (int) tile1.frameX / 18;
+                                var num47 = j - (int) tile1.frameY / 18;
+                                var num48 = i - (int) tile1.frameX / 18;
                                 Wiring.SkipWire(num48, num47);
                                 Wiring.SkipWire(num48, num47 + 1);
                                 Wiring.SkipWire(num48 + 1, num47);
@@ -1373,14 +1373,14 @@ namespace Terraria
                                 WorldGen.LaunchRocketSmall(num48, num47);
                                 return;
                             case 338:
-                                int num49 = j - (int) tile1.frameY / 18;
-                                int num50 = i - (int) tile1.frameX / 18;
+                                var num49 = j - (int) tile1.frameY / 18;
+                                var num50 = i - (int) tile1.frameX / 18;
                                 Wiring.SkipWire(num50, num49);
                                 Wiring.SkipWire(num50, num49 + 1);
                                 if (!Wiring.CheckMech(num50, num49, 30))
                                     return;
-                                bool flag5 = false;
-                                for (int index12 = 0; index12 < 1000; ++index12)
+                                var flag5 = false;
+                                for (var index12 = 0; index12 < 1000; ++index12)
                                 {
                                     if (Main.projectile[index12].active && Main.projectile[index12].aiStyle == 73 &&
                                         ((double) Main.projectile[index12].ai[0] == (double) num50 &&
@@ -1397,12 +1397,12 @@ namespace Terraria
                                     419 + Main.rand.Next(4), 0, 0.0f, Main.myPlayer, (float) num50, (float) num49);
                                 return;
                             case 429:
-                                int num51 = (int) Main.tile[i, j].frameX / 18;
-                                bool flag6 = num51 % 2 >= 1;
-                                bool flag7 = num51 % 4 >= 2;
-                                bool flag8 = num51 % 8 >= 4;
-                                bool flag9 = num51 % 16 >= 8;
-                                bool flag10 = false;
+                                var num51 = (int) Main.tile[i, j].frameX / 18;
+                                var flag6 = num51 % 2 >= 1;
+                                var flag7 = num51 % 4 >= 2;
+                                var flag8 = num51 % 8 >= 4;
+                                var flag9 = num51 % 16 >= 8;
+                                var flag10 = false;
                                 short num52 = 0;
                                 switch (Wiring._currentWireColor)
                                 {
@@ -1433,14 +1433,14 @@ namespace Terraria
                             default:
                                 if (type == 126 || type == 95 || (type == 100 || type == 173))
                                 {
-                                    int num8 = (int) tile1.frameY / 18;
+                                    var num8 = (int) tile1.frameY / 18;
                                     while (num8 >= 2)
                                         num8 -= 2;
-                                    int index12 = j - num8;
-                                    int num53 = (int) tile1.frameX / 18;
+                                    var index12 = j - num8;
+                                    var num53 = (int) tile1.frameX / 18;
                                     if (num53 > 1)
                                         num53 -= 2;
-                                    int index13 = i - num53;
+                                    var index13 = i - num53;
                                     short num54 = 36;
                                     if (Main.tile[index13, index12].frameX > (short) 0)
                                         num54 = (short) -36;
@@ -1459,20 +1459,20 @@ namespace Terraria
                                 switch (type)
                                 {
                                     case 34:
-                                        int num55 = (int) tile1.frameY / 18;
+                                        var num55 = (int) tile1.frameY / 18;
                                         while (num55 >= 3)
                                             num55 -= 3;
-                                        int index14 = j - num55;
-                                        int num56 = (int) tile1.frameX % 108 / 18;
+                                        var index14 = j - num55;
+                                        var num56 = (int) tile1.frameX % 108 / 18;
                                         if (num56 > 2)
                                             num56 -= 3;
-                                        int index15 = i - num56;
+                                        var index15 = i - num56;
                                         short num57 = 54;
                                         if ((int) Main.tile[index15, index14].frameX % 108 > 0)
                                             num57 = (short) -54;
-                                        for (int x = index15; x < index15 + 3; ++x)
+                                        for (var x = index15; x < index15 + 3; ++x)
                                         {
-                                            for (int y3 = index14; y3 < index14 + 3; ++y3)
+                                            for (var y3 = index14; y3 < index14 + 3; ++y3)
                                             {
                                                 Main.tile[x, y3].frameX += num57;
                                                 Wiring.SkipWire(x, y3);
@@ -1500,11 +1500,11 @@ namespace Terraria
                                         switch (type)
                                         {
                                             case 92:
-                                                int num58 = j - (int) tile1.frameY / 18;
+                                                var num58 = j - (int) tile1.frameY / 18;
                                                 short num59 = 18;
                                                 if (tile1.frameX > (short) 0)
                                                     num59 = (short) -18;
-                                                for (int y3 = num58; y3 < num58 + 6; ++y3)
+                                                for (var y3 = num58; y3 < num58 + 6; ++y3)
                                                 {
                                                     Main.tile[i, y3].frameX += num59;
                                                     Wiring.SkipWire(i, y3);
@@ -1513,12 +1513,12 @@ namespace Terraria
                                                 NetMessage.SendTileSquare(-1, i, num58 + 3, 7, TileChangeType.None);
                                                 return;
                                             case 137:
-                                                int num60 = (int) tile1.frameY / 18;
-                                                Vector2 vector2_2 = Vector2.Zero;
-                                                float SpeedX2 = 0.0f;
-                                                float SpeedY2 = 0.0f;
-                                                int Type2 = 0;
-                                                int Damage2 = 0;
+                                                var num60 = (int) tile1.frameY / 18;
+                                                var vector2_2 = Vector2.Zero;
+                                                var SpeedX2 = 0.0f;
+                                                var SpeedY2 = 0.0f;
+                                                var Type2 = 0;
+                                                var Damage2 = 0;
                                                 switch (num60)
                                                 {
                                                     case 0:
@@ -1526,15 +1526,15 @@ namespace Terraria
                                                     case 2:
                                                         if (Wiring.CheckMech(i, j, 200))
                                                         {
-                                                            int num8 = tile1.frameX == (short) 0
+                                                            var num8 = tile1.frameX == (short) 0
                                                                 ? -1
                                                                 : (tile1.frameX == (short) 18 ? 1 : 0);
-                                                            int num53 = tile1.frameX < (short) 36
+                                                            var num53 = tile1.frameX < (short) 36
                                                                 ? 0
                                                                 : (tile1.frameX < (short) 72 ? -1 : 1);
                                                             vector2_2 = new Vector2((float) (i * 16 + 8 + 10 * num8),
                                                                 (float) (j * 16 + 9 + num53 * 9));
-                                                            float num54 = 3f;
+                                                            var num54 = 3f;
                                                             if (num60 == 0)
                                                             {
                                                                 Type2 = 98;
@@ -1565,13 +1565,13 @@ namespace Terraria
                                                     case 3:
                                                         if (Wiring.CheckMech(i, j, 300))
                                                         {
-                                                            int num8 = 200;
-                                                            for (int index12 = 0; index12 < 1000; ++index12)
+                                                            var num8 = 200;
+                                                            for (var index12 = 0; index12 < 1000; ++index12)
                                                             {
                                                                 if (Main.projectile[index12].active &&
                                                                     Main.projectile[index12].type == Type2)
                                                                 {
-                                                                    float num53 =
+                                                                    var num53 =
                                                                         (new Vector2((float) (i * 16 + 8),
                                                                              (float) (j * 18 + 8)) -
                                                                          Main.projectile[index12].Center).Length();
@@ -1602,8 +1602,8 @@ namespace Terraria
                                                             {
                                                                 Type2 = 185;
                                                                 Damage2 = 40;
-                                                                int num53 = 0;
-                                                                int num54 = 0;
+                                                                var num53 = 0;
+                                                                var num54 = 0;
                                                                 switch ((int) tile1.frameX / 18)
                                                                 {
                                                                     case 0:
@@ -1646,8 +1646,8 @@ namespace Terraria
                                                     case 4:
                                                         if (Wiring.CheckMech(i, j, 90))
                                                         {
-                                                            int num8 = 0;
-                                                            int num53 = 0;
+                                                            var num8 = 0;
+                                                            var num53 = 0;
                                                             switch ((int) tile1.frameX / 18)
                                                             {
                                                                 case 0:
@@ -1686,7 +1686,7 @@ namespace Terraria
                                                     case 0:
                                                         if (Wiring.CheckMech(i, j, 200))
                                                         {
-                                                            int num8 = -1;
+                                                            var num8 = -1;
                                                             if (tile1.frameX != (short) 0)
                                                                 num8 = 1;
                                                             SpeedX2 = (float) (12 * num8);
@@ -1703,7 +1703,7 @@ namespace Terraria
                                                     case 1:
                                                         if (Wiring.CheckMech(i, j, 200))
                                                         {
-                                                            int num8 = -1;
+                                                            var num8 = -1;
                                                             if (tile1.frameX != (short) 0)
                                                                 num8 = 1;
                                                             SpeedX2 = (float) (12 * num8);
@@ -1720,7 +1720,7 @@ namespace Terraria
                                                     case 2:
                                                         if (Wiring.CheckMech(i, j, 200))
                                                         {
-                                                            int num8 = -1;
+                                                            var num8 = -1;
                                                             if (tile1.frameX != (short) 0)
                                                                 num8 = 1;
                                                             SpeedX2 = (float) (5 * num8);
@@ -1738,13 +1738,13 @@ namespace Terraria
                                                         if (Wiring.CheckMech(i, j, 300))
                                                         {
                                                             Type2 = 185;
-                                                            int num8 = 200;
-                                                            for (int index12 = 0; index12 < 1000; ++index12)
+                                                            var num8 = 200;
+                                                            for (var index12 = 0; index12 < 1000; ++index12)
                                                             {
                                                                 if (Main.projectile[index12].active &&
                                                                     Main.projectile[index12].type == Type2)
                                                                 {
-                                                                    float num53 =
+                                                                    var num53 =
                                                                         (new Vector2((float) (i * 16 + 8),
                                                                              (float) (j * 18 + 8)) -
                                                                          Main.projectile[index12].Center).Length();
@@ -1814,15 +1814,15 @@ namespace Terraria
                                                     Main.myPlayer, 0.0f, 0.0f);
                                                 return;
                                             case 443:
-                                                int num61 = (int) tile1.frameX / 36;
-                                                int i3 = i - ((int) tile1.frameX - num61 * 36) / 18;
-                                                int j3 = j;
+                                                var num61 = (int) tile1.frameX / 36;
+                                                var i3 = i - ((int) tile1.frameX - num61 * 36) / 18;
+                                                var j3 = j;
                                                 if (!Wiring.CheckMech(i3, j3, 200))
                                                     return;
-                                                Vector2 zero = Vector2.Zero;
-                                                Vector2 vector2_3 = Vector2.Zero;
-                                                int Type3 = 654;
-                                                int Damage3 = 20;
+                                                var zero = Vector2.Zero;
+                                                var vector2_3 = Vector2.Zero;
+                                                var Type3 = 654;
+                                                var Damage3 = 20;
                                                 Vector2 vector2_4;
                                                 if (num61 < 2)
                                                 {
@@ -1872,18 +1872,18 @@ namespace Terraria
                                                     default:
                                                         if (type == 142 || type == 143)
                                                         {
-                                                            int y3 = j - (int) tile1.frameY / 18;
-                                                            int num8 = (int) tile1.frameX / 18;
+                                                            var y3 = j - (int) tile1.frameY / 18;
+                                                            var num8 = (int) tile1.frameX / 18;
                                                             if (num8 > 1)
                                                                 num8 -= 2;
-                                                            int x = i - num8;
+                                                            var x = i - num8;
                                                             Wiring.SkipWire(x, y3);
                                                             Wiring.SkipWire(x, y3 + 1);
                                                             Wiring.SkipWire(x + 1, y3);
                                                             Wiring.SkipWire(x + 1, y3 + 1);
                                                             if (type == 142)
                                                             {
-                                                                for (int index12 = 0;
+                                                                for (var index12 = 0;
                                                                     index12 < 4 && Wiring._numInPump < 19;
                                                                     ++index12)
                                                                 {
@@ -1917,7 +1917,7 @@ namespace Terraria
                                                                 return;
                                                             }
 
-                                                            for (int index12 = 0;
+                                                            for (var index12 = 0;
                                                                 index12 < 4 && Wiring._numOutPump < 19;
                                                                 ++index12)
                                                             {
@@ -1954,19 +1954,19 @@ namespace Terraria
                                                         switch (type)
                                                         {
                                                             case 105:
-                                                                int num62 = j - (int) tile1.frameY / 18;
-                                                                int num63 = (int) tile1.frameX / 18;
-                                                                int num64 = 0;
+                                                                var num62 = j - (int) tile1.frameY / 18;
+                                                                var num63 = (int) tile1.frameX / 18;
+                                                                var num64 = 0;
                                                                 while (num63 >= 2)
                                                                 {
                                                                     num63 -= 2;
                                                                     ++num64;
                                                                 }
 
-                                                                int num65 = i - num63;
-                                                                int num66 = i - (int) tile1.frameX % 36 / 18;
-                                                                int num67 = j - (int) tile1.frameY % 54 / 18;
-                                                                int num68 = (int) tile1.frameX / 36 +
+                                                                var num65 = i - num63;
+                                                                var num66 = i - (int) tile1.frameX % 36 / 18;
+                                                                var num67 = j - (int) tile1.frameY % 54 / 18;
+                                                                var num68 = (int) tile1.frameX / 36 +
                                                                             (int) tile1.frameY / 54 * 55;
                                                                 Wiring.SkipWire(num66, num67);
                                                                 Wiring.SkipWire(num66, num67 + 1);
@@ -1974,12 +1974,12 @@ namespace Terraria
                                                                 Wiring.SkipWire(num66 + 1, num67);
                                                                 Wiring.SkipWire(num66 + 1, num67 + 1);
                                                                 Wiring.SkipWire(num66 + 1, num67 + 2);
-                                                                int X = num66 * 16 + 16;
-                                                                int Y = (num67 + 3) * 16;
-                                                                int index16 = -1;
-                                                                int num69 = -1;
-                                                                bool flag11 = true;
-                                                                bool flag12 = false;
+                                                                var X = num66 * 16 + 16;
+                                                                var Y = (num67 + 3) * 16;
+                                                                var index16 = -1;
+                                                                var num69 = -1;
+                                                                var flag11 = true;
+                                                                var flag12 = false;
                                                                 switch (num68)
                                                                 {
                                                                     case 51:
@@ -2115,7 +2115,7 @@ namespace Terraria
                                                                     }
                                                                     else
                                                                     {
-                                                                        Vector2 position =
+                                                                        var position =
                                                                             new Vector2((float) (X - 4),
                                                                                 (float) (Y - 22)) - new Vector2(10f);
                                                                         Utils.PoofOfSmoke(position);
@@ -2260,15 +2260,15 @@ namespace Terraria
 
                                                                             break;
                                                                         case 34:
-                                                                            for (int index12 = 0;
+                                                                            for (var index12 = 0;
                                                                                 index12 < 2;
                                                                                 ++index12)
                                                                             {
-                                                                                for (int index13 = 0;
+                                                                                for (var index13 = 0;
                                                                                     index13 < 3;
                                                                                     ++index13)
                                                                                 {
-                                                                                    Tile tile2 =
+                                                                                    var tile2 =
                                                                                         Main.tile[num66 + index12,
                                                                                             num67 + index13];
                                                                                     tile2.type = (ushort) 349;
@@ -2306,9 +2306,9 @@ namespace Terraria
                                                                         case 40:
                                                                             if (Wiring.CheckMech(num66, num67, 300))
                                                                             {
-                                                                                int[] numArray = new int[10];
-                                                                                int maxValue = 0;
-                                                                                for (int index12 = 0;
+                                                                                var numArray = new int[10];
+                                                                                var maxValue = 0;
+                                                                                for (var index12 = 0;
                                                                                     index12 < 200;
                                                                                     ++index12)
                                                                                 {
@@ -2353,7 +2353,7 @@ namespace Terraria
 
                                                                                 if (maxValue > 0)
                                                                                 {
-                                                                                    int number =
+                                                                                    var number =
                                                                                         numArray[
                                                                                             Main.rand.Next(maxValue)];
                                                                                     Main.npc[number].position.X =
@@ -2375,9 +2375,9 @@ namespace Terraria
                                                                         case 41:
                                                                             if (Wiring.CheckMech(num66, num67, 300))
                                                                             {
-                                                                                int[] numArray = new int[10];
-                                                                                int maxValue = 0;
-                                                                                for (int index12 = 0;
+                                                                                var numArray = new int[10];
+                                                                                var maxValue = 0;
+                                                                                for (var index12 = 0;
                                                                                     index12 < 200;
                                                                                     ++index12)
                                                                                 {
@@ -2400,7 +2400,7 @@ namespace Terraria
 
                                                                                 if (maxValue > 0)
                                                                                 {
-                                                                                    int number =
+                                                                                    var number =
                                                                                         numArray[
                                                                                             Main.rand.Next(maxValue)];
                                                                                     Main.npc[number].position.X =
@@ -2443,7 +2443,7 @@ namespace Terraria
                                                                                     break;
                                                                                 }
 
-                                                                                Vector2 position =
+                                                                                var position =
                                                                                     new Vector2((float) (X - 4),
                                                                                         (float) (Y - 22)) -
                                                                                     new Vector2(10f);
@@ -2466,24 +2466,24 @@ namespace Terraria
                                                                 Main.npc[index16].SpawnedFromStatue = true;
                                                                 return;
                                                             case 349:
-                                                                int index17 = j - (int) tile1.frameY / 18;
-                                                                int num70 = (int) tile1.frameX / 18;
+                                                                var index17 = j - (int) tile1.frameY / 18;
+                                                                var num70 = (int) tile1.frameX / 18;
                                                                 while (num70 >= 2)
                                                                     num70 -= 2;
-                                                                int index18 = i - num70;
+                                                                var index18 = i - num70;
                                                                 Wiring.SkipWire(index18, index17);
                                                                 Wiring.SkipWire(index18, index17 + 1);
                                                                 Wiring.SkipWire(index18, index17 + 2);
                                                                 Wiring.SkipWire(index18 + 1, index17);
                                                                 Wiring.SkipWire(index18 + 1, index17 + 1);
                                                                 Wiring.SkipWire(index18 + 1, index17 + 2);
-                                                                short num71 =
+                                                                var num71 =
                                                                     Main.tile[index18, index17].frameX != (short) 0
                                                                         ? (short) -216
                                                                         : (short) 216;
-                                                                for (int index12 = 0; index12 < 2; ++index12)
+                                                                for (var index12 = 0; index12 < 2; ++index12)
                                                                 {
-                                                                    for (int index13 = 0; index13 < 3; ++index13)
+                                                                    for (var index13 = 0; index13 < 3; ++index13)
                                                                         Main.tile[index18 + index12, index17 + index13]
                                                                             .frameX += num71;
                                                                 }
@@ -2513,7 +2513,7 @@ namespace Terraria
                 ((double) Wiring._teleport[0].Y > (double) Wiring._teleport[1].Y - 3.0 &&
                  (double) Wiring._teleport[0].Y < (double) Wiring._teleport[1].Y))
                 return;
-            Rectangle[] rectangleArray = new Rectangle[2];
+            var rectangleArray = new Rectangle[2];
             rectangleArray[0].X = (int) ((double) Wiring._teleport[0].X * 16.0);
             rectangleArray[0].Width = 48;
             rectangleArray[0].Height = 48;
@@ -2522,22 +2522,22 @@ namespace Terraria
             rectangleArray[1].Width = 48;
             rectangleArray[1].Height = 48;
             rectangleArray[1].Y = (int) ((double) Wiring._teleport[1].Y * 16.0 - (double) rectangleArray[1].Height);
-            for (int index1 = 0; index1 < 2; ++index1)
+            for (var index1 = 0; index1 < 2; ++index1)
             {
-                Vector2 vector2_1 = new Vector2((float) (rectangleArray[1].X - rectangleArray[0].X),
+                var vector2_1 = new Vector2((float) (rectangleArray[1].X - rectangleArray[0].X),
                     (float) (rectangleArray[1].Y - rectangleArray[0].Y));
                 if (index1 == 1)
                     vector2_1 = new Vector2((float) (rectangleArray[0].X - rectangleArray[1].X),
                         (float) (rectangleArray[0].Y - rectangleArray[1].Y));
                 if (!Wiring.blockPlayerTeleportationForOneIteration)
                 {
-                    for (int playerIndex = 0; playerIndex < (int) byte.MaxValue; ++playerIndex)
+                    for (var playerIndex = 0; playerIndex < (int) byte.MaxValue; ++playerIndex)
                     {
                         if (Main.player[playerIndex].active && !Main.player[playerIndex].dead &&
                             (!Main.player[playerIndex].teleporting &&
                              rectangleArray[index1].Intersects(Main.player[playerIndex].getRect())))
                         {
-                            Vector2 vector2_2 = Main.player[playerIndex].position + vector2_1;
+                            var vector2_2 = Main.player[playerIndex].position + vector2_1;
                             Main.player[playerIndex].teleporting = true;
                             if (Main.netMode == 2)
                                 RemoteClient.CheckSection(playerIndex, vector2_2, 1);
@@ -2549,12 +2549,12 @@ namespace Terraria
                     }
                 }
 
-                for (int index2 = 0; index2 < 200; ++index2)
+                for (var index2 = 0; index2 < 200; ++index2)
                 {
                     if (Main.npc[index2].active && !Main.npc[index2].teleporting &&
                         (Main.npc[index2].lifeMax > 5 && !Main.npc[index2].boss) && !Main.npc[index2].noTileCollide)
                     {
-                        int type = Main.npc[index2].type;
+                        var type = Main.npc[index2].type;
                         if (!NPCID.Sets.TeleportationImmune[type] &&
                             rectangleArray[index1].Intersects(Main.npc[index2].getRect()))
                         {
@@ -2565,9 +2565,9 @@ namespace Terraria
                 }
             }
 
-            for (int index = 0; index < (int) byte.MaxValue; ++index)
+            for (var index = 0; index < (int) byte.MaxValue; ++index)
                 Main.player[index].teleporting = false;
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
                 Main.npc[index].teleporting = false;
         }
 
@@ -2575,7 +2575,7 @@ namespace Terraria
         {
             if (!Main.tile[i, j].active())
                 return;
-            bool flag = Main.tileSolid[(int) Main.tile[i, j].type] &&
+            var flag = Main.tileSolid[(int) Main.tile[i, j].type] &&
                         !TileID.Sets.NotReallySolid[(int) Main.tile[i, j].type];
             switch (Main.tile[i, j].type)
             {
@@ -2616,14 +2616,14 @@ namespace Terraria
         {
             Math.Abs(ps.X - pe.X);
             Math.Abs(ps.Y - pe.Y);
-            int num1 = Math.Sign(pe.X - ps.X);
-            int num2 = Math.Sign(pe.Y - ps.Y);
-            WiresUI.Settings.MultiToolMode toolMode = WiresUI.Settings.ToolMode;
-            Point pt = new Point();
-            bool flag1 = false;
+            var num1 = Math.Sign(pe.X - ps.X);
+            var num2 = Math.Sign(pe.Y - ps.Y);
+            var toolMode = WiresUI.Settings.ToolMode;
+            var pt = new Point();
+            var flag1 = false;
             Item.StartCachingType(530);
             Item.StartCachingType(849);
-            bool flag2 = dir;
+            var flag2 = dir;
             int num3;
             int num4;
             int num5;
@@ -2642,14 +2642,14 @@ namespace Terraria
                 num5 = num1;
             }
 
-            int num6 = num3;
+            var num6 = num3;
             while (num6 != num4 && !flag1)
             {
                 if (flag2)
                     pt.Y = num6;
                 else
                     pt.X = num6;
-                bool? nullable = Wiring.MassWireOperationStep(pt, toolMode, ref wireCount, ref actuatorCount);
+                var nullable = Wiring.MassWireOperationStep(pt, toolMode, ref wireCount, ref actuatorCount);
                 if (nullable.HasValue && !nullable.Value)
                 {
                     flag1 = true;
@@ -2677,14 +2677,14 @@ namespace Terraria
                 num9 = num2;
             }
 
-            int num10 = num7;
+            var num10 = num7;
             while (num10 != num8 && !flag1)
             {
                 if (!flag2)
                     pt.Y = num10;
                 else
                     pt.X = num10;
-                bool? nullable = Wiring.MassWireOperationStep(pt, toolMode, ref wireCount, ref actuatorCount);
+                var nullable = Wiring.MassWireOperationStep(pt, toolMode, ref wireCount, ref actuatorCount);
                 if (nullable.HasValue && !nullable.Value)
                 {
                     flag1 = true;
@@ -2705,7 +2705,7 @@ namespace Terraria
         {
             if (!WorldGen.InWorld(pt.X, pt.Y, 1))
                 return new bool?();
-            Tile tile = Main.tile[pt.X, pt.Y];
+            var tile = Main.tile[pt.X, pt.Y];
             if (tile == null)
                 return new bool?();
             if (!mode.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Cutter))

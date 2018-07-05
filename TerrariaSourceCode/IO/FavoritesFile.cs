@@ -43,7 +43,7 @@ namespace Terraria.IO
         {
             if (!this._data.ContainsKey(fileData.Type))
                 return false;
-            string fileName = fileData.GetFileName(true);
+            var fileName = fileData.GetFileName(true);
             bool flag;
             if (this._data[fileData.Type].TryGetValue(fileName, out flag))
                 return flag;

@@ -32,7 +32,7 @@ namespace Terraria.GameContent.UI
 
         public static Color GetColor(int rarity)
         {
-            Color color = new Color((int) Main.mouseTextColor, (int) Main.mouseTextColor, (int) Main.mouseTextColor,
+            var color = new Color((int) Main.mouseTextColor, (int) Main.mouseTextColor, (int) Main.mouseTextColor,
                 (int) Main.mouseTextColor);
             if (ItemRarity._rarities.ContainsKey(rarity))
                 return ItemRarity._rarities[rarity];

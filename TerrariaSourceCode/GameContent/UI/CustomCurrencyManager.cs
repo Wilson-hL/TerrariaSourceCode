@@ -25,7 +25,7 @@ namespace Terraria.GameContent.UI
 
         public static int RegisterCurrency(CustomCurrencySystem collection)
         {
-            int nextCurrencyIndex = CustomCurrencyManager._nextCurrencyIndex;
+            var nextCurrencyIndex = CustomCurrencyManager._nextCurrencyIndex;
             ++CustomCurrencyManager._nextCurrencyIndex;
             CustomCurrencyManager._currencies[nextCurrencyIndex] = collection;
             return nextCurrencyIndex;
@@ -34,13 +34,13 @@ namespace Terraria.GameContent.UI
         public static void DrawSavings(SpriteBatch sb, int currencyIndex, float shopx, float shopy,
             bool horizontal = false)
         {
-            CustomCurrencySystem currency = CustomCurrencyManager._currencies[currencyIndex];
-            Player player = Main.player[Main.myPlayer];
+            var currency = CustomCurrencyManager._currencies[currencyIndex];
+            var player = Main.player[Main.myPlayer];
             bool overFlowing;
-            long num1 = currency.CountCurrency(out overFlowing, player.bank.item);
-            long num2 = currency.CountCurrency(out overFlowing, player.bank2.item);
-            long num3 = currency.CountCurrency(out overFlowing, player.bank3.item);
-            long totalCoins = currency.CombineStacks(out overFlowing, num1, num2, num3);
+            var num1 = currency.CountCurrency(out overFlowing, player.bank.item);
+            var num2 = currency.CountCurrency(out overFlowing, player.bank2.item);
+            var num3 = currency.CountCurrency(out overFlowing, player.bank3.item);
+            var totalCoins = currency.CombineStacks(out overFlowing, num1, num2, num3);
             if (totalCoins <= 0L)
                 return;
             if (num3 > 0L)
@@ -67,26 +67,26 @@ namespace Terraria.GameContent.UI
 
         public static bool BuyItem(Player player, int price, int currencyIndex)
         {
-            CustomCurrencySystem currency = CustomCurrencyManager._currencies[currencyIndex];
+            var currency = CustomCurrencyManager._currencies[currencyIndex];
             bool overFlowing;
-            long num1 = currency.CountCurrency(out overFlowing, player.inventory, 58, 57, 56, 55, 54);
-            long num2 = currency.CountCurrency(out overFlowing, player.bank.item);
-            long num3 = currency.CountCurrency(out overFlowing, player.bank2.item);
-            long num4 = currency.CountCurrency(out overFlowing, player.bank3.item);
+            var num1 = currency.CountCurrency(out overFlowing, player.inventory, 58, 57, 56, 55, 54);
+            var num2 = currency.CountCurrency(out overFlowing, player.bank.item);
+            var num3 = currency.CountCurrency(out overFlowing, player.bank2.item);
+            var num4 = currency.CountCurrency(out overFlowing, player.bank3.item);
             if (currency.CombineStacks(out overFlowing, num1, num2, num3, num4) < (long) price)
                 return false;
-            List<Item[]> objArrayList = new List<Item[]>();
-            Dictionary<int, List<int>> slotsToIgnore = new Dictionary<int, List<int>>();
-            List<Point> pointList1 = new List<Point>();
-            List<Point> slotCoins = new List<Point>();
-            List<Point> pointList2 = new List<Point>();
-            List<Point> pointList3 = new List<Point>();
-            List<Point> pointList4 = new List<Point>();
+            var objArrayList = new List<Item[]>();
+            var slotsToIgnore = new Dictionary<int, List<int>>();
+            var pointList1 = new List<Point>();
+            var slotCoins = new List<Point>();
+            var pointList2 = new List<Point>();
+            var pointList3 = new List<Point>();
+            var pointList4 = new List<Point>();
             objArrayList.Add(player.inventory);
             objArrayList.Add(player.bank.item);
             objArrayList.Add(player.bank2.item);
             objArrayList.Add(player.bank3.item);
-            for (int index = 0; index < objArrayList.Count; ++index)
+            for (var index = 0; index < objArrayList.Count; ++index)
                 slotsToIgnore[index] = new List<int>();
             slotsToIgnore[0] = new List<int>()
             {
@@ -96,9 +96,9 @@ namespace Terraria.GameContent.UI
                 55,
                 54
             };
-            for (int x = 0; x < objArrayList.Count; ++x)
+            for (var x = 0; x < objArrayList.Count; ++x)
             {
-                for (int y = 0; y < objArrayList[x].Length; ++y)
+                for (var y = 0; y < objArrayList[x].Length; ++y)
                 {
                     if (!slotsToIgnore[x].Contains(y) && currency.Accepts(objArrayList[x][y]))
                         slotCoins.Add(new Point(x, y));
@@ -116,7 +116,7 @@ namespace Terraria.GameContent.UI
         private static void FindEmptySlots(List<Item[]> inventories, Dictionary<int, List<int>> slotsToIgnore,
             List<Point> emptySlots, int currentInventoryIndex)
         {
-            for (int y = inventories[currentInventoryIndex].Length - 1; y >= 0; --y)
+            for (var y = inventories[currentInventoryIndex].Length - 1; y >= 0; --y)
             {
                 if (!slotsToIgnore[currentInventoryIndex].Contains(y) &&
                     (inventories[currentInventoryIndex][y].type == 0 ||

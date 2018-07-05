@@ -18,7 +18,7 @@ namespace Terraria.Utilities
         {
             try
             {
-                FileOperationAPIWrapper.SHFILEOPSTRUCT FileOp = new FileOperationAPIWrapper.SHFILEOPSTRUCT()
+                var FileOp = new FileOperationAPIWrapper.SHFILEOPSTRUCT()
                 {
                     wFunc = FileOperationAPIWrapper.FileOperationType.FO_DELETE,
                     pFrom = path + (object) char.MinValue + (object) char.MinValue,
@@ -52,7 +52,7 @@ namespace Terraria.Utilities
         {
             try
             {
-                FileOperationAPIWrapper.SHFILEOPSTRUCT FileOp = new FileOperationAPIWrapper.SHFILEOPSTRUCT()
+                var FileOp = new FileOperationAPIWrapper.SHFILEOPSTRUCT()
                 {
                     wFunc = FileOperationAPIWrapper.FileOperationType.FO_DELETE,
                     pFrom = path + (object) char.MinValue + (object) char.MinValue,

@@ -60,8 +60,8 @@ namespace Terraria.Utilities
         {
             if (this.needsRefresh)
                 this.CalculateTotalWeight();
-            double num = this.random.NextDouble() * this._totalWeight;
-            foreach (Tuple<T, double> element in this.elements)
+            var num = this.random.NextDouble() * this._totalWeight;
+            foreach (var element in this.elements)
             {
                 if (num <= element.Item2)
                     return element.Item1;
@@ -74,7 +74,7 @@ namespace Terraria.Utilities
         public void CalculateTotalWeight()
         {
             this._totalWeight = 0.0;
-            foreach (Tuple<T, double> element in this.elements)
+            foreach (var element in this.elements)
                 this._totalWeight += element.Item2;
             this.needsRefresh = false;
         }

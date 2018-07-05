@@ -56,14 +56,14 @@ namespace Terraria.GameContent.UI.Elements
             this._playerPanel.OnDoubleClick += new UIElement.MouseEvent(this.PlayGame);
             this.OnDoubleClick += new UIElement.MouseEvent(this.PlayGame);
             this.Append((UIElement) this._playerPanel);
-            UIImageButton uiImageButton1 = new UIImageButton(this._buttonPlayTexture);
+            var uiImageButton1 = new UIImageButton(this._buttonPlayTexture);
             uiImageButton1.VAlign = 1f;
             uiImageButton1.Left.Set(4f, 0.0f);
             uiImageButton1.OnClick += new UIElement.MouseEvent(this.PlayGame);
             uiImageButton1.OnMouseOver += new UIElement.MouseEvent(this.PlayMouseOver);
             uiImageButton1.OnMouseOut += new UIElement.MouseEvent(this.ButtonMouseOut);
             this.Append((UIElement) uiImageButton1);
-            UIImageButton uiImageButton2 = new UIImageButton(this._data.IsFavorite
+            var uiImageButton2 = new UIImageButton(this._data.IsFavorite
                 ? this._buttonFavoriteActiveTexture
                 : this._buttonFavoriteInactiveTexture);
             uiImageButton2.VAlign = 1f;
@@ -75,7 +75,7 @@ namespace Terraria.GameContent.UI.Elements
             this.Append((UIElement) uiImageButton2);
             if (SocialAPI.Cloud != null)
             {
-                UIImageButton uiImageButton3 = new UIImageButton(this._data.IsCloudSave
+                var uiImageButton3 = new UIImageButton(this._data.IsCloudSave
                     ? this._buttonCloudActiveTexture
                     : this._buttonCloudInactiveTexture);
                 uiImageButton3.VAlign = 1f;
@@ -87,7 +87,7 @@ namespace Terraria.GameContent.UI.Elements
                 uiImageButton3.SetSnapPoint("Cloud", snapPointIndex, new Vector2?(), new Vector2?());
             }
 
-            UIImageButton uiImageButton4 = new UIImageButton(this._buttonDeleteTexture);
+            var uiImageButton4 = new UIImageButton(this._buttonDeleteTexture);
             uiImageButton4.VAlign = 1f;
             uiImageButton4.HAlign = 1f;
             uiImageButton4.OnClick += new UIElement.MouseEvent(this.DeleteButtonClick);
@@ -165,7 +165,7 @@ namespace Terraria.GameContent.UI.Elements
 
         private void DeleteButtonClick(UIMouseEvent evt, UIElement listeningElement)
         {
-            for (int index = 0; index < Main.PlayerList.Count; ++index)
+            for (var index = 0; index < Main.PlayerList.Count; ++index)
             {
                 if (Main.PlayerList[index] == this._data)
                 {
@@ -207,7 +207,7 @@ namespace Terraria.GameContent.UI.Elements
 
         public override int CompareTo(object obj)
         {
-            UICharacterListItem characterListItem = obj as UICharacterListItem;
+            var characterListItem = obj as UICharacterListItem;
             if (characterListItem == null)
                 return base.CompareTo(obj);
             if (this.IsFavorite && !characterListItem.IsFavorite)
@@ -248,9 +248,9 @@ namespace Terraria.GameContent.UI.Elements
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             base.DrawSelf(spriteBatch);
-            CalculatedStyle innerDimensions = this.GetInnerDimensions();
-            CalculatedStyle dimensions = this._playerPanel.GetDimensions();
-            float x = dimensions.X + dimensions.Width;
+            var innerDimensions = this.GetInnerDimensions();
+            var dimensions = this._playerPanel.GetDimensions();
+            var x = dimensions.X + dimensions.Width;
             Utils.DrawBorderString(spriteBatch, this._data.Name, new Vector2(x + 6f, dimensions.Y - 2f), Color.White,
                 1f, 0.0f, 0.0f, -1);
             spriteBatch.Draw(this._dividerTexture, new Vector2(x, innerDimensions.Y + 21f), new Rectangle?(),
@@ -258,9 +258,9 @@ namespace Terraria.GameContent.UI.Elements
                 new Vector2(
                     (float) (((double) this.GetDimensions().X + (double) this.GetDimensions().Width - (double) x) /
                              8.0), 1f), SpriteEffects.None, 0.0f);
-            Vector2 vector2 = new Vector2(x + 6f, innerDimensions.Y + 29f);
-            float width1 = 200f;
-            Vector2 position1 = vector2;
+            var vector2 = new Vector2(x + 6f, innerDimensions.Y + 29f);
+            var width1 = 200f;
+            var position1 = vector2;
             this.DrawPanel(spriteBatch, position1, width1);
             spriteBatch.Draw(Main.heartTexture, position1 + new Vector2(5f, 2f), Color.White);
             position1.X += 10f + (float) Main.heartTexture.Width;
@@ -272,13 +272,13 @@ namespace Terraria.GameContent.UI.Elements
             Utils.DrawBorderString(spriteBatch, this._data.Player.statManaMax.ToString() + " MP",
                 position1 + new Vector2(0.0f, 3f), Color.White, 1f, 0.0f, 0.0f, -1);
             vector2.X += width1 + 5f;
-            Vector2 position2 = vector2;
-            float width2 = 140f;
+            var position2 = vector2;
+            var width2 = 140f;
             if (GameCulture.Russian.IsActive)
                 width2 = 180f;
             this.DrawPanel(spriteBatch, position2, width2);
-            string text1 = "";
-            Color color = Color.White;
+            var text1 = "";
+            var color = Color.White;
             switch (this._data.Player.difficulty)
             {
                 case 0:
@@ -294,19 +294,19 @@ namespace Terraria.GameContent.UI.Elements
                     break;
             }
 
-            Vector2 pos1 = position2 + new Vector2(
+            var pos1 = position2 + new Vector2(
                                (float) ((double) width2 * 0.5 -
                                         (double) Main.fontMouseText.MeasureString(text1).X * 0.5), 3f);
             Utils.DrawBorderString(spriteBatch, text1, pos1, color, 1f, 0.0f, 0.0f, -1);
             vector2.X += width2 + 5f;
-            Vector2 position3 = vector2;
-            float width3 = innerDimensions.X + innerDimensions.Width - position3.X;
+            var position3 = vector2;
+            var width3 = innerDimensions.X + innerDimensions.Width - position3.X;
             this.DrawPanel(spriteBatch, position3, width3);
-            TimeSpan playTime = this._data.GetPlayTime();
-            int num = playTime.Days * 24 + playTime.Hours;
-            string text2 = (num < 10 ? (object) "0" : (object) "").ToString() + (object) num +
+            var playTime = this._data.GetPlayTime();
+            var num = playTime.Days * 24 + playTime.Hours;
+            var text2 = (num < 10 ? (object) "0" : (object) "").ToString() + (object) num +
                            playTime.ToString("\\:mm\\:ss");
-            Vector2 pos2 = position3 + new Vector2(
+            var pos2 = position3 + new Vector2(
                                (float) ((double) width3 * 0.5 -
                                         (double) Main.fontMouseText.MeasureString(text2).X * 0.5), 3f);
             Utils.DrawBorderString(spriteBatch, text2, pos2, Color.White, 1f, 0.0f, 0.0f, -1);

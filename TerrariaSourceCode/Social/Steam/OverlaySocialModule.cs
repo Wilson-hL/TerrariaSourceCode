@@ -33,7 +33,7 @@ namespace Terraria.Social.Steam
         {
             if (this._gamepadTextInputActive)
                 return false;
-            bool flag = SteamUtils.ShowGamepadTextInput(
+            var flag = SteamUtils.ShowGamepadTextInput(
                 password ? (EGamepadTextInputMode) 1 : (EGamepadTextInputMode) 0,
                 multiLine ? (EGamepadTextInputLineMode) 1 : (EGamepadTextInputLineMode) 0, description, maxLength,
                 existingText);
@@ -44,7 +44,7 @@ namespace Terraria.Social.Steam
 
         public override string GetGamepadText()
         {
-            uint gamepadTextLength = SteamUtils.GetEnteredGamepadTextLength();
+            var gamepadTextLength = SteamUtils.GetEnteredGamepadTextLength();
             string str;
             SteamUtils.GetEnteredGamepadTextInput(out str, gamepadTextLength);
             return str;

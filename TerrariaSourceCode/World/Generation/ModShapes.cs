@@ -20,7 +20,7 @@ namespace Terraria.World.Generation
 
             public override bool Perform(Point origin, GenAction action)
             {
-                foreach (Point16 point16 in this._data.GetData())
+                foreach (var point16 in this._data.GetData())
                 {
                     if (!this.UnitApply(action, origin, (int) point16.X + origin.X, (int) point16.Y + origin.Y) &&
                         this._quitOnFail)
@@ -65,14 +65,14 @@ namespace Terraria.World.Generation
 
             public override bool Perform(Point origin, GenAction action)
             {
-                int num = this._useDiagonals ? 16 : 8;
-                foreach (Point16 point16 in this._data.GetData())
+                var num = this._useDiagonals ? 16 : 8;
+                foreach (var point16 in this._data.GetData())
                 {
                     if (this._useInterior &&
                         !this.UnitApply(action, origin, (int) point16.X + origin.X, (int) point16.Y + origin.Y) &&
                         this._quitOnFail)
                         return false;
-                    int index = 0;
+                    var index = 0;
                     while (index < num)
                     {
                         if (!this._data.Contains((int) point16.X + ModShapes.OuterOutline.POINT_OFFSETS[index],
@@ -122,11 +122,11 @@ namespace Terraria.World.Generation
 
             public override bool Perform(Point origin, GenAction action)
             {
-                int num = this._useDiagonals ? 16 : 8;
-                foreach (Point16 point16 in this._data.GetData())
+                var num = this._useDiagonals ? 16 : 8;
+                foreach (var point16 in this._data.GetData())
                 {
-                    bool flag = false;
-                    int index = 0;
+                    var flag = false;
+                    var index = 0;
                     while (index < num)
                     {
                         if (!this._data.Contains((int) point16.X + ModShapes.InnerOutline.POINT_OFFSETS[index],

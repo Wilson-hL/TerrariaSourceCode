@@ -44,7 +44,7 @@ namespace Terraria.IO
 
         public static PlayerFileData CreateAndSave(Player player)
         {
-            PlayerFileData playerFile = new PlayerFileData();
+            var playerFile = new PlayerFileData();
             playerFile.Metadata = FileMetadata.FromCurrentSettings(FileType.Player);
             playerFile.Player = player;
             playerFile._isCloudSave = SocialAPI.Cloud != null && SocialAPI.Cloud.EnabledByDefault;
@@ -65,18 +65,18 @@ namespace Terraria.IO
         {
             if (this.IsCloudSave || SocialAPI.Cloud == null)
                 return;
-            string playerPathFromName = Main.GetPlayerPathFromName(this.Name, true);
+            var playerPathFromName = Main.GetPlayerPathFromName(this.Name, true);
             if (!FileUtilities.MoveToCloud(this.Path, playerPathFromName))
                 return;
-            string fileName = this.GetFileName(false);
-            string path = Main.PlayerPath + System.IO.Path.DirectorySeparatorChar + fileName +
+            var fileName = this.GetFileName(false);
+            var path = Main.PlayerPath + System.IO.Path.DirectorySeparatorChar + fileName +
                           System.IO.Path.DirectorySeparatorChar;
             if (Directory.Exists(path))
             {
-                string[] files = Directory.GetFiles(path);
-                for (int index = 0; index < files.Length; ++index)
+                var files = Directory.GetFiles(path);
+                for (var index = 0; index < files.Length; ++index)
                 {
-                    string cloudPath = Main.CloudPlayerPath + "/" + fileName + "/" +
+                    var cloudPath = Main.CloudPlayerPath + "/" + fileName + "/" +
                                        FileUtilities.GetFileName(files[index], true);
                     FileUtilities.MoveToCloud(files[index], cloudPath);
                 }
@@ -92,19 +92,19 @@ namespace Terraria.IO
         {
             if (!this.IsCloudSave || SocialAPI.Cloud == null)
                 return;
-            string playerPathFromName = Main.GetPlayerPathFromName(this.Name, false);
+            var playerPathFromName = Main.GetPlayerPathFromName(this.Name, false);
             if (!FileUtilities.MoveToLocal(this.Path, playerPathFromName))
                 return;
-            string fileName = this.GetFileName(false);
-            string mapPath = System.IO.Path.Combine(Main.CloudPlayerPath, fileName);
-            foreach (string str in SocialAPI.Cloud.GetFiles().Where<string>((Func<string, bool>) (path =>
+            var fileName = this.GetFileName(false);
+            var mapPath = System.IO.Path.Combine(Main.CloudPlayerPath, fileName);
+            foreach (var str in SocialAPI.Cloud.GetFiles().Where<string>((Func<string, bool>) (path =>
             {
                 if (path.StartsWith(mapPath, StringComparison.CurrentCultureIgnoreCase))
                     return path.EndsWith(".map", StringComparison.CurrentCultureIgnoreCase);
                 return false;
             })))
             {
-                string localPath =
+                var localPath =
                     System.IO.Path.Combine(Main.PlayerPath, fileName, FileUtilities.GetFileName(str, true));
                 FileUtilities.MoveToLocal(str, localPath);
             }

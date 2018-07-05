@@ -38,15 +38,15 @@ namespace Terraria.GameContent.UI.Elements
             this._large = largeForOtherLanguages;
             this.BackgroundColor = new Color(26, 40, 89) * 0.8f;
             this.BorderColor = new Color(13, 20, 44) * 0.8f;
-            float num = (float) (16 + this._large.ToInt() * 20);
-            float pixels1 = (float) (this._large.ToInt() * 6);
-            float pixels2 = (float) (this._large.ToInt() * 12);
+            var num = (float) (16 + this._large.ToInt() * 20);
+            var pixels1 = (float) (this._large.ToInt() * 6);
+            var pixels2 = (float) (this._large.ToInt() * 12);
             this._achievement = achievement;
             this.Height.Set(66f + num, 0.0f);
             this.Width.Set(0.0f, 1f);
             this.PaddingTop = 8f;
             this.PaddingLeft = 9f;
-            int iconIndex = Main.Achievements.GetIconIndex(achievement.Name);
+            var iconIndex = Main.Achievements.GetIconIndex(achievement.Name);
             this._iconIndex = iconIndex;
             this._iconFrameUnlocked = new Rectangle(iconIndex % 8 * 66, iconIndex / 8 * 66, 64, 64);
             this._iconFrameLocked = this._iconFrameUnlocked;
@@ -71,38 +71,38 @@ namespace Terraria.GameContent.UI.Elements
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             base.DrawSelf(spriteBatch);
-            int num1 = this._large.ToInt() * 6;
-            Vector2 vector2_1 = new Vector2((float) num1, 0.0f);
+            var num1 = this._large.ToInt() * 6;
+            var vector2_1 = new Vector2((float) num1, 0.0f);
             this._locked = !this._achievement.IsCompleted;
             this.UpdateIconFrame();
-            CalculatedStyle innerDimensions = this.GetInnerDimensions();
-            CalculatedStyle dimensions = this._achievementIconBorders.GetDimensions();
-            Vector2 vector2_2 = new Vector2(dimensions.X + dimensions.Width + 7f, innerDimensions.Y);
-            Tuple<Decimal, Decimal> trackerValues = this.GetTrackerValues();
-            bool flag = false;
+            var innerDimensions = this.GetInnerDimensions();
+            var dimensions = this._achievementIconBorders.GetDimensions();
+            var vector2_2 = new Vector2(dimensions.X + dimensions.Width + 7f, innerDimensions.Y);
+            var trackerValues = this.GetTrackerValues();
+            var flag = false;
             if ((!(trackerValues.Item1 == new Decimal(0)) || !(trackerValues.Item2 == new Decimal(0))) && this._locked)
                 flag = true;
-            float num2 = (float) ((double) innerDimensions.Width - (double) dimensions.Width + 1.0) -
+            var num2 = (float) ((double) innerDimensions.Width - (double) dimensions.Width + 1.0) -
                          (float) (num1 * 2);
-            Vector2 baseScale1 = new Vector2(0.85f);
-            Vector2 baseScale2 = new Vector2(0.92f);
-            string wrappedText = Main.fontItemStack.CreateWrappedText(this._achievement.Description.Value,
+            var baseScale1 = new Vector2(0.85f);
+            var baseScale2 = new Vector2(0.92f);
+            var wrappedText = Main.fontItemStack.CreateWrappedText(this._achievement.Description.Value,
                 (float) (((double) num2 - 20.0) * (1.0 / (double) baseScale2.X)), Language.ActiveCulture.CultureInfo);
-            Vector2 stringSize1 = ChatManager.GetStringSize(Main.fontItemStack, wrappedText, baseScale2, num2);
+            var stringSize1 = ChatManager.GetStringSize(Main.fontItemStack, wrappedText, baseScale2, num2);
             if (!this._large)
                 stringSize1 = ChatManager.GetStringSize(Main.fontItemStack, this._achievement.Description.Value,
                     baseScale2, num2);
-            float num3 = (float) (38.0 + (this._large ? 20.0 : 0.0));
+            var num3 = (float) (38.0 + (this._large ? 20.0 : 0.0));
             if ((double) stringSize1.Y > (double) num3)
                 baseScale2.Y *= num3 / stringSize1.Y;
-            Color baseColor1 = Color.Lerp(this._locked ? Color.Silver : Color.Gold, Color.White,
+            var baseColor1 = Color.Lerp(this._locked ? Color.Silver : Color.Gold, Color.White,
                 this.IsMouseHovering ? 0.5f : 0.0f);
-            Color baseColor2 = Color.Lerp(this._locked ? Color.DarkGray : Color.Silver, Color.White,
+            var baseColor2 = Color.Lerp(this._locked ? Color.DarkGray : Color.Silver, Color.White,
                 this.IsMouseHovering ? 1f : 0.0f);
-            Color color1 = this.IsMouseHovering ? Color.White : Color.Gray;
-            Vector2 position1 = vector2_2 - Vector2.UnitY * 2f + vector2_1;
+            var color1 = this.IsMouseHovering ? Color.White : Color.Gray;
+            var position1 = vector2_2 - Vector2.UnitY * 2f + vector2_1;
             this.DrawPanelTop(spriteBatch, position1, num2, color1);
-            AchievementCategory category = this._achievement.Category;
+            var category = this._achievement.Category;
             position1.Y += 2f;
             position1.X += 4f;
             spriteBatch.Draw(this._categoryTexture, position1,
@@ -113,7 +113,7 @@ namespace Terraria.GameContent.UI.Elements
             ChatManager.DrawColorCodedStringWithShadow(spriteBatch, Main.fontItemStack,
                 this._achievement.FriendlyName.Value, position1, baseColor1, 0.0f, Vector2.Zero, baseScale1, num2, 2f);
             position1.X -= 17f;
-            Vector2 position2 = vector2_2 + Vector2.UnitY * 27f + vector2_1;
+            var position2 = vector2_2 + Vector2.UnitY * 27f + vector2_1;
             this.DrawPanelBottom(spriteBatch, position2, num2, color1);
             position2.X += 8f;
             position2.Y += 4f;
@@ -121,16 +121,16 @@ namespace Terraria.GameContent.UI.Elements
                 baseColor2, 0.0f, Vector2.Zero, baseScale2, -1f, 2f);
             if (!flag)
                 return;
-            Vector2 position3 = position1 + Vector2.UnitX * num2 + Vector2.UnitY;
-            string text = ((int) trackerValues.Item1).ToString() + "/" + ((int) trackerValues.Item2).ToString();
-            Vector2 baseScale3 = new Vector2(0.75f);
-            Vector2 stringSize2 = ChatManager.GetStringSize(Main.fontItemStack, text, baseScale3, -1f);
-            float progress = (float) (trackerValues.Item1 / trackerValues.Item2);
-            float Width = 80f;
-            Color color2 = new Color(100, (int) byte.MaxValue, 100);
+            var position3 = position1 + Vector2.UnitX * num2 + Vector2.UnitY;
+            var text = ((int) trackerValues.Item1).ToString() + "/" + ((int) trackerValues.Item2).ToString();
+            var baseScale3 = new Vector2(0.75f);
+            var stringSize2 = ChatManager.GetStringSize(Main.fontItemStack, text, baseScale3, -1f);
+            var progress = (float) (trackerValues.Item1 / trackerValues.Item2);
+            var Width = 80f;
+            var color2 = new Color(100, (int) byte.MaxValue, 100);
             if (!this.IsMouseHovering)
                 color2 = Color.Lerp(color2, Color.Black, 0.25f);
-            Color BackColor = new Color((int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue);
+            var BackColor = new Color((int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue);
             if (!this.IsMouseHovering)
                 BackColor = Color.Lerp(BackColor, Color.Black, 0.25f);
             this.DrawProgressBar(spriteBatch, progress, position3 - Vector2.UnitX * Width * 0.7f, Width, BackColor,
@@ -195,17 +195,17 @@ namespace Terraria.GameContent.UI.Elements
         {
             if (!this._achievement.HasTracker)
                 return Tuple.Create<Decimal, Decimal>(new Decimal(0), new Decimal(0));
-            IAchievementTracker tracker = this._achievement.GetTracker();
+            var tracker = this._achievement.GetTracker();
             if (tracker.GetTrackerType() == TrackerType.Int)
             {
-                AchievementTracker<int> achievementTracker = (AchievementTracker<int>) tracker;
+                var achievementTracker = (AchievementTracker<int>) tracker;
                 return Tuple.Create<Decimal, Decimal>((Decimal) achievementTracker.Value,
                     (Decimal) achievementTracker.MaxValue);
             }
 
             if (tracker.GetTrackerType() != TrackerType.Float)
                 return Tuple.Create<Decimal, Decimal>(new Decimal(0), new Decimal(0));
-            AchievementTracker<float> achievementTracker1 = (AchievementTracker<float>) tracker;
+            var achievementTracker1 = (AchievementTracker<float>) tracker;
             return Tuple.Create<Decimal, Decimal>((Decimal) achievementTracker1.Value,
                 (Decimal) achievementTracker1.MaxValue);
         }
@@ -219,14 +219,14 @@ namespace Terraria.GameContent.UI.Elements
                 FillingColor = new Color((int) byte.MaxValue, 241, 51);
             if (BackColor == Color.Transparent)
                 FillingColor = new Color((int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue);
-            Texture2D colorBarTexture = Main.colorBarTexture;
-            Texture2D colorBlipTexture = Main.colorBlipTexture;
-            Texture2D magicPixel = Main.magicPixel;
-            float num1 = MathHelper.Clamp(progress, 0.0f, 1f);
-            float num2 = Width * 1f;
-            float y = 8f;
-            float x = num2 / 169f;
-            Vector2 vector2 = spot + Vector2.UnitY * y + Vector2.UnitX * 1f;
+            var colorBarTexture = Main.colorBarTexture;
+            var colorBlipTexture = Main.colorBlipTexture;
+            var magicPixel = Main.magicPixel;
+            var num1 = MathHelper.Clamp(progress, 0.0f, 1f);
+            var num2 = Width * 1f;
+            var y = 8f;
+            var x = num2 / 169f;
+            var vector2 = spot + Vector2.UnitY * y + Vector2.UnitX * 1f;
             spriteBatch.Draw(colorBarTexture, spot,
                 new Rectangle?(new Rectangle(5, 0, colorBarTexture.Width - 9, colorBarTexture.Height)), BackColor, 0.0f,
                 new Vector2(84.5f, 0.0f), new Vector2(x, 1f), SpriteEffects.None, 0.0f);
@@ -236,7 +236,7 @@ namespace Terraria.GameContent.UI.Elements
             spriteBatch.Draw(colorBarTexture, spot + new Vector2(x * 84.5f, 0.0f),
                 new Rectangle?(new Rectangle(colorBarTexture.Width - 4, 0, 4, colorBarTexture.Height)), BackColor, 0.0f,
                 Vector2.Zero, Vector2.One, SpriteEffects.None, 0.0f);
-            Vector2 position = vector2 + Vector2.UnitX * (num1 - 0.5f) * num2;
+            var position = vector2 + Vector2.UnitX * (num1 - 0.5f) * num2;
             --position.X;
             spriteBatch.Draw(magicPixel, position, new Rectangle?(new Rectangle(0, 0, 1, 1)), FillingColor, 0.0f,
                 new Vector2(1f, 0.5f), new Vector2(num2 * num1, y), SpriteEffects.None, 0.0f);
@@ -249,7 +249,7 @@ namespace Terraria.GameContent.UI.Elements
 
         public override int CompareTo(object obj)
         {
-            UIAchievementListItem achievementListItem = obj as UIAchievementListItem;
+            var achievementListItem = obj as UIAchievementListItem;
             if (achievementListItem == null)
                 return 0;
             if (this._achievement.IsCompleted && !achievementListItem._achievement.IsCompleted)

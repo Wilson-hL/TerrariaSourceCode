@@ -26,9 +26,9 @@ namespace Terraria.GameContent.Events
 
         public static void Update()
         {
-            for (int index = 0; index < MoonlordDeathDrama._pieces.Count; ++index)
+            for (var index = 0; index < MoonlordDeathDrama._pieces.Count; ++index)
             {
-                MoonlordDeathDrama.MoonlordPiece piece = MoonlordDeathDrama._pieces[index];
+                var piece = MoonlordDeathDrama._pieces[index];
                 piece.Update();
                 if (piece.Dead)
                 {
@@ -37,9 +37,9 @@ namespace Terraria.GameContent.Events
                 }
             }
 
-            for (int index = 0; index < MoonlordDeathDrama._explosions.Count; ++index)
+            for (var index = 0; index < MoonlordDeathDrama._explosions.Count; ++index)
             {
-                MoonlordDeathDrama.MoonlordExplosion explosion = MoonlordDeathDrama._explosions[index];
+                var explosion = MoonlordDeathDrama._explosions[index];
                 explosion.Update();
                 if (explosion.Dead)
                 {
@@ -48,8 +48,8 @@ namespace Terraria.GameContent.Events
                 }
             }
 
-            bool flag = false;
-            for (int index = 0; index < MoonlordDeathDrama._lightSources.Count; ++index)
+            var flag = false;
+            for (var index = 0; index < MoonlordDeathDrama._lightSources.Count; ++index)
             {
                 if ((double) Main.player[Main.myPlayer].Distance(MoonlordDeathDrama._lightSources[index]) < 2000.0)
                 {
@@ -76,10 +76,10 @@ namespace Terraria.GameContent.Events
 
         public static void DrawPieces(SpriteBatch spriteBatch)
         {
-            Rectangle playerScreen = Utils.CenteredRectangle(
+            var playerScreen = Utils.CenteredRectangle(
                 Main.screenPosition + new Vector2((float) Main.screenWidth, (float) Main.screenHeight) * 0.5f,
                 new Vector2((float) (Main.screenWidth + 1000), (float) (Main.screenHeight + 1000)));
-            for (int index = 0; index < MoonlordDeathDrama._pieces.Count; ++index)
+            for (var index = 0; index < MoonlordDeathDrama._pieces.Count; ++index)
             {
                 if (MoonlordDeathDrama._pieces[index].InDrawRange(playerScreen))
                     MoonlordDeathDrama._pieces[index].Draw(spriteBatch);
@@ -88,10 +88,10 @@ namespace Terraria.GameContent.Events
 
         public static void DrawExplosions(SpriteBatch spriteBatch)
         {
-            Rectangle playerScreen = Utils.CenteredRectangle(
+            var playerScreen = Utils.CenteredRectangle(
                 Main.screenPosition + new Vector2((float) Main.screenWidth, (float) Main.screenHeight) * 0.5f,
                 new Vector2((float) (Main.screenWidth + 1000), (float) (Main.screenHeight + 1000)));
-            for (int index = 0; index < MoonlordDeathDrama._explosions.Count; ++index)
+            for (var index = 0; index < MoonlordDeathDrama._explosions.Count; ++index)
             {
                 if (MoonlordDeathDrama._explosions[index].InDrawRange(playerScreen))
                     MoonlordDeathDrama._explosions[index].Draw(spriteBatch);
@@ -102,32 +102,32 @@ namespace Terraria.GameContent.Events
         {
             if ((double) MoonlordDeathDrama.whitening == 0.0)
                 return;
-            Color color = Color.White * MoonlordDeathDrama.whitening;
+            var color = Color.White * MoonlordDeathDrama.whitening;
             spriteBatch.Draw(Main.magicPixel, new Rectangle(-2, -2, Main.screenWidth + 4, Main.screenHeight + 4),
                 new Rectangle?(new Rectangle(0, 0, 1, 1)), color);
         }
 
         public static void ThrowPieces(Vector2 MoonlordCoreCenter, int DramaSeed)
         {
-            UnifiedRandom r = new UnifiedRandom(DramaSeed);
-            Vector2 vector2_1 = Vector2.UnitY.RotatedBy(
+            var r = new UnifiedRandom(DramaSeed);
+            var vector2_1 = Vector2.UnitY.RotatedBy(
                 (double) r.NextFloat() * 1.57079637050629 - 0.785398185253143 + 3.14159274101257, new Vector2());
             MoonlordDeathDrama._pieces.Add(new MoonlordDeathDrama.MoonlordPiece(
                 TextureManager.Load("Images/Misc/MoonExplosion/Spine"), new Vector2(64f, 150f),
                 MoonlordCoreCenter + new Vector2(0.0f, 50f), vector2_1 * 6f, 0.0f,
                 (float) ((double) r.NextFloat() * 0.100000001490116 - 0.0500000007450581)));
-            Vector2 vector2_2 = Vector2.UnitY.RotatedBy(
+            var vector2_2 = Vector2.UnitY.RotatedBy(
                 (double) r.NextFloat() * 1.57079637050629 - 0.785398185253143 + 3.14159274101257, new Vector2());
             MoonlordDeathDrama._pieces.Add(new MoonlordDeathDrama.MoonlordPiece(
                 TextureManager.Load("Images/Misc/MoonExplosion/Shoulder"), new Vector2(40f, 120f),
                 MoonlordCoreCenter + new Vector2(50f, -120f), vector2_2 * 10f, 0.0f,
                 (float) ((double) r.NextFloat() * 0.100000001490116 - 0.0500000007450581)));
-            Vector2 vector2_3 = Vector2.UnitY.RotatedBy(
+            var vector2_3 = Vector2.UnitY.RotatedBy(
                 (double) r.NextFloat() * 1.57079637050629 - 0.785398185253143 + 3.14159274101257, new Vector2());
             MoonlordDeathDrama._pieces.Add(new MoonlordDeathDrama.MoonlordPiece(
                 TextureManager.Load("Images/Misc/MoonExplosion/Torso"), new Vector2(192f, 252f), MoonlordCoreCenter,
                 vector2_3 * 8f, 0.0f, (float) ((double) r.NextFloat() * 0.100000001490116 - 0.0500000007450581)));
-            Vector2 vector2_4 = Vector2.UnitY.RotatedBy(
+            var vector2_4 = Vector2.UnitY.RotatedBy(
                 (double) r.NextFloat() * 1.57079637050629 - 0.785398185253143 + 3.14159274101257, new Vector2());
             MoonlordDeathDrama._pieces.Add(new MoonlordDeathDrama.MoonlordPiece(
                 TextureManager.Load("Images/Misc/MoonExplosion/Head"), new Vector2(138f, 185f),
@@ -181,7 +181,7 @@ namespace Terraria.GameContent.Events
 
             public void Draw(SpriteBatch sp)
             {
-                Color light = this.GetLight();
+                var light = this.GetLight();
                 sp.Draw(this._texture, this._position - Main.screenPosition, new Rectangle?(), light, this._rotation,
                     this._origin, 1f, SpriteEffects.None, 0.0f);
             }
@@ -204,13 +204,13 @@ namespace Terraria.GameContent.Events
 
             public Color GetLight()
             {
-                Vector3 zero = Vector3.Zero;
-                float num1 = 0.0f;
-                int num2 = 5;
-                Point tileCoordinates = this._position.ToTileCoordinates();
-                for (int x = tileCoordinates.X - num2; x <= tileCoordinates.X + num2; ++x)
+                var zero = Vector3.Zero;
+                var num1 = 0.0f;
+                var num2 = 5;
+                var tileCoordinates = this._position.ToTileCoordinates();
+                for (var x = tileCoordinates.X - num2; x <= tileCoordinates.X + num2; ++x)
                 {
-                    for (int y = tileCoordinates.Y - num2; y <= tileCoordinates.Y + num2; ++y)
+                    for (var y = tileCoordinates.Y - num2; y <= tileCoordinates.Y + num2; ++y)
                     {
                         zero += Lighting.GetColor(x, y).ToVector3();
                         ++num1;
@@ -250,7 +250,7 @@ namespace Terraria.GameContent.Events
 
             public void Draw(SpriteBatch sp)
             {
-                Color light = this.GetLight();
+                var light = this.GetLight();
                 sp.Draw(this._texture, this._position - Main.screenPosition, new Rectangle?(this._frame), light, 0.0f,
                     this._origin, 1f, SpriteEffects.None, 0.0f);
             }

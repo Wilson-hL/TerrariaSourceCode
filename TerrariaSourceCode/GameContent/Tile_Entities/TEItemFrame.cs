@@ -36,7 +36,7 @@ namespace Terraria.GameContent.Tile_Entities
 
         public static int Place(int x, int y)
         {
-            TEItemFrame teItemFrame = new TEItemFrame();
+            var teItemFrame = new TEItemFrame();
             teItemFrame.Position = new Point16(x, y);
             teItemFrame.ID = TileEntity.AssignNewID();
             teItemFrame.type = (byte) 1;
@@ -108,10 +108,10 @@ namespace Terraria.GameContent.Tile_Entities
 
         public static void TryPlacing(int x, int y, int netid, int prefix, int stack)
         {
-            int index = TEItemFrame.Find(x, y);
+            var index = TEItemFrame.Find(x, y);
             if (index == -1)
             {
-                int number = Item.NewItem(x * 16, y * 16, 32, 32, 1, 1, false, 0, false, false);
+                var number = Item.NewItem(x * 16, y * 16, 32, 32, 1, 1, false, 0, false, false);
                 Main.item[number].netDefaults(netid);
                 Main.item[number].Prefix(prefix);
                 Main.item[number].stack = stack;
@@ -119,7 +119,7 @@ namespace Terraria.GameContent.Tile_Entities
             }
             else
             {
-                TEItemFrame teItemFrame = (TEItemFrame) TileEntity.ByID[index];
+                var teItemFrame = (TEItemFrame) TileEntity.ByID[index];
                 if (teItemFrame.item.stack > 0)
                     teItemFrame.DropItem();
                 teItemFrame.item = new Item();

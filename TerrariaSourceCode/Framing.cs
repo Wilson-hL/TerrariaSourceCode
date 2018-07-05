@@ -150,7 +150,7 @@ namespace Terraria
         public static void Add8WayLookup(int lookup, short point1X, short point1Y, short point2X, short point2Y,
             short point3X, short point3Y)
         {
-            Point16[] point16Array = new Point16[3]
+            var point16Array = new Point16[3]
             {
                 new Point16((int) point1X * (int) Framing.frameSize8Way.X,
                     (int) point1Y * (int) Framing.frameSize8Way.Y),
@@ -164,7 +164,7 @@ namespace Terraria
 
         public static void Add8WayLookup(int lookup, short x, short y)
         {
-            Point16[] point16Array = new Point16[3]
+            var point16Array = new Point16[3]
             {
                 new Point16((int) x * (int) Framing.frameSize8Way.X, (int) y * (int) Framing.frameSize8Way.Y),
                 new Point16((int) x * (int) Framing.frameSize8Way.X, (int) y * (int) Framing.frameSize8Way.Y),
@@ -176,7 +176,7 @@ namespace Terraria
         public static void AddWallFrameLookup(int lookup, short point1X, short point1Y, short point2X, short point2Y,
             short point3X, short point3Y, short point4X, short point4Y)
         {
-            Point16[] point16Array = new Point16[4]
+            var point16Array = new Point16[4]
             {
                 new Point16((int) point1X * (int) Framing.wallFrameSize.X,
                     (int) point1Y * (int) Framing.wallFrameSize.Y),
@@ -198,13 +198,13 @@ namespace Terraria
         {
             if (!centerTile.active())
                 return;
-            ushort gemsparkFramingType = TileID.Sets.GemsparkFramingTypes[(int) centerTile.type];
-            Framing.BlockStyle blockStyle1 = Framing.FindBlockStyle(centerTile);
-            int index = 0;
-            Framing.BlockStyle blockStyle2 = new Framing.BlockStyle();
+            var gemsparkFramingType = TileID.Sets.GemsparkFramingTypes[(int) centerTile.type];
+            var blockStyle1 = Framing.FindBlockStyle(centerTile);
+            var index = 0;
+            var blockStyle2 = new Framing.BlockStyle();
             if (blockStyle1.top)
             {
-                Tile tileSafely = Framing.GetTileSafely(i, j - 1);
+                var tileSafely = Framing.GetTileSafely(i, j - 1);
                 if (tileSafely.active() && (int) TileID.Sets.GemsparkFramingTypes[(int) tileSafely.type] ==
                     (int) gemsparkFramingType)
                 {
@@ -216,10 +216,10 @@ namespace Terraria
                 }
             }
 
-            Framing.BlockStyle blockStyle3 = new Framing.BlockStyle();
+            var blockStyle3 = new Framing.BlockStyle();
             if (blockStyle1.left)
             {
-                Tile tileSafely = Framing.GetTileSafely(i - 1, j);
+                var tileSafely = Framing.GetTileSafely(i - 1, j);
                 if (tileSafely.active() && (int) TileID.Sets.GemsparkFramingTypes[(int) tileSafely.type] ==
                     (int) gemsparkFramingType)
                 {
@@ -231,10 +231,10 @@ namespace Terraria
                 }
             }
 
-            Framing.BlockStyle blockStyle4 = new Framing.BlockStyle();
+            var blockStyle4 = new Framing.BlockStyle();
             if (blockStyle1.right)
             {
-                Tile tileSafely = Framing.GetTileSafely(i + 1, j);
+                var tileSafely = Framing.GetTileSafely(i + 1, j);
                 if (tileSafely.active() && (int) TileID.Sets.GemsparkFramingTypes[(int) tileSafely.type] ==
                     (int) gemsparkFramingType)
                 {
@@ -246,10 +246,10 @@ namespace Terraria
                 }
             }
 
-            Framing.BlockStyle blockStyle5 = new Framing.BlockStyle();
+            var blockStyle5 = new Framing.BlockStyle();
             if (blockStyle1.bottom)
             {
-                Tile tileSafely = Framing.GetTileSafely(i, j + 1);
+                var tileSafely = Framing.GetTileSafely(i, j + 1);
                 if (tileSafely.active() && (int) TileID.Sets.GemsparkFramingTypes[(int) tileSafely.type] ==
                     (int) gemsparkFramingType)
                 {
@@ -263,11 +263,11 @@ namespace Terraria
 
             if (blockStyle2.left && blockStyle3.top)
             {
-                Tile tileSafely = Framing.GetTileSafely(i - 1, j - 1);
+                var tileSafely = Framing.GetTileSafely(i - 1, j - 1);
                 if (tileSafely.active() && (int) TileID.Sets.GemsparkFramingTypes[(int) tileSafely.type] ==
                     (int) gemsparkFramingType)
                 {
-                    Framing.BlockStyle blockStyle6 = Framing.FindBlockStyle(tileSafely);
+                    var blockStyle6 = Framing.FindBlockStyle(tileSafely);
                     if (blockStyle6.right && blockStyle6.bottom)
                         index |= 16;
                 }
@@ -275,11 +275,11 @@ namespace Terraria
 
             if (blockStyle2.right && blockStyle4.top)
             {
-                Tile tileSafely = Framing.GetTileSafely(i + 1, j - 1);
+                var tileSafely = Framing.GetTileSafely(i + 1, j - 1);
                 if (tileSafely.active() && (int) TileID.Sets.GemsparkFramingTypes[(int) tileSafely.type] ==
                     (int) gemsparkFramingType)
                 {
-                    Framing.BlockStyle blockStyle6 = Framing.FindBlockStyle(tileSafely);
+                    var blockStyle6 = Framing.FindBlockStyle(tileSafely);
                     if (blockStyle6.left && blockStyle6.bottom)
                         index |= 32;
                 }
@@ -287,11 +287,11 @@ namespace Terraria
 
             if (blockStyle5.left && blockStyle3.bottom)
             {
-                Tile tileSafely = Framing.GetTileSafely(i - 1, j + 1);
+                var tileSafely = Framing.GetTileSafely(i - 1, j + 1);
                 if (tileSafely.active() && (int) TileID.Sets.GemsparkFramingTypes[(int) tileSafely.type] ==
                     (int) gemsparkFramingType)
                 {
-                    Framing.BlockStyle blockStyle6 = Framing.FindBlockStyle(tileSafely);
+                    var blockStyle6 = Framing.FindBlockStyle(tileSafely);
                     if (blockStyle6.right && blockStyle6.top)
                         index |= 64;
                 }
@@ -299,11 +299,11 @@ namespace Terraria
 
             if (blockStyle5.right && blockStyle4.bottom)
             {
-                Tile tileSafely = Framing.GetTileSafely(i + 1, j + 1);
+                var tileSafely = Framing.GetTileSafely(i + 1, j + 1);
                 if (tileSafely.active() && (int) TileID.Sets.GemsparkFramingTypes[(int) tileSafely.type] ==
                     (int) gemsparkFramingType)
                 {
-                    Framing.BlockStyle blockStyle6 = Framing.FindBlockStyle(tileSafely);
+                    var blockStyle6 = Framing.FindBlockStyle(tileSafely);
                     if (blockStyle6.left && blockStyle6.top)
                         index |= 128;
                 }
@@ -311,7 +311,7 @@ namespace Terraria
 
             if (resetFrame)
                 centerTile.frameNumber((byte) WorldGen.genRand.Next(0, 3));
-            Point16 point16 = Framing.selfFrame8WayLookup[index][(int) centerTile.frameNumber()];
+            var point16 = Framing.selfFrame8WayLookup[index][(int) centerTile.frameNumber()];
             centerTile.frameX = point16.X;
             centerTile.frameY = point16.Y;
         }
@@ -321,24 +321,24 @@ namespace Terraria
             if (i <= 0 || j <= 0 || (i >= Main.maxTilesX - 1 || j >= Main.maxTilesY - 1) || Main.tile[i, j] == null)
                 return;
             WorldGen.UpdateMapTile(i, j, true);
-            Tile tile1 = Main.tile[i, j];
+            var tile1 = Main.tile[i, j];
             if (tile1.wall == (byte) 0)
             {
                 tile1.wallColor((byte) 0);
             }
             else
             {
-                int index1 = 0;
-                Tile tile2 = Main.tile[i, j - 1];
+                var index1 = 0;
+                var tile2 = Main.tile[i, j - 1];
                 if (tile2 != null && (tile2.wall > (byte) 0 || tile2.active() && tile2.type == (ushort) 54))
                     index1 = 1;
-                Tile tile3 = Main.tile[i - 1, j];
+                var tile3 = Main.tile[i - 1, j];
                 if (tile3 != null && (tile3.wall > (byte) 0 || tile3.active() && tile3.type == (ushort) 54))
                     index1 |= 2;
-                Tile tile4 = Main.tile[i + 1, j];
+                var tile4 = Main.tile[i + 1, j];
                 if (tile4 != null && (tile4.wall > (byte) 0 || tile4.active() && tile4.type == (ushort) 54))
                     index1 |= 4;
-                Tile tile5 = Main.tile[i, j + 1];
+                var tile5 = Main.tile[i, j + 1];
                 if (tile5 != null && (tile5.wall > (byte) 0 || tile5.active() && tile5.type == (ushort) 54))
                     index1 |= 8;
                 int index2;
@@ -362,7 +362,7 @@ namespace Terraria
 
                 if (index1 == 15)
                     index1 += Framing.centerWallFrameLookup[i % 3][j % 3];
-                Point16 point16 = Framing.wallFrameLookup[index1][index2];
+                var point16 = Framing.wallFrameLookup[index1][index2];
                 tile1.wallFrameX((int) point16.X);
                 tile1.wallFrameY((int) point16.Y);
             }
@@ -386,7 +386,7 @@ namespace Terraria
 
         public static Tile GetTileSafely(int i, int j)
         {
-            Tile tile = Main.tile[i, j];
+            var tile = Main.tile[i, j];
             if (tile == null)
             {
                 tile = new Tile();

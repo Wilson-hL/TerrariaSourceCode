@@ -70,7 +70,7 @@ namespace Terraria.Graphics.Capture
             this.UpdateCamera();
             if (CaptureInterface.CameraLock)
                 return;
-            bool flag = Main.keyState.IsKeyDown(Keys.F1);
+            var flag = Main.keyState.IsKeyDown(Keys.F1);
             if (flag && !this.KeyToggleActiveHeld && (Main.mouseItem.type == 0 || this.Active) &&
                 !Main.CaptureModeDisabled)
                 this.ToggleCamera(!this.Active);
@@ -82,7 +82,7 @@ namespace Terraria.Graphics.Capture
                 CaptureInterface.JustActivated = false;
             if (this.UpdateButtons(new Vector2((float) Main.mouseX, (float) Main.mouseY)) && Main.mouseLeft)
                 return;
-            foreach (KeyValuePair<int, CaptureInterface.CaptureInterfaceMode> mode in CaptureInterface.Modes)
+            foreach (var mode in CaptureInterface.Modes)
             {
                 mode.Value.Selected = mode.Key == this.SelectedMode;
                 mode.Value.Update();
@@ -99,7 +99,7 @@ namespace Terraria.Graphics.Capture
             sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None,
                 RasterizerState.CullCounterClockwise, (Effect) null, Main.UIScaleMatrix);
             PlayerInput.SetZoom_UI();
-            foreach (CaptureInterface.CaptureInterfaceMode captureInterfaceMode in CaptureInterface.Modes.Values)
+            foreach (var captureInterfaceMode in CaptureInterface.Modes.Values)
                 captureInterfaceMode.Draw(sb);
             sb.End();
             sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None,
@@ -121,11 +121,11 @@ namespace Terraria.Graphics.Capture
         {
             if (CaptureInterface.CameraLock)
                 return;
-            bool active = this.Active;
+            var active = this.Active;
             this.Active = CaptureInterface.Modes.ContainsKey(this.SelectedMode) && On;
             if (active != this.Active)
                 Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
-            foreach (KeyValuePair<int, CaptureInterface.CaptureInterfaceMode> mode in CaptureInterface.Modes)
+            foreach (var mode in CaptureInterface.Modes)
                 mode.Value.ToggleActive(this.Active && mode.Key == this.SelectedMode);
             if (!On || active)
                 return;
@@ -135,23 +135,23 @@ namespace Terraria.Graphics.Capture
         private bool UpdateButtons(Vector2 mouse)
         {
             this.HoveredMode = -1;
-            bool flag1 = !Main.graphics.IsFullScreen;
-            int num1 = 9;
-            for (int index = 0; index < num1; ++index)
+            var flag1 = !Main.graphics.IsFullScreen;
+            var num1 = 9;
+            for (var index = 0; index < num1; ++index)
             {
                 if (new Rectangle(24 + 46 * index, 24, 42, 42).Contains(mouse.ToPoint()))
                 {
                     this.HoveredMode = index;
-                    bool flag2 = Main.mouseLeft && Main.mouseLeftRelease;
-                    int num2 = 0;
-                    int num3 = index;
-                    int num4 = num2;
-                    int num5 = num4 + 1;
+                    var flag2 = Main.mouseLeft && Main.mouseLeftRelease;
+                    var num2 = 0;
+                    var num3 = index;
+                    var num4 = num2;
+                    var num5 = num4 + 1;
                     if (num3 == num4 && flag2)
                         CaptureInterface.QuickScreenshot();
-                    int num6 = index;
-                    int num7 = num5;
-                    int num8 = num7 + 1;
+                    var num6 = index;
+                    var num7 = num5;
+                    var num8 = num7 + 1;
                     if (num6 == num7 && flag2 && (CaptureInterface.EdgeAPinned && CaptureInterface.EdgeBPinned))
                         CaptureInterface.StartCamera(new CaptureSettings()
                         {
@@ -162,51 +162,51 @@ namespace Terraria.Graphics.Capture
                             UseScaling = CaptureInterface.Settings.PackImage,
                             CaptureMech = WiresUI.Settings.DrawWires
                         });
-                    int num9 = index;
-                    int num10 = num8;
-                    int num11 = num10 + 1;
+                    var num9 = index;
+                    var num10 = num8;
+                    var num11 = num10 + 1;
                     if (num9 == num10 && flag2 && this.SelectedMode != 0)
                     {
                         this.SelectedMode = 0;
                         this.ToggleCamera(true);
                     }
 
-                    int num12 = index;
-                    int num13 = num11;
-                    int num14 = num13 + 1;
+                    var num12 = index;
+                    var num13 = num11;
+                    var num14 = num13 + 1;
                     if (num12 == num13 && flag2 && this.SelectedMode != 1)
                     {
                         this.SelectedMode = 1;
                         this.ToggleCamera(true);
                     }
 
-                    int num15 = index;
-                    int num16 = num14;
-                    int num17 = num16 + 1;
+                    var num15 = index;
+                    var num16 = num14;
+                    var num17 = num16 + 1;
                     if (num15 == num16 && flag2)
                         CaptureInterface.ResetFocus();
-                    int num18 = index;
-                    int num19 = num17;
-                    int num20 = num19 + 1;
+                    var num18 = index;
+                    var num19 = num17;
+                    var num20 = num19 + 1;
                     if (num18 == num19 && flag2 && Main.mapEnabled)
                         Main.mapFullscreen = !Main.mapFullscreen;
-                    int num21 = index;
-                    int num22 = num20;
-                    int num23 = num22 + 1;
+                    var num21 = index;
+                    var num22 = num20;
+                    var num23 = num22 + 1;
                     if (num21 == num22 && flag2 && this.SelectedMode != 2)
                     {
                         this.SelectedMode = 2;
                         this.ToggleCamera(true);
                     }
 
-                    int num24 = index;
-                    int num25 = num23;
-                    int num26 = num25 + 1;
+                    var num24 = index;
+                    var num25 = num23;
+                    var num26 = num25 + 1;
                     if (num24 == num25 && flag2 && flag1)
                         Process.Start(Path.Combine(Main.SavePath, "Captures"));
-                    int num27 = index;
-                    int num28 = num26;
-                    int num29 = num28 + 1;
+                    var num27 = index;
+                    var num28 = num26;
+                    var num29 = num28 + 1;
                     if (num27 == num28 && flag2)
                     {
                         this.ToggleCamera(false);
@@ -223,8 +223,8 @@ namespace Terraria.Graphics.Capture
 
         public static void QuickScreenshot()
         {
-            Point tileCoordinates1 = Main.ViewPosition.ToTileCoordinates();
-            Point tileCoordinates2 = (Main.ViewPosition + Main.ViewSize).ToTileCoordinates();
+            var tileCoordinates1 = Main.ViewPosition.ToTileCoordinates();
+            var tileCoordinates2 = (Main.ViewPosition + Main.ViewSize).ToTileCoordinates();
             CaptureInterface.StartCamera(new CaptureSettings()
             {
                 Area = new Rectangle(tileCoordinates1.X, tileCoordinates1.Y,
@@ -239,14 +239,14 @@ namespace Terraria.Graphics.Capture
 
         private void DrawButtons(SpriteBatch sb)
         {
-            Vector2 vector2 = new Vector2((float) Main.mouseX, (float) Main.mouseY);
-            int num = 9;
-            for (int index = 0; index < num; ++index)
+            var vector2 = new Vector2((float) Main.mouseX, (float) Main.mouseY);
+            var num = 9;
+            for (var index = 0; index < num; ++index)
             {
-                Texture2D texture2D = Main.inventoryBackTexture;
-                float scale = 0.8f;
-                Vector2 position = new Vector2((float) (24 + 46 * index), 24f);
-                Color color = Main.inventoryBack * 0.8f;
+                var texture2D = Main.inventoryBackTexture;
+                var scale = 0.8f;
+                var position = new Vector2((float) (24 + 46 * index), 24f);
+                var color = Main.inventoryBack * 0.8f;
                 if (this.SelectedMode == 0 && index == 2)
                     texture2D = Main.inventoryBack14Texture;
                 else if (this.SelectedMode == 1 && index == 3)
@@ -286,7 +286,7 @@ namespace Terraria.Graphics.Capture
 
                 sb.Draw(texture2D, position + new Vector2(26f) * scale, new Rectangle?(), Color.White, 0.0f,
                     texture2D.Size() / 2f, 1f, SpriteEffects.None, 0.0f);
-                bool flag = false;
+                var flag = false;
                 switch (index)
                 {
                     case 1:
@@ -320,7 +320,7 @@ namespace Terraria.Graphics.Capture
                         0.0f, Main.cdTexture.Size() / 2f, 1f, SpriteEffects.None, 0.0f);
             }
 
-            string cursorText = "";
+            var cursorText = "";
             switch (this.HoveredMode)
             {
                 case -1:
@@ -397,24 +397,24 @@ namespace Terraria.Graphics.Capture
                 return false;
             }
 
-            float num1 = 0.0f;
-            float num2 = 0.0f;
-            float num3 = 2f;
-            int num4 = Main.maxTilesX / Main.textureMaxWidth;
-            int num5 = Main.maxTilesY / Main.textureMaxHeight;
-            float num6 = 10f;
-            float num7 = 10f;
-            float num8 = (float) (Main.maxTilesX - 10);
-            float num9 = (float) (Main.maxTilesY - 10);
+            var num1 = 0.0f;
+            var num2 = 0.0f;
+            var num3 = 2f;
+            var num4 = Main.maxTilesX / Main.textureMaxWidth;
+            var num5 = Main.maxTilesY / Main.textureMaxHeight;
+            var num6 = 10f;
+            var num7 = 10f;
+            var num8 = (float) (Main.maxTilesX - 10);
+            var num9 = (float) (Main.maxTilesY - 10);
             num1 = 200f;
             num2 = 300f;
             num3 = Main.mapFullscreenScale;
-            float num10 = (float) ((double) Main.screenWidth / (double) Main.maxTilesX * 0.800000011920929);
+            var num10 = (float) ((double) Main.screenWidth / (double) Main.maxTilesX * 0.800000011920929);
             if ((double) Main.mapFullscreenScale < (double) num10)
                 Main.mapFullscreenScale = num10;
             if ((double) Main.mapFullscreenScale > 16.0)
                 Main.mapFullscreenScale = 16f;
-            float mapFullscreenScale = Main.mapFullscreenScale;
+            var mapFullscreenScale = Main.mapFullscreenScale;
             if ((double) Main.mapFullscreenPos.X < (double) num6)
                 Main.mapFullscreenPos.X = num6;
             if ((double) Main.mapFullscreenPos.X > (double) num8)
@@ -423,19 +423,19 @@ namespace Terraria.Graphics.Capture
                 Main.mapFullscreenPos.Y = num7;
             if ((double) Main.mapFullscreenPos.Y > (double) num9)
                 Main.mapFullscreenPos.Y = num9;
-            float x1 = Main.mapFullscreenPos.X;
-            float y1 = Main.mapFullscreenPos.Y;
-            float num11 = x1 * mapFullscreenScale;
-            float num12 = y1 * mapFullscreenScale;
-            float num13 = -num11 + (float) (Main.screenWidth / 2);
-            float num14 = -num12 + (float) (Main.screenHeight / 2);
-            float x2 = num13 + num6 * mapFullscreenScale;
-            float y2 = num14 + num7 * mapFullscreenScale;
-            float num15 = (float) (Main.maxTilesX / 840) * Main.mapFullscreenScale;
-            float num16 = x2;
-            float num17 = y2;
-            float width = (float) Main.mapTexture.Width;
-            float height = (float) Main.mapTexture.Height;
+            var x1 = Main.mapFullscreenPos.X;
+            var y1 = Main.mapFullscreenPos.Y;
+            var num11 = x1 * mapFullscreenScale;
+            var num12 = y1 * mapFullscreenScale;
+            var num13 = -num11 + (float) (Main.screenWidth / 2);
+            var num14 = -num12 + (float) (Main.screenHeight / 2);
+            var x2 = num13 + num6 * mapFullscreenScale;
+            var y2 = num14 + num7 * mapFullscreenScale;
+            var num15 = (float) (Main.maxTilesX / 840) * Main.mapFullscreenScale;
+            var num16 = x2;
+            var num17 = y2;
+            var width = (float) Main.mapTexture.Width;
+            var height = (float) Main.mapTexture.Height;
             float num18;
             float num19;
             float num20;
@@ -443,18 +443,18 @@ namespace Terraria.Graphics.Capture
             switch (Main.maxTilesX)
             {
                 case 4200:
-                    float num22 = num15 * 0.998f;
+                    var num22 = num15 * 0.998f;
                     num18 = num16 - 37.3f * num22;
                     num19 = num17 - 1.7f * num22;
                     num20 = (width - 16f) * num22;
                     num21 = (height - 8.31f) * num22;
                     break;
                 case 6300:
-                    float num23 = num15 * 1.09f;
+                    var num23 = num15 * 1.09f;
                     num18 = num16 - 39.8f * num23;
                     num19 = y2 - 4.08f * num23;
                     num20 = (width - 26.69f) * num23;
-                    float num24 = (height - 6.92f) * num23;
+                    var num24 = (height - 6.92f) * num23;
                     if ((double) num23 < 1.2)
                     {
                         num21 = num24 + 2f;
@@ -463,11 +463,11 @@ namespace Terraria.Graphics.Capture
 
                     break;
                 case 6400:
-                    float num25 = num15 * 1.09f;
+                    var num25 = num15 * 1.09f;
                     num18 = num16 - 38.8f * num25;
                     num19 = y2 - 3.85f * num25;
                     num20 = (width - 13.6f) * num25;
-                    float num26 = (height - 6.92f) * num25;
+                    var num26 = (height - 6.92f) * num25;
                     if ((double) num25 < 1.2)
                     {
                         num21 = num26 + 2f;
@@ -476,11 +476,11 @@ namespace Terraria.Graphics.Capture
 
                     break;
                 case 8400:
-                    float num27 = num15 * 0.999f;
+                    var num27 = num15 * 0.999f;
                     num18 = num16 - 40.6f * num27;
                     num19 = y2 - 5f * num27;
                     num20 = (width - 8.045f) * num27;
-                    float num28 = (height + 0.12f) * num27;
+                    var num28 = (height + 0.12f) * num27;
                     if ((double) num27 < 1.2)
                     {
                         num21 = num28 + 1f;
@@ -493,9 +493,9 @@ namespace Terraria.Graphics.Capture
             switch (Goal)
             {
                 case 0:
-                    int x3 = (int) ((-(double) x2 + (double) PinX) / (double) mapFullscreenScale + (double) num6);
-                    int y3 = (int) ((-(double) y2 + (double) PinY) / (double) mapFullscreenScale + (double) num7);
-                    bool flag = false;
+                    var x3 = (int) ((-(double) x2 + (double) PinX) / (double) mapFullscreenScale + (double) num6);
+                    var y3 = (int) ((-(double) y2 + (double) PinY) / (double) mapFullscreenScale + (double) num7);
+                    var flag = false;
                     if ((double) x3 < (double) num6)
                         flag = true;
                     if ((double) x3 >= (double) num8)
@@ -513,8 +513,8 @@ namespace Terraria.Graphics.Capture
                     result = new Point(-1, -1);
                     return false;
                 case 1:
-                    Vector2 vector2_1 = new Vector2(x2, y2);
-                    Vector2 vector2_2 = new Vector2((float) PinX, (float) PinY) * mapFullscreenScale -
+                    var vector2_1 = new Vector2(x2, y2);
+                    var vector2_2 = new Vector2((float) PinX, (float) PinY) * mapFullscreenScale -
                                         new Vector2(10f * mapFullscreenScale);
                     result = (vector2_1 + vector2_2).ToPoint();
                     return true;
@@ -526,7 +526,7 @@ namespace Terraria.Graphics.Capture
 
         private static void ConstraintPoints()
         {
-            int offScreenTiles = Lighting.offScreenTiles;
+            var offScreenTiles = Lighting.offScreenTiles;
             if (CaptureInterface.EdgeAPinned)
                 CaptureInterface.PointWorldClamp(ref CaptureInterface.EdgeA, offScreenTiles);
             if (!CaptureInterface.EdgeBPinned)
@@ -564,10 +564,10 @@ namespace Terraria.Graphics.Capture
 
         public void Scrolling()
         {
-            int num = PlayerInput.ScrollWheelDelta / 120 % 30;
+            var num = PlayerInput.ScrollWheelDelta / 120 % 30;
             if (num < 0)
                 num += 30;
-            int selectedMode = this.SelectedMode;
+            var selectedMode = this.SelectedMode;
             this.SelectedMode -= num;
             while (this.SelectedMode < 0)
                 this.SelectedMode += 2;
@@ -602,19 +602,19 @@ namespace Terraria.Graphics.Capture
                 new Rectangle?(new Rectangle(0, 0, 1, 1)), Color.Black * (CaptureInterface.CameraFrame / 5f));
             if ((double) CaptureInterface.CameraFrame != 5.0)
                 return;
-            float num1 = (float) ((double) CaptureInterface.CameraWaiting - 60.0 + 5.0);
+            var num1 = (float) ((double) CaptureInterface.CameraWaiting - 60.0 + 5.0);
             if ((double) num1 <= 0.0)
                 return;
-            float num2 = num1 / 5f;
-            float num3 = CaptureManager.Instance.GetProgress() * 100f;
+            var num2 = num1 / 5f;
+            var num3 = CaptureManager.Instance.GetProgress() * 100f;
             if ((double) num3 > 100.0)
                 num3 = 100f;
-            string text1 = num3.ToString("##") + " ";
-            string text2 = "/ 100%";
-            Vector2 vector2_1 = Main.fontDeathText.MeasureString(text1);
-            Vector2 vector2_2 = Main.fontDeathText.MeasureString(text2);
-            Vector2 vector2_3 = new Vector2(-vector2_1.X, (float) (-(double) vector2_1.Y / 2.0));
-            Vector2 vector2_4 = new Vector2(0.0f, (float) (-(double) vector2_2.Y / 2.0));
+            var text1 = num3.ToString("##") + " ";
+            var text2 = "/ 100%";
+            var vector2_1 = Main.fontDeathText.MeasureString(text1);
+            var vector2_2 = Main.fontDeathText.MeasureString(text2);
+            var vector2_3 = new Vector2(-vector2_1.X, (float) (-(double) vector2_1.Y / 2.0));
+            var vector2_4 = new Vector2(0.0f, (float) (-(double) vector2_2.Y / 2.0));
             ChatManager.DrawColorCodedStringWithShadow(sb, Main.fontDeathText, text1,
                 new Vector2((float) Main.screenWidth, (float) Main.screenHeight) / 2f + vector2_3, Color.White * num2,
                 0.0f, Vector2.Zero, Vector2.One, -1f, 2f);
@@ -739,16 +739,16 @@ namespace Terraria.Graphics.Capture
             {
                 if (!CaptureInterface.EdgeAPinned || !CaptureInterface.EdgeBPinned)
                     return;
-                int PinX = Math.Min(CaptureInterface.EdgeA.X, CaptureInterface.EdgeB.X);
-                int PinY = Math.Min(CaptureInterface.EdgeA.Y, CaptureInterface.EdgeB.Y);
-                int num1 = Math.Abs(CaptureInterface.EdgeA.X - CaptureInterface.EdgeB.X);
-                int num2 = Math.Abs(CaptureInterface.EdgeA.Y - CaptureInterface.EdgeB.Y);
+                var PinX = Math.Min(CaptureInterface.EdgeA.X, CaptureInterface.EdgeB.X);
+                var PinY = Math.Min(CaptureInterface.EdgeA.Y, CaptureInterface.EdgeB.Y);
+                var num1 = Math.Abs(CaptureInterface.EdgeA.X - CaptureInterface.EdgeB.X);
+                var num2 = Math.Abs(CaptureInterface.EdgeA.Y - CaptureInterface.EdgeB.Y);
                 if (!Main.mapFullscreen)
                 {
-                    Rectangle rectangle1 =
+                    var rectangle1 =
                         Main.ReverseGravitySupport(
                             new Rectangle(PinX * 16, PinY * 16, (num1 + 1) * 16, (num2 + 1) * 16));
-                    Rectangle rectangle2 = Main.ReverseGravitySupport(new Rectangle((int) Main.screenPosition.X,
+                    var rectangle2 = Main.ReverseGravitySupport(new Rectangle((int) Main.screenPosition.X,
                         (int) Main.screenPosition.Y, Main.screenWidth + 1, Main.screenHeight + 1));
                     Rectangle result;
                     Rectangle.Intersect(ref rectangle2, ref rectangle1, out result);
@@ -756,7 +756,7 @@ namespace Terraria.Graphics.Capture
                         return;
                     result.Offset(-rectangle2.X, -rectangle2.Y);
                     sb.Draw(Main.magicPixel, result, CaptureInterface.Settings.MarkedAreaColor);
-                    for (int index = 0; index < 2; ++index)
+                    for (var index = 0; index < 2; ++index)
                     {
                         sb.Draw(Main.magicPixel,
                             new Rectangle(result.X, result.Y + (index == 1 ? result.Height : -2), result.Width, 2),
@@ -772,16 +772,16 @@ namespace Terraria.Graphics.Capture
                     CaptureInterface.GetMapCoords(PinX, PinY, 1, out result1);
                     Point result2;
                     CaptureInterface.GetMapCoords(PinX + num1 + 1, PinY + num2 + 1, 1, out result2);
-                    Rectangle rectangle1 =
+                    var rectangle1 =
                         new Rectangle(result1.X, result1.Y, result2.X - result1.X, result2.Y - result1.Y);
-                    Rectangle rectangle2 = new Rectangle(0, 0, Main.screenWidth + 1, Main.screenHeight + 1);
+                    var rectangle2 = new Rectangle(0, 0, Main.screenWidth + 1, Main.screenHeight + 1);
                     Rectangle result3;
                     Rectangle.Intersect(ref rectangle2, ref rectangle1, out result3);
                     if (result3.Width == 0 || result3.Height == 0)
                         return;
                     result3.Offset(-rectangle2.X, -rectangle2.Y);
                     sb.Draw(Main.magicPixel, result3, CaptureInterface.Settings.MarkedAreaColor);
-                    for (int index = 0; index < 2; ++index)
+                    for (var index = 0; index < 2; ++index)
                     {
                         sb.Draw(Main.magicPixel,
                             new Rectangle(result3.X, result3.Y + (index == 1 ? result3.Height : -2), result3.Width, 2),
@@ -795,22 +795,22 @@ namespace Terraria.Graphics.Capture
 
             private void DrawCursors(SpriteBatch sb)
             {
-                float num1 = 1f / Main.cursorScale;
-                float num2 = 0.8f / num1;
-                Vector2 min = Main.screenPosition + new Vector2(30f);
-                Vector2 max = min + new Vector2((float) Main.screenWidth, (float) Main.screenHeight) - new Vector2(60f);
+                var num1 = 1f / Main.cursorScale;
+                var num2 = 0.8f / num1;
+                var min = Main.screenPosition + new Vector2(30f);
+                var max = min + new Vector2((float) Main.screenWidth, (float) Main.screenHeight) - new Vector2(60f);
                 if (Main.mapFullscreen)
                 {
                     min -= Main.screenPosition;
                     max -= Main.screenPosition;
                 }
 
-                Vector3 hsl = Main.rgbToHsl(Main.cursorColor);
+                var hsl = Main.rgbToHsl(Main.cursorColor);
                 Main.hslToRgb((float) (((double) hsl.X + 0.330000013113022) % 1.0), hsl.Y, hsl.Z);
                 Main.hslToRgb((float) (((double) hsl.X - 0.330000013113022) % 1.0), hsl.Y, hsl.Z);
                 Color white;
-                Color color = white = Color.White;
-                bool flag = (double) Main.player[Main.myPlayer].gravDir == -1.0;
+                var color = white = Color.White;
+                var flag = (double) Main.player[Main.myPlayer].gravDir == -1.0;
                 if (!CaptureInterface.EdgeAPinned)
                 {
                     Utils.DrawCursorSingle(sb, color, 3.926991f, Main.cursorScale * num1 * num2,
@@ -819,18 +819,18 @@ namespace Terraria.Graphics.Capture
                 }
                 else
                 {
-                    int specialMode = 0;
-                    float num3 = 0.0f;
-                    Vector2 vector2_1 = Vector2.Zero;
+                    var specialMode = 0;
+                    var num3 = 0.0f;
+                    var vector2_1 = Vector2.Zero;
                     if (!Main.mapFullscreen)
                     {
-                        Vector2 vector2_2 = CaptureInterface.EdgeA.ToVector2() * 16f;
+                        var vector2_2 = CaptureInterface.EdgeA.ToVector2() * 16f;
                         float num4;
                         Vector2 vector2_3;
                         if (!CaptureInterface.EdgeBPinned)
                         {
                             specialMode = 1;
-                            Vector2 vector2_4 = vector2_2 + Vector2.One * 8f;
+                            var vector2_4 = vector2_2 + Vector2.One * 8f;
                             vector2_1 = vector2_4;
                             num4 = (-vector2_4 +
                                     Main.ReverseGravitySupport(new Vector2((float) Main.mouseX, (float) Main.mouseY),
@@ -843,11 +843,11 @@ namespace Terraria.Graphics.Capture
                         }
                         else
                         {
-                            Vector2 vector2_4 =
+                            var vector2_4 =
                                 new Vector2(
                                     (float) ((CaptureInterface.EdgeA.X > CaptureInterface.EdgeB.X).ToInt() * 16),
                                     (float) ((CaptureInterface.EdgeA.Y > CaptureInterface.EdgeB.Y).ToInt() * 16));
-                            Vector2 vector2_5 = vector2_2 + vector2_4;
+                            var vector2_5 = vector2_2 + vector2_4;
                             vector2_3 = Vector2.Clamp(vector2_5, min, max);
                             num4 = (CaptureInterface.EdgeB.ToVector2() * 16f + new Vector2(16f) - vector2_4 - vector2_3)
                                 .ToRotation();
@@ -866,19 +866,19 @@ namespace Terraria.Graphics.Capture
                     }
                     else
                     {
-                        Point result1 = CaptureInterface.EdgeA;
+                        var result1 = CaptureInterface.EdgeA;
                         if (CaptureInterface.EdgeBPinned)
                         {
-                            int num4 = (CaptureInterface.EdgeA.X > CaptureInterface.EdgeB.X).ToInt();
-                            int num5 = (CaptureInterface.EdgeA.Y > CaptureInterface.EdgeB.Y).ToInt();
+                            var num4 = (CaptureInterface.EdgeA.X > CaptureInterface.EdgeB.X).ToInt();
+                            var num5 = (CaptureInterface.EdgeA.Y > CaptureInterface.EdgeB.Y).ToInt();
                             result1.X += num4;
                             result1.Y += num5;
                             CaptureInterface.GetMapCoords(result1.X, result1.Y, 1, out result1);
-                            Point result2 = CaptureInterface.EdgeB;
+                            var result2 = CaptureInterface.EdgeB;
                             result2.X += 1 - num4;
                             result2.Y += 1 - num5;
                             CaptureInterface.GetMapCoords(result2.X, result2.Y, 1, out result2);
-                            Vector2 vector2_2 = Vector2.Clamp(result1.ToVector2(), min, max);
+                            var vector2_2 = Vector2.Clamp(result1.ToVector2(), min, max);
                             num3 = (result2.ToVector2() - vector2_2).ToRotation();
                         }
                         else
@@ -897,18 +897,18 @@ namespace Terraria.Graphics.Capture
                 }
                 else
                 {
-                    int specialMode = 0;
-                    float num3 = 0.0f;
-                    Vector2 vector2_1 = Vector2.Zero;
+                    var specialMode = 0;
+                    var num3 = 0.0f;
+                    var vector2_1 = Vector2.Zero;
                     if (!Main.mapFullscreen)
                     {
-                        Vector2 vector2_2 = CaptureInterface.EdgeB.ToVector2() * 16f;
+                        var vector2_2 = CaptureInterface.EdgeB.ToVector2() * 16f;
                         float num4;
                         Vector2 vector2_3;
                         if (!CaptureInterface.EdgeAPinned)
                         {
                             specialMode = 1;
-                            Vector2 vector2_4 = vector2_2 + Vector2.One * 8f;
+                            var vector2_4 = vector2_2 + Vector2.One * 8f;
                             vector2_1 = vector2_4;
                             num4 = (-vector2_4 +
                                     Main.ReverseGravitySupport(new Vector2((float) Main.mouseX, (float) Main.mouseY),
@@ -921,11 +921,11 @@ namespace Terraria.Graphics.Capture
                         }
                         else
                         {
-                            Vector2 vector2_4 =
+                            var vector2_4 =
                                 new Vector2(
                                     (float) ((CaptureInterface.EdgeB.X >= CaptureInterface.EdgeA.X).ToInt() * 16),
                                     (float) ((CaptureInterface.EdgeB.Y >= CaptureInterface.EdgeA.Y).ToInt() * 16));
-                            Vector2 vector2_5 = vector2_2 + vector2_4;
+                            var vector2_5 = vector2_2 + vector2_4;
                             vector2_3 = Vector2.Clamp(vector2_5, min, max);
                             num4 = (CaptureInterface.EdgeA.ToVector2() * 16f + new Vector2(16f) - vector2_4 - vector2_3)
                                 .ToRotation();
@@ -944,19 +944,19 @@ namespace Terraria.Graphics.Capture
                     }
                     else
                     {
-                        Point result1 = CaptureInterface.EdgeB;
+                        var result1 = CaptureInterface.EdgeB;
                         if (CaptureInterface.EdgeAPinned)
                         {
-                            int num4 = (CaptureInterface.EdgeB.X >= CaptureInterface.EdgeA.X).ToInt();
-                            int num5 = (CaptureInterface.EdgeB.Y >= CaptureInterface.EdgeA.Y).ToInt();
+                            var num4 = (CaptureInterface.EdgeB.X >= CaptureInterface.EdgeA.X).ToInt();
+                            var num5 = (CaptureInterface.EdgeB.Y >= CaptureInterface.EdgeA.Y).ToInt();
                             result1.X += num4;
                             result1.Y += num5;
                             CaptureInterface.GetMapCoords(result1.X, result1.Y, 1, out result1);
-                            Point result2 = CaptureInterface.EdgeA;
+                            var result2 = CaptureInterface.EdgeA;
                             result2.X += 1 - num4;
                             result2.Y += 1 - num5;
                             CaptureInterface.GetMapCoords(result2.X, result2.Y, 1, out result2);
-                            Vector2 vector2_2 = Vector2.Clamp(result1.ToVector2(), min, max);
+                            var vector2_2 = Vector2.Clamp(result1.ToVector2(), min, max);
                             num3 = (result2.ToVector2() - vector2_2).ToRotation();
                         }
                         else
@@ -1016,12 +1016,12 @@ namespace Terraria.Graphics.Capture
             {
                 if (!CaptureInterface.EdgeAPinned || !CaptureInterface.EdgeBPinned)
                 {
-                    bool flag1 = false;
+                    var flag1 = false;
                     if (Main.mouseLeft)
                         flag1 = true;
                     if (flag1)
                     {
-                        bool flag2 = true;
+                        var flag2 = true;
                         Point result;
                         if (!Main.mapFullscreen)
                             result = (Main.screenPosition + mouse).ToTileCoordinates();
@@ -1047,13 +1047,13 @@ namespace Terraria.Graphics.Capture
                     }
                 }
 
-                int PinX = Math.Min(CaptureInterface.EdgeA.X, CaptureInterface.EdgeB.X);
-                int PinY = Math.Min(CaptureInterface.EdgeA.Y, CaptureInterface.EdgeB.Y);
-                int num1 = Math.Abs(CaptureInterface.EdgeA.X - CaptureInterface.EdgeB.X);
-                int num2 = Math.Abs(CaptureInterface.EdgeA.Y - CaptureInterface.EdgeB.Y);
-                bool flag = (double) Main.player[Main.myPlayer].gravDir == -1.0;
-                int num3 = 1 - flag.ToInt();
-                int num4 = flag.ToInt();
+                var PinX = Math.Min(CaptureInterface.EdgeA.X, CaptureInterface.EdgeB.X);
+                var PinY = Math.Min(CaptureInterface.EdgeA.Y, CaptureInterface.EdgeB.Y);
+                var num1 = Math.Abs(CaptureInterface.EdgeA.X - CaptureInterface.EdgeB.X);
+                var num2 = Math.Abs(CaptureInterface.EdgeA.Y - CaptureInterface.EdgeB.Y);
+                var flag = (double) Main.player[Main.myPlayer].gravDir == -1.0;
+                var num3 = 1 - flag.ToInt();
+                var num4 = flag.ToInt();
                 Rectangle rectangle1;
                 Rectangle rectangle2;
                 if (!Main.mapFullscreen)
@@ -1090,7 +1090,7 @@ namespace Terraria.Graphics.Capture
                 if (this.currentAim != -1)
                 {
                     this.dragging = true;
-                    Point point1 = new Point();
+                    var point1 = new Point();
                     Point point2;
                     if (!Main.mapFullscreen)
                     {
@@ -1133,12 +1133,12 @@ namespace Terraria.Graphics.Capture
                 else
                 {
                     this.caughtEdge = -1;
-                    Rectangle drawbox = rectangle1;
+                    var drawbox = rectangle1;
                     drawbox.Offset(-rectangle2.X, -rectangle2.Y);
                     this.inMap = drawbox.Contains(mouse.ToPoint());
-                    for (int boundIndex = 0; boundIndex < 4; ++boundIndex)
+                    for (var boundIndex = 0; boundIndex < 4; ++boundIndex)
                     {
-                        Rectangle bound = this.GetBound(drawbox, boundIndex);
+                        var bound = this.GetBound(drawbox, boundIndex);
                         bound.Inflate(8, 8);
                         if (bound.Contains(mouse.ToPoint()))
                         {
@@ -1191,17 +1191,17 @@ namespace Terraria.Graphics.Capture
             {
                 if (!CaptureInterface.EdgeAPinned || !CaptureInterface.EdgeBPinned)
                     return;
-                int PinX = Math.Min(CaptureInterface.EdgeA.X, CaptureInterface.EdgeB.X);
-                int PinY = Math.Min(CaptureInterface.EdgeA.Y, CaptureInterface.EdgeB.Y);
-                int num1 = Math.Abs(CaptureInterface.EdgeA.X - CaptureInterface.EdgeB.X);
-                int num2 = Math.Abs(CaptureInterface.EdgeA.Y - CaptureInterface.EdgeB.Y);
+                var PinX = Math.Min(CaptureInterface.EdgeA.X, CaptureInterface.EdgeB.X);
+                var PinY = Math.Min(CaptureInterface.EdgeA.Y, CaptureInterface.EdgeB.Y);
+                var num1 = Math.Abs(CaptureInterface.EdgeA.X - CaptureInterface.EdgeB.X);
+                var num2 = Math.Abs(CaptureInterface.EdgeA.Y - CaptureInterface.EdgeB.Y);
                 Rectangle result1;
                 if (!Main.mapFullscreen)
                 {
-                    Rectangle rectangle1 =
+                    var rectangle1 =
                         Main.ReverseGravitySupport(
                             new Rectangle(PinX * 16, PinY * 16, (num1 + 1) * 16, (num2 + 1) * 16));
-                    Rectangle rectangle2 = Main.ReverseGravitySupport(new Rectangle((int) Main.screenPosition.X,
+                    var rectangle2 = Main.ReverseGravitySupport(new Rectangle((int) Main.screenPosition.X,
                         (int) Main.screenPosition.Y, Main.screenWidth + 1, Main.screenHeight + 1));
                     Rectangle.Intersect(ref rectangle2, ref rectangle1, out result1);
                     if (result1.Width == 0 || result1.Height == 0)
@@ -1214,9 +1214,9 @@ namespace Terraria.Graphics.Capture
                     CaptureInterface.GetMapCoords(PinX, PinY, 1, out result2);
                     Point result3;
                     CaptureInterface.GetMapCoords(PinX + num1 + 1, PinY + num2 + 1, 1, out result3);
-                    Rectangle rectangle1 =
+                    var rectangle1 =
                         new Rectangle(result2.X, result2.Y, result3.X - result2.X, result3.Y - result2.Y);
-                    Rectangle rectangle2 = new Rectangle(0, 0, Main.screenWidth + 1, Main.screenHeight + 1);
+                    var rectangle2 = new Rectangle(0, 0, Main.screenWidth + 1, Main.screenHeight + 1);
                     Rectangle.Intersect(ref rectangle2, ref rectangle1, out result1);
                     if (result1.Width == 0 || result1.Height == 0)
                         return;
@@ -1224,8 +1224,8 @@ namespace Terraria.Graphics.Capture
                 }
 
                 sb.Draw(Main.magicPixel, result1, CaptureInterface.Settings.MarkedAreaColor);
-                Rectangle r = Rectangle.Empty;
-                for (int index = 0; index < 2; ++index)
+                var r = Rectangle.Empty;
+                for (var index = 0; index < 2; ++index)
                 {
                     if (this.currentAim != index)
                         this.DrawBound(sb,
@@ -1254,14 +1254,14 @@ namespace Terraria.Graphics.Capture
                         sb.Draw(Main.magicPixel, r, Color.Silver);
                         break;
                     case 1:
-                        Rectangle destinationRectangle1 = new Rectangle(r.X - 2, r.Y, r.Width + 4, r.Height);
+                        var destinationRectangle1 = new Rectangle(r.X - 2, r.Y, r.Width + 4, r.Height);
                         sb.Draw(Main.magicPixel, destinationRectangle1, Color.White);
                         destinationRectangle1 = new Rectangle(r.X, r.Y - 2, r.Width, r.Height + 4);
                         sb.Draw(Main.magicPixel, destinationRectangle1, Color.White);
                         sb.Draw(Main.magicPixel, r, Color.White);
                         break;
                     case 2:
-                        Rectangle destinationRectangle2 = new Rectangle(r.X - 2, r.Y, r.Width + 4, r.Height);
+                        var destinationRectangle2 = new Rectangle(r.X - 2, r.Y, r.Width + 4, r.Height);
                         sb.Draw(Main.magicPixel, destinationRectangle2, Color.Gold);
                         destinationRectangle2 = new Rectangle(r.X, r.Y - 2, r.Width, r.Height + 4);
                         sb.Draw(Main.magicPixel, destinationRectangle2, Color.Gold);
@@ -1279,16 +1279,16 @@ namespace Terraria.Graphics.Capture
 
             private Rectangle GetRect()
             {
-                Rectangle rectangle = new Rectangle(0, 0, 224, 170);
+                var rectangle = new Rectangle(0, 0, 224, 170);
                 if (CaptureInterface.Settings.ScreenAnchor == 0)
                 {
                     rectangle.X = 227 - rectangle.Width / 2;
                     rectangle.Y = 80;
-                    int index = 0;
-                    Player player = Main.player[Main.myPlayer];
+                    var index = 0;
+                    var player = Main.player[Main.myPlayer];
                     while (index < player.buffTime.Length && player.buffTime[index] > 0)
                         ++index;
-                    int num = index / 11 + (index % 11 >= 3 ? 1 : 0);
+                    var num = index / 11 + (index % 11 >= 3 ? 1 : 0);
                     rectangle.Y += 48 * num;
                 }
 
@@ -1343,19 +1343,19 @@ namespace Terraria.Graphics.Capture
 
             private void DrawWaterChoices(SpriteBatch spritebatch, Point start, Point mouse)
             {
-                Rectangle r = new Rectangle(0, 0, 20, 20);
-                for (int index1 = 0; index1 < 2; ++index1)
+                var r = new Rectangle(0, 0, 20, 20);
+                for (var index1 = 0; index1 < 2; ++index1)
                 {
-                    for (int index2 = 0; index2 < 5; ++index2)
+                    for (var index2 = 0; index2 < 5; ++index2)
                     {
                         if (index1 != 1 || index2 != 3)
                         {
-                            int index3 = index2 + index1 * 5;
+                            var index3 = index2 + index1 * 5;
                             r.X = start.X + 24 * index2 + 12 * index1;
                             r.Y = start.Y + 24 * index1;
                             if (index1 == 1 && index2 == 4)
                                 r.X -= 24;
-                            int num1 = 0;
+                            var num1 = 0;
                             if (r.Contains(mouse))
                             {
                                 if (Main.mouseLeft && Main.mouseLeftRelease)
@@ -1365,10 +1365,10 @@ namespace Terraria.Graphics.Capture
 
                             if (CaptureInterface.Settings.BiomeChoice == this.BiomeWater(index3))
                                 num1 += 2;
-                            Texture2D texture = Main.liquidTexture[this.BiomeWater(index3)];
-                            int x = (int) Main.wFrame * 18;
-                            Color white = Color.White;
-                            float num2 = 1f;
+                            var texture = Main.liquidTexture[this.BiomeWater(index3)];
+                            var x = (int) Main.wFrame * 18;
+                            var white = Color.White;
+                            var num2 = 1f;
                             if (num1 < 2)
                                 num2 *= 0.5f;
                             if (num1 % 2 == 1)
@@ -1420,14 +1420,14 @@ namespace Terraria.Graphics.Capture
                 if (!this.Selected || CaptureInterface.JustActivated)
                     return;
                 PlayerInput.SetZoom_UI();
-                Point point = new Point(Main.mouseX, Main.mouseY);
+                var point = new Point(Main.mouseX, Main.mouseY);
                 this.hoveredButton = -1;
-                Rectangle rect = this.GetRect();
+                var rect = this.GetRect();
                 this.inUI = rect.Contains(point);
                 rect.Inflate(-20, -20);
                 rect.Height = 16;
-                int y = rect.Y;
-                for (int index = 0; index < 7; ++index)
+                var y = rect.Y;
+                for (var index = 0; index < 7; ++index)
                 {
                     rect.Y = y + index * 20;
                     if (rect.Contains(point))
@@ -1457,14 +1457,14 @@ namespace Terraria.Graphics.Capture
                 sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp,
                     DepthStencilState.None, RasterizerState.CullCounterClockwise, (Effect) null, Main.UIScaleMatrix);
                 PlayerInput.SetZoom_UI();
-                Rectangle rect = this.GetRect();
+                var rect = this.GetRect();
                 Utils.DrawInvBG(sb, rect, new Color(63, 65, 151, (int) byte.MaxValue) * 0.485f);
-                for (int button = 0; button < 7; ++button)
+                for (var button = 0; button < 7; ++button)
                 {
-                    string key = "";
-                    string text = "";
+                    var key = "";
+                    var text = "";
                     this.ButtonDraw(button, ref key, ref text);
-                    Color baseColor = Color.White;
+                    var baseColor = Color.White;
                     if (button == this.hoveredButton)
                         baseColor = Color.Gold;
                     ChatManager.DrawColorCodedStringWithShadow(sb, Main.fontItemStack, key,

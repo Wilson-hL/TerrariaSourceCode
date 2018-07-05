@@ -37,8 +37,8 @@ namespace Terraria.Social.Steam
                     writeInformationQueue = this._pendingSendData[user];
                 else
                     this._pendingSendData[user] = writeInformationQueue = new Queue<SteamP2PWriter.WriteInformation>();
-                int val1 = length;
-                int sourceIndex = 0;
+                var val1 = length;
+                var sourceIndex = 0;
                 while (val1 > 0)
                 {
                     SteamP2PWriter.WriteInformation writeInformation;
@@ -52,7 +52,7 @@ namespace Terraria.Social.Steam
                     else
                         writeInformation = writeInformationQueue.Peek();
 
-                    int length1 = Math.Min(val1, 1024 - writeInformation.Size);
+                    var length1 = Math.Min(val1, 1024 - writeInformation.Size);
                     Array.Copy((Array) data, sourceIndex, (Array) writeInformation.Data, writeInformation.Size,
                         length1);
                     writeInformation.Size += length1;
@@ -68,14 +68,14 @@ namespace Terraria.Social.Steam
             {
                 if (this._pendingSendData.ContainsKey(user))
                 {
-                    Queue<SteamP2PWriter.WriteInformation> writeInformationQueue = this._pendingSendData[user];
+                    var writeInformationQueue = this._pendingSendData[user];
                     while (writeInformationQueue.Count > 0)
                         this._bufferPool.Enqueue(writeInformationQueue.Dequeue().Data);
                 }
 
                 if (!this._pendingSendDataSwap.ContainsKey(user))
                     return;
-                Queue<SteamP2PWriter.WriteInformation> writeInformationQueue1 = this._pendingSendDataSwap[user];
+                var writeInformationQueue1 = this._pendingSendDataSwap[user];
                 while (writeInformationQueue1.Count > 0)
                     this._bufferPool.Enqueue(writeInformationQueue1.Dequeue().Data);
             }
@@ -86,16 +86,16 @@ namespace Terraria.Social.Steam
             lock (this._lock)
                 Utils.Swap<Dictionary<CSteamID, Queue<SteamP2PWriter.WriteInformation>>>(ref this._pendingSendData,
                     ref this._pendingSendDataSwap);
-            using (Dictionary<CSteamID, Queue<SteamP2PWriter.WriteInformation>>.Enumerator enumerator =
+            using (var enumerator =
                 this._pendingSendDataSwap.GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
-                    KeyValuePair<CSteamID, Queue<SteamP2PWriter.WriteInformation>> current = enumerator.Current;
-                    Queue<SteamP2PWriter.WriteInformation> writeInformationQueue = current.Value;
+                    var current = enumerator.Current;
+                    var writeInformationQueue = current.Value;
                     while (writeInformationQueue.Count > 0)
                     {
-                        SteamP2PWriter.WriteInformation writeInformation = writeInformationQueue.Dequeue();
+                        var writeInformation = writeInformationQueue.Dequeue();
                         SteamNetworking.SendP2PPacket(current.Key, writeInformation.Data, (uint) writeInformation.Size,
                             (EP2PSend) 2, this._channel);
                         this._bufferPool.Enqueue(writeInformation.Data);

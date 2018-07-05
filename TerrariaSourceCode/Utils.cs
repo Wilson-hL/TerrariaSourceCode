@@ -52,11 +52,11 @@ namespace Terraria
 
         public static Dictionary<string, string> ParseArguements(string[] args)
         {
-            string str1 = (string) null;
-            string str2 = "";
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            var str1 = (string) null;
+            var str2 = "";
+            var dictionary = new Dictionary<string, string>();
             string str3;
-            for (int index = 0; index < args.Length; ++index)
+            for (var index = 0; index < args.Length; ++index)
             {
                 if (args[index].Length != 0)
                 {
@@ -91,7 +91,7 @@ namespace Terraria
 
         public static void Swap<T>(ref T t1, ref T t2)
         {
-            T obj = t1;
+            var obj = t1;
             t1 = t2;
             t2 = obj;
         }
@@ -130,9 +130,9 @@ namespace Terraria
 
         public static string[] ConvertMonoArgsToDotNet(string[] brokenArgs)
         {
-            ArrayList arrayList = new ArrayList();
-            string str = "";
-            for (int index = 0; index < brokenArgs.Length; ++index)
+            var arrayList = new ArrayList();
+            var str = "";
+            for (var index = 0; index < brokenArgs.Length; ++index)
             {
                 if (brokenArgs[index].StartsWith("-"))
                 {
@@ -155,7 +155,7 @@ namespace Terraria
             }
 
             arrayList.Add((object) str);
-            string[] strArray = new string[arrayList.Count];
+            var strArray = new string[arrayList.Count];
             arrayList.CopyTo((Array) strArray);
             return strArray;
         }
@@ -163,14 +163,14 @@ namespace Terraria
         public static List<List<TextSnippet>> WordwrapStringSmart(string text, Color c, DynamicSpriteFont font,
             int maxWidth, int maxLines)
         {
-            TextSnippet[] array = ChatManager.ParseMessage(text, c).ToArray();
-            List<List<TextSnippet>> textSnippetListList = new List<List<TextSnippet>>();
-            List<TextSnippet> textSnippetList1 = new List<TextSnippet>();
-            for (int index1 = 0; index1 < array.Length; ++index1)
+            var array = ChatManager.ParseMessage(text, c).ToArray();
+            var textSnippetListList = new List<List<TextSnippet>>();
+            var textSnippetList1 = new List<TextSnippet>();
+            for (var index1 = 0; index1 < array.Length; ++index1)
             {
-                TextSnippet textSnippet = array[index1];
-                string[] strArray = textSnippet.Text.Split('\n');
-                for (int index2 = 0; index2 < strArray.Length - 1; ++index2)
+                var textSnippet = array[index1];
+                var strArray = textSnippet.Text.Split('\n');
+                for (var index2 = 0; index2 < strArray.Length - 1; ++index2)
                 {
                     textSnippetList1.Add(textSnippet.CopyMorph(strArray[index2]));
                     textSnippetListList.Add(textSnippetList1);
@@ -183,27 +183,27 @@ namespace Terraria
             textSnippetListList.Add(textSnippetList1);
             if (maxWidth != -1)
             {
-                for (int index1 = 0; index1 < textSnippetListList.Count; ++index1)
+                for (var index1 = 0; index1 < textSnippetListList.Count; ++index1)
                 {
-                    List<TextSnippet> textSnippetList2 = textSnippetListList[index1];
-                    float num1 = 0.0f;
-                    for (int index2 = 0; index2 < textSnippetList2.Count; ++index2)
+                    var textSnippetList2 = textSnippetListList[index1];
+                    var num1 = 0.0f;
+                    for (var index2 = 0; index2 < textSnippetList2.Count; ++index2)
                     {
-                        float stringLength = textSnippetList2[index2].GetStringLength(font);
+                        var stringLength = textSnippetList2[index2].GetStringLength(font);
                         if ((double) stringLength + (double) num1 > (double) maxWidth)
                         {
-                            int num2 = maxWidth - (int) num1;
+                            var num2 = maxWidth - (int) num1;
                             if ((double) num1 > 0.0)
                                 num2 -= 16;
-                            int num3 = Math.Min(textSnippetList2[index2].Text.Length, num2 / 8);
+                            var num3 = Math.Min(textSnippetList2[index2].Text.Length, num2 / 8);
                             if (num3 < 0)
                                 num3 = 0;
-                            string[] strArray = textSnippetList2[index2].Text.Split(' ');
-                            int num4 = num3;
+                            var strArray = textSnippetList2[index2].Text.Split(' ');
+                            var num4 = num3;
                             if (strArray.Length > 1)
                             {
                                 num4 = 0;
-                                for (int index3 = 0;
+                                for (var index3 = 0;
                                     index3 < strArray.Length && num4 + strArray[index3].Length <= num3;
                                     ++index3)
                                     num4 += strArray[index3].Length + 1;
@@ -211,13 +211,13 @@ namespace Terraria
                                     num4 = num3;
                             }
 
-                            string newText1 = textSnippetList2[index2].Text.Substring(0, num4);
-                            string newText2 = textSnippetList2[index2].Text.Substring(num4);
-                            List<TextSnippet> textSnippetList3 = new List<TextSnippet>()
+                            var newText1 = textSnippetList2[index2].Text.Substring(0, num4);
+                            var newText2 = textSnippetList2[index2].Text.Substring(num4);
+                            var textSnippetList3 = new List<TextSnippet>()
                             {
                                 textSnippetList2[index2].CopyMorph(newText2)
                             };
-                            for (int index3 = index2 + 1; index3 < textSnippetList2.Count; ++index3)
+                            for (var index3 = index2 + 1; index3 < textSnippetList2.Count; ++index3)
                                 textSnippetList3.Add(textSnippetList2[index3]);
                             textSnippetList2[index2] = textSnippetList2[index2].CopyMorph(newText1);
                             textSnippetListList[index1] = textSnippetListList[index1].Take<TextSnippet>(index2 + 1)
@@ -243,27 +243,27 @@ namespace Terraria
         public static string[] WordwrapString(string text, DynamicSpriteFont font, int maxWidth, int maxLines,
             out int lineAmount)
         {
-            string[] strArray1 = new string[maxLines];
-            int index1 = 0;
-            List<string> stringList1 = new List<string>((IEnumerable<string>) text.Split('\n'));
-            List<string> stringList2 = new List<string>((IEnumerable<string>) stringList1[0].Split(' '));
-            for (int index2 = 1; index2 < stringList1.Count; ++index2)
+            var strArray1 = new string[maxLines];
+            var index1 = 0;
+            var stringList1 = new List<string>((IEnumerable<string>) text.Split('\n'));
+            var stringList2 = new List<string>((IEnumerable<string>) stringList1[0].Split(' '));
+            for (var index2 = 1; index2 < stringList1.Count; ++index2)
             {
                 stringList2.Add("\n");
                 stringList2.AddRange((IEnumerable<string>) stringList1[index2].Split(' '));
             }
 
-            bool flag = true;
+            var flag = true;
             while (stringList2.Count > 0)
             {
-                string str1 = stringList2[0];
-                string str2 = " ";
+                var str1 = stringList2[0];
+                var str2 = " ";
                 if (stringList2.Count == 1)
                     str2 = "";
                 if (str1 == "\n")
                 {
                     //Fix By GScience(Attention)
-                    string str3 = strArray1[index1++] + str1;
+                    var str3 = strArray1[index1++] + str1;
                     if (index1 < maxLines)
                         stringList2.RemoveAt(0);
                     else
@@ -273,12 +273,12 @@ namespace Terraria
                 {
                     if ((double) font.MeasureString(str1).X > (double) maxWidth)
                     {
-                        string str3 = string.Concat((object) str1[0]);
-                        int startIndex = 1;
+                        var str3 = string.Concat((object) str1[0]);
+                        var startIndex = 1;
                         while ((double) font.MeasureString(str3 + (object) str1[startIndex] + (object) '-').X <=
                                (double) maxWidth)
                             str3 += "" + str1[startIndex++];
-                        string str4 = str3 + (object) '-';
+                        var str4 = str3 + (object) '-';
                         strArray1[index1++] = str4 + " ";
                         if (index1 < maxLines)
                         {
@@ -330,7 +330,7 @@ namespace Terraria
             if (elipseSizes == Vector2.Zero || angleVector == Vector2.Zero)
                 return Vector2.Zero;
             angleVector.Normalize();
-            Vector2 vector2 = Vector2.One / Vector2.Normalize(elipseSizes);
+            var vector2 = Vector2.One / Vector2.Normalize(elipseSizes);
             angleVector *= vector2;
             angleVector.Normalize();
             return angleVector * elipseSizes / 2f;
@@ -347,9 +347,9 @@ namespace Terraria
 
         public static long CoinsCount(out bool overFlowing, Item[] inv, params int[] ignoreSlots)
         {
-            List<int> intList = new List<int>((IEnumerable<int>) ignoreSlots);
+            var intList = new List<int>((IEnumerable<int>) ignoreSlots);
             long num = 0;
-            for (int index = 0; index < inv.Length; ++index)
+            for (var index = 0; index < inv.Length; ++index)
             {
                 if (!intList.Contains(index))
                 {
@@ -383,10 +383,10 @@ namespace Terraria
 
         public static int[] CoinsSplit(long count)
         {
-            int[] numArray = new int[4];
+            var numArray = new int[4];
             long num1 = 0;
             long num2 = 1000000;
-            for (int index = 3; index >= 0; --index)
+            for (var index = 3; index >= 0; --index)
             {
                 numArray[index] = (int) ((count - num1) / num2);
                 num1 += (long) numArray[index] * num2;
@@ -399,7 +399,7 @@ namespace Terraria
         public static long CoinsCombineStacks(out bool overFlowing, params long[] coinCounts)
         {
             long num = 0;
-            foreach (long coinCount in coinCounts)
+            foreach (var coinCount in coinCounts)
             {
                 num += coinCount;
                 if (num >= 999999999L)
@@ -415,18 +415,18 @@ namespace Terraria
 
         public static void PoofOfSmoke(Vector2 position)
         {
-            int num = Main.rand.Next(3, 7);
-            for (int index1 = 0; index1 < num; ++index1)
+            var num = Main.rand.Next(3, 7);
+            for (var index1 = 0; index1 < num; ++index1)
             {
-                int index2 = Gore.NewGore(position,
+                var index2 = Gore.NewGore(position,
                     (Main.rand.NextFloat() * 6.283185f).ToRotationVector2() * new Vector2(2f, 0.7f) * 0.7f,
                     Main.rand.Next(11, 14), 1f);
                 Main.gore[index2].scale = 0.7f;
             }
 
-            for (int index = 0; index < 10; ++index)
+            for (var index = 0; index < 10; ++index)
             {
-                Dust dust = Main.dust[Dust.NewDust(position, 14, 14, 16, 0.0f, 0.0f, 100, new Color(), 1.5f)];
+                var dust = Main.dust[Dust.NewDust(position, 14, 14, 16, 0.0f, 0.0f, 100, new Color(), 1.5f)];
                 dust.position += new Vector2(5f);
                 dust.velocity = (Main.rand.NextFloat() * 6.283185f).ToRotationVector2() * new Vector2(2f, 0.7f) * 0.7f *
                                 (float) (0.5 + 0.5 * (double) Main.rand.NextFloat());
@@ -435,7 +435,7 @@ namespace Terraria
 
         public static byte[] ToByteArray(this string str)
         {
-            byte[] numArray = new byte[str.Length * 2];
+            var numArray = new byte[str.Length * 2];
             Buffer.BlockCopy((Array) str.ToCharArray(), 0, (Array) numArray, 0, numArray.Length);
             return numArray;
         }
@@ -475,8 +475,8 @@ namespace Terraria
         public static Rectangle Frame(this Texture2D tex, int horizontalFrames = 1, int verticalFrames = 1,
             int frameX = 0, int frameY = 0)
         {
-            int width = tex.Width / horizontalFrames;
-            int height = tex.Height / verticalFrames;
+            var width = tex.Width / horizontalFrames;
+            var height = tex.Height / verticalFrames;
             return new Rectangle(width * frameX, height * frameY, width, height);
         }
 
@@ -509,7 +509,7 @@ namespace Terraria
 
         public static void WritePackedVector2(this BinaryWriter bb, Vector2 v)
         {
-            HalfVector2 halfVector2 = new HalfVector2(v.X, v.Y);
+            var halfVector2 = new HalfVector2(v.X, v.Y);
             bb.Write(halfVector2.PackedValue);
         }
 
@@ -624,10 +624,10 @@ namespace Terraria
 
         public static Vector2 RotatedBy(this Vector2 spinningpoint, double radians, Vector2 center = default(Vector2))
         {
-            float num1 = (float) Math.Cos(radians);
-            float num2 = (float) Math.Sin(radians);
-            Vector2 vector2_1 = spinningpoint - center;
-            Vector2 vector2_2 = center;
+            var num1 = (float) Math.Cos(radians);
+            var num2 = (float) Math.Sin(radians);
+            var vector2_1 = spinningpoint - center;
+            var vector2_2 = center;
             vector2_2.X += (float) ((double) vector2_1.X * (double) num1 - (double) vector2_1.Y * (double) num2);
             vector2_2.Y += (float) ((double) vector2_1.X * (double) num2 + (double) vector2_1.Y * (double) num1);
             return vector2_2;
@@ -695,10 +695,10 @@ namespace Terraria
 
         public static Vector2 ClosestPointOnLine(this Vector2 P, Vector2 A, Vector2 B)
         {
-            Vector2 vector2_1 = P - A;
-            Vector2 vector2_2 = B - A;
-            float num1 = vector2_2.LengthSquared();
-            float num2 = Vector2.Dot(vector2_1, vector2_2) / num1;
+            var vector2_1 = P - A;
+            var vector2_2 = B - A;
+            var num1 = vector2_2.LengthSquared();
+            var num2 = Vector2.Dot(vector2_1, vector2_2) / num1;
             if ((double) num2 < 0.0)
                 return A;
             if ((double) num2 > 1.0)
@@ -711,16 +711,16 @@ namespace Terraria
         {
             if (lineStart.Between(rectTopLeft, rectBottomRight) || lineEnd.Between(rectTopLeft, rectBottomRight))
                 return true;
-            Vector2 P = new Vector2(rectBottomRight.X, rectTopLeft.Y);
-            Vector2 vector2 = new Vector2(rectTopLeft.X, rectBottomRight.Y);
-            Vector2[] vector2Array = new Vector2[4]
+            var P = new Vector2(rectBottomRight.X, rectTopLeft.Y);
+            var vector2 = new Vector2(rectTopLeft.X, rectBottomRight.Y);
+            var vector2Array = new Vector2[4]
             {
                 rectTopLeft.ClosestPointOnLine(lineStart, lineEnd),
                 P.ClosestPointOnLine(lineStart, lineEnd),
                 vector2.ClosestPointOnLine(lineStart, lineEnd),
                 rectBottomRight.ClosestPointOnLine(lineStart, lineEnd)
             };
-            for (int index = 0; index < vector2Array.Length; ++index)
+            for (var index = 0; index < vector2Array.Length; ++index)
             {
                 if (vector2Array[0].Between(rectTopLeft, vector2))
                     return true;
@@ -798,7 +798,7 @@ namespace Terraria
             float angle;
             if ((double) targetAngle < (double) curAngle)
             {
-                float num = targetAngle + 6.283185f;
+                var num = targetAngle + 6.283185f;
                 angle = (double) num - (double) curAngle > (double) curAngle - (double) targetAngle
                     ? MathHelper.Lerp(curAngle, targetAngle, amount)
                     : MathHelper.Lerp(curAngle, num, amount);
@@ -807,7 +807,7 @@ namespace Terraria
             {
                 if ((double) targetAngle <= (double) curAngle)
                     return curAngle;
-                float num = targetAngle - 6.283185f;
+                var num = targetAngle - 6.283185f;
                 angle = (double) targetAngle - (double) curAngle > (double) curAngle - (double) num
                     ? MathHelper.Lerp(curAngle, num, amount)
                     : MathHelper.Lerp(curAngle, targetAngle, amount);
@@ -838,7 +838,7 @@ namespace Terraria
                 return true;
             if (firstArray == null || secondArray == null || firstArray.Length != secondArray.Length)
                 return false;
-            for (int index = 0; index < firstArray.Length; ++index)
+            for (var index = 0; index < firstArray.Length; ++index)
             {
                 if (firstArray[index] != secondArray[index])
                     return false;
@@ -868,20 +868,20 @@ namespace Terraria
         {
             if (x0 == x1 && y0 == y1)
                 return plot(x0, y0);
-            bool flag = Math.Abs(y1 - y0) > Math.Abs(x1 - x0);
+            var flag = Math.Abs(y1 - y0) > Math.Abs(x1 - x0);
             if (flag)
             {
                 Utils.Swap<int>(ref x0, ref y0);
                 Utils.Swap<int>(ref x1, ref y1);
             }
 
-            int num1 = Math.Abs(x1 - x0);
-            int num2 = Math.Abs(y1 - y0);
-            int num3 = num1 / 2;
-            int num4 = y0;
-            int num5 = x0 < x1 ? 1 : -1;
-            int num6 = y0 < y1 ? 1 : -1;
-            int num7 = x0;
+            var num1 = Math.Abs(x1 - x0);
+            var num2 = Math.Abs(y1 - y0);
+            var num3 = num1 / 2;
+            var num4 = y0;
+            var num5 = x0 < x1 ? 1 : -1;
+            var num6 = y0 < y1 ? 1 : -1;
+            var num7 = x0;
             while (num7 != x1)
             {
                 if (flag)
@@ -954,17 +954,17 @@ namespace Terraria
 
         public static bool PlotTileLine(Vector2 start, Vector2 end, float width, Utils.PerLinePoint plot)
         {
-            float num = width / 2f;
-            Vector2 vector2_1 = end - start;
-            Vector2 vector2_2 = vector2_1 / vector2_1.Length();
-            Vector2 vector2_3 = new Vector2(-vector2_2.Y, vector2_2.X) * num;
+            var num = width / 2f;
+            var vector2_1 = end - start;
+            var vector2_2 = vector2_1 / vector2_1.Length();
+            var vector2_3 = new Vector2(-vector2_2.Y, vector2_2.X) * num;
             Point tileCoordinates1 = (start - vector2_3).ToTileCoordinates();
             Point tileCoordinates2 = (start + vector2_3).ToTileCoordinates();
             Point tileCoordinates3 = start.ToTileCoordinates();
             Point tileCoordinates4 = end.ToTileCoordinates();
-            Point lineMinOffset = new Point(tileCoordinates1.X - tileCoordinates3.X,
+            var lineMinOffset = new Point(tileCoordinates1.X - tileCoordinates3.X,
                 tileCoordinates1.Y - tileCoordinates3.Y);
-            Point lineMaxOffset = new Point(tileCoordinates2.X - tileCoordinates3.X,
+            var lineMaxOffset = new Point(tileCoordinates2.X - tileCoordinates3.X,
                 tileCoordinates2.Y - tileCoordinates3.Y);
             return Utils.PlotLine(tileCoordinates3.X, tileCoordinates3.Y, tileCoordinates4.X, tileCoordinates4.Y,
                 (Utils.PerLinePoint) ((x, y) => Utils.PlotLine(x + lineMinOffset.X, y + lineMinOffset.Y,
@@ -973,13 +973,13 @@ namespace Terraria
 
         public static bool PlotTileTale(Vector2 start, Vector2 end, float width, Utils.PerLinePoint plot)
         {
-            float halfWidth = width / 2f;
-            Vector2 vector2_1 = end - start;
-            Vector2 vector2_2 = vector2_1 / vector2_1.Length();
-            Vector2 perpOffset = new Vector2(-vector2_2.Y, vector2_2.X);
+            var halfWidth = width / 2f;
+            var vector2_1 = end - start;
+            var vector2_2 = vector2_1 / vector2_1.Length();
+            var perpOffset = new Vector2(-vector2_2.Y, vector2_2.X);
             Point pointStart = start.ToTileCoordinates();
             Point tileCoordinates1 = end.ToTileCoordinates();
-            int length = 0;
+            var length = 0;
             Utils.PlotLine(pointStart.X, pointStart.Y, tileCoordinates1.X, tileCoordinates1.Y,
                 (Utils.PerLinePoint) ((x, y) =>
                 {
@@ -987,16 +987,16 @@ namespace Terraria
                     return true;
                 }), true);
             --length;
-            int curLength = 0;
+            var curLength = 0;
             return Utils.PlotLine(pointStart.X, pointStart.Y, tileCoordinates1.X, tileCoordinates1.Y,
                 (Utils.PerLinePoint) ((x, y) =>
                 {
-                    float num = (float) (1.0 - (double) curLength / (double) length);
+                    var num = (float) (1.0 - (double) curLength / (double) length);
                     ++curLength;
                     Point tileCoordinates2 = (start - perpOffset * halfWidth * num).ToTileCoordinates();
                     Point tileCoordinates3 = (start + perpOffset * halfWidth * num).ToTileCoordinates();
-                    Point point1 = new Point(tileCoordinates2.X - pointStart.X, tileCoordinates2.Y - pointStart.Y);
-                    Point point2 = new Point(tileCoordinates3.X - pointStart.X, tileCoordinates3.Y - pointStart.Y);
+                    var point1 = new Point(tileCoordinates2.X - pointStart.X, tileCoordinates2.Y - pointStart.Y);
+                    var point2 = new Point(tileCoordinates3.X - pointStart.X, tileCoordinates3.Y - pointStart.Y);
                     return Utils.PlotLine(x + point1.X, y + point1.Y, x + point2.X, y + point2.Y, plot, false);
                 }), true);
         }
@@ -1034,9 +1034,9 @@ namespace Terraria
         public static void DrawBorderStringFourWay(SpriteBatch sb, DynamicSpriteFont font, string text, float x,
             float y, Color textColor, Color borderColor, Vector2 origin, float scale = 1f)
         {
-            Color color = borderColor;
-            Vector2 zero = Vector2.Zero;
-            for (int index = 0; index < 5; ++index)
+            var color = borderColor;
+            var zero = Vector2.Zero;
+            for (var index = 0; index < 5; ++index)
             {
                 switch (index)
                 {
@@ -1073,8 +1073,8 @@ namespace Terraria
         {
             if (maxCharactersDisplayed != -1 && text.Length > maxCharactersDisplayed)
                 text.Substring(0, maxCharactersDisplayed);
-            DynamicSpriteFont fontMouseText = Main.fontMouseText;
-            Vector2 vector2 = fontMouseText.MeasureString(text);
+            var fontMouseText = Main.fontMouseText;
+            var vector2 = fontMouseText.MeasureString(text);
             ChatManager.DrawColorCodedStringWithShadow(sb, fontMouseText, text, pos, color, 0.0f,
                 new Vector2(anchorx, anchory) * vector2, new Vector2(scale), -1f, 1.5f);
             return vector2 * scale;
@@ -1085,10 +1085,10 @@ namespace Terraria
         {
             if (maxCharactersDisplayed != -1 && text.Length > maxCharactersDisplayed)
                 text.Substring(0, maxCharactersDisplayed);
-            DynamicSpriteFont fontDeathText = Main.fontDeathText;
-            for (int index1 = -1; index1 < 2; ++index1)
+            var fontDeathText = Main.fontDeathText;
+            for (var index1 = -1; index1 < 2; ++index1)
             {
-                for (int index2 = -1; index2 < 2; ++index2)
+                for (var index2 = -1; index2 < 2; ++index2)
                     DynamicSpriteFontExtensionMethods.DrawString(spriteBatch, fontDeathText, text,
                         pos + new Vector2((float) index1, (float) index2), Color.Black, 0.0f,
                         new Vector2(anchorx, anchory) * fontDeathText.MeasureString(text), scale, SpriteEffects.None,
@@ -1114,7 +1114,7 @@ namespace Terraria
         {
             if (c == new Color())
                 c = new Color(63, 65, 151, (int) byte.MaxValue) * 0.785f;
-            Texture2D inventoryBack13Texture = Main.inventoryBack13Texture;
+            var inventoryBack13Texture = Main.inventoryBack13Texture;
             if (w < 20)
                 w = 20;
             if (h < 20)
@@ -1175,10 +1175,10 @@ namespace Terraria
         public static void DrawLaser(SpriteBatch sb, Texture2D tex, Vector2 start, Vector2 end, Vector2 scale,
             Utils.LaserLineFraming framing)
         {
-            Vector2 vector2_1 = start;
-            Vector2 vector2_2 = Vector2.Normalize(end - start);
-            float distanceLeft1 = (end - start).Length();
-            float rotation = vector2_2.ToRotation() - 1.570796f;
+            var vector2_1 = start;
+            var vector2_2 = Vector2.Normalize(end - start);
+            var distanceLeft1 = (end - start).Length();
+            var rotation = vector2_2.ToRotation() - 1.570796f;
             if (vector2_2.HasNaNs())
                 return;
             float distanceCovered;
@@ -1189,11 +1189,11 @@ namespace Terraria
                 out color);
             sb.Draw(tex, vector2_1, new Rectangle?(frame), color, rotation, frame.Size() / 2f, scale,
                 SpriteEffects.None, 0.0f);
-            float distanceLeft2 = distanceLeft1 - distanceCovered * scale.Y;
-            Vector2 vector2_3 = vector2_1 + vector2_2 * ((float) frame.Height - origin.Y) * scale.Y;
+            var distanceLeft2 = distanceLeft1 - distanceCovered * scale.Y;
+            var vector2_3 = vector2_1 + vector2_2 * ((float) frame.Height - origin.Y) * scale.Y;
             if ((double) distanceLeft2 > 0.0)
             {
-                float num = 0.0f;
+                var num = 0.0f;
                 while ((double) num + 1.0 < (double) distanceLeft2)
                 {
                     framing(1, vector2_3, distanceLeft2 - num, frame, out distanceCovered, out frame, out origin,
@@ -1224,15 +1224,15 @@ namespace Terraria
 
         public static void DrawLine(SpriteBatch spriteBatch, Vector2 start, Vector2 end, Color color)
         {
-            float num1 = Vector2.Distance(start, end);
-            Vector2 v = (end - start) / num1;
-            Vector2 vector2 = start;
-            Vector2 screenPosition = Main.screenPosition;
+            var num1 = Vector2.Distance(start, end);
+            var v = (end - start) / num1;
+            var vector2 = start;
+            var screenPosition = Main.screenPosition;
             float rotation = v.ToRotation();
-            float num2 = 0.0f;
+            var num2 = 0.0f;
             while ((double) num2 <= (double) num1)
             {
-                float num3 = num2 / num1;
+                var num3 = num2 / num1;
                 spriteBatch.Draw(Main.blackTileTexture, vector2 - screenPosition, new Rectangle?(),
                     new Color(new Vector4(num3, num3, num3, 1f) * color.ToVector4()), rotation, Vector2.Zero, 0.25f,
                     SpriteEffects.None, 0.0f);
@@ -1244,16 +1244,16 @@ namespace Terraria
         public static void DrawLine(SpriteBatch spriteBatch, Vector2 start, Vector2 end, Color colorStart,
             Color colorEnd, float width)
         {
-            float num1 = Vector2.Distance(start, end);
-            Vector2 v = (end - start) / num1;
-            Vector2 vector2 = start;
-            Vector2 screenPosition = Main.screenPosition;
+            var num1 = Vector2.Distance(start, end);
+            var v = (end - start) / num1;
+            var vector2 = start;
+            var screenPosition = Main.screenPosition;
             float rotation = v.ToRotation();
-            float scale = width / 16f;
-            float num2 = 0.0f;
+            var scale = width / 16f;
+            var num2 = 0.0f;
             while ((double) num2 <= (double) num1)
             {
-                float amount = num2 / num1;
+                var amount = num2 / num1;
                 spriteBatch.Draw(Main.blackTileTexture, vector2 - screenPosition, new Rectangle?(),
                     Color.Lerp(colorStart, colorEnd, amount), rotation, Vector2.Zero, scale, SpriteEffects.None, 0.0f);
                 vector2 = start + num2 * v;
@@ -1293,11 +1293,11 @@ namespace Terraria
         public static void DrawCursorSingle(SpriteBatch sb, Color color, float rot = float.NaN, float scale = 1f,
             Vector2 manualPosition = default(Vector2), int cursorSlot = 0, int specialMode = 0)
         {
-            bool flag1 = false;
-            bool flag2 = true;
-            bool flag3 = true;
-            Vector2 origin = Vector2.Zero;
-            Vector2 vector2_1 = new Vector2((float) Main.mouseX, (float) Main.mouseY);
+            var flag1 = false;
+            var flag2 = true;
+            var flag3 = true;
+            var origin = Vector2.Zero;
+            var vector2_1 = new Vector2((float) Main.mouseX, (float) Main.mouseY);
             if (manualPosition != Vector2.Zero)
                 vector2_1 = manualPosition;
             if (float.IsNaN(rot))
@@ -1316,10 +1316,10 @@ namespace Terraria
                 origin = new Vector2(8f);
                 if (flag1 && specialMode == 0)
                 {
-                    float num1 = rot;
+                    var num1 = rot;
                     if ((double) num1 < 0.0)
                         num1 += 6.283185f;
-                    for (float num2 = 0.0f; (double) num2 < 4.0; ++num2)
+                    for (var num2 = 0.0f; (double) num2 < 4.0; ++num2)
                     {
                         if ((double) Math.Abs(num1 - 1.570796f * num2) <= 0.785398185253143)
                         {
@@ -1330,7 +1330,7 @@ namespace Terraria
                 }
             }
 
-            Vector2 vector2_2 = Vector2.One;
+            var vector2_2 = Vector2.One;
             if (Main.ThickMouse && cursorSlot == 0 || cursorSlot == 1)
                 vector2_2 = Main.DrawThickCursor(cursorSlot == 1);
             if (flag2)

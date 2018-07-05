@@ -29,7 +29,7 @@ namespace Terraria
             HitTile.rand = new UnifiedRandom();
             this.data = new HitTile.HitTileObject[21];
             this.order = new int[21];
-            for (int index = 0; index <= 20; ++index)
+            for (var index = 0; index <= 20; ++index)
             {
                 this.data[index] = new HitTile.HitTileObject();
                 this.order[index] = index;
@@ -40,10 +40,10 @@ namespace Terraria
 
         public int HitObject(int x, int y, int hitType)
         {
-            for (int index1 = 0; index1 <= 20; ++index1)
+            for (var index1 = 0; index1 <= 20; ++index1)
             {
-                int index2 = this.order[index1];
-                HitTile.HitTileObject hitTileObject = this.data[index2];
+                var index2 = this.order[index1];
+                var hitTileObject = this.data[index2];
                 if (hitTileObject.type == hitType)
                 {
                     if (hitTileObject.X == x && hitTileObject.Y == y)
@@ -53,7 +53,7 @@ namespace Terraria
                     break;
             }
 
-            HitTile.HitTileObject hitTileObject1 = this.data[this.bufferLocation];
+            var hitTileObject1 = this.data[this.bufferLocation];
             hitTileObject1.X = x;
             hitTileObject1.Y = y;
             hitTileObject1.type = hitType;
@@ -64,7 +64,7 @@ namespace Terraria
         {
             if (tileId < 0 || tileId > 20)
                 return;
-            HitTile.HitTileObject hitTileObject = this.data[tileId];
+            var hitTileObject = this.data[tileId];
             hitTileObject.X = x;
             hitTileObject.Y = y;
         }
@@ -73,7 +73,7 @@ namespace Terraria
         {
             if (tileId < 0 || tileId > 20 || tileId == this.bufferLocation && damageAmount == 0)
                 return 0;
-            HitTile.HitTileObject hitTileObject = this.data[tileId];
+            var hitTileObject = this.data[tileId];
             if (!updateAmount)
                 return hitTileObject.damage + damageAmount;
             hitTileObject.damage += damageAmount;
@@ -84,18 +84,18 @@ namespace Terraria
             {
                 this.bufferLocation = this.order[20];
                 this.data[this.bufferLocation].Clear();
-                for (int index = 20; index > 0; --index)
+                for (var index = 20; index > 0; --index)
                     this.order[index] = this.order[index - 1];
                 this.order[0] = this.bufferLocation;
             }
             else
             {
-                int index = 0;
+                var index = 0;
                 while (index <= 20 && this.order[index] != tileId)
                     ++index;
                 for (; index > 1; --index)
                 {
-                    int num = this.order[index - 1];
+                    var num = this.order[index - 1];
                     this.order[index - 1] = this.order[index];
                     this.order[index] = num;
                 }
@@ -111,7 +111,7 @@ namespace Terraria
             if (tileId < 0 || tileId > 20)
                 return;
             this.data[tileId].Clear();
-            int index = 0;
+            var index = 0;
             while (index < 20 && this.order[index] != tileId)
                 ++index;
             for (; index < 20; ++index)
@@ -121,13 +121,13 @@ namespace Terraria
 
         public void Prune()
         {
-            bool flag = false;
-            for (int index = 0; index <= 20; ++index)
+            var flag = false;
+            for (var index = 0; index <= 20; ++index)
             {
-                HitTile.HitTileObject hitTileObject = this.data[index];
+                var hitTileObject = this.data[index];
                 if (hitTileObject.type != 0)
                 {
-                    Tile tile = Main.tile[hitTileObject.X, hitTileObject.Y];
+                    var tile = Main.tile[hitTileObject.X, hitTileObject.Y];
                     if (hitTileObject.timeToLive <= 1)
                     {
                         hitTileObject.Clear();
@@ -168,15 +168,15 @@ namespace Terraria
 
             if (!flag)
                 return;
-            int num1 = 1;
+            var num1 = 1;
             while (flag)
             {
                 flag = false;
-                for (int index = num1; index < 20; ++index)
+                for (var index = num1; index < 20; ++index)
                 {
                     if (this.data[this.order[index]].type == 0 && this.data[this.order[index + 1]].type != 0)
                     {
-                        int num2 = this.order[index];
+                        var num2 = this.order[index];
                         this.order[index] = this.order[index + 1];
                         this.order[index + 1] = num2;
                         flag = true;
@@ -187,35 +187,35 @@ namespace Terraria
 
         public void DrawFreshAnimations(SpriteBatch spriteBatch)
         {
-            for (int index = 0; index < this.data.Length; ++index)
+            for (var index = 0; index < this.data.Length; ++index)
                 ++this.data[index].animationTimeElapsed;
             if (!Main.SettingsEnabled_MinersWobble)
                 return;
-            int num1 = 1;
-            Vector2 vector2_1 = new Vector2((float) Main.offScreenRange);
+            var num1 = 1;
+            var vector2_1 = new Vector2((float) Main.offScreenRange);
             if (Main.drawToScreen)
                 vector2_1 = Vector2.Zero;
             vector2_1 = Vector2.Zero;
-            for (int index = 0; index < this.data.Length; ++index)
+            for (var index = 0; index < this.data.Length; ++index)
             {
                 if (this.data[index].type == num1)
                 {
-                    int damage = this.data[index].damage;
+                    var damage = this.data[index].damage;
                     if (damage >= 20)
                     {
-                        int x = this.data[index].X;
-                        int y = this.data[index].Y;
+                        var x = this.data[index].X;
+                        var y = this.data[index].Y;
                         if (WorldGen.InWorld(x, y, 0))
                         {
-                            bool flag1 = Main.tile[x, y] != null;
+                            var flag1 = Main.tile[x, y] != null;
                             if (flag1 && num1 == 1)
                                 flag1 = flag1 && Main.tile[x, y].active() && Main.tileSolid[(int) Main.tile[x, y].type];
                             if (flag1 && num1 == 2)
                                 flag1 = flag1 && Main.tile[x, y].wall != (byte) 0;
                             if (flag1)
                             {
-                                bool flag2 = false;
-                                bool flag3 = false;
+                                var flag2 = false;
+                                var flag3 = false;
                                 if (Main.tile[x, y].type == (ushort) 10)
                                     flag2 = false;
                                 else if (Main.tileSolid[(int) Main.tile[x, y].type] &&
@@ -224,8 +224,8 @@ namespace Terraria
                                 else if (Main.tile[x, y].type == (ushort) 5)
                                 {
                                     flag3 = true;
-                                    int num2 = (int) Main.tile[x, y].frameX / 22;
-                                    int num3 = (int) Main.tile[x, y].frameY / 22;
+                                    var num2 = (int) Main.tile[x, y].frameX / 22;
+                                    var num3 = (int) Main.tile[x, y].frameY / 22;
                                     if (num3 < 9)
                                         flag2 = (num2 != 1 && num2 != 2 || (num3 < 6 || num3 > 8)) &&
                                                 ((num2 != 3 || num3 > 2) &&
@@ -241,7 +241,7 @@ namespace Terraria
 
                                 if (flag2 && Main.tile[x, y].slope() == (byte) 0 && !Main.tile[x, y].halfBrick())
                                 {
-                                    int num2 = 0;
+                                    var num2 = 0;
                                     if (damage >= 80)
                                         num2 = 3;
                                     else if (damage >= 60)
@@ -250,41 +250,41 @@ namespace Terraria
                                         num2 = 1;
                                     else if (damage >= 20)
                                         num2 = 0;
-                                    Rectangle rectangle = new Rectangle(this.data[index].crackStyle * 18, num2 * 18, 16,
+                                    var rectangle = new Rectangle(this.data[index].crackStyle * 18, num2 * 18, 16,
                                         16);
                                     rectangle.Inflate(-2, -2);
                                     if (flag3)
                                         rectangle.X = (4 + this.data[index].crackStyle / 2) * 18;
-                                    int animationTimeElapsed = this.data[index].animationTimeElapsed;
+                                    var animationTimeElapsed = this.data[index].animationTimeElapsed;
                                     if ((double) animationTimeElapsed < 10.0)
                                     {
-                                        float num3 = (float) animationTimeElapsed / 10f;
-                                        float num4 = 1f;
-                                        Color color1 = Lighting.GetColor(x, y);
-                                        float rotation = 0.0f;
-                                        Vector2 zero = Vector2.Zero;
-                                        float num5 = num3;
-                                        float num6 = 0.5f;
-                                        float num7 = num5 % num6 * (1f / num6);
+                                        var num3 = (float) animationTimeElapsed / 10f;
+                                        var num4 = 1f;
+                                        var color1 = Lighting.GetColor(x, y);
+                                        var rotation = 0.0f;
+                                        var zero = Vector2.Zero;
+                                        var num5 = num3;
+                                        var num6 = 0.5f;
+                                        var num7 = num5 % num6 * (1f / num6);
                                         if ((int) ((double) num5 / (double) num6) % 2 == 1)
                                             num7 = 1f - num7;
                                         num4 = (float) ((double) num7 * 0.449999988079071 + 1.0);
-                                        Tile tileSafely = Framing.GetTileSafely(x, y);
-                                        Tile tile = tileSafely;
-                                        Texture2D texture =
+                                        var tileSafely = Framing.GetTileSafely(x, y);
+                                        var tile = tileSafely;
+                                        var texture =
                                             !Main.canDrawColorTile(tileSafely.type, (int) tileSafely.color())
                                                 ? Main.tileTexture[(int) tileSafely.type]
                                                 : (Texture2D) Main.tileAltTexture[(int) tileSafely.type,
                                                     (int) tileSafely.color()];
-                                        Vector2 origin = new Vector2(8f);
-                                        Vector2 vector2_2 = new Vector2(1f);
-                                        float num8 = (float) ((double) num7 * 0.200000002980232 + 1.0);
-                                        float num9 = 1f - num7;
-                                        float num10 = 1f;
-                                        Color color2 =
+                                        var origin = new Vector2(8f);
+                                        var vector2_2 = new Vector2(1f);
+                                        var num8 = (float) ((double) num7 * 0.200000002980232 + 1.0);
+                                        var num9 = 1f - num7;
+                                        var num10 = 1f;
+                                        var color2 =
                                             color1 * (float) ((double) num10 * (double) num10 * 0.800000011920929);
-                                        Vector2 scale = num8 * vector2_2;
-                                        Vector2 position =
+                                        var scale = num8 * vector2_2;
+                                        var position =
                                             (new Vector2((float) (x * 16 - (int) Main.screenPosition.X),
                                                  (float) (y * 16 - (int) Main.screenPosition.Y)) + vector2_1 + origin +
                                              zero).Floor();

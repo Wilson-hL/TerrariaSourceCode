@@ -49,7 +49,7 @@ namespace Terraria.GameInput
 
         public void Initialize(PresetProfiles style)
         {
-            foreach (KeyValuePair<InputMode, KeyConfiguration> inputMode in this.InputModes)
+            foreach (var inputMode in this.InputModes)
             {
                 inputMode.Value.SetupKeys();
                 PlayerInput.Reset(inputMode.Value, style, inputMode.Key);
@@ -58,7 +58,7 @@ namespace Terraria.GameInput
 
         public bool Load(Dictionary<string, object> dict)
         {
-            int num = 0;
+            var num = 0;
             object obj;
             if (dict.TryGetValue("Last Launched Version", out obj))
                 num = (int) (long) obj;
@@ -92,7 +92,7 @@ namespace Terraria.GameInput
 
             if (dict.TryGetValue("Settings", out obj))
             {
-                Dictionary<string, object> dictionary =
+                var dictionary =
                     (Dictionary<string, object>) JsonConvert.DeserializeObject<Dictionary<string, object>>(
                         ((object) (JObject) obj).ToString());
                 if (dictionary.TryGetValue("Edittable", out obj))
@@ -128,8 +128,8 @@ namespace Terraria.GameInput
 
         public Dictionary<string, object> Save()
         {
-            Dictionary<string, object> dictionary1 = new Dictionary<string, object>();
-            Dictionary<string, object> dictionary2 = new Dictionary<string, object>();
+            var dictionary1 = new Dictionary<string, object>();
+            var dictionary2 = new Dictionary<string, object>();
             dictionary1.Add("Last Launched Version", (object) 193);
             dictionary2.Add("Edittable", (object) this.AllowEditting);
             dictionary2.Add("Gamepad - HotbarRadialHoldTime", (object) this.HotbarRadialHoldTimeRequired);
@@ -157,10 +157,10 @@ namespace Terraria.GameInput
         {
             if (PlayerInput.OriginalProfiles.ContainsKey(this.Name))
             {
-                foreach (KeyValuePair<string, List<string>> writePreference in PlayerInput.OriginalProfiles[this.Name]
+                foreach (var writePreference in PlayerInput.OriginalProfiles[this.Name]
                     .InputModes[nm].WritePreferences())
                 {
-                    bool flag = true;
+                    var flag = true;
                     List<string> stringList;
                     if (dict.TryGetValue(writePreference.Key, out stringList))
                     {
@@ -168,7 +168,7 @@ namespace Terraria.GameInput
                             flag = false;
                         if (!flag)
                         {
-                            for (int index = 0; index < stringList.Count; ++index)
+                            for (var index = 0; index < stringList.Count; ++index)
                             {
                                 if (stringList[index] != writePreference.Value[index])
                                 {
@@ -201,7 +201,7 @@ namespace Terraria.GameInput
 
         public void CopyGameplaySettingsFrom(PlayerInputProfile profile, InputMode mode)
         {
-            string[] keysToCopy = new string[18]
+            var keysToCopy = new string[18]
             {
                 "MouseLeft", "MouseRight", "Up", "Down", "Left", "Right", "Jump", "Grapple", "SmartSelect",
                 "SmartCursor", "QuickMount", "QuickHeal", "QuickMana", "QuickBuff", "Throw", "Inventory", "ViewZoomIn",
@@ -212,7 +212,7 @@ namespace Terraria.GameInput
 
         public void CopyHotbarSettingsFrom(PlayerInputProfile profile, InputMode mode)
         {
-            string[] keysToCopy = new string[12]
+            var keysToCopy = new string[12]
             {
                 "HotbarMinus", "HotbarPlus", "Hotbar1", "Hotbar2", "Hotbar3", "Hotbar4", "Hotbar5", "Hotbar6",
                 "Hotbar7", "Hotbar8", "Hotbar9", "Hotbar10"
@@ -222,14 +222,14 @@ namespace Terraria.GameInput
 
         public void CopyMapSettingsFrom(PlayerInputProfile profile, InputMode mode)
         {
-            string[] keysToCopy = new string[6]
+            var keysToCopy = new string[6]
                 {"MapZoomIn", "MapZoomOut", "MapAlphaUp", "MapAlphaDown", "MapFull", "MapStyle"};
             this.CopyKeysFrom(profile, mode, keysToCopy);
         }
 
         public void CopyGamepadSettingsFrom(PlayerInputProfile profile, InputMode mode)
         {
-            string[] keysToCopy = new string[10]
+            var keysToCopy = new string[10]
             {
                 "RadialHotbar", "RadialQuickbar", "DpadSnap1", "DpadSnap2", "DpadSnap3", "DpadSnap4", "DpadRadial1",
                 "DpadRadial2", "DpadRadial3", "DpadRadial4"
@@ -255,7 +255,7 @@ namespace Terraria.GameInput
 
         private void CopyKeysFrom(PlayerInputProfile profile, InputMode mode, string[] keysToCopy)
         {
-            for (int index = 0; index < keysToCopy.Length; ++index)
+            for (var index = 0; index < keysToCopy.Length; ++index)
             {
                 List<string> stringList;
                 if (profile.InputModes[mode].KeyStatus.TryGetValue(keysToCopy[index], out stringList))

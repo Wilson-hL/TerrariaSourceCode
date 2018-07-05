@@ -38,7 +38,7 @@ namespace Terraria.GameInput
         public void CompareDiffs(TriggersSet Bearer, TriggersSet oldset, TriggersSet newset)
         {
             Bearer.Reset();
-            foreach (string index in Bearer.KeyStatus.Keys.ToList<string>())
+            foreach (var index in Bearer.KeyStatus.Keys.ToList<string>())
                 Bearer.KeyStatus[index] = newset.KeyStatus[index] && !oldset.KeyStatus[index];
         }
     }

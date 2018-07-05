@@ -64,7 +64,7 @@ namespace Terraria.Graphics
             if (this._fallbackIndexData == null)
             {
                 this._fallbackIndexData = new short[12288];
-                for (int index = 0; index < 2048; ++index)
+                for (var index = 0; index < 2048; ++index)
                 {
                     this._fallbackIndexData[index * 6] = (short) (index * 4);
                     this._fallbackIndexData[index * 6 + 1] = (short) (index * 4 + 1);
@@ -186,8 +186,8 @@ namespace Terraria.Graphics
 
         private static short[] CreateIndexData()
         {
-            short[] numArray = new short[12288];
-            for (int index = 0; index < 2048; ++index)
+            var numArray = new short[12288];
+            for (var index = 0; index < 2048; ++index)
             {
                 numArray[index * 6] = (short) (index * 4);
                 numArray[index * 6 + 1] = (short) (index * 4 + 1);
@@ -208,11 +208,11 @@ namespace Terraria.Graphics
                 Array.Resize<TileBatch.SpriteData>(ref this._spriteDataQueue, this._spriteDataQueue.Length << 1);
             fixed (TileBatch.SpriteData* spriteDataPtr = &this._spriteDataQueue[this._queuedSpriteCount])
             {
-                float z = destination.Z;
-                float w = destination.W;
+                var z = destination.Z;
+                var w = destination.W;
                 if (sourceRectangle.HasValue)
                 {
-                    Rectangle rectangle = sourceRectangle.Value;
+                    var rectangle = sourceRectangle.Value;
                     spriteDataPtr->Source.X = (float) rectangle.X;
                     spriteDataPtr->Source.Y = (float) rectangle.Y;
                     spriteDataPtr->Source.Z = (float) rectangle.Width;
@@ -225,8 +225,8 @@ namespace Terraria.Graphics
                 }
                 else
                 {
-                    float width = (float) texture.Width;
-                    float height = (float) texture.Height;
+                    var width = (float) texture.Width;
+                    var height = (float) texture.Height;
                     spriteDataPtr->Source.X = 0.0f;
                     spriteDataPtr->Source.Y = 0.0f;
                     spriteDataPtr->Source.Z = width;
@@ -264,9 +264,9 @@ namespace Terraria.Graphics
 
         private void Flush()
         {
-            Texture2D texture = (Texture2D) null;
-            int offset = 0;
-            for (int index = 0; index < this._queuedSpriteCount; ++index)
+            var texture = (Texture2D) null;
+            var offset = 0;
+            for (var index = 0; index < this._queuedSpriteCount; ++index)
             {
                 if (this._spriteTextures[index] != texture)
                 {
@@ -285,12 +285,12 @@ namespace Terraria.Graphics
         private unsafe void RenderBatch(Texture2D texture, TileBatch.SpriteData[] sprites, int offset, int count)
         {
             this._graphicsDevice.Textures[0] = (Texture) texture;
-            float num1 = 1f / (float) texture.Width;
-            float num2 = 1f / (float) texture.Height;
+            var num1 = 1f / (float) texture.Width;
+            var num2 = 1f / (float) texture.Height;
             while (count > 0)
             {
-                SetDataOptions options = SetDataOptions.NoOverwrite;
-                int num3 = count;
+                var options = SetDataOptions.NoOverwrite;
+                var num3 = count;
                 if (num3 > 2048 - this._vertexBufferPosition)
                 {
                     num3 = 2048 - this._vertexBufferPosition;
@@ -307,9 +307,9 @@ namespace Terraria.Graphics
                 fixed (TileBatch.SpriteData* spriteDataPtr1 = &sprites[offset])
                 fixed (VertexPositionColorTexture* positionColorTexturePtr1 = &this._vertices[0])
                 {
-                    TileBatch.SpriteData* spriteDataPtr2 = spriteDataPtr1;
-                    VertexPositionColorTexture* positionColorTexturePtr2 = positionColorTexturePtr1;
-                    for (int index1 = 0; index1 < num3; ++index1)
+                    var spriteDataPtr2 = spriteDataPtr1;
+                    var positionColorTexturePtr2 = positionColorTexturePtr1;
+                    for (var index1 = 0; index1 < num3; ++index1)
                     {
                         float num4;
                         float num5;
@@ -324,21 +324,21 @@ namespace Terraria.Graphics
                             num5 = 0.0f;
                         }
 
-                        float num6 = spriteDataPtr2->Origin.X / spriteDataPtr2->Source.Z;
-                        float num7 = spriteDataPtr2->Origin.Y / spriteDataPtr2->Source.W;
+                        var num6 = spriteDataPtr2->Origin.X / spriteDataPtr2->Source.Z;
+                        var num7 = spriteDataPtr2->Origin.Y / spriteDataPtr2->Source.W;
                         positionColorTexturePtr2->Color = spriteDataPtr2->Colors.TopLeftColor;
                         positionColorTexturePtr2[1].Color = spriteDataPtr2->Colors.TopRightColor;
                         positionColorTexturePtr2[2].Color = spriteDataPtr2->Colors.BottomRightColor;
                         positionColorTexturePtr2[3].Color = spriteDataPtr2->Colors.BottomLeftColor;
-                        for (int index2 = 0; index2 < 4; ++index2)
+                        for (var index2 = 0; index2 < 4; ++index2)
                         {
-                            float num8 = TileBatch.CORNER_OFFSET_X[index2];
-                            float num9 = TileBatch.CORNER_OFFSET_Y[index2];
-                            float num10 = (num8 - num6) * spriteDataPtr2->Destination.Z;
-                            float num11 = (num9 - num7) * spriteDataPtr2->Destination.W;
-                            float num12 = (float) ((double) spriteDataPtr2->Destination.X +
+                            var num8 = TileBatch.CORNER_OFFSET_X[index2];
+                            var num9 = TileBatch.CORNER_OFFSET_Y[index2];
+                            var num10 = (num8 - num6) * spriteDataPtr2->Destination.Z;
+                            var num11 = (num9 - num7) * spriteDataPtr2->Destination.W;
+                            var num12 = (float) ((double) spriteDataPtr2->Destination.X +
                                                    (double) num10 * (double) num4 - (double) num11 * (double) num5);
-                            float num13 = (float) ((double) spriteDataPtr2->Destination.Y +
+                            var num13 = (float) ((double) spriteDataPtr2->Destination.Y +
                                                    (double) num10 * (double) num5 + (double) num11 * (double) num4);
                             if ((spriteDataPtr2->Effects & SpriteEffects.FlipVertically) != SpriteEffects.None)
                                 num8 = 1f - num8;

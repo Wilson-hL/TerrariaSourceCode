@@ -38,7 +38,7 @@ namespace Terraria
         public static Dust NewDustPerfect(Vector2 Position, int Type, Vector2? Velocity = null, int Alpha = 0,
             Color newColor = default(Color), float Scale = 1f)
         {
-            Dust dust = Main.dust[Dust.NewDust(Position, 0, 0, Type, 0.0f, 0.0f, Alpha, newColor, Scale)];
+            var dust = Main.dust[Dust.NewDust(Position, 0, 0, Type, 0.0f, 0.0f, Alpha, newColor, Scale)];
             dust.position = Position;
             if (Velocity.HasValue)
                 dust.velocity = Velocity.Value;
@@ -48,7 +48,7 @@ namespace Terraria
         public static Dust NewDustDirect(Vector2 Position, int Width, int Height, int Type, float SpeedX = 0.0f,
             float SpeedY = 0.0f, int Alpha = 0, Color newColor = default(Color), float Scale = 1f)
         {
-            Dust dust = Main.dust[Dust.NewDust(Position, Width, Height, Type, SpeedX, SpeedY, Alpha, newColor, Scale)];
+            var dust = Main.dust[Dust.NewDust(Position, Width, Height, Type, SpeedX, SpeedY, Alpha, newColor, Scale)];
             if (dust.velocity.HasNaNs())
                 dust.velocity = Vector2.Zero;
             return dust;
@@ -63,15 +63,15 @@ namespace Terraria
                 Main.rand = new UnifiedRandom((int) DateTime.Now.Ticks);
             if (Main.gamePaused || WorldGen.gen || Main.netMode == 2)
                 return 6000;
-            int num1 = (int) (400.0 * (1.0 - (double) Dust.dCount));
+            var num1 = (int) (400.0 * (1.0 - (double) Dust.dCount));
             if (!new Rectangle((int) ((double) Main.screenPosition.X - (double) num1),
                 (int) ((double) Main.screenPosition.Y - (double) num1), Main.screenWidth + num1 * 2,
                 Main.screenHeight + num1 * 2).Intersects(new Rectangle((int) Position.X, (int) Position.Y, 10, 10)))
                 return 6000;
-            int num2 = 6000;
-            for (int index = 0; index < 6000; ++index)
+            var num2 = 6000;
+            for (var index = 0; index < 6000; ++index)
             {
-                Dust dust = Main.dust[index];
+                var dust = Main.dust[index];
                 if (!dust.active)
                 {
                     if ((double) index > (double) Main.maxDustToDraw * 0.9)
@@ -102,8 +102,8 @@ namespace Terraria
                     else
                         Dust.dCount = 0.0f;
 
-                    int num3 = Width;
-                    int num4 = Height;
+                    var num3 = Width;
+                    var num4 = Height;
                     if (num3 < 5)
                         num3 = 5;
                     if (num4 < 5)
@@ -123,7 +123,7 @@ namespace Terraria
                     dust.frame.Y = 10 * Main.rand.Next(3);
                     dust.shader = (ArmorShaderData) null;
                     dust.customData = (object) null;
-                    int num5 = Type;
+                    var num5 = Type;
                     while (num5 >= 100)
                     {
                         num5 -= 100;
@@ -196,8 +196,8 @@ namespace Terraria
         {
             if (rf.dustIndex == Main.maxDustToDraw)
                 return rf;
-            int index = Dust.NewDust(rf.position, 0, 0, rf.type, 0.0f, 0.0f, 0, new Color(), 1f);
-            Dust dust = Main.dust[index];
+            var index = Dust.NewDust(rf.position, 0, 0, rf.type, 0.0f, 0.0f, 0, new Color(), 1f);
+            var dust = Main.dust[index];
             dust.position = rf.position;
             dust.velocity = rf.velocity;
             dust.fadeIn = rf.fadeIn;
@@ -223,25 +223,25 @@ namespace Terraria
         public static void QuickBox(Vector2 topLeft, Vector2 bottomRight, int divisions, Color color,
             Action<Dust> manipulator)
         {
-            float num1 = (float) (divisions + 2);
-            for (float num2 = 0.0f; (double) num2 <= (double) (divisions + 2); ++num2)
+            var num1 = (float) (divisions + 2);
+            for (var num2 = 0.0f; (double) num2 <= (double) (divisions + 2); ++num2)
             {
-                Dust dust1 =
+                var dust1 =
                     Dust.QuickDust(new Vector2(MathHelper.Lerp(topLeft.X, bottomRight.X, num2 / num1), topLeft.Y),
                         color);
                 if (manipulator != null)
                     manipulator(dust1);
-                Dust dust2 =
+                var dust2 =
                     Dust.QuickDust(new Vector2(MathHelper.Lerp(topLeft.X, bottomRight.X, num2 / num1), bottomRight.Y),
                         color);
                 if (manipulator != null)
                     manipulator(dust2);
-                Dust dust3 =
+                var dust3 =
                     Dust.QuickDust(new Vector2(topLeft.X, MathHelper.Lerp(topLeft.Y, bottomRight.Y, num2 / num1)),
                         color);
                 if (manipulator != null)
                     manipulator(dust3);
-                Dust dust4 =
+                var dust4 =
                     Dust.QuickDust(new Vector2(bottomRight.X, MathHelper.Lerp(topLeft.Y, bottomRight.Y, num2 / num1)),
                         color);
                 if (manipulator != null)
@@ -251,7 +251,7 @@ namespace Terraria
 
         public static Dust QuickDust(Vector2 pos, Color color)
         {
-            Dust dust = Main.dust[Dust.NewDust(pos, 0, 0, 267, 0.0f, 0.0f, 0, new Color(), 1f)];
+            var dust = Main.dust[Dust.NewDust(pos, 0, 0, 267, 0.0f, 0.0f, 0, new Color(), 1f)];
             dust.position = pos;
             dust.velocity = Vector2.Zero;
             dust.fadeIn = 1f;
@@ -265,8 +265,8 @@ namespace Terraria
         {
             Dust.QuickDust(start, color).scale = 2f;
             Dust.QuickDust(end, color).scale = 2f;
-            float num = 1f / splits;
-            float amount = 0.0f;
+            var num = 1f / splits;
+            var amount = 0.0f;
             while ((double) amount < 1.0)
             {
                 Dust.QuickDust(Vector2.Lerp(start, end, amount), color).scale = 2f;
@@ -303,15 +303,15 @@ namespace Terraria
 
         public static void UpdateDust()
         {
-            int num1 = 0;
+            var num1 = 0;
             Dust.lavaBubbles = 0;
             Main.snowDust = 0;
             Dust.SandStormCount = 0;
-            bool flag = Sandstorm.Happening && Main.player[Main.myPlayer].ZoneSandstorm &&
+            var flag = Sandstorm.Happening && Main.player[Main.myPlayer].ZoneSandstorm &&
                         ((Main.bgStyle == 2 || Main.bgStyle == 5) && Main.bgDelay < 50);
-            for (int index1 = 0; index1 < 6000; ++index1)
+            for (var index1 = 0; index1 < 6000; ++index1)
             {
-                Dust dust = Main.dust[index1];
+                var dust = Main.dust[index1];
                 if (index1 < Main.maxDustToDraw)
                 {
                     if (dust.active)
@@ -332,7 +332,7 @@ namespace Terraria
                                 dust.frame.Y = 10 * Main.rand.Next(3);
                                 dust.shader = (ArmorShaderData) null;
                                 dust.customData = (object) null;
-                                int num2 = dust.type / 100;
+                                var num2 = dust.type / 100;
                                 dust.frame.X -= 1000 * num2;
                                 dust.frame.Y += 30 * num2;
                                 dust.noGravity = true;
@@ -352,13 +352,13 @@ namespace Terraria
 
                         if (dust.type >= 86 && dust.type <= 92 && !dust.noLight)
                         {
-                            float num2 = dust.scale * 0.6f;
+                            var num2 = dust.scale * 0.6f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
-                            int num3 = dust.type - 85;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num2;
+                            var num3 = dust.type - 85;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num2;
                             switch (num3)
                             {
                                 case 1:
@@ -401,12 +401,12 @@ namespace Terraria
                         {
                             if (dust.customData != null && dust.customData is Player)
                             {
-                                Player customData = (Player) dust.customData;
+                                var customData = (Player) dust.customData;
                                 dust.position += customData.position - customData.oldPosition;
                             }
                             else if (dust.customData != null && dust.customData is Projectile)
                             {
-                                Projectile customData = (Projectile) dust.customData;
+                                var customData = (Projectile) dust.customData;
                                 if (customData.active)
                                     dust.position += customData.position - customData.oldPosition;
                             }
@@ -414,13 +414,13 @@ namespace Terraria
 
                         if (dust.type == 262 && !dust.noLight)
                         {
-                            Vector3 rgb = new Vector3(0.9f, 0.6f, 0.0f) * dust.scale * 0.6f;
+                            var rgb = new Vector3(0.9f, 0.6f, 0.0f) * dust.scale * 0.6f;
                             Lighting.AddLight(dust.position, rgb);
                         }
 
                         if (dust.type == 240 && dust.customData != null && dust.customData is Projectile)
                         {
-                            Projectile customData = (Projectile) dust.customData;
+                            var customData = (Projectile) dust.customData;
                             if (customData.active)
                                 dust.position += customData.position - customData.oldPosition;
                         }
@@ -454,41 +454,41 @@ namespace Terraria
                         {
                             if (!dust.noLight)
                             {
-                                Vector3 rgb = dust.color.ToVector3() * dust.scale * 0.4f;
+                                var rgb = dust.color.ToVector3() * dust.scale * 0.4f;
                                 Lighting.AddLight(dust.position, rgb);
                             }
 
                             if (dust.customData != null && dust.customData is Player)
                             {
-                                Player customData = (Player) dust.customData;
+                                var customData = (Player) dust.customData;
                                 dust.position += customData.position - customData.oldPosition;
                                 dust.customData = (object) null;
                             }
                             else if (dust.customData != null && dust.customData is Projectile)
                             {
-                                Projectile customData = (Projectile) dust.customData;
+                                var customData = (Projectile) dust.customData;
                                 dust.position += customData.position - customData.oldPosition;
                             }
                         }
 
                         if (dust.type == 230)
                         {
-                            float num2 = dust.scale * 0.6f;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 0.5f;
-                            float num7 = num4 * 0.9f;
-                            float num8 = num5 * 1f;
+                            var num2 = dust.scale * 0.6f;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 0.5f;
+                            var num7 = num4 * 0.9f;
+                            var num8 = num5 * 1f;
                             dust.scale += 0.02f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                             if (dust.customData != null && dust.customData is Player)
                             {
-                                Vector2 center = ((Entity) dust.customData).Center;
-                                Vector2 vector2_1 = dust.position - center;
-                                float val2 = vector2_1.Length();
-                                Vector2 vector2_2 = vector2_1 / val2;
+                                var center = ((Entity) dust.customData).Center;
+                                var vector2_1 = dust.position - center;
+                                var val2 = vector2_1.Length();
+                                var vector2_2 = vector2_1 / val2;
                                 dust.scale = Math.Min(dust.scale, (float) ((double) val2 / 24.0 - 1.0));
                                 dust.velocity -= vector2_2 * (100f / Math.Max(50f, val2));
                             }
@@ -502,15 +502,15 @@ namespace Terraria
 
                         if (dust.type == 172)
                         {
-                            float num2 = dust.scale * 0.5f;
+                            var num2 = dust.scale * 0.5f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 0.0f;
-                            float num7 = num4 * 0.25f;
-                            float num8 = num5 * 1f;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 0.0f;
+                            var num7 = num4 * 0.25f;
+                            var num8 = num5 * 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
@@ -520,22 +520,22 @@ namespace Terraria
                             ++dust.rotation;
                             if (!dust.noLight)
                             {
-                                float num2 = dust.scale * 0.25f;
+                                var num2 = dust.scale * 0.25f;
                                 if ((double) num2 > 1.0)
                                     num2 = 1f;
-                                float num3 = num2;
-                                float num4 = num2;
-                                float num5 = num2;
-                                float num6 = num3 * 1f;
-                                float num7 = num4 * 0.2f;
-                                float num8 = num5 * 0.1f;
+                                var num3 = num2;
+                                var num4 = num2;
+                                var num5 = num2;
+                                var num6 = num3 * 1f;
+                                var num7 = num4 * 0.2f;
+                                var num8 = num5 * 0.1f;
                                 Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                     (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                             }
 
                             if (dust.customData != null && dust.customData is Player)
                             {
-                                Player customData = (Player) dust.customData;
+                                var customData = (Player) dust.customData;
                                 dust.position += customData.position - customData.oldPosition;
                                 dust.customData = (object) null;
                             }
@@ -545,7 +545,7 @@ namespace Terraria
                         {
                             if (!dust.noLight)
                             {
-                                float num2 = dust.scale * 0.3f;
+                                var num2 = dust.scale * 0.3f;
                                 if ((double) num2 > 1.0)
                                     num2 = 1f;
                                 Lighting.AddLight(dust.position, new Vector3(0.4f, 0.6f, 0.7f) * num2);
@@ -562,37 +562,37 @@ namespace Terraria
                             dust.scale -= 1f / 400f;
                             if (dust.customData != null && dust.customData is Player)
                             {
-                                Player customData = (Player) dust.customData;
+                                var customData = (Player) dust.customData;
                                 dust.position += customData.position - customData.oldPosition;
                             }
                         }
 
                         if (dust.type == 254)
                         {
-                            float num2 = dust.scale * 0.35f;
+                            var num2 = dust.scale * 0.35f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 0.9f;
-                            float num7 = num4 * 0.1f;
-                            float num8 = num5 * 0.75f;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 0.9f;
+                            var num7 = num4 * 0.1f;
+                            var num8 = num5 * 0.75f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
 
                         if (dust.type == (int) byte.MaxValue)
                         {
-                            float num2 = dust.scale * 0.25f;
+                            var num2 = dust.scale * 0.25f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 0.9f;
-                            float num7 = num4 * 0.1f;
-                            float num8 = num5 * 0.75f;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 0.9f;
+                            var num7 = num4 * 0.1f;
+                            var num8 = num5 * 0.75f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
@@ -602,8 +602,8 @@ namespace Terraria
                         if (dust.type == 213 || dust.type == 260)
                         {
                             dust.rotation = 0.0f;
-                            float num2 = (float) ((double) dust.scale / 2.5 * 0.200000002980232);
-                            Vector3 vector3 = Vector3.Zero;
+                            var num2 = (float) ((double) dust.scale / 2.5 * 0.200000002980232);
+                            var vector3 = Vector3.Zero;
                             switch (dust.type)
                             {
                                 case 213:
@@ -624,13 +624,13 @@ namespace Terraria
 
                         if (dust.type == 157)
                         {
-                            float num2 = dust.scale * 0.2f;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 0.25f;
-                            float num7 = num4 * 1f;
-                            float num8 = num5 * 0.5f;
+                            var num2 = dust.scale * 0.2f;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 0.25f;
+                            var num7 = num4 * 1f;
+                            var num8 = num5 * 0.5f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
@@ -638,80 +638,80 @@ namespace Terraria
                         if (dust.type == 206)
                         {
                             dust.scale -= 0.1f;
-                            float num2 = dust.scale * 0.4f;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 0.1f;
-                            float num7 = num4 * 0.6f;
-                            float num8 = num5 * 1f;
+                            var num2 = dust.scale * 0.4f;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 0.1f;
+                            var num7 = num4 * 0.6f;
+                            var num8 = num5 * 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
 
                         if (dust.type == 163)
                         {
-                            float num2 = dust.scale * 0.25f;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 0.25f;
-                            float num7 = num4 * 1f;
-                            float num8 = num5 * 0.05f;
+                            var num2 = dust.scale * 0.25f;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 0.25f;
+                            var num7 = num4 * 1f;
+                            var num8 = num5 * 0.05f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
 
                         if (dust.type == 205)
                         {
-                            float num2 = dust.scale * 0.25f;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 1f;
-                            float num7 = num4 * 0.05f;
-                            float num8 = num5 * 1f;
+                            var num2 = dust.scale * 0.25f;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 1f;
+                            var num7 = num4 * 0.05f;
+                            var num8 = num5 * 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
 
                         if (dust.type == 170)
                         {
-                            float num2 = dust.scale * 0.5f;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 1f;
-                            float num7 = num4 * 1f;
-                            float num8 = num5 * 0.05f;
+                            var num2 = dust.scale * 0.5f;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 1f;
+                            var num7 = num4 * 1f;
+                            var num8 = num5 * 0.05f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
 
                         if (dust.type == 156)
                         {
-                            float num2 = dust.scale * 0.6f;
-                            int type = dust.type;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 0.5f;
-                            float num7 = num4 * 0.9f;
-                            float num8 = num5 * 1f;
+                            var num2 = dust.scale * 0.6f;
+                            var type = dust.type;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 0.5f;
+                            var num7 = num4 * 0.9f;
+                            var num8 = num5 * 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
 
                         if (dust.type == 234)
                         {
-                            float num2 = dust.scale * 0.6f;
-                            int type = dust.type;
-                            float num3 = num2;
-                            float num4 = num2;
-                            float num5 = num2;
-                            float num6 = num3 * 0.95f;
-                            float num7 = num4 * 0.65f;
-                            float num8 = num5 * 1.3f;
+                            var num2 = dust.scale * 0.6f;
+                            var type = dust.type;
+                            var num3 = num2;
+                            var num4 = num2;
+                            var num5 = num2;
+                            var num6 = num3 * 0.95f;
+                            var num7 = num4 * 0.65f;
+                            var num8 = num5 * 1.3f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), num2 * num6, num2 * num7, num2 * num8);
                         }
@@ -721,7 +721,7 @@ namespace Terraria
                         if (dust.type == 174)
                         {
                             dust.scale -= 0.01f;
-                            float R = dust.scale * 1f;
+                            var R = dust.scale * 1f;
                             if ((double) R > 0.600000023841858)
                                 R = 0.6f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -730,7 +730,7 @@ namespace Terraria
 
                         if (dust.type == 235)
                         {
-                            Vector2 vector2 = new Vector2((float) Main.rand.Next(-100, 101),
+                            var vector2 = new Vector2((float) Main.rand.Next(-100, 101),
                                 (float) Main.rand.Next(-100, 101));
                             vector2.Normalize();
                             vector2 *= 15f;
@@ -748,17 +748,17 @@ namespace Terraria
                             {
                                 if (dust.customData != null && dust.customData is NPC)
                                 {
-                                    NPC customData = (NPC) dust.customData;
+                                    var customData = (NPC) dust.customData;
                                     dust.position += customData.position - customData.oldPos[1];
                                 }
                                 else if (dust.customData != null && dust.customData is Player)
                                 {
-                                    Player customData = (Player) dust.customData;
+                                    var customData = (Player) dust.customData;
                                     dust.position += customData.position - customData.oldPosition;
                                 }
                                 else if (dust.customData != null && dust.customData is Vector2)
                                 {
-                                    Vector2 vector2 = (Vector2) dust.customData - dust.position;
+                                    var vector2 = (Vector2) dust.customData - dust.position;
                                     if (vector2 != Vector2.Zero)
                                         vector2.Normalize();
                                     dust.velocity = (dust.velocity * 4f + vector2 * dust.velocity.Length()) / 5f;
@@ -767,7 +767,7 @@ namespace Terraria
 
                             if (!dust.noLight)
                             {
-                                float num2 = dust.scale * 1.4f;
+                                var num2 = dust.scale * 1.4f;
                                 if (dust.type == 29)
                                 {
                                     if ((double) num2 > 1.0)
@@ -830,10 +830,10 @@ namespace Terraria
                                 {
                                     if ((double) num2 > 0.800000011920929)
                                         num2 = 0.8f;
-                                    int num3 = dust.type - 58;
-                                    float num4 = 1f;
-                                    float num5 = 1f;
-                                    float num6 = 1f;
+                                    var num3 = dust.type - 58;
+                                    var num4 = 1f;
+                                    var num5 = 1f;
+                                    var num6 = 1f;
                                     switch (num3)
                                     {
                                         case 1:
@@ -880,7 +880,7 @@ namespace Terraria
                                 }
                                 else if (dust.type == (int) sbyte.MaxValue)
                                 {
-                                    float R = num2 * 1.3f;
+                                    var R = num2 * 1.3f;
                                     if ((double) R > 1.0)
                                         R = 1f;
                                     Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -888,7 +888,7 @@ namespace Terraria
                                 }
                                 else if (dust.type == 187)
                                 {
-                                    float B = num2 * 1.3f;
+                                    var B = num2 * 1.3f;
                                     if ((double) B > 1.0)
                                         B = 1f;
                                     Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -907,22 +907,22 @@ namespace Terraria
                         {
                             if (!dust.noLight)
                             {
-                                float num2 = dust.scale * 1.4f;
+                                var num2 = dust.scale * 1.4f;
                                 if ((double) num2 > 1.0)
                                     num2 = 1f;
-                                Vector3 vector3 = new Vector3(0.7f, 0.65f, 0.3f);
+                                var vector3 = new Vector3(0.7f, 0.65f, 0.3f);
                                 Lighting.AddLight(dust.position, vector3 * num2);
                             }
 
                             if (dust.customData != null && dust.customData is Vector2)
                             {
-                                Vector2 vector2 = (Vector2) dust.customData - dust.position;
+                                var vector2 = (Vector2) dust.customData - dust.position;
                                 dust.velocity.X += 1f * (float) Math.Sign(vector2.X) * dust.scale;
                             }
                         }
                         else if (dust.type == 159)
                         {
-                            float num2 = dust.scale * 1.3f;
+                            var num2 = dust.scale * 1.3f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -945,7 +945,7 @@ namespace Terraria
                                 dust.velocity.Y += (float) Main.rand.Next(-10, 11) * 0.02f;
                                 if (Main.rand.Next(5) == 0)
                                 {
-                                    int index2 = Dust.NewDust(dust.position, 4, 4, dust.type, 0.0f, 0.0f, 0,
+                                    var index2 = Dust.NewDust(dust.position, 4, 4, dust.type, 0.0f, 0.0f, 0,
                                         new Color(), 1f);
                                     Main.dust[index2].noGravity = true;
                                     Main.dust[index2].scale = dust.scale * 2.5f;
@@ -954,7 +954,7 @@ namespace Terraria
                         }
                         else if (dust.type == 164)
                         {
-                            float R = dust.scale;
+                            var R = dust.scale;
                             if ((double) R > 1.0)
                                 R = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -977,7 +977,7 @@ namespace Terraria
                                 dust.velocity.Y += (float) Main.rand.Next(-10, 11) * 0.02f;
                                 if (Main.rand.Next(5) == 0)
                                 {
-                                    int index2 = Dust.NewDust(dust.position, 4, 4, dust.type, 0.0f, 0.0f, 0,
+                                    var index2 = Dust.NewDust(dust.position, 4, 4, dust.type, 0.0f, 0.0f, 0,
                                         new Color(), 1f);
                                     Main.dust[index2].noGravity = true;
                                     Main.dust[index2].scale = dust.scale * 2.5f;
@@ -986,7 +986,7 @@ namespace Terraria
                         }
                         else if (dust.type == 173)
                         {
-                            float B = dust.scale;
+                            var B = dust.scale;
                             if ((double) B > 1.0)
                                 B = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1006,7 +1006,7 @@ namespace Terraria
                                 dust.velocity.Y += (float) Main.rand.Next(-10, 11) * 0.005f;
                                 if (Main.rand.Next(10) == 10)
                                 {
-                                    int index2 = Dust.NewDust(dust.position, 4, 4, dust.type, 0.0f, 0.0f, 0,
+                                    var index2 = Dust.NewDust(dust.position, 4, 4, dust.type, 0.0f, 0.0f, 0,
                                         new Color(), 1f);
                                     Main.dust[index2].noGravity = true;
                                     Main.dust[index2].scale = dust.scale;
@@ -1023,7 +1023,7 @@ namespace Terraria
                         }
                         else if (dust.type == 160 || dust.type == 162)
                         {
-                            float num2 = dust.scale * 1.3f;
+                            var num2 = dust.scale * 1.3f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             if (dust.type == 162)
@@ -1046,7 +1046,7 @@ namespace Terraria
                                 dust.velocity.Y += (float) Main.rand.Next(-10, 11) * 0.02f;
                                 if ((double) dust.scale > 0.3 && Main.rand.Next(50) == 0)
                                 {
-                                    int index2 = Dust.NewDust(new Vector2(dust.position.X - 4f, dust.position.Y - 4f),
+                                    var index2 = Dust.NewDust(new Vector2(dust.position.X - 4f, dust.position.Y - 4f),
                                         1, 1, dust.type, 0.0f, 0.0f, 0, new Color(), 1f);
                                     Main.dust[index2].noGravity = true;
                                     Main.dust[index2].scale = dust.scale * 1.5f;
@@ -1055,7 +1055,7 @@ namespace Terraria
                         }
                         else if (dust.type == 168)
                         {
-                            float R = dust.scale * 0.8f;
+                            var R = dust.scale * 0.8f;
                             if ((double) R > 0.55)
                                 R = 0.55f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1105,15 +1105,15 @@ namespace Terraria
                         else if (dust.type >= 244 && dust.type <= 247)
                         {
                             dust.rotation += 0.1f * dust.scale;
-                            Color color = Lighting.GetColor((int) ((double) dust.position.X / 16.0),
+                            var color = Lighting.GetColor((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0));
-                            byte num2 = (byte) (((int) color.R + (int) color.G + (int) color.B) / 3);
-                            float num3 = (float) (((double) num2 / 270.0 + 1.0) / 2.0);
-                            float num4 = (float) (((double) num2 / 270.0 + 1.0) / 2.0);
-                            float num5 = (float) (((double) num2 / 270.0 + 1.0) / 2.0);
-                            float num6 = num3 * (dust.scale * 0.9f);
-                            float num7 = num4 * (dust.scale * 0.9f);
-                            float num8 = num5 * (dust.scale * 0.9f);
+                            var num2 = (byte) (((int) color.R + (int) color.G + (int) color.B) / 3);
+                            var num3 = (float) (((double) num2 / 270.0 + 1.0) / 2.0);
+                            var num4 = (float) (((double) num2 / 270.0 + 1.0) / 2.0);
+                            var num5 = (float) (((double) num2 / 270.0 + 1.0) / 2.0);
+                            var num6 = num3 * (dust.scale * 0.9f);
+                            var num7 = num4 * (dust.scale * 0.9f);
+                            var num8 = num5 * (dust.scale * 0.9f);
                             if (dust.alpha < (int) byte.MaxValue)
                             {
                                 dust.scale += 0.09f;
@@ -1131,7 +1131,7 @@ namespace Terraria
                                     dust.scale -= 0.01f;
                             }
 
-                            float num9 = 1f;
+                            var num9 = 1f;
                             if (dust.type == 244)
                             {
                                 num6 *= 0.8862745f;
@@ -1161,26 +1161,26 @@ namespace Terraria
                                 num9 = 1.2f;
                             }
 
-                            float R = num6 * num9;
-                            float G = num7 * num9;
-                            float B = num8 * num9;
+                            var R = num6 * num9;
+                            var G = num7 * num9;
+                            var B = num8 * num9;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0), R, G, B);
                         }
                         else if (dust.type == 43)
                         {
                             dust.rotation += 0.1f * dust.scale;
-                            Color color = Lighting.GetColor((int) ((double) dust.position.X / 16.0),
+                            var color = Lighting.GetColor((int) ((double) dust.position.X / 16.0),
                                 (int) ((double) dust.position.Y / 16.0));
-                            float num2 = (float) color.R / 270f;
-                            float num3 = (float) color.G / 270f;
-                            float num4 = (float) color.B / 270f;
-                            float num5 = (float) ((int) dust.color.R / (int) byte.MaxValue);
-                            float num6 = (float) ((int) dust.color.G / (int) byte.MaxValue);
-                            float num7 = (float) ((int) dust.color.B / (int) byte.MaxValue);
-                            float R = num2 * (dust.scale * 1.07f * num5);
-                            float G = num3 * (dust.scale * 1.07f * num6);
-                            float B = num4 * (dust.scale * 1.07f * num7);
+                            var num2 = (float) color.R / 270f;
+                            var num3 = (float) color.G / 270f;
+                            var num4 = (float) color.B / 270f;
+                            var num5 = (float) ((int) dust.color.R / (int) byte.MaxValue);
+                            var num6 = (float) ((int) dust.color.G / (int) byte.MaxValue);
+                            var num7 = (float) ((int) dust.color.B / (int) byte.MaxValue);
+                            var R = num2 * (dust.scale * 1.07f * num5);
+                            var G = num3 * (dust.scale * 1.07f * num6);
+                            var B = num4 * (dust.scale * 1.07f * num7);
                             if (dust.alpha < (int) byte.MaxValue)
                             {
                                 dust.scale += 0.09f;
@@ -1208,7 +1208,7 @@ namespace Terraria
                         {
                             dust.velocity.Y *= 0.98f;
                             dust.velocity.X *= 0.98f;
-                            float num2 = dust.scale;
+                            var num2 = dust.scale;
                             if (dust.type != 15)
                                 num2 = dust.scale * 0.8f;
                             if (dust.noLight)
@@ -1235,7 +1235,7 @@ namespace Terraria
                         }
                         else if (dust.type == 110)
                         {
-                            float G = dust.scale * 0.1f;
+                            var G = dust.scale * 0.1f;
                             if ((double) G > 1.0)
                                 G = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1243,7 +1243,7 @@ namespace Terraria
                         }
                         else if (dust.type == 111)
                         {
-                            float B = dust.scale * 0.125f;
+                            var B = dust.scale * 0.125f;
                             if ((double) B > 1.0)
                                 B = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1251,7 +1251,7 @@ namespace Terraria
                         }
                         else if (dust.type == 112)
                         {
-                            float num2 = dust.scale * 0.1f;
+                            var num2 = dust.scale * 0.1f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1259,7 +1259,7 @@ namespace Terraria
                         }
                         else if (dust.type == 113)
                         {
-                            float num2 = dust.scale * 0.1f;
+                            var num2 = dust.scale * 0.1f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1267,7 +1267,7 @@ namespace Terraria
                         }
                         else if (dust.type == 114)
                         {
-                            float num2 = dust.scale * 0.1f;
+                            var num2 = dust.scale * 0.1f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1282,7 +1282,7 @@ namespace Terraria
                             dust.velocity.Y *= 0.98f;
                             dust.velocity.X *= 0.98f;
                             dust.scale += 0.02f;
-                            float num2 = dust.scale;
+                            var num2 = dust.scale;
                             if (dust.type != 15)
                                 num2 = dust.scale * 0.8f;
                             if ((double) num2 > 1.0)
@@ -1302,7 +1302,7 @@ namespace Terraria
                             dust.velocity.Y *= 0.98f;
                             dust.velocity.X *= 0.98f;
                             dust.scale += 0.02f;
-                            float num2 = dust.scale * 0.8f;
+                            var num2 = dust.scale * 0.8f;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             if (dust.noLight)
@@ -1319,18 +1319,18 @@ namespace Terraria
                             dust.scale += 0.005f;
                             dust.velocity.Y *= 0.94f;
                             dust.velocity.X *= 0.94f;
-                            float B1 = dust.scale * 0.8f;
+                            var B1 = dust.scale * 0.8f;
                             if ((double) B1 > 1.0)
                                 B1 = 1f;
                             if (dust.type == 21)
                             {
-                                float B2 = dust.scale * 0.4f;
+                                var B2 = dust.scale * 0.4f;
                                 Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                     (int) ((double) dust.position.Y / 16.0), B2 * 0.8f, B2 * 0.3f, B2);
                             }
                             else if (dust.type == 231)
                             {
-                                float R = dust.scale * 0.4f;
+                                var R = dust.scale * 0.4f;
                                 Lighting.AddLight((int) ((double) dust.position.X / 16.0),
                                     (int) ((double) dust.position.Y / 16.0), R, R * 0.5f, R * 0.3f);
                             }
@@ -1354,7 +1354,7 @@ namespace Terraria
 
                             dust.velocity *= 0.94f;
                             dust.scale += 1f / 500f;
-                            float B = dust.scale;
+                            var B = dust.scale;
                             if (dust.noLight)
                             {
                                 B *= 0.1f;
@@ -1375,7 +1375,7 @@ namespace Terraria
                         else if (dust.type == 55 || dust.type == 56 || (dust.type == 73 || dust.type == 74))
                         {
                             dust.velocity *= 0.98f;
-                            float num2 = dust.scale * 0.8f;
+                            var num2 = dust.scale * 0.8f;
                             if (dust.type == 55)
                             {
                                 if ((double) num2 > 1.0)
@@ -1399,7 +1399,7 @@ namespace Terraria
                             }
                             else
                             {
-                                float B = dust.scale * 1.2f;
+                                var B = dust.scale * 1.2f;
                                 if ((double) B > 1.0)
                                     B = 1f;
                                 Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1409,7 +1409,7 @@ namespace Terraria
                         else if (dust.type == 71 || dust.type == 72)
                         {
                             dust.velocity *= 0.98f;
-                            float num2 = dust.scale;
+                            var num2 = dust.scale;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1419,7 +1419,7 @@ namespace Terraria
                         {
                             ++Main.snowDust;
                             dust.scale += 0.009f;
-                            float y = Main.player[Main.myPlayer].velocity.Y;
+                            var y = Main.player[Main.myPlayer].velocity.Y;
                             if ((double) y > 0.0 && (double) dust.fadeIn == 0.0 &&
                                 (double) dust.velocity.Y < (double) y)
                                 dust.velocity.Y = MathHelper.Lerp(dust.velocity.Y, y, 0.04f);
@@ -1466,7 +1466,7 @@ namespace Terraria
                             if (!flag)
                                 dust.scale -= 0.05f;
                             dust.rotation = 0.0f;
-                            float y = Main.player[Main.myPlayer].velocity.Y;
+                            var y = Main.player[Main.myPlayer].velocity.Y;
                             if ((double) y > 0.0 && (double) dust.fadeIn == 0.0 &&
                                 (double) dust.velocity.Y < (double) y)
                                 dust.velocity.Y = MathHelper.Lerp(dust.velocity.Y, y, 0.04f);
@@ -1540,7 +1540,7 @@ namespace Terraria
                                 dust.rotation += 0.01f;
                             else
                                 dust.rotation -= 0.01f;
-                            float R = dust.scale * 0.6f;
+                            var R = dust.scale * 0.6f;
                             if ((double) R > 1.0)
                                 R = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1559,7 +1559,7 @@ namespace Terraria
                         }
                         else if (dust.type == 67 || dust.type == 92)
                         {
-                            float B = dust.scale;
+                            var B = dust.scale;
                             if ((double) B > 1.0)
                                 B = 1f;
                             if (dust.noLight)
@@ -1569,7 +1569,7 @@ namespace Terraria
                         }
                         else if (dust.type == 185)
                         {
-                            float B = dust.scale;
+                            var B = dust.scale;
                             if ((double) B > 1.0)
                                 B = 1f;
                             if (dust.noLight)
@@ -1579,7 +1579,7 @@ namespace Terraria
                         }
                         else if (dust.type == 107)
                         {
-                            float G = dust.scale * 0.5f;
+                            var G = dust.scale * 0.5f;
                             if ((double) G > 1.0)
                                 G = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1617,7 +1617,7 @@ namespace Terraria
 
                             if (dust.type == 35)
                             {
-                                float R = (float) ((double) dust.scale * 0.300000011920929 + 0.400000005960464);
+                                var R = (float) ((double) dust.scale * 0.300000011920929 + 0.400000005960464);
                                 if ((double) R > 1.0)
                                     R = 1f;
                                 Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1627,7 +1627,7 @@ namespace Terraria
 
                         if (dust.type == 68)
                         {
-                            float B = dust.scale * 0.3f;
+                            var B = dust.scale * 0.3f;
                             if ((double) B > 1.0)
                                 B = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1636,7 +1636,7 @@ namespace Terraria
 
                         if (dust.type == 70)
                         {
-                            float B = dust.scale * 0.3f;
+                            var B = dust.scale * 0.3f;
                             if ((double) B > 1.0)
                                 B = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1656,7 +1656,7 @@ namespace Terraria
                             if ((double) dust.velocity.Y < -0.75)
                                 dust.velocity.Y = -0.75f;
                             dust.scale += 0.007f;
-                            float B = dust.scale * 0.7f;
+                            var B = dust.scale * 0.7f;
                             if ((double) B > 1.0)
                                 B = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1675,7 +1675,7 @@ namespace Terraria
                             if ((double) dust.velocity.Y < -0.35)
                                 dust.velocity.Y = -0.35f;
                             dust.scale += 0.0085f;
-                            float G = dust.scale * 0.7f;
+                            var G = dust.scale * 0.7f;
                             if ((double) G > 1.0)
                                 G = 1f;
                             Lighting.AddLight((int) ((double) dust.position.X / 16.0),
@@ -1691,16 +1691,16 @@ namespace Terraria
                             if (dust.type == 235)
                             {
                                 dust.scale += 0.007f;
-                                int index2 = (int) dust.fadeIn - 1;
+                                var index2 = (int) dust.fadeIn - 1;
                                 if (index2 >= 0 && index2 <= (int) byte.MaxValue)
                                 {
-                                    Vector2 vector2_1 = dust.position - Main.player[index2].Center;
-                                    float num2 = 100f - vector2_1.Length();
+                                    var vector2_1 = dust.position - Main.player[index2].Center;
+                                    var num2 = 100f - vector2_1.Length();
                                     if ((double) num2 > 0.0)
                                         dust.scale -= num2 * 0.0015f;
                                     vector2_1.Normalize();
-                                    float num3 = (float) ((1.0 - (double) dust.scale) * 20.0);
-                                    Vector2 vector2_2 = vector2_1 * -num3;
+                                    var num3 = (float) ((1.0 - (double) dust.scale) * 20.0);
+                                    var vector2_2 = vector2_1 * -num3;
                                     dust.velocity = (dust.velocity * 4f + vector2_2) / 5f;
                                 }
                             }
@@ -1721,7 +1721,7 @@ namespace Terraria
 
                         if (dust.type >= 130 && dust.type <= 134)
                         {
-                            float num2 = dust.scale;
+                            var num2 = dust.scale;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             if (dust.type == 130)
@@ -1756,7 +1756,7 @@ namespace Terraria
                         }
                         else if (dust.type >= 219 && dust.type <= 223)
                         {
-                            float num2 = dust.scale;
+                            var num2 = dust.scale;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             if (!dust.noLight)
@@ -1786,13 +1786,13 @@ namespace Terraria
                             dust.scale -= 1f / 400f;
                             if (dust.customData != null && dust.customData is Player)
                             {
-                                Player customData = (Player) dust.customData;
+                                var customData = (Player) dust.customData;
                                 dust.position += customData.position - customData.oldPosition;
                             }
                         }
                         else if (dust.type == 226)
                         {
-                            float num2 = dust.scale;
+                            var num2 = dust.scale;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             if (!dust.noLight)
@@ -1808,7 +1808,7 @@ namespace Terraria
                             dust.velocity *= new Vector2(0.97f, 0.99f);
                             if (dust.customData != null && dust.customData is Player)
                             {
-                                Player customData = (Player) dust.customData;
+                                var customData = (Player) dust.customData;
                                 dust.position += customData.position - customData.oldPosition;
                             }
 
@@ -1816,7 +1816,7 @@ namespace Terraria
                         }
                         else if (dust.type == 272)
                         {
-                            float num2 = dust.scale;
+                            var num2 = dust.scale;
                             if ((double) num2 > 1.0)
                                 num2 = 1f;
                             if (!dust.noLight)
@@ -1832,13 +1832,13 @@ namespace Terraria
                             dust.velocity *= new Vector2(0.97f, 0.99f);
                             if (dust.customData != null && dust.customData is Player)
                             {
-                                Player customData = (Player) dust.customData;
+                                var customData = (Player) dust.customData;
                                 dust.position += customData.position - customData.oldPosition;
                             }
 
                             if (dust.customData != null && dust.customData is NPC)
                             {
-                                NPC customData = (NPC) dust.customData;
+                                var customData = (NPC) dust.customData;
                                 dust.position += customData.position - customData.oldPosition;
                             }
 
@@ -1853,7 +1853,7 @@ namespace Terraria
 
                         if ((double) dust.position.Y > (double) Main.screenPosition.Y + (double) Main.screenHeight)
                             dust.active = false;
-                        float num10 = 0.1f;
+                        var num10 = 0.1f;
                         if ((double) Dust.dCount == 0.5)
                             dust.scale -= 1f / 1000f;
                         if ((double) Dust.dCount == 0.6)
@@ -1882,7 +1882,7 @@ namespace Terraria
                     dust.active = false;
             }
 
-            int num11 = num1;
+            var num11 = num1;
             if ((double) num11 > (double) Main.maxDustToDraw * 0.9)
                 Dust.dCount = 0.9f;
             else if ((double) num11 > (double) Main.maxDustToDraw * 0.8)
@@ -1899,7 +1899,7 @@ namespace Terraria
 
         public Color GetAlpha(Color newColor)
         {
-            float num1 = (float) ((int) byte.MaxValue - this.alpha) / (float) byte.MaxValue;
+            var num1 = (float) ((int) byte.MaxValue - this.alpha) / (float) byte.MaxValue;
             if (this.type == 259)
                 return new Color(230, 230, 230, 230);
             if (this.type == 261)
@@ -1918,7 +1918,7 @@ namespace Terraria
                 return new Color((int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue, 0);
             if (this.type == 213 || this.type == 260)
             {
-                int num2 = (int) ((double) this.scale / 2.5 * (double) byte.MaxValue);
+                var num2 = (int) ((double) this.scale / 2.5 * (double) byte.MaxValue);
                 return new Color(num2, num2, num2, num2);
             }
 
@@ -1950,7 +1950,7 @@ namespace Terraria
                 return new Color(250, 250, 250, 150);
             if (this.type == 160 || this.type == 162 || (this.type == 164 || this.type == 173))
             {
-                int num2 = (int) (250.0 * (double) this.scale);
+                var num2 = (int) (250.0 * (double) this.scale);
                 return new Color(num2, num2, num2, 0);
             }
 
@@ -2002,21 +2002,21 @@ namespace Terraria
             if (this.type == 157)
             {
                 int maxValue;
-                int num2 = maxValue = (int) byte.MaxValue;
-                int num3 = maxValue;
-                int num4 = maxValue;
-                float num5 = (float) ((double) Main.mouseTextColor / 100.0 - 1.60000002384186);
-                int num6 = (int) ((double) num4 * (double) num5);
-                int num7 = (int) ((double) num3 * (double) num5);
-                int num8 = (int) ((double) num2 * (double) num5);
-                int a = (int) (100.0 * (double) num5);
-                int r = num6 + 50;
+                var num2 = maxValue = (int) byte.MaxValue;
+                var num3 = maxValue;
+                var num4 = maxValue;
+                var num5 = (float) ((double) Main.mouseTextColor / 100.0 - 1.60000002384186);
+                var num6 = (int) ((double) num4 * (double) num5);
+                var num7 = (int) ((double) num3 * (double) num5);
+                var num8 = (int) ((double) num2 * (double) num5);
+                var a = (int) (100.0 * (double) num5);
+                var r = num6 + 50;
                 if (r > (int) byte.MaxValue)
                     r = (int) byte.MaxValue;
-                int g = num7 + 50;
+                var g = num7 + 50;
                 if (g > (int) byte.MaxValue)
                     g = (int) byte.MaxValue;
-                int b = num8 + 50;
+                var b = num8 + 50;
                 if (b > (int) byte.MaxValue)
                     b = (int) byte.MaxValue;
                 return new Color(r, g, b, a);
@@ -2045,10 +2045,10 @@ namespace Terraria
                     return new Color(200, 200, 200, 200);
             }
 
-            int r1 = (int) ((double) newColor.R * (double) num1);
-            int g1 = (int) ((double) newColor.G * (double) num1);
-            int b1 = (int) ((double) newColor.B * (double) num1);
-            int a1 = (int) newColor.A - this.alpha;
+            var r1 = (int) ((double) newColor.R * (double) num1);
+            var g1 = (int) ((double) newColor.G * (double) num1);
+            var b1 = (int) ((double) newColor.B * (double) num1);
+            var a1 = (int) newColor.A - this.alpha;
             if (a1 < 0)
                 a1 = 0;
             if (a1 > (int) byte.MaxValue)
@@ -2058,10 +2058,10 @@ namespace Terraria
 
         public Color GetColor(Color newColor)
         {
-            int r = (int) this.color.R - ((int) byte.MaxValue - (int) newColor.R);
-            int g = (int) this.color.G - ((int) byte.MaxValue - (int) newColor.G);
-            int b = (int) this.color.B - ((int) byte.MaxValue - (int) newColor.B);
-            int a = (int) this.color.A - ((int) byte.MaxValue - (int) newColor.A);
+            var r = (int) this.color.R - ((int) byte.MaxValue - (int) newColor.R);
+            var g = (int) this.color.G - ((int) byte.MaxValue - (int) newColor.G);
+            var b = (int) this.color.B - ((int) byte.MaxValue - (int) newColor.B);
+            var a = (int) this.color.A - ((int) byte.MaxValue - (int) newColor.A);
             if (r < 0)
                 r = 0;
             if (r > (int) byte.MaxValue)

@@ -22,13 +22,13 @@ namespace Terraria
 
         public static void UpdateDummies()
         {
-            Dictionary<int, Rectangle> dictionary = new Dictionary<int, Rectangle>();
-            bool flag1 = false;
-            Rectangle rectangle = new Rectangle(0, 0, 32, 48);
+            var dictionary = new Dictionary<int, Rectangle>();
+            var flag1 = false;
+            var rectangle = new Rectangle(0, 0, 32, 48);
             rectangle.Inflate(1600, 1600);
-            int x = rectangle.X;
-            int y = rectangle.Y;
-            for (int index1 = 0; index1 < 1000; ++index1)
+            var x = rectangle.X;
+            var y = rectangle.Y;
+            for (var index1 = 0; index1 < 1000; ++index1)
             {
                 if (DeprecatedClassLeftInForLoading.dummies[index1] != null)
                 {
@@ -47,7 +47,7 @@ namespace Terraria
                     {
                         if (!flag1)
                         {
-                            for (int index2 = 0; index2 < (int) byte.MaxValue; ++index2)
+                            for (var index2 = 0; index2 < (int) byte.MaxValue; ++index2)
                             {
                                 if (Main.player[index2].active)
                                     dictionary[index2] = Main.player[index2].getRect();
@@ -58,8 +58,8 @@ namespace Terraria
 
                         rectangle.X = (int) DeprecatedClassLeftInForLoading.dummies[index1].x * 16 + x;
                         rectangle.Y = (int) DeprecatedClassLeftInForLoading.dummies[index1].y * 16 + y;
-                        bool flag2 = false;
-                        foreach (KeyValuePair<int, Rectangle> keyValuePair in dictionary)
+                        var flag2 = false;
+                        foreach (var keyValuePair in dictionary)
                         {
                             if (keyValuePair.Value.Intersects(rectangle))
                             {
@@ -84,7 +84,7 @@ namespace Terraria
 
         public static int Find(int x, int y)
         {
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
                 if (DeprecatedClassLeftInForLoading.dummies[index] != null &&
                     (int) DeprecatedClassLeftInForLoading.dummies[index].x == x &&
@@ -97,8 +97,8 @@ namespace Terraria
 
         public static int Place(int x, int y)
         {
-            int index1 = -1;
-            for (int index2 = 0; index2 < 1000; ++index2)
+            var index1 = -1;
+            for (var index2 = 0; index2 < 1000; ++index2)
             {
                 if (DeprecatedClassLeftInForLoading.dummies[index2] == null)
                 {
@@ -115,9 +115,9 @@ namespace Terraria
 
         public static void Kill(int x, int y)
         {
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
-                DeprecatedClassLeftInForLoading dummy = DeprecatedClassLeftInForLoading.dummies[index];
+                var dummy = DeprecatedClassLeftInForLoading.dummies[index];
                 if (dummy != null && (int) dummy.x == x && (int) dummy.y == y)
                     DeprecatedClassLeftInForLoading.dummies[index] = (DeprecatedClassLeftInForLoading) null;
             }
@@ -134,7 +134,7 @@ namespace Terraria
 
         public void Activate()
         {
-            int index = NPC.NewNPC((int) this.x * 16 + 16, (int) this.y * 16 + 48, 488, 100, 0.0f, 0.0f, 0.0f, 0.0f,
+            var index = NPC.NewNPC((int) this.x * 16 + 16, (int) this.y * 16 + 48, 488, 100, 0.0f, 0.0f, 0.0f, 0.0f,
                 (int) byte.MaxValue);
             Main.npc[index].ai[0] = (float) this.x;
             Main.npc[index].ai[1] = (float) this.y;

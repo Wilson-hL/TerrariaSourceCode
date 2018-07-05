@@ -52,7 +52,7 @@ namespace Terraria.GameContent.UI.States
 
         private void UpdateGamepadSquiggle()
         {
-            Vector2 vector2 =
+            var vector2 =
                 new Vector2((float) Math.Cos((double) Main.GlobalTime * 6.28318548202515),
                     (float) Math.Sin((double) Main.GlobalTime * 6.28318548202515 * 2.0)) * new Vector2(30f, 15f) +
                 Vector2.UnitY * 20f;

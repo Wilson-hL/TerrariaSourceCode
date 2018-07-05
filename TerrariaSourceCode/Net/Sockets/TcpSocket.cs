@@ -40,7 +40,7 @@ namespace Terraria.Net.Sockets
         {
             this._connection = tcpClient;
             this._connection.NoDelay = true;
-            IPEndPoint remoteEndPoint = (IPEndPoint) tcpClient.Client.RemoteEndPoint;
+            var remoteEndPoint = (IPEndPoint) tcpClient.Client.RemoteEndPoint;
             this._remoteAddress = (RemoteAddress) new TcpAddress(remoteEndPoint.Address, remoteEndPoint.Port);
         }
 
@@ -59,20 +59,20 @@ namespace Terraria.Net.Sockets
 
         void ISocket.Connect(RemoteAddress address)
         {
-            TcpAddress tcpAddress = (TcpAddress) address;
+            var tcpAddress = (TcpAddress) address;
             this._connection.Connect(tcpAddress.Address, tcpAddress.Port);
             this._remoteAddress = address;
         }
 
         private void ReadCallback(IAsyncResult result)
         {
-            Tuple<SocketReceiveCallback, object> asyncState = (Tuple<SocketReceiveCallback, object>) result.AsyncState;
+            var asyncState = (Tuple<SocketReceiveCallback, object>) result.AsyncState;
             asyncState.Item1(asyncState.Item2, this._connection.GetStream().EndRead(result));
         }
 
         private void SendCallback(IAsyncResult result)
         {
-            Tuple<SocketSendCallback, object> asyncState = (Tuple<SocketSendCallback, object>) result.AsyncState;
+            var asyncState = (Tuple<SocketSendCallback, object>) result.AsyncState;
             try
             {
                 this._connection.GetStream().EndWrite(result);
@@ -112,7 +112,7 @@ namespace Terraria.Net.Sockets
 
         bool ISocket.StartListening(SocketConnectionAccepted callback)
         {
-            IPAddress address = IPAddress.Any;
+            var address = IPAddress.Any;
             string ipString;
             if (Program.LaunchParameters.TryGetValue("-ip", out ipString) && !IPAddress.TryParse(ipString, out address))
                 address = IPAddress.Any;
@@ -146,7 +146,7 @@ namespace Terraria.Net.Sockets
                 {
                     try
                     {
-                        ISocket client = (ISocket) new TcpSocket(this._listener.AcceptTcpClient());
+                        var client = (ISocket) new TcpSocket(this._listener.AcceptTcpClient());
                         Console.WriteLine(Language.GetTextValue("Net.ClientConnecting",
                             (object) client.GetRemoteAddress()));
                         this._listenerCallback(client);

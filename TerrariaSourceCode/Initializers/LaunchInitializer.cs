@@ -20,11 +20,11 @@ namespace Terraria.Initializers
 
         private static void LoadSharedParameters(Main game)
         {
-            string[] strArray1 = new string[1] {"-loadlib"};
+            var strArray1 = new string[1] {"-loadlib"};
             string path;
             if ((path = LaunchInitializer.TryParameter(strArray1)) != null)
                 game.loadLib(path);
-            string[] strArray2 = new string[2] {"-p", "-port"};
+            var strArray2 = new string[2] {"-p", "-port"};
             string s;
             int result;
             if ((s = LaunchInitializer.TryParameter(strArray2)) == null || !int.TryParse(s, out result))
@@ -34,11 +34,11 @@ namespace Terraria.Initializers
 
         private static void LoadClientParameters(Main game)
         {
-            string[] strArray1 = new string[2] {"-j", "-join"};
+            var strArray1 = new string[2] {"-j", "-join"};
             string IP;
             if ((IP = LaunchInitializer.TryParameter(strArray1)) != null)
                 game.AutoJoin(IP);
-            string[] strArray2 = new string[2] {"-pass", "-password"};
+            var strArray2 = new string[2] {"-pass", "-password"};
             string str;
             if ((str = LaunchInitializer.TryParameter(strArray2)) != null)
             {
@@ -55,11 +55,11 @@ namespace Terraria.Initializers
         {
             try
             {
-                string[] strArray = new string[1] {"-forcepriority"};
+                var strArray = new string[1] {"-forcepriority"};
                 string s;
                 if ((s = LaunchInitializer.TryParameter(strArray)) != null)
                 {
-                    Process currentProcess = Process.GetCurrentProcess();
+                    var currentProcess = Process.GetCurrentProcess();
                     int result;
                     if (int.TryParse(s, out result))
                     {
@@ -98,33 +98,33 @@ namespace Terraria.Initializers
             {
             }
 
-            string[] strArray1 = new string[2] {"-maxplayers", "-players"};
+            var strArray1 = new string[2] {"-maxplayers", "-players"};
             string s1;
             int result1;
             if ((s1 = LaunchInitializer.TryParameter(strArray1)) != null && int.TryParse(s1, out result1))
                 game.SetNetPlayers(result1);
-            string[] strArray2 = new string[2] {"-pass", "-password"};
+            var strArray2 = new string[2] {"-pass", "-password"};
             string str1;
             if ((str1 = LaunchInitializer.TryParameter(strArray2)) != null)
                 Netplay.ServerPassword = str1;
-            string[] strArray3 = new string[1] {"-lang"};
+            var strArray3 = new string[1] {"-lang"};
             string s2;
             int result2;
             if ((s2 = LaunchInitializer.TryParameter(strArray3)) != null && int.TryParse(s2, out result2))
                 LanguageManager.Instance.SetLanguage(result2);
-            string[] strArray4 = new string[1] {"-language"};
+            var strArray4 = new string[1] {"-language"};
             string cultureName;
             if ((cultureName = LaunchInitializer.TryParameter(strArray4)) != null)
                 LanguageManager.Instance.SetLanguage(cultureName);
-            string[] strArray5 = new string[1] {"-worldname"};
+            var strArray5 = new string[1] {"-worldname"};
             string world1;
             if ((world1 = LaunchInitializer.TryParameter(strArray5)) != null)
                 game.SetWorldName(world1);
-            string[] strArray6 = new string[1] {"-motd"};
+            var strArray6 = new string[1] {"-motd"};
             string newMOTD;
             if ((newMOTD = LaunchInitializer.TryParameter(strArray6)) != null)
                 game.NewMOTD(newMOTD);
-            string[] strArray7 = new string[1] {"-banlist"};
+            var strArray7 = new string[1] {"-banlist"};
             string str2;
             if ((str2 = LaunchInitializer.TryParameter(strArray7)) != null)
                 Netplay.BanFilePath = str2;
@@ -132,7 +132,7 @@ namespace Terraria.Initializers
                 game.EnableAutoShutdown();
             if (LaunchInitializer.HasParameter("-secure"))
                 Netplay.spamCheck = true;
-            string[] strArray8 = new string[1] {"-autocreate"};
+            var strArray8 = new string[1] {"-autocreate"};
             string worldSize;
             if ((worldSize = LaunchInitializer.TryParameter(strArray8)) != null)
                 game.autoCreate(worldSize);
@@ -140,23 +140,23 @@ namespace Terraria.Initializers
                 Netplay.UseUPNP = false;
             if (LaunchInitializer.HasParameter("-experimental"))
                 Main.UseExperimentalFeatures = true;
-            string[] strArray9 = new string[1] {"-world"};
+            var strArray9 = new string[1] {"-world"};
             string world2;
             if ((world2 = LaunchInitializer.TryParameter(strArray9)) != null)
                 game.SetWorld(world2, false);
             else if (SocialAPI.Mode == SocialMode.Steam)
             {
-                string[] strArray10 = new string[1] {"-cloudworld"};
+                var strArray10 = new string[1] {"-cloudworld"};
                 string world3;
                 if ((world3 = LaunchInitializer.TryParameter(strArray10)) != null)
                     game.SetWorld(world3, true);
             }
 
-            string[] strArray11 = new string[1] {"-config"};
+            var strArray11 = new string[1] {"-config"};
             string configPath;
             if ((configPath = LaunchInitializer.TryParameter(strArray11)) != null)
                 game.LoadDedConfig(configPath);
-            string[] strArray12 = new string[1] {"-seed"};
+            var strArray12 = new string[1] {"-seed"};
             string str3;
             if ((str3 = LaunchInitializer.TryParameter(strArray12)) == null)
                 return;
@@ -165,7 +165,7 @@ namespace Terraria.Initializers
 
         private static bool HasParameter(params string[] keys)
         {
-            for (int index = 0; index < keys.Length; ++index)
+            for (var index = 0; index < keys.Length; ++index)
             {
                 if (Program.LaunchParameters.ContainsKey(keys[index]))
                     return true;
@@ -176,7 +176,7 @@ namespace Terraria.Initializers
 
         private static string TryParameter(params string[] keys)
         {
-            for (int index = 0; index < keys.Length; ++index)
+            for (var index = 0; index < keys.Length; ++index)
             {
                 string str;
                 if (Program.LaunchParameters.TryGetValue(keys[index], out str))

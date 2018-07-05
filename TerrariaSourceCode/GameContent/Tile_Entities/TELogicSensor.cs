@@ -36,7 +36,7 @@ namespace Terraria.GameContent.Tile_Entities
         {
             if (type != 2 || !TELogicSensor.ValidTile(x, y))
                 return;
-            int number = TELogicSensor.Place(x, y);
+            var number = TELogicSensor.Place(x, y);
             ((TELogicSensor) TileEntity.ByID[number]).FigureCheckState();
             NetMessage.SendData(86, -1, -1, (NetworkText) null, number, (float) x, (float) y, 0.0f, 0, 0, 0);
         }
@@ -54,7 +54,7 @@ namespace Terraria.GameContent.Tile_Entities
         {
             if (TELogicSensor.playerBoxFilled)
                 return;
-            for (int index = 0; index < (int) byte.MaxValue; ++index)
+            for (var index = 0; index < (int) byte.MaxValue; ++index)
             {
                 if (Main.player[index].active)
                     TELogicSensor.playerBox[index] = Main.player[index].getRect();
@@ -66,7 +66,7 @@ namespace Terraria.GameContent.Tile_Entities
         private static void UpdateEndInternal()
         {
             TELogicSensor.inUpdateLoop = false;
-            foreach (Tuple<Point16, bool> tripPoint in TELogicSensor.tripPoints)
+            foreach (var tripPoint in TELogicSensor.tripPoints)
             {
                 Wiring.blockPlayerTeleportationForOneIteration = tripPoint.Item2;
                 Wiring.HitSwitch((int) tripPoint.Item1.X, (int) tripPoint.Item1.Y);
@@ -74,7 +74,7 @@ namespace Terraria.GameContent.Tile_Entities
 
             Wiring.blockPlayerTeleportationForOneIteration = false;
             TELogicSensor.tripPoints.Clear();
-            foreach (int key in TELogicSensor.markedIDsForRemoval)
+            foreach (var key in TELogicSensor.markedIDsForRemoval)
             {
                 TileEntity tileEntity;
                 if (TileEntity.ByID.TryGetValue(key, out tileEntity) && tileEntity.type == (byte) 2)
@@ -87,7 +87,7 @@ namespace Terraria.GameContent.Tile_Entities
 
         public override void Update()
         {
-            bool state = TELogicSensor.GetState((int) this.Position.X, (int) this.Position.Y, this.logicCheck, this);
+            var state = TELogicSensor.GetState((int) this.Position.X, (int) this.Position.Y, this.logicCheck, this);
             switch (this.logicCheck)
             {
                 case TELogicSensor.LogicCheckType.Day:
@@ -141,10 +141,10 @@ namespace Terraria.GameContent.Tile_Entities
             on = false;
             if (!WorldGen.InWorld(x, y, 0))
                 return TELogicSensor.LogicCheckType.None;
-            Tile tile = Main.tile[x, y];
+            var tile = Main.tile[x, y];
             if (tile == null)
                 return TELogicSensor.LogicCheckType.None;
-            TELogicSensor.LogicCheckType type = TELogicSensor.LogicCheckType.None;
+            var type = TELogicSensor.LogicCheckType.None;
             switch ((int) tile.frameY / 18)
             {
                 case 0:
@@ -183,9 +183,9 @@ namespace Terraria.GameContent.Tile_Entities
                 case TELogicSensor.LogicCheckType.Night:
                     return !Main.dayTime;
                 case TELogicSensor.LogicCheckType.PlayerAbove:
-                    bool flag1 = false;
-                    Rectangle rectangle = new Rectangle(x * 16 - 32 - 1, y * 16 - 160 - 1, 82, 162);
-                    foreach (KeyValuePair<int, Rectangle> keyValuePair in TELogicSensor.playerBox)
+                    var flag1 = false;
+                    var rectangle = new Rectangle(x * 16 - 32 - 1, y * 16 - 160 - 1, 82, 162);
+                    foreach (var keyValuePair in TELogicSensor.playerBox)
                     {
                         if (keyValuePair.Value.Intersects(rectangle))
                         {
@@ -201,8 +201,8 @@ namespace Terraria.GameContent.Tile_Entities
                 case TELogicSensor.LogicCheckType.Liquid:
                     if (instance == null)
                         return false;
-                    Tile tile = Main.tile[x, y];
-                    bool flag2 = true;
+                    var tile = Main.tile[x, y];
+                    var flag2 = true;
                     if (tile == null || tile.liquid == (byte) 0)
                         flag2 = false;
                     if (!tile.lava() && type == TELogicSensor.LogicCheckType.Lava)
@@ -274,7 +274,7 @@ namespace Terraria.GameContent.Tile_Entities
 
         public static int Place(int x, int y)
         {
-            TELogicSensor teLogicSensor = new TELogicSensor();
+            var teLogicSensor = new TELogicSensor();
             teLogicSensor.Position = new Point16(x, y);
             teLogicSensor.ID = TileEntity.AssignNewID();
             teLogicSensor.type = (byte) 2;
@@ -286,7 +286,7 @@ namespace Terraria.GameContent.Tile_Entities
         public static int Hook_AfterPlacement(int x, int y, int type = 423, int style = 0, int direction = 1)
         {
             bool on;
-            TELogicSensor.LogicCheckType type1 = TELogicSensor.FigureCheckType(x, y, out on);
+            var type1 = TELogicSensor.FigureCheckType(x, y, out on);
             TELogicSensor.GetFrame(x, y, type1, on);
             if (Main.netMode == 1)
             {
@@ -295,7 +295,7 @@ namespace Terraria.GameContent.Tile_Entities
                 return -1;
             }
 
-            int index = TELogicSensor.Place(x, y);
+            var index = TELogicSensor.Place(x, y);
             ((TELogicSensor) TileEntity.ByID[index]).FigureCheckState();
             return index;
         }

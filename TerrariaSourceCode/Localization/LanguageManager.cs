@@ -55,7 +55,7 @@ namespace Terraria.Localization
 
         private void SetAllTextValuesToKeys()
         {
-            foreach (KeyValuePair<string, LocalizedText> localizedText in this._localizedTexts)
+            foreach (var localizedText in this._localizedTexts)
                 localizedText.Value.SetValue(localizedText.Key);
         }
 
@@ -105,11 +105,11 @@ namespace Terraria.Localization
 
         private void LoadFilesForCulture(GameCulture culture)
         {
-            foreach (string path in this.GetLanguageFilesForCulture(culture))
+            foreach (var path in this.GetLanguageFilesForCulture(culture))
             {
                 try
                 {
-                    string fileText = LanguageManager.ReadEmbeddedResource(path);
+                    var fileText = LanguageManager.ReadEmbeddedResource(path);
                     if (fileText == null || fileText.Length < 2)
                         throw new FileFormatException();
                     this.LoadLanguageFromFileText(fileText);
@@ -126,22 +126,22 @@ namespace Terraria.Localization
 
         private static string ReadEmbeddedResource(string path)
         {
-            using (Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path))
+            using (var manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path))
             {
-                using (StreamReader streamReader = new StreamReader(manifestResourceStream))
+                using (var streamReader = new StreamReader(manifestResourceStream))
                     return streamReader.ReadToEnd();
             }
         }
 
         private void ProcessCopyCommandsInTexts()
         {
-            Regex regex = new Regex("{\\$(\\w+\\.\\w+)}", RegexOptions.Compiled);
-            foreach (KeyValuePair<string, LocalizedText> localizedText1 in this._localizedTexts)
+            var regex = new Regex("{\\$(\\w+\\.\\w+)}", RegexOptions.Compiled);
+            foreach (var localizedText1 in this._localizedTexts)
             {
-                LocalizedText localizedText2 = localizedText1.Value;
-                for (int index = 0; index < 100; ++index)
+                var localizedText2 = localizedText1.Value;
+                for (var index = 0; index < 100; ++index)
                 {
-                    string text = regex.Replace(localizedText2.Value,
+                    var text = regex.Replace(localizedText2.Value,
                         (MatchEvaluator) (match => this.GetTextValue(match.Groups[1].ToString())));
                     if (!(text == localizedText2.Value))
                         localizedText2.SetValue(text);
@@ -153,14 +153,14 @@ namespace Terraria.Localization
 
         public void LoadLanguageFromFileText(string fileText)
         {
-            foreach (KeyValuePair<string, Dictionary<string, string>> keyValuePair1 in (
+            foreach (var keyValuePair1 in (
                 Dictionary<string, Dictionary<string, string>>) JsonConvert
                 .DeserializeObject<Dictionary<string, Dictionary<string, string>>>(fileText))
             {
-                string key1 = keyValuePair1.Key;
-                foreach (KeyValuePair<string, string> keyValuePair2 in keyValuePair1.Value)
+                var key1 = keyValuePair1.Key;
+                foreach (var keyValuePair2 in keyValuePair1.Value)
                 {
-                    string key2 = keyValuePair1.Key + "." + keyValuePair2.Key;
+                    var key2 = keyValuePair1.Key + "." + keyValuePair2.Key;
                     if (this._localizedTexts.ContainsKey(key2))
                     {
                         this._localizedTexts[key2].SetValue(keyValuePair2.Value);
@@ -181,7 +181,7 @@ namespace Terraria.Localization
         {
             if (font == null)
                 return;
-            foreach (LocalizedText localizedText in this._localizedTexts.Values)
+            foreach (var localizedText in this._localizedTexts.Values)
             {
                 foreach (int num in localizedText.Value)
                     ;
@@ -190,16 +190,16 @@ namespace Terraria.Localization
 
         public LocalizedText[] FindAll(Regex regex)
         {
-            int length = 0;
-            foreach (KeyValuePair<string, LocalizedText> localizedText in this._localizedTexts)
+            var length = 0;
+            foreach (var localizedText in this._localizedTexts)
             {
                 if (regex.IsMatch(localizedText.Key))
                     ++length;
             }
 
-            LocalizedText[] localizedTextArray = new LocalizedText[length];
-            int index = 0;
-            foreach (KeyValuePair<string, LocalizedText> localizedText in this._localizedTexts)
+            var localizedTextArray = new LocalizedText[length];
+            var index = 0;
+            foreach (var localizedText in this._localizedTexts)
             {
                 if (regex.IsMatch(localizedText.Key))
                 {
@@ -213,8 +213,8 @@ namespace Terraria.Localization
 
         public LocalizedText[] FindAll(LanguageSearchFilter filter)
         {
-            LinkedList<LocalizedText> source = new LinkedList<LocalizedText>();
-            foreach (KeyValuePair<string, LocalizedText> localizedText in this._localizedTexts)
+            var source = new LinkedList<LocalizedText>();
+            foreach (var localizedText in this._localizedTexts)
             {
                 if (filter(localizedText.Key, localizedText.Value))
                     source.AddLast(localizedText.Value);
@@ -225,15 +225,15 @@ namespace Terraria.Localization
 
         public LocalizedText SelectRandom(LanguageSearchFilter filter, UnifiedRandom random = null)
         {
-            int maxValue = 0;
-            foreach (KeyValuePair<string, LocalizedText> localizedText in this._localizedTexts)
+            var maxValue = 0;
+            foreach (var localizedText in this._localizedTexts)
             {
                 if (filter(localizedText.Key, localizedText.Value))
                     ++maxValue;
             }
 
-            int num = (random ?? Main.rand).Next(maxValue);
-            foreach (KeyValuePair<string, LocalizedText> localizedText in this._localizedTexts)
+            var num = (random ?? Main.rand).Next(maxValue);
+            foreach (var localizedText in this._localizedTexts)
             {
                 if (filter(localizedText.Key, localizedText.Value) && --maxValue == num)
                     return localizedText.Value;
@@ -246,7 +246,7 @@ namespace Terraria.Localization
         {
             if (!this._categoryGroupedKeys.ContainsKey(categoryName))
                 return new LocalizedText(categoryName + ".RANDOM", categoryName + ".RANDOM");
-            List<string> categoryGroupedKey = this._categoryGroupedKeys[categoryName];
+            var categoryGroupedKey = this._categoryGroupedKeys[categoryName];
             return this.GetText(categoryName + "." +
                                 categoryGroupedKey[(random ?? Main.rand).Next(categoryGroupedKey.Count)]);
         }

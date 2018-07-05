@@ -18,9 +18,9 @@ namespace Terraria.World.Generation
             switch (this._areaType)
             {
                 case GenCondition.AreaType.And:
-                    for (int x1 = x; x1 < x + this._width; ++x1)
+                    for (var x1 = x; x1 < x + this._width; ++x1)
                     {
-                        for (int y1 = y; y1 < y + this._height; ++y1)
+                        for (var y1 = y; y1 < y + this._height; ++y1)
                         {
                             if (!this.CheckValidity(x1, y1))
                                 return this.InvertResults;
@@ -29,9 +29,9 @@ namespace Terraria.World.Generation
 
                     return !this.InvertResults;
                 case GenCondition.AreaType.Or:
-                    for (int x1 = x; x1 < x + this._width; ++x1)
+                    for (var x1 = x; x1 < x + this._width; ++x1)
                     {
-                        for (int y1 = y; y1 < y + this._height; ++y1)
+                        for (var y1 = y; y1 < y + this._height; ++y1)
                         {
                             if (this.CheckValidity(x1, y1))
                                 return !this.InvertResults;

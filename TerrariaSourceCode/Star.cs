@@ -22,7 +22,7 @@ namespace Terraria
         {
             Main.numStars = Main.rand.Next(65, 130);
             Main.numStars = 130;
-            for (int index = 0; index < Main.numStars; ++index)
+            for (var index = 0; index < Main.numStars; ++index)
             {
                 Main.star[index] = new Star();
                 Main.star[index].position.X = (float) Main.rand.Next(-12, Main.screenWidth + 1);
@@ -42,7 +42,7 @@ namespace Terraria
 
         public static void UpdateStars()
         {
-            for (int index = 0; index < Main.numStars; ++index)
+            for (var index = 0; index < Main.numStars; ++index)
             {
                 Main.star[index].twinkle += Main.star[index].twinkleSpeed;
                 if ((double) Main.star[index].twinkle > 1.0)

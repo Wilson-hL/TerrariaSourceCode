@@ -33,11 +33,11 @@ namespace Terraria.UI
 
         public static void Draw(SpriteBatch sb)
         {
-            float y = (float) (Main.screenHeight - 40);
+            var y = (float) (Main.screenHeight - 40);
             if (PlayerInput.UsingGamepad)
                 y -= 25f;
-            Vector2 center = new Vector2((float) (Main.screenWidth / 2), y);
-            foreach (AchievementCompleteUI.DrawCache cach in AchievementCompleteUI.caches)
+            var center = new Vector2((float) (Main.screenWidth / 2), y);
+            foreach (var cach in AchievementCompleteUI.caches)
             {
                 AchievementCompleteUI.DrawAchievement(sb, ref center, cach);
                 if ((double) center.Y < -100.0)
@@ -59,9 +59,9 @@ namespace Terraria.UI
 
         public static void Update()
         {
-            foreach (AchievementCompleteUI.DrawCache cach in AchievementCompleteUI.caches)
+            foreach (var cach in AchievementCompleteUI.caches)
                 cach.Update();
-            for (int index = 0; index < AchievementCompleteUI.caches.Count; ++index)
+            for (var index = 0; index < AchievementCompleteUI.caches.Count; ++index)
             {
                 if (AchievementCompleteUI.caches[index].TimeLeft == 0)
                 {
@@ -73,22 +73,22 @@ namespace Terraria.UI
 
         private static void DrawAchievement(SpriteBatch sb, ref Vector2 center, AchievementCompleteUI.DrawCache ach)
         {
-            float alpha = ach.Alpha;
+            var alpha = ach.Alpha;
             if ((double) alpha > 0.0)
             {
-                string title = ach.Title;
-                Vector2 center1 = center;
-                Vector2 vector2 = Main.fontItemStack.MeasureString(title);
-                float num = ach.Scale * 1.1f;
-                Rectangle rectangle = Utils.CenteredRectangle(center1, (vector2 + new Vector2(58f, 10f)) * num);
-                Vector2 mouseScreen = Main.MouseScreen;
-                bool flag = rectangle.Contains(mouseScreen.ToPoint());
-                Color c = flag ? new Color(64, 109, 164) * 0.75f : new Color(64, 109, 164) * 0.5f;
+                var title = ach.Title;
+                var center1 = center;
+                var vector2 = Main.fontItemStack.MeasureString(title);
+                var num = ach.Scale * 1.1f;
+                var rectangle = Utils.CenteredRectangle(center1, (vector2 + new Vector2(58f, 10f)) * num);
+                var mouseScreen = Main.MouseScreen;
+                var flag = rectangle.Contains(mouseScreen.ToPoint());
+                var c = flag ? new Color(64, 109, 164) * 0.75f : new Color(64, 109, 164) * 0.5f;
                 Utils.DrawInvBG(sb, rectangle, c);
-                float scale = num * 0.3f;
-                Color color = new Color((int) Main.mouseTextColor, (int) Main.mouseTextColor,
+                var scale = num * 0.3f;
+                var color = new Color((int) Main.mouseTextColor, (int) Main.mouseTextColor,
                     (int) Main.mouseTextColor / 5, (int) Main.mouseTextColor);
-                Vector2 position = rectangle.Right() -
+                var position = rectangle.Right() -
                                    Vector2.UnitX * num * (float) (12.0 + (double) scale * (double) ach.Frame.Width);
                 sb.Draw(AchievementCompleteUI.AchievementsTexture, position, new Rectangle?(ach.Frame),
                     Color.White * alpha, 0.0f, new Vector2(0.0f, (float) (ach.Frame.Height / 2)), scale,
@@ -135,7 +135,7 @@ namespace Terraria.UI
             {
                 this.theAchievement = achievement;
                 this.Title = achievement.FriendlyName.Value;
-                int iconIndex = Main.Achievements.GetIconIndex(achievement.Name);
+                var iconIndex = Main.Achievements.GetIconIndex(achievement.Name);
                 this.IconIndex = iconIndex;
                 this.Frame = new Rectangle(iconIndex % 8 * 66, iconIndex / 8 * 66, 64, 64);
                 this.TimeLeft = 300;
@@ -157,7 +157,7 @@ namespace Terraria.UI
             {
                 get
                 {
-                    float scale = this.Scale;
+                    var scale = this.Scale;
                     if ((double) scale <= 0.5)
                         return 0.0f;
                     return (float) (((double) scale - 0.5) / 0.5);

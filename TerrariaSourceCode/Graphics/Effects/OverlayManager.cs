@@ -21,13 +21,13 @@ namespace Terraria.Graphics.Effects
 
         public OverlayManager()
         {
-            for (int index = 0; index < this._activeOverlays.Length; ++index)
+            for (var index = 0; index < this._activeOverlays.Length; ++index)
                 this._activeOverlays[index] = new LinkedList<Overlay>();
         }
 
         public override void OnActivate(Overlay overlay, Vector2 position)
         {
-            LinkedList<Overlay> activeOverlay = this._activeOverlays[(int) overlay.Priority];
+            var activeOverlay = this._activeOverlays[(int) overlay.Priority];
             if (overlay.Mode == OverlayMode.FadeIn || overlay.Mode == OverlayMode.Active)
                 return;
             if (overlay.Mode == OverlayMode.FadeOut)
@@ -40,7 +40,7 @@ namespace Terraria.Graphics.Effects
 
             if (activeOverlay.Count != 0)
             {
-                foreach (Overlay overlay1 in activeOverlay)
+                foreach (var overlay1 in activeOverlay)
                     overlay1.Mode = OverlayMode.FadeOut;
             }
 
@@ -51,11 +51,11 @@ namespace Terraria.Graphics.Effects
         public void Update(GameTime gameTime)
         {
             LinkedListNode<Overlay> next;
-            for (int index = 0; index < this._activeOverlays.Length; ++index)
+            for (var index = 0; index < this._activeOverlays.Length; ++index)
             {
-                for (LinkedListNode<Overlay> node = this._activeOverlays[index].First; node != null; node = next)
+                for (var node = this._activeOverlays[index].First; node != null; node = next)
                 {
-                    Overlay overlay = node.Value;
+                    var overlay = node.Value;
                     next = node.Next;
                     overlay.Update(gameTime);
                     switch (overlay.Mode)
@@ -95,14 +95,14 @@ namespace Terraria.Graphics.Effects
         {
             if (this._overlayCount == 0)
                 return;
-            bool flag = false;
-            for (int index = 0; index < this._activeOverlays.Length; ++index)
+            var flag = false;
+            for (var index = 0; index < this._activeOverlays.Length; ++index)
             {
-                for (LinkedListNode<Overlay> linkedListNode = this._activeOverlays[index].First;
+                for (var linkedListNode = this._activeOverlays[index].First;
                     linkedListNode != null;
                     linkedListNode = linkedListNode.Next)
                 {
-                    Overlay overlay = linkedListNode.Value;
+                    var overlay = linkedListNode.Value;
                     if (overlay.Layer == layer && overlay.IsVisible())
                     {
                         if (!flag)

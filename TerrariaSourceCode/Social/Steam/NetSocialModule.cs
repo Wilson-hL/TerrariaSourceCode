@@ -47,7 +47,7 @@ namespace Terraria.Social.Steam
         {
             CoreSocialModule.OnTick += new Action(this._reader.ReadTick);
             CoreSocialModule.OnTick += new Action(this._writer.SendAll);
-            NetSocialModule netSocialModule = this;
+            var netSocialModule = this;
             this._lobbyChatMessage =
                 Callback<LobbyChatMsg_t>.Create(
                     new Callback<LobbyChatMsg_t>.DispatchDelegate(netSocialModule.OnLobbyChatMessage));
@@ -62,7 +62,7 @@ namespace Terraria.Social.Steam
         {
             if (address == null)
                 return false;
-            CSteamID steamId = this.RemoteAddressToSteamId(address);
+            var steamId = this.RemoteAddressToSteamId(address);
             if (!this._connectionStateMap.ContainsKey(steamId) ||
                 this._connectionStateMap[steamId] != NetSocialModule.ConnectionState.Connected)
                 return false;
@@ -77,18 +77,18 @@ namespace Terraria.Social.Steam
             if (result.m_ulSteamIDLobby != this._lobby.Id.m_SteamID || result.m_eChatEntryType != 1 ||
                 result.m_ulSteamIDUser != this._lobby.Owner.m_SteamID)
                 return;
-            byte[] message = this._lobby.GetMessage((int) result.m_iChatID);
+            var message = this._lobby.GetMessage((int) result.m_iChatID);
             if (message.Length == 0)
                 return;
-            using (MemoryStream memoryStream = new MemoryStream(message))
+            using (var memoryStream = new MemoryStream(message))
             {
-                using (BinaryReader binaryReader = new BinaryReader((Stream) memoryStream))
+                using (var binaryReader = new BinaryReader((Stream) memoryStream))
                 {
                     if (binaryReader.ReadByte() != (byte) 1)
                         return;
                     while ((long) message.Length - memoryStream.Position >= 8L)
                     {
-                        CSteamID userId = new CSteamID(binaryReader.ReadUInt64());
+                        var userId = new CSteamID(binaryReader.ReadUInt64());
                         if (userId != SteamUser.GetSteamID())
                             this._lobby.SetPlayedWith(userId);
                     }

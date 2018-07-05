@@ -36,28 +36,28 @@ namespace Terraria
 
         public static void NewText(Item newItem, int stack, bool noStack = false, bool longText = false)
         {
-            bool flag = newItem.type >= 71 && newItem.type <= 74;
+            var flag = newItem.type >= 71 && newItem.type <= 74;
             if (!Main.showItemText || newItem.Name == null || (!newItem.active || Main.netMode == 2))
                 return;
-            for (int index = 0; index < 20; ++index)
+            for (var index = 0; index < 20; ++index)
             {
                 if (Main.itemText[index].active &&
                     (Main.itemText[index].name == newItem.AffixName() || flag && Main.itemText[index].coinText) &&
                     (!Main.itemText[index].NoStack && !noStack))
                 {
-                    string str1 = newItem.Name + " (" + (object) (Main.itemText[index].stack + stack) + ")";
-                    string str2 = newItem.Name;
+                    var str1 = newItem.Name + " (" + (object) (Main.itemText[index].stack + stack) + ")";
+                    var str2 = newItem.Name;
                     if (Main.itemText[index].stack > 1)
                         str2 = str2 + " (" + (object) Main.itemText[index].stack + ")";
                     Main.fontMouseText.MeasureString(str2);
-                    Vector2 vector2 = Main.fontMouseText.MeasureString(str1);
+                    var vector2 = Main.fontMouseText.MeasureString(str1);
                     if (Main.itemText[index].lifeTime < 0)
                         Main.itemText[index].scale = 1f;
                     if (Main.itemText[index].lifeTime < 60)
                         Main.itemText[index].lifeTime = 60;
                     if (flag && Main.itemText[index].coinText)
                     {
-                        int num = 0;
+                        var num = 0;
                         if (newItem.type == 71)
                             num += newItem.stack;
                         else if (newItem.type == 72)
@@ -67,7 +67,7 @@ namespace Terraria
                         else if (newItem.type == 74)
                             num += 1000000 * newItem.stack;
                         Main.itemText[index].coinValue += num;
-                        string name = ItemText.ValueToName(Main.itemText[index].coinValue);
+                        var name = ItemText.ValueToName(Main.itemText[index].coinValue);
                         vector2 = Main.fontMouseText.MeasureString(name);
                         Main.itemText[index].name = name;
                         if (Main.itemText[index].coinValue >= 1000000)
@@ -112,8 +112,8 @@ namespace Terraria
                 }
             }
 
-            int index1 = -1;
-            for (int index2 = 0; index2 < 20; ++index2)
+            var index1 = -1;
+            for (var index2 = 0; index2 < 20; ++index2)
             {
                 if (!Main.itemText[index2].active)
                 {
@@ -124,8 +124,8 @@ namespace Terraria
 
             if (index1 == -1)
             {
-                double num = (double) Main.bottomWorld;
-                for (int index2 = 0; index2 < 20; ++index2)
+                var num = (double) Main.bottomWorld;
+                for (var index2 = 0; index2 < 20; ++index2)
                 {
                     if (num > (double) Main.itemText[index2].position.Y)
                     {
@@ -137,10 +137,10 @@ namespace Terraria
 
             if (index1 < 0)
                 return;
-            string str = newItem.AffixName();
+            var str = newItem.AffixName();
             if (stack > 1)
                 str = str + " (" + (object) stack + ")";
-            Vector2 vector2_1 = Main.fontMouseText.MeasureString(str);
+            var vector2_1 = Main.fontMouseText.MeasureString(str);
             Main.itemText[index1].alpha = 1f;
             Main.itemText[index1].alphaDir = -1;
             Main.itemText[index1].active = true;
@@ -199,7 +199,7 @@ namespace Terraria
                 Main.itemText[index1].coinValue += 1000000 * Main.itemText[index1].stack;
             Main.itemText[index1].ValueToName();
             Main.itemText[index1].stack = 1;
-            int index3 = index1;
+            var index3 = index1;
             if (Main.itemText[index3].coinValue >= 1000000)
             {
                 if (Main.itemText[index3].lifeTime < 300)
@@ -230,11 +230,11 @@ namespace Terraria
 
         private static string ValueToName(int coinValue)
         {
-            int num1 = 0;
-            int num2 = 0;
-            int num3 = 0;
-            int num4 = 0;
-            int num5 = coinValue;
+            var num1 = 0;
+            var num2 = 0;
+            var num3 = 0;
+            var num4 = 0;
+            var num5 = coinValue;
             while (num5 > 0)
             {
                 if (num5 >= 1000000)
@@ -259,7 +259,7 @@ namespace Terraria
                 }
             }
 
-            string str = "";
+            var str = "";
             if (num1 > 0)
                 str = str + (object) num1 + string.Format(" {0} ", (object) Language.GetTextValue("Currency.Platinum"));
             if (num2 > 0)
@@ -275,11 +275,11 @@ namespace Terraria
 
         private void ValueToName()
         {
-            int num1 = 0;
-            int num2 = 0;
-            int num3 = 0;
-            int num4 = 0;
-            int coinValue = this.coinValue;
+            var num1 = 0;
+            var num2 = 0;
+            var num3 = 0;
+            var num4 = 0;
+            var coinValue = this.coinValue;
             while (coinValue > 0)
             {
                 if (coinValue >= 1000000)
@@ -307,28 +307,28 @@ namespace Terraria
             this.name = "";
             if (num1 > 0)
             {
-                ItemText itemText = this;
+                var itemText = this;
                 itemText.name = itemText.name + (object) num1 +
                                 string.Format(" {0} ", (object) Language.GetTextValue("Currency.Platinum"));
             }
 
             if (num2 > 0)
             {
-                ItemText itemText = this;
+                var itemText = this;
                 itemText.name = itemText.name + (object) num2 +
                                 string.Format(" {0} ", (object) Language.GetTextValue("Currency.Gold"));
             }
 
             if (num3 > 0)
             {
-                ItemText itemText = this;
+                var itemText = this;
                 itemText.name = itemText.name + (object) num3 +
                                 string.Format(" {0} ", (object) Language.GetTextValue("Currency.Silver"));
             }
 
             if (num4 > 0)
             {
-                ItemText itemText = this;
+                var itemText = this;
                 itemText.name = itemText.name + (object) num4 +
                                 string.Format(" {0} ", (object) Language.GetTextValue("Currency.Copper"));
             }
@@ -342,7 +342,7 @@ namespace Terraria
         {
             if (!this.active)
                 return;
-            float targetScale = ItemText.TargetScale;
+            var targetScale = ItemText.TargetScale;
             this.alpha += (float) this.alphaDir * 0.01f;
             if ((double) this.alpha <= 0.7)
             {
@@ -359,25 +359,25 @@ namespace Terraria
             if (this.expert && this.expert)
                 this.color = new Color((int) (byte) Main.DiscoR, (int) (byte) Main.DiscoG, (int) (byte) Main.DiscoB,
                     (int) Main.mouseTextColor);
-            bool flag = false;
-            string str1 = this.name;
+            var flag = false;
+            var str1 = this.name;
             if (this.stack > 1)
                 str1 = str1 + " (" + (object) this.stack + ")";
-            Vector2 vector2_1 = Main.fontMouseText.MeasureString(str1) * this.scale;
+            var vector2_1 = Main.fontMouseText.MeasureString(str1) * this.scale;
             vector2_1.Y *= 0.8f;
-            Rectangle rectangle1 = new Rectangle((int) ((double) this.position.X - (double) vector2_1.X / 2.0),
+            var rectangle1 = new Rectangle((int) ((double) this.position.X - (double) vector2_1.X / 2.0),
                 (int) ((double) this.position.Y - (double) vector2_1.Y / 2.0), (int) vector2_1.X, (int) vector2_1.Y);
-            for (int index = 0; index < 20; ++index)
+            for (var index = 0; index < 20; ++index)
             {
                 if (Main.itemText[index].active && index != whoAmI)
                 {
-                    string str2 = Main.itemText[index].name;
+                    var str2 = Main.itemText[index].name;
                     if (Main.itemText[index].stack > 1)
                         str2 = str2 + " (" + (object) Main.itemText[index].stack + ")";
-                    Vector2 vector2_2 = Main.fontMouseText.MeasureString(str2);
+                    var vector2_2 = Main.fontMouseText.MeasureString(str2);
                     vector2_2 *= Main.itemText[index].scale;
                     vector2_2.Y *= 0.8f;
-                    Rectangle rectangle2 =
+                    var rectangle2 =
                         new Rectangle((int) ((double) Main.itemText[index].position.X - (double) vector2_2.X / 2.0),
                             (int) ((double) Main.itemText[index].position.Y - (double) vector2_2.Y / 2.0),
                             (int) vector2_2.X, (int) vector2_2.Y);
@@ -386,7 +386,7 @@ namespace Terraria
                          (double) this.position.Y == (double) Main.itemText[index].position.Y && whoAmI < index))
                     {
                         flag = true;
-                        int num = ItemText.numActive;
+                        var num = ItemText.numActive;
                         if (num > 3)
                             num = 3;
                         Main.itemText[index].lifeTime = ItemText.activeTime + 15 * num;
@@ -428,8 +428,8 @@ namespace Terraria
 
         public static void UpdateItemText()
         {
-            int num = 0;
-            for (int whoAmI = 0; whoAmI < 20; ++whoAmI)
+            var num = 0;
+            for (var whoAmI = 0; whoAmI < 20; ++whoAmI)
             {
                 if (Main.itemText[whoAmI].active)
                 {

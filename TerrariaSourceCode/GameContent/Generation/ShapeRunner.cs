@@ -25,24 +25,24 @@ namespace Terraria.GameContent.Generation
 
         public override bool Perform(Point origin, GenAction action)
         {
-            float num1 = (float) this._steps;
-            float steps = (float) this._steps;
-            double num2 = (double) this._startStrength;
-            Vector2 vector2_1 = new Vector2((float) origin.X, (float) origin.Y);
-            Vector2 vector2_2 = this._startVelocity == Vector2.Zero
+            var num1 = (float) this._steps;
+            var steps = (float) this._steps;
+            var num2 = (double) this._startStrength;
+            var vector2_1 = new Vector2((float) origin.X, (float) origin.Y);
+            var vector2_2 = this._startVelocity == Vector2.Zero
                 ? Utils.RandomVector2(GenBase._random, -1f, 1f)
                 : this._startVelocity;
             while ((double) num1 > 0.0 && num2 > 0.0)
             {
                 num2 = (double) this._startStrength * ((double) num1 / (double) steps);
-                float num3 = num1 - 1f;
-                int num4 = Math.Max(1, (int) ((double) vector2_1.X - num2 * 0.5));
-                int num5 = Math.Max(1, (int) ((double) vector2_1.Y - num2 * 0.5));
-                int num6 = Math.Min(GenBase._worldWidth, (int) ((double) vector2_1.X + num2 * 0.5));
-                int num7 = Math.Min(GenBase._worldHeight, (int) ((double) vector2_1.Y + num2 * 0.5));
-                for (int x = num4; x < num6; ++x)
+                var num3 = num1 - 1f;
+                var num4 = Math.Max(1, (int) ((double) vector2_1.X - num2 * 0.5));
+                var num5 = Math.Max(1, (int) ((double) vector2_1.Y - num2 * 0.5));
+                var num6 = Math.Min(GenBase._worldWidth, (int) ((double) vector2_1.X + num2 * 0.5));
+                var num7 = Math.Min(GenBase._worldHeight, (int) ((double) vector2_1.Y + num2 * 0.5));
+                for (var x = num4; x < num6; ++x)
                 {
-                    for (int y = num5; y < num7; ++y)
+                    for (var y = num5; y < num7; ++y)
                     {
                         if ((double) Math.Abs((float) x - vector2_1.X) + (double) Math.Abs((float) y - vector2_1.Y) <
                             num2 * 0.5 * (1.0 + (double) GenBase._random.Next(-10, 11) * 0.015))
@@ -50,10 +50,10 @@ namespace Terraria.GameContent.Generation
                     }
                 }
 
-                int num8 = (int) (num2 / 50.0) + 1;
+                var num8 = (int) (num2 / 50.0) + 1;
                 num1 = num3 - (float) num8;
                 vector2_1 += vector2_2;
-                for (int index = 0; index < num8; ++index)
+                for (var index = 0; index < num8; ++index)
                 {
                     vector2_1 += vector2_2;
                     vector2_2 += Utils.RandomVector2(GenBase._random, -0.5f, 0.5f);

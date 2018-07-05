@@ -56,10 +56,10 @@ namespace Terraria.Map
 
         public static void Initialize()
         {
-            Color[][] colorArray1 = new Color[470][];
-            for (int index = 0; index < 470; ++index)
+            var colorArray1 = new Color[470][];
+            for (var index = 0; index < 470; ++index)
                 colorArray1[index] = new Color[12];
-            Color color1 = new Color(151, 107, 75);
+            var color1 = new Color(151, 107, 75);
             colorArray1[0][0] = color1;
             colorArray1[5][0] = color1;
             colorArray1[30][0] = color1;
@@ -700,9 +700,9 @@ namespace Terraria.Map
             colorArray1[467][1] = new Color((int) byte.MaxValue, 249, 59);
             colorArray1[468][0] = colorArray1[467][0];
             colorArray1[468][1] = colorArray1[467][1];
-            Color[] colorArray2 = new Color[3] {new Color(9, 61, 191), new Color(253, 32, 3), new Color(254, 194, 20)};
-            Color[][] colorArray3 = new Color[231][];
-            for (int index = 0; index < 231; ++index)
+            var colorArray2 = new Color[3] {new Color(9, 61, 191), new Color(253, 32, 3), new Color(254, 194, 20)};
+            var colorArray3 = new Color[231][];
+            for (var index = 0; index < 231; ++index)
                 colorArray3[index] = new Color[2];
             colorArray3[158][0] = new Color(107, 49, 154);
             colorArray3[163][0] = new Color(154, 148, 49);
@@ -940,52 +940,52 @@ namespace Terraria.Map
             colorArray3[228][0] = new Color(160, 2, 75);
             colorArray3[229][0] = new Color(100, 55, 164);
             colorArray3[230][0] = new Color(0, 117, 101);
-            Color[] colorArray4 = new Color[256];
-            Color color2 = new Color(50, 40, (int) byte.MaxValue);
-            Color color3 = new Color(145, 185, (int) byte.MaxValue);
-            for (int index = 0; index < colorArray4.Length; ++index)
+            var colorArray4 = new Color[256];
+            var color2 = new Color(50, 40, (int) byte.MaxValue);
+            var color3 = new Color(145, 185, (int) byte.MaxValue);
+            for (var index = 0; index < colorArray4.Length; ++index)
             {
-                float num1 = (float) index / (float) colorArray4.Length;
-                float num2 = 1f - num1;
+                var num1 = (float) index / (float) colorArray4.Length;
+                var num2 = 1f - num1;
                 colorArray4[index] = new Color(
                     (int) (byte) ((double) color2.R * (double) num2 + (double) color3.R * (double) num1),
                     (int) (byte) ((double) color2.G * (double) num2 + (double) color3.G * (double) num1),
                     (int) (byte) ((double) color2.B * (double) num2 + (double) color3.B * (double) num1));
             }
 
-            Color[] colorArray5 = new Color[256];
-            Color color4 = new Color(88, 61, 46);
-            Color color5 = new Color(37, 78, 123);
-            for (int index = 0; index < colorArray5.Length; ++index)
+            var colorArray5 = new Color[256];
+            var color4 = new Color(88, 61, 46);
+            var color5 = new Color(37, 78, 123);
+            for (var index = 0; index < colorArray5.Length; ++index)
             {
-                float num1 = (float) index / (float) byte.MaxValue;
-                float num2 = 1f - num1;
+                var num1 = (float) index / (float) byte.MaxValue;
+                var num2 = 1f - num1;
                 colorArray5[index] = new Color(
                     (int) (byte) ((double) color4.R * (double) num2 + (double) color5.R * (double) num1),
                     (int) (byte) ((double) color4.G * (double) num2 + (double) color5.G * (double) num1),
                     (int) (byte) ((double) color4.B * (double) num2 + (double) color5.B * (double) num1));
             }
 
-            Color[] colorArray6 = new Color[256];
-            Color color6 = new Color(74, 67, 60);
+            var colorArray6 = new Color[256];
+            var color6 = new Color(74, 67, 60);
             color5 = new Color(53, 70, 97);
-            for (int index = 0; index < colorArray6.Length; ++index)
+            for (var index = 0; index < colorArray6.Length; ++index)
             {
-                float num1 = (float) index / (float) byte.MaxValue;
-                float num2 = 1f - num1;
+                var num1 = (float) index / (float) byte.MaxValue;
+                var num2 = 1f - num1;
                 colorArray6[index] = new Color(
                     (int) (byte) ((double) color6.R * (double) num2 + (double) color5.R * (double) num1),
                     (int) (byte) ((double) color6.G * (double) num2 + (double) color5.G * (double) num1),
                     (int) (byte) ((double) color6.B * (double) num2 + (double) color5.B * (double) num1));
             }
 
-            Color color7 = new Color(50, 44, 38);
-            int num3 = 0;
+            var color7 = new Color(50, 44, 38);
+            var num3 = 0;
             MapHelper.tileOptionCounts = new int[470];
-            for (int index1 = 0; index1 < 470; ++index1)
+            for (var index1 = 0; index1 < 470; ++index1)
             {
-                Color[] colorArray7 = colorArray1[index1];
-                int index2 = 0;
+                var colorArray7 = colorArray1[index1];
+                var index2 = 0;
                 while (index2 < 12 && !(colorArray7[index2] == Color.Transparent))
                     ++index2;
                 MapHelper.tileOptionCounts[index1] = index2;
@@ -993,10 +993,10 @@ namespace Terraria.Map
             }
 
             MapHelper.wallOptionCounts = new int[231];
-            for (int index1 = 0; index1 < 231; ++index1)
+            for (var index1 = 0; index1 < 231; ++index1)
             {
-                Color[] colorArray7 = colorArray3[index1];
-                int index2 = 0;
+                var colorArray7 = colorArray3[index1];
+                var index2 = 0;
                 while (index2 < 2 && !(colorArray7[index2] == Color.Transparent))
                     ++index2;
                 MapHelper.wallOptionCounts[index1] = index2;
@@ -1008,13 +1008,13 @@ namespace Terraria.Map
             ushort num4 = 1;
             MapHelper.tilePosition = num4;
             MapHelper.tileLookup = new ushort[470];
-            for (int index1 = 0; index1 < 470; ++index1)
+            for (var index1 = 0; index1 < 470; ++index1)
             {
                 if (MapHelper.tileOptionCounts[index1] > 0)
                 {
-                    Color[] colorArray7 = colorArray1[index1];
+                    var colorArray7 = colorArray1[index1];
                     MapHelper.tileLookup[index1] = num4;
-                    for (int index2 = 0; index2 < MapHelper.tileOptionCounts[index1]; ++index2)
+                    for (var index2 = 0; index2 < MapHelper.tileOptionCounts[index1]; ++index2)
                     {
                         MapHelper.colorLookup[(int) num4] = colorArray1[index1][index2];
                         ++num4;
@@ -1027,13 +1027,13 @@ namespace Terraria.Map
             MapHelper.wallPosition = num4;
             MapHelper.wallLookup = new ushort[231];
             MapHelper.wallRangeStart = num4;
-            for (int index1 = 0; index1 < 231; ++index1)
+            for (var index1 = 0; index1 < 231; ++index1)
             {
                 if (MapHelper.wallOptionCounts[index1] > 0)
                 {
-                    Color[] colorArray7 = colorArray3[index1];
+                    var colorArray7 = colorArray3[index1];
                     MapHelper.wallLookup[index1] = num4;
-                    for (int index2 = 0; index2 < MapHelper.wallOptionCounts[index1]; ++index2)
+                    for (var index2 = 0; index2 < MapHelper.wallOptionCounts[index1]; ++index2)
                     {
                         MapHelper.colorLookup[(int) num4] = colorArray3[index1][index2];
                         ++num4;
@@ -1045,28 +1045,28 @@ namespace Terraria.Map
 
             MapHelper.wallRangeEnd = num4;
             MapHelper.liquidPosition = num4;
-            for (int index = 0; index < 3; ++index)
+            for (var index = 0; index < 3; ++index)
             {
                 MapHelper.colorLookup[(int) num4] = colorArray2[index];
                 ++num4;
             }
 
             MapHelper.skyPosition = num4;
-            for (int index = 0; index < 256; ++index)
+            for (var index = 0; index < 256; ++index)
             {
                 MapHelper.colorLookup[(int) num4] = colorArray4[index];
                 ++num4;
             }
 
             MapHelper.dirtPosition = num4;
-            for (int index = 0; index < 256; ++index)
+            for (var index = 0; index < 256; ++index)
             {
                 MapHelper.colorLookup[(int) num4] = colorArray5[index];
                 ++num4;
             }
 
             MapHelper.rockPosition = num4;
-            for (int index = 0; index < 256; ++index)
+            for (var index = 0; index < 256; ++index)
             {
                 MapHelper.colorLookup[(int) num4] = colorArray6[index];
                 ++num4;
@@ -1096,15 +1096,15 @@ namespace Terraria.Map
 
         private static void MapColor(ushort type, ref Color oldColor, byte colorType)
         {
-            Color color = WorldGen.paintColor((int) colorType);
-            float num1 = (float) oldColor.R / (float) byte.MaxValue;
-            float num2 = (float) oldColor.G / (float) byte.MaxValue;
-            float num3 = (float) oldColor.B / (float) byte.MaxValue;
+            var color = WorldGen.paintColor((int) colorType);
+            var num1 = (float) oldColor.R / (float) byte.MaxValue;
+            var num2 = (float) oldColor.G / (float) byte.MaxValue;
+            var num3 = (float) oldColor.B / (float) byte.MaxValue;
             if ((double) num2 > (double) num1)
                 num1 = num2;
             if ((double) num3 > (double) num1)
             {
-                float num4 = num1;
+                var num4 = num1;
                 num1 = num3;
                 num3 = num4;
             }
@@ -1112,7 +1112,7 @@ namespace Terraria.Map
             switch (colorType)
             {
                 case 29:
-                    float num5 = num3 * 0.3f;
+                    var num5 = num3 * 0.3f;
                     oldColor.R = (byte) ((double) color.R * (double) num5);
                     oldColor.G = (byte) ((double) color.G * (double) num5);
                     oldColor.B = (byte) ((double) color.B * (double) num5);
@@ -1131,7 +1131,7 @@ namespace Terraria.Map
                     oldColor.B = (byte) ((uint) byte.MaxValue - (uint) oldColor.B);
                     break;
                 default:
-                    float num6 = num1;
+                    var num6 = num1;
                     oldColor.R = (byte) ((double) color.R * (double) num6);
                     oldColor.G = (byte) ((double) color.G * (double) num6);
                     oldColor.B = (byte) ((double) color.B * (double) num6);
@@ -1141,13 +1141,13 @@ namespace Terraria.Map
 
         public static Color GetMapTileXnaColor(ref MapTile tile)
         {
-            Color oldColor = MapHelper.colorLookup[(int) tile.Type];
-            byte color = tile.Color;
+            var oldColor = MapHelper.colorLookup[(int) tile.Type];
+            var color = tile.Color;
             if (color > (byte) 0)
                 MapHelper.MapColor(tile.Type, ref oldColor, color);
             if (tile.Light == byte.MaxValue)
                 return oldColor;
-            float num = (float) tile.Light / (float) byte.MaxValue;
+            var num = (float) tile.Light / (float) byte.MaxValue;
             oldColor.R = (byte) ((double) oldColor.R * (double) num);
             oldColor.G = (byte) ((double) oldColor.G * (double) num);
             oldColor.B = (byte) ((double) oldColor.B * (double) num);
@@ -1156,15 +1156,15 @@ namespace Terraria.Map
 
         public static MapTile CreateMapTile(int i, int j, byte Light)
         {
-            Tile tile = Main.tile[i, j] ?? (Main.tile[i, j] = new Tile());
-            int num1 = 0;
-            int num2 = (int) Light;
-            ushort type1 = Main.Map[i, j].Type;
-            int num3 = 0;
-            int num4 = 0;
+            var tile = Main.tile[i, j] ?? (Main.tile[i, j] = new Tile());
+            var num1 = 0;
+            var num2 = (int) Light;
+            var type1 = Main.Map[i, j].Type;
+            var num3 = 0;
+            var num4 = 0;
             if (tile.active())
             {
-                int type2 = (int) tile.type;
+                var type2 = (int) tile.type;
                 num3 = (int) MapHelper.tileLookup[type2];
                 if (type2 == 51 && (i + j) % 2 == 0)
                     num3 = 0;
@@ -1302,7 +1302,7 @@ namespace Terraria.Map
                         case 185:
                             if (tile.frameY < (short) 18)
                             {
-                                int num5 = (int) tile.frameX / 18;
+                                var num5 = (int) tile.frameX / 18;
                                 if (num5 < 6 || num5 == 28 || (num5 == 29 || num5 == 30) || (num5 == 31 || num5 == 32))
                                 {
                                     num4 = 0;
@@ -1336,7 +1336,7 @@ namespace Terraria.Map
                                 break;
                             }
 
-                            int num6 = (int) tile.frameX / 36;
+                            var num6 = (int) tile.frameX / 36;
                             if (num6 < 6 || num6 == 19 || (num6 == 20 || num6 == 21) ||
                                 (num6 == 22 || num6 == 23 || (num6 == 24 || num6 == 33)) ||
                                 (num6 == 38 || num6 == 39 || num6 == 40))
@@ -1371,7 +1371,7 @@ namespace Terraria.Map
 
                             break;
                         case 186:
-                            int num7 = (int) tile.frameX / 54;
+                            var num7 = (int) tile.frameX / 54;
                             if (num7 < 7)
                             {
                                 num4 = 2;
@@ -1404,7 +1404,7 @@ namespace Terraria.Map
 
                             break;
                         case 187:
-                            int num8 = (int) tile.frameX / 54;
+                            var num8 = (int) tile.frameX / 54;
                             if (num8 < 3 || num8 == 14 || (num8 == 15 || num8 == 16))
                             {
                                 num4 = 0;
@@ -1458,7 +1458,7 @@ namespace Terraria.Map
                             num4 = (int) tile.frameX / 34;
                             break;
                         case 240:
-                            int num9 = (int) tile.frameX / 54 + (int) tile.frameY / 54 * 36;
+                            var num9 = (int) tile.frameX / 54 + (int) tile.frameY / 54 * 36;
                             if (num9 >= 0 && num9 <= 11 || num9 >= 47 && num9 <= 53)
                             {
                                 num4 = 0;
@@ -1497,47 +1497,47 @@ namespace Terraria.Map
 
                             break;
                         case 242:
-                            int num10 = (int) tile.frameY / 72;
+                            var num10 = (int) tile.frameY / 72;
                             num4 = num10 < 22 || num10 > 24 ? 0 : 1;
                             break;
                         case 419:
-                            int num11 = (int) tile.frameX / 18;
+                            var num11 = (int) tile.frameX / 18;
                             if (num11 > 2)
                                 num11 = 2;
                             num4 = num11;
                             break;
                         case 420:
-                            int num12 = (int) tile.frameY / 18;
+                            var num12 = (int) tile.frameY / 18;
                             if (num12 > 5)
                                 num12 = 5;
                             num4 = num12;
                             break;
                         case 423:
-                            int num13 = (int) tile.frameY / 18;
+                            var num13 = (int) tile.frameY / 18;
                             if (num13 > 6)
                                 num13 = 6;
                             num4 = num13;
                             break;
                         case 428:
-                            int num14 = (int) tile.frameY / 18;
+                            var num14 = (int) tile.frameY / 18;
                             if (num14 > 3)
                                 num14 = 3;
                             num4 = num14;
                             break;
                         case 440:
-                            int num15 = (int) tile.frameX / 54;
+                            var num15 = (int) tile.frameX / 54;
                             if (num15 > 6)
                                 num15 = 6;
                             num4 = num15;
                             break;
                         case 453:
-                            int num16 = (int) tile.frameX / 36;
+                            var num16 = (int) tile.frameX / 36;
                             if (num16 > 2)
                                 num16 = 2;
                             num4 = num16;
                             break;
                         case 457:
-                            int num17 = (int) tile.frameX / 36;
+                            var num17 = (int) tile.frameX / 36;
                             if (num17 > 4)
                                 num17 = 4;
                             num4 = num17;
@@ -1569,12 +1569,12 @@ namespace Terraria.Map
             {
                 if (tile.liquid > (byte) 32)
                 {
-                    int num5 = (int) tile.liquidType();
+                    var num5 = (int) tile.liquidType();
                     num3 = (int) MapHelper.liquidPosition + num5;
                 }
                 else if (tile.wall > (byte) 0)
                 {
-                    int wall = (int) tile.wall;
+                    var wall = (int) tile.wall;
                     num3 = (int) MapHelper.wallLookup[wall];
                     num1 = (int) tile.wallColor();
                     switch (wall)
@@ -1603,7 +1603,7 @@ namespace Terraria.Map
             {
                 if ((double) j < Main.worldSurface)
                 {
-                    int num5 = (int) (byte) ((double) byte.MaxValue * ((double) j / Main.worldSurface));
+                    var num5 = (int) (byte) ((double) byte.MaxValue * ((double) j / Main.worldSurface));
                     num3 = (int) MapHelper.skyPosition + num5;
                     num2 = (int) byte.MaxValue;
                     num1 = 0;
@@ -1611,24 +1611,24 @@ namespace Terraria.Map
                 else if (j < Main.maxTilesY - 200)
                 {
                     num1 = 0;
-                    bool flag = (int) type1 < (int) MapHelper.dirtPosition ||
+                    var flag = (int) type1 < (int) MapHelper.dirtPosition ||
                                 (int) type1 >= (int) MapHelper.hellPosition;
                     byte num5 = 0;
-                    float num6 = (float) ((double) Main.screenPosition.X / 16.0 - 5.0);
-                    float num7 = (float) (((double) Main.screenPosition.X + (double) Main.screenWidth) / 16.0 + 5.0);
-                    float num8 = (float) ((double) Main.screenPosition.Y / 16.0 - 5.0);
-                    float num9 = (float) (((double) Main.screenPosition.Y + (double) Main.screenHeight) / 16.0 + 5.0);
+                    var num6 = (float) ((double) Main.screenPosition.X / 16.0 - 5.0);
+                    var num7 = (float) (((double) Main.screenPosition.X + (double) Main.screenWidth) / 16.0 + 5.0);
+                    var num8 = (float) ((double) Main.screenPosition.Y / 16.0 - 5.0);
+                    var num9 = (float) (((double) Main.screenPosition.Y + (double) Main.screenHeight) / 16.0 + 5.0);
                     if (((double) i < (double) num6 || (double) i > (double) num7 ||
                          ((double) j < (double) num8 || (double) j > (double) num9)) &&
                         (i > 40 && i < Main.maxTilesX - 40 && (j > 40 && j < Main.maxTilesY - 40)) && flag)
                     {
-                        int num10 = i - 36;
+                        var num10 = i - 36;
                         while (num10 <= i + 30)
                         {
-                            int num11 = j - 36;
+                            var num11 = j - 36;
                             while (num11 <= j + 30)
                             {
-                                for (int index = 0; index < MapHelper.snowTypes.Length; ++index)
+                                for (var index = 0; index < MapHelper.snowTypes.Length; ++index)
                                 {
                                     if ((int) MapHelper.snowTypes[index] == (int) type1)
                                     {
@@ -1647,7 +1647,7 @@ namespace Terraria.Map
                     }
                     else
                     {
-                        float num10 = (float) Main.snowTiles / 1000f * (float) byte.MaxValue;
+                        var num10 = (float) Main.snowTiles / 1000f * (float) byte.MaxValue;
                         if ((double) num10 > (double) byte.MaxValue)
                             num10 = (float) byte.MaxValue;
                         num5 = (byte) num10;
@@ -1666,10 +1666,10 @@ namespace Terraria.Map
 
         public static void SaveMap()
         {
-            bool isCloudSave = Main.ActivePlayerFileData.IsCloudSave;
+            var isCloudSave = Main.ActivePlayerFileData.IsCloudSave;
             if (isCloudSave && SocialAPI.Cloud == null || (!Main.mapEnabled || MapHelper.saveLock))
                 return;
-            string path1 = Main.playerPathName.Substring(0, Main.playerPathName.Length - 4);
+            var path1 = Main.playerPathName.Substring(0, Main.playerPathName.Length - 4);
             lock (MapHelper.padlock)
             {
                 try
@@ -1684,23 +1684,23 @@ namespace Terraria.Map
                     {
                     }
 
-                    string str = path1 + (object) Path.DirectorySeparatorChar;
-                    string path2 = !Main.ActiveWorldFileData.UseGuidAsMapName
+                    var str = path1 + (object) Path.DirectorySeparatorChar;
+                    var path2 = !Main.ActiveWorldFileData.UseGuidAsMapName
                         ? str + (object) Main.worldID + ".map"
                         : str + Main.ActiveWorldFileData.UniqueId.ToString() + ".map";
                     new Stopwatch().Start();
-                    bool flag1 = false;
+                    var flag1 = false;
                     if (!Main.gameMenu)
                         flag1 = true;
-                    using (MemoryStream memoryStream = new MemoryStream(4000))
+                    using (var memoryStream = new MemoryStream(4000))
                     {
-                        using (BinaryWriter writer = new BinaryWriter((Stream) memoryStream))
+                        using (var writer = new BinaryWriter((Stream) memoryStream))
                         {
-                            using (DeflateStream deflateStream =
+                            using (var deflateStream =
                                 new DeflateStream((Stream) memoryStream, (CompressionMode) 0))
                             {
-                                int count = 0;
-                                byte[] buffer = new byte[16384];
+                                var count = 0;
+                                var buffer = new byte[16384];
                                 writer.Write(193);
                                 Main.MapFileMetadata.IncrementAndWrite(writer);
                                 writer.Write(Main.worldName);
@@ -1715,7 +1715,7 @@ namespace Terraria.Map
                                 writer.Write((short) 256);
                                 byte num1 = 1;
                                 byte num2 = 0;
-                                for (int index = 0; index < 470; ++index)
+                                for (var index = 0; index < 470; ++index)
                                 {
                                     if (MapHelper.tileOptionCounts[index] != 1)
                                         num2 |= num1;
@@ -1731,7 +1731,7 @@ namespace Terraria.Map
 
                                 if (num1 != (byte) 1)
                                     writer.Write(num2);
-                                int index1 = 0;
+                                var index1 = 0;
                                 byte num3 = 1;
                                 byte num4 = 0;
                                 for (; index1 < 231; ++index1)
@@ -1750,39 +1750,39 @@ namespace Terraria.Map
 
                                 if (num3 != (byte) 1)
                                     writer.Write(num4);
-                                for (int index2 = 0; index2 < 470; ++index2)
+                                for (var index2 = 0; index2 < 470; ++index2)
                                 {
                                     if (MapHelper.tileOptionCounts[index2] != 1)
                                         writer.Write((byte) MapHelper.tileOptionCounts[index2]);
                                 }
 
-                                for (int index2 = 0; index2 < 231; ++index2)
+                                for (var index2 = 0; index2 < 231; ++index2)
                                 {
                                     if (MapHelper.wallOptionCounts[index2] != 1)
                                         writer.Write((byte) MapHelper.wallOptionCounts[index2]);
                                 }
 
                                 writer.Flush();
-                                for (int index2 = 0; index2 < Main.maxTilesY; ++index2)
+                                for (var index2 = 0; index2 < Main.maxTilesY; ++index2)
                                 {
                                     if (!flag1)
                                     {
-                                        float num5 = (float) index2 / (float) Main.maxTilesY;
+                                        var num5 = (float) index2 / (float) Main.maxTilesY;
                                         Main.statusText =
                                             Lang.gen[66].Value + " " + (object) (int) ((double) num5 * 100.0 + 1.0) +
                                             "%";
                                     }
 
                                     int num6;
-                                    for (int index3 = 0; index3 < Main.maxTilesX; index3 = num6 + 1)
+                                    for (var index3 = 0; index3 < Main.maxTilesX; index3 = num6 + 1)
                                     {
-                                        MapTile mapTile = Main.Map[index3, index2];
+                                        var mapTile = Main.Map[index3, index2];
                                         byte num5;
-                                        byte num7 = num5 = (byte) 0;
-                                        bool flag2 = true;
-                                        bool flag3 = true;
-                                        int num8 = 0;
-                                        int num9 = 0;
+                                        var num7 = num5 = (byte) 0;
+                                        var flag2 = true;
+                                        var flag3 = true;
+                                        var num8 = 0;
+                                        var num9 = 0;
                                         byte num10 = 0;
                                         int num11;
                                         ushort num12;
@@ -1794,8 +1794,8 @@ namespace Terraria.Map
                                             num11 = 0;
                                             num12 = (ushort) 0;
                                             num13 = 0;
-                                            int index4 = index3 + 1;
-                                            for (int index5 = Main.maxTilesX - index3 - 1;
+                                            var index4 = index3 + 1;
+                                            for (var index5 = Main.maxTilesX - index3 - 1;
                                                 index5 > 0 && Main.Map[index4, index2].Light <= (byte) 18;
                                                 ++index4)
                                             {
@@ -1847,12 +1847,12 @@ namespace Terraria.Map
                                             if (flag3)
                                             {
                                                 num13 = 0;
-                                                int index4 = index3 + 1;
-                                                int num14 = Main.maxTilesX - index3 - 1;
+                                                var index4 = index3 + 1;
+                                                var num14 = Main.maxTilesX - index3 - 1;
                                                 num8 = index4;
                                                 while (num14 > 0)
                                                 {
-                                                    MapTile other = Main.Map[index4, index2];
+                                                    var other = Main.Map[index4, index2];
                                                     if (mapTile.EqualsWithoutLight(ref other))
                                                     {
                                                         --num14;
@@ -1869,11 +1869,11 @@ namespace Terraria.Map
                                             else
                                             {
                                                 num13 = 0;
-                                                int index4 = index3 + 1;
-                                                int num14 = Main.maxTilesX - index3 - 1;
+                                                var index4 = index3 + 1;
+                                                var num14 = Main.maxTilesX - index3 - 1;
                                                 while (num14 > 0)
                                                 {
-                                                    MapTile other = Main.Map[index4, index2];
+                                                    var other = Main.Map[index4, index2];
                                                     if (mapTile.Equals(ref other))
                                                     {
                                                         --num14;
@@ -1890,7 +1890,7 @@ namespace Terraria.Map
                                             num5 |= (byte) ((uint) num10 << 1);
                                         if (num5 != (byte) 0)
                                             num7 |= (byte) 1;
-                                        byte num15 = (byte) ((uint) num7 | (uint) (byte) (num11 << 1));
+                                        var num15 = (byte) ((uint) num7 | (uint) (byte) (num11 << 1));
                                         if (flag2 && num12 > (ushort) byte.MaxValue)
                                             num15 |= (byte) 16;
                                         if (flag3)
@@ -1939,7 +1939,7 @@ namespace Terraria.Map
                                             }
                                         }
 
-                                        for (int index4 = num8; index4 < num9; ++index4)
+                                        for (var index4 = num8; index4 < num9; ++index4)
                                         {
                                             buffer[count] = Main.Map[index4, index2].Light;
                                             ++count;
@@ -1964,7 +1964,7 @@ namespace Terraria.Map
                 }
                 catch (Exception ex)
                 {
-                    using (StreamWriter streamWriter = new StreamWriter("client-crashlog.txt", true))
+                    using (var streamWriter = new StreamWriter("client-crashlog.txt", true))
                     {
                         streamWriter.WriteLine((object) DateTime.Now);
                         streamWriter.WriteLine((object) ex);
@@ -1978,27 +1978,27 @@ namespace Terraria.Map
 
         public static void LoadMapVersion1(BinaryReader fileIO, int release)
         {
-            string str = fileIO.ReadString();
-            int num1 = fileIO.ReadInt32();
-            int num2 = fileIO.ReadInt32();
-            int num3 = fileIO.ReadInt32();
+            var str = fileIO.ReadString();
+            var num1 = fileIO.ReadInt32();
+            var num2 = fileIO.ReadInt32();
+            var num3 = fileIO.ReadInt32();
             if (str != Main.worldName || num1 != Main.worldID || (num3 != Main.maxTilesX || num2 != Main.maxTilesY))
                 throw new Exception("Map meta-data is invalid.");
-            for (int x = 0; x < Main.maxTilesX; ++x)
+            for (var x = 0; x < Main.maxTilesX; ++x)
             {
-                float num4 = (float) x / (float) Main.maxTilesX;
+                var num4 = (float) x / (float) Main.maxTilesX;
                 Main.statusText = Lang.gen[67].Value + " " + (object) (int) ((double) num4 * 100.0 + 1.0) + "%";
-                for (int y = 0; y < Main.maxTilesY; ++y)
+                for (var y = 0; y < Main.maxTilesY; ++y)
                 {
                     if (fileIO.ReadBoolean())
                     {
-                        int index = release <= 77 ? (int) fileIO.ReadByte() : (int) fileIO.ReadUInt16();
-                        byte light = fileIO.ReadByte();
+                        var index = release <= 77 ? (int) fileIO.ReadByte() : (int) fileIO.ReadUInt16();
+                        var light = fileIO.ReadByte();
                         MapHelper.OldMapHelper oldMapHelper;
                         oldMapHelper.misc = fileIO.ReadByte();
                         oldMapHelper.misc2 = release < 50 ? (byte) 0 : fileIO.ReadByte();
-                        bool flag = false;
-                        int num5 = (int) oldMapHelper.option();
+                        var flag = false;
+                        var num5 = (int) oldMapHelper.option();
                         int num6;
                         if (oldMapHelper.active())
                             num6 = num5 + (int) MapHelper.tileLookup[index];
@@ -2013,7 +2013,7 @@ namespace Terraria.Map
                         else if ((double) y < Main.worldSurface)
                         {
                             flag = true;
-                            int num7 = (int) (byte) (256.0 * ((double) y / Main.worldSurface));
+                            var num7 = (int) (byte) (256.0 * ((double) y / Main.worldSurface));
                             num6 = (int) MapHelper.skyPosition + num7;
                         }
                         else if ((double) y < Main.rockLayer)
@@ -2033,9 +2033,9 @@ namespace Terraria.Map
                         else
                             num6 = (int) MapHelper.hellPosition;
 
-                        MapTile tile = MapTile.Create((ushort) num6, light, (byte) 0);
+                        var tile = MapTile.Create((ushort) num6, light, (byte) 0);
                         Main.Map.SetTile(x, y, ref tile);
-                        int num8 = (int) fileIO.ReadInt16();
+                        var num8 = (int) fileIO.ReadInt16();
                         if (light == byte.MaxValue)
                         {
                             while (num8 > 0)
@@ -2048,7 +2048,7 @@ namespace Terraria.Map
                                     if ((double) y < Main.worldSurface)
                                     {
                                         flag = true;
-                                        int num9 = (int) (byte) (256.0 * ((double) y / Main.worldSurface));
+                                        var num9 = (int) (byte) (256.0 * ((double) y / Main.worldSurface));
                                         num7 = (int) MapHelper.skyPosition + num9;
                                     }
                                     else if ((double) y < Main.rockLayer)
@@ -2079,7 +2079,7 @@ namespace Terraria.Map
                             {
                                 ++y;
                                 --num8;
-                                byte num7 = fileIO.ReadByte();
+                                var num7 = fileIO.ReadByte();
                                 if (num7 > (byte) 18)
                                 {
                                     tile.Light = num7;
@@ -2089,7 +2089,7 @@ namespace Terraria.Map
                                         if ((double) y < Main.worldSurface)
                                         {
                                             flag = true;
-                                            int num10 = (int) (byte) (256.0 * ((double) y / Main.worldSurface));
+                                            var num10 = (int) (byte) (256.0 * ((double) y / Main.worldSurface));
                                             num9 = (int) MapHelper.skyPosition + num10;
                                         }
                                         else if ((double) y < Main.rockLayer)
@@ -2118,7 +2118,7 @@ namespace Terraria.Map
                     }
                     else
                     {
-                        int num5 = (int) fileIO.ReadInt16();
+                        var num5 = (int) fileIO.ReadInt16();
                         y += num5;
                     }
                 }
@@ -2130,22 +2130,22 @@ namespace Terraria.Map
             Main.MapFileMetadata = release < 135
                 ? FileMetadata.FromCurrentSettings(FileType.Map)
                 : FileMetadata.Read(fileIO, FileType.Map);
-            string str = fileIO.ReadString();
-            int num1 = fileIO.ReadInt32();
-            int num2 = fileIO.ReadInt32();
-            int num3 = fileIO.ReadInt32();
+            var str = fileIO.ReadString();
+            var num1 = fileIO.ReadInt32();
+            var num2 = fileIO.ReadInt32();
+            var num3 = fileIO.ReadInt32();
             if (str != Main.worldName || num1 != Main.worldID || (num3 != Main.maxTilesX || num2 != Main.maxTilesY))
                 throw new Exception("Map meta-data is invalid.");
-            short num4 = fileIO.ReadInt16();
-            short num5 = fileIO.ReadInt16();
-            short num6 = fileIO.ReadInt16();
-            short num7 = fileIO.ReadInt16();
-            short num8 = fileIO.ReadInt16();
-            short num9 = fileIO.ReadInt16();
-            bool[] flagArray1 = new bool[(int) num4];
+            var num4 = fileIO.ReadInt16();
+            var num5 = fileIO.ReadInt16();
+            var num6 = fileIO.ReadInt16();
+            var num7 = fileIO.ReadInt16();
+            var num8 = fileIO.ReadInt16();
+            var num9 = fileIO.ReadInt16();
+            var flagArray1 = new bool[(int) num4];
             byte num10 = 0;
             byte num11 = 128;
-            for (int index = 0; index < (int) num4; ++index)
+            for (var index = 0; index < (int) num4; ++index)
             {
                 if (num11 == (byte) 128)
                 {
@@ -2159,10 +2159,10 @@ namespace Terraria.Map
                     flagArray1[index] = true;
             }
 
-            bool[] flagArray2 = new bool[(int) num5];
+            var flagArray2 = new bool[(int) num5];
             byte num12 = 0;
             byte num13 = 128;
-            for (int index = 0; index < (int) num5; ++index)
+            for (var index = 0; index < (int) num5; ++index)
             {
                 if (num13 == (byte) 128)
                 {
@@ -2176,35 +2176,35 @@ namespace Terraria.Map
                     flagArray2[index] = true;
             }
 
-            byte[] numArray1 = new byte[(int) num4];
+            var numArray1 = new byte[(int) num4];
             ushort num14 = 0;
-            for (int index = 0; index < (int) num4; ++index)
+            for (var index = 0; index < (int) num4; ++index)
             {
                 numArray1[index] = !flagArray1[index] ? (byte) 1 : fileIO.ReadByte();
                 num14 += (ushort) numArray1[index];
             }
 
-            byte[] numArray2 = new byte[(int) num5];
+            var numArray2 = new byte[(int) num5];
             ushort num15 = 0;
-            for (int index = 0; index < (int) num5; ++index)
+            for (var index = 0; index < (int) num5; ++index)
             {
                 numArray2[index] = !flagArray2[index] ? (byte) 1 : fileIO.ReadByte();
                 num15 += (ushort) numArray2[index];
             }
 
-            ushort[] numArray3 =
+            var numArray3 =
                 new ushort[(int) num14 + (int) num15 + (int) num6 + (int) num7 + (int) num8 + (int) num9 + 2];
             numArray3[0] = (ushort) 0;
             ushort num16 = 1;
             ushort num17 = 1;
-            ushort num18 = num17;
-            for (int index1 = 0; index1 < 470; ++index1)
+            var num18 = num17;
+            for (var index1 = 0; index1 < 470; ++index1)
             {
                 if (index1 < (int) num4)
                 {
-                    int num19 = (int) numArray1[index1];
-                    int tileOptionCount = MapHelper.tileOptionCounts[index1];
-                    for (int index2 = 0; index2 < tileOptionCount; ++index2)
+                    var num19 = (int) numArray1[index1];
+                    var tileOptionCount = MapHelper.tileOptionCounts[index1];
+                    for (var index2 = 0; index2 < tileOptionCount; ++index2)
                     {
                         if (index2 < num19)
                         {
@@ -2219,14 +2219,14 @@ namespace Terraria.Map
                     num16 += (ushort) MapHelper.tileOptionCounts[index1];
             }
 
-            ushort num20 = num17;
-            for (int index1 = 0; index1 < 231; ++index1)
+            var num20 = num17;
+            for (var index1 = 0; index1 < 231; ++index1)
             {
                 if (index1 < (int) num5)
                 {
-                    int num19 = (int) numArray2[index1];
-                    int wallOptionCount = MapHelper.wallOptionCounts[index1];
-                    for (int index2 = 0; index2 < wallOptionCount; ++index2)
+                    var num19 = (int) numArray2[index1];
+                    var wallOptionCount = MapHelper.wallOptionCounts[index1];
+                    for (var index2 = 0; index2 < wallOptionCount; ++index2)
                     {
                         if (index2 < num19)
                         {
@@ -2241,8 +2241,8 @@ namespace Terraria.Map
                     num16 += (ushort) MapHelper.wallOptionCounts[index1];
             }
 
-            ushort num21 = num17;
-            for (int index = 0; index < 3; ++index)
+            var num21 = num17;
+            for (var index = 0; index < 3; ++index)
             {
                 if (index < (int) num6)
                 {
@@ -2253,8 +2253,8 @@ namespace Terraria.Map
                 ++num16;
             }
 
-            ushort num22 = num17;
-            for (int index = 0; index < 256; ++index)
+            var num22 = num17;
+            for (var index = 0; index < 256; ++index)
             {
                 if (index < (int) num7)
                 {
@@ -2265,8 +2265,8 @@ namespace Terraria.Map
                 ++num16;
             }
 
-            ushort num23 = num17;
-            for (int index = 0; index < 256; ++index)
+            var num23 = num17;
+            for (var index = 0; index < 256; ++index)
             {
                 if (index < (int) num8)
                 {
@@ -2277,8 +2277,8 @@ namespace Terraria.Map
                 ++num16;
             }
 
-            ushort num24 = num17;
-            for (int index = 0; index < 256; ++index)
+            var num24 = num17;
+            for (var index = 0; index < 256; ++index)
             {
                 if (index < (int) num9)
                 {
@@ -2289,20 +2289,20 @@ namespace Terraria.Map
                 ++num16;
             }
 
-            ushort num25 = num17;
+            var num25 = num17;
             numArray3[(int) num17] = num16;
-            BinaryReader binaryReader = release < 93
+            var binaryReader = release < 93
                 ? new BinaryReader(fileIO.BaseStream)
                 : new BinaryReader((Stream) new DeflateStream((Stream) fileIO.BaseStream, (CompressionMode) 1));
-            for (int y = 0; y < Main.maxTilesY; ++y)
+            for (var y = 0; y < Main.maxTilesY; ++y)
             {
-                float num19 = (float) y / (float) Main.maxTilesY;
+                var num19 = (float) y / (float) Main.maxTilesY;
                 Main.statusText = Lang.gen[67].Value + " " + (object) (int) ((double) num19 * 100.0 + 1.0) + "%";
-                for (int x = 0; x < Main.maxTilesX; ++x)
+                for (var x = 0; x < Main.maxTilesX; ++x)
                 {
-                    byte num26 = binaryReader.ReadByte();
-                    byte num27 = ((int) num26 & 1) != 1 ? (byte) 0 : binaryReader.ReadByte();
-                    byte num28 = (byte) (((int) num26 & 14) >> 1);
+                    var num26 = binaryReader.ReadByte();
+                    var num27 = ((int) num26 & 1) != 1 ? (byte) 0 : binaryReader.ReadByte();
+                    var num28 = (byte) (((int) num26 & 14) >> 1);
                     bool flag;
                     switch (num28)
                     {
@@ -2327,10 +2327,10 @@ namespace Terraria.Map
                             break;
                     }
 
-                    ushort num29 = !flag
+                    var num29 = !flag
                         ? (ushort) 0
                         : (((int) num26 & 16) != 16 ? (ushort) binaryReader.ReadByte() : binaryReader.ReadUInt16());
-                    byte light = ((int) num26 & 32) != 32 ? byte.MaxValue : binaryReader.ReadByte();
+                    var light = ((int) num26 & 32) != 32 ? byte.MaxValue : binaryReader.ReadByte();
                     int num30;
                     switch ((byte) (((int) num26 & 192) >> 6))
                     {
@@ -2367,7 +2367,7 @@ namespace Terraria.Map
                         case 6:
                             if ((double) y < Main.worldSurface)
                             {
-                                ushort num31 = (ushort) ((double) num7 * ((double) y / Main.worldSurface));
+                                var num31 = (ushort) ((double) num7 * ((double) y / Main.worldSurface));
                                 num29 += (ushort) ((uint) num22 + (uint) num31);
                                 goto default;
                             }
@@ -2388,7 +2388,7 @@ namespace Terraria.Map
                                 goto default;
                             }
                         default:
-                            MapTile tile = MapTile.Create(numArray3[(int) num29], light,
+                            var tile = MapTile.Create(numArray3[(int) num29], light,
                                 (byte) ((int) num27 >> 1 & 31));
                             Main.Map.SetTile(x, y, ref tile);
                             if (light == byte.MaxValue)

@@ -35,8 +35,8 @@ namespace Terraria.GameContent.Skies
             this._fadeOpacity = !this._isActive
                 ? Math.Max(0.0f, this._fadeOpacity - 0.01f)
                 : Math.Min(1f, 0.01f + this._fadeOpacity);
-            float num = 1200f;
-            for (int index = 0; index < this._meteors.Length; ++index)
+            var num = 1200f;
+            for (var index = 0; index < this._meteors.Length; ++index)
             {
                 this._meteors[index].Position.X -= num * (float) gameTime.ElapsedGameTime.TotalSeconds;
                 this._meteors[index].Position.Y += num * (float) gameTime.ElapsedGameTime.TotalSeconds;
@@ -66,8 +66,8 @@ namespace Terraria.GameContent.Skies
                                    0.100000001490116)), Main.screenWidth, Main.screenHeight),
                     Color.White * Math.Min(1f,
                         (float) (((double) Main.screenPosition.Y - 800.0) / 1000.0) * this._fadeOpacity));
-                Vector2 vector2_1 = new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-                Vector2 vector2_2 = 0.01f * (new Vector2((float) Main.maxTilesX * 8f, (float) Main.worldSurface / 2f) -
+                var vector2_1 = new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
+                var vector2_2 = 0.01f * (new Vector2((float) Main.maxTilesX * 8f, (float) Main.worldSurface / 2f) -
                                              Main.screenPosition);
                 spriteBatch.Draw(this._planetTexture, vector2_1 + new Vector2(-200f, -200f) + vector2_2,
                     new Rectangle?(), Color.White * 0.9f * this._fadeOpacity, 0.0f,
@@ -75,11 +75,11 @@ namespace Terraria.GameContent.Skies
                     1f, SpriteEffects.None, 1f);
             }
 
-            int num1 = -1;
-            int num2 = 0;
-            for (int index = 0; index < this._meteors.Length; ++index)
+            var num1 = -1;
+            var num2 = 0;
+            for (var index = 0; index < this._meteors.Length; ++index)
             {
-                float depth = this._meteors[index].Depth;
+                var depth = this._meteors[index].Depth;
                 if (num1 == -1 && (double) depth < (double) maxDepth)
                     num1 = index;
                 if ((double) depth > (double) minDepth)
@@ -90,16 +90,16 @@ namespace Terraria.GameContent.Skies
 
             if (num1 == -1)
                 return;
-            float num3 = Math.Min(1f, (float) (((double) Main.screenPosition.Y - 1000.0) / 1000.0));
-            Vector2 vector2_3 = Main.screenPosition +
+            var num3 = Math.Min(1f, (float) (((double) Main.screenPosition.Y - 1000.0) / 1000.0));
+            var vector2_3 = Main.screenPosition +
                                 new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-            Rectangle rectangle = new Rectangle(-1000, -1000, 4000, 4000);
-            for (int index = num1; index < num2; ++index)
+            var rectangle = new Rectangle(-1000, -1000, 4000, 4000);
+            for (var index = num1; index < num2; ++index)
             {
-                Vector2 vector2_1 = new Vector2(1f / this._meteors[index].Depth, 0.9f / this._meteors[index].Depth);
-                Vector2 position = (this._meteors[index].Position - vector2_3) * vector2_1 + vector2_3 -
+                var vector2_1 = new Vector2(1f / this._meteors[index].Depth, 0.9f / this._meteors[index].Depth);
+                var position = (this._meteors[index].Position - vector2_3) * vector2_1 + vector2_3 -
                                    Main.screenPosition;
-                int num4 = this._meteors[index].FrameCounter / 3;
+                var num4 = this._meteors[index].FrameCounter / 3;
                 this._meteors[index].FrameCounter = (this._meteors[index].FrameCounter + 1) % 12;
                 if (rectangle.Contains((int) position.X, (int) position.Y))
                     spriteBatch.Draw(this._meteorTexture, position,
@@ -120,9 +120,9 @@ namespace Terraria.GameContent.Skies
             this._fadeOpacity = 1f / 500f;
             this._isActive = true;
             this._meteors = new SolarSky.Meteor[150];
-            for (int index = 0; index < this._meteors.Length; ++index)
+            for (var index = 0; index < this._meteors.Length; ++index)
             {
-                float num = (float) index / (float) this._meteors.Length;
+                var num = (float) index / (float) this._meteors.Length;
                 this._meteors[index].Position.X = (float) ((double) num * ((double) Main.maxTilesX * 16.0) +
                                                            (double) this._random.NextFloat() * 40.0 - 20.0);
                 this._meteors[index].Position.Y =

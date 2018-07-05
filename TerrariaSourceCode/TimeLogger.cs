@@ -38,7 +38,7 @@ namespace Terraria
             TimeLogger.drawTimes = new TimeLogger.TimeLogData[10];
             TimeLogger.lightingTimes = new TimeLogger.TimeLogData[5];
             TimeLogger.detailedDrawTimes = new TimeLogger.TimeLogData[40];
-            for (int index = 0; index < TimeLogger.renderTimes.Length; ++index)
+            for (var index = 0; index < TimeLogger.renderTimes.Length; ++index)
                 TimeLogger.renderTimes[index].logText = string.Format("Render #{0}", (object) index);
             TimeLogger.drawTimes[0].logText = "Drawing Solid Tiles";
             TimeLogger.drawTimes[1].logText = "Drawing Non-Solid Tiles";
@@ -47,7 +47,7 @@ namespace Terraria
             TimeLogger.drawTimes[4].logText = "Drawing Water Tiles";
             TimeLogger.drawTimes[5].logText = "Drawing Black Tiles";
             TimeLogger.lightingTimes[0].logText = "Lighting Initialization";
-            for (int index = 1; index < TimeLogger.lightingTimes.Length; ++index)
+            for (var index = 1; index < TimeLogger.lightingTimes.Length; ++index)
                 TimeLogger.lightingTimes[index].logText = string.Format("Lighting Pass #{0}", (object) index);
             TimeLogger.detailedDrawTimes[0].logText = "Finding color tiles";
             TimeLogger.detailedDrawTimes[1].logText = "Initial Map Update";
@@ -87,7 +87,7 @@ namespace Terraria
             TimeLogger.detailedDrawTimes[35].logText = "Render layers up to Players";
             TimeLogger.detailedDrawTimes[36].logText = "Render Items/Rain/Gore/Dust/Water/Map";
             TimeLogger.detailedDrawTimes[37].logText = "Render Interface";
-            for (int index = 0; index < TimeLogger.detailedDrawTimes.Length; ++index)
+            for (var index = 0; index < TimeLogger.detailedDrawTimes.Length; ++index)
             {
                 if (string.IsNullOrEmpty(TimeLogger.detailedDrawTimes[index].logText))
                     TimeLogger.detailedDrawTimes[index].logText =
@@ -112,17 +112,17 @@ namespace Terraria
 
         public static void NewDrawFrame()
         {
-            for (int index = 0; index < TimeLogger.renderTimes.Length; ++index)
+            for (var index = 0; index < TimeLogger.renderTimes.Length; ++index)
                 TimeLogger.renderTimes[index].usedLastDraw = false;
-            for (int index = 0; index < TimeLogger.drawTimes.Length; ++index)
+            for (var index = 0; index < TimeLogger.drawTimes.Length; ++index)
                 TimeLogger.drawTimes[index].usedLastDraw = false;
-            for (int index = 0; index < TimeLogger.lightingTimes.Length; ++index)
+            for (var index = 0; index < TimeLogger.lightingTimes.Length; ++index)
                 TimeLogger.lightingTimes[index].usedLastDraw = false;
             if (TimeLogger.startLoggingNextFrame)
             {
                 TimeLogger.startLoggingNextFrame = false;
-                DateTime now = DateTime.Now;
-                string path = Main.SavePath + (object) Path.DirectorySeparatorChar + "TerrariaDrawLog.7z";
+                var now = DateTime.Now;
+                var path = Main.SavePath + (object) Path.DirectorySeparatorChar + "TerrariaDrawLog.7z";
                 try
                 {
                     TimeLogger.logWriter =
@@ -186,7 +186,7 @@ namespace Terraria
 
         private static void UpdateTime(TimeLogger.TimeLogData[] times, int type, double time)
         {
-            bool flag = false;
+            var flag = false;
             if (times[type].resetMaxTime > 0)
                 --times[type].resetMaxTime;
             else
@@ -237,8 +237,8 @@ namespace Terraria
 
         public static float GetDrawTotal()
         {
-            float num = 0.0f;
-            for (int index = 0; index < TimeLogger.drawTimes.Length; ++index)
+            var num = 0.0f;
+            for (var index = 0; index < TimeLogger.drawTimes.Length; ++index)
                 num += TimeLogger.drawTimes[index].time;
             return num;
         }
@@ -257,8 +257,8 @@ namespace Terraria
 
         public static float GetLightingTotal()
         {
-            float num = 0.0f;
-            for (int index = 0; index < TimeLogger.lightingTimes.Length; ++index)
+            var num = 0.0f;
+            for (var index = 0; index < TimeLogger.lightingTimes.Length; ++index)
                 num += TimeLogger.lightingTimes[index].time;
             return num;
         }
@@ -272,8 +272,8 @@ namespace Terraria
         {
             if (detailedDrawType < 0 || detailedDrawType >= TimeLogger.detailedDrawTimes.Length)
                 return;
-            double totalMilliseconds = TimeLogger.detailedDrawTimer.Elapsed.TotalMilliseconds;
-            double time = totalMilliseconds - TimeLogger.lastDetailedDrawTime;
+            var totalMilliseconds = TimeLogger.detailedDrawTimer.Elapsed.TotalMilliseconds;
+            var time = totalMilliseconds - TimeLogger.lastDetailedDrawTime;
             TimeLogger.lastDetailedDrawTime = totalMilliseconds;
             TimeLogger.UpdateTime(TimeLogger.detailedDrawTimes, detailedDrawType, time);
         }
@@ -285,8 +285,8 @@ namespace Terraria
 
         public static float GetDetailedDrawTotal()
         {
-            float num = 0.0f;
-            for (int index = 0; index < TimeLogger.detailedDrawTimes.Length; ++index)
+            var num = 0.0f;
+            for (var index = 0; index < TimeLogger.detailedDrawTimes.Length; ++index)
             {
                 if (TimeLogger.detailedDrawTimes[index].usedLastDraw)
                     num += TimeLogger.detailedDrawTimes[index].time;

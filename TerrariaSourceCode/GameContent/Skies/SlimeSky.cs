@@ -24,7 +24,7 @@ namespace Terraria.GameContent.Skies
         public override void OnLoad()
         {
             this._textures = new Texture2D[4];
-            for (int index = 0; index < 4; ++index)
+            for (var index = 0; index < 4; ++index)
                 this._textures[index] = TextureManager.Load("Images/Misc/Sky_Slime_" + (object) (index + 1));
             this.GenerateSlimes();
         }
@@ -32,10 +32,10 @@ namespace Terraria.GameContent.Skies
         private void GenerateSlimes()
         {
             this._slimes = new SlimeSky.Slime[Main.maxTilesY / 6];
-            for (int index = 0; index < this._slimes.Length; ++index)
+            for (var index = 0; index < this._slimes.Length; ++index)
             {
-                int maxValue = (int) ((double) Main.screenPosition.Y * 0.7 - (double) Main.screenHeight);
-                int minValue = (int) ((double) maxValue - Main.worldSurface * 16.0);
+                var maxValue = (int) ((double) Main.screenPosition.Y * 0.7 - (double) Main.screenHeight);
+                var minValue = (int) ((double) maxValue - Main.worldSurface * 16.0);
                 this._slimes[index].Position = new Vector2((float) (this._random.Next(0, Main.maxTilesX) * 16),
                     (float) this._random.Next(minValue, maxValue));
                 this._slimes[index].Speed = (float) (5.0 + 3.0 * this._random.NextDouble());
@@ -64,7 +64,7 @@ namespace Terraria.GameContent.Skies
         {
             if (Main.gamePaused || !Main.hasFocus)
                 return;
-            for (int index = 0; index < this._slimes.Length; ++index)
+            for (var index = 0; index < this._slimes.Length; ++index)
             {
                 if (this._slimes[index].Active)
                 {
@@ -110,11 +110,11 @@ namespace Terraria.GameContent.Skies
         {
             if ((double) Main.screenPosition.Y > 10000.0 || Main.gameMenu)
                 return;
-            int num1 = -1;
-            int num2 = 0;
-            for (int index = 0; index < this._slimes.Length; ++index)
+            var num1 = -1;
+            var num2 = 0;
+            for (var index = 0; index < this._slimes.Length; ++index)
             {
-                float depth = this._slimes[index].Depth;
+                var depth = this._slimes[index].Depth;
                 if (num1 == -1 && (double) depth < (double) maxDepth)
                     num1 = index;
                 if ((double) depth > (double) minDepth)
@@ -125,15 +125,15 @@ namespace Terraria.GameContent.Skies
 
             if (num1 == -1)
                 return;
-            Vector2 vector2_1 = Main.screenPosition +
+            var vector2_1 = Main.screenPosition +
                                 new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-            Rectangle rectangle = new Rectangle(-1000, -1000, 4000, 4000);
-            for (int index = num1; index < num2; ++index)
+            var rectangle = new Rectangle(-1000, -1000, 4000, 4000);
+            for (var index = num1; index < num2; ++index)
             {
                 if (this._slimes[index].Active)
                 {
-                    Color color = new Color(Main.bgColor.ToVector4() * 0.9f + new Vector4(0.1f)) * 0.8f;
-                    float num3 = 1f;
+                    var color = new Color(Main.bgColor.ToVector4() * 0.9f + new Vector4(0.1f)) * 0.8f;
+                    var num3 = 1f;
                     if ((double) this._slimes[index].Depth > 3.0)
                         num3 = 0.6f;
                     else if ((double) this._slimes[index].Depth > 2.5)
@@ -142,12 +142,12 @@ namespace Terraria.GameContent.Skies
                         num3 = 0.8f;
                     else if ((double) this._slimes[index].Depth > 1.5)
                         num3 = 0.9f;
-                    float num4 = num3 * 0.8f;
+                    var num4 = num3 * 0.8f;
                     color = new Color((int) ((double) color.R * (double) num4),
                         (int) ((double) color.G * (double) num4), (int) ((double) color.B * (double) num4),
                         (int) ((double) color.A * (double) num4));
-                    Vector2 vector2_2 = new Vector2(1f / this._slimes[index].Depth, 0.9f / this._slimes[index].Depth);
-                    Vector2 position = this._slimes[index].Position;
+                    var vector2_2 = new Vector2(1f / this._slimes[index].Depth, 0.9f / this._slimes[index].Depth);
+                    var position = this._slimes[index].Position;
                     position = (position - vector2_1) * vector2_2 + vector2_1 - Main.screenPosition;
                     position.X = (float) (((double) position.X + 500.0) % 4000.0);
                     if ((double) position.X < 0.0)

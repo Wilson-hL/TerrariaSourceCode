@@ -55,8 +55,8 @@ namespace Terraria
 
         public static string GetLocalIPAddress()
         {
-            string str = "";
-            foreach (IPAddress address in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            var str = "";
+            foreach (var address in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
             {
                 if (address.AddressFamily == AddressFamily.InterNetwork)
                 {
@@ -74,7 +74,7 @@ namespace Terraria
             Main.rxData = 0;
             Main.txMsg = 0;
             Main.txData = 0;
-            for (int index = 0; index < Main.maxMsg; ++index)
+            for (var index = 0; index < Main.maxMsg; ++index)
             {
                 Main.rxMsgType[index] = 0;
                 Main.rxDataType[index] = 0;
@@ -85,11 +85,11 @@ namespace Terraria
 
         public static void ResetSections()
         {
-            for (int index1 = 0; index1 < 256; ++index1)
+            for (var index1 = 0; index1 < 256; ++index1)
             {
-                for (int index2 = 0; index2 < Main.maxSectionsX; ++index2)
+                for (var index2 = 0; index2 < Main.maxSectionsX; ++index2)
                 {
-                    for (int index3 = 0; index3 < Main.maxSectionsY; ++index3)
+                    for (var index3 = 0; index3 < Main.maxSectionsY; ++index3)
                         Netplay.Clients[index1].TileSections[index2, index3] = false;
                 }
             }
@@ -97,8 +97,8 @@ namespace Terraria
 
         public static void AddBan(int plr)
         {
-            RemoteAddress remoteAddress = Netplay.Clients[plr].Socket.GetRemoteAddress();
-            using (StreamWriter streamWriter = new StreamWriter(Netplay.BanFilePath, true))
+            var remoteAddress = Netplay.Clients[plr].Socket.GetRemoteAddress();
+            using (var streamWriter = new StreamWriter(Netplay.BanFilePath, true))
             {
                 streamWriter.WriteLine("//" + Main.player[plr].name);
                 streamWriter.WriteLine(remoteAddress.GetIdentifier());
@@ -109,10 +109,10 @@ namespace Terraria
         {
             try
             {
-                string identifier = address.GetIdentifier();
+                var identifier = address.GetIdentifier();
                 if (System.IO.File.Exists(Netplay.BanFilePath))
                 {
-                    using (StreamReader streamReader = new StreamReader(Netplay.BanFilePath))
+                    using (var streamReader = new StreamReader(Netplay.BanFilePath))
                     {
                         string str;
                         while ((str = streamReader.ReadLine()) != null)
@@ -134,12 +134,12 @@ namespace Terraria
         {
             if (Netplay.Connection.Socket.GetRemoteAddress().Type != AddressType.Tcp)
                 return;
-            for (int index1 = 0; index1 < Main.maxMP; ++index1)
+            for (var index1 = 0; index1 < Main.maxMP; ++index1)
             {
                 if (Main.recentIP[index1].ToLower() == Netplay.ServerIPText.ToLower() &&
                     Main.recentPort[index1] == Netplay.ListenPort)
                 {
-                    for (int index2 = index1; index2 < Main.maxMP - 1; ++index2)
+                    for (var index2 = index1; index2 < Main.maxMP - 1; ++index2)
                     {
                         Main.recentIP[index2] = Main.recentIP[index2 + 1];
                         Main.recentPort[index2] = Main.recentPort[index2 + 1];
@@ -148,7 +148,7 @@ namespace Terraria
                 }
             }
 
-            for (int index = Main.maxMP - 1; index > 0; --index)
+            for (var index = Main.maxMP - 1; index > 0; --index)
             {
                 Main.recentIP[index] = Main.recentIP[index - 1];
                 Main.recentPort[index] = Main.recentPort[index - 1];
@@ -163,7 +163,7 @@ namespace Terraria
 
         public static void SocialClientLoop(object threadContext)
         {
-            ISocket socket = (ISocket) threadContext;
+            var socket = (ISocket) threadContext;
             Netplay.ClientLoopSetup(socket.GetRemoteAddress());
             Netplay.Connection.Socket = socket;
             Netplay.InnerClientLoop();
@@ -173,7 +173,7 @@ namespace Terraria
         {
             Netplay.ClientLoopSetup((RemoteAddress) new TcpAddress(Netplay.ServerIP, Netplay.ListenPort));
             Main.menuMode = 14;
-            bool flag = true;
+            var flag = true;
             while (flag)
             {
                 flag = false;
@@ -204,7 +204,7 @@ namespace Terraria
                 Main.rand = new UnifiedRandom((int) DateTime.Now.Ticks);
             Main.player[Main.myPlayer].hostile = false;
             Main.clientPlayer = (Player) Main.player[Main.myPlayer].clientClone();
-            for (int index = 0; index < (int) byte.MaxValue; ++index)
+            for (var index = 0; index < (int) byte.MaxValue; ++index)
             {
                 if (index != Main.myPlayer)
                     Main.player[index] = new Player();
@@ -224,7 +224,7 @@ namespace Terraria
             try
             {
                 NetMessage.buffer[256].Reset();
-                int num1 = -1;
+                var num1 = -1;
                 while (!Netplay.disconnect)
                 {
                     if (Netplay.Connection.Socket.IsConnected())
@@ -258,7 +258,7 @@ namespace Terraria
 
                         if (Netplay.Connection.State == 5 && Main.loadMapLock)
                         {
-                            float num2 = (float) Main.loadMapLastX / (float) Main.maxTilesX;
+                            var num2 = (float) Main.loadMapLastX / (float) Main.maxTilesX;
                             Main.statusText = Lang.gen[68].Value + " " + (object) (int) ((double) num2 * 100.0 + 1.0) +
                                               "%";
                         }
@@ -340,7 +340,7 @@ namespace Terraria
             {
                 try
                 {
-                    using (StreamWriter streamWriter = new StreamWriter("client-crashlog.txt", true))
+                    using (var streamWriter = new StreamWriter("client-crashlog.txt", true))
                     {
                         streamWriter.WriteLine((object) DateTime.Now);
                         streamWriter.WriteLine((object) ex);
@@ -361,7 +361,7 @@ namespace Terraria
 
         private static int FindNextOpenClientSlot()
         {
-            for (int index = 0; index < Main.maxNetPlayers; ++index)
+            for (var index = 0; index < Main.maxNetPlayers; ++index)
             {
                 if (!Netplay.Clients[index].IsConnected())
                     return index;
@@ -372,7 +372,7 @@ namespace Terraria
 
         private static void OnConnectionAccepted(ISocket client)
         {
-            int nextOpenClientSlot = Netplay.FindNextOpenClientSlot();
+            var nextOpenClientSlot = Netplay.FindNextOpenClientSlot();
             if (nextOpenClientSlot != -1)
             {
                 Netplay.Clients[nextOpenClientSlot].Reset();
@@ -415,7 +415,7 @@ namespace Terraria
             Main.statusText = Lang.menu[8].Value;
             Main.netMode = 2;
             Netplay.disconnect = false;
-            for (int index = 0; index < 256; ++index)
+            for (var index = 0; index < 256; ++index)
             {
                 Netplay.Clients[index] = new RemoteClient();
                 Netplay.Clients[index].Reset();
@@ -447,13 +447,13 @@ namespace Terraria
                 }
             }
 
-            int num1 = 0;
+            var num1 = 0;
             while (!Netplay.disconnect)
             {
                 if (!Netplay.IsListening)
                 {
-                    int num2 = -1;
-                    for (int index = 0; index < Main.maxNetPlayers; ++index)
+                    var num2 = -1;
+                    for (var index = 0; index < Main.maxNetPlayers; ++index)
                     {
                         if (!Netplay.Clients[index].IsConnected())
                         {
@@ -483,8 +483,8 @@ namespace Terraria
                     }
                 }
 
-                int num3 = 0;
-                for (int index = 0; index < 256; ++index)
+                var num3 = 0;
+                for (var index = 0; index < 256; ++index)
                 {
                     if (NetMessage.buffer[index].checkBytes)
                         NetMessage.CheckBytes(index);
@@ -575,7 +575,7 @@ namespace Terraria
                         Netplay.Clients[index].StatusText2 = "";
                         if (index < (int) byte.MaxValue)
                         {
-                            bool active = Main.player[index].active;
+                            var active = Main.player[index].active;
                             Main.player[index].active = false;
                             if (active)
                                 Player.Hooks.PlayerDisconnect(index);
@@ -609,7 +609,7 @@ namespace Terraria
             {
             }
 
-            for (int index = 0; index < 256; ++index)
+            for (var index = 0; index < 256; ++index)
                 Netplay.Clients[index].Reset();
             if (Main.menuMode != 15)
             {
@@ -655,8 +655,8 @@ namespace Terraria
                     return true;
                 }
 
-                IPAddress[] addressList = Dns.GetHostEntry(remoteAddress).AddressList;
-                for (int index = 0; index < addressList.Length; ++index)
+                var addressList = Dns.GetHostEntry(remoteAddress).AddressList;
+                for (var index = 0; index < addressList.Length; ++index)
                 {
                     if (addressList[index].AddressFamily == AddressFamily.InterNetwork)
                     {

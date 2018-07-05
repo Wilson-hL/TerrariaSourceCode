@@ -24,7 +24,7 @@ namespace Terraria.Modules
             else
             {
                 this.data = new List<TileObjectData>(copyFrom.data.Count);
-                for (int index = 0; index < this.data.Count; ++index)
+                for (var index = 0; index < this.data.Count; ++index)
                     this.data.Add(new TileObjectData(copyFrom.data[index]));
             }
         }

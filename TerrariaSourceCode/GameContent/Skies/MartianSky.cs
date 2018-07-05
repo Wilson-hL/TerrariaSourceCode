@@ -25,10 +25,10 @@ namespace Terraria.GameContent.Skies
         {
             if (Main.gamePaused || !Main.hasFocus)
                 return;
-            int activeUfos = this._activeUfos;
-            for (int index = 0; index < this._ufos.Length; ++index)
+            var activeUfos = this._activeUfos;
+            for (var index = 0; index < this._ufos.Length; ++index)
             {
-                MartianSky.Ufo ufo = this._ufos[index];
+                var ufo = this._ufos[index];
                 if (ufo.IsActive)
                 {
                     ++ufo.Frame;
@@ -63,11 +63,11 @@ namespace Terraria.GameContent.Skies
         {
             if ((double) Main.screenPosition.Y > 10000.0)
                 return;
-            int num1 = -1;
-            int num2 = 0;
-            for (int index = 0; index < this._ufos.Length; ++index)
+            var num1 = -1;
+            var num2 = 0;
+            for (var index = 0; index < this._ufos.Length; ++index)
             {
-                float depth = this._ufos[index].Depth;
+                var depth = this._ufos[index].Depth;
                 if (num1 == -1 && (double) depth < (double) maxDepth)
                     num1 = index;
                 if ((double) depth > (double) minDepth)
@@ -78,14 +78,14 @@ namespace Terraria.GameContent.Skies
 
             if (num1 == -1)
                 return;
-            Color color = new Color(Main.bgColor.ToVector4() * 0.9f + new Vector4(0.1f));
-            Vector2 vector2_1 = Main.screenPosition +
+            var color = new Color(Main.bgColor.ToVector4() * 0.9f + new Vector4(0.1f));
+            var vector2_1 = Main.screenPosition +
                                 new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-            Rectangle rectangle = new Rectangle(-1000, -1000, 4000, 4000);
-            for (int index = num1; index < num2; ++index)
+            var rectangle = new Rectangle(-1000, -1000, 4000, 4000);
+            for (var index = num1; index < num2; ++index)
             {
-                Vector2 vector2_2 = new Vector2(1f / this._ufos[index].Depth, 0.9f / this._ufos[index].Depth);
-                Vector2 position = this._ufos[index].Position;
+                var vector2_2 = new Vector2(1f / this._ufos[index].Depth, 0.9f / this._ufos[index].Depth);
+                var position = this._ufos[index].Position;
                 position = (position - vector2_1) * vector2_2 + vector2_1 - Main.screenPosition;
                 if (this._ufos[index].IsActive && rectangle.Contains((int) position.X, (int) position.Y))
                 {
@@ -106,18 +106,18 @@ namespace Terraria.GameContent.Skies
         {
             this._maxUfos = (int) (256.0 * (double) ((float) Main.maxTilesX / 4200f));
             this._ufos = new MartianSky.Ufo[this._maxUfos];
-            int num1 = this._maxUfos >> 4;
-            for (int index = 0; index < num1; ++index)
+            var num1 = this._maxUfos >> 4;
+            for (var index = 0; index < num1; ++index)
             {
-                double num2 = (double) index / (double) num1;
+                var num2 = (double) index / (double) num1;
                 this._ufos[index] = new MartianSky.Ufo(Main.extraTexture[5],
                     (float) (Main.rand.NextDouble() * 4.0 + 6.59999990463257));
                 this._ufos[index].GlowTexture = Main.glowMaskTexture[90];
             }
 
-            for (int index = num1; index < this._ufos.Length; ++index)
+            for (var index = num1; index < this._ufos.Length; ++index)
             {
-                double num2 = (double) (index - num1) / (double) (this._ufos.Length - num1);
+                var num2 = (double) (index - num1) / (double) (this._ufos.Length - num1);
                 this._ufos[index] = new MartianSky.Ufo(Main.extraTexture[6],
                     (float) (Main.rand.NextDouble() * 5.0 + 1.60000002384186));
                 this._ufos[index].Scale = 0.5f;
@@ -168,8 +168,8 @@ namespace Terraria.GameContent.Skies
                 ufo.Position.X = (float) MartianSky.Ufo.Random.NextDouble() * (float) (Main.maxTilesX << 4);
                 ufo.Position.Y = (float) (MartianSky.Ufo.Random.NextDouble() * 5000.0);
                 ufo.Opacity = 0.0f;
-                float num1 = (float) (MartianSky.Ufo.Random.NextDouble() * 5.0 + 10.0);
-                double num2 = MartianSky.Ufo.Random.NextDouble() * 0.600000023841858 - 0.300000011920929;
+                var num1 = (float) (MartianSky.Ufo.Random.NextDouble() * 5.0 + 10.0);
+                var num2 = MartianSky.Ufo.Random.NextDouble() * 0.600000023841858 - 0.300000011920929;
                 ufo.Rotation = (float) num2;
                 if (MartianSky.Ufo.Random.Next(2) == 0)
                     num2 += 3.14159274101257;

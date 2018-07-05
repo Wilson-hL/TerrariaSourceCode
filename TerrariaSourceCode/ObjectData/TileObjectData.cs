@@ -200,9 +200,9 @@ namespace Terraria.ObjectData
             this._tileObjectCoords.styleWidth =
                 (this._tileObjectCoords.width + this._tileObjectCoords.padding) * this.Width +
                 (int) this._tileObjectCoords.paddingFix.X;
-            int num = 0;
+            var num = 0;
             this._tileObjectCoords.styleHeight = 0;
-            for (int index = 0; index < this._tileObjectCoords.heights.Length; ++index)
+            for (var index = 0; index < this._tileObjectCoords.heights.Length; ++index)
                 num += this._tileObjectCoords.heights[index] + this._tileObjectCoords.padding;
             this._tileObjectCoords.styleHeight = num + (int) this._tileObjectCoords.paddingFix.Y;
             if (!this._hasOwnLiquidDeath)
@@ -288,7 +288,7 @@ namespace Terraria.ObjectData
                 this._anchor.top = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].AnchorTop = value;
             }
         }
@@ -315,7 +315,7 @@ namespace Terraria.ObjectData
                 this._anchor.bottom = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].AnchorBottom = value;
             }
         }
@@ -342,7 +342,7 @@ namespace Terraria.ObjectData
                 this._anchor.left = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].AnchorLeft = value;
             }
         }
@@ -369,7 +369,7 @@ namespace Terraria.ObjectData
                 this._anchor.right = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].AnchorRight = value;
             }
         }
@@ -396,7 +396,7 @@ namespace Terraria.ObjectData
                 this._anchor.wall = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].AnchorWall = value;
             }
         }
@@ -423,9 +423,9 @@ namespace Terraria.ObjectData
                 this._anchorTiles.tileValid = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                 {
-                    int[] numArray = value;
+                    var numArray = value;
                     if (value != null)
                         numArray = (int[]) value.Clone();
                     this._alternates.data[index].AnchorValidTiles = numArray;
@@ -455,9 +455,9 @@ namespace Terraria.ObjectData
                 this._anchorTiles.tileInvalid = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                 {
-                    int[] numArray = value;
+                    var numArray = value;
                     if (value != null)
                         numArray = (int[]) value.Clone();
                     this._alternates.data[index].AnchorInvalidTiles = numArray;
@@ -487,9 +487,9 @@ namespace Terraria.ObjectData
                 this._anchorTiles.tileAlternates = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                 {
-                    int[] numArray = value;
+                    var numArray = value;
                     if (value != null)
                         numArray = (int[]) value.Clone();
                     this._alternates.data[index].AnchorAlternateTiles = numArray;
@@ -517,9 +517,9 @@ namespace Terraria.ObjectData
                 this._anchorTiles.wallValid = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                 {
-                    int[] numArray = value;
+                    var numArray = value;
                     if (value != null)
                         numArray = (int[]) value.Clone();
                     this._alternates.data[index].AnchorValidWalls = numArray;
@@ -549,7 +549,7 @@ namespace Terraria.ObjectData
                 this._liquidDeath.water = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].WaterDeath = value;
             }
         }
@@ -576,7 +576,7 @@ namespace Terraria.ObjectData
                 this._liquidDeath.lava = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].LavaDeath = value;
             }
         }
@@ -603,7 +603,7 @@ namespace Terraria.ObjectData
                 this._liquidPlacement.water = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].WaterPlacement = value;
             }
         }
@@ -630,7 +630,7 @@ namespace Terraria.ObjectData
                 this._liquidPlacement.lava = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].LavaPlacement = value;
             }
         }
@@ -765,7 +765,7 @@ namespace Terraria.ObjectData
                 this._tileObjectDraw.yOffset = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].DrawYOffset = value;
             }
         }
@@ -792,7 +792,7 @@ namespace Terraria.ObjectData
                 this._tileObjectDraw.flipHorizontal = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].DrawFlipHorizontal = value;
             }
         }
@@ -819,7 +819,7 @@ namespace Terraria.ObjectData
                 this._tileObjectDraw.flipVertical = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].DrawFlipVertical = value;
             }
         }
@@ -846,7 +846,7 @@ namespace Terraria.ObjectData
                 this._tileObjectDraw.stepDown = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].DrawStepDown = value;
             }
         }
@@ -873,7 +873,7 @@ namespace Terraria.ObjectData
                 this._tileObjectStyle.horizontal = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].StyleHorizontal = value;
             }
         }
@@ -900,7 +900,7 @@ namespace Terraria.ObjectData
                 this._tileObjectStyle.style = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].Style = value;
             }
         }
@@ -927,7 +927,7 @@ namespace Terraria.ObjectData
                 this._tileObjectStyle.styleWrapLimit = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].StyleWrapLimit = value;
             }
         }
@@ -954,7 +954,7 @@ namespace Terraria.ObjectData
                 this._tileObjectStyle.styleLineSkip = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].StyleLineSkip = value;
             }
         }
@@ -981,7 +981,7 @@ namespace Terraria.ObjectData
                 this._tileObjectStyle.styleMultiplier = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].StyleMultiplier = value;
             }
         }
@@ -1014,7 +1014,7 @@ namespace Terraria.ObjectData
                 this._tileObjectBase.width = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].Width = value;
             }
         }
@@ -1047,7 +1047,7 @@ namespace Terraria.ObjectData
                 this._tileObjectBase.height = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].Height = value;
             }
         }
@@ -1074,7 +1074,7 @@ namespace Terraria.ObjectData
                 this._tileObjectBase.origin = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].Origin = value;
             }
         }
@@ -1101,7 +1101,7 @@ namespace Terraria.ObjectData
                 this._tileObjectBase.direction = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].Direction = value;
             }
         }
@@ -1128,7 +1128,7 @@ namespace Terraria.ObjectData
                 this._tileObjectBase.randomRange = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].RandomStyleRange = value;
             }
         }
@@ -1155,7 +1155,7 @@ namespace Terraria.ObjectData
                 this._tileObjectBase.flattenAnchors = value;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].FlattenAnchors = value;
             }
         }
@@ -1184,9 +1184,9 @@ namespace Terraria.ObjectData
                 this._tileObjectCoords.calculated = false;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                 {
-                    int[] numArray = value;
+                    var numArray = value;
                     if (value != null)
                         numArray = (int[]) value.Clone();
                     this._alternates.data[index].CoordinateHeights = numArray;
@@ -1217,7 +1217,7 @@ namespace Terraria.ObjectData
                 this._tileObjectCoords.calculated = false;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].CoordinateWidth = value;
             }
         }
@@ -1245,7 +1245,7 @@ namespace Terraria.ObjectData
                 this._tileObjectCoords.calculated = false;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].CoordinatePadding = value;
             }
         }
@@ -1273,7 +1273,7 @@ namespace Terraria.ObjectData
                 this._tileObjectCoords.calculated = false;
                 if (!this._linkedAlternates)
                     return;
-                for (int index = 0; index < this._alternates.data.Count; ++index)
+                for (var index = 0; index < this._alternates.data.Count; ++index)
                     this._alternates.data[index].CoordinatePaddingFix = value;
             }
         }
@@ -1367,7 +1367,7 @@ namespace Terraria.ObjectData
 
             if (numArray2 != null)
             {
-                for (int index = 0; index < numArray2.Length; ++index)
+                for (var index = 0; index < numArray2.Length; ++index)
                 {
                     if (type == numArray2[index])
                         return false;
@@ -1376,7 +1376,7 @@ namespace Terraria.ObjectData
 
             if (numArray1 == null)
                 return true;
-            for (int index = 0; index < numArray1.Length; ++index)
+            for (var index = 0; index < numArray1.Length; ++index)
             {
                 if (type == numArray1[index])
                     return true;
@@ -1387,10 +1387,10 @@ namespace Terraria.ObjectData
 
         public bool isValidWallAnchor(int type)
         {
-            int[] numArray = this._anchorTiles != null ? this._anchorTiles.wallValid : (int[]) null;
+            var numArray = this._anchorTiles != null ? this._anchorTiles.wallValid : (int[]) null;
             if (numArray == null)
                 return type != 0;
-            for (int index = 0; index < numArray.Length; ++index)
+            for (var index = 0; index < numArray.Length; ++index)
             {
                 if (type == numArray[index])
                     return true;
@@ -1403,10 +1403,10 @@ namespace Terraria.ObjectData
         {
             if (this._anchorTiles == null)
                 return false;
-            int[] tileAlternates = this._anchorTiles.tileAlternates;
+            var tileAlternates = this._anchorTiles.tileAlternates;
             if (tileAlternates == null)
                 return false;
-            for (int index = 0; index < tileAlternates.Length; ++index)
+            for (var index = 0; index < tileAlternates.Length; ++index)
             {
                 if (type == tileAlternates[index])
                     return true;
@@ -1417,7 +1417,7 @@ namespace Terraria.ObjectData
 
         public int CalculatePlacementStyle(int style, int alternate, int random)
         {
-            int num = style * this.StyleMultiplier + this.Style;
+            var num = style * this.StyleMultiplier + this.Style;
             if (random >= 0)
                 num += random;
             return num;
@@ -1452,7 +1452,7 @@ namespace Terraria.ObjectData
 
             if (tileObjectDataList.Count <= style)
             {
-                for (int count = tileObjectDataList.Count; count <= style; ++count)
+                for (var count = tileObjectDataList.Count; count <= style; ++count)
                     tileObjectDataList.Add((TileObjectData) null);
             }
 
@@ -1477,7 +1477,7 @@ namespace Terraria.ObjectData
             TileObjectData._baseObject = new TileObjectData((TileObjectData) null);
             TileObjectData._baseObject.SetupBaseObject();
             TileObjectData._data = new List<TileObjectData>(470);
-            for (int index = 0; index < 470; ++index)
+            for (var index = 0; index < 470; ++index)
                 TileObjectData._data.Add((TileObjectData) null);
             TileObjectData.newTile = new TileObjectData(TileObjectData._baseObject);
             TileObjectData.newSubTile = new TileObjectData(TileObjectData._baseObject);
@@ -1510,7 +1510,7 @@ namespace Terraria.ObjectData
             TileObjectData.newTile.UsesCustomCanPlace = false;
             TileObjectData.newTile.LavaDeath = true;
             TileObjectData.addTile(427);
-            for (int tileType = 435; tileType <= 439; ++tileType)
+            for (var tileType = 435; tileType <= 439; ++tileType)
             {
                 TileObjectData.newTile.CoordinateHeights = new int[1]
                 {
@@ -1688,7 +1688,7 @@ namespace Terraria.ObjectData
             TileObjectData.newTile.Direction = TileObjectDirection.PlaceLeft;
             TileObjectData.newTile.StyleMultiplier = 2;
             TileObjectData.newTile.StyleWrapLimit = 2;
-            for (int Y = 1; Y < 5; ++Y)
+            for (var Y = 1; Y < 5; ++Y)
             {
                 TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
                 TileObjectData.newAlternate.Origin = new Point16(0, Y);
@@ -1698,7 +1698,7 @@ namespace Terraria.ObjectData
             TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
             TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
             TileObjectData.addAlternate(1);
-            for (int Y = 1; Y < 5; ++Y)
+            for (var Y = 1; Y < 5; ++Y)
             {
                 TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
                 TileObjectData.newAlternate.Origin = new Point16(0, Y);
@@ -3428,13 +3428,13 @@ namespace Terraria.ObjectData
         {
             if (type < 0 || type >= TileObjectData._data.Count || style < 0)
                 return false;
-            TileObjectData tileObjectData1 = TileObjectData._data[type];
+            var tileObjectData1 = TileObjectData._data[type];
             if (tileObjectData1 == null)
                 return false;
-            List<TileObjectData> subTiles = tileObjectData1.SubTiles;
+            var subTiles = tileObjectData1.SubTiles;
             if (subTiles != null && style < subTiles.Count)
             {
-                TileObjectData tileObjectData2 = subTiles[style];
+                var tileObjectData2 = subTiles[style];
                 if (tileObjectData2 != null)
                     return tileObjectData2._usesCustomCanPlace;
             }
@@ -3444,7 +3444,7 @@ namespace Terraria.ObjectData
 
         public static bool CheckLiquidPlacement(int type, int style, Tile checkTile)
         {
-            TileObjectData tileData = TileObjectData.GetTileData(type, style, 0);
+            var tileData = TileObjectData.GetTileData(type, style, 0);
             if (tileData != null)
                 return tileData.LiquidPlace(checkTile);
             return TileObjectData.LiquidPlace(type, checkTile);
@@ -3475,7 +3475,7 @@ namespace Terraria.ObjectData
 
         public static bool CheckWaterDeath(int type, int style)
         {
-            TileObjectData tileData = TileObjectData.GetTileData(type, style, 0);
+            var tileData = TileObjectData.GetTileData(type, style, 0);
             if (tileData == null)
                 return Main.tileWaterDeath[type];
             return tileData.WaterDeath;
@@ -3485,7 +3485,7 @@ namespace Terraria.ObjectData
         {
             if (!checkTile.active())
                 return false;
-            TileObjectData tileData = TileObjectData.GetTileData(checkTile);
+            var tileData = TileObjectData.GetTileData(checkTile);
             if (tileData == null)
                 return Main.tileWaterDeath[(int) checkTile.type];
             return tileData.WaterDeath;
@@ -3493,7 +3493,7 @@ namespace Terraria.ObjectData
 
         public static bool CheckLavaDeath(int type, int style)
         {
-            TileObjectData tileData = TileObjectData.GetTileData(type, style, 0);
+            var tileData = TileObjectData.GetTileData(type, style, 0);
             if (tileData == null)
                 return Main.tileLavaDeath[type];
             return tileData.LavaDeath;
@@ -3503,7 +3503,7 @@ namespace Terraria.ObjectData
         {
             if (!checkTile.active())
                 return false;
-            TileObjectData tileData = TileObjectData.GetTileData(checkTile);
+            var tileData = TileObjectData.GetTileData(checkTile);
             if (tileData == null)
                 return Main.tileLavaDeath[(int) checkTile.type];
             return tileData.LavaDeath;
@@ -3520,22 +3520,22 @@ namespace Terraria.ObjectData
                 throw new ArgumentOutOfRangeException("Function called with a bad type argument");
             if (style < 0)
                 throw new ArgumentOutOfRangeException("Function called with a bad style argument");
-            TileObjectData tileObjectData1 = TileObjectData._data[type];
+            var tileObjectData1 = TileObjectData._data[type];
             if (tileObjectData1 == null)
                 return (TileObjectData) null;
-            List<TileObjectData> subTiles = tileObjectData1.SubTiles;
+            var subTiles = tileObjectData1.SubTiles;
             if (subTiles != null && style < subTiles.Count)
             {
-                TileObjectData tileObjectData2 = subTiles[style];
+                var tileObjectData2 = subTiles[style];
                 if (tileObjectData2 != null)
                     tileObjectData1 = tileObjectData2;
             }
 
             --alternate;
-            List<TileObjectData> alternates = tileObjectData1.Alternates;
+            var alternates = tileObjectData1.Alternates;
             if (alternates != null && alternate >= 0 && alternate < alternates.Count)
             {
-                TileObjectData tileObjectData2 = alternates[alternate];
+                var tileObjectData2 = alternates[alternate];
                 if (tileObjectData2 != null)
                     tileObjectData1 = tileObjectData2;
             }
@@ -3547,32 +3547,32 @@ namespace Terraria.ObjectData
         {
             if (getTile == null || !getTile.active())
                 return (TileObjectData) null;
-            int type = (int) getTile.type;
+            var type = (int) getTile.type;
             if (type < 0 || type >= TileObjectData._data.Count)
                 throw new ArgumentOutOfRangeException("Function called with a bad tile type");
-            TileObjectData tileObjectData = TileObjectData._data[type];
+            var tileObjectData = TileObjectData._data[type];
             if (tileObjectData == null)
                 return (TileObjectData) null;
-            int num1 = (int) getTile.frameX / tileObjectData.CoordinateFullWidth;
-            int num2 = (int) getTile.frameY / tileObjectData.CoordinateFullHeight;
-            int num3 = tileObjectData.StyleWrapLimit;
+            var num1 = (int) getTile.frameX / tileObjectData.CoordinateFullWidth;
+            var num2 = (int) getTile.frameY / tileObjectData.CoordinateFullHeight;
+            var num3 = tileObjectData.StyleWrapLimit;
             if (num3 == 0)
                 num3 = 1;
-            int num4 = !tileObjectData.StyleHorizontal ? num1 * num3 + num2 : num2 * num3 + num1;
-            int index1 = num4 / tileObjectData.StyleMultiplier;
-            int num5 = num4 % tileObjectData.StyleMultiplier;
+            var num4 = !tileObjectData.StyleHorizontal ? num1 * num3 + num2 : num2 * num3 + num1;
+            var index1 = num4 / tileObjectData.StyleMultiplier;
+            var num5 = num4 % tileObjectData.StyleMultiplier;
             if (tileObjectData.SubTiles != null && index1 >= 0 && index1 < tileObjectData.SubTiles.Count)
             {
-                TileObjectData subTile = tileObjectData.SubTiles[index1];
+                var subTile = tileObjectData.SubTiles[index1];
                 if (subTile != null)
                     tileObjectData = subTile;
             }
 
             if (tileObjectData._alternates != null)
             {
-                for (int index2 = 0; index2 < tileObjectData.Alternates.Count; ++index2)
+                for (var index2 = 0; index2 < tileObjectData.Alternates.Count; ++index2)
                 {
-                    TileObjectData alternate = tileObjectData.Alternates[index2];
+                    var alternate = tileObjectData.Alternates[index2];
                     if (alternate != null && num5 >= alternate.Style &&
                         num5 <= alternate.Style + alternate.RandomStyleRange)
                         return alternate;
@@ -3592,11 +3592,11 @@ namespace Terraria.ObjectData
         public static bool CallPostPlacementPlayerHook(int tileX, int tileY, int type, int style, int dir,
             TileObject data)
         {
-            TileObjectData tileData = TileObjectData.GetTileData(type, style, data.alternate);
+            var tileData = TileObjectData.GetTileData(type, style, data.alternate);
             if (tileData == null || tileData._placementHooks == null ||
                 tileData._placementHooks.postPlaceMyPlayer.hook == null)
                 return false;
-            PlacementHook postPlaceMyPlayer = tileData._placementHooks.postPlaceMyPlayer;
+            var postPlaceMyPlayer = tileData._placementHooks.postPlaceMyPlayer;
             if (postPlaceMyPlayer.processedCoordinates)
             {
                 tileX -= (int) tileData.Origin.X;
@@ -3608,7 +3608,7 @@ namespace Terraria.ObjectData
 
         public static void OriginToTopLeft(int type, int style, ref Point16 baseCoords)
         {
-            TileObjectData tileData = TileObjectData.GetTileData(type, style, 0);
+            var tileData = TileObjectData.GetTileData(type, style, 0);
             if (tileData == null)
                 return;
             baseCoords = new Point16((int) baseCoords.X - (int) tileData.Origin.X,

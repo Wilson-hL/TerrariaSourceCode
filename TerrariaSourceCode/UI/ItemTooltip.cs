@@ -63,8 +63,8 @@ namespace Terraria.UI
             }
             else
             {
-                string tooltip = this._text.Value;
-                foreach (TooltipProcessor globalProcessor in ItemTooltip._globalProcessors)
+                var tooltip = this._text.Value;
+                foreach (var globalProcessor in ItemTooltip._globalProcessors)
                     tooltip = globalProcessor(tooltip);
                 this._tooltipLines = tooltip.Split('\n');
                 this._processedText = tooltip;

@@ -39,7 +39,7 @@ namespace Terraria.GameContent.UI.Elements
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
-            CalculatedStyle dimensions = this.GetDimensions();
+            var dimensions = this.GetDimensions();
             Texture2D texture;
             Point point;
             if (this._isOn)
@@ -53,7 +53,7 @@ namespace Terraria.GameContent.UI.Elements
                 point = this._offTextureOffset;
             }
 
-            Color color = this.IsMouseHovering ? Color.White : Color.Silver;
+            var color = this.IsMouseHovering ? Color.White : Color.Silver;
             spriteBatch.Draw(texture,
                 new Rectangle((int) dimensions.X, (int) dimensions.Y, this._drawWidth, this._drawHeight),
                 new Rectangle?(new Rectangle(point.X, point.Y, this._drawWidth, this._drawHeight)), color);

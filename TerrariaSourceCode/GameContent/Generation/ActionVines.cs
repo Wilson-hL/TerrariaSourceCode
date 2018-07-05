@@ -24,7 +24,7 @@ namespace Terraria.GameContent.Generation
 
         public override bool Apply(Point origin, int x, int y, params object[] args)
         {
-            int num1 = GenBase._random.Next(this._minLength, this._maxLength + 1);
+            var num1 = GenBase._random.Next(this._minLength, this._maxLength + 1);
             int num2;
             for (num2 = 0; num2 < num1 && !GenBase._tiles[x, y + num2].active(); ++num2)
             {

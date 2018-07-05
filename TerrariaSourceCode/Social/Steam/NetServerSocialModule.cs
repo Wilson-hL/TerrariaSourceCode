@@ -30,25 +30,25 @@ namespace Terraria.Social.Steam
 
         private void BroadcastConnectedUsers()
         {
-            List<ulong> ulongList = new List<ulong>();
-            using (IEnumerator<KeyValuePair<CSteamID, NetSocialModule.ConnectionState>> enumerator =
+            var ulongList = new List<ulong>();
+            using (var enumerator =
                 this._connectionStateMap.GetEnumerator())
             {
                 while (((IEnumerator) enumerator).MoveNext())
                 {
-                    KeyValuePair<CSteamID, NetSocialModule.ConnectionState> current = enumerator.Current;
+                    var current = enumerator.Current;
                     if (current.Value == NetSocialModule.ConnectionState.Connected)
                         ulongList.Add((ulong) current.Key.m_SteamID);
                 }
             }
 
-            byte[] numArray = new byte[ulongList.Count * 8 + 1];
-            using (MemoryStream memoryStream = new MemoryStream(numArray))
+            var numArray = new byte[ulongList.Count * 8 + 1];
+            using (var memoryStream = new MemoryStream(numArray))
             {
-                using (BinaryWriter binaryWriter = new BinaryWriter((Stream) memoryStream))
+                using (var binaryWriter = new BinaryWriter((Stream) memoryStream))
                 {
                     binaryWriter.Write((byte) 1);
-                    foreach (ulong num in ulongList)
+                    foreach (var num in ulongList)
                         binaryWriter.Write(num);
                 }
             }
@@ -161,12 +161,12 @@ namespace Terraria.Social.Steam
                     return false;
             }
 
-            NetSocialModule.ConnectionState connectionState = this._connectionStateMap[userId];
+            var connectionState = this._connectionStateMap[userId];
             if (connectionState != NetSocialModule.ConnectionState.Authenticating)
                 return connectionState == NetSocialModule.ConnectionState.Connected;
             if (length < 3 || ((int) data[1] << 8 | (int) data[0]) != length || data[2] != (byte) 93)
                 return false;
-            byte[] numArray = new byte[data.Length - 3];
+            var numArray = new byte[data.Length - 3];
             Array.Copy((Array) data, 3, (Array) numArray, 0, numArray.Length);
             switch ((int) SteamUser.BeginAuthSession(numArray, numArray.Length, userId))
             {
@@ -196,7 +196,7 @@ namespace Terraria.Social.Steam
 
         private void OnP2PSessionRequest(P2PSessionRequest_t result)
         {
-            CSteamID steamIdRemote = (CSteamID) result.m_steamIDRemote;
+            var steamIdRemote = (CSteamID) result.m_steamIDRemote;
             if (this._connectionStateMap.ContainsKey(steamIdRemote) && this._connectionStateMap[steamIdRemote] !=
                 NetSocialModule.ConnectionState.Inactive)
             {

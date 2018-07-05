@@ -110,7 +110,7 @@ namespace Terraria
         public static void Initialize()
         {
             Mount.mounts = new Mount.MountData[15];
-            Mount.MountData mountData1 = new Mount.MountData();
+            var mountData1 = new Mount.MountData();
             Mount.mounts[0] = mountData1;
             mountData1.spawnDust = 57;
             mountData1.spawnDustNoGravity = false;
@@ -123,8 +123,8 @@ namespace Terraria
             mountData1.jumpHeight = 17;
             mountData1.jumpSpeed = 5.31f;
             mountData1.totalFrames = 12;
-            int[] numArray1 = new int[mountData1.totalFrames];
-            for (int index = 0; index < numArray1.Length; ++index)
+            var numArray1 = new int[mountData1.totalFrames];
+            for (var index = 0; index < numArray1.Length; ++index)
                 numArray1[index] = 30;
             numArray1[1] += 2;
             numArray1[11] += 2;
@@ -162,7 +162,7 @@ namespace Terraria
                 mountData1.textureHeight = mountData1.backTexture.Height;
             }
 
-            Mount.MountData mountData2 = new Mount.MountData();
+            var mountData2 = new Mount.MountData();
             Mount.mounts[2] = mountData2;
             mountData2.spawnDust = 58;
             mountData2.buff = 129;
@@ -174,8 +174,8 @@ namespace Terraria
             mountData2.jumpHeight = 10;
             mountData2.jumpSpeed = 6.01f;
             mountData2.totalFrames = 16;
-            int[] numArray2 = new int[mountData2.totalFrames];
-            for (int index = 0; index < numArray2.Length; ++index)
+            var numArray2 = new int[mountData2.totalFrames];
+            for (var index = 0; index < numArray2.Length; ++index)
                 numArray2[index] = 22;
             numArray2[12] += 2;
             numArray2[13] += 4;
@@ -214,7 +214,7 @@ namespace Terraria
                 mountData2.textureHeight = mountData2.backTexture.Height;
             }
 
-            Mount.MountData mountData3 = new Mount.MountData();
+            var mountData3 = new Mount.MountData();
             Mount.mounts[1] = mountData3;
             mountData3.spawnDust = 15;
             mountData3.buff = 128;
@@ -227,8 +227,8 @@ namespace Terraria
             mountData3.jumpHeight = 15;
             mountData3.jumpSpeed = 5.01f;
             mountData3.totalFrames = 7;
-            int[] numArray3 = new int[mountData3.totalFrames];
-            for (int index = 0; index < numArray3.Length; ++index)
+            var numArray3 = new int[mountData3.totalFrames];
+            for (var index = 0; index < numArray3.Length; ++index)
                 numArray3[index] = 14;
             numArray3[2] += 2;
             numArray3[3] += 4;
@@ -268,7 +268,7 @@ namespace Terraria
                 mountData3.textureHeight = mountData3.backTexture.Height;
             }
 
-            Mount.MountData mountData4 = new Mount.MountData();
+            var mountData4 = new Mount.MountData();
             Mount.mounts[3] = mountData4;
             mountData4.spawnDust = 56;
             mountData4.buff = 130;
@@ -282,8 +282,8 @@ namespace Terraria
             mountData4.jumpSpeed = 8.25f;
             mountData4.constantJump = true;
             mountData4.totalFrames = 4;
-            int[] numArray4 = new int[mountData4.totalFrames];
-            for (int index = 0; index < numArray4.Length; ++index)
+            var numArray4 = new int[mountData4.totalFrames];
+            for (var index = 0; index < numArray4.Length; ++index)
                 numArray4[index] = 20;
             numArray4[1] += 2;
             numArray4[3] -= 2;
@@ -318,7 +318,7 @@ namespace Terraria
                 mountData4.textureHeight = mountData4.backTexture.Height;
             }
 
-            Mount.MountData mountData5 = new Mount.MountData();
+            var mountData5 = new Mount.MountData();
             Mount.mounts[6] = mountData5;
             mountData5.Minecart = true;
             mountData5.MinecartDirectional = true;
@@ -336,8 +336,8 @@ namespace Terraria
             mountData5.jumpSpeed = 5.15f;
             mountData5.blockExtraJumps = true;
             mountData5.totalFrames = 3;
-            int[] numArray5 = new int[mountData5.totalFrames];
-            for (int index = 0; index < numArray5.Length; ++index)
+            var numArray5 = new int[mountData5.totalFrames];
+            for (var index = 0; index < numArray5.Length; ++index)
                 numArray5[index] = 8;
             mountData5.playerYOffsets = numArray5;
             mountData5.xOffset = 1;
@@ -370,7 +370,7 @@ namespace Terraria
                 mountData5.textureHeight = mountData5.frontTexture.Height;
             }
 
-            Mount.MountData mountData6 = new Mount.MountData();
+            var mountData6 = new Mount.MountData();
             Mount.mounts[4] = mountData6;
             mountData6.spawnDust = 56;
             mountData6.buff = 131;
@@ -384,8 +384,8 @@ namespace Terraria
             mountData6.jumpHeight = 10;
             mountData6.jumpSpeed = 3.15f;
             mountData6.totalFrames = 12;
-            int[] numArray6 = new int[mountData6.totalFrames];
-            for (int index = 0; index < numArray6.Length; ++index)
+            var numArray6 = new int[mountData6.totalFrames];
+            for (var index = 0; index < numArray6.Length; ++index)
                 numArray6[index] = 26;
             mountData6.playerYOffsets = numArray6;
             mountData6.xOffset = 1;
@@ -421,7 +421,7 @@ namespace Terraria
                 mountData6.textureHeight = mountData6.backTexture.Height;
             }
 
-            Mount.MountData mountData7 = new Mount.MountData();
+            var mountData7 = new Mount.MountData();
             Mount.mounts[5] = mountData7;
             mountData7.spawnDust = 152;
             mountData7.buff = 132;
@@ -437,8 +437,8 @@ namespace Terraria
             mountData7.jumpSpeed = 4f;
             mountData7.blockExtraJumps = true;
             mountData7.totalFrames = 12;
-            int[] numArray7 = new int[mountData7.totalFrames];
-            for (int index = 0; index < numArray7.Length; ++index)
+            var numArray7 = new int[mountData7.totalFrames];
+            for (var index = 0; index < numArray7.Length; ++index)
                 numArray7[index] = 16;
             numArray7[8] = 18;
             mountData7.playerYOffsets = numArray7;
@@ -475,7 +475,7 @@ namespace Terraria
                 mountData7.textureHeight = mountData7.backTexture.Height;
             }
 
-            Mount.MountData mountData8 = new Mount.MountData();
+            var mountData8 = new Mount.MountData();
             Mount.mounts[7] = mountData8;
             mountData8.spawnDust = 226;
             mountData8.spawnDustNoGravity = true;
@@ -492,8 +492,8 @@ namespace Terraria
             mountData8.jumpSpeed = 4f;
             mountData8.blockExtraJumps = true;
             mountData8.totalFrames = 8;
-            int[] numArray8 = new int[mountData8.totalFrames];
-            for (int index = 0; index < numArray8.Length; ++index)
+            var numArray8 = new int[mountData8.totalFrames];
+            for (var index = 0; index < numArray8.Length; ++index)
                 numArray8[index] = 16;
             mountData8.playerYOffsets = numArray8;
             mountData8.xOffset = 1;
@@ -529,7 +529,7 @@ namespace Terraria
                 mountData8.textureHeight = mountData8.frontTexture.Height;
             }
 
-            Mount.MountData mountData9 = new Mount.MountData();
+            var mountData9 = new Mount.MountData();
             Mount.mounts[8] = mountData9;
             mountData9.spawnDust = 226;
             mountData9.buff = 142;
@@ -548,8 +548,8 @@ namespace Terraria
             mountData9.emitsLight = true;
             mountData9.lightColor = new Vector3(0.3f, 0.3f, 0.4f);
             mountData9.totalFrames = 1;
-            int[] numArray9 = new int[mountData9.totalFrames];
-            for (int index = 0; index < numArray9.Length; ++index)
+            var numArray9 = new int[mountData9.totalFrames];
+            for (var index = 0; index < numArray9.Length; ++index)
                 numArray9[index] = 4;
             mountData9.playerYOffsets = numArray9;
             mountData9.xOffset = 1;
@@ -589,12 +589,12 @@ namespace Terraria
             }
 
             Mount.drillTextureSize = new Vector2(80f, 80f);
-            Vector2 vector2_1 = new Vector2((float) mountData9.textureWidth,
+            var vector2_1 = new Vector2((float) mountData9.textureWidth,
                 (float) (mountData9.textureHeight / mountData9.totalFrames));
             if (Mount.drillTextureSize != vector2_1)
                 throw new Exception("Be sure to update the Drill texture origin to match the actual texture size of " +
                                     (object) mountData9.textureWidth + ", " + (object) mountData9.textureHeight + ".");
-            Mount.MountData mountData10 = new Mount.MountData();
+            var mountData10 = new Mount.MountData();
             Mount.mounts[9] = mountData10;
             mountData10.spawnDust = 152;
             mountData10.buff = 143;
@@ -612,8 +612,8 @@ namespace Terraria
             mountData10.jumpSpeed = 10.01f;
             mountData10.blockExtraJumps = false;
             mountData10.totalFrames = 12;
-            int[] numArray10 = new int[mountData10.totalFrames];
-            for (int index = 0; index < numArray10.Length; ++index)
+            var numArray10 = new int[mountData10.totalFrames];
+            for (var index = 0; index < numArray10.Length; ++index)
                 numArray10[index] = 16;
             mountData10.playerYOffsets = numArray10;
             mountData10.xOffset = 1;
@@ -661,15 +661,15 @@ namespace Terraria
             Mount.scutlixEyePositions[8] = new Vector2(70f, 34f);
             Mount.scutlixEyePositions[9] = new Vector2(76f, 34f);
             Mount.scutlixTextureSize = new Vector2(45f, 54f);
-            Vector2 vector2_2 = new Vector2((float) (mountData10.textureWidth / 2),
+            var vector2_2 = new Vector2((float) (mountData10.textureWidth / 2),
                 (float) (mountData10.textureHeight / mountData10.totalFrames));
             if (Mount.scutlixTextureSize != vector2_2)
                 throw new Exception(
                     "Be sure to update the Scutlix texture origin to match the actual texture size of " +
                     (object) mountData10.textureWidth + ", " + (object) mountData10.textureHeight + ".");
-            for (int index = 0; index < Mount.scutlixEyePositions.Length; ++index)
+            for (var index = 0; index < Mount.scutlixEyePositions.Length; ++index)
                 Mount.scutlixEyePositions[index] -= Mount.scutlixTextureSize;
-            Mount.MountData mountData11 = new Mount.MountData();
+            var mountData11 = new Mount.MountData();
             Mount.mounts[10] = mountData11;
             mountData11.spawnDust = 15;
             mountData11.buff = 162;
@@ -682,8 +682,8 @@ namespace Terraria
             mountData11.jumpHeight = 10;
             mountData11.jumpSpeed = 8.01f;
             mountData11.totalFrames = 16;
-            int[] numArray11 = new int[mountData11.totalFrames];
-            for (int index = 0; index < numArray11.Length; ++index)
+            var numArray11 = new int[mountData11.totalFrames];
+            for (var index = 0; index < numArray11.Length; ++index)
                 numArray11[index] = 28;
             numArray11[3] += 2;
             numArray11[4] += 2;
@@ -729,7 +729,7 @@ namespace Terraria
                 mountData11.textureHeight = mountData11.backTexture.Height;
             }
 
-            Mount.MountData mountData12 = new Mount.MountData();
+            var mountData12 = new Mount.MountData();
             Mount.mounts[11] = mountData12;
             mountData12.Minecart = true;
             mountData12.MinecartDust = new Action<Vector2>(DelegateMethods.Minecart.SparksMech);
@@ -746,8 +746,8 @@ namespace Terraria
             mountData12.jumpSpeed = 5.15f;
             mountData12.blockExtraJumps = true;
             mountData12.totalFrames = 3;
-            int[] numArray12 = new int[mountData12.totalFrames];
-            for (int index = 0; index < numArray12.Length; ++index)
+            var numArray12 = new int[mountData12.totalFrames];
+            for (var index = 0; index < numArray12.Length; ++index)
                 numArray12[index] = 9;
             mountData12.playerYOffsets = numArray12;
             mountData12.xOffset = -1;
@@ -781,7 +781,7 @@ namespace Terraria
                 mountData12.textureHeight = mountData12.frontTexture.Height;
             }
 
-            Mount.MountData mountData13 = new Mount.MountData();
+            var mountData13 = new Mount.MountData();
             Mount.mounts[12] = mountData13;
             mountData13.spawnDust = 15;
             mountData13.buff = 168;
@@ -798,8 +798,8 @@ namespace Terraria
             mountData13.swimSpeed = 16f;
             mountData13.blockExtraJumps = true;
             mountData13.totalFrames = 23;
-            int[] numArray13 = new int[mountData13.totalFrames];
-            for (int index = 0; index < numArray13.Length; ++index)
+            var numArray13 = new int[mountData13.totalFrames];
+            for (var index = 0; index < numArray13.Length; ++index)
                 numArray13[index] = 12;
             mountData13.playerYOffsets = numArray13;
             mountData13.xOffset = 2;
@@ -835,7 +835,7 @@ namespace Terraria
                 mountData13.textureHeight = mountData13.backTexture.Height;
             }
 
-            Mount.MountData mountData14 = new Mount.MountData();
+            var mountData14 = new Mount.MountData();
             Mount.mounts[13] = mountData14;
             mountData14.Minecart = true;
             mountData14.MinecartDirectional = true;
@@ -853,8 +853,8 @@ namespace Terraria
             mountData14.jumpSpeed = 5.15f;
             mountData14.blockExtraJumps = true;
             mountData14.totalFrames = 3;
-            int[] numArray14 = new int[mountData14.totalFrames];
-            for (int index = 0; index < numArray14.Length; ++index)
+            var numArray14 = new int[mountData14.totalFrames];
+            for (var index = 0; index < numArray14.Length; ++index)
                 numArray14[index] = 8;
             mountData14.playerYOffsets = numArray14;
             mountData14.xOffset = 1;
@@ -887,7 +887,7 @@ namespace Terraria
                 mountData14.textureHeight = mountData14.frontTexture.Height;
             }
 
-            Mount.MountData mountData15 = new Mount.MountData();
+            var mountData15 = new Mount.MountData();
             Mount.mounts[14] = mountData15;
             mountData15.spawnDust = 15;
             mountData15.buff = 193;
@@ -899,8 +899,8 @@ namespace Terraria
             mountData15.jumpHeight = 20;
             mountData15.jumpSpeed = 8.01f;
             mountData15.totalFrames = 8;
-            int[] numArray15 = new int[mountData15.totalFrames];
-            for (int index = 0; index < numArray15.Length; ++index)
+            var numArray15 = new int[mountData15.totalFrames];
+            for (var index = 0; index < numArray15.Length; ++index)
                 numArray15[index] = 8;
             numArray15[1] += 2;
             numArray15[3] += 2;
@@ -1045,7 +1045,7 @@ namespace Terraria
 
         public int JumpHeight(float xVelocity)
         {
-            int jumpHeight = this._data.jumpHeight;
+            var jumpHeight = this._data.jumpHeight;
             switch (this._type)
             {
                 case 0:
@@ -1069,7 +1069,7 @@ namespace Terraria
 
         public float JumpSpeed(float xVelocity)
         {
-            float jumpSpeed = this._data.jumpSpeed;
+            var jumpSpeed = this._data.jumpSpeed;
             switch (this._type)
             {
                 case 0:
@@ -1174,10 +1174,10 @@ namespace Terraria
             {
                 if (this._type != 9)
                     return;
-                float X = Main.screenPosition.X + (float) Main.mouseX;
-                float Y = Main.screenPosition.Y + (float) Main.mouseY;
-                float ai0 = X - mountedPlayer.position.X;
-                float ai1 = Y - mountedPlayer.position.Y;
+                var X = Main.screenPosition.X + (float) Main.mouseX;
+                var Y = Main.screenPosition.Y + (float) Main.mouseY;
+                var ai0 = X - mountedPlayer.position.X;
+                var ai1 = Y - mountedPlayer.position.Y;
                 Projectile.NewProjectile(X, Y, 0.0f, 0.0f, 441, 0, 0.0f, mountedPlayer.whoAmI, ai0, ai1);
                 this._abilityCharging = true;
             }
@@ -1250,10 +1250,10 @@ namespace Terraria
 
         public void UpdateDrill(Player mountedPlayer, bool controlUp, bool controlDown)
         {
-            Mount.DrillMountData mountSpecificData = (Mount.DrillMountData) this._mountSpecificData;
-            for (int index = 0; index < mountSpecificData.beams.Length; ++index)
+            var mountSpecificData = (Mount.DrillMountData) this._mountSpecificData;
+            for (var index = 0; index < mountSpecificData.beams.Length; ++index)
             {
-                Mount.DrillBeam beam = mountSpecificData.beams[index];
+                var beam = mountSpecificData.beams[index];
                 if (beam.cooldown > 1)
                     --beam.cooldown;
                 else if (beam.cooldown == 1)
@@ -1275,23 +1275,23 @@ namespace Terraria
         {
             if (this._type != 8 || !this._abilityActive)
                 return;
-            Mount.DrillMountData mountSpecificData = (Mount.DrillMountData) this._mountSpecificData;
+            var mountSpecificData = (Mount.DrillMountData) this._mountSpecificData;
             if (mountSpecificData.beamCooldown != 0)
                 return;
-            for (int index1 = 0; index1 < mountSpecificData.beams.Length; ++index1)
+            for (var index1 = 0; index1 < mountSpecificData.beams.Length; ++index1)
             {
-                Mount.DrillBeam beam = mountSpecificData.beams[index1];
+                var beam = mountSpecificData.beams[index1];
                 if (beam.cooldown == 0)
                 {
-                    Point16 point16 = this.DrillSmartCursor(mountedPlayer, mountSpecificData);
+                    var point16 = this.DrillSmartCursor(mountedPlayer, mountSpecificData);
                     if (point16 != Point16.NegativeOne)
                     {
                         beam.curTileTarget = point16;
-                        int drillPickPower = Mount.drillPickPower;
-                        bool flag1 = mountedPlayer.whoAmI == Main.myPlayer;
+                        var drillPickPower = Mount.drillPickPower;
+                        var flag1 = mountedPlayer.whoAmI == Main.myPlayer;
                         if (flag1)
                         {
-                            bool flag2 = true;
+                            var flag2 = true;
                             if (WorldGen.InWorld((int) point16.X, (int) point16.Y, 0) &&
                                 Main.tile[(int) point16.X, (int) point16.Y] != null &&
                                 (Main.tile[(int) point16.X, (int) point16.Y].type == (ushort) 26 && !Main.hardMode))
@@ -1307,16 +1307,16 @@ namespace Terraria
                                 mountedPlayer.PickTile((int) point16.X, (int) point16.Y, drillPickPower);
                         }
 
-                        Vector2 Position = new Vector2((float) ((int) point16.X << 4) + 8f,
+                        var Position = new Vector2((float) ((int) point16.X << 4) + 8f,
                             (float) ((int) point16.Y << 4) + 8f);
-                        float rotation = (Position - mountedPlayer.Center).ToRotation();
-                        for (int index2 = 0; index2 < 2; ++index2)
+                        var rotation = (Position - mountedPlayer.Center).ToRotation();
+                        for (var index2 = 0; index2 < 2; ++index2)
                         {
-                            float num1 = rotation + (float) ((Main.rand.Next(2) == 1 ? -1.0 : 1.0) * 1.57079637050629);
-                            float num2 = (float) (Main.rand.NextDouble() * 2.0 + 2.0);
-                            Vector2 vector2 = new Vector2((float) Math.Cos((double) num1) * num2,
+                            var num1 = rotation + (float) ((Main.rand.Next(2) == 1 ? -1.0 : 1.0) * 1.57079637050629);
+                            var num2 = (float) (Main.rand.NextDouble() * 2.0 + 2.0);
+                            var vector2 = new Vector2((float) Math.Cos((double) num1) * num2,
                                 (float) Math.Sin((double) num1) * num2);
-                            int index3 = Dust.NewDust(Position, 0, 0, 230, vector2.X, vector2.Y, 0, new Color(), 1f);
+                            var index3 = Dust.NewDust(Position, 0, 0, 230, vector2.X, vector2.Y, 0, new Color(), 1f);
                             Main.dust[index3].noGravity = true;
                             Main.dust[index3].customData = (object) mountedPlayer;
                         }
@@ -1336,23 +1336,23 @@ namespace Terraria
 
         private Point16 DrillSmartCursor(Player mountedPlayer, Mount.DrillMountData data)
         {
-            Vector2 vector2_1 = mountedPlayer.whoAmI != Main.myPlayer
+            var vector2_1 = mountedPlayer.whoAmI != Main.myPlayer
                 ? data.crosshairPosition
                 : Main.screenPosition + new Vector2((float) Main.mouseX, (float) Main.mouseY);
-            Vector2 center = mountedPlayer.Center;
-            Vector2 vector2_2 = vector2_1 - center;
-            float num1 = vector2_2.Length();
+            var center = mountedPlayer.Center;
+            var vector2_2 = vector2_1 - center;
+            var num1 = vector2_2.Length();
             if ((double) num1 > 224.0)
                 num1 = 224f;
-            float num2 = num1 + 32f;
+            var num2 = num1 + 32f;
             vector2_2.Normalize();
-            Vector2 start = center;
-            Vector2 end = center + vector2_2 * num2;
-            Point16 tilePoint = new Point16(-1, -1);
+            var start = center;
+            var end = center + vector2_2 * num2;
+            var tilePoint = new Point16(-1, -1);
             if (!Utils.PlotTileLine(start, end, 65.6f, (Utils.PerLinePoint) ((x, y) =>
             {
                 tilePoint = new Point16(x, y);
-                for (int index = 0; index < data.beams.Length; ++index)
+                for (var index = 0; index < data.beams.Length; ++index)
                 {
                     if (data.beams[index].curTileTarget == tilePoint)
                         return true;
@@ -1382,10 +1382,10 @@ namespace Terraria
                             break;
                         if (mountedPlayer.whoAmI == Main.myPlayer)
                         {
-                            float X = Main.screenPosition.X + (float) Main.mouseX;
-                            float Y = Main.screenPosition.Y + (float) Main.mouseY;
-                            float ai0 = X - mountedPlayer.position.X;
-                            float ai1 = Y - mountedPlayer.position.Y;
+                            var X = Main.screenPosition.X + (float) Main.mouseX;
+                            var Y = Main.screenPosition.Y + (float) Main.mouseY;
+                            var ai0 = X - mountedPlayer.position.X;
+                            var ai1 = Y - mountedPlayer.position.Y;
                             Projectile.NewProjectile(X, Y, 0.0f, 0.0f, 453, 0, 0.0f, mountedPlayer.whoAmI, ai0, ai1);
                         }
 
@@ -1402,8 +1402,8 @@ namespace Terraria
                     Vector2 vector2_1;
                     vector2_1.X = mountedPlayer.position.X + (float) (mountedPlayer.width / 2);
                     vector2_1.Y = mountedPlayer.position.Y + (float) mountedPlayer.height;
-                    int num = (this._frameExtra - 6) * 2;
-                    for (int index = 0; index < 2; ++index)
+                    var num = (this._frameExtra - 6) * 2;
+                    for (var index = 0; index < 2; ++index)
                     {
                         Vector2 vector2_2;
                         vector2_2.Y = vector2_1.Y + Mount.scutlixEyePositions[num + index].Y +
@@ -1411,10 +1411,10 @@ namespace Terraria
                         vector2_2.X = mountedPlayer.direction != -1
                             ? vector2_1.X + Mount.scutlixEyePositions[num + index].X + (float) this._data.xOffset
                             : vector2_1.X - Mount.scutlixEyePositions[num + index].X - (float) this._data.xOffset;
-                        Vector2 vector2_3 = mousePosition - vector2_2;
+                        var vector2_3 = mousePosition - vector2_2;
                         vector2_3.Normalize();
-                        Vector2 vector2_4 = vector2_3 * 14f;
-                        int Damage = 100;
+                        var vector2_4 = vector2_3 * 14f;
+                        var Damage = 100;
                         vector2_2 += vector2_4;
                         Projectile.NewProjectile(vector2_2.X, vector2_2.Y, vector2_4.X, vector2_4.Y, 606, Damage, 0.0f,
                             Main.myPlayer, 0.0f, 0.0f);
@@ -1428,9 +1428,9 @@ namespace Terraria
         {
             if (this._frameState == 2 || this._frameState == 4)
             {
-                bool flag = true;
-                float num1 = 1f;
-                float num2 = mountedPlayer.gravity / Player.defaultGravity;
+                var flag = true;
+                var num1 = 1f;
+                var num2 = mountedPlayer.gravity / Player.defaultGravity;
                 if (mountedPlayer.slowFall)
                     num2 /= 3f;
                 if ((double) num2 < 0.25)
@@ -1447,16 +1447,16 @@ namespace Terraria
 
                 if (this._type == 12 && !mountedPlayer.MountFishronSpecial)
                     num1 = 0.5f;
-                float num3 = this._fatigue / this._fatigueMax;
+                var num3 = this._fatigue / this._fatigueMax;
                 if (this._type == 7 || this._type == 8 || this._type == 12)
                     num3 = 0.0f;
-                float num4 = 4f * num3;
-                float num5 = 4f * num3;
+                var num4 = 4f * num3;
+                var num5 = 4f * num3;
                 if ((double) num4 == 0.0)
                     num4 = -1f / 1000f;
                 if ((double) num5 == 0.0)
                     num5 = -1f / 1000f;
-                float num6 = mountedPlayer.velocity.Y;
+                var num6 = mountedPlayer.velocity.Y;
                 if ((mountedPlayer.controlUp || mountedPlayer.controlJump) && flag)
                 {
                     num4 = (float) (-2.0 - 6.0 * (1.0 - (double) num3));
@@ -1469,7 +1469,7 @@ namespace Terraria
                 }
                 else
                 {
-                    int jump = mountedPlayer.jump;
+                    var jump = mountedPlayer.jump;
                 }
 
                 if ((double) num6 < (double) num4)
@@ -1497,13 +1497,13 @@ namespace Terraria
 
             if (this._type == 7)
             {
-                float num1 = mountedPlayer.velocity.X / this._data.dashSpeed;
+                var num1 = mountedPlayer.velocity.X / this._data.dashSpeed;
                 if ((double) num1 > 0.95)
                     num1 = 0.95f;
                 if ((double) num1 < -0.95)
                     num1 = -0.95f;
-                float num2 = (float) (0.785398185253143 * (double) num1 / 2.0);
-                float num3 = Math.Abs((float) (2.0 - (double) this._frame / 2.0)) / 2f;
+                var num2 = (float) (0.785398185253143 * (double) num1 / 2.0);
+                var num3 = Math.Abs((float) (2.0 - (double) this._frame / 2.0)) / 2f;
                 Lighting.AddLight((int) ((double) mountedPlayer.position.X + (double) (mountedPlayer.width / 2)) / 16,
                     (int) ((double) mountedPlayer.position.Y + (double) (mountedPlayer.height / 2)) / 16, 0.4f,
                     0.2f * num3, 0.0f);
@@ -1511,15 +1511,15 @@ namespace Terraria
             }
             else if (this._type == 8)
             {
-                float num1 = mountedPlayer.velocity.X / this._data.dashSpeed;
+                var num1 = mountedPlayer.velocity.X / this._data.dashSpeed;
                 if ((double) num1 > 0.95)
                     num1 = 0.95f;
                 if ((double) num1 < -0.95)
                     num1 = -0.95f;
-                float num2 = (float) (0.785398185253143 * (double) num1 / 2.0);
+                var num2 = (float) (0.785398185253143 * (double) num1 / 2.0);
                 mountedPlayer.fullRotation = num2;
-                Mount.DrillMountData mountSpecificData = (Mount.DrillMountData) this._mountSpecificData;
-                float num3 = mountSpecificData.outerRingRotation + mountedPlayer.velocity.X / 80f;
+                var mountSpecificData = (Mount.DrillMountData) this._mountSpecificData;
+                var num3 = mountSpecificData.outerRingRotation + mountedPlayer.velocity.X / 80f;
                 if ((double) num3 > 3.14159274101257)
                     num3 -= 6.283185f;
                 else if ((double) num3 < -3.14159274101257)
@@ -1542,7 +1542,7 @@ namespace Terraria
                 this._idleTime = 0;
             if (this._data.emitsLight)
             {
-                Point tileCoordinates = mountedPlayer.Center.ToTileCoordinates();
+                var tileCoordinates = mountedPlayer.Center.ToTileCoordinates();
                 Lighting.AddLight(tileCoordinates.X, tileCoordinates.Y, this._data.lightColor.X,
                     this._data.lightColor.Y, this._data.lightColor.Z);
             }
@@ -1567,13 +1567,13 @@ namespace Terraria
                         Vector2 position;
                         position.X = mountedPlayer.position.X;
                         position.Y = mountedPlayer.position.Y + (float) mountedPlayer.height;
-                        int num1 = (int) ((double) position.X / 16.0);
-                        double num2 = (double) position.Y / 16.0;
-                        float num3 = 0.0f;
-                        float width = (float) mountedPlayer.width;
+                        var num1 = (int) ((double) position.X / 16.0);
+                        var num2 = (double) position.Y / 16.0;
+                        var num3 = 0.0f;
+                        var width = (float) mountedPlayer.width;
                         while ((double) width > 0.0)
                         {
-                            float num4 = (float) ((num1 + 1) * 16) - position.X;
+                            var num4 = (float) ((num1 + 1) * 16) - position.X;
                             if ((double) num4 > (double) width)
                                 num4 = width;
                             num3 += Collision.GetTileRotation(position) * num4;
@@ -1582,9 +1582,9 @@ namespace Terraria
                             ++num1;
                         }
 
-                        float num5 = num3 / (float) mountedPlayer.width - mountedPlayer.fullRotation;
-                        float num6 = 0.0f;
-                        float num7 = 0.1570796f;
+                        var num5 = num3 / (float) mountedPlayer.width - mountedPlayer.fullRotation;
+                        var num6 = 0.0f;
+                        var num7 = 0.1570796f;
                         if ((double) num5 < 0.0)
                             num6 = (double) num5 <= -(double) num7 ? -num7 : num5;
                         else if ((double) num5 > 0.0)
@@ -1629,10 +1629,10 @@ namespace Terraria
 
                     break;
                 case 10:
-                    bool flag1 = (double) Math.Abs(velocity.X) > (double) this.DashSpeed - (double) this.RunSpeed / 2.0;
+                    var flag1 = (double) Math.Abs(velocity.X) > (double) this.DashSpeed - (double) this.RunSpeed / 2.0;
                     if (state == 1)
                     {
-                        bool flag2 = false;
+                        var flag2 = false;
                         if (flag1)
                         {
                             state = 5;
@@ -1645,21 +1645,21 @@ namespace Terraria
 
                         if (flag2)
                         {
-                            Vector2 Position = mountedPlayer.Center +
+                            var Position = mountedPlayer.Center +
                                                new Vector2((float) (mountedPlayer.width * mountedPlayer.direction),
                                                    0.0f);
-                            Vector2 vector2_1 = new Vector2(40f, 30f);
-                            float num1 = 6.283185f * Main.rand.NextFloat();
-                            for (float num2 = 0.0f; (double) num2 < 14.0; ++num2)
+                            var vector2_1 = new Vector2(40f, 30f);
+                            var num1 = 6.283185f * Main.rand.NextFloat();
+                            for (var num2 = 0.0f; (double) num2 < 14.0; ++num2)
                             {
-                                Dust dust = Main.dust[Dust.NewDust(Position, 0, 0, Utils.SelectRandom<int>(Main.rand,
+                                var dust = Main.dust[Dust.NewDust(Position, 0, 0, Utils.SelectRandom<int>(Main.rand,
                                     new int[3]
                                     {
                                         176,
                                         177,
                                         179
                                     }), 0.0f, 0.0f, 0, new Color(), 1f)];
-                                Vector2 vector2_2 =
+                                var vector2_2 =
                                     Vector2.UnitY.RotatedBy((double) num2 * 6.28318548202515 / 14.0 + (double) num1,
                                         new Vector2()) * (0.2f * (float) this._frameExtra);
                                 dust.position = Position + vector2_2 * vector2_1;
@@ -1676,7 +1676,7 @@ namespace Terraria
 
                     if (flag1)
                     {
-                        Dust dust = Main.dust[Dust.NewDust(mountedPlayer.position, mountedPlayer.width,
+                        var dust = Main.dust[Dust.NewDust(mountedPlayer.position, mountedPlayer.width,
                             mountedPlayer.height, Utils.SelectRandom<int>(Main.rand, new int[3]
                             {
                                 176,
@@ -1693,10 +1693,10 @@ namespace Terraria
 
                     break;
                 case 14:
-                    bool flag3 = (double) Math.Abs(velocity.X) > (double) this.RunSpeed / 2.0;
-                    float num8 = (float) Math.Sign(mountedPlayer.velocity.X);
-                    float y = 12f;
-                    float num9 = 40f;
+                    var flag3 = (double) Math.Abs(velocity.X) > (double) this.RunSpeed / 2.0;
+                    var num8 = (float) Math.Sign(mountedPlayer.velocity.X);
+                    var y = 12f;
+                    var num9 = 40f;
                     mountedPlayer.basiliskCharge = flag3
                         ? Utils.Clamp<float>(mountedPlayer.basiliskCharge + 0.005555556f, 0.0f, 1f)
                         : 0.0f;
@@ -1704,9 +1704,9 @@ namespace Terraria
                         Lighting.AddLight(mountedPlayer.Center, 0.5f, 0.1f, 0.1f);
                     if (flag3 && (double) velocity.Y == 0.0)
                     {
-                        for (int index = 0; index < 2; ++index)
+                        for (var index = 0; index < 2; ++index)
                         {
-                            Dust dust = Main.dust[
+                            var dust = Main.dust[
                                 Dust.NewDust(mountedPlayer.BottomLeft, mountedPlayer.width, 6, 31, 0.0f, 0.0f, 0,
                                     new Color(), 1f)];
                             dust.velocity = new Vector2(velocity.X * 0.15f, Main.rand.NextFloat() * -2f);
@@ -1718,22 +1718,22 @@ namespace Terraria
 
                         if (mountedPlayer.cMount == 0)
                         {
-                            Player player1 = mountedPlayer;
+                            var player1 = mountedPlayer;
                             player1.position = player1.position + new Vector2(num8 * 24f, 0.0f);
                             mountedPlayer.FloorVisuals(true);
-                            Player player2 = mountedPlayer;
+                            var player2 = mountedPlayer;
                             player2.position = player2.position - new Vector2(num8 * 24f, 0.0f);
                         }
                     }
 
                     if ((double) num8 == (double) mountedPlayer.direction)
                     {
-                        for (int index = 0; index < (int) (3.0 * (double) mountedPlayer.basiliskCharge); ++index)
+                        for (var index = 0; index < (int) (3.0 * (double) mountedPlayer.basiliskCharge); ++index)
                         {
-                            Dust dust = Main.dust[
+                            var dust = Main.dust[
                                 Dust.NewDust(mountedPlayer.BottomLeft, mountedPlayer.width, 6, 6, 0.0f, 0.0f, 0,
                                     new Color(), 1f)];
-                            Vector2 vector2 = mountedPlayer.Center + new Vector2(num8 * num9, y);
+                            var vector2 = mountedPlayer.Center + new Vector2(num8 * num9, y);
                             dust.position = mountedPlayer.Center + new Vector2(num8 * (num9 - 2f),
                                                 (float) ((double) y - 6.0 + (double) Main.rand.NextFloat() * 12.0));
                             dust.velocity = (dust.position - vector2).SafeNormalize(Vector2.Zero) *
@@ -1783,10 +1783,10 @@ namespace Terraria
                     ++this._frameCounter;
                     if (this._data.idleFrameCount != 0 && this._idleTime >= this._idleTimeNext)
                     {
-                        float idleFrameDelay = (float) this._data.idleFrameDelay;
+                        var idleFrameDelay = (float) this._data.idleFrameDelay;
                         if (this._type == 5)
                             idleFrameDelay *= (float) (2.0 - 1.0 * (double) this._fatigue / (double) this._fatigueMax);
-                        int num1 = (int) ((double) (this._idleTime - this._idleTimeNext) / (double) idleFrameDelay);
+                        var num1 = (int) ((double) (this._idleTime - this._idleTimeNext) / (double) idleFrameDelay);
                         if (num1 >= this._data.idleFrameCount)
                         {
                             if (this._data.idleFrameLoop)
@@ -1989,22 +1989,22 @@ namespace Terraria
                     this._abilityActive = false;
                     break;
                 case 9:
-                    Vector2 center = mountedPlayer.Center;
-                    Vector2 mousePosition = center;
-                    bool flag1 = false;
-                    float num1 = 1500f;
-                    for (int index = 0; index < 200; ++index)
+                    var center = mountedPlayer.Center;
+                    var mousePosition = center;
+                    var flag1 = false;
+                    var num1 = 1500f;
+                    for (var index = 0; index < 200; ++index)
                     {
-                        NPC npc = Main.npc[index];
+                        var npc = Main.npc[index];
                         if (npc.CanBeChasedBy((object) this, false))
                         {
-                            Vector2 v = npc.Center - center;
-                            float num2 = v.Length();
+                            var v = npc.Center - center;
+                            var num2 = v.Length();
                             if ((double) Vector2.Distance(mousePosition, center) > (double) num2 &&
                                 (double) num2 < (double) num1 || !flag1)
                             {
-                                bool flag2 = true;
-                                float num3 = Math.Abs(v.ToRotation());
+                                var flag2 = true;
+                                var num3 = Math.Abs(v.ToRotation());
                                 if (mountedPlayer.direction == 1 && (double) num3 > 1.04719759490799)
                                     flag2 = false;
                                 else if (mountedPlayer.direction == -1 && (double) num3 < 2.09439514610459)
@@ -2048,46 +2048,46 @@ namespace Terraria
                     AchievementsHelper.HandleSpecialEvent(mountedPlayer, 5);
                     break;
                 case 11:
-                    Vector3 vector3_1 = new Vector3(0.4f, 0.12f, 0.15f);
-                    float num4 =
+                    var vector3_1 = new Vector3(0.4f, 0.12f, 0.15f);
+                    var num4 =
                         (float) (1.0 + (double) Math.Abs(mountedPlayer.velocity.X) / (double) this.RunSpeed * 2.5);
                     mountedPlayer.statDefense += (int) (2.0 * (double) num4);
-                    int num5 = Math.Sign(mountedPlayer.velocity.X);
+                    var num5 = Math.Sign(mountedPlayer.velocity.X);
                     if (num5 == 0)
                         num5 = mountedPlayer.direction;
                     if (Main.netMode != 2)
                     {
-                        Vector3 vector3_2 = vector3_1 * num4;
+                        var vector3_2 = vector3_1 * num4;
                         Lighting.AddLight(mountedPlayer.Center, vector3_2.X, vector3_2.Y, vector3_2.Z);
                         Lighting.AddLight(mountedPlayer.Top, vector3_2.X, vector3_2.Y, vector3_2.Z);
                         Lighting.AddLight(mountedPlayer.Bottom, vector3_2.X, vector3_2.Y, vector3_2.Z);
                         Lighting.AddLight(mountedPlayer.Left, vector3_2.X, vector3_2.Y, vector3_2.Z);
                         Lighting.AddLight(mountedPlayer.Right, vector3_2.X, vector3_2.Y, vector3_2.Z);
-                        float num2 = -24f;
+                        var num2 = -24f;
                         if (mountedPlayer.direction != num5)
                             num2 = -22f;
                         if (num5 == -1)
                             ++num2;
-                        Vector2 vector2_1 =
+                        var vector2_1 =
                             new Vector2(num2 * (float) num5, -19f).RotatedBy((double) mountedPlayer.fullRotation,
                                 new Vector2());
-                        Vector2 vector2_2 =
+                        var vector2_2 =
                             new Vector2(MathHelper.Lerp(0.0f, -8f, mountedPlayer.fullRotation / 0.7853982f),
                                     MathHelper.Lerp(0.0f, 2f, Math.Abs(mountedPlayer.fullRotation / 0.7853982f)))
                                 .RotatedBy((double) mountedPlayer.fullRotation, new Vector2());
                         if (num5 == Math.Sign(mountedPlayer.fullRotation))
                             vector2_2 *= MathHelper.Lerp(1f, 0.6f, Math.Abs(mountedPlayer.fullRotation / 0.7853982f));
-                        Vector2 vector2_3 = mountedPlayer.Bottom + vector2_1 + vector2_2;
-                        Vector2 vector2_4 = mountedPlayer.oldPosition + mountedPlayer.Size * new Vector2(0.5f, 1f) +
+                        var vector2_3 = mountedPlayer.Bottom + vector2_1 + vector2_2;
+                        var vector2_4 = mountedPlayer.oldPosition + mountedPlayer.Size * new Vector2(0.5f, 1f) +
                                             vector2_1 + vector2_2;
                         if ((double) Vector2.Distance(vector2_3, vector2_4) > 3.0)
                         {
-                            int num3 = (int) Vector2.Distance(vector2_3, vector2_4) / 3;
+                            var num3 = (int) Vector2.Distance(vector2_3, vector2_4) / 3;
                             if ((double) Vector2.Distance(vector2_3, vector2_4) % 3.0 != 0.0)
                                 ++num3;
-                            for (float num6 = 1f; (double) num6 <= (double) num3; ++num6)
+                            for (var num6 = 1f; (double) num6 <= (double) num3; ++num6)
                             {
-                                Dust dust = Main.dust[
+                                var dust = Main.dust[
                                     Dust.NewDust(mountedPlayer.Center, 0, 0, 182, 0.0f, 0.0f, 0, new Color(), 1f)];
                                 dust.position = Vector2.Lerp(vector2_4, vector2_3, num6 / (float) num3);
                                 dust.noGravity = true;
@@ -2099,7 +2099,7 @@ namespace Terraria
                         }
                         else
                         {
-                            Dust dust = Main.dust[
+                            var dust = Main.dust[
                                 Dust.NewDust(mountedPlayer.Center, 0, 0, 182, 0.0f, 0.0f, 0, new Color(), 1f)];
                             dust.position = vector2_3;
                             dust.noGravity = true;
@@ -2111,13 +2111,13 @@ namespace Terraria
 
                     if (mountedPlayer.whoAmI != Main.myPlayer || (double) mountedPlayer.velocity.X == 0.0)
                         break;
-                    Vector2 minecartMechPoint = Mount.GetMinecartMechPoint(mountedPlayer, 20, -19);
-                    int num7 = 60;
-                    int num8 = 0;
-                    float num9 = 0.0f;
-                    for (int index1 = 0; index1 < 200; ++index1)
+                    var minecartMechPoint = Mount.GetMinecartMechPoint(mountedPlayer, 20, -19);
+                    var num7 = 60;
+                    var num8 = 0;
+                    var num9 = 0.0f;
+                    for (var index1 = 0; index1 < 200; ++index1)
                     {
-                        NPC npc = Main.npc[index1];
+                        var npc = Main.npc[index1];
                         if (npc.active && npc.immune[mountedPlayer.whoAmI] <= 0 &&
                             (!npc.dontTakeDamage && (double) npc.Distance(minecartMechPoint) < 300.0) &&
                             (npc.CanBeChasedBy((object) mountedPlayer, false) && Collision.CanHitLine(npc.position,
@@ -2128,11 +2128,11 @@ namespace Terraria
                                                              ? 3.141593f
                                                              : 0.0f))) < 0.785398185253143)
                         {
-                            Vector2 v = npc.position + npc.Size * Utils.RandomVector2(Main.rand, 0.0f, 1f) -
+                            var v = npc.position + npc.Size * Utils.RandomVector2(Main.rand, 0.0f, 1f) -
                                         minecartMechPoint;
                             num9 += v.ToRotation();
                             ++num8;
-                            int index2 = Projectile.NewProjectile(minecartMechPoint.X, minecartMechPoint.Y, v.X, v.Y,
+                            var index2 = Projectile.NewProjectile(minecartMechPoint.X, minecartMechPoint.Y, v.X, v.Y,
                                 591, 0, 0.0f, mountedPlayer.whoAmI, (float) mountedPlayer.whoAmI, 0.0f);
                             Main.projectile[index2].Center = npc.Center;
                             Main.projectile[index2].damage = num7;
@@ -2146,8 +2146,8 @@ namespace Terraria
                 case 12:
                     if (mountedPlayer.MountFishronSpecial)
                     {
-                        Vector3 vector3_2 = Colors.CurrentLiquidColor.ToVector3() * 0.4f;
-                        Point tileCoordinates =
+                        var vector3_2 = Colors.CurrentLiquidColor.ToVector3() * 0.4f;
+                        var tileCoordinates =
                             (mountedPlayer.Center + Vector2.UnitX * (float) mountedPlayer.direction * 20f +
                              mountedPlayer.velocity * 10f).ToTileCoordinates();
                         if (!WorldGen.SolidTile(tileCoordinates.X, tileCoordinates.Y))
@@ -2175,19 +2175,19 @@ namespace Terraria
 
         public static Vector2 GetMinecartMechPoint(Player mountedPlayer, int offX, int offY)
         {
-            int num1 = Math.Sign(mountedPlayer.velocity.X);
+            var num1 = Math.Sign(mountedPlayer.velocity.X);
             if (num1 == 0)
                 num1 = mountedPlayer.direction;
-            float num2 = (float) offX;
-            int num3 = Math.Sign(offX);
+            var num2 = (float) offX;
+            var num3 = Math.Sign(offX);
             if (mountedPlayer.direction != num1)
                 num2 -= (float) num3;
             if (num1 == -1)
                 num2 -= (float) num3;
-            Vector2 vector2_1 =
+            var vector2_1 =
                 new Vector2(num2 * (float) num1, (float) offY).RotatedBy((double) mountedPlayer.fullRotation,
                     new Vector2());
-            Vector2 vector2_2 =
+            var vector2_2 =
                 new Vector2(MathHelper.Lerp(0.0f, -8f, mountedPlayer.fullRotation / 0.7853982f),
                         MathHelper.Lerp(0.0f, 2f, Math.Abs(mountedPlayer.fullRotation / 0.7853982f)))
                     .RotatedBy((double) mountedPlayer.fullRotation, new Vector2());
@@ -2208,7 +2208,7 @@ namespace Terraria
         {
             if (this._type == -1)
                 return;
-            for (int index = 0; index < 22; ++index)
+            for (var index = 0; index < 22; ++index)
             {
                 if (mountedPlayer.buffType[index] == this._data.buff ||
                     this.Cart && mountedPlayer.buffType[index] == this._data.extraBuff)
@@ -2245,13 +2245,13 @@ namespace Terraria
                     return position;
             }
 
-            Vector2 center = mountedPlayer.Center;
+            var center = mountedPlayer.Center;
             position -= center;
             if ((double) position.X > (double) -x && (double) position.X < (double) x &&
                 ((double) position.Y > (double) -y && (double) position.Y < (double) y))
             {
-                float num1 = (float) x / Math.Abs(position.X);
-                float num2 = (float) y / Math.Abs(position.Y);
+                var num1 = (float) x / Math.Abs(position.X);
+                var num2 = (float) y / Math.Abs(position.Y);
                 if ((double) num1 > (double) num2)
                     position *= num2;
                 else
@@ -2267,13 +2267,13 @@ namespace Terraria
             switch (this._type)
             {
                 case 8:
-                    Vector2 v = this.ClampToDeadZone(mountedPlayer, mousePosition) - mountedPlayer.Center;
-                    Mount.DrillMountData mountSpecificData = (Mount.DrillMountData) this._mountSpecificData;
-                    float rotation = v.ToRotation();
+                    var v = this.ClampToDeadZone(mountedPlayer, mousePosition) - mountedPlayer.Center;
+                    var mountSpecificData = (Mount.DrillMountData) this._mountSpecificData;
+                    var rotation = v.ToRotation();
                     if ((double) rotation < 0.0)
                         rotation += 6.283185f;
                     mountSpecificData.diodeRotationTarget = rotation;
-                    float num1 = mountSpecificData.diodeRotation % 6.283185f;
+                    var num1 = mountSpecificData.diodeRotation % 6.283185f;
                     if ((double) num1 < 0.0)
                         num1 += 6.283185f;
                     if ((double) num1 < (double) rotation)
@@ -2288,9 +2288,9 @@ namespace Terraria
                     mountSpecificData.crosshairPosition = mousePosition;
                     return true;
                 case 9:
-                    int frameExtra = this._frameExtra;
-                    int direction = mountedPlayer.direction;
-                    float num2 =
+                    var frameExtra = this._frameExtra;
+                    var direction = mountedPlayer.direction;
+                    var num2 =
                         MathHelper.ToDegrees((this.ClampToDeadZone(mountedPlayer, mousePosition) - mountedPlayer.Center)
                             .ToRotation());
                     if ((double) num2 > 90.0)
@@ -2324,14 +2324,14 @@ namespace Terraria
                     else if ((double) num2 > -112.5)
                         this._frameExtra = 6;
 
-                    float abilityCharge = this.AbilityCharge;
+                    var abilityCharge = this.AbilityCharge;
                     if ((double) abilityCharge > 0.0)
                     {
                         Vector2 vector2_1;
                         vector2_1.X = mountedPlayer.position.X + (float) (mountedPlayer.width / 2);
                         vector2_1.Y = mountedPlayer.position.Y + (float) mountedPlayer.height;
-                        int num3 = (this._frameExtra - 6) * 2;
-                        for (int index = 0; index < 2; ++index)
+                        var num3 = (this._frameExtra - 6) * 2;
+                        for (var index = 0; index < 2; ++index)
                         {
                             Vector2 vector2_2;
                             vector2_2.Y = vector2_1.Y + Mount.scutlixEyePositions[num3 + index].Y;
@@ -2395,15 +2395,15 @@ namespace Terraria
                     break;
             }
 
-            int xoffset = this.XOffset;
-            int num1 = this.YOffset + this.PlayerOffset;
+            var xoffset = this.XOffset;
+            var num1 = this.YOffset + this.PlayerOffset;
             if (drawPlayer.direction <= 0 && (!this.Cart || !this.Directional))
                 xoffset *= -1;
             Position.X = (float) (int) ((double) Position.X - (double) Main.screenPosition.X +
                                         (double) (drawPlayer.width / 2) + (double) xoffset);
             Position.Y = (float) (int) ((double) Position.Y - (double) Main.screenPosition.Y +
                                         (double) (drawPlayer.height / 2) + (double) num1);
-            bool flag1 = false;
+            var flag1 = false;
             int num2;
             switch (this._type)
             {
@@ -2446,8 +2446,8 @@ namespace Terraria
                     break;
             }
 
-            int height = this._data.textureHeight / this._data.totalFrames;
-            Rectangle rectangle1 = new Rectangle(0, height * num2, this._data.textureWidth, height);
+            var height = this._data.textureHeight / this._data.totalFrames;
+            var rectangle1 = new Rectangle(0, height * num2, this._data.textureWidth, height);
             if (flag1)
                 rectangle1.Height -= 2;
             switch (this._type)
@@ -2482,7 +2482,7 @@ namespace Terraria
                     break;
             }
 
-            Color color1 = new Color(drawColor.ToVector4() * 0.25f + new Vector4(0.75f));
+            var color1 = new Color(drawColor.ToVector4() * 0.25f + new Vector4(0.75f));
             switch (this._type)
             {
                 case 11:
@@ -2497,8 +2497,8 @@ namespace Terraria
                 case 12:
                     if (drawType == 0)
                     {
-                        float num3 = MathHelper.Clamp(drawPlayer.MountFishronSpecialCounter / 60f, 0.0f, 1f);
-                        Color color2 = Colors.CurrentLiquidColor;
+                        var num3 = MathHelper.Clamp(drawPlayer.MountFishronSpecialCounter / 60f, 0.0f, 1f);
+                        var color2 = Colors.CurrentLiquidColor;
                         if (color2 == Color.Transparent)
                             color2 = Color.White;
                         color2.A = (byte) 127;
@@ -2509,14 +2509,14 @@ namespace Terraria
                     break;
             }
 
-            float rotation1 = 0.0f;
+            var rotation1 = 0.0f;
             switch (this._type)
             {
                 case 7:
                     rotation1 = drawPlayer.fullRotation;
                     break;
                 case 8:
-                    Mount.DrillMountData mountSpecificData1 = (Mount.DrillMountData) this._mountSpecificData;
+                    var mountSpecificData1 = (Mount.DrillMountData) this._mountSpecificData;
                     switch (drawType)
                     {
                         case 0:
@@ -2530,9 +2530,9 @@ namespace Terraria
                     break;
             }
 
-            Vector2 origin = this.Origin;
-            int type1 = this._type;
-            float scale1 = 1f;
+            var origin = this.Origin;
+            var type1 = this._type;
+            var scale1 = 1f;
             SpriteEffects effect;
             switch (this._type)
             {
@@ -2558,8 +2558,8 @@ namespace Terraria
                     break;
             }
 
-            bool flag2 = false;
-            int type2 = this._type;
+            var flag2 = false;
+            var type2 = this._type;
             DrawData drawData;
             if (!flag2)
             {
@@ -2579,20 +2579,20 @@ namespace Terraria
 
             if (this._type != 8 || drawType != 3)
                 return;
-            Mount.DrillMountData mountSpecificData2 = (Mount.DrillMountData) this._mountSpecificData;
-            Rectangle rectangle2 = new Rectangle(0, 0, 1, 1);
-            Vector2 vector2_1 =
+            var mountSpecificData2 = (Mount.DrillMountData) this._mountSpecificData;
+            var rectangle2 = new Rectangle(0, 0, 1, 1);
+            var vector2_1 =
                 Mount.drillDiodePoint1.RotatedBy((double) mountSpecificData2.diodeRotation, new Vector2());
-            Vector2 vector2_2 =
+            var vector2_2 =
                 Mount.drillDiodePoint2.RotatedBy((double) mountSpecificData2.diodeRotation, new Vector2());
-            for (int index1 = 0; index1 < mountSpecificData2.beams.Length; ++index1)
+            for (var index1 = 0; index1 < mountSpecificData2.beams.Length; ++index1)
             {
-                Mount.DrillBeam beam = mountSpecificData2.beams[index1];
+                var beam = mountSpecificData2.beams[index1];
                 if (!(beam.curTileTarget == Point16.NegativeOne))
                 {
-                    for (int index2 = 0; index2 < 2; ++index2)
+                    for (var index2 = 0; index2 < 2; ++index2)
                     {
-                        Vector2 vector2_3 =
+                        var vector2_3 =
                             new Vector2((float) ((int) beam.curTileTarget.X * 16 + 8),
                                 (float) ((int) beam.curTileTarget.Y * 16 + 8)) - Main.screenPosition - Position;
                         Vector2 vector2_4;
@@ -2609,10 +2609,10 @@ namespace Terraria
                         }
 
                         color2.A = (byte) 128;
-                        Color color3 = color2 * 0.5f;
-                        Vector2 v = vector2_3 - vector2_4;
-                        float rotation2 = v.ToRotation();
-                        Vector2 scale2 = new Vector2(2f, v.Length());
+                        var color3 = color2 * 0.5f;
+                        var v = vector2_3 - vector2_4;
+                        var rotation2 = v.ToRotation();
+                        var scale2 = new Vector2(2f, v.Length());
                         drawData = new DrawData(Main.magicPixel, vector2_4 + Position, new Rectangle?(rectangle2),
                             color3, rotation2 - 1.570796f, Vector2.Zero, scale2, SpriteEffects.None, 0);
                         drawData.ignorePlayerRotation = true;
@@ -2627,7 +2627,7 @@ namespace Terraria
         {
             if (!this._active)
                 return;
-            bool cart = this.Cart;
+            var cart = this.Cart;
             this._active = false;
             mountedPlayer.ClearBuff(this._data.buff);
             this._mountSpecificData = (object) null;
@@ -2642,14 +2642,14 @@ namespace Terraria
             mountedPlayer.fullRotationOrigin = Vector2.Zero;
             if (Main.netMode != 2)
             {
-                for (int index1 = 0; index1 < 100; ++index1)
+                for (var index1 = 0; index1 < 100; ++index1)
                 {
                     if (this._type == 6 || this._type == 11 || this._type == 13)
                     {
                         if (index1 % 10 == 0)
                         {
-                            int Type = Main.rand.Next(61, 64);
-                            int index2 =
+                            var Type = Main.rand.Next(61, 64);
+                            var index2 =
                                 Gore.NewGore(new Vector2(mountedPlayer.position.X - 20f, mountedPlayer.position.Y),
                                     Vector2.Zero, Type, 1f);
                             Main.gore[index2].alpha = 100;
@@ -2659,7 +2659,7 @@ namespace Terraria
                     }
                     else
                     {
-                        int index2 = Dust.NewDust(new Vector2(mountedPlayer.position.X - 20f, mountedPlayer.position.Y),
+                        var index2 = Dust.NewDust(new Vector2(mountedPlayer.position.X - 20f, mountedPlayer.position.Y),
                             mountedPlayer.width + 40, mountedPlayer.height, this._data.spawnDust, 0.0f, 0.0f, 0,
                             new Color(), 1f);
                         Main.dust[index2].scale += (float) Main.rand.Next(-10, 21) * 0.01f;
@@ -2726,11 +2726,11 @@ namespace Terraria
             if (this._type == 9 && this._abilityCooldown < 20)
                 this._abilityCooldown = 20;
             mountedPlayer.position.Y += (float) mountedPlayer.height;
-            for (int index = 0; index < mountedPlayer.shadowPos.Length; ++index)
+            for (var index = 0; index < mountedPlayer.shadowPos.Length; ++index)
                 mountedPlayer.shadowPos[index].Y += (float) mountedPlayer.height;
             mountedPlayer.height = 42 + this._data.heightBoost;
             mountedPlayer.position.Y -= (float) mountedPlayer.height;
-            for (int index = 0; index < mountedPlayer.shadowPos.Length; ++index)
+            for (var index = 0; index < mountedPlayer.shadowPos.Length; ++index)
                 mountedPlayer.shadowPos[index].Y -= (float) mountedPlayer.height;
             if (this._type == 7 || this._type == 8)
                 mountedPlayer.fullRotationOrigin =
@@ -2739,14 +2739,14 @@ namespace Terraria
                 this._mountSpecificData = (object) new Mount.DrillMountData();
             if (Main.netMode != 2)
             {
-                for (int index1 = 0; index1 < 100; ++index1)
+                for (var index1 = 0; index1 < 100; ++index1)
                 {
                     if (this._type == 6 || this._type == 11 || this._type == 13)
                     {
                         if (index1 % 10 == 0)
                         {
-                            int Type = Main.rand.Next(61, 64);
-                            int index2 =
+                            var Type = Main.rand.Next(61, 64);
+                            var index2 =
                                 Gore.NewGore(new Vector2(mountedPlayer.position.X - 20f, mountedPlayer.position.Y),
                                     Vector2.Zero, Type, 1f);
                             Main.gore[index2].alpha = 100;
@@ -2756,7 +2756,7 @@ namespace Terraria
                     }
                     else
                     {
-                        int index2 = Dust.NewDust(new Vector2(mountedPlayer.position.X - 20f, mountedPlayer.position.Y),
+                        var index2 = Dust.NewDust(new Vector2(mountedPlayer.position.X - 20f, mountedPlayer.position.Y),
                             mountedPlayer.width + 40, mountedPlayer.height, this._data.spawnDust, 0.0f, 0.0f, 0,
                             new Color(), 1f);
                         Main.dust[index2].scale += (float) Main.rand.Next(-10, 21) * 0.01f;
@@ -2782,7 +2782,7 @@ namespace Terraria
 
         public bool CanMount(int m, Player mountingPlayer)
         {
-            int Height = 42 + Mount.mounts[m].heightBoost;
+            var Height = 42 + Mount.mounts[m].heightBoost;
             return Collision.IsClearSpotTest(
                 mountingPlayer.position + new Vector2(0.0f, (float) (mountingPlayer.height - Height)) +
                 mountingPlayer.velocity, 16f, mountingPlayer.width, Height, true, true, 1, true, false);
@@ -2790,13 +2790,13 @@ namespace Terraria
 
         public bool FindTileHeight(Vector2 position, int maxTilesDown, out float tileHeight)
         {
-            int index1 = (int) ((double) position.X / 16.0);
-            int index2 = (int) ((double) position.Y / 16.0);
-            for (int index3 = 0; index3 <= maxTilesDown; ++index3)
+            var index1 = (int) ((double) position.X / 16.0);
+            var index2 = (int) ((double) position.Y / 16.0);
+            for (var index3 = 0; index3 <= maxTilesDown; ++index3)
             {
-                Tile tile = Main.tile[index1, index2];
-                bool flag1 = Main.tileSolid[(int) tile.type];
-                bool flag2 = Main.tileSolidTop[(int) tile.type];
+                var tile = Main.tile[index1, index2];
+                var flag1 = Main.tileSolid[(int) tile.type];
+                var flag2 = Main.tileSolidTop[(int) tile.type];
                 if (tile.active())
                 {
                     if (flag1)
@@ -2806,7 +2806,7 @@ namespace Terraria
                     }
                     else
                     {
-                        int num = flag2 ? 1 : 0;
+                        var num = flag2 ? 1 : 0;
                     }
                 }
 
@@ -2841,7 +2841,7 @@ namespace Terraria
             public DrillMountData()
             {
                 this.beams = new Mount.DrillBeam[4];
-                for (int index = 0; index < this.beams.Length; ++index)
+                for (var index = 0; index < this.beams.Length; ++index)
                     this.beams[index] = new Mount.DrillBeam();
             }
         }

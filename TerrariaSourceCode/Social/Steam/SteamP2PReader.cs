@@ -40,7 +40,7 @@ namespace Terraria.Social.Steam
             {
                 if (!this._pendingReadBuffers.ContainsKey(id))
                     return false;
-                Queue<SteamP2PReader.ReadResult> pendingReadBuffer = this._pendingReadBuffers[id];
+                var pendingReadBuffer = this._pendingReadBuffers[id];
                 return pendingReadBuffer.Count != 0 && pendingReadBuffer.Peek().Size != 0U;
             }
         }
@@ -65,7 +65,7 @@ namespace Terraria.Social.Steam
                 uint size1;
                 while (this.IsPacketAvailable(out size1))
                 {
-                    byte[] data = this._bufferPool.Count != 0
+                    var data = this._bufferPool.Count != 0
                         ? this._bufferPool.Dequeue()
                         : new byte[Math.Max(size1, 4096U)];
                     uint size2;
@@ -96,11 +96,11 @@ namespace Terraria.Social.Steam
             {
                 if (!this._pendingReadBuffers.ContainsKey(user))
                     return 0;
-                Queue<SteamP2PReader.ReadResult> pendingReadBuffer = this._pendingReadBuffers[user];
+                var pendingReadBuffer = this._pendingReadBuffers[user];
                 while (pendingReadBuffer.Count > 0)
                 {
-                    SteamP2PReader.ReadResult readResult = pendingReadBuffer.Peek();
-                    uint num2 = Math.Min((uint) bufferSize - num1, readResult.Size - readResult.Offset);
+                    var readResult = pendingReadBuffer.Peek();
+                    var num2 = Math.Min((uint) bufferSize - num1, readResult.Size - readResult.Offset);
                     if (num2 == 0U)
                         return (int) num1;
                     Array.Copy((Array) readResult.Data, (long) readResult.Offset, (Array) buffer,

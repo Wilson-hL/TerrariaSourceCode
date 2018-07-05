@@ -59,7 +59,7 @@ namespace Terraria.UI.Chat
 
         public virtual TextSnippet CopyMorph(string newText)
         {
-            TextSnippet textSnippet = (TextSnippet) this.MemberwiseClone();
+            var textSnippet = (TextSnippet) this.MemberwiseClone();
             textSnippet.Text = newText;
             return textSnippet;
         }

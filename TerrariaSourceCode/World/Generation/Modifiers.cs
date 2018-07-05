@@ -22,10 +22,10 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                bool flag = false;
-                for (int index1 = 0; index1 < this._scale; ++index1)
+                var flag = false;
+                for (var index1 = 0; index1 < this._scale; ++index1)
                 {
-                    for (int index2 = 0; index2 < this._scale; ++index2)
+                    for (var index2 = 0; index2 < this._scale; ++index2)
                         flag |= !this.UnitApply(origin, (x - origin.X << 1) + index1 + origin.X,
                             (y - origin.Y << 1) + index2 + origin.Y);
                 }
@@ -53,10 +53,10 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                bool flag = false;
-                for (int index1 = -this._xExpansion; index1 <= this._xExpansion; ++index1)
+                var flag = false;
+                for (var index1 = -this._xExpansion; index1 <= this._xExpansion; ++index1)
                 {
-                    for (int index2 = -this._yExpansion; index2 <= this._yExpansion; ++index2)
+                    for (var index2 = -this._yExpansion; index2 <= this._yExpansion; ++index2)
                         flag |= !this.UnitApply(origin, x + index1, y + index2, args);
                 }
 
@@ -77,7 +77,7 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                Vector2 vector2 = new Vector2((float) origin.X, (float) origin.Y);
+                var vector2 = new Vector2((float) origin.X, (float) origin.Y);
                 if (GenBase._random.NextDouble() > (double) Math.Max(0.0f,
                         Math.Min(1f,
                             (float) (((double) Vector2.Distance(new Vector2((float) x, (float) y), vector2) -
@@ -128,14 +128,14 @@ namespace Terraria.World.Generation
                 GenBase._random.NextDouble();
                 if (GenBase._random.NextDouble() >= this._chance)
                     return this.UnitApply(origin, x, y, args);
-                bool flag = false;
-                int num1 = GenBase._random.Next(1 - this._minX, 1);
-                int num2 = GenBase._random.Next(0, this._maxX);
-                int num3 = GenBase._random.Next(1 - this._minY, 1);
-                int num4 = GenBase._random.Next(0, this._maxY);
-                for (int index1 = num1; index1 <= num2; ++index1)
+                var flag = false;
+                var num1 = GenBase._random.Next(1 - this._minX, 1);
+                var num2 = GenBase._random.Next(0, this._maxX);
+                var num3 = GenBase._random.Next(1 - this._minY, 1);
+                var num4 = GenBase._random.Next(0, this._maxY);
+                for (var index1 = num1; index1 <= num2; ++index1)
                 {
-                    for (int index2 = num3; index2 <= num4; ++index2)
+                    for (var index2 = num3; index2 <= num4; ++index2)
                         flag |= !this.UnitApply(origin, x + index1, y + index2, args);
                 }
 
@@ -154,8 +154,8 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                bool flag = true;
-                for (int index = 0; index < this._conditions.Length; ++index)
+                var flag = true;
+                for (var index = 0; index < this._conditions.Length; ++index)
                     flag &= this._conditions[index].IsValid(x, y);
                 if (flag)
                     return this.UnitApply(origin, x, y, args);
@@ -174,7 +174,7 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                for (int index = 0; index < this._types.Length; ++index)
+                for (var index = 0; index < this._types.Length; ++index)
                 {
                     if ((int) GenBase._tiles[x, y].wall == (int) this._types[index])
                         return this.UnitApply(origin, x, y, args);
@@ -197,7 +197,7 @@ namespace Terraria.World.Generation
             {
                 if (!GenBase._tiles[x, y].active())
                     return this.Fail();
-                for (int index = 0; index < this._types.Length; ++index)
+                for (var index = 0; index < this._types.Length; ++index)
                 {
                     if ((int) GenBase._tiles[x, y].type == (int) this._types[index])
                         return this.UnitApply(origin, x, y, args);
@@ -240,15 +240,15 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                int num = this._useDiagonals ? 16 : 8;
-                int index1 = 0;
+                var num = this._useDiagonals ? 16 : 8;
+                var index1 = 0;
                 while (index1 < num)
                 {
-                    Tile tile = GenBase._tiles[x + Modifiers.IsTouching.DIRECTIONS[index1],
+                    var tile = GenBase._tiles[x + Modifiers.IsTouching.DIRECTIONS[index1],
                         y + Modifiers.IsTouching.DIRECTIONS[index1 + 1]];
                     if (tile.active())
                     {
-                        for (int index2 = 0; index2 < this._tileIds.Length; ++index2)
+                        for (var index2 = 0; index2 < this._tileIds.Length; ++index2)
                         {
                             if ((int) tile.type == (int) this._tileIds[index2])
                                 return this.UnitApply(origin, x, y, args);
@@ -295,15 +295,15 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                int num = this._useDiagonals ? 16 : 8;
-                int index1 = 0;
+                var num = this._useDiagonals ? 16 : 8;
+                var index1 = 0;
                 while (index1 < num)
                 {
-                    Tile tile = GenBase._tiles[x + Modifiers.NotTouching.DIRECTIONS[index1],
+                    var tile = GenBase._tiles[x + Modifiers.NotTouching.DIRECTIONS[index1],
                         y + Modifiers.NotTouching.DIRECTIONS[index1 + 1]];
                     if (tile.active())
                     {
-                        for (int index2 = 0; index2 < this._tileIds.Length; ++index2)
+                        for (var index2 = 0; index2 < this._tileIds.Length; ++index2)
                         {
                             if ((int) tile.type == (int) this._tileIds[index2])
                                 return this.Fail();
@@ -348,8 +348,8 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                int num = this._useDiagonals ? 16 : 8;
-                int index = 0;
+                var num = this._useDiagonals ? 16 : 8;
+                var index = 0;
                 while (index < num)
                 {
                     if (!GenBase._tiles[x + Modifiers.IsTouchingAir.DIRECTIONS[index],
@@ -375,7 +375,7 @@ namespace Terraria.World.Generation
             {
                 if (!GenBase._tiles[x, y].active())
                     return this.UnitApply(origin, x, y, args);
-                for (int index = 0; index < this._types.Length; ++index)
+                for (var index = 0; index < this._types.Length; ++index)
                 {
                     if ((int) GenBase._tiles[x, y].type == (int) this._types[index])
                         return this.Fail();
@@ -398,7 +398,7 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                Tile tile = GenBase._tiles[x, y];
+                var tile = GenBase._tiles[x, y];
                 if ((this._liquidType == -1 || this._liquidType == (int) tile.liquidType()) &&
                     (this._liquidLevel == -1 && tile.liquid != (byte) 0 || this._liquidLevel == (int) tile.liquid))
                     return this.UnitApply(origin, x, y, args);
@@ -417,7 +417,7 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                for (int index = 0; index < this._types.Length; ++index)
+                for (var index = 0; index < this._types.Length; ++index)
                 {
                     if ((int) GenBase._tiles[x, y].wall == (int) this._types[index])
                         return this.Fail();

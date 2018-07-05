@@ -41,7 +41,7 @@ namespace Terraria.GameContent.UI.Elements
 
         public void Goto(UIList.ElementSearchMethod searchMethod)
         {
-            for (int index = 0; index < this._items.Count; ++index)
+            for (var index = 0; index < this._items.Count; ++index)
             {
                 if (searchMethod(this._items[index]))
                 {
@@ -89,12 +89,12 @@ namespace Terraria.GameContent.UI.Elements
         public override void RecalculateChildren()
         {
             base.RecalculateChildren();
-            float pixels = 0.0f;
-            for (int index = 0; index < this._items.Count; ++index)
+            var pixels = 0.0f;
+            for (var index = 0; index < this._items.Count; ++index)
             {
                 this._items[index].Top.Set(pixels, 0.0f);
                 this._items[index].Recalculate();
-                CalculatedStyle outerDimensions = this._items[index].GetOuterDimensions();
+                var outerDimensions = this._items[index].GetOuterDimensions();
                 pixels += outerDimensions.Height + this.ListPadding;
             }
 
@@ -127,11 +127,11 @@ namespace Terraria.GameContent.UI.Elements
 
         public override List<SnapPoint> GetSnapPoints()
         {
-            List<SnapPoint> snapPointList = new List<SnapPoint>();
+            var snapPointList = new List<SnapPoint>();
             SnapPoint point;
             if (this.GetSnapPoint(out point))
                 snapPointList.Add(point);
-            foreach (UIElement uiElement in this._items)
+            foreach (var uiElement in this._items)
                 snapPointList.AddRange((IEnumerable<SnapPoint>) uiElement.GetSnapPoints());
             return snapPointList;
         }
@@ -154,13 +154,13 @@ namespace Terraria.GameContent.UI.Elements
 
             protected override void DrawChildren(SpriteBatch spriteBatch)
             {
-                Vector2 position1 = this.Parent.GetDimensions().Position();
-                Vector2 dimensions1 =
+                var position1 = this.Parent.GetDimensions().Position();
+                var dimensions1 =
                     new Vector2(this.Parent.GetDimensions().Width, this.Parent.GetDimensions().Height);
-                foreach (UIElement element in this.Elements)
+                foreach (var element in this.Elements)
                 {
-                    Vector2 position2 = element.GetDimensions().Position();
-                    Vector2 dimensions2 = new Vector2(element.GetDimensions().Width, element.GetDimensions().Height);
+                    var position2 = element.GetDimensions().Position();
+                    var dimensions2 = new Vector2(element.GetDimensions().Width, element.GetDimensions().Height);
                     if (Collision.CheckAABBvAABBCollision(position1, dimensions1, position2, dimensions2))
                         element.Draw(spriteBatch);
                 }

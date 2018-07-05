@@ -42,13 +42,13 @@ namespace Terraria.GameContent.Liquid
 
         public LiquidRenderer()
         {
-            for (int index = 0; index < this._liquidTextures.Length; ++index)
+            for (var index = 0; index < this._liquidTextures.Length; ++index)
                 this._liquidTextures[index] = TextureManager.Load("Images/Misc/water_" + (object) index);
         }
 
         private unsafe void InternalPrepareDraw(Rectangle drawArea)
         {
-            Rectangle rectangle =
+            var rectangle =
                 new Rectangle(drawArea.X - 2, drawArea.Y - 2, drawArea.Width + 4, drawArea.Height + 4);
             this._drawArea = drawArea;
             if (this._cache.Length < rectangle.Width * rectangle.Height + 1)
@@ -59,13 +59,13 @@ namespace Terraria.GameContent.Liquid
                 this._waveMask = new Color[drawArea.Width * drawArea.Height];
             fixed (LiquidRenderer.LiquidCache* liquidCachePtr1 = &this._cache[1])
             {
-                int num1 = rectangle.Height * 2 + 2;
-                LiquidRenderer.LiquidCache* liquidCachePtr2 = liquidCachePtr1;
-                for (int x = rectangle.X; x < rectangle.X + rectangle.Width; ++x)
+                var num1 = rectangle.Height * 2 + 2;
+                var liquidCachePtr2 = liquidCachePtr1;
+                for (var x = rectangle.X; x < rectangle.X + rectangle.Width; ++x)
                 {
-                    for (int y = rectangle.Y; y < rectangle.Y + rectangle.Height; ++y)
+                    for (var y = rectangle.Y; y < rectangle.Y + rectangle.Height; ++y)
                     {
-                        Tile tile = this._tiles[x, y] ?? new Tile();
+                        var tile = this._tiles[x, y] ?? new Tile();
                         liquidCachePtr2->LiquidLevel = (float) tile.liquid / (float) byte.MaxValue;
                         liquidCachePtr2->IsHalfBrick = tile.halfBrick() && liquidCachePtr2[-1].HasLiquid;
                         liquidCachePtr2->IsSolid = WorldGen.SolidOrSlopedTile(tile) && !liquidCachePtr2->IsHalfBrick;
@@ -79,16 +79,16 @@ namespace Terraria.GameContent.Liquid
                     }
                 }
 
-                LiquidRenderer.LiquidCache* liquidCachePtr3 = liquidCachePtr1 + num1;
+                var liquidCachePtr3 = liquidCachePtr1 + num1;
                 LiquidRenderer.LiquidCache liquidCache1;
                 LiquidRenderer.LiquidCache liquidCache2;
                 LiquidRenderer.LiquidCache liquidCache3;
                 LiquidRenderer.LiquidCache liquidCache4;
-                for (int index1 = 2; index1 < rectangle.Width - 2; ++index1)
+                for (var index1 = 2; index1 < rectangle.Width - 2; ++index1)
                 {
-                    for (int index2 = 2; index2 < rectangle.Height - 2; ++index2)
+                    for (var index2 = 2; index2 < rectangle.Height - 2; ++index2)
                     {
-                        float val1 = 0.0f;
+                        var val1 = 0.0f;
                         float num2;
                         if (liquidCachePtr3->IsHalfBrick && liquidCachePtr3[-1].HasLiquid)
                             num2 = 1f;
@@ -125,19 +125,19 @@ namespace Terraria.GameContent.Liquid
                     liquidCachePtr3 += 4;
                 }
 
-                LiquidRenderer.LiquidCache* liquidCachePtr4 = liquidCachePtr1;
-                for (int index1 = 0; index1 < rectangle.Width; ++index1)
+                var liquidCachePtr4 = liquidCachePtr1;
+                for (var index1 = 0; index1 < rectangle.Width; ++index1)
                 {
-                    for (int index2 = 0; index2 < rectangle.Height - 10; ++index2)
+                    for (var index2 = 0; index2 < rectangle.Height - 10; ++index2)
                     {
                         if (liquidCachePtr4->HasVisibleLiquid && !liquidCachePtr4->IsSolid)
                         {
                             liquidCachePtr4->Opacity = 1f;
                             liquidCachePtr4->VisibleType = liquidCachePtr4->Type;
-                            float num2 =
+                            var num2 =
                                 1f / (float) (LiquidRenderer.WATERFALL_LENGTH[(int) liquidCachePtr4->Type] + 1);
-                            float num3 = 1f;
-                            for (int index3 = 1;
+                            var num3 = 1f;
+                            for (var index3 = 1;
                                 index3 <= LiquidRenderer.WATERFALL_LENGTH[(int) liquidCachePtr4->Type];
                                 ++index3)
                             {
@@ -169,10 +169,10 @@ namespace Terraria.GameContent.Liquid
                     liquidCachePtr4 += 10;
                 }
 
-                LiquidRenderer.LiquidCache* liquidCachePtr5 = liquidCachePtr1 + num1;
-                for (int index1 = 2; index1 < rectangle.Width - 2; ++index1)
+                var liquidCachePtr5 = liquidCachePtr1 + num1;
+                for (var index1 = 2; index1 < rectangle.Width - 2; ++index1)
                 {
-                    for (int index2 = 2; index2 < rectangle.Height - 2; ++index2)
+                    for (var index2 = 2; index2 < rectangle.Height - 2; ++index2)
                     {
                         if (!liquidCachePtr5->HasVisibleLiquid || liquidCachePtr5->IsSolid)
                         {
@@ -187,11 +187,11 @@ namespace Terraria.GameContent.Liquid
                             liquidCache2 = liquidCachePtr5[1];
                             liquidCache3 = liquidCachePtr5[-rectangle.Height];
                             liquidCache4 = liquidCachePtr5[rectangle.Height];
-                            float num2 = 0.0f;
-                            float num3 = 1f;
-                            float num4 = 0.0f;
-                            float num5 = 1f;
-                            float visibleLiquidLevel = liquidCachePtr5->VisibleLiquidLevel;
+                            var num2 = 0.0f;
+                            var num3 = 1f;
+                            var num4 = 0.0f;
+                            var num5 = 1f;
+                            var visibleLiquidLevel = liquidCachePtr5->VisibleLiquidLevel;
                             if (!liquidCache1.HasVisibleLiquid)
                                 num4 += liquidCache2.VisibleLiquidLevel * (1f - visibleLiquidLevel);
                             if (!liquidCache2.HasVisibleLiquid && !liquidCache2.IsSolid && !liquidCache2.IsHalfBrick)
@@ -204,7 +204,7 @@ namespace Terraria.GameContent.Liquid
                             liquidCachePtr5->RightWall = num3;
                             liquidCachePtr5->BottomWall = num5;
                             liquidCachePtr5->TopWall = num4;
-                            Point zero = Point.Zero;
+                            var zero = Point.Zero;
                             liquidCachePtr5->HasTopEdge =
                                 !liquidCache1.HasVisibleLiquid && !liquidCache1.IsSolid || (double) num4 != 0.0;
                             liquidCachePtr5->HasBottomEdge =
@@ -248,10 +248,10 @@ namespace Terraria.GameContent.Liquid
                     liquidCachePtr5 += 4;
                 }
 
-                LiquidRenderer.LiquidCache* liquidCachePtr6 = liquidCachePtr1 + num1;
-                for (int index1 = 2; index1 < rectangle.Width - 2; ++index1)
+                var liquidCachePtr6 = liquidCachePtr1 + num1;
+                for (var index1 = 2; index1 < rectangle.Width - 2; ++index1)
                 {
-                    for (int index2 = 2; index2 < rectangle.Height - 2; ++index2)
+                    for (var index2 = 2; index2 < rectangle.Height - 2; ++index2)
                     {
                         if (liquidCachePtr6->HasVisibleLiquid)
                         {
@@ -298,10 +298,10 @@ namespace Terraria.GameContent.Liquid
                     liquidCachePtr6 += 4;
                 }
 
-                LiquidRenderer.LiquidCache* liquidCachePtr7 = liquidCachePtr1 + num1;
-                for (int index1 = 2; index1 < rectangle.Width - 2; ++index1)
+                var liquidCachePtr7 = liquidCachePtr1 + num1;
+                for (var index1 = 2; index1 < rectangle.Width - 2; ++index1)
                 {
-                    for (int index2 = 2; index2 < rectangle.Height - 2; ++index2)
+                    for (var index2 = 2; index2 < rectangle.Height - 2; ++index2)
                     {
                         if (liquidCachePtr7->HasLiquid)
                         {
@@ -344,10 +344,10 @@ namespace Terraria.GameContent.Liquid
                     liquidCachePtr7 += 4;
                 }
 
-                LiquidRenderer.LiquidCache* liquidCachePtr8 = liquidCachePtr1 + num1;
-                for (int index1 = 2; index1 < rectangle.Width - 2; ++index1)
+                var liquidCachePtr8 = liquidCachePtr1 + num1;
+                for (var index1 = 2; index1 < rectangle.Width - 2; ++index1)
                 {
-                    for (int index2 = 2; index2 < rectangle.Height - 2; ++index2)
+                    for (var index2 = 2; index2 < rectangle.Height - 2; ++index2)
                     {
                         if (liquidCachePtr8->HasLiquid)
                         {
@@ -391,22 +391,22 @@ namespace Terraria.GameContent.Liquid
                     liquidCachePtr8 += 4;
                 }
 
-                LiquidRenderer.LiquidCache* liquidCachePtr9 = liquidCachePtr1 + num1;
+                var liquidCachePtr9 = liquidCachePtr1 + num1;
                 fixed (LiquidRenderer.LiquidDrawCache* liquidDrawCachePtr1 = &this._drawCache[0])
                 fixed (Color* colorPtr1 = &this._waveMask[0])
                 {
-                    LiquidRenderer.LiquidDrawCache* liquidDrawCachePtr2 = liquidDrawCachePtr1;
-                    Color* colorPtr2 = colorPtr1;
-                    for (int index1 = 2; index1 < rectangle.Width - 2; ++index1)
+                    var liquidDrawCachePtr2 = liquidDrawCachePtr1;
+                    var colorPtr2 = colorPtr1;
+                    for (var index1 = 2; index1 < rectangle.Width - 2; ++index1)
                     {
-                        for (int index2 = 2; index2 < rectangle.Height - 2; ++index2)
+                        for (var index2 = 2; index2 < rectangle.Height - 2; ++index2)
                         {
                             if (liquidCachePtr9->HasVisibleLiquid)
                             {
-                                float num2 = Math.Min(0.75f, liquidCachePtr9->VisibleLeftWall);
-                                float num3 = Math.Max(0.25f, liquidCachePtr9->VisibleRightWall);
-                                float num4 = Math.Min(0.75f, liquidCachePtr9->VisibleTopWall);
-                                float num5 = Math.Max(0.25f, liquidCachePtr9->VisibleBottomWall);
+                                var num2 = Math.Min(0.75f, liquidCachePtr9->VisibleLeftWall);
+                                var num3 = Math.Max(0.25f, liquidCachePtr9->VisibleRightWall);
+                                var num4 = Math.Min(0.75f, liquidCachePtr9->VisibleTopWall);
+                                var num5 = Math.Max(0.25f, liquidCachePtr9->VisibleBottomWall);
                                 if (liquidCachePtr9->IsHalfBrick && (double) num5 > 0.5)
                                     num5 = 0.5f;
                                 liquidDrawCachePtr2->IsVisible =
@@ -425,13 +425,13 @@ namespace Terraria.GameContent.Liquid
                                     (float) Math.Floor((double) num2 * 16.0), (float) Math.Floor((double) num4 * 16.0));
                                 liquidDrawCachePtr2->Type = liquidCachePtr9->VisibleType;
                                 liquidDrawCachePtr2->HasWall = liquidCachePtr9->HasWall;
-                                byte num6 = LiquidRenderer.WAVE_MASK_STRENGTH[(int) liquidCachePtr9->VisibleType];
-                                byte num7 = (byte) ((uint) num6 >> 1);
+                                var num6 = LiquidRenderer.WAVE_MASK_STRENGTH[(int) liquidCachePtr9->VisibleType];
+                                var num7 = (byte) ((uint) num6 >> 1);
                                 colorPtr2->R = num7;
                                 colorPtr2->G = num7;
                                 colorPtr2->B = LiquidRenderer.VISCOSITY_MASK[(int) liquidCachePtr9->VisibleType];
                                 colorPtr2->A = num6;
-                                LiquidRenderer.LiquidCache* liquidCachePtr10 = liquidCachePtr9 - 1;
+                                var liquidCachePtr10 = liquidCachePtr9 - 1;
                                 if (index2 != 2 && !liquidCachePtr10->HasVisibleLiquid &&
                                     (!liquidCachePtr10->IsSolid && !liquidCachePtr10->IsHalfBrick))
                                     *(colorPtr2 - 1) = *colorPtr2;
@@ -439,9 +439,9 @@ namespace Terraria.GameContent.Liquid
                             else
                             {
                                 liquidDrawCachePtr2->IsVisible = false;
-                                int index3 = liquidCachePtr9->IsSolid || liquidCachePtr9->IsHalfBrick ? 3 : 4;
-                                byte num2 = LiquidRenderer.WAVE_MASK_STRENGTH[index3];
-                                byte num3 = (byte) ((uint) num2 >> 1);
+                                var index3 = liquidCachePtr9->IsSolid || liquidCachePtr9->IsHalfBrick ? 3 : 4;
+                                var num2 = LiquidRenderer.WAVE_MASK_STRENGTH[index3];
+                                var num3 = (byte) ((uint) num2 >> 1);
                                 colorPtr2->R = num3;
                                 colorPtr2->G = num3;
                                 colorPtr2->B = LiquidRenderer.VISCOSITY_MASK[index3];
@@ -457,10 +457,10 @@ namespace Terraria.GameContent.Liquid
                     }
                 }
 
-                LiquidRenderer.LiquidCache* liquidCachePtr11 = liquidCachePtr1;
-                for (int x = rectangle.X; x < rectangle.X + rectangle.Width; ++x)
+                var liquidCachePtr11 = liquidCachePtr1;
+                for (var x = rectangle.X; x < rectangle.X + rectangle.Width; ++x)
                 {
-                    for (int y = rectangle.Y; y < rectangle.Y + rectangle.Height; ++y)
+                    for (var y = rectangle.Y; y < rectangle.Y + rectangle.Height; ++y)
                     {
                         if (liquidCachePtr11->VisibleType == (byte) 1 && liquidCachePtr11->HasVisibleLiquid &&
                             Dust.lavaBubbles < 200)
@@ -470,7 +470,7 @@ namespace Terraria.GameContent.Liquid
                                     Color.White, 1f);
                             if (this._random.Next(350) == 0)
                             {
-                                int index = Dust.NewDust(new Vector2((float) (x * 16), (float) (y * 16)), 16, 8, 35,
+                                var index = Dust.NewDust(new Vector2((float) (x * 16), (float) (y * 16)), 16, 8, 35,
                                     0.0f, 0.0f, 50, Color.White, 1.5f);
                                 Main.dust[index].velocity *= 0.8f;
                                 Main.dust[index].velocity.X *= 2f;
@@ -494,27 +494,27 @@ namespace Terraria.GameContent.Liquid
         private unsafe void InternalDraw(SpriteBatch spriteBatch, Vector2 drawOffset, int waterStyle, float globalAlpha,
             bool isBackgroundDraw)
         {
-            Rectangle drawArea = this._drawArea;
+            var drawArea = this._drawArea;
             Main.tileBatch.Begin();
             fixed (LiquidRenderer.LiquidDrawCache* liquidDrawCachePtr1 = &this._drawCache[0])
             {
-                LiquidRenderer.LiquidDrawCache* liquidDrawCachePtr2 = liquidDrawCachePtr1;
-                for (int x = drawArea.X; x < drawArea.X + drawArea.Width; ++x)
+                var liquidDrawCachePtr2 = liquidDrawCachePtr1;
+                for (var x = drawArea.X; x < drawArea.X + drawArea.Width; ++x)
                 {
-                    for (int y = drawArea.Y; y < drawArea.Y + drawArea.Height; ++y)
+                    for (var y = drawArea.Y; y < drawArea.Y + drawArea.Height; ++y)
                     {
                         if (liquidDrawCachePtr2->IsVisible)
                         {
-                            Rectangle sourceRectangle = liquidDrawCachePtr2->SourceRectangle;
+                            var sourceRectangle = liquidDrawCachePtr2->SourceRectangle;
                             if (liquidDrawCachePtr2->IsSurfaceLiquid)
                                 sourceRectangle.Y = 1280;
                             else
                                 sourceRectangle.Y += this._animationFrame * 80;
-                            Vector2 liquidOffset = liquidDrawCachePtr2->LiquidOffset;
-                            float val2 = liquidDrawCachePtr2->Opacity * (isBackgroundDraw
+                            var liquidOffset = liquidDrawCachePtr2->LiquidOffset;
+                            var val2 = liquidDrawCachePtr2->Opacity * (isBackgroundDraw
                                              ? 1f
                                              : LiquidRenderer.DEFAULT_OPACITY[(int) liquidDrawCachePtr2->Type]);
-                            int index = (int) liquidDrawCachePtr2->Type;
+                            var index = (int) liquidDrawCachePtr2->Type;
                             switch (index)
                             {
                                 case 0:
@@ -526,7 +526,7 @@ namespace Terraria.GameContent.Liquid
                                     break;
                             }
 
-                            float num = Math.Min(1f, val2);
+                            var num = Math.Min(1f, val2);
                             VertexColors vertices;
                             Lighting.GetColor4Slice_New(x, y, out vertices, 1f);
                             vertices.BottomLeftColor *= num;
@@ -550,7 +550,7 @@ namespace Terraria.GameContent.Liquid
         {
             x -= this._drawArea.X;
             y -= this._drawArea.Y;
-            int index = x * this._drawArea.Height + y;
+            var index = x * this._drawArea.Height + y;
             if (index < 0 || index >= this._drawCache.Length)
                 return true;
             if (this._drawCache[index].IsVisible)
@@ -564,7 +564,7 @@ namespace Terraria.GameContent.Liquid
             y -= this._drawArea.Y;
             if (x < 0 || x >= this._drawArea.Width || (y < 0 || y >= this._drawArea.Height))
                 return 0.0f;
-            int index = (x + 2) * (this._drawArea.Height + 4) + y + 2;
+            var index = (x + 2) * (this._drawArea.Height + 4) + y + 2;
             if (!this._cache[index].HasVisibleLiquid)
                 return 0.0f;
             return this._cache[index].VisibleLiquidLevel;
@@ -574,7 +574,7 @@ namespace Terraria.GameContent.Liquid
         {
             if (Main.gamePaused || !Main.hasFocus)
                 return;
-            float val2 = MathHelper.Clamp(Main.windSpeed * 80f, -20f, 20f);
+            var val2 = MathHelper.Clamp(Main.windSpeed * 80f, -20f, 20f);
             this._frameState += ((double) val2 >= 0.0 ? Math.Max(10f, val2) : Math.Min(-10f, val2)) *
                                 (float) gameTime.ElapsedGameTime.TotalSeconds;
             if ((double) this._frameState < 0.0)

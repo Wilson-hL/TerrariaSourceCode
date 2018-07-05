@@ -24,7 +24,7 @@ namespace Terraria.Net
 
         public void Register<T>() where T : NetModule, new()
         {
-            T instance = Activator.CreateInstance<T>();
+            var instance = Activator.CreateInstance<T>();
             NetManager.PacketTypeStorage<T>.Id = this._moduleCount;
             NetManager.PacketTypeStorage<T>.Module = instance;
             this._modules[this._moduleCount] = (NetModule) instance;
@@ -43,7 +43,7 @@ namespace Terraria.Net
 
         public void Read(BinaryReader reader, int userId)
         {
-            ushort key = reader.ReadUInt16();
+            var key = reader.ReadUInt16();
             if (!this._modules.ContainsKey(key))
                 return;
             this._modules[key].Deserialize(reader, userId);
@@ -51,7 +51,7 @@ namespace Terraria.Net
 
         public void Broadcast(NetPacket packet, int ignoreClient = -1)
         {
-            for (int index = 0; index < 256; ++index)
+            for (var index = 0; index < 256; ++index)
             {
                 if (index != ignoreClient && Netplay.Clients[index].IsConnected())
                     this.SendData(Netplay.Clients[index].Socket, packet);

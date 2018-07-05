@@ -51,8 +51,8 @@ namespace Terraria.Social.Steam
 
         public override byte[] GetEncryptionKey()
         {
-            byte[] numArray = new byte[16];
-            byte[] bytes = BitConverter.GetBytes((ulong) SteamUser.GetSteamID().m_SteamID);
+            var numArray = new byte[16];
+            var bytes = BitConverter.GetBytes((ulong) SteamUser.GetSteamID().m_SteamID);
             Array.Copy((Array) bytes, (Array) numArray, 8);
             Array.Copy((Array) bytes, 0, (Array) numArray, 8, 8);
             return numArray;

@@ -19,7 +19,7 @@ namespace Terraria.GameContent.UI.States
 
         public override int CompareTo(object obj)
         {
-            UISortableElement uiSortableElement = obj as UISortableElement;
+            var uiSortableElement = obj as UISortableElement;
             if (uiSortableElement != null)
                 return this.OrderIndex.CompareTo(uiSortableElement.OrderIndex);
             return base.CompareTo(obj);

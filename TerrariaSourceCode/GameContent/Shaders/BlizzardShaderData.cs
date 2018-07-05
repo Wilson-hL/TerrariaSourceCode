@@ -21,13 +21,13 @@ namespace Terraria.GameContent.Shaders
 
         public override void Update(GameTime gameTime)
         {
-            float num = Main.windSpeed;
+            var num = Main.windSpeed;
             if ((double) num >= 0.0 && (double) num <= 0.100000001490116)
                 num = 0.1f;
             else if ((double) num <= 0.0 && (double) num >= -0.100000001490116)
                 num = -0.1f;
             this.windSpeed = (float) ((double) num * 0.0500000007450581 + (double) this.windSpeed * 0.949999988079071);
-            Vector2 direction = new Vector2(-this.windSpeed, -1f) * new Vector2(10f, 2f);
+            var direction = new Vector2(-this.windSpeed, -1f) * new Vector2(10f, 2f);
             direction.Normalize();
             direction *= new Vector2(0.8f, 0.6f);
             if (!Main.gamePaused && Main.hasFocus)

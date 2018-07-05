@@ -42,11 +42,11 @@ namespace Terraria.World.Generation
             this._height = lines.Length;
             this._width = lines[0].Length;
             this._data = new int[this._width, this._height];
-            for (int index1 = 0; index1 < this._height; ++index1)
+            for (var index1 = 0; index1 < this._height; ++index1)
             {
-                for (int index2 = 0; index2 < this._width; ++index2)
+                for (var index2 = 0; index2 < this._width; ++index2)
                 {
-                    int num = (int) lines[index1][index2];
+                    var num = (int) lines[index1][index2];
                     this._data[index2, index1] = num < 48 || num > 57 ? -1 : num - 48;
                 }
             }
@@ -70,12 +70,12 @@ namespace Terraria.World.Generation
             if (!structures.CanPlace(
                 new Microsoft.Xna.Framework.Rectangle(origin.X, origin.Y, this._width, this._height), 0))
                 return false;
-            for (int index1 = 0; index1 < this._width; ++index1)
+            for (var index1 = 0; index1 < this._width; ++index1)
             {
-                for (int index2 = 0; index2 < this._height; ++index2)
+                for (var index2 = 0; index2 < this._height; ++index2)
                 {
-                    int num1 = this._xMirror ? -index1 : index1;
-                    int num2 = this._yMirror ? -index2 : index2;
+                    var num1 = this._xMirror ? -index1 : index1;
+                    var num2 = this._yMirror ? -index2 : index2;
                     if (this._data[index1, index2] != -1 && !this._actions[this._data[index1, index2]]
                             .Apply(origin, num1 + origin.X, num2 + origin.Y))
                         return false;

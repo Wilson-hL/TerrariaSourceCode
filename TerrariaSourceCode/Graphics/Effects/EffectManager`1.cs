@@ -44,7 +44,7 @@ namespace Terraria.Graphics.Effects
             if (this._isLoaded)
                 return;
             this._isLoaded = true;
-            foreach (T obj in this._effects.Values)
+            foreach (var obj in this._effects.Values)
                 obj.Load();
         }
 
@@ -53,7 +53,7 @@ namespace Terraria.Graphics.Effects
             if (!this._effects.ContainsKey(name))
                 throw new MissingEffectException("Unable to find effect named: " + name + ". Type: " +
                                                  (object) typeof(T) + ".");
-            T effect = this._effects[name];
+            var effect = this._effects[name];
             this.OnActivate(effect, position);
             effect.Activate(position, args);
             return effect;
@@ -64,7 +64,7 @@ namespace Terraria.Graphics.Effects
             if (!this._effects.ContainsKey(name))
                 throw new MissingEffectException("Unable to find effect named: " + name + ". Type: " +
                                                  (object) typeof(T) + ".");
-            T effect = this._effects[name];
+            var effect = this._effects[name];
             this.OnDeactivate(effect);
             effect.Deactivate(args);
         }

@@ -165,12 +165,12 @@ namespace Terraria.IO
             WorldFile.IsWorldOnCloud = loadFromCloud;
             Main.checkXMas();
             Main.checkHalloween();
-            bool flag = loadFromCloud && SocialAPI.Cloud != null;
+            var flag = loadFromCloud && SocialAPI.Cloud != null;
             if (!FileUtilities.Exists(Main.worldPathName, flag) && Main.autoGen)
             {
                 if (!flag)
                 {
-                    for (int index = Main.worldPathName.Length - 1; index >= 0; --index)
+                    for (var index = Main.worldPathName.Length - 1; index >= 0; --index)
                     {
                         if (Main.worldPathName.Substring(index, 1) ==
                             string.Concat((object) Path.DirectorySeparatorChar))
@@ -184,7 +184,7 @@ namespace Terraria.IO
                 WorldGen.clearWorld();
                 Main.ActiveWorldFileData = WorldFile.CreateMetadata(Main.worldName == "" ? "World" : Main.worldName,
                     flag, Main.expertMode);
-                string seedText = (Main.AutogenSeedName ?? "").Trim();
+                var seedText = (Main.AutogenSeedName ?? "").Trim();
                 if (seedText.Length == 0)
                     Main.ActiveWorldFileData.SetSeedToRandom();
                 else
@@ -193,17 +193,17 @@ namespace Terraria.IO
                 WorldFile.saveWorld();
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(FileUtilities.ReadAllBytes(Main.worldPathName, flag)))
+            using (var memoryStream = new MemoryStream(FileUtilities.ReadAllBytes(Main.worldPathName, flag)))
             {
-                using (BinaryReader binaryReader = new BinaryReader((Stream) memoryStream))
+                using (var binaryReader = new BinaryReader((Stream) memoryStream))
                 {
                     try
                     {
                         WorldGen.loadFailed = false;
                         WorldGen.loadSuccess = false;
-                        int num1 = binaryReader.ReadInt32();
+                        var num1 = binaryReader.ReadInt32();
                         WorldFile.versionNumber = num1;
-                        int num2 = num1 > 87
+                        var num2 = num1 > 87
                             ? WorldFile.LoadWorld_Version2(binaryReader)
                             : WorldFile.LoadWorld_Version1(binaryReader);
                         if (num1 < 141)
@@ -221,14 +221,14 @@ namespace Terraria.IO
                         WorldGen.waterLine = Main.maxTilesY;
                         Liquid.QuickWater(2, -1, -1);
                         WorldGen.WaterCheck();
-                        int num3 = 0;
+                        var num3 = 0;
                         Liquid.quickSettle = true;
-                        int num4 = Liquid.numLiquid + LiquidBuffer.numLiquidBuffer;
-                        float num5 = 0.0f;
+                        var num4 = Liquid.numLiquid + LiquidBuffer.numLiquidBuffer;
+                        var num5 = 0.0f;
                         while (Liquid.numLiquid > 0 && num3 < 100000)
                         {
                             ++num3;
-                            float num6 = (float) (num4 - (Liquid.numLiquid + LiquidBuffer.numLiquidBuffer)) /
+                            var num6 = (float) (num4 - (Liquid.numLiquid + LiquidBuffer.numLiquidBuffer)) /
                                          (float) num4;
                             if (Liquid.numLiquid + LiquidBuffer.numLiquidBuffer > num4)
                                 num4 = Liquid.numLiquid + LiquidBuffer.numLiquidBuffer;
@@ -312,11 +312,11 @@ namespace Terraria.IO
                 if (Main.worldPathName == null)
                     return;
                 new Stopwatch().Start();
-                byte[] data1 = (byte[]) null;
-                int num = 0;
-                using (MemoryStream memoryStream = new MemoryStream(7000000))
+                var data1 = (byte[]) null;
+                var num = 0;
+                using (var memoryStream = new MemoryStream(7000000))
                 {
-                    using (BinaryWriter writer = new BinaryWriter((Stream) memoryStream))
+                    using (var writer = new BinaryWriter((Stream) memoryStream))
                         WorldFile.SaveWorld_Version2(writer);
                     data1 = memoryStream.ToArray();
                     num = data1.Length;
@@ -324,15 +324,15 @@ namespace Terraria.IO
 
                 if (data1 == null)
                     return;
-                byte[] data2 = (byte[]) null;
+                var data2 = (byte[]) null;
                 if (FileUtilities.Exists(Main.worldPathName, useCloudSaving))
                     data2 = FileUtilities.ReadAllBytes(Main.worldPathName, useCloudSaving);
                 FileUtilities.Write(Main.worldPathName, data1, num, useCloudSaving);
-                byte[] buffer = FileUtilities.ReadAllBytes(Main.worldPathName, useCloudSaving);
-                string path = (string) null;
-                using (MemoryStream memoryStream = new MemoryStream(buffer, 0, num, false))
+                var buffer = FileUtilities.ReadAllBytes(Main.worldPathName, useCloudSaving);
+                var path = (string) null;
+                using (var memoryStream = new MemoryStream(buffer, 0, num, false))
                 {
-                    using (BinaryReader fileIO = new BinaryReader((Stream) memoryStream))
+                    using (var fileIO = new BinaryReader((Stream) memoryStream))
                     {
                         if (!Main.validateSaves || WorldFile.validateWorld(fileIO))
                         {
@@ -358,7 +358,7 @@ namespace Terraria.IO
         public static int LoadWorld_Version1(BinaryReader fileIO)
         {
             Main.WorldFileMetadata = FileMetadata.FromCurrentSettings(FileType.World);
-            int versionNumber = WorldFile.versionNumber;
+            var versionNumber = WorldFile.versionNumber;
             if (versionNumber > 193)
                 return 1;
             Main.worldName = fileIO.ReadString();
@@ -504,14 +504,14 @@ namespace Terraria.IO
                 WorldGen.oreTier3 = 111;
             }
 
-            int style1 = 0;
-            int style2 = 0;
-            int style3 = 0;
-            int style4 = 0;
-            int style5 = 0;
-            int style6 = 0;
-            int style7 = 0;
-            int style8 = 0;
+            var style1 = 0;
+            var style2 = 0;
+            var style3 = 0;
+            var style4 = 0;
+            var style5 = 0;
+            var style6 = 0;
+            var style7 = 0;
+            var style8 = 0;
             if (versionNumber >= 55)
             {
                 style1 = (int) fileIO.ReadByte();
@@ -553,14 +553,14 @@ namespace Terraria.IO
             else
                 WorldGen.RandomizeWeather();
 
-            for (int index1 = 0; index1 < Main.maxTilesX; ++index1)
+            for (var index1 = 0; index1 < Main.maxTilesX; ++index1)
             {
-                float num1 = (float) index1 / (float) Main.maxTilesX;
+                var num1 = (float) index1 / (float) Main.maxTilesX;
                 Main.statusText = Lang.gen[51].Value + " " + (object) (int) ((double) num1 * 100.0 + 1.0) + "%";
-                for (int index2 = 0; index2 < Main.maxTilesY; ++index2)
+                for (var index2 = 0; index2 < Main.maxTilesY; ++index2)
                 {
-                    Tile tile = Main.tile[index1, index2];
-                    int index3 = -1;
+                    var tile = Main.tile[index1, index2];
+                    var index3 = -1;
                     tile.active(fileIO.ReadBoolean());
                     if (tile.active())
                     {
@@ -649,7 +649,7 @@ namespace Terraria.IO
                         tile.inActive(fileIO.ReadBoolean());
                     }
 
-                    int num2 = 0;
+                    var num2 = 0;
                     if (versionNumber >= 25)
                         num2 = (int) fileIO.ReadInt16();
                     if (index3 != -1)
@@ -662,8 +662,8 @@ namespace Terraria.IO
                             }
                             else
                             {
-                                int num3 = (int) (Main.worldSurface - (double) index2 + 1.0);
-                                int num4 = num2 + 1 - num3;
+                                var num3 = (int) (Main.worldSurface - (double) index2 + 1.0);
+                                var num4 = num2 + 1 - num3;
                                 WorldGen.tileCounts[index3] += num3 * 5 + num4;
                             }
                         }
@@ -673,7 +673,7 @@ namespace Terraria.IO
 
                     if (num2 > 0)
                     {
-                        for (int index4 = index2 + 1; index4 < index2 + num2 + 1; ++index4)
+                        for (var index4 = index2 + 1; index4 < index2 + num2 + 1; ++index4)
                             Main.tile[index1, index4].CopyFrom(Main.tile[index1, index2]);
                         index2 += num2;
                     }
@@ -685,10 +685,10 @@ namespace Terraria.IO
                 WorldGen.FixSunflowers();
             if (versionNumber < 72)
                 WorldGen.FixChands();
-            int num5 = 40;
+            var num5 = 40;
             if (versionNumber < 58)
                 num5 = 20;
-            for (int index1 = 0; index1 < 1000; ++index1)
+            for (var index1 = 0; index1 < 1000; ++index1)
             {
                 if (fileIO.ReadBoolean())
                 {
@@ -697,18 +697,18 @@ namespace Terraria.IO
                     Main.chest[index1].y = fileIO.ReadInt32();
                     if (versionNumber >= 85)
                     {
-                        string str = fileIO.ReadString();
+                        var str = fileIO.ReadString();
                         if (str.Length > 20)
                             str = str.Substring(0, 20);
                         Main.chest[index1].name = str;
                     }
 
-                    for (int index2 = 0; index2 < 40; ++index2)
+                    for (var index2 = 0; index2 < 40; ++index2)
                     {
                         Main.chest[index1].item[index2] = new Item();
                         if (index2 < num5)
                         {
-                            int num1 = versionNumber < 59 ? (int) fileIO.ReadByte() : (int) fileIO.ReadInt16();
+                            var num1 = versionNumber < 59 ? (int) fileIO.ReadByte() : (int) fileIO.ReadInt16();
                             if (num1 > 0)
                             {
                                 if (versionNumber >= 38)
@@ -717,7 +717,7 @@ namespace Terraria.IO
                                 }
                                 else
                                 {
-                                    short num2 = ItemID.FromLegacyName(fileIO.ReadString(), versionNumber);
+                                    var num2 = ItemID.FromLegacyName(fileIO.ReadString(), versionNumber);
                                     Main.chest[index1].item[index2].SetDefaults((int) num2, false);
                                 }
 
@@ -730,13 +730,13 @@ namespace Terraria.IO
                 }
             }
 
-            for (int index1 = 0; index1 < 1000; ++index1)
+            for (var index1 = 0; index1 < 1000; ++index1)
             {
                 if (fileIO.ReadBoolean())
                 {
-                    string str = fileIO.ReadString();
-                    int index2 = fileIO.ReadInt32();
-                    int index3 = fileIO.ReadInt32();
+                    var str = fileIO.ReadString();
+                    var index2 = fileIO.ReadInt32();
+                    var index3 = fileIO.ReadInt32();
                     if (Main.tile[index2, index3].active() &&
                         (Main.tile[index2, index3].type == (ushort) 55 ||
                          Main.tile[index2, index3].type == (ushort) 85))
@@ -749,8 +749,8 @@ namespace Terraria.IO
                 }
             }
 
-            bool flag1 = fileIO.ReadBoolean();
-            int index = 0;
+            var flag1 = fileIO.ReadBoolean();
+            var index = 0;
             while (flag1)
             {
                 if (versionNumber >= 190)
@@ -802,15 +802,15 @@ namespace Terraria.IO
                 Main.FakeLoadInvasionStart();
             if (versionNumber < 7)
                 return 0;
-            bool flag2 = fileIO.ReadBoolean();
-            string str1 = fileIO.ReadString();
-            int num6 = fileIO.ReadInt32();
+            var flag2 = fileIO.ReadBoolean();
+            var str1 = fileIO.ReadString();
+            var num6 = fileIO.ReadInt32();
             return flag2 && (str1 == Main.worldName || num6 == Main.worldID) ? 0 : 2;
         }
 
         public static void SaveWorld_Version2(BinaryWriter writer)
         {
-            int[] pointers = new int[10]
+            var pointers = new int[10]
             {
                 WorldFile.SaveFileFormatHeader(writer), WorldFile.SaveWorldHeader(writer),
                 WorldFile.SaveWorldTiles(writer), WorldFile.SaveChests(writer), WorldFile.SaveSigns(writer),
@@ -828,12 +828,12 @@ namespace Terraria.IO
             writer.Write(193);
             Main.WorldFileMetadata.IncrementAndWrite(writer);
             writer.Write(num2);
-            for (int index = 0; index < (int) num2; ++index)
+            for (var index = 0; index < (int) num2; ++index)
                 writer.Write(0);
             writer.Write(num1);
             byte num3 = 0;
             byte num4 = 1;
-            for (int index = 0; index < (int) num1; ++index)
+            for (var index = 0; index < (int) num1; ++index)
             {
                 if (Main.tileFrameImportant[index])
                     num3 |= num4;
@@ -858,7 +858,7 @@ namespace Terraria.IO
             writer.Write(193);
             writer.BaseStream.Position += 20L;
             writer.Write((short) pointers.Length);
-            for (int index = 0; index < pointers.Length; ++index)
+            for (var index = 0; index < pointers.Length; ++index)
                 writer.Write(pointers[index]);
             return (int) writer.BaseStream.Position;
         }
@@ -955,7 +955,7 @@ namespace Terraria.IO
             writer.Write((short) Main.numClouds);
             writer.Write(Main.windSpeedSet);
             writer.Write(Main.anglerWhoFinishedToday.Count);
-            for (int index = 0; index < Main.anglerWhoFinishedToday.Count; ++index)
+            for (var index = 0; index < Main.anglerWhoFinishedToday.Count; ++index)
                 writer.Write(Main.anglerWhoFinishedToday[index]);
             writer.Write(NPC.savedAngler);
             writer.Write(Main.anglerQuest);
@@ -964,7 +964,7 @@ namespace Terraria.IO
             writer.Write(Main.invasionSizeStart);
             writer.Write(WorldFile.tempCultistDelay);
             writer.Write((short) 580);
-            for (int index = 0; index < 580; ++index)
+            for (var index = 0; index < 580; ++index)
                 writer.Write(NPC.killCount[index]);
             writer.Write(Main.fastForwardTime);
             writer.Write(NPC.downedFishron);
@@ -989,7 +989,7 @@ namespace Terraria.IO
             writer.Write(WorldFile.tempPartyGenuine);
             writer.Write(WorldFile.tempPartyCooldown);
             writer.Write(WorldFile.tempPartyCelebratingNPCs.Count);
-            for (int index = 0; index < WorldFile.tempPartyCelebratingNPCs.Count; ++index)
+            for (var index = 0; index < WorldFile.tempPartyCelebratingNPCs.Count; ++index)
                 writer.Write(WorldFile.tempPartyCelebratingNPCs[index]);
             writer.Write(WorldFile.Temp_Sandstorm_Happening);
             writer.Write(WorldFile.Temp_Sandstorm_TimeLeft);
@@ -1002,21 +1002,21 @@ namespace Terraria.IO
 
         private static int SaveWorldTiles(BinaryWriter writer)
         {
-            byte[] buffer = new byte[13];
-            for (int i = 0; i < Main.maxTilesX; ++i)
+            var buffer = new byte[13];
+            for (var i = 0; i < Main.maxTilesX; ++i)
             {
-                float num1 = (float) i / (float) Main.maxTilesX;
+                var num1 = (float) i / (float) Main.maxTilesX;
                 Main.statusText = Lang.gen[49].Value + " " + (object) (int) ((double) num1 * 100.0 + 1.0) + "%";
                 int num2;
-                for (int j = 0; j < Main.maxTilesY; j = num2 + 1)
+                for (var j = 0; j < Main.maxTilesY; j = num2 + 1)
                 {
-                    Tile tile = Main.tile[i, j];
-                    int index1 = 3;
+                    var tile = Main.tile[i, j];
+                    var index1 = 3;
                     int num3;
-                    byte num4 = (byte) (num3 = 0);
-                    byte num5 = (byte) num3;
-                    byte num6 = (byte) num3;
-                    bool flag = false;
+                    var num4 = (byte) (num3 = 0);
+                    var num5 = (byte) num3;
+                    var num6 = (byte) num3;
+                    var flag = false;
                     if (tile.active())
                     {
                         flag = true;
@@ -1056,11 +1056,11 @@ namespace Terraria.IO
                         if (Main.tileFrameImportant[(int) tile.type])
                         {
                             buffer[index1] = (byte) ((uint) tile.frameX & (uint) byte.MaxValue);
-                            int index2 = index1 + 1;
+                            var index2 = index1 + 1;
                             buffer[index2] = (byte) (((int) tile.frameX & 65280) >> 8);
-                            int index3 = index2 + 1;
+                            var index3 = index2 + 1;
                             buffer[index3] = (byte) ((uint) tile.frameY & (uint) byte.MaxValue);
-                            int index4 = index3 + 1;
+                            var index4 = index3 + 1;
                             buffer[index4] = (byte) (((int) tile.frameY & 65280) >> 8);
                             index1 = index4 + 1;
                         }
@@ -1104,15 +1104,15 @@ namespace Terraria.IO
                         num5 |= (byte) 4;
                     if (tile.wire3())
                         num5 |= (byte) 8;
-                    int num7 = !tile.halfBrick() ? (tile.slope() == (byte) 0 ? 0 : (int) tile.slope() + 1 << 4) : 16;
-                    byte num8 = (byte) ((uint) num5 | (uint) (byte) num7);
+                    var num7 = !tile.halfBrick() ? (tile.slope() == (byte) 0 ? 0 : (int) tile.slope() + 1 << 4) : 16;
+                    var num8 = (byte) ((uint) num5 | (uint) (byte) num7);
                     if (tile.actuator())
                         num4 |= (byte) 2;
                     if (tile.inActive())
                         num4 |= (byte) 4;
                     if (tile.wire4())
                         num4 |= (byte) 32;
-                    int index5 = 2;
+                    var index5 = 2;
                     if (num4 != (byte) 0)
                     {
                         num8 |= (byte) 1;
@@ -1128,8 +1128,8 @@ namespace Terraria.IO
                     }
 
                     short num9 = 0;
-                    int index6 = j + 1;
-                    for (int index2 = Main.maxTilesY - j - 1;
+                    var index6 = j + 1;
+                    for (var index2 = Main.maxTilesY - j - 1;
                         index2 > 0 && tile.isTheSameAs(Main.tile[i, index6]);
                         ++index6)
                     {
@@ -1163,15 +1163,15 @@ namespace Terraria.IO
         private static int SaveChests(BinaryWriter writer)
         {
             short num = 0;
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
-                Chest chest = Main.chest[index];
+                var chest = Main.chest[index];
                 if (chest != null)
                 {
-                    bool flag = false;
-                    for (int x = chest.x; x <= chest.x + 1; ++x)
+                    var flag = false;
+                    for (var x = chest.x; x <= chest.x + 1; ++x)
                     {
-                        for (int y = chest.y; y <= chest.y + 1; ++y)
+                        for (var y = chest.y; y <= chest.y + 1; ++y)
                         {
                             if (x < 0 || y < 0 || (x >= Main.maxTilesX || y >= Main.maxTilesY))
                             {
@@ -1179,7 +1179,7 @@ namespace Terraria.IO
                                 break;
                             }
 
-                            Tile tile = Main.tile[x, y];
+                            var tile = Main.tile[x, y];
                             if (!tile.active() || !Main.tileContainer[(int) tile.type])
                             {
                                 flag = true;
@@ -1197,17 +1197,17 @@ namespace Terraria.IO
 
             writer.Write(num);
             writer.Write((short) 40);
-            for (int index1 = 0; index1 < 1000; ++index1)
+            for (var index1 = 0; index1 < 1000; ++index1)
             {
-                Chest chest = Main.chest[index1];
+                var chest = Main.chest[index1];
                 if (chest != null)
                 {
                     writer.Write(chest.x);
                     writer.Write(chest.y);
                     writer.Write(chest.name);
-                    for (int index2 = 0; index2 < 40; ++index2)
+                    for (var index2 = 0; index2 < 40; ++index2)
                     {
-                        Item obj = chest.item[index2];
+                        var obj = chest.item[index2];
                         if (obj == null)
                         {
                             writer.Write((short) 0);
@@ -1235,17 +1235,17 @@ namespace Terraria.IO
         private static int SaveSigns(BinaryWriter writer)
         {
             short num = 0;
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
-                Sign sign = Main.sign[index];
+                var sign = Main.sign[index];
                 if (sign != null && sign.text != null)
                     ++num;
             }
 
             writer.Write(num);
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
-                Sign sign = Main.sign[index];
+                var sign = Main.sign[index];
                 if (sign != null && sign.text != null)
                 {
                     writer.Write(sign.text);
@@ -1259,17 +1259,17 @@ namespace Terraria.IO
 
         private static int SaveDummies(BinaryWriter writer)
         {
-            int num = 0;
-            for (int index = 0; index < 1000; ++index)
+            var num = 0;
+            for (var index = 0; index < 1000; ++index)
             {
                 if (DeprecatedClassLeftInForLoading.dummies[index] != null)
                     ++num;
             }
 
             writer.Write(num);
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
-                DeprecatedClassLeftInForLoading dummy = DeprecatedClassLeftInForLoading.dummies[index];
+                var dummy = DeprecatedClassLeftInForLoading.dummies[index];
                 if (dummy != null)
                 {
                     writer.Write(dummy.x);
@@ -1282,9 +1282,9 @@ namespace Terraria.IO
 
         private static int SaveNPCs(BinaryWriter writer)
         {
-            for (int index = 0; index < Main.npc.Length; ++index)
+            for (var index = 0; index < Main.npc.Length; ++index)
             {
-                NPC npc = Main.npc[index];
+                var npc = Main.npc[index];
                 if (npc.active && npc.townNPC && npc.type != 368)
                 {
                     writer.Write(npc.active);
@@ -1299,9 +1299,9 @@ namespace Terraria.IO
             }
 
             writer.Write(false);
-            for (int index = 0; index < Main.npc.Length; ++index)
+            for (var index = 0; index < Main.npc.Length; ++index)
             {
-                NPC npc = Main.npc[index];
+                var npc = Main.npc[index];
                 if (npc.active && NPCID.Sets.SavesAndLoads[npc.type])
                 {
                     writer.Write(npc.active);
@@ -1382,7 +1382,7 @@ namespace Terraria.IO
         {
             importance = (bool[]) null;
             positions = (int[]) null;
-            int num1 = reader.ReadInt32();
+            var num1 = reader.ReadInt32();
             WorldFile.versionNumber = num1;
             if (num1 >= 135)
             {
@@ -1400,15 +1400,15 @@ namespace Terraria.IO
             else
                 Main.WorldFileMetadata = FileMetadata.FromCurrentSettings(FileType.World);
 
-            short num2 = reader.ReadInt16();
+            var num2 = reader.ReadInt16();
             positions = new int[(int) num2];
-            for (int index = 0; index < (int) num2; ++index)
+            for (var index = 0; index < (int) num2; ++index)
                 positions[index] = reader.ReadInt32();
-            short num3 = reader.ReadInt16();
+            var num3 = reader.ReadInt16();
             importance = new bool[(int) num3];
             byte num4 = 0;
             byte num5 = 128;
-            for (int index = 0; index < (int) num3; ++index)
+            for (var index = 0; index < (int) num3; ++index)
             {
                 if (num5 == (byte) 128)
                 {
@@ -1427,11 +1427,11 @@ namespace Terraria.IO
 
         private static void LoadHeader(BinaryReader reader)
         {
-            int versionNumber = WorldFile.versionNumber;
+            var versionNumber = WorldFile.versionNumber;
             Main.worldName = reader.ReadString();
             if (versionNumber >= 179)
             {
-                string seedText = versionNumber != 179 ? reader.ReadString() : reader.ReadInt32().ToString();
+                var seedText = versionNumber != 179 ? reader.ReadString() : reader.ReadInt32().ToString();
                 Main.ActiveWorldFileData.SetSeed(seedText);
                 Main.ActiveWorldFileData.WorldGeneratorVersion = reader.ReadUInt64();
             }
@@ -1534,7 +1534,7 @@ namespace Terraria.IO
             if (versionNumber < 95)
                 return;
             Main.anglerWhoFinishedToday.Clear();
-            for (int index = reader.ReadInt32(); index > 0; --index)
+            for (var index = reader.ReadInt32(); index > 0; --index)
                 Main.anglerWhoFinishedToday.Add(reader.ReadString());
             if (versionNumber < 99)
                 return;
@@ -1558,8 +1558,8 @@ namespace Terraria.IO
             WorldFile.tempCultistDelay = versionNumber >= 108 ? reader.ReadInt32() : 86400;
             if (versionNumber < 109)
                 return;
-            int num1 = (int) reader.ReadInt16();
-            for (int index = 0; index < num1; ++index)
+            var num1 = (int) reader.ReadInt16();
+            for (var index = 0; index < num1; ++index)
             {
                 if (index < 580)
                     NPC.killCount[index] = reader.ReadInt32();
@@ -1613,9 +1613,9 @@ namespace Terraria.IO
                 WorldFile.tempPartyManual = reader.ReadBoolean();
                 WorldFile.tempPartyGenuine = reader.ReadBoolean();
                 WorldFile.tempPartyCooldown = reader.ReadInt32();
-                int num2 = reader.ReadInt32();
+                var num2 = reader.ReadInt32();
                 WorldFile.tempPartyCelebratingNPCs.Clear();
-                for (int index = 0; index < num2; ++index)
+                for (var index = 0; index < num2; ++index)
                     WorldFile.tempPartyCelebratingNPCs.Add(reader.ReadInt32());
             }
 
@@ -1639,17 +1639,17 @@ namespace Terraria.IO
 
         private static void LoadWorldTiles(BinaryReader reader, bool[] importance)
         {
-            for (int index1 = 0; index1 < Main.maxTilesX; ++index1)
+            for (var index1 = 0; index1 < Main.maxTilesX; ++index1)
             {
-                float num1 = (float) index1 / (float) Main.maxTilesX;
+                var num1 = (float) index1 / (float) Main.maxTilesX;
                 Main.statusText = Lang.gen[51].Value + " " + (object) (int) ((double) num1 * 100.0 + 1.0) + "%";
-                for (int index2 = 0; index2 < Main.maxTilesY; ++index2)
+                for (var index2 = 0; index2 < Main.maxTilesY; ++index2)
                 {
-                    int index3 = -1;
+                    var index3 = -1;
                     byte num2;
-                    byte num3 = num2 = (byte) 0;
-                    Tile from = Main.tile[index1, index2];
-                    byte num4 = reader.ReadByte();
+                    var num3 = num2 = (byte) 0;
+                    var from = Main.tile[index1, index2];
+                    var num4 = reader.ReadByte();
                     if (((int) num4 & 1) == 1)
                     {
                         num3 = reader.ReadByte();
@@ -1662,7 +1662,7 @@ namespace Terraria.IO
                         from.active(true);
                         if (((int) num4 & 32) == 32)
                         {
-                            byte num5 = reader.ReadByte();
+                            var num5 = reader.ReadByte();
                             index3 = (int) reader.ReadByte() << 8 | (int) num5;
                         }
                         else
@@ -1693,7 +1693,7 @@ namespace Terraria.IO
                             from.wallColor(reader.ReadByte());
                     }
 
-                    byte num6 = (byte) (((int) num4 & 24) >> 3);
+                    var num6 = (byte) (((int) num4 & 24) >> 3);
                     if (num6 != (byte) 0)
                     {
                         from.liquid = reader.ReadByte();
@@ -1714,7 +1714,7 @@ namespace Terraria.IO
                             from.wire2(true);
                         if (((int) num3 & 8) == 8)
                             from.wire3(true);
-                        byte num5 = (byte) (((int) num3 & 112) >> 4);
+                        var num5 = (byte) (((int) num3 & 112) >> 4);
                         if (num5 != (byte) 0 && Main.tileSolid[(int) from.type])
                         {
                             if (num5 == (byte) 1)
@@ -1758,8 +1758,8 @@ namespace Terraria.IO
                             }
                             else
                             {
-                                int num5 = (int) (Main.worldSurface - (double) index2 + 1.0);
-                                int num8 = num7 + 1 - num5;
+                                var num5 = (int) (Main.worldSurface - (double) index2 + 1.0);
+                                var num8 = num7 + 1 - num5;
                                 WorldGen.tileCounts[index3] += num5 * 5 + num8;
                             }
                         }
@@ -1783,8 +1783,8 @@ namespace Terraria.IO
 
         private static void LoadChests(BinaryReader reader)
         {
-            int num1 = (int) reader.ReadInt16();
-            int num2 = (int) reader.ReadInt16();
+            var num1 = (int) reader.ReadInt16();
+            var num2 = (int) reader.ReadInt16();
             int num3;
             int num4;
             if (num2 < 40)
@@ -1801,14 +1801,14 @@ namespace Terraria.IO
             int index1;
             for (index1 = 0; index1 < num1; ++index1)
             {
-                Chest chest = new Chest(false);
+                var chest = new Chest(false);
                 chest.x = reader.ReadInt32();
                 chest.y = reader.ReadInt32();
                 chest.name = reader.ReadString();
-                for (int index2 = 0; index2 < num3; ++index2)
+                for (var index2 = 0; index2 < num3; ++index2)
                 {
-                    short num5 = reader.ReadInt16();
-                    Item obj = new Item();
+                    var num5 = reader.ReadInt16();
+                    var obj = new Item();
                     if (num5 > (short) 0)
                     {
                         obj.netDefaults(reader.ReadInt32());
@@ -1825,24 +1825,24 @@ namespace Terraria.IO
                     chest.item[index2] = obj;
                 }
 
-                for (int index2 = 0; index2 < num4; ++index2)
+                for (var index2 = 0; index2 < num4; ++index2)
                 {
                     if (reader.ReadInt16() > (short) 0)
                     {
                         reader.ReadInt32();
-                        int num5 = (int) reader.ReadByte();
+                        var num5 = (int) reader.ReadByte();
                     }
                 }
 
                 Main.chest[index1] = chest;
             }
 
-            List<Point16> point16List = new List<Point16>();
-            for (int index2 = 0; index2 < index1; ++index2)
+            var point16List = new List<Point16>();
+            for (var index2 = 0; index2 < index1; ++index2)
             {
                 if (Main.chest[index2] != null)
                 {
-                    Point16 point16 = new Point16(Main.chest[index2].x, Main.chest[index2].y);
+                    var point16 = new Point16(Main.chest[index2].x, Main.chest[index2].y);
                     if (point16List.Contains(point16))
                         Main.chest[index2] = (Chest) null;
                     else
@@ -1859,14 +1859,14 @@ namespace Terraria.IO
 
         private static void LoadSigns(BinaryReader reader)
         {
-            short num = reader.ReadInt16();
+            var num = reader.ReadInt16();
             int index1;
             for (index1 = 0; index1 < (int) num; ++index1)
             {
-                string str = reader.ReadString();
-                int index2 = reader.ReadInt32();
-                int index3 = reader.ReadInt32();
-                Tile tile = Main.tile[index2, index3];
+                var str = reader.ReadString();
+                var index2 = reader.ReadInt32();
+                var index3 = reader.ReadInt32();
+                var tile = Main.tile[index2, index3];
                 Sign sign;
                 if (tile.active() && Main.tileSign[(int) tile.type])
                 {
@@ -1881,12 +1881,12 @@ namespace Terraria.IO
                 Main.sign[index1] = sign;
             }
 
-            List<Point16> point16List = new List<Point16>();
-            for (int index2 = 0; index2 < 1000; ++index2)
+            var point16List = new List<Point16>();
+            for (var index2 = 0; index2 < 1000; ++index2)
             {
                 if (Main.sign[index2] != null)
                 {
-                    Point16 point16 = new Point16(Main.sign[index2].x, Main.sign[index2].y);
+                    var point16 = new Point16(Main.sign[index2].x, Main.sign[index2].y);
                     if (point16List.Contains(point16))
                         Main.sign[index2] = (Sign) null;
                     else
@@ -1900,20 +1900,20 @@ namespace Terraria.IO
 
         private static void LoadDummies(BinaryReader reader)
         {
-            int num = reader.ReadInt32();
-            for (int index = 0; index < num; ++index)
+            var num = reader.ReadInt32();
+            for (var index = 0; index < num; ++index)
                 DeprecatedClassLeftInForLoading.dummies[index] =
                     new DeprecatedClassLeftInForLoading((int) reader.ReadInt16(), (int) reader.ReadInt16());
-            for (int index = num; index < 1000; ++index)
+            for (var index = num; index < 1000; ++index)
                 DeprecatedClassLeftInForLoading.dummies[index] = (DeprecatedClassLeftInForLoading) null;
         }
 
         private static void LoadNPCs(BinaryReader reader)
         {
-            int index = 0;
-            for (bool flag = reader.ReadBoolean(); flag; flag = reader.ReadBoolean())
+            var index = 0;
+            for (var flag = reader.ReadBoolean(); flag; flag = reader.ReadBoolean())
             {
-                NPC npc = Main.npc[index];
+                var npc = Main.npc[index];
                 if (WorldFile.versionNumber >= 190)
                     npc.SetDefaults(reader.ReadInt32(), -1f);
                 else
@@ -1929,9 +1929,9 @@ namespace Terraria.IO
 
             if (WorldFile.versionNumber < 140)
                 return;
-            for (bool flag = reader.ReadBoolean(); flag; flag = reader.ReadBoolean())
+            for (var flag = reader.ReadBoolean(); flag; flag = reader.ReadBoolean())
             {
-                NPC npc = Main.npc[index];
+                var npc = Main.npc[index];
                 if (WorldFile.versionNumber >= 190)
                     npc.SetDefaults(reader.ReadInt32(), -1f);
                 else
@@ -1953,8 +1953,8 @@ namespace Terraria.IO
             new Stopwatch().Start();
             try
             {
-                Stream baseStream = fileIO.BaseStream;
-                int num1 = fileIO.ReadInt32();
+                var baseStream = fileIO.BaseStream;
+                var num1 = fileIO.ReadInt32();
                 if (num1 == 0 || num1 > 193)
                     return false;
                 baseStream.Position = 0L;
@@ -1962,36 +1962,36 @@ namespace Terraria.IO
                 int[] positions;
                 if (!WorldFile.LoadFileFormatHeader(fileIO, out importance, out positions))
                     return false;
-                string str1 = fileIO.ReadString();
+                var str1 = fileIO.ReadString();
                 if (num1 >= 179)
                 {
                     if (num1 == 179)
                         fileIO.ReadInt32();
                     else
                         fileIO.ReadString();
-                    long num2 = (long) fileIO.ReadUInt64();
+                    var num2 = (long) fileIO.ReadUInt64();
                 }
 
                 if (num1 >= 181)
                     fileIO.ReadBytes(16);
-                int num3 = fileIO.ReadInt32();
+                var num3 = fileIO.ReadInt32();
                 fileIO.ReadInt32();
                 fileIO.ReadInt32();
                 fileIO.ReadInt32();
                 fileIO.ReadInt32();
-                int num4 = fileIO.ReadInt32();
-                int num5 = fileIO.ReadInt32();
+                var num4 = fileIO.ReadInt32();
+                var num5 = fileIO.ReadInt32();
                 baseStream.Position = (long) positions[1];
-                for (int index1 = 0; index1 < num5; ++index1)
+                for (var index1 = 0; index1 < num5; ++index1)
                 {
-                    float num2 = (float) index1 / (float) Main.maxTilesX;
+                    var num2 = (float) index1 / (float) Main.maxTilesX;
                     Main.statusText = Lang.gen[73].Value + " " + (object) (int) ((double) num2 * 100.0 + 1.0) + "%";
                     int num6;
-                    for (int index2 = 0; index2 < num4; index2 = index2 + num6 + 1)
+                    for (var index2 = 0; index2 < num4; index2 = index2 + num6 + 1)
                     {
                         byte num7;
-                        byte num8 = num7 = (byte) 0;
-                        byte num9 = fileIO.ReadByte();
+                        var num8 = num7 = (byte) 0;
+                        var num9 = fileIO.ReadByte();
                         if (((int) num9 & 1) == 1 && ((int) fileIO.ReadByte() & 1) == 1)
                             num7 = fileIO.ReadByte();
                         if (((int) num9 & 2) == 2)
@@ -1999,7 +1999,7 @@ namespace Terraria.IO
                             int index3;
                             if (((int) num9 & 32) == 32)
                             {
-                                byte num10 = fileIO.ReadByte();
+                                var num10 = fileIO.ReadByte();
                                 index3 = (int) fileIO.ReadByte() << 8 | (int) num10;
                             }
                             else
@@ -2007,28 +2007,28 @@ namespace Terraria.IO
 
                             if (importance[index3])
                             {
-                                int num10 = (int) fileIO.ReadInt16();
-                                int num11 = (int) fileIO.ReadInt16();
+                                var num10 = (int) fileIO.ReadInt16();
+                                var num11 = (int) fileIO.ReadInt16();
                             }
 
                             if (((int) num7 & 8) == 8)
                             {
-                                int num12 = (int) fileIO.ReadByte();
+                                var num12 = (int) fileIO.ReadByte();
                             }
                         }
 
                         if (((int) num9 & 4) == 4)
                         {
-                            int num10 = (int) fileIO.ReadByte();
+                            var num10 = (int) fileIO.ReadByte();
                             if (((int) num7 & 16) == 16)
                             {
-                                int num11 = (int) fileIO.ReadByte();
+                                var num11 = (int) fileIO.ReadByte();
                             }
                         }
 
                         if (((int) num9 & 24) >> 3 != 0)
                         {
-                            int num13 = (int) fileIO.ReadByte();
+                            var num13 = (int) fileIO.ReadByte();
                         }
 
                         switch ((byte) (((int) num9 & 192) >> 6))
@@ -2048,27 +2048,27 @@ namespace Terraria.IO
 
                 if (baseStream.Position != (long) positions[2])
                     return false;
-                int num14 = (int) fileIO.ReadInt16();
-                int num15 = (int) fileIO.ReadInt16();
-                for (int index1 = 0; index1 < num14; ++index1)
+                var num14 = (int) fileIO.ReadInt16();
+                var num15 = (int) fileIO.ReadInt16();
+                for (var index1 = 0; index1 < num14; ++index1)
                 {
                     fileIO.ReadInt32();
                     fileIO.ReadInt32();
                     fileIO.ReadString();
-                    for (int index2 = 0; index2 < num15; ++index2)
+                    for (var index2 = 0; index2 < num15; ++index2)
                     {
                         if (fileIO.ReadInt16() > (short) 0)
                         {
                             fileIO.ReadInt32();
-                            int num2 = (int) fileIO.ReadByte();
+                            var num2 = (int) fileIO.ReadByte();
                         }
                     }
                 }
 
                 if (baseStream.Position != (long) positions[3])
                     return false;
-                int num16 = (int) fileIO.ReadInt16();
-                for (int index = 0; index < num16; ++index)
+                var num16 = (int) fileIO.ReadInt16();
+                for (var index = 0; index < num16; ++index)
                 {
                     fileIO.ReadString();
                     fileIO.ReadInt32();
@@ -2077,33 +2077,33 @@ namespace Terraria.IO
 
                 if (baseStream.Position != (long) positions[4])
                     return false;
-                for (bool flag = fileIO.ReadBoolean(); flag; flag = fileIO.ReadBoolean())
+                for (var flag = fileIO.ReadBoolean(); flag; flag = fileIO.ReadBoolean())
                 {
                     fileIO.ReadInt32();
                     fileIO.ReadString();
-                    double num2 = (double) fileIO.ReadSingle();
-                    double num6 = (double) fileIO.ReadSingle();
+                    var num2 = (double) fileIO.ReadSingle();
+                    var num6 = (double) fileIO.ReadSingle();
                     fileIO.ReadBoolean();
                     fileIO.ReadInt32();
                     fileIO.ReadInt32();
                 }
 
-                for (bool flag = fileIO.ReadBoolean(); flag; flag = fileIO.ReadBoolean())
+                for (var flag = fileIO.ReadBoolean(); flag; flag = fileIO.ReadBoolean())
                 {
                     fileIO.ReadInt32();
-                    double num2 = (double) fileIO.ReadSingle();
-                    double num6 = (double) fileIO.ReadSingle();
+                    var num2 = (double) fileIO.ReadSingle();
+                    var num6 = (double) fileIO.ReadSingle();
                 }
 
                 if (baseStream.Position != (long) positions[5])
                     return false;
                 if (WorldFile.versionNumber >= 116 && WorldFile.versionNumber <= 121)
                 {
-                    int num2 = fileIO.ReadInt32();
-                    for (int index = 0; index < num2; ++index)
+                    var num2 = fileIO.ReadInt32();
+                    for (var index = 0; index < num2; ++index)
                     {
-                        int num6 = (int) fileIO.ReadInt16();
-                        int num7 = (int) fileIO.ReadInt16();
+                        var num6 = (int) fileIO.ReadInt16();
+                        var num7 = (int) fileIO.ReadInt16();
                     }
 
                     if (baseStream.Position != (long) positions[6])
@@ -2112,35 +2112,35 @@ namespace Terraria.IO
 
                 if (WorldFile.versionNumber >= 122)
                 {
-                    int num2 = fileIO.ReadInt32();
-                    for (int index = 0; index < num2; ++index)
+                    var num2 = fileIO.ReadInt32();
+                    for (var index = 0; index < num2; ++index)
                         TileEntity.Read(fileIO, false);
                 }
 
                 if (WorldFile.versionNumber >= 170)
                 {
-                    int num2 = fileIO.ReadInt32();
-                    for (int index = 0; index < num2; ++index)
+                    var num2 = fileIO.ReadInt32();
+                    for (var index = 0; index < num2; ++index)
                         fileIO.ReadInt64();
                 }
 
                 if (WorldFile.versionNumber >= 189)
                 {
-                    int num2 = fileIO.ReadInt32();
+                    var num2 = fileIO.ReadInt32();
                     fileIO.ReadBytes(12 * num2);
                 }
 
-                bool flag1 = fileIO.ReadBoolean();
-                string str2 = fileIO.ReadString();
-                int num17 = fileIO.ReadInt32();
-                bool flag2 = false;
+                var flag1 = fileIO.ReadBoolean();
+                var str2 = fileIO.ReadString();
+                var num17 = fileIO.ReadInt32();
+                var flag2 = false;
                 if (flag1 && (str2 == str1 || num17 == num3))
                     flag2 = true;
                 return flag2;
             }
             catch (Exception ex)
             {
-                using (StreamWriter streamWriter = new StreamWriter("client-crashlog.txt", true))
+                using (var streamWriter = new StreamWriter("client-crashlog.txt", true))
                 {
                     streamWriter.WriteLine((object) DateTime.Now);
                     streamWriter.WriteLine((object) ex);
@@ -2157,27 +2157,27 @@ namespace Terraria.IO
                 return string.Empty;
             try
             {
-                using (FileStream fileStream = new FileStream(WorldFileName, FileMode.Open))
+                using (var fileStream = new FileStream(WorldFileName, FileMode.Open))
                 {
-                    using (BinaryReader binaryReader = new BinaryReader((Stream) fileStream))
+                    using (var binaryReader = new BinaryReader((Stream) fileStream))
                     {
-                        int num1 = binaryReader.ReadInt32();
+                        var num1 = binaryReader.ReadInt32();
                         if (num1 > 0)
                         {
                             if (num1 <= 193)
                             {
                                 if (num1 <= 87)
                                 {
-                                    string str = binaryReader.ReadString();
+                                    var str = binaryReader.ReadString();
                                     binaryReader.Close();
                                     return str;
                                 }
 
                                 if (num1 >= 135)
                                     binaryReader.BaseStream.Position += 20L;
-                                int num2 = (int) binaryReader.ReadInt16();
+                                var num2 = (int) binaryReader.ReadInt16();
                                 fileStream.Position = (long) binaryReader.ReadInt32();
-                                string str1 = binaryReader.ReadString();
+                                var str1 = binaryReader.ReadString();
                                 binaryReader.Close();
                                 return str1;
                             }
@@ -2189,8 +2189,8 @@ namespace Terraria.IO
             {
             }
 
-            string[] strArray = WorldFileName.Split(Path.DirectorySeparatorChar);
-            string str2 = strArray[strArray.Length - 1];
+            var strArray = WorldFileName.Split(Path.DirectorySeparatorChar);
+            var str2 = strArray[strArray.Length - 1];
             return str2.Substring(0, str2.Length - 4);
         }
 
@@ -2200,18 +2200,18 @@ namespace Terraria.IO
                 return false;
             try
             {
-                using (FileStream fileStream = new FileStream(WorldFileName, FileMode.Open))
+                using (var fileStream = new FileStream(WorldFileName, FileMode.Open))
                 {
-                    using (BinaryReader binaryReader = new BinaryReader((Stream) fileStream))
+                    using (var binaryReader = new BinaryReader((Stream) fileStream))
                     {
-                        int num1 = binaryReader.ReadInt32();
+                        var num1 = binaryReader.ReadInt32();
                         if (num1 >= 135)
                             binaryReader.BaseStream.Position += 20L;
                         if (num1 >= 112)
                         {
                             if (num1 <= 193)
                             {
-                                int num2 = (int) binaryReader.ReadInt16();
+                                var num2 = (int) binaryReader.ReadInt16();
                                 fileStream.Position = (long) binaryReader.ReadInt32();
                                 binaryReader.ReadString();
                                 binaryReader.ReadInt32();
@@ -2243,7 +2243,7 @@ namespace Terraria.IO
         {
             if (file == null || cloudSave && SocialAPI.Cloud == null)
                 return (WorldFileData) null;
-            WorldFileData worldFileData = new WorldFileData(file, cloudSave);
+            var worldFileData = new WorldFileData(file, cloudSave);
             if (!FileUtilities.Exists(file, cloudSave))
             {
                 worldFileData.CreationTime = DateTime.Now;
@@ -2253,25 +2253,25 @@ namespace Terraria.IO
 
             try
             {
-                using (Stream input = cloudSave
+                using (var input = cloudSave
                     ? (Stream) new MemoryStream(SocialAPI.Cloud.Read(file))
                     : (Stream) new FileStream(file, FileMode.Open))
                 {
-                    using (BinaryReader reader = new BinaryReader(input))
+                    using (var reader = new BinaryReader(input))
                     {
-                        int num1 = reader.ReadInt32();
+                        var num1 = reader.ReadInt32();
                         if (num1 >= 135)
                             worldFileData.Metadata = FileMetadata.Read(reader, FileType.World);
                         else
                             worldFileData.Metadata = FileMetadata.FromCurrentSettings(FileType.World);
                         if (num1 <= 193)
                         {
-                            int num2 = (int) reader.ReadInt16();
+                            var num2 = (int) reader.ReadInt16();
                             input.Position = (long) reader.ReadInt32();
                             worldFileData.Name = reader.ReadString();
                             if (num1 >= 179)
                             {
-                                string seedText = num1 != 179 ? reader.ReadString() : reader.ReadInt32().ToString();
+                                var seedText = num1 != 179 ? reader.ReadString() : reader.ReadInt32().ToString();
                                 worldFileData.SetSeed(seedText);
                                 worldFileData.WorldGeneratorVersion = reader.ReadUInt64();
                             }
@@ -2287,14 +2287,14 @@ namespace Terraria.IO
                             reader.ReadInt32();
                             reader.ReadInt32();
                             reader.ReadInt32();
-                            int y = reader.ReadInt32();
-                            int x = reader.ReadInt32();
+                            var y = reader.ReadInt32();
+                            var x = reader.ReadInt32();
                             worldFileData.SetWorldSize(x, y);
                             worldFileData.IsExpertMode = num1 >= 112 && reader.ReadBoolean();
                             worldFileData.CreationTime = num1 < 141
                                 ? (cloudSave ? DateTime.Now : File.GetCreationTime(file))
                                 : DateTime.FromBinary(reader.ReadInt64());
-                            int num3 = (int) reader.ReadByte();
+                            var num3 = (int) reader.ReadByte();
                             reader.ReadInt32();
                             reader.ReadInt32();
                             reader.ReadInt32();
@@ -2345,7 +2345,7 @@ namespace Terraria.IO
                             reader.ReadBoolean();
                             reader.ReadBoolean();
                             reader.ReadBoolean();
-                            int num4 = (int) reader.ReadByte();
+                            var num4 = (int) reader.ReadByte();
                             reader.ReadInt32();
                             worldFileData.IsHardMode = reader.ReadBoolean();
                             return worldFileData;
@@ -2362,7 +2362,7 @@ namespace Terraria.IO
 
         public static WorldFileData CreateMetadata(string name, bool cloudSave, bool isExpertMode)
         {
-            WorldFileData worldFileData = new WorldFileData(Main.GetWorldPathFromName(name, cloudSave), cloudSave);
+            var worldFileData = new WorldFileData(Main.GetWorldPathFromName(name, cloudSave), cloudSave);
             worldFileData.Name = name;
             worldFileData.IsExpertMode = isExpertMode;
             worldFileData.CreationTime = DateTime.Now;
@@ -2383,19 +2383,19 @@ namespace Terraria.IO
                 return (FileMetadata) null;
             try
             {
-                byte[] buffer = (byte[]) null;
-                bool flag = cloudSave && SocialAPI.Cloud != null;
+                var buffer = (byte[]) null;
+                var flag = cloudSave && SocialAPI.Cloud != null;
                 if (flag)
                 {
-                    int length = 24;
+                    var length = 24;
                     buffer = new byte[length];
                     SocialAPI.Cloud.Read(file, buffer, length);
                 }
 
-                using (Stream input =
+                using (var input =
                     flag ? (Stream) new MemoryStream(buffer) : (Stream) new FileStream(file, FileMode.Open))
                 {
-                    using (BinaryReader reader = new BinaryReader(input))
+                    using (var reader = new BinaryReader(input))
                     {
                         if (reader.ReadInt32() >= 135)
                             return FileMetadata.Read(reader, FileType.World);
@@ -2425,11 +2425,11 @@ namespace Terraria.IO
 
         public static void FixDresserChests()
         {
-            for (int X = 0; X < Main.maxTilesX; ++X)
+            for (var X = 0; X < Main.maxTilesX; ++X)
             {
-                for (int Y = 0; Y < Main.maxTilesY; ++Y)
+                for (var Y = 0; Y < Main.maxTilesY; ++Y)
                 {
-                    Tile tile = Main.tile[X, Y];
+                    var tile = Main.tile[X, Y];
                     if (tile.active() && tile.type == (ushort) 88 &&
                         ((int) tile.frameX % 54 == 0 && (int) tile.frameY % 36 == 0))
                         Chest.CreateChest(X, Y, -1);
@@ -2440,7 +2440,7 @@ namespace Terraria.IO
         private static int SaveTileEntities(BinaryWriter writer)
         {
             writer.Write(TileEntity.ByID.Count);
-            foreach (KeyValuePair<int, TileEntity> keyValuePair in TileEntity.ByID)
+            foreach (var keyValuePair in TileEntity.ByID)
                 TileEntity.Write(writer, keyValuePair.Value, false);
             return (int) writer.BaseStream.Position;
         }
@@ -2449,11 +2449,11 @@ namespace Terraria.IO
         {
             TileEntity.ByID.Clear();
             TileEntity.ByPosition.Clear();
-            int num1 = reader.ReadInt32();
-            int num2 = 0;
-            for (int index = 0; index < num1; ++index)
+            var num1 = reader.ReadInt32();
+            var num2 = 0;
+            for (var index = 0; index < num1; ++index)
             {
-                TileEntity tileEntity1 = TileEntity.Read(reader, false);
+                var tileEntity1 = TileEntity.Read(reader, false);
                 tileEntity1.ID = num2++;
                 TileEntity.ByID[tileEntity1.ID] = tileEntity1;
                 TileEntity tileEntity2;
@@ -2463,8 +2463,8 @@ namespace Terraria.IO
             }
 
             TileEntity.TileEntitiesNextID = num1;
-            List<Point16> point16List = new List<Point16>();
-            foreach (KeyValuePair<Point16, TileEntity> keyValuePair in TileEntity.ByPosition)
+            var point16List = new List<Point16>();
+            foreach (var keyValuePair in TileEntity.ByPosition)
             {
                 if (!WorldGen.InWorld((int) keyValuePair.Value.Position.X, (int) keyValuePair.Value.Position.Y, 1))
                 {
@@ -2489,9 +2489,9 @@ namespace Terraria.IO
 
             try
             {
-                foreach (Point16 key in point16List)
+                foreach (var key in point16List)
                 {
-                    TileEntity tileEntity = TileEntity.ByPosition[key];
+                    var tileEntity = TileEntity.ByPosition[key];
                     if (TileEntity.ByID.ContainsKey(tileEntity.ID))
                         TileEntity.ByID.Remove(tileEntity.ID);
                     if (TileEntity.ByPosition.ContainsKey(key))
@@ -2506,7 +2506,7 @@ namespace Terraria.IO
         private static int SaveWeightedPressurePlates(BinaryWriter writer)
         {
             writer.Write(PressurePlateHelper.PressurePlatesPressed.Count);
-            foreach (KeyValuePair<Point, bool[]> keyValuePair in PressurePlateHelper.PressurePlatesPressed)
+            foreach (var keyValuePair in PressurePlateHelper.PressurePlatesPressed)
             {
                 writer.Write(keyValuePair.Key.X);
                 writer.Write(keyValuePair.Key.Y);
@@ -2519,10 +2519,10 @@ namespace Terraria.IO
         {
             PressurePlateHelper.Reset();
             PressurePlateHelper.NeedsFirstUpdate = true;
-            int num = reader.ReadInt32();
-            for (int index = 0; index < num; ++index)
+            var num = reader.ReadInt32();
+            for (var index = 0; index < num; ++index)
             {
-                Point key = new Point(reader.ReadInt32(), reader.ReadInt32());
+                var key = new Point(reader.ReadInt32(), reader.ReadInt32());
                 PressurePlateHelper.PressurePlatesPressed.Add(key, new bool[(int) byte.MaxValue]);
             }
         }

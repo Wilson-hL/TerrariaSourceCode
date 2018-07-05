@@ -15,7 +15,7 @@ namespace Terraria
 
         public static void KillSign(int x, int y)
         {
-            for (int index = 0; index < 1000; ++index)
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.sign[index] != null && Main.sign[index].x == x && Main.sign[index].y == y)
                     Main.sign[index] = (Sign) null;
@@ -24,19 +24,19 @@ namespace Terraria
 
         public static int ReadSign(int i, int j, bool CreateIfMissing = true)
         {
-            int num1 = (int) Main.tile[i, j].frameX / 18;
-            int num2 = (int) Main.tile[i, j].frameY / 18;
-            int num3 = num1 % 2;
-            int x = i - num3;
-            int y = j - num2;
+            var num1 = (int) Main.tile[i, j].frameX / 18;
+            var num2 = (int) Main.tile[i, j].frameY / 18;
+            var num3 = num1 % 2;
+            var x = i - num3;
+            var y = j - num2;
             if (!Main.tileSign[(int) Main.tile[x, y].type])
             {
                 Sign.KillSign(x, y);
                 return -1;
             }
 
-            int num4 = -1;
-            for (int index = 0; index < 1000; ++index)
+            var num4 = -1;
+            for (var index = 0; index < 1000; ++index)
             {
                 if (Main.sign[index] != null && Main.sign[index].x == x && Main.sign[index].y == y)
                 {
@@ -47,7 +47,7 @@ namespace Terraria
 
             if (num4 < 0 && CreateIfMissing)
             {
-                for (int index = 0; index < 1000; ++index)
+                for (var index = 0; index < 1000; ++index)
                 {
                     if (Main.sign[index] == null)
                     {

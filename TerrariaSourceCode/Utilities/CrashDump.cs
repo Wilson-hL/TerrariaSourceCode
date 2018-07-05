@@ -28,7 +28,7 @@ namespace Terraria.Utilities
 
         private static string CreateDumpName()
         {
-            DateTime localTime = DateTime.Now.ToLocalTime();
+            var localTime = DateTime.Now.ToLocalTime();
             return string.Format("{0}_{1}_{2}_{3}.dmp", (object) "Terraria", (object) Main.versionNumber,
                 (object) localTime.ToString("MM-dd-yy_HH-mm-ss-ffff", (IFormatProvider) CultureInfo.InvariantCulture),
                 (object) Thread.CurrentThread.ManagedThreadId);
@@ -39,10 +39,10 @@ namespace Terraria.Utilities
         {
             if (!Platform.IsWindows)
                 return false;
-            string path = Path.Combine(outputDirectory, CrashDump.CreateDumpName());
+            var path = Path.Combine(outputDirectory, CrashDump.CreateDumpName());
             if (!Directory.Exists(outputDirectory))
                 Directory.CreateDirectory(outputDirectory);
-            using (FileStream fileStream = File.Create(path))
+            using (var fileStream = File.Create(path))
                 return CrashDump.Write((SafeHandle) fileStream.SafeFileHandle, options, exceptionInfo);
         }
 
@@ -51,9 +51,9 @@ namespace Terraria.Utilities
         {
             if (!Platform.IsWindows)
                 return false;
-            Process currentProcess = Process.GetCurrentProcess();
-            IntPtr handle = currentProcess.Handle;
-            uint id = (uint) currentProcess.Id;
+            var currentProcess = Process.GetCurrentProcess();
+            var handle = currentProcess.Handle;
+            var id = (uint) currentProcess.Id;
             CrashDump.MiniDumpExceptionInformation expParam;
             expParam.ThreadId = CrashDump.GetCurrentThreadId();
             expParam.ClientPointers = false;

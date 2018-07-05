@@ -54,18 +54,18 @@ namespace Terraria.GameContent.UI.Elements
         {
             this._visualOverallProgress = this._targetOverallProgress;
             this._visualCurrentProgress = this._targetCurrentProgress;
-            CalculatedStyle dimensions = this.GetDimensions();
-            int completedWidth1 = (int) ((double) this._visualOverallProgress * 504.0);
-            int completedWidth2 = (int) ((double) this._visualCurrentProgress * 504.0);
-            Vector2 vector2 = new Vector2(dimensions.X, dimensions.Y);
-            Color filled = new Color();
+            var dimensions = this.GetDimensions();
+            var completedWidth1 = (int) ((double) this._visualOverallProgress * 504.0);
+            var completedWidth2 = (int) ((double) this._visualCurrentProgress * 504.0);
+            var vector2 = new Vector2(dimensions.X, dimensions.Y);
+            var filled = new Color();
             filled.PackedValue = WorldGen.crimson ? 4286836223U : 4283888223U;
             this.DrawFilling2(spriteBatch, vector2 + new Vector2(20f, 40f), 16, completedWidth1, 564, filled,
                 Color.Lerp(filled, Color.Black, 0.5f), new Color(48, 48, 48));
             filled.PackedValue = 4290947159U;
             this.DrawFilling2(spriteBatch, vector2 + new Vector2(50f, 60f), 8, completedWidth2, 504, filled,
                 Color.Lerp(filled, Color.Black, 0.5f), new Color(33, 33, 33));
-            Rectangle rectangle = this.GetDimensions().ToRectangle();
+            var rectangle = this.GetDimensions().ToRectangle();
             rectangle.X -= 8;
             spriteBatch.Draw(WorldGen.crimson ? this._texOuterCrimson : this._texOuterCorrupt, rectangle.TopLeft(),
                 Color.White);
@@ -77,9 +77,9 @@ namespace Terraria.GameContent.UI.Elements
         {
             if (completedWidth % 2 != 0)
                 --completedWidth;
-            Vector2 position = topLeft + (float) completedWidth * Vector2.UnitX;
-            int num = completedWidth;
-            Rectangle rectangle = tex.Frame(1, 1, 0, 0);
+            var position = topLeft + (float) completedWidth * Vector2.UnitX;
+            var num = completedWidth;
+            var rectangle = tex.Frame(1, 1, 0, 0);
             while (num > 0)
             {
                 if (rectangle.Width > num)

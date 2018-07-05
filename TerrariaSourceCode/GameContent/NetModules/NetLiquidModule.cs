@@ -14,12 +14,12 @@ namespace Terraria.GameContent.NetModules
     {
         public static NetPacket Serialize(HashSet<int> changes)
         {
-            NetPacket packet = NetModule.CreatePacket<NetLiquidModule>(changes.Count * 6 + 2);
+            var packet = NetModule.CreatePacket<NetLiquidModule>(changes.Count * 6 + 2);
             packet.Writer.Write((ushort) changes.Count);
-            foreach (int change in changes)
+            foreach (var change in changes)
             {
-                int index1 = change >> 16 & (int) ushort.MaxValue;
-                int index2 = change & (int) ushort.MaxValue;
+                var index1 = change >> 16 & (int) ushort.MaxValue;
+                var index2 = change & (int) ushort.MaxValue;
                 packet.Writer.Write(change);
                 packet.Writer.Write(Main.tile[index1, index2].liquid);
                 packet.Writer.Write(Main.tile[index1, index2].liquidType());
@@ -30,15 +30,15 @@ namespace Terraria.GameContent.NetModules
 
         public override bool Deserialize(BinaryReader reader, int userId)
         {
-            int num1 = (int) reader.ReadUInt16();
-            for (int index1 = 0; index1 < num1; ++index1)
+            var num1 = (int) reader.ReadUInt16();
+            for (var index1 = 0; index1 < num1; ++index1)
             {
-                int num2 = reader.ReadInt32();
-                byte num3 = reader.ReadByte();
-                byte num4 = reader.ReadByte();
-                int index2 = num2 >> 16 & (int) ushort.MaxValue;
-                int index3 = num2 & (int) ushort.MaxValue;
-                Tile tile = Main.tile[index2, index3];
+                var num2 = reader.ReadInt32();
+                var num3 = reader.ReadByte();
+                var num4 = reader.ReadByte();
+                var index2 = num2 >> 16 & (int) ushort.MaxValue;
+                var index3 = num2 & (int) ushort.MaxValue;
+                var tile = Main.tile[index2, index3];
                 if (tile != null)
                 {
                     tile.liquid = num3;

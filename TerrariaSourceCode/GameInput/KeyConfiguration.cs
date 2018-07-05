@@ -26,13 +26,13 @@ namespace Terraria.GameInput
         public void SetupKeys()
         {
             this.KeyStatus.Clear();
-            foreach (string knownTrigger in PlayerInput.KnownTriggers)
+            foreach (var knownTrigger in PlayerInput.KnownTriggers)
                 this.KeyStatus.Add(knownTrigger, new List<string>());
         }
 
         public void Processkey(TriggersSet set, string newKey)
         {
-            foreach (KeyValuePair<string, List<string>> keyStatu in this.KeyStatus)
+            foreach (var keyStatu in this.KeyStatus)
             {
                 if (keyStatu.Value.Contains(newKey))
                     set.KeyStatus[keyStatu.Key] = true;
@@ -47,7 +47,7 @@ namespace Terraria.GameInput
 
         public void CopyKeyState(TriggersSet oldSet, TriggersSet newSet, string newKey)
         {
-            foreach (KeyValuePair<string, List<string>> keyStatu in this.KeyStatus)
+            foreach (var keyStatu in this.KeyStatus)
             {
                 if (keyStatu.Value.Contains(newKey))
                     newSet.KeyStatus[keyStatu.Key] = oldSet.KeyStatus[keyStatu.Key];
@@ -56,12 +56,12 @@ namespace Terraria.GameInput
 
         public void ReadPreferences(Dictionary<string, List<string>> dict)
         {
-            foreach (KeyValuePair<string, List<string>> keyValuePair in dict)
+            foreach (var keyValuePair in dict)
             {
                 if (this.KeyStatus.ContainsKey(keyValuePair.Key))
                 {
                     this.KeyStatus[keyValuePair.Key].Clear();
-                    foreach (string str in keyValuePair.Value)
+                    foreach (var str in keyValuePair.Value)
                         this.KeyStatus[keyValuePair.Key].Add(str);
                 }
             }
@@ -69,8 +69,8 @@ namespace Terraria.GameInput
 
         public Dictionary<string, List<string>> WritePreferences()
         {
-            Dictionary<string, List<string>> dictionary = new Dictionary<string, List<string>>();
-            foreach (KeyValuePair<string, List<string>> keyStatu in this.KeyStatus)
+            var dictionary = new Dictionary<string, List<string>>();
+            foreach (var keyStatu in this.KeyStatus)
             {
                 if (keyStatu.Value.Count > 0)
                     dictionary.Add(keyStatu.Key, keyStatu.Value.ToList<string>());

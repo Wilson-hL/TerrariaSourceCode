@@ -63,9 +63,9 @@ namespace Terraria.Graphics.Effects
             }
             else
             {
-                for (LinkedListNode<Filter> node = this._activeFilters.First; node != null; node = node.Next)
+                for (var node = this._activeFilters.First; node != null; node = node.Next)
                 {
-                    Filter filter = node.Value;
+                    var filter = node.Value;
                     if (effect.Priority <= filter.Priority)
                     {
                         this._activeFilters.AddAfter(node, effect);
@@ -93,15 +93,15 @@ namespace Terraria.Graphics.Effects
 
         public void Update(GameTime gameTime)
         {
-            LinkedListNode<Filter> node = this._activeFilters.First;
-            int count = this._activeFilters.Count;
-            int num = 0;
+            var node = this._activeFilters.First;
+            var count = this._activeFilters.Count;
+            var num = 0;
             LinkedListNode<Filter> next;
             for (; node != null; node = next)
             {
-                Filter filter = node.Value;
+                var filter = node.Value;
                 next = node.Next;
-                bool flag = false;
+                var flag = false;
                 if (filter.Priority >= this._priorityThreshold)
                 {
                     ++num;
@@ -131,15 +131,15 @@ namespace Terraria.Graphics.Effects
         {
             if (!this._captureThisFrame)
                 return;
-            LinkedListNode<Filter> linkedListNode = this._activeFilters.First;
-            int count = this._activeFilters.Count;
-            Filter filter1 = (Filter) null;
-            RenderTarget2D renderTarget2D = Main.screenTarget;
-            GraphicsDevice graphicsDevice = Main.instance.GraphicsDevice;
-            int num = 0;
+            var linkedListNode = this._activeFilters.First;
+            var count = this._activeFilters.Count;
+            var filter1 = (Filter) null;
+            var renderTarget2D = Main.screenTarget;
+            var graphicsDevice = Main.instance.GraphicsDevice;
+            var num = 0;
             if ((double) Main.player[Main.myPlayer].gravDir == -1.0)
             {
-                RenderTarget2D screenTargetSwap = Main.screenTargetSwap;
+                var screenTargetSwap = Main.screenTargetSwap;
                 graphicsDevice.SetRenderTarget(screenTargetSwap);
                 graphicsDevice.Clear(Color.Black);
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp,
@@ -153,7 +153,7 @@ namespace Terraria.Graphics.Effects
             LinkedListNode<Filter> next;
             for (; linkedListNode != null; linkedListNode = next)
             {
-                Filter filter2 = linkedListNode.Value;
+                var filter2 = linkedListNode.Value;
                 next = linkedListNode.Next;
                 if (filter2.Priority >= this._priorityThreshold)
                 {
@@ -162,7 +162,7 @@ namespace Terraria.Graphics.Effects
                     {
                         if (filter1 != null)
                         {
-                            RenderTarget2D renderTarget = renderTarget2D != Main.screenTarget
+                            var renderTarget = renderTarget2D != Main.screenTarget
                                 ? Main.screenTarget
                                 : Main.screenTargetSwap;
                             graphicsDevice.SetRenderTarget(renderTarget);
@@ -198,7 +198,7 @@ namespace Terraria.Graphics.Effects
                 Main.spriteBatch.Draw((Texture2D) renderTarget2D, Vector2.Zero, Color.White);
 
             Main.spriteBatch.End();
-            for (int index = 0; index < 8; ++index)
+            for (var index = 0; index < 8; ++index)
                 graphicsDevice.Textures[index] = (Texture) null;
             if (this.OnPostDraw == null)
                 return;

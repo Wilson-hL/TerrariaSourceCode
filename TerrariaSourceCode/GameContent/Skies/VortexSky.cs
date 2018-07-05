@@ -41,7 +41,7 @@ namespace Terraria.GameContent.Skies
             if (this._ticksUntilNextBolt <= 0)
             {
                 this._ticksUntilNextBolt = this._random.Next(1, 5);
-                int index = 0;
+                var index = 0;
                 while (this._bolts[index].IsAlive && index != this._bolts.Length - 1)
                     ++index;
                 this._bolts[index].IsAlive = true;
@@ -53,7 +53,7 @@ namespace Terraria.GameContent.Skies
             }
 
             --this._ticksUntilNextBolt;
-            for (int index = 0; index < this._bolts.Length; ++index)
+            for (var index = 0; index < this._bolts.Length; ++index)
             {
                 if (this._bolts[index].IsAlive)
                 {
@@ -82,8 +82,8 @@ namespace Terraria.GameContent.Skies
                                    0.100000001490116)), Main.screenWidth, Main.screenHeight),
                     Color.White * Math.Min(1f, (float) (((double) Main.screenPosition.Y - 800.0) / 1000.0)) *
                     this._fadeOpacity);
-                Vector2 vector2_1 = new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-                Vector2 vector2_2 = 0.01f * (new Vector2((float) Main.maxTilesX * 8f, (float) Main.worldSurface / 2f) -
+                var vector2_1 = new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
+                var vector2_2 = 0.01f * (new Vector2((float) Main.maxTilesX * 8f, (float) Main.worldSurface / 2f) -
                                              Main.screenPosition);
                 spriteBatch.Draw(this._planetTexture, vector2_1 + new Vector2(-200f, -200f) + vector2_2,
                     new Rectangle?(), Color.White * 0.9f * this._fadeOpacity, 0.0f,
@@ -91,25 +91,25 @@ namespace Terraria.GameContent.Skies
                     1f, SpriteEffects.None, 1f);
             }
 
-            float num1 = Math.Min(1f, (float) (((double) Main.screenPosition.Y - 1000.0) / 1000.0));
-            Vector2 vector2_3 = Main.screenPosition +
+            var num1 = Math.Min(1f, (float) (((double) Main.screenPosition.Y - 1000.0) / 1000.0));
+            var vector2_3 = Main.screenPosition +
                                 new Vector2((float) (Main.screenWidth >> 1), (float) (Main.screenHeight >> 1));
-            Rectangle rectangle = new Rectangle(-1000, -1000, 4000, 4000);
-            for (int index = 0; index < this._bolts.Length; ++index)
+            var rectangle = new Rectangle(-1000, -1000, 4000, 4000);
+            for (var index = 0; index < this._bolts.Length; ++index)
             {
                 if (this._bolts[index].IsAlive && (double) this._bolts[index].Depth > (double) minDepth &&
                     (double) this._bolts[index].Depth < (double) maxDepth)
                 {
-                    Vector2 vector2_1 = new Vector2(1f / this._bolts[index].Depth, 0.9f / this._bolts[index].Depth);
-                    Vector2 position = (this._bolts[index].Position - vector2_3) * vector2_1 + vector2_3 -
+                    var vector2_1 = new Vector2(1f / this._bolts[index].Depth, 0.9f / this._bolts[index].Depth);
+                    var position = (this._bolts[index].Position - vector2_3) * vector2_1 + vector2_3 -
                                        Main.screenPosition;
                     if (rectangle.Contains((int) position.X, (int) position.Y))
                     {
-                        Texture2D texture = this._boltTexture;
-                        int life = this._bolts[index].Life;
+                        var texture = this._boltTexture;
+                        var life = this._bolts[index].Life;
                         if (life > 26 && life % 2 == 0)
                             texture = this._flashTexture;
-                        float num2 = (float) life / 30f;
+                        var num2 = (float) life / 30f;
                         spriteBatch.Draw(texture, position, new Rectangle?(),
                             Color.White * num1 * num2 * this._fadeOpacity, 0.0f, Vector2.Zero, vector2_1.X * 5f,
                             SpriteEffects.None, 0.0f);
@@ -128,7 +128,7 @@ namespace Terraria.GameContent.Skies
             this._fadeOpacity = 1f / 500f;
             this._isActive = true;
             this._bolts = new VortexSky.Bolt[500];
-            for (int index = 0; index < this._bolts.Length; ++index)
+            for (var index = 0; index < this._bolts.Length; ++index)
                 this._bolts[index].IsAlive = false;
         }
 

@@ -30,13 +30,13 @@ namespace Terraria.Localization
 
         public string FormatWith(object obj)
         {
-            string input = this.Value;
-            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(obj);
+            var input = this.Value;
+            var properties = TypeDescriptor.GetProperties(obj);
             return LocalizedText._substitutionRegex.Replace(input, (MatchEvaluator) (match =>
             {
                 if (match.Groups[1].Length != 0)
                     return "";
-                PropertyDescriptor propertyDescriptor = properties.Find(match.Groups[2].ToString(), false);
+                var propertyDescriptor = properties.Find(match.Groups[2].ToString(), false);
                 if (propertyDescriptor == null)
                     return "";
                 return (propertyDescriptor.GetValue(obj) ?? (object) "").ToString();
@@ -45,19 +45,19 @@ namespace Terraria.Localization
 
         public bool CanFormatWith(object obj)
         {
-            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(obj);
+            var properties = TypeDescriptor.GetProperties(obj);
             foreach (Match match in LocalizedText._substitutionRegex.Matches(this.Value))
             {
-                string name = match.Groups[2].ToString();
-                PropertyDescriptor propertyDescriptor = properties.Find(name, false);
+                var name = match.Groups[2].ToString();
+                var propertyDescriptor = properties.Find(name, false);
                 if (propertyDescriptor == null)
                     return false;
-                object obj1 = propertyDescriptor.GetValue(obj);
+                var obj1 = propertyDescriptor.GetValue(obj);
                 if (obj1 == null)
                     return false;
                 if (match.Groups[1].Length != 0)
                 {
-                    bool? nullable = obj1 as bool?;
+                    var nullable = obj1 as bool?;
                     if (((nullable.HasValue ? (nullable.GetValueOrDefault() ? 1 : 0) : 0) ^
                          (match.Groups[1].Length == 1 ? 1 : 0)) != 0)
                         return false;

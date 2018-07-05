@@ -27,7 +27,7 @@ namespace Terraria
             ZipEntry zipEntry;
             if (TexturePackSupport.entries.TryGetValue(path, out zipEntry))
             {
-                using (MemoryStream memoryStream = new MemoryStream())
+                using (var memoryStream = new MemoryStream())
                 {
                     zipEntry.Extract((Stream) memoryStream);
                     tex = TexturePackSupport.FromStreamSlow(Main.instance.GraphicsDevice, (Stream) memoryStream);
@@ -44,10 +44,10 @@ namespace Terraria
 
         public static Texture2D FromStreamSlow(GraphicsDevice graphicsDevice, Stream stream)
         {
-            Texture2D texture2D = Texture2D.FromStream(graphicsDevice, stream);
-            Color[] data = new Color[texture2D.Width * texture2D.Height];
+            var texture2D = Texture2D.FromStream(graphicsDevice, stream);
+            var data = new Color[texture2D.Width * texture2D.Height];
             texture2D.GetData<Color>(data);
-            for (int index = 0; index != data.Length; ++index)
+            for (var index = 0; index != data.Length; ++index)
                 data[index] = Color.FromNonPremultiplied(data[index].ToVector4());
             texture2D.SetData<Color>(data);
             return texture2D;
@@ -55,17 +55,17 @@ namespace Terraria
 
         public static void FindTexturePack()
         {
-            string path = Main.SavePath + "/Texture Pack.zip";
+            var path = Main.SavePath + "/Texture Pack.zip";
             if (!File.Exists(path))
                 return;
             TexturePackSupport.entries.Clear();
             TexturePackSupport.texturePack = ZipFile.Read((Stream) File.OpenRead(path));
-            using (IEnumerator<ZipEntry> enumerator =
+            using (var enumerator =
                 ((IEnumerable<ZipEntry>) TexturePackSupport.texturePack.Entries).GetEnumerator())
             {
                 while (((IEnumerator) enumerator).MoveNext())
                 {
-                    ZipEntry current = enumerator.Current;
+                    var current = enumerator.Current;
                     TexturePackSupport.entries.Add(current.FileName.Replace("/", "\\"), current);
                 }
             }

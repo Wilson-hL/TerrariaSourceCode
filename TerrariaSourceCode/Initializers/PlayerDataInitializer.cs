@@ -30,7 +30,7 @@ namespace Terraria.Initializers
         {
             PlayerDataInitializer.CopyVariant(8, 0);
             PlayerDataInitializer.CopyVariant(9, 4);
-            for (int index = 8; index < 10; ++index)
+            for (var index = 8; index < 10; ++index)
             {
                 Main.playerTextures[index, 4] = Main.armorArmTexture[191];
                 Main.playerTextures[index, 6] = Main.armorArmTexture[191];
@@ -43,14 +43,14 @@ namespace Terraria.Initializers
 
         private static void LoadVariant(int ID, int[] pieceIDs)
         {
-            for (int index = 0; index < pieceIDs.Length; ++index)
+            for (var index = 0; index < pieceIDs.Length; ++index)
                 Main.playerTextures[ID, pieceIDs[index]] =
                     TextureManager.Load("Images/Player_" + (object) ID + "_" + (object) pieceIDs[index]);
         }
 
         private static void CopyVariant(int to, int from)
         {
-            for (int index = 0; index < 15; ++index)
+            for (var index = 0; index < 15; ++index)
                 Main.playerTextures[to, index] = Main.playerTextures[from, index];
         }
 

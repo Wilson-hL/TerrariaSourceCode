@@ -16,20 +16,20 @@ namespace Terraria
         {
             if (!WorldGen.InWorld(i, j, 2))
                 return false;
-            int num1 = 0;
-            int num2 = 0;
-            for (int i1 = i - 1; num1 < spreadInEachAxis && i1 > 0; --i1)
+            var num1 = 0;
+            var num2 = 0;
+            for (var i1 = i - 1; num1 < spreadInEachAxis && i1 > 0; --i1)
             {
-                Tile tile = Main.tile[i1, j];
+                var tile = Main.tile[i1, j];
                 if (tile.active() && fittingTypes[(int) tile.type] && !WorldGen.SolidTileAllowBottomSlope(i1, j - 1))
                     ++num1;
                 else if (!tile.active())
                     break;
             }
 
-            for (int i1 = i + 1; num2 < spreadInEachAxis && i1 < Main.maxTilesX - 1; ++i1)
+            for (var i1 = i + 1; num2 < spreadInEachAxis && i1 < Main.maxTilesX - 1; ++i1)
             {
-                Tile tile = Main.tile[i1, j];
+                var tile = Main.tile[i1, j];
                 if (tile.active() && fittingTypes[(int) tile.type] && !WorldGen.SolidTileAllowBottomSlope(i1, j - 1))
                     ++num2;
                 else if (!tile.active())
@@ -41,9 +41,9 @@ namespace Terraria
 
         public static bool CanSpawnSandstormHostile(Vector2 position, int expandUp, int expandDown)
         {
-            bool flag = true;
-            Point tileCoordinates = position.ToTileCoordinates();
-            for (int index = -1; index <= 1; ++index)
+            var flag = true;
+            var tileCoordinates = position.ToTileCoordinates();
+            for (var index = -1; index <= 1; ++index)
             {
                 int topY;
                 int bottomY;
@@ -63,9 +63,9 @@ namespace Terraria
 
         public static bool CanSpawnSandstormFriendly(Vector2 position, int expandUp, int expandDown)
         {
-            bool flag = true;
-            Point tileCoordinates = position.ToTileCoordinates();
-            for (int index = -1; index <= 1; ++index)
+            var flag = true;
+            var tileCoordinates = position.ToTileCoordinates();
+            for (var index = -1; index <= 1; ++index)
             {
                 int topY;
                 int bottomY;
@@ -86,8 +86,8 @@ namespace Terraria
         public static void CheckArenaScore(Vector2 arenaCenter, out Point xLeftEnd, out Point xRightEnd,
             int walkerWidthInTiles = 5, int walkerHeightInTiles = 10)
         {
-            bool showDebug = false;
-            Point tileCoordinates = arenaCenter.ToTileCoordinates();
+            var showDebug = false;
+            var tileCoordinates = arenaCenter.ToTileCoordinates();
             xLeftEnd = xRightEnd = tileCoordinates;
             int topY;
             int bottomY;
@@ -119,9 +119,9 @@ namespace Terraria
             distanceCoveredInTiles = 0;
             --startFloorPosition.Y;
             lastIteratedFloorSpot = startFloorPosition;
-            for (int index1 = 0; index1 < maxDistance; ++index1)
+            for (var index1 = 0; index1 < maxDistance; ++index1)
             {
-                for (int index2 = 0;
+                for (var index2 = 0;
                     index2 < 3 && WorldGen.SolidTile3(startFloorPosition.X, startFloorPosition.Y);
                     ++index2)
                     --startFloorPosition.Y;

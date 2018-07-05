@@ -49,9 +49,9 @@ namespace Terraria.ID
         {
             get
             {
-                Color color = Color.Transparent;
-                bool flag = true;
-                for (int index = 0; index < 11; ++index)
+                var color = Color.Transparent;
+                var flag = true;
+                for (var index = 0; index < 11; ++index)
                 {
                     if ((double) Main.liquidAlpha[index] > 0.0)
                     {

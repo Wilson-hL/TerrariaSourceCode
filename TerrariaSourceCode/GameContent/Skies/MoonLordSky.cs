@@ -29,7 +29,7 @@ namespace Terraria.GameContent.Skies
         {
             if (!this.UpdateMoonLordIndex())
                 return 0.0f;
-            float x = 0.0f;
+            var x = 0.0f;
             if (this._moonLordIndex != -1)
                 x = Vector2.Distance(Main.player[Main.myPlayer].Center, Main.npc[this._moonLordIndex].Center);
             return 1f - Utils.SmoothStep(3000f, 6000f, x);
@@ -37,7 +37,7 @@ namespace Terraria.GameContent.Skies
 
         public override Color OnTileColor(Color inColor)
         {
-            float intensity = this.GetIntensity();
+            var intensity = this.GetIntensity();
             return new Color(Vector4.Lerp(new Vector4(0.5f, 0.8f, 1f, 1f), inColor.ToVector4(), 1f - intensity));
         }
 
@@ -46,8 +46,8 @@ namespace Terraria.GameContent.Skies
             if (this._moonLordIndex >= 0 && Main.npc[this._moonLordIndex].active &&
                 Main.npc[this._moonLordIndex].type == 398)
                 return true;
-            int num = -1;
-            for (int index = 0; index < Main.npc.Length; ++index)
+            var num = -1;
+            for (var index = 0; index < Main.npc.Length; ++index)
             {
                 if (Main.npc[index].active && Main.npc[index].type == 398)
                 {
@@ -64,7 +64,7 @@ namespace Terraria.GameContent.Skies
         {
             if ((double) maxDepth < 0.0 || (double) minDepth >= 0.0)
                 return;
-            float intensity = this.GetIntensity();
+            var intensity = this.GetIntensity();
             spriteBatch.Draw(Main.blackTileTexture, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight),
                 Color.Black * intensity);
         }

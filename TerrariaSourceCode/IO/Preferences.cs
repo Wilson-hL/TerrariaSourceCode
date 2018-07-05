@@ -37,7 +37,7 @@ namespace Terraria.IO
             this.UseBson = useBson;
             if (parseAllTypes)
             {
-                JsonSerializerSettings serializerSettings = new JsonSerializerSettings();
+                var serializerSettings = new JsonSerializerSettings();
                 serializerSettings.TypeNameHandling = (TypeNameHandling) 4;
                 serializerSettings.MetadataPropertyHandling = (MetadataPropertyHandling) 1;
                 serializerSettings.Formatting = (Formatting) 1;
@@ -45,7 +45,7 @@ namespace Terraria.IO
             }
             else
             {
-                JsonSerializerSettings serializerSettings = new JsonSerializerSettings();
+                var serializerSettings = new JsonSerializerSettings();
                 serializerSettings.Formatting = (Formatting) 1;
                 this._serializerSettings = serializerSettings;
             }
@@ -67,9 +67,9 @@ namespace Terraria.IO
                     }
                     else
                     {
-                        using (FileStream fileStream = File.OpenRead(this._path))
+                        using (var fileStream = File.OpenRead(this._path))
                         {
-                            using (BsonReader bsonReader = new BsonReader((Stream) fileStream))
+                            using (var bsonReader = new BsonReader((Stream) fileStream))
                                 this._data = (Dictionary<string, object>) JsonSerializer
                                     .Create(this._serializerSettings)
                                     .Deserialize<Dictionary<string, object>>((JsonReader) bsonReader);
@@ -104,7 +104,7 @@ namespace Terraria.IO
                         File.SetAttributes(this._path, FileAttributes.Normal);
                     if (!this.UseBson)
                     {
-                        string text = JsonConvert.SerializeObject((object) this._data, this._serializerSettings);
+                        var text = JsonConvert.SerializeObject((object) this._data, this._serializerSettings);
                         if (this.OnProcessText != null)
                             this.OnProcessText(ref text);
                         File.WriteAllText(this._path, text);
@@ -112,9 +112,9 @@ namespace Terraria.IO
                     }
                     else
                     {
-                        using (FileStream fileStream = File.Create(this._path))
+                        using (var fileStream = File.Create(this._path))
                         {
-                            using (BsonWriter bsonWriter = new BsonWriter((Stream) fileStream))
+                            using (var bsonWriter = new BsonWriter((Stream) fileStream))
                             {
                                 File.SetAttributes(this._path, FileAttributes.Normal);
                                 JsonSerializer.Create(this._serializerSettings)

@@ -84,11 +84,11 @@ namespace Terraria.GameContent.UI.States
             this._textureShift = TextureManager.Load("Images/UI/VK_Shift");
             this._textureBackspace = TextureManager.Load("Images/UI/VK_Backspace");
             this.Top.Pixels = (float) this._lastOffsetDown;
-            float num1 = (float) (-5000 * this._edittingSign.ToInt());
-            float maxValue = (float) byte.MaxValue;
-            float num2 = 0.0f;
-            float num3 = 516f;
-            UIElement element = new UIElement();
+            var num1 = (float) (-5000 * this._edittingSign.ToInt());
+            var maxValue = (float) byte.MaxValue;
+            var num2 = 0.0f;
+            var num3 = 516f;
+            var element = new UIElement();
             element.Width.Pixels = (float) ((double) num3 + 8.0 + 16.0);
             element.Top.Precent = num2;
             element.Top.Pixels = maxValue;
@@ -96,7 +96,7 @@ namespace Terraria.GameContent.UI.States
             element.HAlign = 0.5f;
             element.SetPadding(0.0f);
             this.outerLayer1 = element;
-            UIElement uiElement = new UIElement();
+            var uiElement = new UIElement();
             uiElement.Width.Pixels = (float) ((double) num3 + 8.0 + 16.0);
             uiElement.Top.Precent = num2;
             uiElement.Top.Pixels = maxValue;
@@ -104,12 +104,12 @@ namespace Terraria.GameContent.UI.States
             uiElement.HAlign = 0.5f;
             uiElement.SetPadding(0.0f);
             this.outerLayer2 = uiElement;
-            UIPanel mainPanel = new UIPanel();
+            var mainPanel = new UIPanel();
             mainPanel.Width.Precent = 1f;
             mainPanel.Height.Pixels = 225f;
             mainPanel.BackgroundColor = new Color(23, 33, 69) * 0.7f;
             element.Append((UIElement) mainPanel);
-            float num4 = -79f;
+            var num4 = -79f;
             this._textBox = new UITextBox("", 0.78f, true);
             this._textBox.BackgroundColor = Color.Transparent;
             this._textBox.BorderColor = Color.Transparent;
@@ -119,11 +119,11 @@ namespace Terraria.GameContent.UI.States
             this._textBox.Top.Precent = num2;
             this._textBox.Height.Pixels = 37f;
             this.Append((UIElement) this._textBox);
-            for (int x = 0; x < 10; ++x)
+            for (var x = 0; x < 10; ++x)
             {
-                for (int y = 0; y < 4; ++y)
+                for (var y = 0; y < 4; ++y)
                 {
-                    UITextPanel<object> keyboardButton = this.CreateKeyboardButton(
+                    var keyboardButton = this.CreateKeyboardButton(
                         (object) "1234567890qwertyuiopasdfghjkl'zxcvbnm,.?"[y * 10 + x].ToString(), x, y, 1, true);
                     keyboardButton.OnClick += new UIElement.MouseEvent(this.TypeText);
                     mainPanel.Append((UIElement) keyboardButton);
@@ -157,7 +157,7 @@ namespace Terraria.GameContent.UI.States
                     ? UIVirtualKeyboard.KeyState.Default
                     : UIVirtualKeyboard.KeyState.Shift);
             });
-            UIImage uiImage1 = new UIImage(this._textureShift);
+            var uiImage1 = new UIImage(this._textureShift);
             uiImage1.HAlign = 0.5f;
             uiImage1.VAlign = 0.5f;
             uiImage1.ImageScale = 0.85f;
@@ -205,7 +205,7 @@ namespace Terraria.GameContent.UI.States
             this._submitButton.OnMouseOut += (UIElement.MouseEvent) ((evt, listeningElement) => this.ValidateText());
             this._submitButton.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
             {
-                string text = this.Text.Trim();
+                var text = this.Text.Trim();
                 if (text.Length <= 0 && !this._edittingSign && (!this._edittingChest && !this._allowEmpty))
                     return;
                 Main.PlaySound(10, -1, -1, 1, 1f, 0.0f);
@@ -250,7 +250,7 @@ namespace Terraria.GameContent.UI.States
             this._submitButton2.OnMouseOut += (UIElement.MouseEvent) ((evt, listeningElement) => this.ValidateText());
             this._submitButton2.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
             {
-                string text = this.Text.Trim();
+                var text = this.Text.Trim();
                 if (text.Length <= 0 && !this._edittingSign && (!this._edittingChest && !this._allowEmpty))
                     return;
                 Main.PlaySound(10, -1, -1, 1, 1f, 0.0f);
@@ -281,7 +281,7 @@ namespace Terraria.GameContent.UI.States
                 this._cancelAction();
             });
             this.outerLayer2.Append((UIElement) this._cancelButton2);
-            UITextPanel<object> keyboardButton1 = this.CreateKeyboardButton((object) "", 8, 4, 2, true);
+            var keyboardButton1 = this.CreateKeyboardButton((object) "", 8, 4, 2, true);
             keyboardButton1.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
             {
                 Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
@@ -291,13 +291,13 @@ namespace Terraria.GameContent.UI.States
             keyboardButton1.PaddingLeft = 0.0f;
             keyboardButton1.PaddingRight = 0.0f;
             keyboardButton1.PaddingBottom = keyboardButton1.PaddingTop = 0.0f;
-            UIImage uiImage2 = new UIImage(this._textureBackspace);
+            var uiImage2 = new UIImage(this._textureBackspace);
             uiImage2.HAlign = 0.5f;
             uiImage2.VAlign = 0.5f;
             uiImage2.ImageScale = 0.92f;
             keyboardButton1.Append((UIElement) uiImage2);
             mainPanel.Append((UIElement) keyboardButton1);
-            UIText uiText = new UIText(labelText, 0.75f, true);
+            var uiText = new UIText(labelText, 0.75f, true);
             uiText.HAlign = 0.5f;
             uiText.Width.Pixels = num3;
             uiText.Top.Pixels = (float) ((double) num4 - 37.0 - 4.0) + maxValue + num1;
@@ -316,13 +316,13 @@ namespace Terraria.GameContent.UI.States
 
         private void BuildSpaceBarArea(UIPanel mainPanel)
         {
-            Action createTheseTwo = (Action) (() =>
+            var createTheseTwo = (Action) (() =>
             {
-                bool flag = this.CanRestore();
-                int x = flag ? 4 : 5;
-                bool edittingSign = this._edittingSign;
-                int width = !flag || !edittingSign ? 3 : 2;
-                UITextPanel<object> keyboardButton1 = this.CreateKeyboardButton(
+                var flag = this.CanRestore();
+                var x = flag ? 4 : 5;
+                var edittingSign = this._edittingSign;
+                var width = !flag || !edittingSign ? 3 : 2;
+                var keyboardButton1 = this.CreateKeyboardButton(
                     (object) Language.GetText("UI.SpaceButton"), 2, 4,
                     this._edittingSign || this._edittingChest && flag ? width : 6, true);
                 keyboardButton1.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
@@ -335,7 +335,7 @@ namespace Terraria.GameContent.UI.States
                 this._spacebarButton = keyboardButton1;
                 if (!edittingSign)
                     return;
-                UITextPanel<object> keyboardButton2 =
+                var keyboardButton2 =
                     this.CreateKeyboardButton((object) Language.GetText("UI.EnterButton"), x, 4, width, true);
                 keyboardButton2.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
                 {
@@ -349,7 +349,7 @@ namespace Terraria.GameContent.UI.States
             createTheseTwo();
             if (!this.CanRestore())
                 return;
-            UITextPanel<object> restoreBar =
+            var restoreBar =
                 this.CreateKeyboardButton((object) Language.GetText("UI.RestoreButton"), 6, 4, 2, true);
             restoreBar.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
             {
@@ -377,7 +377,7 @@ namespace Terraria.GameContent.UI.States
         private void TypeText(UIMouseEvent evt, UIElement listeningElement)
         {
             Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
-            bool flag = this.Text.Length == 0;
+            var flag = this.Text.Length == 0;
             this._textBox.Write(((UITextPanel<object>) listeningElement).Text);
             this.ValidateText();
             if (!flag || this.Text.Length <= 0 || this._keyState != UIVirtualKeyboard.KeyState.Shift)
@@ -387,7 +387,7 @@ namespace Terraria.GameContent.UI.States
 
         public void SetKeyState(UIVirtualKeyboard.KeyState keyState)
         {
-            UITextPanel<object> uiTextPanel1 = (UITextPanel<object>) null;
+            var uiTextPanel1 = (UITextPanel<object>) null;
             switch (this._keyState)
             {
                 case UIVirtualKeyboard.KeyState.Symbol:
@@ -406,8 +406,8 @@ namespace Terraria.GameContent.UI.States
                     uiTextPanel1.BackgroundColor = new Color(63, 82, 151) * 0.7f;
             }
 
-            string str = (string) null;
-            UITextPanel<object> uiTextPanel2 = (UITextPanel<object>) null;
+            var str = (string) null;
+            var uiTextPanel2 = (UITextPanel<object>) null;
             switch (keyState)
             {
                 case UIVirtualKeyboard.KeyState.Default:
@@ -423,7 +423,7 @@ namespace Terraria.GameContent.UI.States
                     break;
             }
 
-            for (int index = 0; index < str.Length; ++index)
+            for (var index = 0; index < str.Length; ++index)
                 this._keyList[index].SetText((object) str[index].ToString());
             this._keyState = keyState;
             if (uiTextPanel2 == null)
@@ -478,8 +478,8 @@ namespace Terraria.GameContent.UI.States
 
         private UITextPanel<object> CreateKeyboardButton(object text, int x, int y, int width = 1, bool style = true)
         {
-            float num = 516f;
-            UITextPanel<object> button = new UITextPanel<object>(text, 0.4f, true);
+            var num = 516f;
+            var button = new UITextPanel<object>(text, 0.4f, true);
             button.Width.Pixels = (float) (48.0 * (double) width + 4.0 * (double) (width - 1));
             button.Height.Pixels = 37f;
             button.Left.Precent = 0.5f;
@@ -487,7 +487,7 @@ namespace Terraria.GameContent.UI.States
             button.Top.Pixels = 41f * (float) y;
             if (style)
                 this.StyleKey<object>(button, false);
-            for (int index = 0; index < width; ++index)
+            for (var index = 0; index < width; ++index)
                 this._keyList[y * 10 + x + index] = button;
             return button;
         }
@@ -551,10 +551,10 @@ namespace Terraria.GameContent.UI.States
                 this.SetupGamepadPoints(spriteBatch);
                 PlayerInput.WritingText = true;
                 Main.instance.HandleIME();
-                Vector2 position = new Vector2((float) (Main.screenWidth / 2),
+                var position = new Vector2((float) (Main.screenWidth / 2),
                     (float) (this._textBox.GetDimensions().ToRectangle().Bottom + 32));
                 Main.instance.DrawWindowsIMEPanel(position, 0.5f);
-                string inputText = Main.GetInputText(this.Text);
+                var inputText = Main.GetInputText(this.Text);
                 if (this._edittingSign && Main.inputTextEnter)
                 {
                     inputText += (string) (object) '\n';
@@ -591,8 +591,8 @@ namespace Terraria.GameContent.UI.States
                         this.CopyTextToChest();
                 }
 
-                byte num = (byte) (((int) byte.MaxValue + (int) Main.tileColor.R * 2) / 3);
-                Color color = new Color((int) num, (int) num, (int) num, (int) byte.MaxValue);
+                var num = (byte) (((int) byte.MaxValue + (int) Main.tileColor.R * 2) / 3);
+                var color = new Color((int) num, (int) num, (int) num, (int) byte.MaxValue);
                 this._textBox.TextColor = Color.Lerp(Color.White, color, 0.2f);
                 this._label.TextColor = Color.Lerp(Color.White, color, 0.2f);
                 position = new Vector2((float) (Main.screenWidth / 2),
@@ -603,8 +603,8 @@ namespace Terraria.GameContent.UI.States
 
         private void UpdateOffsetDown()
         {
-            int num1 = UIVirtualKeyboard.OffsetDown - this._lastOffsetDown;
-            int num2 = num1;
+            var num1 = UIVirtualKeyboard.OffsetDown - this._lastOffsetDown;
+            var num2 = num1;
             if (Math.Abs(num1) < 10)
                 num2 = num1;
             this._lastOffsetDown += num2;
@@ -632,33 +632,33 @@ namespace Terraria.GameContent.UI.States
         {
             UILinkPointNavigator.Shortcuts.BackButtonCommand = 6;
             UILinkPointNavigator.Shortcuts.FANCYUI_SPECIAL_INSTRUCTIONS = 1;
-            int num1 = 3002;
+            var num1 = 3002;
             UILinkPointNavigator.SetPosition(3000, this._cancelButton.GetDimensions().Center());
-            UILinkPoint point1 = UILinkPointNavigator.Points[3000];
+            var point1 = UILinkPointNavigator.Points[3000];
             point1.Unlink();
             point1.Right = 3001;
             point1.Up = num1 + 40;
             UILinkPointNavigator.SetPosition(3001, this._submitButton.GetDimensions().Center());
-            UILinkPoint point2 = UILinkPointNavigator.Points[3001];
+            var point2 = UILinkPointNavigator.Points[3001];
             point2.Unlink();
             point2.Left = 3000;
             point2.Up = num1 + 49;
-            for (int index1 = 0; index1 < 5; ++index1)
+            for (var index1 = 0; index1 < 5; ++index1)
             {
-                for (int index2 = 0; index2 < 10; ++index2)
+                for (var index2 = 0; index2 < 10; ++index2)
                 {
-                    int index3 = index1 * 10 + index2;
-                    int ID = num1 + index3;
+                    var index3 = index1 * 10 + index2;
+                    var ID = num1 + index3;
                     if (this._keyList[index3] != null)
                     {
                         UILinkPointNavigator.SetPosition(ID, this._keyList[index3].GetDimensions().Center());
-                        UILinkPoint point3 = UILinkPointNavigator.Points[ID];
+                        var point3 = UILinkPointNavigator.Points[ID];
                         point3.Unlink();
-                        int num2 = index2 - 1;
+                        var num2 = index2 - 1;
                         while (num2 >= 0 && this._keyList[index1 * 10 + num2] == this._keyList[index3])
                             --num2;
                         point3.Left = num2 == -1 ? index1 * 10 + 9 + num1 : index1 * 10 + num2 + num1;
-                        int index4 = index2 + 1;
+                        var index4 = index2 + 1;
                         while (index4 <= 9 && this._keyList[index1 * 10 + index4] == this._keyList[index3])
                             ++index4;
                         point3.Right = index4 == 10 || this._keyList[index3] == this._keyList[index4]
@@ -713,7 +713,7 @@ namespace Terraria.GameContent.UI.States
         {
             if (UIVirtualKeyboard._currentInstance == null)
                 return;
-            string text = UIVirtualKeyboard._currentInstance.Text.Trim();
+            var text = UIVirtualKeyboard._currentInstance.Text.Trim();
             if (text.Length <= 0)
                 return;
             Main.PlaySound(10, -1, -1, 1, 1f, 0.0f);
@@ -733,7 +733,7 @@ namespace Terraria.GameContent.UI.States
             if (UIVirtualKeyboard._currentInstance == null)
                 return;
             Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
-            bool flag = UIVirtualKeyboard._currentInstance.Text.Length == 0;
+            var flag = UIVirtualKeyboard._currentInstance.Text.Length == 0;
             UIVirtualKeyboard._currentInstance._textBox.Write(text);
             UIVirtualKeyboard._currentInstance.ValidateText();
             if (!flag || UIVirtualKeyboard._currentInstance.Text.Length <= 0 ||
@@ -795,7 +795,7 @@ namespace Terraria.GameContent.UI.States
         {
             if (!this._edittingSign)
                 return;
-            int sign = Main.player[Main.myPlayer].sign;
+            var sign = Main.player[Main.myPlayer].sign;
             if (sign < 0 || Main.sign[sign] == null)
                 return;
             Main.npcChatText = this.Text;

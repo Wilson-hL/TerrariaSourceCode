@@ -31,16 +31,16 @@ namespace Terraria.World.Generation
 
         public void GenerateWorld(GenerationProgress progress = null)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            float num = 0.0f;
-            foreach (GenPass pass in this._passes)
+            var stopwatch = new Stopwatch();
+            var num = 0.0f;
+            foreach (var pass in this._passes)
                 num += pass.Weight;
             if (progress == null)
                 progress = new GenerationProgress();
             progress.TotalWeight = num;
             Main.menuMode = 888;
             Main.MenuUI.SetState((UIState) new UIWorldLoad(progress));
-            foreach (GenPass pass in this._passes)
+            foreach (var pass in this._passes)
             {
                 WorldGen._genRand = new UnifiedRandom(this._seed);
                 Main.rand = new UnifiedRandom(this._seed);

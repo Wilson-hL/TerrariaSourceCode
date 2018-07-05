@@ -25,8 +25,8 @@ namespace Terraria.Initializers
         public static float HandleSlider(float currentValue, float min, float max, float deadZone = 0.2f,
             float sensitivity = 0.5f)
         {
-            float x = PlayerInput.GamepadThumbstickLeft.X;
-            float num = (double) x < -(double) deadZone || (double) x > (double) deadZone
+            var x = PlayerInput.GamepadThumbstickLeft.X;
+            var num = (double) x < -(double) deadZone || (double) x > (double) deadZone
                 ? MathHelper.Lerp(0.0f, sensitivity / 60f,
                       (float) (((double) Math.Abs(x) - (double) deadZone) / (1.0 - (double) deadZone))) *
                   (float) Math.Sign(x)
@@ -38,12 +38,12 @@ namespace Terraria.Initializers
 
         public static void Load()
         {
-            Func<string> func1 = (Func<string>) (() =>
+            var func1 = (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[53].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["MouseLeft"]));
-            UILinkPage page1 = new UILinkPage();
+            var page1 = new UILinkPage();
             page1.UpdateEvent += (Action) (() => PlayerInput.GamepadAllowScrolling = true);
-            for (int index = 0; index < 20; ++index)
+            for (var index = 0; index < 20; ++index)
                 page1.LinkMap.Add(2000 + index, new UILinkPoint(2000 + index, true, -3, -4, -1, -2));
             page1.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[53].Value, false,
@@ -69,7 +69,7 @@ namespace Terraria.Initializers
                 return false;
             });
             UILinkPointNavigator.RegisterPage(page1, 1000, true);
-            UILinkPage cp1 = new UILinkPage();
+            var cp1 = new UILinkPage();
             cp1.LinkMap.Add(2500, new UILinkPoint(2500, true, -3, 2501, -1, -2));
             cp1.LinkMap.Add(2501, new UILinkPoint(2501, true, 2500, 2502, -1, -2));
             cp1.LinkMap.Add(2502, new UILinkPoint(2502, true, 2501, -4, -1, -2));
@@ -98,24 +98,24 @@ namespace Terraria.Initializers
                 Main.player[Main.myPlayer].releaseUseTile = false;
             });
             UILinkPointNavigator.RegisterPage(cp1, 1003, true);
-            UILinkPage cp2 = new UILinkPage();
+            var cp2 = new UILinkPage();
             cp2.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func2 = (Func<string>) (() =>
+            var func2 = (Func<string>) (() =>
             {
-                int currentPoint = UILinkPointNavigator.CurrentPoint;
+                var currentPoint = UILinkPointNavigator.CurrentPoint;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].inventory, 0, currentPoint);
             });
-            Func<string> func3 = (Func<string>) (() =>
+            var func3 = (Func<string>) (() =>
                 ItemSlot.GetGamepadInstructions(ref Main.player[Main.myPlayer].trashItem, 6));
-            for (int index = 0; index <= 49; ++index)
+            for (var index = 0; index <= 49; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, index - 1, index + 1, index - 10, index + 10);
+                var uiLinkPoint = new UILinkPoint(index, true, index - 1, index + 1, index - 10, index + 10);
                 uiLinkPoint.OnSpecialInteracts += func2;
-                int num = index;
+                var num = index;
                 if (num < 10)
                     uiLinkPoint.Up = -1;
                 if (num >= 40)
@@ -145,10 +145,10 @@ namespace Terraria.Initializers
             cp2.LinkMap[300].OnSpecialInteracts += func3;
             cp2.UpdateEvent += (Action) (() =>
             {
-                bool inReforgeMenu = Main.InReforgeMenu;
-                bool flag1 = Main.player[Main.myPlayer].chest != -1;
-                bool flag2 = Main.npcShop != 0;
-                for (int index = 40; index <= 49; ++index)
+                var inReforgeMenu = Main.InReforgeMenu;
+                var flag1 = Main.player[Main.myPlayer].chest != -1;
+                var flag2 = Main.npcShop != 0;
+                for (var index = 40; index <= 49; ++index)
                     cp2.LinkMap[index].Down = !inReforgeMenu
                         ? (!flag1 ? (!flag2 ? -2 : 2700 + index - 40) : 400 + index - 40)
                         : (index < 45 ? 303 : 304);
@@ -203,20 +203,20 @@ namespace Terraria.Initializers
             cp2.PageOnLeft = 9;
             cp2.PageOnRight = 2;
             UILinkPointNavigator.RegisterPage(cp2, 0, true);
-            UILinkPage cp3 = new UILinkPage();
+            var cp3 = new UILinkPage();
             cp3.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func4 = (Func<string>) (() =>
+            var func4 = (Func<string>) (() =>
             {
-                int currentPoint = UILinkPointNavigator.CurrentPoint;
+                var currentPoint = UILinkPointNavigator.CurrentPoint;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].inventory, 1, currentPoint);
             });
-            for (int index = 50; index <= 53; ++index)
+            for (var index = 50; index <= 53; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, -3, -4, index - 1, index + 1);
+                var uiLinkPoint = new UILinkPoint(index, true, -3, -4, index - 1, index + 1);
                 uiLinkPoint.OnSpecialInteracts += func4;
                 cp3.LinkMap.Add(index, uiLinkPoint);
             }
@@ -248,20 +248,20 @@ namespace Terraria.Initializers
             cp3.PageOnLeft = 0;
             cp3.PageOnRight = 2;
             UILinkPointNavigator.RegisterPage(cp3, 1, true);
-            UILinkPage cp4 = new UILinkPage();
+            var cp4 = new UILinkPage();
             cp4.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func5 = (Func<string>) (() =>
+            var func5 = (Func<string>) (() =>
             {
-                int currentPoint = UILinkPointNavigator.CurrentPoint;
+                var currentPoint = UILinkPointNavigator.CurrentPoint;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].inventory, 2, currentPoint);
             });
-            for (int index = 54; index <= 57; ++index)
+            for (var index = 54; index <= 57; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, -3, -4, index - 1, index + 1);
+                var uiLinkPoint = new UILinkPoint(index, true, -3, -4, index - 1, index + 1);
                 uiLinkPoint.OnSpecialInteracts += func5;
                 cp4.LinkMap.Add(index, uiLinkPoint);
             }
@@ -292,27 +292,27 @@ namespace Terraria.Initializers
             cp4.PageOnLeft = 0;
             cp4.PageOnRight = 8;
             UILinkPointNavigator.RegisterPage(cp4, 2, true);
-            UILinkPage cp5 = new UILinkPage();
+            var cp5 = new UILinkPage();
             cp5.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func6 = (Func<string>) (() =>
+            var func6 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 100;
+                var slot = UILinkPointNavigator.CurrentPoint - 100;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].armor, slot < 10 ? 8 : 9, slot);
             });
-            Func<string> func7 = (Func<string>) (() =>
+            var func7 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 120;
+                var slot = UILinkPointNavigator.CurrentPoint - 120;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].dye, 12, slot);
             });
-            for (int index = 100; index <= 119; ++index)
+            for (var index = 100; index <= 119; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, index + 10, index - 10, index - 1, index + 1);
+                var uiLinkPoint = new UILinkPoint(index, true, index + 10, index - 10, index - 1, index + 1);
                 uiLinkPoint.OnSpecialInteracts += func6;
-                int num = index - 100;
+                var num = index - 100;
                 if (num == 0)
                     uiLinkPoint.Up = 305;
                 if (num == 10)
@@ -326,11 +326,11 @@ namespace Terraria.Initializers
                 cp5.LinkMap.Add(index, uiLinkPoint);
             }
 
-            for (int index = 120; index <= 129; ++index)
+            for (var index = 120; index <= 129; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, -3, index - 10, index - 1, index + 1);
+                var uiLinkPoint = new UILinkPoint(index, true, -3, index - 10, index - 1, index + 1);
                 uiLinkPoint.OnSpecialInteracts += func7;
-                int num = index - 120;
+                var num = index - 120;
                 if (num == 0)
                     uiLinkPoint.Up = 307;
                 if (num == 9)
@@ -350,9 +350,9 @@ namespace Terraria.Initializers
             });
             cp5.UpdateEvent += (Action) (() =>
             {
-                int num1 = 107;
-                int extraAccessorySlots = Main.player[Main.myPlayer].extraAccessorySlots;
-                for (int index = 0; index < extraAccessorySlots; ++index)
+                var num1 = 107;
+                var extraAccessorySlots = Main.player[Main.myPlayer].extraAccessorySlots;
+                for (var index = 0; index < extraAccessorySlots; ++index)
                 {
                     cp5.LinkMap[num1 + index].Down = num1 + index + 1;
                     cp5.LinkMap[num1 - 100 + 120 + index].Down = num1 - 100 + 120 + index + 1;
@@ -362,11 +362,11 @@ namespace Terraria.Initializers
                 cp5.LinkMap[num1 + extraAccessorySlots].Down = 308;
                 cp5.LinkMap[num1 - 100 + 120 + extraAccessorySlots].Down = 308;
                 cp5.LinkMap[num1 + 10 + extraAccessorySlots].Down = 308;
-                bool shouldPvpDraw = Main.ShouldPVPDraw;
-                for (int index = 120; index <= 129; ++index)
+                var shouldPvpDraw = Main.ShouldPVPDraw;
+                for (var index = 120; index <= 129; ++index)
                 {
-                    UILinkPoint link = cp5.LinkMap[index];
-                    int num2 = index - 120;
+                    var link = cp5.LinkMap[index];
+                    var num2 = index - 120;
                     if (num2 == 0)
                         link.Left = shouldPvpDraw ? 1550 : -3;
                     if (num2 == 1)
@@ -386,17 +386,17 @@ namespace Terraria.Initializers
             cp5.PageOnLeft = 8;
             cp5.PageOnRight = 8;
             UILinkPointNavigator.RegisterPage(cp5, 3, true);
-            UILinkPage page2 = new UILinkPage();
+            var page2 = new UILinkPage();
             page2.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func8 = (Func<string>) (() =>
+            var func8 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 400;
-                int context = 4;
-                Item[] inv = Main.player[Main.myPlayer].bank.item;
+                var slot = UILinkPointNavigator.CurrentPoint - 400;
+                var context = 4;
+                var inv = Main.player[Main.myPlayer].bank.item;
                 switch (Main.player[Main.myPlayer].chest)
                 {
                     case -4:
@@ -415,11 +415,11 @@ namespace Terraria.Initializers
                         goto case -2;
                 }
             });
-            for (int index = 400; index <= 439; ++index)
+            for (var index = 400; index <= 439; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, index - 1, index + 1, index - 10, index + 10);
+                var uiLinkPoint = new UILinkPoint(index, true, index - 1, index + 1, index - 10, index + 10);
                 uiLinkPoint.OnSpecialInteracts += func8;
-                int num = index - 400;
+                var num = index - 400;
                 if (num < 10)
                     uiLinkPoint.Up = 40 + num;
                 if (num >= 30)
@@ -458,22 +458,22 @@ namespace Terraria.Initializers
                     return Main.player[Main.myPlayer].chest != -1;
                 return false;
             });
-            UILinkPage page3 = new UILinkPage();
+            var page3 = new UILinkPage();
             page3.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func9 = (Func<string>) (() =>
+            var func9 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 2700;
+                var slot = UILinkPointNavigator.CurrentPoint - 2700;
                 return ItemSlot.GetGamepadInstructions(Main.instance.shop[Main.npcShop].item, 15, slot);
             });
-            for (int index = 2700; index <= 2739; ++index)
+            for (var index = 2700; index <= 2739; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, index - 1, index + 1, index - 10, index + 10);
+                var uiLinkPoint = new UILinkPoint(index, true, index - 1, index + 1, index - 10, index + 10);
                 uiLinkPoint.OnSpecialInteracts += func9;
-                int num = index - 2700;
+                var num = index - 2700;
                 if (num < 10)
                     uiLinkPoint.Up = 40 + num;
                 if (num >= 30)
@@ -495,7 +495,7 @@ namespace Terraria.Initializers
                     return Main.npcShop != 0;
                 return false;
             });
-            UILinkPage cp6 = new UILinkPage();
+            var cp6 = new UILinkPage();
             cp6.LinkMap.Add(303, new UILinkPoint(303, true, 304, 304, 40, -2));
             cp6.LinkMap.Add(304, new UILinkPoint(304, true, 303, 303, 40, -2));
             cp6.OnSpecialInteracts += (Func<string>) (() =>
@@ -503,7 +503,7 @@ namespace Terraria.Initializers
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func10 = (Func<string>) (() => ItemSlot.GetGamepadInstructions(ref Main.reforgeItem, 5));
+            var func10 = (Func<string>) (() => ItemSlot.GetGamepadInstructions(ref Main.reforgeItem, 5));
             cp6.LinkMap[303].OnSpecialInteracts += func10;
             cp6.LinkMap[304].OnSpecialInteracts += (Func<string>) (() => Lang.misc[53].Value);
             cp6.UpdateEvent += (Action) (() =>
@@ -529,12 +529,12 @@ namespace Terraria.Initializers
             cp6.PageOnLeft = 0;
             cp6.PageOnRight = 0;
             UILinkPointNavigator.RegisterPage(cp6, 5, true);
-            UILinkPage cp7 = new UILinkPage();
+            var cp7 = new UILinkPage();
             cp7.OnSpecialInteracts += (Func<string>) (() =>
             {
                 if (PlayerInput.Triggers.JustPressed.Grapple)
                 {
-                    Point tileCoordinates = Main.player[Main.myPlayer].Center.ToTileCoordinates();
+                    var tileCoordinates = Main.player[Main.myPlayer].Center.ToTileCoordinates();
                     if (UILinkPointNavigator.CurrentPoint == 600)
                     {
                         if (WorldGen.MoveTownNPC(tileCoordinates.X, tileCoordinates.Y, -1))
@@ -562,18 +562,18 @@ namespace Terraria.Initializers
                            PlayerInput.ProfileGamepadUI.KeyStatus["Grapple"]) + PlayerInput.BuildCommand(
                            Lang.misc[69].Value, true, PlayerInput.ProfileGamepadUI.KeyStatus["SmartSelect"]);
             });
-            for (int index = 600; index <= 650; ++index)
+            for (var index = 600; index <= 650; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, index + 10, index - 10, index - 1, index + 1);
+                var uiLinkPoint = new UILinkPoint(index, true, index + 10, index - 10, index - 1, index + 1);
                 cp7.LinkMap.Add(index, uiLinkPoint);
             }
 
             cp7.UpdateEvent += (Action) (() =>
             {
-                int num = UILinkPointNavigator.Shortcuts.NPCS_IconsPerColumn;
+                var num = UILinkPointNavigator.Shortcuts.NPCS_IconsPerColumn;
                 if (num == 0)
                     num = 100;
-                for (int index = 0; index < 50; ++index)
+                for (var index = 0; index < 50; ++index)
                 {
                     cp7.LinkMap[600 + index].Up = index % num == 0 ? -1 : 600 + index - 1;
                     if (cp7.LinkMap[600 + index].Up == -1)
@@ -597,46 +597,46 @@ namespace Terraria.Initializers
             cp7.PageOnLeft = 8;
             cp7.PageOnRight = 8;
             UILinkPointNavigator.RegisterPage(cp7, 6, true);
-            UILinkPage cp8 = new UILinkPage();
+            var cp8 = new UILinkPage();
             cp8.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func11 = (Func<string>) (() =>
+            var func11 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 180;
+                var slot = UILinkPointNavigator.CurrentPoint - 180;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].miscEquips, 20, slot);
             });
-            Func<string> func12 = (Func<string>) (() =>
+            var func12 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 180;
+                var slot = UILinkPointNavigator.CurrentPoint - 180;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].miscEquips, 19, slot);
             });
-            Func<string> func13 = (Func<string>) (() =>
+            var func13 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 180;
+                var slot = UILinkPointNavigator.CurrentPoint - 180;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].miscEquips, 18, slot);
             });
-            Func<string> func14 = (Func<string>) (() =>
+            var func14 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 180;
+                var slot = UILinkPointNavigator.CurrentPoint - 180;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].miscEquips, 17, slot);
             });
-            Func<string> func15 = (Func<string>) (() =>
+            var func15 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 180;
+                var slot = UILinkPointNavigator.CurrentPoint - 180;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].miscEquips, 16, slot);
             });
-            Func<string> func16 = (Func<string>) (() =>
+            var func16 = (Func<string>) (() =>
             {
-                int slot = UILinkPointNavigator.CurrentPoint - 185;
+                var slot = UILinkPointNavigator.CurrentPoint - 185;
                 return ItemSlot.GetGamepadInstructions(Main.player[Main.myPlayer].miscDyes, 12, slot);
             });
-            for (int index = 180; index <= 184; ++index)
+            for (var index = 180; index <= 184; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, 185 + index - 180, -4, index - 1, index + 1);
-                int num = index - 180;
+                var uiLinkPoint = new UILinkPoint(index, true, 185 + index - 180, -4, index - 1, index + 1);
+                var num = index - 180;
                 if (num == 0)
                     uiLinkPoint.Up = 305;
                 if (num == 4)
@@ -662,11 +662,11 @@ namespace Terraria.Initializers
                 }
             }
 
-            for (int index = 185; index <= 189; ++index)
+            for (var index = 185; index <= 189; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, -3, index - 5, index - 1, index + 1);
+                var uiLinkPoint = new UILinkPoint(index, true, -3, index - 5, index - 1, index + 1);
                 uiLinkPoint.OnSpecialInteracts += func16;
-                int num = index - 185;
+                var num = index - 185;
                 if (num == 0)
                     uiLinkPoint.Up = 306;
                 if (num == 4)
@@ -688,7 +688,7 @@ namespace Terraria.Initializers
             cp8.PageOnLeft = 8;
             cp8.PageOnRight = 8;
             UILinkPointNavigator.RegisterPage(cp8, 7, true);
-            UILinkPage cp9 = new UILinkPage();
+            var cp9 = new UILinkPage();
             cp9.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
@@ -724,7 +724,7 @@ namespace Terraria.Initializers
                             UILinkPointNavigator.Shortcuts.NPCS_IconsPerColumn > 1
                                 ? 600 + UILinkPointNavigator.Shortcuts.NPCS_IconsPerColumn * 2
                                 : -2;
-                        int num = UILinkPointNavigator.Shortcuts.NPCS_IconsPerColumn;
+                        var num = UILinkPointNavigator.Shortcuts.NPCS_IconsPerColumn;
                         if (num == 0)
                             num = 100;
                         if (num == 100)
@@ -743,22 +743,22 @@ namespace Terraria.Initializers
             cp9.PageOnLeft = 0;
             cp9.PageOnRight = 0;
             UILinkPointNavigator.RegisterPage(cp9, 8, true);
-            UILinkPage cp10 = new UILinkPage();
+            var cp10 = new UILinkPage();
             cp10.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func17 = (Func<string>) (() => ItemSlot.GetGamepadInstructions(ref Main.guideItem, 7));
-            Func<string> HandleItem2 = (Func<string>) (() =>
+            var func17 = (Func<string>) (() => ItemSlot.GetGamepadInstructions(ref Main.guideItem, 7));
+            var HandleItem2 = (Func<string>) (() =>
             {
                 if (Main.mouseItem.type < 1)
                     return "";
                 return ItemSlot.GetGamepadInstructions(ref Main.mouseItem, 22);
             });
-            for (int index = 1500; index < 1550; ++index)
+            for (var index = 1500; index < 1550; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, index, index, -1, -2);
+                var uiLinkPoint = new UILinkPoint(index, true, index, index, -1, -2);
                 if (index != 1500)
                     uiLinkPoint.OnSpecialInteracts += HandleItem2;
                 cp10.LinkMap.Add(index, uiLinkPoint);
@@ -767,8 +767,8 @@ namespace Terraria.Initializers
             cp10.LinkMap[1500].OnSpecialInteracts += func17;
             cp10.UpdateEvent += (Action) (() =>
             {
-                int num1 = UILinkPointNavigator.Shortcuts.CRAFT_CurrentIngridientsCount;
-                int num2 = num1;
+                var num1 = UILinkPointNavigator.Shortcuts.CRAFT_CurrentIngridientsCount;
+                var num2 = num1;
                 if (Main.numAvailableRecipes > 0)
                     num2 += 2;
                 if (num1 < num2)
@@ -777,7 +777,7 @@ namespace Terraria.Initializers
                     UILinkPointNavigator.ChangePoint(1500);
                 if (UILinkPointNavigator.OverridePoint == -1 && cp10.CurrentPoint == 1500 && !Main.InGuideCraftMenu)
                     UILinkPointNavigator.ChangePoint(1501);
-                for (int index = 1; index < num1; ++index)
+                for (var index = 1; index < num1; ++index)
                 {
                     cp10.LinkMap[1500 + index].Left = 1500 + index - 1;
                     cp10.LinkMap[1500 + index].Right = index == num1 - 2 ? -4 : 1500 + index + 1;
@@ -793,9 +793,9 @@ namespace Terraria.Initializers
             {
                 if (Main.InGuideCraftMenu)
                     return "";
-                string str = "";
-                Player player = Main.player[Main.myPlayer];
-                bool flag1 = false;
+                var str = "";
+                var player = Main.player[Main.myPlayer];
+                var flag1 = false;
                 if (Main.mouseItem.type == 0 &&
                     player.ItemSpace(Main.recipe[Main.availableRecipe[Main.focusRecipe]].createItem) &&
                     !player.IsStackingItems())
@@ -828,7 +828,7 @@ namespace Terraria.Initializers
                     }
                 }
 
-                bool flag2 = Main.mouseItem.stack <= 0;
+                var flag2 = Main.mouseItem.stack <= 0;
                 if (flag2 ||
                     Main.mouseItem.type == Main.recipe[Main.availableRecipe[Main.focusRecipe]].createItem.type &&
                     Main.mouseItem.stack < Main.mouseItem.maxStack)
@@ -914,24 +914,24 @@ namespace Terraria.Initializers
             cp10.PageOnLeft = 10;
             cp10.PageOnRight = 0;
             UILinkPointNavigator.RegisterPage(cp10, 9, true);
-            UILinkPage cp11 = new UILinkPage();
+            var cp11 = new UILinkPage();
             cp11.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            for (int index1 = 700; index1 < 1500; ++index1)
+            for (var index1 = 700; index1 < 1500; ++index1)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index1, true, index1, index1, index1, index1);
-                int IHateLambda = index1;
+                var uiLinkPoint = new UILinkPoint(index1, true, index1, index1, index1, index1);
+                var IHateLambda = index1;
                 uiLinkPoint.OnSpecialInteracts += (Func<string>) (() =>
                 {
-                    string str1 = "";
-                    bool flag = false;
-                    Player player = Main.player[Main.myPlayer];
+                    var str1 = "";
+                    var flag = false;
+                    var player = Main.player[Main.myPlayer];
                     if (IHateLambda + Main.recStart < Main.numAvailableRecipes)
                     {
-                        int index = Main.recStart + IHateLambda - 700;
+                        var index = Main.recStart + IHateLambda - 700;
                         if (Main.mouseItem.type == 0 &&
                             player.ItemSpace(Main.recipe[Main.availableRecipe[index]].createItem) &&
                             !player.IsStackingItems())
@@ -953,7 +953,7 @@ namespace Terraria.Initializers
                         }
                     }
 
-                    string str2 = str1 + PlayerInput.BuildCommand(Lang.misc[73].Value, (!flag ? 1 : 0) != 0,
+                    var str2 = str1 + PlayerInput.BuildCommand(Lang.misc[73].Value, (!flag ? 1 : 0) != 0,
                                       PlayerInput.ProfileGamepadUI.KeyStatus["MouseLeft"]);
                     if (flag)
                         str2 += PlayerInput.BuildCommand(Lang.misc[71].Value, true,
@@ -965,16 +965,16 @@ namespace Terraria.Initializers
 
             cp11.UpdateEvent += (Action) (() =>
             {
-                int num1 = UILinkPointNavigator.Shortcuts.CRAFT_IconsPerRow;
-                int craftIconsPerColumn = UILinkPointNavigator.Shortcuts.CRAFT_IconsPerColumn;
+                var num1 = UILinkPointNavigator.Shortcuts.CRAFT_IconsPerRow;
+                var craftIconsPerColumn = UILinkPointNavigator.Shortcuts.CRAFT_IconsPerColumn;
                 if (num1 == 0)
                     num1 = 100;
-                int num2 = num1 * craftIconsPerColumn;
+                var num2 = num1 * craftIconsPerColumn;
                 if (num2 > 800)
                     num2 = 800;
                 if (num2 > Main.numAvailableRecipes)
                     num2 = Main.numAvailableRecipes;
-                for (int index = 0; index < num2; ++index)
+                for (var index = 0; index < num2; ++index)
                 {
                     cp11.LinkMap[700 + index].Left = index % num1 == 0 ? -3 : 700 + index - 1;
                     cp11.LinkMap[700 + index].Right = (index + 1) % num1 == 0 || index == Main.numAvailableRecipes - 1
@@ -986,7 +986,7 @@ namespace Terraria.Initializers
             });
             cp11.ReachEndEvent += (Action<int, int>) ((current, next) =>
             {
-                int craftIconsPerRow = UILinkPointNavigator.Shortcuts.CRAFT_IconsPerRow;
+                var craftIconsPerRow = UILinkPointNavigator.Shortcuts.CRAFT_IconsPerRow;
                 switch (next)
                 {
                     case -2:
@@ -1021,15 +1021,15 @@ namespace Terraria.Initializers
             cp11.PageOnLeft = 0;
             cp11.PageOnRight = 9;
             UILinkPointNavigator.RegisterPage(cp11, 10, true);
-            UILinkPage cp12 = new UILinkPage();
+            var cp12 = new UILinkPage();
             cp12.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            for (int index = 2605; index < 2620; ++index)
+            for (var index = 2605; index < 2620; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, index, index, index, index);
+                var uiLinkPoint = new UILinkPoint(index, true, index, index, index, index);
                 uiLinkPoint.OnSpecialInteracts += (Func<string>) (() =>
                     PlayerInput.BuildCommand(Lang.misc[73].Value, true,
                         PlayerInput.ProfileGamepadUI.KeyStatus["MouseLeft"]));
@@ -1038,11 +1038,11 @@ namespace Terraria.Initializers
 
             cp12.UpdateEvent += (Action) (() =>
             {
-                int num1 = 5;
-                int num2 = 3;
-                int num3 = num1 * num2;
-                int num4 = Main.UnlockedMaxHair();
-                for (int index = 0; index < num3; ++index)
+                var num1 = 5;
+                var num2 = 3;
+                var num3 = num1 * num2;
+                var num4 = Main.UnlockedMaxHair();
+                for (var index = 0; index < num3; ++index)
                 {
                     cp12.LinkMap[2605 + index].Left = index % num1 == 0 ? -3 : 2605 + index - 1;
                     cp12.LinkMap[2605 + index].Right =
@@ -1053,7 +1053,7 @@ namespace Terraria.Initializers
             });
             cp12.ReachEndEvent += (Action<int, int>) ((current, next) =>
             {
-                int num = 5;
+                var num = 5;
                 if (next == -1)
                 {
                     Main.hairStart -= num;
@@ -1072,7 +1072,7 @@ namespace Terraria.Initializers
             cp12.PageOnLeft = 12;
             cp12.PageOnRight = 12;
             UILinkPointNavigator.RegisterPage(cp12, 11, true);
-            UILinkPage page4 = new UILinkPage();
+            var page4 = new UILinkPage();
             page4.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
@@ -1085,15 +1085,15 @@ namespace Terraria.Initializers
             page4.LinkMap.Add(2604, new UILinkPoint(2604, true, 2603, -4, 2602, -2));
             page4.UpdateEvent += (Action) (() =>
             {
-                Vector3 hsl = Main.rgbToHsl(Main.selColor);
-                float interfaceDeadzoneX = PlayerInput.CurrentProfile.InterfaceDeadzoneX;
-                float x = PlayerInput.GamepadThumbstickLeft.X;
-                float num = (double) x < -(double) interfaceDeadzoneX || (double) x > (double) interfaceDeadzoneX
+                var hsl = Main.rgbToHsl(Main.selColor);
+                var interfaceDeadzoneX = PlayerInput.CurrentProfile.InterfaceDeadzoneX;
+                var x = PlayerInput.GamepadThumbstickLeft.X;
+                var num = (double) x < -(double) interfaceDeadzoneX || (double) x > (double) interfaceDeadzoneX
                     ? MathHelper.Lerp(0.0f, 0.008333334f,
                           (float) (((double) Math.Abs(x) - (double) interfaceDeadzoneX) /
                                    (1.0 - (double) interfaceDeadzoneX))) * (float) Math.Sign(x)
                     : 0.0f;
-                int currentPoint = UILinkPointNavigator.CurrentPoint;
+                var currentPoint = UILinkPointNavigator.CurrentPoint;
                 if (currentPoint == 2600)
                     Main.hBar = MathHelper.Clamp(Main.hBar + num, 0.0f, 1f);
                 if (currentPoint == 2601)
@@ -1113,8 +1113,8 @@ namespace Terraria.Initializers
             page4.PageOnLeft = 11;
             page4.PageOnRight = 11;
             UILinkPointNavigator.RegisterPage(page4, 12, true);
-            UILinkPage cp13 = new UILinkPage();
-            for (int index = 0; index < 30; ++index)
+            var cp13 = new UILinkPage();
+            for (var index = 0; index < 30; ++index)
             {
                 cp13.LinkMap.Add(2900 + index, new UILinkPoint(2900 + index, true, -3, -4, -1, -2));
                 cp13.LinkMap[2900 + index].OnSpecialInteracts += func1;
@@ -1129,20 +1129,20 @@ namespace Terraria.Initializers
             {
                 if (UILinkPointNavigator.CurrentPage != cp13.ID)
                     return;
-                int num = cp13.CurrentPoint - 2900;
+                var num = cp13.CurrentPoint - 2900;
                 if (num >= 4)
                     return;
                 IngameOptions.category = num;
             });
             cp13.UpdateEvent += (Action) (() =>
             {
-                int num1 = UILinkPointNavigator.Shortcuts.INGAMEOPTIONS_BUTTONS_LEFT;
+                var num1 = UILinkPointNavigator.Shortcuts.INGAMEOPTIONS_BUTTONS_LEFT;
                 if (num1 == 0)
                     num1 = 5;
                 if (UILinkPointNavigator.OverridePoint == -1 && cp13.CurrentPoint < 2930 &&
                     cp13.CurrentPoint > 2900 + num1 - 1)
                     UILinkPointNavigator.ChangePoint(2900);
-                for (int index = 2900; index < 2900 + num1; ++index)
+                for (var index = 2900; index < 2900 + num1; ++index)
                 {
                     cp13.LinkMap[index].Up = index - 1;
                     cp13.LinkMap[index].Down = index + 1;
@@ -1150,7 +1150,7 @@ namespace Terraria.Initializers
 
                 cp13.LinkMap[2900].Up = 2900 + num1 - 1;
                 cp13.LinkMap[2900 + num1 - 1].Down = 2900;
-                int num2 = cp13.CurrentPoint - 2900;
+                var num2 = cp13.CurrentPoint - 2900;
                 if (num2 >= 4 || !PlayerInput.Triggers.JustPressed.MouseLeft)
                     return;
                 IngameOptions.category = num2;
@@ -1171,8 +1171,8 @@ namespace Terraria.Initializers
                 return false;
             });
             UILinkPointNavigator.RegisterPage(cp13, 1001, true);
-            UILinkPage cp14 = new UILinkPage();
-            for (int index = 0; index < 30; ++index)
+            var cp14 = new UILinkPage();
+            for (var index = 0; index < 30; ++index)
             {
                 cp14.LinkMap.Add(2930 + index, new UILinkPoint(2930 + index, true, -3, -4, -1, -2));
                 cp14.LinkMap[2930 + index].OnSpecialInteracts += func1;
@@ -1185,13 +1185,13 @@ namespace Terraria.Initializers
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
             cp14.UpdateEvent += (Action) (() =>
             {
-                int num1 = UILinkPointNavigator.Shortcuts.INGAMEOPTIONS_BUTTONS_RIGHT;
+                var num1 = UILinkPointNavigator.Shortcuts.INGAMEOPTIONS_BUTTONS_RIGHT;
                 if (num1 == 0)
                     num1 = 5;
                 if (UILinkPointNavigator.OverridePoint == -1 && cp14.CurrentPoint >= 2930 &&
                     cp14.CurrentPoint > 2930 + num1 - 1)
                     UILinkPointNavigator.ChangePoint(2930);
-                for (int index = 2930; index < 2930 + num1; ++index)
+                for (var index = 2930; index < 2930 + num1; ++index)
                 {
                     cp14.LinkMap[index].Up = index - 1;
                     cp14.LinkMap[index].Down = index + 1;
@@ -1199,22 +1199,22 @@ namespace Terraria.Initializers
 
                 cp14.LinkMap[2930].Up = -1;
                 cp14.LinkMap[2930 + num1 - 1].Down = -2;
-                int num2 = PlayerInput.Triggers.JustPressed.Inventory ? 1 : 0;
+                var num2 = PlayerInput.Triggers.JustPressed.Inventory ? 1 : 0;
                 UILinksInitializer.HandleOptionsSpecials();
             });
             cp14.PageOnLeft = cp14.PageOnRight = 1001;
             cp14.IsValidEvent += (Func<bool>) (() => Main.ingameOptionsWindow);
             cp14.CanEnterEvent += (Func<bool>) (() => Main.ingameOptionsWindow);
             UILinkPointNavigator.RegisterPage(cp14, 1002, true);
-            UILinkPage cp15 = new UILinkPage();
+            var cp15 = new UILinkPage();
             cp15.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            for (int index = 1550; index < 1558; ++index)
+            for (var index = 1550; index < 1558; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, -3, -4, -1, -2);
+                var uiLinkPoint = new UILinkPoint(index, true, -3, -4, -1, -2);
                 switch (index - 1550)
                 {
                     case 1:
@@ -1249,7 +1249,7 @@ namespace Terraria.Initializers
             cp15.LinkMap[1557].Up = 1555;
             cp15.LinkMap[1557].Down = 308;
             cp15.LinkMap[1557].Right = (int) sbyte.MaxValue;
-            for (int index = 0; index < 7; ++index)
+            for (var index = 0; index < 7; ++index)
                 cp15.LinkMap[1550 + index].OnSpecialInteracts += func1;
             cp15.UpdateEvent += (Action) (() =>
             {
@@ -1268,7 +1268,7 @@ namespace Terraria.Initializers
                     cp15.LinkMap[1557].Right = (int) sbyte.MaxValue;
                 }
 
-                int infoacccount = UILinkPointNavigator.Shortcuts.INFOACCCOUNT;
+                var infoacccount = UILinkPointNavigator.Shortcuts.INFOACCCOUNT;
                 if (infoacccount > 0)
                     cp15.LinkMap[1557].Up = 1558 + (infoacccount - 1) / 2 * 2;
                 if (!Main.ShouldPVPDraw)
@@ -1293,15 +1293,15 @@ namespace Terraria.Initializers
             cp15.PageOnLeft = 8;
             cp15.PageOnRight = 8;
             UILinkPointNavigator.RegisterPage(cp15, 16, true);
-            UILinkPage cp16 = new UILinkPage();
+            var cp16 = new UILinkPage();
             cp16.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            for (int index = 1558; index < 1570; ++index)
+            for (var index = 1558; index < 1570; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, -3, -4, -1, -2);
+                var uiLinkPoint = new UILinkPoint(index, true, -3, -4, -1, -2);
                 uiLinkPoint.OnSpecialInteracts += func1;
                 switch (index - 1558)
                 {
@@ -1326,13 +1326,13 @@ namespace Terraria.Initializers
 
             cp16.UpdateEvent += (Action) (() =>
             {
-                int infoacccount = UILinkPointNavigator.Shortcuts.INFOACCCOUNT;
+                var infoacccount = UILinkPointNavigator.Shortcuts.INFOACCCOUNT;
                 if (UILinkPointNavigator.OverridePoint == -1 && cp16.CurrentPoint - 1558 >= infoacccount)
                     UILinkPointNavigator.ChangePoint(1558 + infoacccount - 1);
-                for (int index1 = 0; index1 < infoacccount; ++index1)
+                for (var index1 = 0; index1 < infoacccount; ++index1)
                 {
-                    bool flag = index1 % 2 == 0;
-                    int index2 = index1 + 1558;
+                    var flag = index1 % 2 == 0;
+                    var index2 = index1 + 1558;
                     cp16.LinkMap[index2].Down = index1 < infoacccount - 2 ? index2 + 2 : 1557;
                     cp16.LinkMap[index2].Up =
                         index1 > 1 ? index2 - 2 : (Main.ShouldPVPDraw ? (flag ? 1555 : 1556) : -1);
@@ -1349,15 +1349,15 @@ namespace Terraria.Initializers
             cp16.PageOnLeft = 8;
             cp16.PageOnRight = 8;
             UILinkPointNavigator.RegisterPage(cp16, 17, true);
-            UILinkPage cp17 = new UILinkPage();
+            var cp17 = new UILinkPage();
             cp17.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     true, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            for (int index = 4000; index < 4010; ++index)
+            for (var index = 4000; index < 4010; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, -3, -4, -1, -2);
+                var uiLinkPoint = new UILinkPoint(index, true, -3, -4, -1, -2);
                 switch (index - 4000)
                 {
                     case 0:
@@ -1387,13 +1387,13 @@ namespace Terraria.Initializers
 
             cp17.UpdateEvent += (Action) (() =>
             {
-                int builderacccount = UILinkPointNavigator.Shortcuts.BUILDERACCCOUNT;
+                var builderacccount = UILinkPointNavigator.Shortcuts.BUILDERACCCOUNT;
                 if (UILinkPointNavigator.OverridePoint == -1 && cp17.CurrentPoint - 4000 >= builderacccount)
                     UILinkPointNavigator.ChangePoint(4000 + builderacccount - 1);
-                for (int index1 = 0; index1 < builderacccount; ++index1)
+                for (var index1 = 0; index1 < builderacccount; ++index1)
                 {
-                    int num = index1 % 2;
-                    int index2 = index1 + 4000;
+                    var num = index1 % 2;
+                    var index2 = index1 + 4000;
                     cp17.LinkMap[index2].Down = index1 < builderacccount - 1 ? index2 + 1 : -2;
                     cp17.LinkMap[index2].Up = index1 > 0 ? index2 - 1 : -1;
                 }
@@ -1407,7 +1407,7 @@ namespace Terraria.Initializers
             cp17.PageOnLeft = 8;
             cp17.PageOnRight = 8;
             UILinkPointNavigator.RegisterPage(cp17, 18, true);
-            UILinkPage page5 = new UILinkPage();
+            var page5 = new UILinkPage();
             page5.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
@@ -1430,7 +1430,7 @@ namespace Terraria.Initializers
             page5.PageOnLeft = 15;
             page5.PageOnRight = 15;
             UILinkPointNavigator.RegisterPage(page5, 14, true);
-            UILinkPage page6 = new UILinkPage();
+            var page6 = new UILinkPage();
             page6.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
@@ -1448,15 +1448,15 @@ namespace Terraria.Initializers
             page6.LinkMap[2804].OnSpecialInteracts += func1;
             page6.UpdateEvent += (Action) (() =>
             {
-                Vector3 hsl = Main.rgbToHsl(Main.selColor);
-                float interfaceDeadzoneX = PlayerInput.CurrentProfile.InterfaceDeadzoneX;
-                float x = PlayerInput.GamepadThumbstickLeft.X;
-                float num = (double) x < -(double) interfaceDeadzoneX || (double) x > (double) interfaceDeadzoneX
+                var hsl = Main.rgbToHsl(Main.selColor);
+                var interfaceDeadzoneX = PlayerInput.CurrentProfile.InterfaceDeadzoneX;
+                var x = PlayerInput.GamepadThumbstickLeft.X;
+                var num = (double) x < -(double) interfaceDeadzoneX || (double) x > (double) interfaceDeadzoneX
                     ? MathHelper.Lerp(0.0f, 0.008333334f,
                           (float) (((double) Math.Abs(x) - (double) interfaceDeadzoneX) /
                                    (1.0 - (double) interfaceDeadzoneX))) * (float) Math.Sign(x)
                     : 0.0f;
-                int currentPoint = UILinkPointNavigator.CurrentPoint;
+                var currentPoint = UILinkPointNavigator.CurrentPoint;
                 if (currentPoint == 2800)
                     Main.hBar = MathHelper.Clamp(Main.hBar + num, 0.0f, 1f);
                 if (currentPoint == 2801)
@@ -1495,9 +1495,9 @@ namespace Terraria.Initializers
             page6.PageOnLeft = 14;
             page6.PageOnRight = 14;
             UILinkPointNavigator.RegisterPage(page6, 15, true);
-            UILinkPage cp18 = new UILinkPage();
+            var cp18 = new UILinkPage();
             cp18.UpdateEvent += (Action) (() => PlayerInput.GamepadAllowScrolling = true);
-            for (int index = 0; index < 200; ++index)
+            for (var index = 0; index < 200; ++index)
                 cp18.LinkMap.Add(3000 + index, new UILinkPoint(3000 + index, true, -3, -4, -1, -2));
             cp18.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[53].Value, false,
@@ -1525,28 +1525,28 @@ namespace Terraria.Initializers
                 return true;
             });
             UILinkPointNavigator.RegisterPage(cp18, 1004, true);
-            UILinkPage cp19 = new UILinkPage();
+            var cp19 = new UILinkPage();
             cp19.OnSpecialInteracts += (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[56].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value,
                     false, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"],
                     PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]));
-            Func<string> func18 = (Func<string>) (() =>
+            var func18 = (Func<string>) (() =>
                 PlayerInput.BuildCommand(Lang.misc[94].Value, false,
                     PlayerInput.ProfileGamepadUI.KeyStatus["MouseLeft"]));
-            for (int index = 9000; index <= 9050; ++index)
+            for (var index = 9000; index <= 9050; ++index)
             {
-                UILinkPoint uiLinkPoint = new UILinkPoint(index, true, index + 10, index - 10, index - 1, index + 1);
+                var uiLinkPoint = new UILinkPoint(index, true, index + 10, index - 10, index - 1, index + 1);
                 cp19.LinkMap.Add(index, uiLinkPoint);
                 uiLinkPoint.OnSpecialInteracts += func18;
             }
 
             cp19.UpdateEvent += (Action) (() =>
             {
-                int num = UILinkPointNavigator.Shortcuts.BUFFS_PER_COLUMN;
+                var num = UILinkPointNavigator.Shortcuts.BUFFS_PER_COLUMN;
                 if (num == 0)
                     num = 100;
-                for (int index = 0; index < 50; ++index)
+                for (var index = 0; index < 50; ++index)
                 {
                     cp19.LinkMap[9000 + index].Up = index % num == 0 ? -1 : 9000 + index - 1;
                     if (cp19.LinkMap[9000 + index].Up == -1)
@@ -1570,7 +1570,7 @@ namespace Terraria.Initializers
             cp19.PageOnLeft = 8;
             cp19.PageOnRight = 8;
             UILinkPointNavigator.RegisterPage(cp19, 19, true);
-            UILinkPage page7 = UILinkPointNavigator.Pages[UILinkPointNavigator.CurrentPage];
+            var page7 = UILinkPointNavigator.Pages[UILinkPointNavigator.CurrentPage];
             page7.CurrentPoint = page7.DefaultPoint;
             page7.Enter();
         }
@@ -1607,16 +1607,16 @@ namespace Terraria.Initializers
 
         public static string FancyUISpecialInstructions()
         {
-            string str1 = "";
+            var str1 = "";
             if (UILinkPointNavigator.Shortcuts.FANCYUI_SPECIAL_INSTRUCTIONS == 1)
             {
                 if (PlayerInput.Triggers.JustPressed.HotbarMinus)
                     UIVirtualKeyboard.CycleSymbols();
-                string str2 = str1 + PlayerInput.BuildCommand(Lang.menu[235].Value, false,
+                var str2 = str1 + PlayerInput.BuildCommand(Lang.menu[235].Value, false,
                                   PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"]);
                 if (PlayerInput.Triggers.JustPressed.MouseRight)
                     UIVirtualKeyboard.BackSpace();
-                string str3 = str2 + PlayerInput.BuildCommand(Lang.menu[236].Value, false,
+                var str3 = str2 + PlayerInput.BuildCommand(Lang.menu[236].Value, false,
                                   PlayerInput.ProfileGamepadUI.KeyStatus["MouseRight"]);
                 if (PlayerInput.Triggers.JustPressed.SmartCursor)
                     UIVirtualKeyboard.Write(" ");
@@ -1656,8 +1656,8 @@ namespace Terraria.Initializers
                         PlayerInput.CurrentProfile.InterfaceDeadzoneX, 0.35f);
                     break;
                 case 5:
-                    float hBar = Main.hBar;
-                    float num1 = Main.hBar = UILinksInitializer.HandleSlider(hBar, 0.0f, 1f, 0.2f, 0.5f);
+                    var hBar = Main.hBar;
+                    var num1 = Main.hBar = UILinksInitializer.HandleSlider(hBar, 0.0f, 1f, 0.2f, 0.5f);
                     if ((double) hBar == (double) num1)
                         break;
                     switch (Main.menuMode)
@@ -1701,8 +1701,8 @@ namespace Terraria.Initializers
                     Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
                     break;
                 case 6:
-                    float sBar = Main.sBar;
-                    float num2 = Main.sBar = UILinksInitializer.HandleSlider(sBar, 0.0f, 1f,
+                    var sBar = Main.sBar;
+                    var num2 = Main.sBar = UILinksInitializer.HandleSlider(sBar, 0.0f, 1f,
                         PlayerInput.CurrentProfile.InterfaceDeadzoneX, 0.5f);
                     if ((double) sBar == (double) num2)
                         break;
@@ -1747,11 +1747,11 @@ namespace Terraria.Initializers
                     Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
                     break;
                 case 7:
-                    float lBar = Main.lBar;
-                    float min = 0.15f;
+                    var lBar = Main.lBar;
+                    var min = 0.15f;
                     if (Main.menuMode == 252)
                         min = 0.0f;
-                    float num3 = Main.lBar = UILinksInitializer.HandleSlider(lBar, min, 1f,
+                    var num3 = Main.lBar = UILinksInitializer.HandleSlider(lBar, min, 1f,
                         PlayerInput.CurrentProfile.InterfaceDeadzoneX, 0.5f);
                     if ((double) lBar == (double) num3)
                         break;
@@ -1796,8 +1796,8 @@ namespace Terraria.Initializers
                     Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
                     break;
                 case 8:
-                    float aBar = Main.aBar;
-                    float num4 = Main.aBar = UILinksInitializer.HandleSlider(aBar, 0.0f, 1f,
+                    var aBar = Main.aBar;
+                    var num4 = Main.aBar = UILinksInitializer.HandleSlider(aBar, 0.0f, 1f,
                         PlayerInput.CurrentProfile.InterfaceDeadzoneX, 0.5f);
                     if ((double) aBar == (double) num4)
                         break;
@@ -1806,8 +1806,8 @@ namespace Terraria.Initializers
                     Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
                     break;
                 case 9:
-                    bool left = PlayerInput.Triggers.Current.Left;
-                    bool right = PlayerInput.Triggers.Current.Right;
+                    var left = PlayerInput.Triggers.Current.Left;
+                    var right = PlayerInput.Triggers.Current.Right;
                     if (PlayerInput.Triggers.JustPressed.Left || PlayerInput.Triggers.JustPressed.Right)
                         UILinksInitializer.SomeVarsForUILinkers.HairMoveCD = 0;
                     else if (UILinksInitializer.SomeVarsForUILinkers.HairMoveCD > 0)
@@ -1821,7 +1821,7 @@ namespace Terraria.Initializers
                         UILinksInitializer.SomeVarsForUILinkers.HairMoveCD = 12;
                     }
 
-                    int num5 = 51;
+                    var num5 = 51;
                     if (Main.PendingPlayer.hair >= num5)
                         Main.PendingPlayer.hair = 0;
                     if (Main.PendingPlayer.hair >= 0)

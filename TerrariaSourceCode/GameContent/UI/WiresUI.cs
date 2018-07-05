@@ -55,7 +55,7 @@ namespace Terraria.GameContent.UI
             {
                 get
                 {
-                    int type = Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].type;
+                    var type = Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].type;
                     if (type != 3611)
                         return type == 3625;
                     return true;
@@ -66,7 +66,7 @@ namespace Terraria.GameContent.UI
             {
                 get
                 {
-                    int type = Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].type;
+                    var type = Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].type;
                     if (type == 3611)
                         WiresUI.Settings._lastActuatorEnabled = 2;
                     if (type == 3625)
@@ -102,9 +102,9 @@ namespace Terraria.GameContent.UI
 
             private void LineUpdate()
             {
-                bool flag1 = true;
-                float min = 0.75f;
-                Player player = Main.player[Main.myPlayer];
+                var flag1 = true;
+                var min = 0.75f;
+                var player = Main.player[Main.myPlayer];
                 if (!WiresUI.Settings.DrawToolModeUI || Main.drawingPlayerChat)
                 {
                     flag1 = false;
@@ -132,7 +132,7 @@ namespace Terraria.GameContent.UI
                 }
                 else
                 {
-                    float num = Utils.Clamp<float>(this._lineOpacity + 0.05f * (float) flag1.ToDirectionInt(), min, 1f);
+                    var num = Utils.Clamp<float>(this._lineOpacity + 0.05f * (float) flag1.ToDirectionInt(), min, 1f);
                     this._lineOpacity += 0.05f * (float) Math.Sign(num - this._lineOpacity);
                     if ((double) Math.Abs(this._lineOpacity - num) >= 0.0500000007450581)
                         return;
@@ -142,7 +142,7 @@ namespace Terraria.GameContent.UI
 
             private void FlowerUpdate()
             {
-                Player player = Main.player[Main.myPlayer];
+                var player = Main.player[Main.myPlayer];
                 if (!WiresUI.Settings.DrawToolModeUI)
                     this.active = false;
                 else if ((player.mouseInterface || player.lastMouseInterface) && !this.OnWiresMenu)
@@ -186,27 +186,27 @@ namespace Terraria.GameContent.UI
             {
                 if (this.active || (double) this._lineOpacity == 0.0)
                     return;
-                Vector2 vector2_1 = Main.MouseScreen;
-                Vector2 vector2_2 = new Vector2((float) (Main.screenWidth / 2), (float) (Main.screenHeight - 70));
+                var vector2_1 = Main.MouseScreen;
+                var vector2_2 = new Vector2((float) (Main.screenWidth / 2), (float) (Main.screenHeight - 70));
                 if (PlayerInput.UsingGamepad)
                     vector2_1 = Vector2.Zero;
-                Vector2 v = vector2_1 - vector2_2;
-                double num1 = (double) Vector2.Dot(Vector2.Normalize(v), Vector2.UnitX);
-                double num2 = (double) Vector2.Dot(Vector2.Normalize(v), Vector2.UnitY);
-                double rotation = (double) v.ToRotation();
-                double num3 = (double) v.Length();
-                bool flag1 = false;
-                bool toolAllowActuators = WiresUI.Settings.DrawToolAllowActuators;
-                for (int index = 0; index < 6; ++index)
+                var v = vector2_1 - vector2_2;
+                var num1 = (double) Vector2.Dot(Vector2.Normalize(v), Vector2.UnitX);
+                var num2 = (double) Vector2.Dot(Vector2.Normalize(v), Vector2.UnitY);
+                var rotation = (double) v.ToRotation();
+                var num3 = (double) v.Length();
+                var flag1 = false;
+                var toolAllowActuators = WiresUI.Settings.DrawToolAllowActuators;
+                for (var index = 0; index < 6; ++index)
                 {
                     if (toolAllowActuators || index != 5)
                     {
-                        bool flag2 =
+                        var flag2 =
                             WiresUI.Settings.ToolMode.HasFlag((Enum) (WiresUI.Settings.MultiToolMode) (1 << index));
                         if (index == 5)
                             flag2 = WiresUI.Settings.ToolMode.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Actuator);
-                        Vector2 vector2_3 = vector2_2 + Vector2.UnitX * (float) (45.0 * ((double) index - 1.5));
-                        int num4 = index;
+                        var vector2_3 = vector2_2 + Vector2.UnitX * (float) (45.0 * ((double) index - 1.5));
+                        var num4 = index;
                         if (index == 0)
                             num4 = 3;
                         if (index == 3)
@@ -235,17 +235,17 @@ namespace Terraria.GameContent.UI
                                 break;
                         }
 
-                        bool flag3 = false;
+                        var flag3 = false;
                         if (!PlayerInput.UsingGamepad)
                             flag3 = (double) Vector2.Distance(vector2_3, vector2_1) < 19.0 * (double) this._lineOpacity;
                         if (flag1)
                             flag3 = false;
                         if (flag3)
                             flag1 = true;
-                        Texture2D texture2D1 = Main.wireUITexture[
+                        var texture2D1 = Main.wireUITexture[
                             (WiresUI.Settings.ToolMode.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Cutter) ? 8 : 0) +
                             (flag3 ? 1 : 0)];
-                        Texture2D texture2D2 = (Texture2D) null;
+                        var texture2D2 = (Texture2D) null;
                         switch (index)
                         {
                             case 0:
@@ -265,8 +265,8 @@ namespace Terraria.GameContent.UI
                                 break;
                         }
 
-                        Color color1 = Color.White;
-                        Color color2 = Color.White;
+                        var color1 = Color.White;
+                        var color2 = Color.White;
                         if (!flag2 && index != 4)
                         {
                             if (flag3)
@@ -316,7 +316,7 @@ namespace Terraria.GameContent.UI
                             this.OnWiresMenu = true;
                         }
 
-                        int num5 = flag3 ? 1 : 0;
+                        var num5 = flag3 ? 1 : 0;
                         spriteBatch.Draw(texture2D1, vector2_3, new Rectangle?(), color1 * this._lineOpacity, 0.0f,
                             texture2D1.Size() / 2f, this._lineOpacity, SpriteEffects.None, 0.0f);
                         spriteBatch.Draw(texture2D2, vector2_3, new Rectangle?(), color2 * this._lineOpacity, 0.0f,
@@ -333,39 +333,39 @@ namespace Terraria.GameContent.UI
             {
                 if (!this.active)
                     return;
-                Vector2 vector2_1 = Main.MouseScreen;
-                Vector2 position = this.position;
+                var vector2_1 = Main.MouseScreen;
+                var position = this.position;
                 if (PlayerInput.UsingGamepad && Main.SmartCursorEnabled)
                     vector2_1 = !(PlayerInput.GamepadThumbstickRight != Vector2.Zero)
                         ? (!(PlayerInput.GamepadThumbstickLeft != Vector2.Zero)
                             ? this.position
                             : this.position + PlayerInput.GamepadThumbstickLeft * 40f)
                         : this.position + PlayerInput.GamepadThumbstickRight * 40f;
-                Vector2 v = vector2_1 - position;
-                double num1 = (double) Vector2.Dot(Vector2.Normalize(v), Vector2.UnitX);
-                double num2 = (double) Vector2.Dot(Vector2.Normalize(v), Vector2.UnitY);
-                float rotation = v.ToRotation();
-                float num3 = v.Length();
-                bool flag1 = false;
-                bool toolAllowActuators = WiresUI.Settings.DrawToolAllowActuators;
-                float num4 = (float) (4 + toolAllowActuators.ToInt());
-                float num5 = toolAllowActuators ? 11f : -0.5f;
-                for (int index = 0; index < 6; ++index)
+                var v = vector2_1 - position;
+                var num1 = (double) Vector2.Dot(Vector2.Normalize(v), Vector2.UnitX);
+                var num2 = (double) Vector2.Dot(Vector2.Normalize(v), Vector2.UnitY);
+                var rotation = v.ToRotation();
+                var num3 = v.Length();
+                var flag1 = false;
+                var toolAllowActuators = WiresUI.Settings.DrawToolAllowActuators;
+                var num4 = (float) (4 + toolAllowActuators.ToInt());
+                var num5 = toolAllowActuators ? 11f : -0.5f;
+                for (var index = 0; index < 6; ++index)
                 {
                     if (toolAllowActuators || index != 5)
                     {
-                        bool flag2 =
+                        var flag2 =
                             WiresUI.Settings.ToolMode.HasFlag((Enum) (WiresUI.Settings.MultiToolMode) (1 << index));
                         if (index == 5)
                             flag2 = WiresUI.Settings.ToolMode.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Actuator);
-                        Vector2 vector2_2 = position + Vector2.UnitX * (float) (45.0 * ((double) index - 1.5));
+                        var vector2_2 = position + Vector2.UnitX * (float) (45.0 * ((double) index - 1.5));
                         switch (index)
                         {
                             case 0:
                             case 1:
                             case 2:
                             case 3:
-                                float num6 = (float) index;
+                                var num6 = (float) index;
                                 if (index == 0)
                                     num6 = 3f;
                                 if (index == 3)
@@ -385,7 +385,7 @@ namespace Terraria.GameContent.UI
                                 break;
                         }
 
-                        bool flag3 = false;
+                        var flag3 = false;
                         if (index == 4)
                             flag3 = (double) num3 < 20.0;
                         switch (index)
@@ -395,7 +395,7 @@ namespace Terraria.GameContent.UI
                             case 2:
                             case 3:
                             case 5:
-                                float num7 = (vector2_2 - position).ToRotation().AngleTowards(rotation,
+                                var num7 = (vector2_2 - position).ToRotation().AngleTowards(rotation,
                                                  (float) (6.28318548202515 / ((double) num4 * 2.0))) - rotation;
                                 if ((double) num3 >= 20.0 && (double) Math.Abs(num7) < 0.00999999977648258)
                                 {
@@ -415,10 +415,10 @@ namespace Terraria.GameContent.UI
                             flag3 = false;
                         if (flag3)
                             flag1 = true;
-                        Texture2D texture2D1 = Main.wireUITexture[
+                        var texture2D1 = Main.wireUITexture[
                             (WiresUI.Settings.ToolMode.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Cutter) ? 8 : 0) +
                             (flag3 ? 1 : 0)];
-                        Texture2D texture2D2 = (Texture2D) null;
+                        var texture2D2 = (Texture2D) null;
                         switch (index)
                         {
                             case 0:
@@ -438,8 +438,8 @@ namespace Terraria.GameContent.UI
                                 break;
                         }
 
-                        Color color1 = Color.White;
-                        Color color2 = Color.White;
+                        var color1 = Color.White;
+                        var color2 = Color.White;
                         if (!flag2 && index != 4)
                         {
                             if (flag3)
@@ -488,7 +488,7 @@ namespace Terraria.GameContent.UI
                             this.OnWiresMenu = true;
                         }
 
-                        int num8 = flag3 ? 1 : 0;
+                        var num8 = flag3 ? 1 : 0;
                         spriteBatch.Draw(texture2D1, vector2_2, new Rectangle?(), color1, 0.0f, texture2D1.Size() / 2f,
                             1f, SpriteEffects.None, 0.0f);
                         spriteBatch.Draw(texture2D2, vector2_2, new Rectangle?(), color2, 0.0f, texture2D2.Size() / 2f,
@@ -505,10 +505,10 @@ namespace Terraria.GameContent.UI
             {
                 if (this.active || (double) this._lineOpacity == 0.0)
                     return;
-                Vector2 vector2 = Main.MouseScreen +
+                var vector2 = Main.MouseScreen +
                                   new Vector2((float) (10 - 9 * PlayerInput.UsingGamepad.ToInt()), 25f);
-                Color color1 = new Color(50, 50, 50);
-                bool toolAllowActuators = WiresUI.Settings.DrawToolAllowActuators;
+                var color1 = new Color(50, 50, 50);
+                var toolAllowActuators = WiresUI.Settings.DrawToolAllowActuators;
                 if (!toolAllowActuators)
                 {
                     if (!PlayerInput.UsingGamepad)
@@ -517,26 +517,26 @@ namespace Terraria.GameContent.UI
                         vector2 += new Vector2(0.0f, 10f);
                 }
 
-                Texture2D builderAccTexture = Main.builderAccTexture;
-                Texture2D texture = builderAccTexture;
-                Rectangle r1 = new Rectangle(140, 2, 6, 6);
-                Rectangle r2 = new Rectangle(148, 2, 6, 6);
-                Rectangle r3 = new Rectangle(128, 0, 10, 10);
-                float num1 = 1f;
-                float scale = 1f;
-                bool flag1 = false;
+                var builderAccTexture = Main.builderAccTexture;
+                var texture = builderAccTexture;
+                var r1 = new Rectangle(140, 2, 6, 6);
+                var r2 = new Rectangle(148, 2, 6, 6);
+                var r3 = new Rectangle(128, 0, 10, 10);
+                var num1 = 1f;
+                var scale = 1f;
+                var flag1 = false;
                 if (flag1 && !toolAllowActuators)
                     num1 *= Main.cursorScale;
-                float lineOpacity = this._lineOpacity;
+                var lineOpacity = this._lineOpacity;
                 if (PlayerInput.UsingGamepad)
                     lineOpacity *= Main.GamepadCursorAlpha;
-                for (int index = 0; index < 5; ++index)
+                for (var index = 0; index < 5; ++index)
                 {
                     if (toolAllowActuators || index != 4)
                     {
-                        float num2 = lineOpacity;
-                        Vector2 vec = vector2 + Vector2.UnitX * (float) (45.0 * ((double) index - 1.5));
-                        int num3 = index;
+                        var num2 = lineOpacity;
+                        var vec = vector2 + Vector2.UnitX * (float) (45.0 * ((double) index - 1.5));
+                        var num3 = index;
                         if (index == 0)
                             num3 = 3;
                         if (index == 1)
@@ -547,7 +547,7 @@ namespace Terraria.GameContent.UI
                             num3 = 0;
                         if (index == 4)
                             num3 = 5;
-                        int num4 = num3;
+                        var num4 = num3;
                         switch (num4)
                         {
                             case 1:
@@ -558,11 +558,11 @@ namespace Terraria.GameContent.UI
                                 break;
                         }
 
-                        bool flag2 =
+                        var flag2 =
                             WiresUI.Settings.ToolMode.HasFlag((Enum) (WiresUI.Settings.MultiToolMode) (1 << num4));
                         if (num4 == 5)
                             flag2 = WiresUI.Settings.ToolMode.HasFlag((Enum) WiresUI.Settings.MultiToolMode.Actuator);
-                        Color color2 = Color.HotPink;
+                        var color2 = Color.HotPink;
                         switch (num3)
                         {
                             case 0:
@@ -634,7 +634,7 @@ namespace Terraria.GameContent.UI
                         }
                         else
                         {
-                            float num5 = 0.7f;
+                            var num5 = 0.7f;
                             switch (num3)
                             {
                                 case 0:
@@ -652,7 +652,7 @@ namespace Terraria.GameContent.UI
                             }
                         }
 
-                        Vector2 position = vec.Floor();
+                        var position = vec.Floor();
                         spriteBatch.Draw(texture, position, new Rectangle?(r3), color1 * num2, 0.0f, r3.Size() / 2f,
                             scale, SpriteEffects.None, 0.0f);
                         spriteBatch.Draw(builderAccTexture, position, new Rectangle?(r1), color2 * num2, 0.0f,

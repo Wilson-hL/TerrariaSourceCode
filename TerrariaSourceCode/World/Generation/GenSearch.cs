@@ -24,7 +24,7 @@ namespace Terraria.World.Generation
 
         protected bool Check(int x, int y)
         {
-            for (int index = 0; index < this._conditions.Length; ++index)
+            for (var index = 0; index < this._conditions.Length; ++index)
             {
                 if (this._requireAll ^ this._conditions[index].IsValid(x, y))
                     return !this._requireAll;

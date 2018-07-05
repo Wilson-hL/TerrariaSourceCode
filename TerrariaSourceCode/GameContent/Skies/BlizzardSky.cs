@@ -48,8 +48,8 @@ namespace Terraria.GameContent.Skies
         {
             if ((double) minDepth >= 1.0 && (double) maxDepth != 3.40282346638529E+38)
                 return;
-            float num = Math.Min(1f, Main.cloudAlpha * 2f);
-            Color color = new Color(new Vector4(1f) * Main.bgColor.ToVector4()) * this._opacity * 0.7f * num;
+            var num = Math.Min(1f, Main.cloudAlpha * 2f);
+            var color = new Color(new Vector4(1f) * Main.bgColor.ToVector4()) * this._opacity * 0.7f * num;
             spriteBatch.Draw(Main.magicPixel, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), color);
         }
 

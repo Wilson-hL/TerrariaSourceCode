@@ -42,7 +42,7 @@ namespace Terraria.UI
 
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, (BlendState) null, (SamplerState) null,
                 (DepthStencilState) null, (RasterizerState) null, (Effect) null, transformMatrix);
-            bool flag = this.DrawSelf();
+            var flag = this.DrawSelf();
             Main.spriteBatch.End();
             return flag;
         }

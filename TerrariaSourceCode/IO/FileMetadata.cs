@@ -41,7 +41,7 @@ namespace Terraria.IO
 
         public static FileMetadata Read(BinaryReader reader, FileType expectedType)
         {
-            FileMetadata fileMetadata = new FileMetadata();
+            var fileMetadata = new FileMetadata();
             fileMetadata.Read(reader);
             if (fileMetadata.Type != expectedType)
                 throw new FileFormatException("Expected type \"" +
@@ -53,13 +53,13 @@ namespace Terraria.IO
 
         private void Read(BinaryReader reader)
         {
-            ulong num1 = reader.ReadUInt64();
+            var num1 = reader.ReadUInt64();
             if (((long) num1 & 72057594037927935L) != 27981915666277746L)
                 throw new FileFormatException("Expected Re-Logic file format.");
-            byte num2 = (byte) (num1 >> 56 & (ulong) byte.MaxValue);
-            FileType fileType = FileType.None;
-            FileType[] values = (FileType[]) Enum.GetValues(typeof(FileType));
-            for (int index = 0; index < values.Length; ++index)
+            var num2 = (byte) (num1 >> 56 & (ulong) byte.MaxValue);
+            var fileType = FileType.None;
+            var values = (FileType[]) Enum.GetValues(typeof(FileType));
+            for (var index = 0; index < values.Length; ++index)
             {
                 if (values[index] == (FileType) num2)
                 {

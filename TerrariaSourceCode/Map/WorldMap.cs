@@ -52,8 +52,8 @@ namespace Terraria.Map
 
         public bool UpdateLighting(int x, int y, byte light)
         {
-            MapTile tile = this._tiles[x, y];
-            MapTile mapTile = MapHelper.CreateMapTile(x, y, Math.Max(tile.Light, light));
+            var tile = this._tiles[x, y];
+            var mapTile = MapHelper.CreateMapTile(x, y, Math.Max(tile.Light, light));
             if (mapTile.Equals(ref tile))
                 return false;
             this._tiles[x, y] = mapTile;
@@ -62,7 +62,7 @@ namespace Terraria.Map
 
         public bool UpdateType(int x, int y)
         {
-            MapTile mapTile = MapHelper.CreateMapTile(x, y, this._tiles[x, y].Light);
+            var mapTile = MapHelper.CreateMapTile(x, y, this._tiles[x, y].Light);
             if (mapTile.Equals(ref this._tiles[x, y]))
                 return false;
             this._tiles[x, y] = mapTile;
@@ -75,15 +75,15 @@ namespace Terraria.Map
 
         public void Load()
         {
-            bool isCloudSave = Main.ActivePlayerFileData.IsCloudSave;
+            var isCloudSave = Main.ActivePlayerFileData.IsCloudSave;
             if (isCloudSave && SocialAPI.Cloud == null || !Main.mapEnabled)
                 return;
-            string str1 = Main.playerPathName.Substring(0, Main.playerPathName.Length - 4) +
+            var str1 = Main.playerPathName.Substring(0, Main.playerPathName.Length - 4) +
                           (object) Path.DirectorySeparatorChar;
             string str2;
             if (Main.ActiveWorldFileData.UseGuidAsMapName)
             {
-                string str3 = str1;
+                var str3 = str1;
                 str2 = str1 + Main.ActiveWorldFileData.UniqueId.ToString() + ".map";
                 if (!FileUtilities.Exists(str2, isCloudSave))
                     str2 = str3 + (object) Main.worldID + ".map";
@@ -97,13 +97,13 @@ namespace Terraria.Map
             }
             else
             {
-                using (MemoryStream memoryStream = new MemoryStream(FileUtilities.ReadAllBytes(str2, isCloudSave)))
+                using (var memoryStream = new MemoryStream(FileUtilities.ReadAllBytes(str2, isCloudSave)))
                 {
-                    using (BinaryReader fileIO = new BinaryReader((Stream) memoryStream))
+                    using (var fileIO = new BinaryReader((Stream) memoryStream))
                     {
                         try
                         {
-                            int release = fileIO.ReadInt32();
+                            var release = fileIO.ReadInt32();
                             if (release > 193)
                                 return;
                             if (release <= 91)
@@ -117,7 +117,7 @@ namespace Terraria.Map
                         }
                         catch (Exception ex)
                         {
-                            using (StreamWriter streamWriter = new StreamWriter("client-crashlog.txt", true))
+                            using (var streamWriter = new StreamWriter("client-crashlog.txt", true))
                             {
                                 streamWriter.WriteLine((object) DateTime.Now);
                                 streamWriter.WriteLine((object) ex);
@@ -140,9 +140,9 @@ namespace Terraria.Map
 
         public void Clear()
         {
-            for (int index1 = 0; index1 < this.MaxWidth; ++index1)
+            for (var index1 = 0; index1 < this.MaxWidth; ++index1)
             {
-                for (int index2 = 0; index2 < this.MaxHeight; ++index2)
+                for (var index2 = 0; index2 < this.MaxHeight; ++index2)
                     this._tiles[index1, index2].Clear();
             }
         }

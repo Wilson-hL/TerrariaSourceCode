@@ -67,7 +67,7 @@ namespace Terraria.UI
         {
             IngameFancyUI.CoverNextFrame();
             Main.PlaySound(12, -1, -1, 1, 1f, 0.0f);
-            string labelText = "";
+            var labelText = "";
             switch (keyboardContext)
             {
                 case 1:
@@ -76,7 +76,7 @@ namespace Terraria.UI
                     break;
                 case 2:
                     labelText = Language.GetTextValue("UI.EnterNewName");
-                    Player player = Main.player[Main.myPlayer];
+                    var player = Main.player[Main.myPlayer];
                     Main.npcChatText = Main.chest[player.chest].name;
                     if (Main.tile[player.chestX, player.chestY].type == (ushort) 21)
                         Main.defaultChestName =
@@ -148,7 +148,7 @@ namespace Terraria.UI
                 return false;
             }
 
-            bool flag = false;
+            var flag = false;
             if (Main.InGameUI.CurrentState is UIVirtualKeyboard && UIVirtualKeyboard.KeyboardContext > 0)
             {
                 if (!Main.inFancyUI)

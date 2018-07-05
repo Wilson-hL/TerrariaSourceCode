@@ -34,7 +34,7 @@ namespace Terraria
             {
                 if (!Netplay.disconnect)
                 {
-                    int streamLength = length;
+                    var streamLength = length;
                     if (streamLength == 0)
                     {
                         Netplay.disconnect = true;
@@ -60,7 +60,7 @@ namespace Terraria
             {
                 try
                 {
-                    using (StreamWriter streamWriter = new StreamWriter("client-crashlog.txt", true))
+                    using (var streamWriter = new StreamWriter("client-crashlog.txt", true))
                     {
                         streamWriter.WriteLine((object) DateTime.Now);
                         streamWriter.WriteLine((object) ex);

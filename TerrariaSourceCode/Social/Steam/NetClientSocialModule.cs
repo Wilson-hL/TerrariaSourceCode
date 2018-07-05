@@ -50,7 +50,7 @@ namespace Terraria.Social.Steam
             if (!Program.LaunchParameters.ContainsKey("+connect_lobby") ||
                 !ulong.TryParse(Program.LaunchParameters["+connect_lobby"], out result))
                 return;
-            CSteamID lobbySteamId = new CSteamID(result);
+            var lobbySteamId = new CSteamID(result);
             if (!lobbySteamId.IsValid())
                 return;
             Main.OpenPlayerSelect((Main.OnPlayerSelected) (playerData =>
@@ -67,7 +67,7 @@ namespace Terraria.Social.Steam
         {
             if (this._lobby.State != LobbyState.Inactive)
                 this._lobby.Leave();
-            ProcessStartInfo startInfo = process.StartInfo;
+            var startInfo = process.StartInfo;
             startInfo.Arguments = startInfo.Arguments + " -steam -localsteamid " +
                                   (object) (ulong) SteamUser.GetSteamID().m_SteamID;
             if (mode.HasFlag((Enum) ServerMode.Lobby))
@@ -145,7 +145,7 @@ namespace Terraria.Social.Steam
         {
             if (this._lobby.State != LobbyState.Inactive)
                 this._lobby.Leave();
-            string friendName = SteamFriends.GetFriendPersonaName((CSteamID) result.m_steamIDFriend);
+            var friendName = SteamFriends.GetFriendPersonaName((CSteamID) result.m_steamIDFriend);
             Main.OpenPlayerSelect((Main.OnPlayerSelected) (playerData =>
             {
                 Main.ServerSideCharacter = false;
@@ -161,7 +161,7 @@ namespace Terraria.Social.Steam
         {
             SteamNetworking.AllowP2PPacketRelay(true);
             this.SendAuthTicket(this._lobby.Owner);
-            int num = 0;
+            var num = 0;
             P2PSessionState_t p2PsessionStateT;
             while (SteamNetworking.GetP2PSessionState(this._lobby.Owner, out p2PsessionStateT) &&
                    p2PsessionStateT.m_bConnectionActive != 1)
@@ -212,12 +212,12 @@ namespace Terraria.Social.Steam
             if (this._authTicket == (HAuthTicket) HAuthTicket.Invalid)
                 this._authTicket =
                     SteamUser.GetAuthSessionTicket(this._authData, this._authData.Length, out this._authDataLength);
-            int length = (int) this._authDataLength + 3;
-            byte[] numArray = new byte[length];
+            var length = (int) this._authDataLength + 3;
+            var numArray = new byte[length];
             numArray[0] = (byte) (length & (int) byte.MaxValue);
             numArray[1] = (byte) (length >> 8 & (int) byte.MaxValue);
             numArray[2] = (byte) 93;
-            for (int index = 0; (long) index < (long) this._authDataLength; ++index)
+            for (var index = 0; (long) index < (long) this._authDataLength; ++index)
                 numArray[index + 3] = this._authData[index];
             SteamNetworking.SendP2PPacket(address, numArray, (uint) length, (EP2PSend) 2, 1);
         }
@@ -227,7 +227,7 @@ namespace Terraria.Social.Steam
             if (this._authTicket != (HAuthTicket) HAuthTicket.Invalid)
                 SteamUser.CancelAuthTicket(this._authTicket);
             this._authTicket = (HAuthTicket) HAuthTicket.Invalid;
-            for (int index = 0; index < this._authData.Length; ++index)
+            for (var index = 0; index < this._authData.Length; ++index)
                 this._authData[index] = (byte) 0;
             this._authDataLength = 0U;
         }
@@ -246,7 +246,7 @@ namespace Terraria.Social.Steam
 
         private void OnP2PSessionRequest(P2PSessionRequest_t result)
         {
-            CSteamID steamIdRemote = (CSteamID) result.m_steamIDRemote;
+            var steamIdRemote = (CSteamID) result.m_steamIDRemote;
             if (!this._connectionStateMap.ContainsKey(steamIdRemote) || this._connectionStateMap[steamIdRemote] ==
                 NetSocialModule.ConnectionState.Inactive)
                 return;

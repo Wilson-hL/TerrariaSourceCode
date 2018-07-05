@@ -98,7 +98,7 @@ namespace Terraria.UI
 
         protected virtual void DrawChildren(SpriteBatch spriteBatch)
         {
-            foreach (UIElement element in this.Elements)
+            foreach (var element in this.Elements)
                 element.Draw(spriteBatch);
         }
 
@@ -125,18 +125,18 @@ namespace Terraria.UI
 
         public void RemoveAllChildren()
         {
-            foreach (UIElement element in this.Elements)
+            foreach (var element in this.Elements)
                 element.Parent = (UIElement) null;
             this.Elements.Clear();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            bool overflowHidden = this.OverflowHidden;
-            bool useImmediateMode = this._useImmediateMode;
-            RasterizerState rasterizerState = spriteBatch.GraphicsDevice.RasterizerState;
-            Rectangle scissorRectangle = spriteBatch.GraphicsDevice.ScissorRectangle;
-            SamplerState anisotropicClamp = SamplerState.AnisotropicClamp;
+            var overflowHidden = this.OverflowHidden;
+            var useImmediateMode = this._useImmediateMode;
+            var rasterizerState = spriteBatch.GraphicsDevice.RasterizerState;
+            var scissorRectangle = spriteBatch.GraphicsDevice.ScissorRectangle;
+            var anisotropicClamp = SamplerState.AnisotropicClamp;
             if (useImmediateMode)
             {
                 spriteBatch.End();
@@ -155,7 +155,7 @@ namespace Terraria.UI
             if (overflowHidden)
             {
                 spriteBatch.End();
-                Rectangle clippingRectangle = this.GetClippingRectangle(spriteBatch);
+                var clippingRectangle = this.GetClippingRectangle(spriteBatch);
                 spriteBatch.GraphicsDevice.ScissorRectangle = clippingRectangle;
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, anisotropicClamp,
                     DepthStencilState.None, UIElement._overflowHiddenRasterizerState, (Effect) null,
@@ -173,21 +173,21 @@ namespace Terraria.UI
 
         public virtual void Update(GameTime gameTime)
         {
-            foreach (UIElement element in this.Elements)
+            foreach (var element in this.Elements)
                 element.Update(gameTime);
         }
 
         public Rectangle GetClippingRectangle(SpriteBatch spriteBatch)
         {
-            Vector2 position1 = new Vector2(this._innerDimensions.X, this._innerDimensions.Y);
-            Vector2 position2 = new Vector2(this._innerDimensions.Width, this._innerDimensions.Height) + position1;
-            Vector2 vector2_1 = Vector2.Transform(position1, Main.UIScaleMatrix);
-            Vector2 vector2_2 = Vector2.Transform(position2, Main.UIScaleMatrix);
-            Rectangle rectangle = new Rectangle((int) vector2_1.X, (int) vector2_1.Y,
+            var position1 = new Vector2(this._innerDimensions.X, this._innerDimensions.Y);
+            var position2 = new Vector2(this._innerDimensions.Width, this._innerDimensions.Height) + position1;
+            var vector2_1 = Vector2.Transform(position1, Main.UIScaleMatrix);
+            var vector2_2 = Vector2.Transform(position2, Main.UIScaleMatrix);
+            var rectangle = new Rectangle((int) vector2_1.X, (int) vector2_1.Y,
                 (int) ((double) vector2_2.X - (double) vector2_1.X),
                 (int) ((double) vector2_2.Y - (double) vector2_1.Y));
-            int width = spriteBatch.GraphicsDevice.Viewport.Width;
-            int height = spriteBatch.GraphicsDevice.Viewport.Height;
+            var width = spriteBatch.GraphicsDevice.Viewport.Width;
+            var height = spriteBatch.GraphicsDevice.Viewport.Height;
             rectangle.X = Utils.Clamp<int>(rectangle.X, 0, width);
             rectangle.Y = Utils.Clamp<int>(rectangle.Y, 0, height);
             rectangle.Width = Utils.Clamp<int>(rectangle.Width, 0, width - rectangle.X);
@@ -197,18 +197,18 @@ namespace Terraria.UI
 
         public virtual List<SnapPoint> GetSnapPoints()
         {
-            List<SnapPoint> snapPointList = new List<SnapPoint>();
+            var snapPointList = new List<SnapPoint>();
             SnapPoint point;
             if (this.GetSnapPoint(out point))
                 snapPointList.Add(point);
-            foreach (UIElement element in this.Elements)
+            foreach (var element in this.Elements)
                 snapPointList.AddRange((IEnumerable<SnapPoint>) element.GetSnapPoints());
             return snapPointList;
         }
 
         public virtual void Recalculate()
         {
-            CalculatedStyle calculatedStyle1 = this.Parent == null
+            var calculatedStyle1 = this.Parent == null
                 ? UserInterface.ActiveInstance.GetDimensions()
                 : this.Parent.GetInnerDimensions();
             if (this.Parent != null && this.Parent is UIList)
@@ -216,10 +216,10 @@ namespace Terraria.UI
             CalculatedStyle calculatedStyle2;
             calculatedStyle2.X = this.Left.GetValue(calculatedStyle1.Width) + calculatedStyle1.X;
             calculatedStyle2.Y = this.Top.GetValue(calculatedStyle1.Height) + calculatedStyle1.Y;
-            float min1 = this.MinWidth.GetValue(calculatedStyle1.Width);
-            float max1 = this.MaxWidth.GetValue(calculatedStyle1.Width);
-            float min2 = this.MinHeight.GetValue(calculatedStyle1.Height);
-            float max2 = this.MaxHeight.GetValue(calculatedStyle1.Height);
+            var min1 = this.MinWidth.GetValue(calculatedStyle1.Width);
+            var max1 = this.MaxWidth.GetValue(calculatedStyle1.Width);
+            var min2 = this.MinHeight.GetValue(calculatedStyle1.Height);
+            var max2 = this.MaxHeight.GetValue(calculatedStyle1.Height);
             calculatedStyle2.Width = MathHelper.Clamp(this.Width.GetValue(calculatedStyle1.Width), min1, max1);
             calculatedStyle2.Height = MathHelper.Clamp(this.Height.GetValue(calculatedStyle1.Height), min2, max2);
             calculatedStyle2.Width += this.MarginLeft + this.MarginRight;
@@ -244,8 +244,8 @@ namespace Terraria.UI
 
         public UIElement GetElementAt(Vector2 point)
         {
-            UIElement uiElement = (UIElement) null;
-            foreach (UIElement element in this.Elements)
+            var uiElement = (UIElement) null;
+            foreach (var element in this.Elements)
             {
                 if (element.ContainsPoint(point))
                 {
@@ -279,7 +279,7 @@ namespace Terraria.UI
 
         public virtual void RecalculateChildren()
         {
-            foreach (UIElement element in this.Elements)
+            foreach (var element in this.Elements)
                 element.Recalculate();
         }
 
@@ -387,7 +387,7 @@ namespace Terraria.UI
             if (!this._isInitialized)
                 this.Initialize();
             this.OnActivate();
-            foreach (UIElement element in this.Elements)
+            foreach (var element in this.Elements)
                 element.Activate();
         }
 
@@ -398,7 +398,7 @@ namespace Terraria.UI
         public void Deactivate()
         {
             this.OnDeactivate();
-            foreach (UIElement element in this.Elements)
+            foreach (var element in this.Elements)
                 element.Deactivate();
         }
 

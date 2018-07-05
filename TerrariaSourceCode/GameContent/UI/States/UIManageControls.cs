@@ -80,14 +80,14 @@ namespace Terraria.GameContent.UI.States
             this._keyboardGamepadBorderTexture = TextureManager.Load("Images/UI/Settings_Inputs_Border");
             this._GameplayVsUITexture = TextureManager.Load("Images/UI/Settings_Inputs_2");
             this._GameplayVsUIBorderTexture = TextureManager.Load("Images/UI/Settings_Inputs_2_Border");
-            UIElement element = new UIElement();
+            var element = new UIElement();
             element.Width.Set(0.0f, 0.8f);
             element.MaxWidth.Set(600f, 0.0f);
             element.Top.Set(220f, 0.0f);
             element.Height.Set(-200f, 1f);
             element.HAlign = 0.5f;
             this._outerContainer = element;
-            UIPanel uiPanel = new UIPanel();
+            var uiPanel = new UIPanel();
             uiPanel.Width.Set(0.0f, 1f);
             uiPanel.Height.Set(-110f, 1f);
             uiPanel.BackgroundColor = new Color(33, 43, 79) * 0.8f;
@@ -182,7 +182,7 @@ namespace Terraria.GameContent.UI.States
             uiPanel.Append((UIElement) this._uilist);
             this.AssembleBindPanels();
             this.FillList();
-            UIScrollbar scrollbar = new UIScrollbar();
+            var scrollbar = new UIScrollbar();
             scrollbar.SetView(100f, 1000f);
             scrollbar.Height.Set(-67f, 1f);
             scrollbar.HAlign = 1f;
@@ -190,7 +190,7 @@ namespace Terraria.GameContent.UI.States
             scrollbar.MarginBottom = 11f;
             uiPanel.Append((UIElement) scrollbar);
             this._uilist.SetScrollbar(scrollbar);
-            UITextPanel<LocalizedText> uiTextPanel1 =
+            var uiTextPanel1 =
                 new UITextPanel<LocalizedText>(Language.GetText("UI.Keybindings"), 0.7f, true);
             uiTextPanel1.HAlign = 0.5f;
             uiTextPanel1.Top.Set(-45f, 0.0f);
@@ -198,7 +198,7 @@ namespace Terraria.GameContent.UI.States
             uiTextPanel1.SetPadding(15f);
             uiTextPanel1.BackgroundColor = new Color(73, 94, 171);
             element.Append((UIElement) uiTextPanel1);
-            UITextPanel<LocalizedText> uiTextPanel2 =
+            var uiTextPanel2 =
                 new UITextPanel<LocalizedText>(Language.GetText("UI.Back"), 0.7f, true);
             uiTextPanel2.Width.Set(-10f, 0.5f);
             uiTextPanel2.Height.Set(50f, 0.0f);
@@ -215,7 +215,7 @@ namespace Terraria.GameContent.UI.States
 
         private void AssembleBindPanels()
         {
-            List<string> bindings1 = new List<string>()
+            var bindings1 = new List<string>()
             {
                 "MouseLeft",
                 "MouseRight",
@@ -237,7 +237,7 @@ namespace Terraria.GameContent.UI.States
                 "ViewZoomOut",
                 "sp9"
             };
-            List<string> bindings2 = new List<string>()
+            var bindings2 = new List<string>()
             {
                 "MouseLeft",
                 "MouseRight",
@@ -258,7 +258,7 @@ namespace Terraria.GameContent.UI.States
                 "Inventory",
                 "sp9"
             };
-            List<string> bindings3 = new List<string>()
+            var bindings3 = new List<string>()
             {
                 "HotbarMinus",
                 "HotbarPlus",
@@ -274,7 +274,7 @@ namespace Terraria.GameContent.UI.States
                 "Hotbar10",
                 "sp10"
             };
-            List<string> bindings4 = new List<string>()
+            var bindings4 = new List<string>()
             {
                 "MapZoomIn",
                 "MapZoomOut",
@@ -284,8 +284,8 @@ namespace Terraria.GameContent.UI.States
                 "MapStyle",
                 "sp11"
             };
-            List<string> bindings5 = new List<string>() {"sp1", "sp2", "RadialHotbar", "RadialQuickbar", "sp12"};
-            List<string> bindings6 = new List<string>()
+            var bindings5 = new List<string>() {"sp1", "sp2", "RadialHotbar", "RadialQuickbar", "sp12"};
+            var bindings6 = new List<string>()
             {
                 "sp3",
                 "sp4",
@@ -301,21 +301,21 @@ namespace Terraria.GameContent.UI.States
                 "sp19",
                 "sp13"
             };
-            InputMode currentInputMode1 = InputMode.Keyboard;
+            var currentInputMode1 = InputMode.Keyboard;
             this._bindsKeyboard.Add((UIElement) this.CreateBindingGroup(0, bindings1, currentInputMode1));
             this._bindsKeyboard.Add((UIElement) this.CreateBindingGroup(1, bindings4, currentInputMode1));
             this._bindsKeyboard.Add((UIElement) this.CreateBindingGroup(2, bindings3, currentInputMode1));
-            InputMode currentInputMode2 = InputMode.XBoxGamepad;
+            var currentInputMode2 = InputMode.XBoxGamepad;
             this._bindsGamepad.Add((UIElement) this.CreateBindingGroup(0, bindings2, currentInputMode2));
             this._bindsGamepad.Add((UIElement) this.CreateBindingGroup(1, bindings4, currentInputMode2));
             this._bindsGamepad.Add((UIElement) this.CreateBindingGroup(2, bindings3, currentInputMode2));
             this._bindsGamepad.Add((UIElement) this.CreateBindingGroup(3, bindings5, currentInputMode2));
             this._bindsGamepad.Add((UIElement) this.CreateBindingGroup(4, bindings6, currentInputMode2));
-            InputMode currentInputMode3 = InputMode.KeyboardUI;
+            var currentInputMode3 = InputMode.KeyboardUI;
             this._bindsKeyboardUI.Add((UIElement) this.CreateBindingGroup(0, bindings1, currentInputMode3));
             this._bindsKeyboardUI.Add((UIElement) this.CreateBindingGroup(1, bindings4, currentInputMode3));
             this._bindsKeyboardUI.Add((UIElement) this.CreateBindingGroup(2, bindings3, currentInputMode3));
-            InputMode currentInputMode4 = InputMode.XBoxGamepadUI;
+            var currentInputMode4 = InputMode.XBoxGamepadUI;
             this._bindsGamepadUI.Add((UIElement) this.CreateBindingGroup(0, bindings2, currentInputMode4));
             this._bindsGamepadUI.Add((UIElement) this.CreateBindingGroup(1, bindings4, currentInputMode4));
             this._bindsGamepadUI.Add((UIElement) this.CreateBindingGroup(2, bindings3, currentInputMode4));
@@ -326,24 +326,24 @@ namespace Terraria.GameContent.UI.States
         private UISortableElement CreateBindingGroup(int elementIndex, List<string> bindings,
             InputMode currentInputMode)
         {
-            UISortableElement uiSortableElement = new UISortableElement(elementIndex);
+            var uiSortableElement = new UISortableElement(elementIndex);
             uiSortableElement.HAlign = 0.5f;
             uiSortableElement.Width.Set(0.0f, 1f);
             uiSortableElement.Height.Set(2000f, 0.0f);
-            UIPanel uiPanel = new UIPanel();
+            var uiPanel = new UIPanel();
             uiPanel.Width.Set(0.0f, 1f);
             uiPanel.Height.Set(-16f, 1f);
             uiPanel.VAlign = 1f;
             uiPanel.BackgroundColor = new Color(33, 43, 79) * 0.8f;
             uiSortableElement.Append((UIElement) uiPanel);
-            UIList parent = new UIList();
+            var parent = new UIList();
             parent.OverflowHidden = false;
             parent.Width.Set(0.0f, 1f);
             parent.Height.Set(-8f, 1f);
             parent.VAlign = 1f;
             parent.ListPadding = 5f;
             uiPanel.Append((UIElement) parent);
-            Color backgroundColor = uiPanel.BackgroundColor;
+            var backgroundColor = uiPanel.BackgroundColor;
             switch (elementIndex)
             {
                 case 0:
@@ -365,7 +365,7 @@ namespace Terraria.GameContent.UI.States
 
             this.CreateElementGroup(parent, bindings, currentInputMode, uiPanel.BackgroundColor);
             uiPanel.BackgroundColor = uiPanel.BackgroundColor.MultiplyRGBA(new Color(111, 111, 111));
-            LocalizedText text = LocalizedText.Empty;
+            var text = LocalizedText.Empty;
             switch (elementIndex)
             {
                 case 0:
@@ -387,13 +387,13 @@ namespace Terraria.GameContent.UI.States
                     break;
             }
 
-            UITextPanel<LocalizedText> uiTextPanel1 = new UITextPanel<LocalizedText>(text, 0.7f, false);
+            var uiTextPanel1 = new UITextPanel<LocalizedText>(text, 0.7f, false);
             uiTextPanel1.VAlign = 0.0f;
             uiTextPanel1.HAlign = 0.5f;
-            UITextPanel<LocalizedText> uiTextPanel2 = uiTextPanel1;
+            var uiTextPanel2 = uiTextPanel1;
             uiSortableElement.Append((UIElement) uiTextPanel2);
             uiSortableElement.Recalculate();
-            float totalHeight = parent.GetTotalHeight();
+            var totalHeight = parent.GetTotalHeight();
             uiSortableElement.Width.Set(0.0f, 1f);
             uiSortableElement.Height.Set((float) ((double) totalHeight + 30.0 + 16.0), 0.0f);
             return uiSortableElement;
@@ -401,17 +401,17 @@ namespace Terraria.GameContent.UI.States
 
         private void CreateElementGroup(UIList parent, List<string> bindings, InputMode currentInputMode, Color color)
         {
-            for (int index = 0; index < bindings.Count; ++index)
+            for (var index = 0; index < bindings.Count; ++index)
             {
-                string binding = bindings[index];
-                UISortableElement uiSortableElement = new UISortableElement(index);
+                var binding = bindings[index];
+                var uiSortableElement = new UISortableElement(index);
                 uiSortableElement.Width.Set(0.0f, 1f);
                 uiSortableElement.Height.Set(30f, 0.0f);
                 uiSortableElement.HAlign = 0.5f;
                 parent.Add((UIElement) uiSortableElement);
                 if (UIManageControls._BindingsHalfSingleLine.Contains(bindings[index]))
                 {
-                    UIElement panel = this.CreatePanel(bindings[index], currentInputMode, color);
+                    var panel = this.CreatePanel(bindings[index], currentInputMode, color);
                     panel.Width.Set(0.0f, 0.5f);
                     panel.HAlign = 0.5f;
                     panel.Height.Set(0.0f, 1f);
@@ -420,7 +420,7 @@ namespace Terraria.GameContent.UI.States
                 }
                 else if (UIManageControls._BindingsFullLine.Contains(bindings[index]))
                 {
-                    UIElement panel = this.CreatePanel(bindings[index], currentInputMode, color);
+                    var panel = this.CreatePanel(bindings[index], currentInputMode, color);
                     panel.Width.Set(0.0f, 1f);
                     panel.Height.Set(0.0f, 1f);
                     panel.SetSnapPoint("Wide", UIManageControls.SnapPointIndex++, new Vector2?(), new Vector2?());
@@ -428,7 +428,7 @@ namespace Terraria.GameContent.UI.States
                 }
                 else
                 {
-                    UIElement panel1 = this.CreatePanel(bindings[index], currentInputMode, color);
+                    var panel1 = this.CreatePanel(bindings[index], currentInputMode, color);
                     panel1.Width.Set(-5f, 0.5f);
                     panel1.Height.Set(0.0f, 1f);
                     panel1.SetSnapPoint("Thin", UIManageControls.SnapPointIndex++, new Vector2?(), new Vector2?());
@@ -436,7 +436,7 @@ namespace Terraria.GameContent.UI.States
                     ++index;
                     if (index < bindings.Count)
                     {
-                        UIElement panel2 = this.CreatePanel(bindings[index], currentInputMode, color);
+                        var panel2 = this.CreatePanel(bindings[index], currentInputMode, color);
                         panel2.Width.Set(-5f, 0.5f);
                         panel2.Height.Set(0.0f, 1f);
                         panel2.HAlign = 1f;
@@ -452,7 +452,7 @@ namespace Terraria.GameContent.UI.States
             switch (bind)
             {
                 case "sp1":
-                    UIElement uiElement1 = (UIElement) new UIKeybindingToggleListItem(
+                    var uiElement1 = (UIElement) new UIKeybindingToggleListItem(
                         (Func<string>) (() => Lang.menu[196].Value), (Func<bool>) (() =>
                         {
                             if (
@@ -477,7 +477,7 @@ namespace Terraria.GameContent.UI.States
                     uiElement1.OnClick += new UIElement.MouseEvent(this.SnapButtonClick);
                     return uiElement1;
                 case "sp2":
-                    UIElement uiElement2 = (UIElement) new UIKeybindingToggleListItem(
+                    var uiElement2 = (UIElement) new UIKeybindingToggleListItem(
                         (Func<string>) (() => Lang.menu[197].Value), (Func<bool>) (() =>
                         {
                             if (
@@ -566,57 +566,57 @@ namespace Terraria.GameContent.UI.States
                                 UILinksInitializer.HandleSlider(PlayerInput.CurrentProfile.RightThumbstickDeadzoneY,
                                     0.0f, 0.95f, PlayerInput.CurrentProfile.InterfaceDeadzoneX, 0.35f)), 1005, color);
                 case "sp9":
-                    UIElement uiElement3 =
+                    var uiElement3 =
                         (UIElement) new UIKeybindingSimpleListItem((Func<string>) (() => Lang.menu[86].Value), color);
                     uiElement3.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
                     {
-                        string copyableProfileName = UIManageControls.GetCopyableProfileName();
+                        var copyableProfileName = UIManageControls.GetCopyableProfileName();
                         PlayerInput.CurrentProfile.CopyGameplaySettingsFrom(
                             PlayerInput.OriginalProfiles[copyableProfileName], currentInputMode);
                     });
                     return uiElement3;
                 case "sp10":
-                    UIElement uiElement4 =
+                    var uiElement4 =
                         (UIElement) new UIKeybindingSimpleListItem((Func<string>) (() => Lang.menu[86].Value), color);
                     uiElement4.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
                     {
-                        string copyableProfileName = UIManageControls.GetCopyableProfileName();
+                        var copyableProfileName = UIManageControls.GetCopyableProfileName();
                         PlayerInput.CurrentProfile.CopyHotbarSettingsFrom(
                             PlayerInput.OriginalProfiles[copyableProfileName], currentInputMode);
                     });
                     return uiElement4;
                 case "sp11":
-                    UIElement uiElement5 =
+                    var uiElement5 =
                         (UIElement) new UIKeybindingSimpleListItem((Func<string>) (() => Lang.menu[86].Value), color);
                     uiElement5.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
                     {
-                        string copyableProfileName = UIManageControls.GetCopyableProfileName();
+                        var copyableProfileName = UIManageControls.GetCopyableProfileName();
                         PlayerInput.CurrentProfile.CopyMapSettingsFrom(
                             PlayerInput.OriginalProfiles[copyableProfileName], currentInputMode);
                     });
                     return uiElement5;
                 case "sp12":
-                    UIElement uiElement6 =
+                    var uiElement6 =
                         (UIElement) new UIKeybindingSimpleListItem((Func<string>) (() => Lang.menu[86].Value), color);
                     uiElement6.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
                     {
-                        string copyableProfileName = UIManageControls.GetCopyableProfileName();
+                        var copyableProfileName = UIManageControls.GetCopyableProfileName();
                         PlayerInput.CurrentProfile.CopyGamepadSettingsFrom(
                             PlayerInput.OriginalProfiles[copyableProfileName], currentInputMode);
                     });
                     return uiElement6;
                 case "sp13":
-                    UIElement uiElement7 =
+                    var uiElement7 =
                         (UIElement) new UIKeybindingSimpleListItem((Func<string>) (() => Lang.menu[86].Value), color);
                     uiElement7.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
                     {
-                        string copyableProfileName = UIManageControls.GetCopyableProfileName();
+                        var copyableProfileName = UIManageControls.GetCopyableProfileName();
                         PlayerInput.CurrentProfile.CopyGamepadAdvancedSettingsFrom(
                             PlayerInput.OriginalProfiles[copyableProfileName], currentInputMode);
                     });
                     return uiElement7;
                 case "sp14":
-                    UIElement uiElement8 = (UIElement) new UIKeybindingToggleListItem(
+                    var uiElement8 = (UIElement) new UIKeybindingToggleListItem(
                         (Func<string>) (() => Lang.menu[205].Value),
                         (Func<bool>) (() => PlayerInput.CurrentProfile.LeftThumbstickInvertX), color);
                     uiElement8.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
@@ -628,7 +628,7 @@ namespace Terraria.GameContent.UI.States
                     });
                     return uiElement8;
                 case "sp15":
-                    UIElement uiElement9 = (UIElement) new UIKeybindingToggleListItem(
+                    var uiElement9 = (UIElement) new UIKeybindingToggleListItem(
                         (Func<string>) (() => Lang.menu[206].Value),
                         (Func<bool>) (() => PlayerInput.CurrentProfile.LeftThumbstickInvertY), color);
                     uiElement9.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
@@ -640,7 +640,7 @@ namespace Terraria.GameContent.UI.States
                     });
                     return uiElement9;
                 case "sp16":
-                    UIElement uiElement10 = (UIElement) new UIKeybindingToggleListItem(
+                    var uiElement10 = (UIElement) new UIKeybindingToggleListItem(
                         (Func<string>) (() => Lang.menu[207].Value),
                         (Func<bool>) (() => PlayerInput.CurrentProfile.RightThumbstickInvertX), color);
                     uiElement10.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
@@ -652,7 +652,7 @@ namespace Terraria.GameContent.UI.States
                     });
                     return uiElement10;
                 case "sp17":
-                    UIElement uiElement11 = (UIElement) new UIKeybindingToggleListItem(
+                    var uiElement11 = (UIElement) new UIKeybindingToggleListItem(
                         (Func<string>) (() => Lang.menu[208].Value),
                         (Func<bool>) (() => PlayerInput.CurrentProfile.RightThumbstickInvertY), color);
                     uiElement11.OnClick += (UIElement.MouseEvent) ((evt, listeningElement) =>
@@ -666,7 +666,7 @@ namespace Terraria.GameContent.UI.States
                 case "sp18":
                     return (UIElement) new UIKeybindingSliderItem((Func<string>) (() =>
                     {
-                        int holdTimeRequired = PlayerInput.CurrentProfile.HotbarRadialHoldTimeRequired;
+                        var holdTimeRequired = PlayerInput.CurrentProfile.HotbarRadialHoldTimeRequired;
                         if (holdTimeRequired == -1)
                             return Lang.menu[228].Value;
                         return Lang.menu[227].Value + " (" + ((float) holdTimeRequired / 60f).ToString("F2") + "s)";
@@ -696,7 +696,7 @@ namespace Terraria.GameContent.UI.States
                 case "sp19":
                     return (UIElement) new UIKeybindingSliderItem((Func<string>) (() =>
                         {
-                            int inventoryMoveCd = PlayerInput.CurrentProfile.InventoryMoveCD;
+                            var inventoryMoveCd = PlayerInput.CurrentProfile.InventoryMoveCD;
                             return Lang.menu[252].Value + " (" + ((float) inventoryMoveCd / 60f).ToString("F2") + "s)";
                         }),
                         (Func<float>) (() =>
@@ -709,9 +709,9 @@ namespace Terraria.GameContent.UI.States
                                 --UILinkPointNavigator.Shortcuts.INV_MOVE_OPTION_CD;
                             if (UILinkPointNavigator.Shortcuts.INV_MOVE_OPTION_CD != 0)
                                 return;
-                            float currentValue = Utils.InverseLerp(4f, 12f,
+                            var currentValue = Utils.InverseLerp(4f, 12f,
                                 (float) PlayerInput.CurrentProfile.InventoryMoveCD, true);
-                            float num = UILinksInitializer.HandleSlider(currentValue, 0.0f, 1f,
+                            var num = UILinksInitializer.HandleSlider(currentValue, 0.0f, 1f,
                                 PlayerInput.CurrentProfile.InterfaceDeadzoneX, 0.5f);
                             if ((double) currentValue == (double) num)
                                 return;
@@ -746,7 +746,7 @@ namespace Terraria.GameContent.UI.States
 
         private static string GetCopyableProfileName()
         {
-            string str = "Redigit's Pick";
+            var str = "Redigit's Pick";
             if (PlayerInput.OriginalProfiles.ContainsKey(PlayerInput.CurrentProfile.Name))
                 str = PlayerInput.CurrentProfile.Name;
             return str;
@@ -754,13 +754,13 @@ namespace Terraria.GameContent.UI.States
 
         private void FillList()
         {
-            List<UIElement> uiElementList = this._bindsKeyboard;
+            var uiElementList = this._bindsKeyboard;
             if (!this.OnKeyboard)
                 uiElementList = this._bindsGamepad;
             if (!this.OnGameplay)
                 uiElementList = this.OnKeyboard ? this._bindsKeyboardUI : this._bindsGamepadUI;
             this._uilist.Clear();
-            foreach (UIElement uiElement in uiElementList)
+            foreach (var uiElement in uiElementList)
                 this._uilist.Add(uiElement);
         }
 
@@ -1012,9 +1012,9 @@ namespace Terraria.GameContent.UI.States
 
         private void profileButtonClick(UIMouseEvent evt, UIElement listeningElement)
         {
-            string name = PlayerInput.CurrentProfile.Name;
-            List<string> list = PlayerInput.Profiles.Keys.ToList<string>();
-            int index = list.IndexOf(name) + 1;
+            var name = PlayerInput.CurrentProfile.Name;
+            var list = PlayerInput.Profiles.Keys.ToList<string>();
+            var index = list.IndexOf(name) + 1;
             if (index >= list.Count)
                 index -= list.Count;
             PlayerInput.SetSelectedProfile(list[index]);
@@ -1046,7 +1046,7 @@ namespace Terraria.GameContent.UI.States
         private void SetupGamepadPoints(SpriteBatch spriteBatch)
         {
             UILinkPointNavigator.Shortcuts.BackButtonCommand = 4;
-            int ID1 = 3000;
+            var ID1 = 3000;
             UILinkPointNavigator.SetPosition(ID1,
                 this._buttonBack.GetInnerDimensions().ToRectangle().Center.ToVector2());
             UILinkPointNavigator.SetPosition(ID1 + 1,
@@ -1059,60 +1059,60 @@ namespace Terraria.GameContent.UI.States
                 this._buttonVs1.GetInnerDimensions().ToRectangle().Center.ToVector2());
             UILinkPointNavigator.SetPosition(ID1 + 5,
                 this._buttonVs2.GetInnerDimensions().ToRectangle().Center.ToVector2());
-            int index1 = ID1;
-            UILinkPoint point1 = UILinkPointNavigator.Points[index1];
+            var index1 = ID1;
+            var point1 = UILinkPointNavigator.Points[index1];
             point1.Unlink();
             point1.Up = ID1 + 6;
-            int index2 = ID1 + 1;
-            UILinkPoint point2 = UILinkPointNavigator.Points[index2];
+            var index2 = ID1 + 1;
+            var point2 = UILinkPointNavigator.Points[index2];
             point2.Unlink();
             point2.Right = ID1 + 2;
             point2.Down = ID1 + 6;
-            int index3 = ID1 + 2;
-            UILinkPoint point3 = UILinkPointNavigator.Points[index3];
+            var index3 = ID1 + 2;
+            var point3 = UILinkPointNavigator.Points[index3];
             point3.Unlink();
             point3.Left = ID1 + 1;
             point3.Right = ID1 + 4;
             point3.Down = ID1 + 6;
-            int index4 = ID1 + 4;
-            UILinkPoint point4 = UILinkPointNavigator.Points[index4];
+            var index4 = ID1 + 4;
+            var point4 = UILinkPointNavigator.Points[index4];
             point4.Unlink();
             point4.Left = ID1 + 2;
             point4.Right = ID1 + 5;
             point4.Down = ID1 + 6;
-            int index5 = ID1 + 5;
-            UILinkPoint point5 = UILinkPointNavigator.Points[index5];
+            var index5 = ID1 + 5;
+            var point5 = UILinkPointNavigator.Points[index5];
             point5.Unlink();
             point5.Left = ID1 + 4;
             point5.Right = ID1 + 3;
             point5.Down = ID1 + 6;
-            int index6 = ID1 + 3;
-            UILinkPoint point6 = UILinkPointNavigator.Points[index6];
+            var index6 = ID1 + 3;
+            var point6 = UILinkPointNavigator.Points[index6];
             point6.Unlink();
             point6.Left = ID1 + 5;
             point6.Down = ID1 + 6;
-            float num = 1f / Main.UIScale;
-            Rectangle clippingRectangle = this._uilist.GetClippingRectangle(spriteBatch);
-            Vector2 minimum = clippingRectangle.TopLeft() * num;
-            Vector2 maximum = clippingRectangle.BottomRight() * num;
-            List<SnapPoint> snapPoints = this._uilist.GetSnapPoints();
-            for (int index7 = 0; index7 < snapPoints.Count; ++index7)
+            var num = 1f / Main.UIScale;
+            var clippingRectangle = this._uilist.GetClippingRectangle(spriteBatch);
+            var minimum = clippingRectangle.TopLeft() * num;
+            var maximum = clippingRectangle.BottomRight() * num;
+            var snapPoints = this._uilist.GetSnapPoints();
+            for (var index7 = 0; index7 < snapPoints.Count; ++index7)
             {
                 if (!snapPoints[index7].Position.Between(minimum, maximum))
                 {
-                    Vector2 position = snapPoints[index7].Position;
+                    var position = snapPoints[index7].Position;
                     snapPoints.Remove(snapPoints[index7]);
                     --index7;
                 }
             }
 
             snapPoints.Sort((Comparison<SnapPoint>) ((x, y) => x.ID.CompareTo(y.ID)));
-            for (int index7 = 0; index7 < snapPoints.Count; ++index7)
+            for (var index7 = 0; index7 < snapPoints.Count; ++index7)
             {
-                int ID2 = ID1 + 6 + index7;
+                var ID2 = ID1 + 6 + index7;
                 if (snapPoints[index7].Name == "Thin")
                 {
-                    UILinkPoint point7 = UILinkPointNavigator.Points[ID2];
+                    var point7 = UILinkPointNavigator.Points[ID2];
                     point7.Unlink();
                     UILinkPointNavigator.SetPosition(ID2, snapPoints[index7].Position);
                     point7.Right = ID2 + 1;
@@ -1123,8 +1123,8 @@ namespace Terraria.GameContent.UI.States
                     ++index7;
                     if (index7 < snapPoints.Count)
                     {
-                        int ID3 = ID1 + 6 + index7;
-                        UILinkPoint point8 = UILinkPointNavigator.Points[ID3];
+                        var ID3 = ID1 + 6 + index7;
+                        var point8 = UILinkPointNavigator.Points[ID3];
                         point8.Unlink();
                         UILinkPointNavigator.SetPosition(ID3, snapPoints[index7].Position);
                         point8.Left = ID3 - 1;
@@ -1137,7 +1137,7 @@ namespace Terraria.GameContent.UI.States
                 }
                 else
                 {
-                    UILinkPoint point7 = UILinkPointNavigator.Points[ID2];
+                    var point7 = UILinkPointNavigator.Points[ID2];
                     point7.Unlink();
                     UILinkPointNavigator.SetPosition(ID2, snapPoints[index7].Position);
                     point7.Down = index7 < snapPoints.Count - 1 ? ID2 + 1 : ID1;

@@ -33,9 +33,9 @@ namespace Terraria.GameContent.UI
 
         public virtual long CountCurrency(out bool overFlowing, Item[] inv, params int[] ignoreSlots)
         {
-            List<int> intList = new List<int>((IEnumerable<int>) ignoreSlots);
+            var intList = new List<int>((IEnumerable<int>) ignoreSlots);
             long num1 = 0;
-            for (int index = 0; index < inv.Length; ++index)
+            for (var index = 0; index < inv.Length; ++index)
             {
                 if (!intList.Contains(index))
                 {
@@ -57,7 +57,7 @@ namespace Terraria.GameContent.UI
         public virtual long CombineStacks(out bool overFlowing, params long[] coinCounts)
         {
             long num = 0;
-            foreach (long coinCount in coinCounts)
+            foreach (var coinCount in coinCounts)
             {
                 num += coinCount;
                 if (num >= this.CurrencyCap)
@@ -74,21 +74,21 @@ namespace Terraria.GameContent.UI
         public virtual bool TryPurchasing(int price, List<Item[]> inv, List<Point> slotCoins, List<Point> slotsEmpty,
             List<Point> slotEmptyBank, List<Point> slotEmptyBank2, List<Point> slotEmptyBank3)
         {
-            long num1 = (long) price;
-            Dictionary<Point, Item> dictionary = new Dictionary<Point, Item>();
-            bool flag = true;
+            var num1 = (long) price;
+            var dictionary = new Dictionary<Point, Item>();
+            var flag = true;
             while (num1 > 0L)
             {
                 long num2 = 1000000;
-                for (int index = 0; index < 4; ++index)
+                for (var index = 0; index < 4; ++index)
                 {
                     if (num1 >= num2)
                     {
-                        foreach (Point slotCoin in slotCoins)
+                        foreach (var slotCoin in slotCoins)
                         {
                             if (inv[slotCoin.X][slotCoin.Y].type == 74 - index)
                             {
-                                long num3 = num1 / num2;
+                                var num3 = num1 / num2;
                                 dictionary[slotCoin] = inv[slotCoin.X][slotCoin.Y].Clone();
                                 if (num3 < (long) inv[slotCoin.X][slotCoin.Y].stack)
                                 {
@@ -113,20 +113,20 @@ namespace Terraria.GameContent.UI
                     if (slotsEmpty.Count > 0)
                     {
                         slotsEmpty.Sort(new Comparison<Point>(DelegateMethods.CompareYReverse));
-                        Point point = new Point(-1, -1);
-                        for (int index1 = 0; index1 < inv.Count; ++index1)
+                        var point = new Point(-1, -1);
+                        for (var index1 = 0; index1 < inv.Count; ++index1)
                         {
                             long num3 = 10000;
-                            for (int index2 = 0; index2 < 3; ++index2)
+                            for (var index2 = 0; index2 < 3; ++index2)
                             {
                                 if (num1 >= num3)
                                 {
-                                    foreach (Point slotCoin in slotCoins)
+                                    foreach (var slotCoin in slotCoins)
                                     {
                                         if (slotCoin.X == index1 && inv[slotCoin.X][slotCoin.Y].type == 74 - index2 &&
                                             inv[slotCoin.X][slotCoin.Y].stack >= 1)
                                         {
-                                            List<Point> pointList = slotsEmpty;
+                                            var pointList = slotsEmpty;
                                             if (index1 == 1 && slotEmptyBank.Count > 0)
                                                 pointList = slotEmptyBank;
                                             if (index1 == 2 && slotEmptyBank2.Count > 0)
@@ -155,16 +155,16 @@ namespace Terraria.GameContent.UI
                                     break;
                             }
 
-                            for (int index2 = 0; index2 < 2; ++index2)
+                            for (var index2 = 0; index2 < 2; ++index2)
                             {
                                 if (point.X == -1 && point.Y == -1)
                                 {
-                                    foreach (Point slotCoin in slotCoins)
+                                    foreach (var slotCoin in slotCoins)
                                     {
                                         if (slotCoin.X == index1 && inv[slotCoin.X][slotCoin.Y].type == 73 + index2 &&
                                             inv[slotCoin.X][slotCoin.Y].stack >= 1)
                                         {
-                                            List<Point> pointList = slotsEmpty;
+                                            var pointList = slotsEmpty;
                                             if (index1 == 1 && slotEmptyBank.Count > 0)
                                                 pointList = slotEmptyBank;
                                             if (index1 == 2 && slotEmptyBank2.Count > 0)
@@ -202,7 +202,7 @@ namespace Terraria.GameContent.UI
                     }
                     else
                     {
-                        foreach (KeyValuePair<Point, Item> keyValuePair in dictionary)
+                        foreach (var keyValuePair in dictionary)
                             inv[keyValuePair.Key.X][keyValuePair.Key.Y] = keyValuePair.Value.Clone();
                         flag = false;
                         break;
@@ -234,12 +234,12 @@ namespace Terraria.GameContent.UI
 
         protected List<Tuple<Point, Item>> ItemCacheCreate(List<Item[]> inventories)
         {
-            List<Tuple<Point, Item>> tupleList = new List<Tuple<Point, Item>>();
-            for (int x = 0; x < inventories.Count; ++x)
+            var tupleList = new List<Tuple<Point, Item>>();
+            for (var x = 0; x < inventories.Count; ++x)
             {
-                for (int y = 0; y < inventories[x].Length; ++y)
+                for (var y = 0; y < inventories[x].Length; ++y)
                 {
-                    Item obj = inventories[x][y];
+                    var obj = inventories[x][y];
                     tupleList.Add(new Tuple<Point, Item>(new Point(x, y), obj.DeepClone()));
                 }
             }
@@ -249,7 +249,7 @@ namespace Terraria.GameContent.UI
 
         protected void ItemCacheRestore(List<Tuple<Point, Item>> cache, List<Item[]> inventories)
         {
-            foreach (Tuple<Point, Item> tuple in cache)
+            foreach (var tuple in cache)
                 inventories[tuple.Item1.X][tuple.Item1.Y] = tuple.Item2;
         }
     }

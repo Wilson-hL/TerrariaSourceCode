@@ -23,21 +23,21 @@ namespace Terraria.World.Generation
             if (area.X < 0 || area.Y < 0 ||
                 (area.X + area.Width > Main.maxTilesX - 1 || area.Y + area.Height > Main.maxTilesY - 1))
                 return false;
-            Microsoft.Xna.Framework.Rectangle rectangle = new Microsoft.Xna.Framework.Rectangle(area.X - padding,
+            var rectangle = new Microsoft.Xna.Framework.Rectangle(area.X - padding,
                 area.Y - padding, area.Width + padding * 2, area.Height + padding * 2);
-            for (int index = 0; index < this._structures.Count; ++index)
+            for (var index = 0; index < this._structures.Count; ++index)
             {
                 if (rectangle.Intersects(this._structures[index]))
                     return false;
             }
 
-            for (int x = rectangle.X; x < rectangle.X + rectangle.Width; ++x)
+            for (var x = rectangle.X; x < rectangle.X + rectangle.Width; ++x)
             {
-                for (int y = rectangle.Y; y < rectangle.Y + rectangle.Height; ++y)
+                for (var y = rectangle.Y; y < rectangle.Y + rectangle.Height; ++y)
                 {
                     if (Main.tile[x, y].active())
                     {
-                        ushort type = Main.tile[x, y].type;
+                        var type = Main.tile[x, y].type;
                         if (!validTiles[(int) type])
                             return false;
                     }

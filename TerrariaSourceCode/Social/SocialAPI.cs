@@ -36,7 +36,7 @@ namespace Terraria.Social
             SocialAPI._modules = new List<ISocialModule>();
             if (SocialAPI.Mode == SocialMode.Steam)
                 SocialAPI.LoadSteam();
-            foreach (ISocialModule module in SocialAPI._modules)
+            foreach (var module in SocialAPI._modules)
                 module.Initialize();
         }
 
@@ -46,13 +46,13 @@ namespace Terraria.Social
                 return;
 
             SocialAPI._modules.Reverse();
-            foreach (ISocialModule module in SocialAPI._modules)
+            foreach (var module in SocialAPI._modules)
                 module.Shutdown();
         }
 
         private static T LoadModule<T>() where T : ISocialModule, new()
         {
-            T obj = new T();
+            var obj = new T();
             SocialAPI._modules.Add((ISocialModule) obj);
             return obj;
         }

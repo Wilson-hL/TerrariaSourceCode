@@ -20,9 +20,9 @@ namespace Terraria.GameContent.Shaders
 
         public override void Update(GameTime gameTime)
         {
-            Vector2 vector2 = new Vector2(-Main.windSpeed, -1f) * new Vector2(20f, 0.1f);
+            var vector2 = new Vector2(-Main.windSpeed, -1f) * new Vector2(20f, 0.1f);
             vector2.Normalize();
-            Vector2 direction = vector2 * new Vector2(2f, 0.2f);
+            var direction = vector2 * new Vector2(2f, 0.2f);
             if (!Main.gamePaused && Main.hasFocus)
                 this._texturePosition += direction * (float) gameTime.ElapsedGameTime.TotalSeconds;
             this._texturePosition.X %= 10f;

@@ -67,7 +67,7 @@ namespace Terraria.UI
         {
             if (!Main.playerInventory || Main.player[Main.myPlayer].talkNPC == -1)
                 ItemSlot._customCurrencyForSavings = -1;
-            for (int index = 0; index < ItemSlot.inventoryGlowTime.Length; ++index)
+            for (var index = 0; index < ItemSlot.inventoryGlowTime.Length; ++index)
             {
                 if (ItemSlot.inventoryGlowTime[index] > 0)
                 {
@@ -77,7 +77,7 @@ namespace Terraria.UI
                 }
             }
 
-            for (int index = 0; index < ItemSlot.inventoryGlowTimeChest.Length; ++index)
+            for (var index = 0; index < ItemSlot.inventoryGlowTimeChest.Length; ++index)
             {
                 if (ItemSlot.inventoryGlowTimeChest[index] > 0)
                 {
@@ -112,7 +112,7 @@ namespace Terraria.UI
 
         public static void OverrideHover(Item[] inv, int context = 0, int slot = 0)
         {
-            Item obj = inv[slot];
+            var obj = inv[slot];
             if (ItemSlot.ShiftInUse && obj.type > 0 && (obj.stack > 0 && !inv[slot].favorited))
             {
                 switch (context)
@@ -185,7 +185,7 @@ namespace Terraria.UI
 
         private static bool OverrideLeftClick(Item[] inv, int context = 0, int slot = 0)
         {
-            Item I = inv[slot];
+            var I = inv[slot];
             switch (Main.cursorOverride)
             {
                 case 2:
@@ -228,8 +228,8 @@ namespace Terraria.UI
             if (ItemSlot.OverrideLeftClick(inv, context, slot))
                 return;
             inv[slot].newAndShiny = false;
-            Player player = Main.player[Main.myPlayer];
-            bool flag = false;
+            var player = Main.player[Main.myPlayer];
+            var flag = false;
             switch (context)
             {
                 case 0:
@@ -289,7 +289,7 @@ namespace Terraria.UI
                                 }
                                 else
                                 {
-                                    int num = Main.mouseItem.maxStack - inv[slot].stack;
+                                    var num = Main.mouseItem.maxStack - inv[slot].stack;
                                     inv[slot].stack += num;
                                     Main.mouseItem.stack -= num;
                                 }
@@ -523,7 +523,7 @@ namespace Terraria.UI
                         Main.PlaySound(7, -1, -1, 1, 1f, 0.0f);
                         break;
                     case 4:
-                        Chest chest = Main.instance.shop[Main.npcShop];
+                        var chest = Main.instance.shop[Main.npcShop];
                         if (player.SellItem(Main.mouseItem.value, Main.mouseItem.stack))
                         {
                             chest.AddShop(Main.mouseItem);
@@ -560,12 +560,12 @@ namespace Terraria.UI
 
         private static void SellOrTrash(Item[] inv, int context, int slot)
         {
-            Player player = Main.player[Main.myPlayer];
+            var player = Main.player[Main.myPlayer];
             if (inv[slot].type <= 0)
                 return;
             if (Main.npcShop > 0 && !inv[slot].favorited)
             {
-                Chest chest = Main.instance.shop[Main.npcShop];
+                var chest = Main.instance.shop[Main.npcShop];
                 if (inv[slot].type >= 71 && inv[slot].type <= 74)
                     return;
                 if (player.SellItem(inv[slot].value, inv[slot].stack))
@@ -601,7 +601,7 @@ namespace Terraria.UI
 
         private static string GetOverrideInstructions(Item[] inv, int context, int slot)
         {
-            Player player = Main.player[Main.myPlayer];
+            var player = Main.player[Main.myPlayer];
             if (inv[slot].type > 0 && inv[slot].stack > 0)
             {
                 if (!inv[slot].favorited)
@@ -640,7 +640,7 @@ namespace Terraria.UI
                     }
                 }
 
-                bool flag = false;
+                var flag = false;
                 switch (context)
                 {
                     case 0:
@@ -656,7 +656,7 @@ namespace Terraria.UI
                 {
                     if (Main.npcShop > 0 && !inv[slot].favorited)
                     {
-                        Chest chest = Main.instance.shop[Main.npcShop];
+                        var chest = Main.instance.shop[Main.npcShop];
                         if (inv[slot].type >= 71 && inv[slot].type <= 74)
                             return "";
                         return Lang.misc[75].Value;
@@ -672,8 +672,8 @@ namespace Terraria.UI
 
         public static int PickItemMovementAction(Item[] inv, int context, int slot, Item checkItem)
         {
-            Player player = Main.player[Main.myPlayer];
-            int num = -1;
+            var player = Main.player[Main.myPlayer];
+            var num = -1;
             switch (context)
             {
                 case 0:
@@ -833,11 +833,11 @@ namespace Terraria.UI
 
         public static void RightClick(Item[] inv, int context = 0, int slot = 0)
         {
-            Player player = Main.player[Main.myPlayer];
+            var player = Main.player[Main.myPlayer];
             inv[slot].newAndShiny = false;
             if (player.itemAnimation > 0)
                 return;
-            bool flag1 = false;
+            var flag1 = false;
             switch (context)
             {
                 case 0:
@@ -959,7 +959,7 @@ namespace Terraria.UI
                         Main.PlaySound(7, -1, -1, 1, 1f, 0.0f);
                         Main.stackSplit = 30;
                         Main.mouseRightRelease = false;
-                        int num = Main.rand.Next(14);
+                        var num = Main.rand.Next(14);
                         if (num == 0 && Main.hardMode)
                             inv[slot].SetDefaults(602, false);
                         else if (num <= 7)
@@ -986,10 +986,10 @@ namespace Terraria.UI
                         (inv[slot].type > 0 && inv[slot].stack > 0 ||
                          inv[slot - 10].type > 0 && inv[slot - 10].stack > 0))
                     {
-                        bool flag2 = true;
+                        var flag2 = true;
                         if (flag2 && context == 11 && inv[slot].wingSlot > (sbyte) 0)
                         {
-                            for (int index = 3; index < 10; ++index)
+                            for (var index = 3; index < 10; ++index)
                             {
                                 if (inv[index].wingSlot > (sbyte) 0 && index != slot - 10)
                                     flag2 = false;
@@ -1044,12 +1044,12 @@ namespace Terraria.UI
                     break;
                 case 15:
                     flag1 = true;
-                    Chest chest = Main.instance.shop[Main.npcShop];
+                    var chest = Main.instance.shop[Main.npcShop];
                     if (Main.stackSplit <= 1 && Main.mouseRight && inv[slot].type > 0 &&
                         (Main.mouseItem.IsTheSameAs(inv[slot]) || Main.mouseItem.type == 0))
                     {
-                        int num = Main.superFastStack + 1;
-                        for (int index = 0; index < num; ++index)
+                        var num = Main.superFastStack + 1;
+                        for (var index = 0; index < num; ++index)
                         {
                             if ((Main.mouseItem.stack < Main.mouseItem.maxStack || Main.mouseItem.type == 0) &&
                                 (player.BuyItem(inv[slot].GetStoreValue(), inv[slot].shopSpecialCurrency) &&
@@ -1089,7 +1089,7 @@ namespace Terraria.UI
             {
                 if (Main.stackSplit > 1 || !Main.mouseRight)
                     return;
-                bool flag2 = true;
+                var flag2 = true;
                 if (context == 0 && inv[slot].maxStack <= 1)
                     flag2 = false;
                 if (context == 3 && inv[slot].maxStack <= 1)
@@ -1124,14 +1124,14 @@ namespace Terraria.UI
         public static bool Equippable(ref Item inv, int context = 0)
         {
             ItemSlot.singleSlotArray[0] = inv;
-            bool flag = ItemSlot.Equippable(ItemSlot.singleSlotArray, context, 0);
+            var flag = ItemSlot.Equippable(ItemSlot.singleSlotArray, context, 0);
             inv = ItemSlot.singleSlotArray[0];
             return flag;
         }
 
         public static bool Equippable(Item[] inv, int context, int slot)
         {
-            Player player = Main.player[Main.myPlayer];
+            var player = Main.player[Main.myPlayer];
             return inv[slot].dye > (byte) 0 || Main.projHook[inv[slot].shoot] || inv[slot].mountType != -1 ||
                    (inv[slot].buffType > 0 && Main.lightPet[inv[slot].buffType] ||
                     inv[slot].buffType > 0 && Main.vanityPet[inv[slot].buffType]) ||
@@ -1148,7 +1148,7 @@ namespace Terraria.UI
 
         public static void SwapEquip(Item[] inv, int context, int slot)
         {
-            Player player = Main.player[Main.myPlayer];
+            var player = Main.player[Main.myPlayer];
             if (inv[slot].dye > (byte) 0)
             {
                 bool success;
@@ -1202,7 +1202,7 @@ namespace Terraria.UI
             }
             else
             {
-                Item obj = inv[slot];
+                var obj = inv[slot];
                 bool success;
                 inv[slot] = ItemSlot.ArmorSwap(inv[slot], out success);
                 if (success)
@@ -1229,15 +1229,15 @@ namespace Terraria.UI
         public static void Draw(SpriteBatch spriteBatch, Item[] inv, int context, int slot, Vector2 position,
             Color lightColor = default(Color))
         {
-            Player player = Main.player[Main.myPlayer];
-            Item obj = inv[slot];
-            float inventoryScale = Main.inventoryScale;
-            Color color1 = Color.White;
+            var player = Main.player[Main.myPlayer];
+            var obj = inv[slot];
+            var inventoryScale = Main.inventoryScale;
+            var color1 = Color.White;
             if (lightColor != Color.Transparent)
                 color1 = lightColor;
-            int ID = -1;
-            bool flag1 = false;
-            int num1 = 0;
+            var ID = -1;
+            var flag1 = false;
+            var num1 = 0;
             if (PlayerInput.UsingGamepadUI)
             {
                 switch (context)
@@ -1315,9 +1315,9 @@ namespace Terraria.UI
                 }
             }
 
-            Texture2D texture2D1 = Main.inventoryBackTexture;
-            Color color2 = Main.inventoryBack;
-            bool flag2 = false;
+            var texture2D1 = Main.inventoryBackTexture;
+            var color2 = Main.inventoryBack;
+            var flag2 = false;
             if (obj.type > 0 && obj.stack > 0 && (obj.favorited && context != 13) &&
                 (context != 21 && context != 22 && context != 14))
                 texture2D1 = Main.inventoryBack10Texture;
@@ -1325,7 +1325,7 @@ namespace Terraria.UI
                      (context != 13 && context != 21 && (context != 14 && context != 22)))
             {
                 texture2D1 = Main.inventoryBack15Texture;
-                float num2 =
+                var num2 =
                     (float) ((double) ((float) Main.mouseTextColor / (float) byte.MaxValue) * 0.200000002980232 +
                              0.800000011920929);
                 color2 = color2.MultiplyRGBA(new Color(num2, num2, num2));
@@ -1334,7 +1334,7 @@ namespace Terraria.UI
                      (context != 13 && context != 21 && context != 22))
             {
                 texture2D1 = Main.inventoryBack15Texture;
-                float num2 =
+                var num2 =
                     (float) ((double) ((float) Main.mouseTextColor / (float) byte.MaxValue) * 0.200000002980232 +
                              0.800000011920929);
                 color2 = num1 != 1
@@ -1411,24 +1411,24 @@ namespace Terraria.UI
 
             if (context == 0 && ItemSlot.inventoryGlowTime[slot] > 0 && !inv[slot].favorited)
             {
-                float num2 = Main.invAlpha / (float) byte.MaxValue;
-                Color color3 = new Color(63, 65, 151, (int) byte.MaxValue) * num2;
-                Color color4 = Main.hslToRgb(ItemSlot.inventoryGlowHue[slot], 1f, 0.5f) * num2;
-                float num4 = (float) ItemSlot.inventoryGlowTime[slot] / 300f;
-                float num5 = num4 * num4;
+                var num2 = Main.invAlpha / (float) byte.MaxValue;
+                var color3 = new Color(63, 65, 151, (int) byte.MaxValue) * num2;
+                var color4 = Main.hslToRgb(ItemSlot.inventoryGlowHue[slot], 1f, 0.5f) * num2;
+                var num4 = (float) ItemSlot.inventoryGlowTime[slot] / 300f;
+                var num5 = num4 * num4;
                 color2 = Color.Lerp(color3, color4, num5 / 2f);
                 texture2D1 = Main.inventoryBack13Texture;
             }
 
             if ((context == 4 || context == 3) && (ItemSlot.inventoryGlowTimeChest[slot] > 0 && !inv[slot].favorited))
             {
-                float num2 = Main.invAlpha / (float) byte.MaxValue;
-                Color color3 = new Color(130, 62, 102, (int) byte.MaxValue) * num2;
+                var num2 = Main.invAlpha / (float) byte.MaxValue;
+                var color3 = new Color(130, 62, 102, (int) byte.MaxValue) * num2;
                 if (context == 3)
                     color3 = new Color(104, 52, 52, (int) byte.MaxValue) * num2;
-                Color color4 = Main.hslToRgb(ItemSlot.inventoryGlowHueChest[slot], 1f, 0.5f) * num2;
-                float num4 = (float) ItemSlot.inventoryGlowTimeChest[slot] / 300f;
-                float num5 = num4 * num4;
+                var color4 = Main.hslToRgb(ItemSlot.inventoryGlowHueChest[slot], 1f, 0.5f) * num2;
+                var num4 = (float) ItemSlot.inventoryGlowTimeChest[slot] / 300f;
+                var num5 = num4 * num4;
                 color2 = Color.Lerp(color3, color4, num5 / 2f);
                 texture2D1 = Main.inventoryBack13Texture;
             }
@@ -1442,7 +1442,7 @@ namespace Terraria.UI
             if (!flag2)
                 spriteBatch.Draw(texture2D1, position, new Rectangle?(), color2, 0.0f, new Vector2(), inventoryScale,
                     SpriteEffects.None, 0.0f);
-            int num6 = -1;
+            var num6 = -1;
             switch (context)
             {
                 case 8:
@@ -1497,30 +1497,30 @@ namespace Terraria.UI
 
             if ((obj.type <= 0 || obj.stack <= 0) && num6 != -1)
             {
-                Texture2D texture2D2 = Main.extraTexture[54];
-                Rectangle r = texture2D2.Frame(3, 6, num6 % 3, num6 / 3);
+                var texture2D2 = Main.extraTexture[54];
+                var r = texture2D2.Frame(3, 6, num6 % 3, num6 / 3);
                 r.Width -= 2;
                 r.Height -= 2;
                 spriteBatch.Draw(texture2D2, position + texture2D1.Size() / 2f * inventoryScale, new Rectangle?(r),
                     Color.White * 0.35f, 0.0f, r.Size() / 2f, inventoryScale, SpriteEffects.None, 0.0f);
             }
 
-            Vector2 vector2 = texture2D1.Size() * inventoryScale;
+            var vector2 = texture2D1.Size() * inventoryScale;
             if (obj.type > 0 && obj.stack > 0)
             {
-                Texture2D texture2D2 = Main.itemTexture[obj.type];
-                Rectangle r = Main.itemAnimations[obj.type] == null
+                var texture2D2 = Main.itemTexture[obj.type];
+                var r = Main.itemAnimations[obj.type] == null
                     ? texture2D2.Frame(1, 1, 0, 0)
                     : Main.itemAnimations[obj.type].GetFrame(texture2D2);
-                Color currentColor = color1;
-                float scale1 = 1f;
+                var currentColor = color1;
+                var scale1 = 1f;
                 ItemSlot.GetItemLight(ref currentColor, ref scale1, obj, false);
-                float num2 = 1f;
+                var num2 = 1f;
                 if (r.Width > 32 || r.Height > 32)
                     num2 = r.Width <= r.Height ? 32f / (float) r.Height : 32f / (float) r.Width;
-                float scale2 = num2 * inventoryScale;
-                Vector2 position1 = position + vector2 / 2f - r.Size() * scale2 / 2f;
-                Vector2 origin = r.Size() * (float) ((double) scale1 / 2.0 - 0.5);
+                var scale2 = num2 * inventoryScale;
+                var position1 = position + vector2 / 2f - r.Size() * scale2 / 2f;
+                var origin = r.Size() * (float) ((double) scale1 / 2.0 - 0.5);
                 spriteBatch.Draw(texture2D2, position1, new Rectangle?(r), obj.GetAlpha(currentColor), 0.0f, origin,
                     scale2 * scale1, SpriteEffects.None, 0.0f);
                 if (obj.color != Color.Transparent)
@@ -1534,12 +1534,12 @@ namespace Terraria.UI
                     ChatManager.DrawColorCodedStringWithShadow(spriteBatch, Main.fontItemStack, obj.stack.ToString(),
                         position + new Vector2(10f, 26f) * inventoryScale, color1, 0.0f, Vector2.Zero,
                         new Vector2(inventoryScale), -1f, inventoryScale);
-                int num4 = -1;
+                var num4 = -1;
                 if (context == 13)
                 {
                     if (obj.DD2Summon)
                     {
-                        for (int index = 0; index < 58; ++index)
+                        for (var index = 0; index < 58; ++index)
                         {
                             if (inv[index].type == 3822)
                                 num4 += inv[index].stack;
@@ -1551,9 +1551,9 @@ namespace Terraria.UI
 
                     if (obj.useAmmo > 0)
                     {
-                        int useAmmo = obj.useAmmo;
+                        var useAmmo = obj.useAmmo;
                         num4 = 0;
-                        for (int index = 0; index < 58; ++index)
+                        for (var index = 0; index < 58; ++index)
                         {
                             if (inv[index].ammo == useAmmo)
                                 num4 += inv[index].stack;
@@ -1563,7 +1563,7 @@ namespace Terraria.UI
                     if (obj.fishingPole > 0)
                     {
                         num4 = 0;
-                        for (int index = 0; index < 58; ++index)
+                        for (var index = 0; index < 58; ++index)
                         {
                             if (inv[index].bait > 0)
                                 num4 += inv[index].stack;
@@ -1572,9 +1572,9 @@ namespace Terraria.UI
 
                     if (obj.tileWand > 0)
                     {
-                        int tileWand = obj.tileWand;
+                        var tileWand = obj.tileWand;
                         num4 = 0;
-                        for (int index = 0; index < 58; ++index)
+                        for (var index = 0; index < 58; ++index)
                         {
                             if (inv[index].type == tileWand)
                                 num4 += inv[index].stack;
@@ -1585,7 +1585,7 @@ namespace Terraria.UI
                         (obj.type == 3625 || obj.type == 3611))
                     {
                         num4 = 0;
-                        for (int index = 0; index < 58; ++index)
+                        for (var index = 0; index < 58; ++index)
                         {
                             if (inv[index].type == 530)
                                 num4 += inv[index].stack;
@@ -1599,7 +1599,7 @@ namespace Terraria.UI
                         new Vector2(inventoryScale * 0.8f), -1f, inventoryScale);
                 if (context == 13)
                 {
-                    string text = string.Concat((object) (slot + 1));
+                    var text = string.Concat((object) (slot + 1));
                     if (text == "10")
                         text = "0";
                     ChatManager.DrawColorCodedStringWithShadow(spriteBatch, Main.fontItemStack, text,
@@ -1609,26 +1609,26 @@ namespace Terraria.UI
 
                 if (context == 13 && obj.potion)
                 {
-                    Vector2 position2 = position + texture2D1.Size() * inventoryScale / 2f -
+                    var position2 = position + texture2D1.Size() * inventoryScale / 2f -
                                         Main.cdTexture.Size() * inventoryScale / 2f;
-                    Color color3 = obj.GetAlpha(color1) * ((float) player.potionDelay / (float) player.potionDelayTime);
+                    var color3 = obj.GetAlpha(color1) * ((float) player.potionDelay / (float) player.potionDelayTime);
                     spriteBatch.Draw(Main.cdTexture, position2, new Rectangle?(), color3, 0.0f, new Vector2(), scale2,
                         SpriteEffects.None, 0.0f);
                 }
 
                 if ((context == 10 || context == 18) && (obj.expertOnly && !Main.expertMode))
                 {
-                    Vector2 position2 = position + texture2D1.Size() * inventoryScale / 2f -
+                    var position2 = position + texture2D1.Size() * inventoryScale / 2f -
                                         Main.cdTexture.Size() * inventoryScale / 2f;
-                    Color white = Color.White;
+                    var white = Color.White;
                     spriteBatch.Draw(Main.cdTexture, position2, new Rectangle?(), white, 0.0f, new Vector2(), scale2,
                         SpriteEffects.None, 0.0f);
                 }
             }
             else if (context == 6)
             {
-                Texture2D trashTexture = Main.trashTexture;
-                Vector2 position1 = position + texture2D1.Size() * inventoryScale / 2f -
+                var trashTexture = Main.trashTexture;
+                var position1 = position + texture2D1.Size() * inventoryScale / 2f -
                                     trashTexture.Size() * inventoryScale / 2f;
                 spriteBatch.Draw(trashTexture, position1, new Rectangle?(), new Color(100, 100, 100, 100), 0.0f,
                     new Vector2(), inventoryScale, SpriteEffects.None, 0.0f);
@@ -1636,12 +1636,12 @@ namespace Terraria.UI
 
             if (context == 0 && slot < 10)
             {
-                float num2 = inventoryScale;
-                string text = string.Concat((object) (slot + 1));
+                var num2 = inventoryScale;
+                var text = string.Concat((object) (slot + 1));
                 if (text == "10")
                     text = "0";
-                Color inventoryBack = Main.inventoryBack;
-                int num4 = 0;
+                var inventoryBack = Main.inventoryBack;
+                var num4 = 0;
                 if (Main.player[Main.myPlayer].selectedItem == slot)
                 {
                     num4 -= 3;
@@ -1649,7 +1649,7 @@ namespace Terraria.UI
                     inventoryBack.B = (byte) 0;
                     inventoryBack.G = (byte) 210;
                     inventoryBack.A = (byte) 100;
-                    float num5 = num2 * 1.4f;
+                    var num5 = num2 * 1.4f;
                 }
 
                 ChatManager.DrawColorCodedStringWithShadow(spriteBatch, Main.fontItemStack, text,
@@ -1724,11 +1724,11 @@ namespace Terraria.UI
 
         private static bool AccCheck(Item item, int slot)
         {
-            Player player = Main.player[Main.myPlayer];
+            var player = Main.player[Main.myPlayer];
             if (slot != -1 && (player.armor[slot].IsTheSameAs(item) ||
                                player.armor[slot].wingSlot > (sbyte) 0 && item.wingSlot > (sbyte) 0))
                 return false;
-            for (int index = 0; index < player.armor.Length; ++index)
+            for (var index = 0; index < player.armor.Length; ++index)
             {
                 if (slot < 10 && index < 10 && (item.wingSlot > (sbyte) 0 && player.armor[index].wingSlot > (sbyte) 0 ||
                                                 slot >= 10 && index >= 10 &&
@@ -1745,8 +1745,8 @@ namespace Terraria.UI
             success = false;
             if (item.dye <= (byte) 0)
                 return item;
-            Player player = Main.player[Main.myPlayer];
-            for (int index = 0; index < 10; ++index)
+            var player = Main.player[Main.myPlayer];
+            for (var index = 0; index < 10; ++index)
             {
                 if (player.dye[index].type == 0)
                 {
@@ -1759,7 +1759,7 @@ namespace Terraria.UI
                 ItemSlot.dyeSlotCount = 0;
             if (ItemSlot.dyeSlotCount < 0)
                 ItemSlot.dyeSlotCount = 9;
-            Item obj = player.dye[ItemSlot.dyeSlotCount].Clone();
+            var obj = player.dye[ItemSlot.dyeSlotCount].Clone();
             player.dye[ItemSlot.dyeSlotCount] = item.Clone();
             ++ItemSlot.dyeSlotCount;
             if (ItemSlot.dyeSlotCount >= 10)
@@ -1775,10 +1775,10 @@ namespace Terraria.UI
             success = false;
             if (item.headSlot == -1 && item.bodySlot == -1 && (item.legSlot == -1 && !item.accessory))
                 return item;
-            Player player = Main.player[Main.myPlayer];
-            int index1 = !item.vanity || item.accessory ? 0 : 10;
+            var player = Main.player[Main.myPlayer];
+            var index1 = !item.vanity || item.accessory ? 0 : 10;
             item.favorited = false;
-            Item obj = item;
+            var obj = item;
             if (item.headSlot != -1)
             {
                 obj = player.armor[index1].Clone();
@@ -1796,8 +1796,8 @@ namespace Terraria.UI
             }
             else if (item.accessory)
             {
-                int num = 5 + Main.player[Main.myPlayer].extraAccessorySlots;
-                for (int index2 = 3; index2 < 3 + num; ++index2)
+                var num = 5 + Main.player[Main.myPlayer].extraAccessorySlots;
+                for (var index2 = 3; index2 < 3 + num; ++index2)
                 {
                     if (player.armor[index2].type == 0)
                     {
@@ -1806,7 +1806,7 @@ namespace Terraria.UI
                     }
                 }
 
-                for (int index2 = 0; index2 < player.armor.Length; ++index2)
+                for (var index2 = 0; index2 < player.armor.Length; ++index2)
                 {
                     if (item.IsTheSameAs(player.armor[index2]))
                         ItemSlot.accSlotCount = index2 - 3;
@@ -1818,8 +1818,8 @@ namespace Terraria.UI
                     ItemSlot.accSlotCount = 0;
                 if (ItemSlot.accSlotCount < 0)
                     ItemSlot.accSlotCount = num - 1;
-                int index3 = 3 + ItemSlot.accSlotCount;
-                for (int index2 = 0; index2 < player.armor.Length; ++index2)
+                var index3 = 3 + ItemSlot.accSlotCount;
+                for (var index2 = 0; index2 < player.armor.Length; ++index2)
                 {
                     if (item.IsTheSameAs(player.armor[index2]))
                         index3 = index2;
@@ -1841,9 +1841,9 @@ namespace Terraria.UI
         private static Item EquipSwap(Item item, Item[] inv, int slot, out bool success)
         {
             success = false;
-            Player player = Main.player[Main.myPlayer];
+            var player = Main.player[Main.myPlayer];
             item.favorited = false;
-            Item obj = inv[slot].Clone();
+            var obj = inv[slot].Clone();
             inv[slot] = item.Clone();
             Main.PlaySound(7, -1, -1, 1, 1f, 0.0f);
             Recipe.FindRecipes();
@@ -1881,14 +1881,14 @@ namespace Terraria.UI
                 Color.White * ((float) Main.mouseTextColor / (float) byte.MaxValue), Color.Black, Vector2.Zero, 1f);
             if (horizontal)
             {
-                for (int index = 0; index < 4; ++index)
+                for (var index = 0; index < 4; ++index)
                 {
                     if (index == 0)
                     {
-                        int coins = coinsArray[3 - index];
+                        var coins = coinsArray[3 - index];
                     }
 
-                    Vector2 position =
+                    var position =
                         new Vector2(
                             (float) ((double) shopx +
                                      (double) ChatManager.GetStringSize(Main.fontMouseText, text, Vector2.One, -1f).X +
@@ -1901,9 +1901,9 @@ namespace Terraria.UI
             }
             else
             {
-                for (int index = 0; index < 4; ++index)
+                for (var index = 0; index < 4; ++index)
                 {
-                    int num = index != 0 || coinsArray[3 - index] <= 99 ? 0 : -6;
+                    var num = index != 0 || coinsArray[3 - index] <= 99 ? 0 : -6;
                     sb.Draw(Main.itemTexture[74 - index], new Vector2(shopx + 11f + (float) (24 * index), shopy + 75f),
                         new Rectangle?(), Color.White, 0.0f, Main.itemTexture[74 - index].Size() / 2f, 1f,
                         SpriteEffects.None, 0.0f);
@@ -1916,7 +1916,7 @@ namespace Terraria.UI
 
         public static void DrawSavings(SpriteBatch sb, float shopx, float shopy, bool horizontal = false)
         {
-            Player player = Main.player[Main.myPlayer];
+            var player = Main.player[Main.myPlayer];
             if (ItemSlot._customCurrencyForSavings != -1)
             {
                 CustomCurrencyManager.DrawSavings(sb, ItemSlot._customCurrencyForSavings, shopx, shopy, horizontal);
@@ -1924,10 +1924,10 @@ namespace Terraria.UI
             else
             {
                 bool overFlowing;
-                long num1 = Utils.CoinsCount(out overFlowing, player.bank.item);
-                long num2 = Utils.CoinsCount(out overFlowing, player.bank2.item);
-                long num3 = Utils.CoinsCount(out overFlowing, player.bank3.item);
-                long count = Utils.CoinsCombineStacks(out overFlowing, num1, num2, num3);
+                var num1 = Utils.CoinsCount(out overFlowing, player.bank.item);
+                var num2 = Utils.CoinsCount(out overFlowing, player.bank2.item);
+                var num3 = Utils.CoinsCount(out overFlowing, player.bank3.item);
+                var count = Utils.CoinsCombineStacks(out overFlowing, num1, num2, num3);
                 if (count <= 0L)
                     return;
                 if (num3 > 0L)
@@ -1950,17 +1950,17 @@ namespace Terraria.UI
         {
             if (!PlayerInput.UsingGamepad || !PlayerInput.CurrentProfile.UsingDpadHotbar())
                 return;
-            Player player = Main.player[Main.myPlayer];
+            var player = Main.player[Main.myPlayer];
             if (player.chest != -1)
                 return;
-            Texture2D texture2D = Main.hotbarRadialTexture[0];
-            float num = (float) Main.mouseTextColor / (float) byte.MaxValue;
-            Color color = Color.White * ((float) (1.0 - (1.0 - (double) num) * (1.0 - (double) num)) * 0.785f);
+            var texture2D = Main.hotbarRadialTexture[0];
+            var num = (float) Main.mouseTextColor / (float) byte.MaxValue;
+            var color = Color.White * ((float) (1.0 - (1.0 - (double) num) * (1.0 - (double) num)) * 0.785f);
             sb.Draw(texture2D, position, new Rectangle?(), color, 0.0f, texture2D.Size() / 2f, Main.inventoryScale,
                 SpriteEffects.None, 0.0f);
-            for (int index = 0; index < 4; ++index)
+            for (var index = 0; index < 4; ++index)
             {
-                int binding = player.DpadRadial.Bindings[index];
+                var binding = player.DpadRadial.Bindings[index];
                 if (binding != -1)
                     ItemSlot.Draw(sb, player.inventory, 14, binding,
                         position + new Vector2((float) (texture2D.Width / 3), 0.0f).RotatedBy(
@@ -1978,29 +1978,29 @@ namespace Terraria.UI
                     1f);
             if ((double) ItemSlot.CircularRadialOpacity == 0.0)
                 return;
-            Player player = Main.player[Main.myPlayer];
-            Texture2D texture2D1 = Main.hotbarRadialTexture[2];
-            float num1 = ItemSlot.CircularRadialOpacity * 0.9f;
-            float num2 = ItemSlot.CircularRadialOpacity * 1f;
-            float num3 = (float) Main.mouseTextColor / (float) byte.MaxValue;
-            Color color = Color.White * ((float) (1.0 - (1.0 - (double) num3) * (1.0 - (double) num3)) * 0.785f) * num1;
-            Texture2D texture2D2 = Main.hotbarRadialTexture[1];
-            float num4 = 6.283185f / (float) player.CircularRadial.RadialCount;
-            float num5 = -1.570796f;
-            for (int index = 0; index < player.CircularRadial.RadialCount; ++index)
+            var player = Main.player[Main.myPlayer];
+            var texture2D1 = Main.hotbarRadialTexture[2];
+            var num1 = ItemSlot.CircularRadialOpacity * 0.9f;
+            var num2 = ItemSlot.CircularRadialOpacity * 1f;
+            var num3 = (float) Main.mouseTextColor / (float) byte.MaxValue;
+            var color = Color.White * ((float) (1.0 - (1.0 - (double) num3) * (1.0 - (double) num3)) * 0.785f) * num1;
+            var texture2D2 = Main.hotbarRadialTexture[1];
+            var num4 = 6.283185f / (float) player.CircularRadial.RadialCount;
+            var num5 = -1.570796f;
+            for (var index = 0; index < player.CircularRadial.RadialCount; ++index)
             {
-                int binding = player.CircularRadial.Bindings[index];
-                Vector2 vector2 =
+                var binding = player.CircularRadial.Bindings[index];
+                var vector2 =
                     new Vector2(150f, 0.0f).RotatedBy((double) num5 + (double) num4 * (double) index, new Vector2()) *
                     num2;
-                float num6 = 0.85f;
+                var num6 = 0.85f;
                 if (player.CircularRadial.SelectedBinding == index)
                     num6 = 1.7f;
                 sb.Draw(texture2D2, position + vector2, new Rectangle?(), color * num6, 0.0f, texture2D2.Size() / 2f,
                     num2 * num6, SpriteEffects.None, 0.0f);
                 if (binding != -1)
                 {
-                    float inventoryScale = Main.inventoryScale;
+                    var inventoryScale = Main.inventoryScale;
                     Main.inventoryScale = num2 * num6;
                     ItemSlot.Draw(sb, player.inventory, 14, binding,
                         position + vector2 + new Vector2(-26f * num2 * num6), Color.White);
@@ -2018,18 +2018,18 @@ namespace Terraria.UI
                     1f);
             if ((double) ItemSlot.QuicksRadialOpacity == 0.0)
                 return;
-            Player player = Main.player[Main.myPlayer];
-            Texture2D texture2D = Main.hotbarRadialTexture[2];
-            Texture2D quicksIconTexture = Main.quicksIconTexture;
-            float num1 = ItemSlot.QuicksRadialOpacity * 0.9f;
-            float num2 = ItemSlot.QuicksRadialOpacity * 1f;
-            float num3 = (float) Main.mouseTextColor / (float) byte.MaxValue;
-            Color color = Color.White * ((float) (1.0 - (1.0 - (double) num3) * (1.0 - (double) num3)) * 0.785f) * num1;
-            float num4 = 6.283185f / (float) player.QuicksRadial.RadialCount;
-            float num5 = -1.570796f;
-            Item obj1 = player.QuickHeal_GetItemToUse();
-            Item obj2 = player.QuickMana_GetItemToUse();
-            Item obj3 = (Item) null;
+            var player = Main.player[Main.myPlayer];
+            var texture2D = Main.hotbarRadialTexture[2];
+            var quicksIconTexture = Main.quicksIconTexture;
+            var num1 = ItemSlot.QuicksRadialOpacity * 0.9f;
+            var num2 = ItemSlot.QuicksRadialOpacity * 1f;
+            var num3 = (float) Main.mouseTextColor / (float) byte.MaxValue;
+            var color = Color.White * ((float) (1.0 - (1.0 - (double) num3) * (1.0 - (double) num3)) * 0.785f) * num1;
+            var num4 = 6.283185f / (float) player.QuicksRadial.RadialCount;
+            var num5 = -1.570796f;
+            var obj1 = player.QuickHeal_GetItemToUse();
+            var obj2 = player.QuickMana_GetItemToUse();
+            var obj3 = (Item) null;
             if (obj1 == null)
             {
                 obj1 = new Item();
@@ -2048,23 +2048,23 @@ namespace Terraria.UI
                 obj3.SetDefaults(292, false);
             }
 
-            for (int index = 0; index < player.QuicksRadial.RadialCount; ++index)
+            for (var index = 0; index < player.QuicksRadial.RadialCount; ++index)
             {
-                Item inv = obj1;
+                var inv = obj1;
                 if (index == 1)
                     inv = obj3;
                 if (index == 2)
                     inv = obj2;
-                int binding = player.QuicksRadial.Bindings[index];
-                Vector2 vector2 =
+                var binding = player.QuicksRadial.Bindings[index];
+                var vector2 =
                     new Vector2(120f, 0.0f).RotatedBy((double) num5 + (double) num4 * (double) index, new Vector2()) *
                     num2;
-                float num6 = 0.85f;
+                var num6 = 0.85f;
                 if (player.QuicksRadial.SelectedBinding == index)
                     num6 = 1.7f;
                 sb.Draw(texture2D, position + vector2, new Rectangle?(), color * num6, 0.0f, texture2D.Size() / 2f,
                     (float) ((double) num2 * (double) num6 * 1.29999995231628), SpriteEffects.None, 0.0f);
-                float inventoryScale = Main.inventoryScale;
+                var inventoryScale = Main.inventoryScale;
                 Main.inventoryScale = num2 * num6;
                 ItemSlot.Draw(sb, ref inv, 14, position + vector2 + new Vector2(-26f * num2 * num6), Color.White);
                 Main.inventoryScale = inventoryScale;
@@ -2076,13 +2076,13 @@ namespace Terraria.UI
 
         public static void GetItemLight(ref Color currentColor, Item item, bool outInTheWorld = false)
         {
-            float scale = 1f;
+            var scale = 1f;
             ItemSlot.GetItemLight(ref currentColor, ref scale, item, outInTheWorld);
         }
 
         public static void GetItemLight(ref Color currentColor, int type, bool outInTheWorld = false)
         {
-            float scale = 1f;
+            var scale = 1f;
             ItemSlot.GetItemLight(ref currentColor, ref scale, type, outInTheWorld);
         }
 
@@ -2125,15 +2125,15 @@ namespace Terraria.UI
         public static string GetGamepadInstructions(ref Item inv, int context = 0)
         {
             ItemSlot.singleSlotArray[0] = inv;
-            string gamepadInstructions = ItemSlot.GetGamepadInstructions(ItemSlot.singleSlotArray, context, 0);
+            var gamepadInstructions = ItemSlot.GetGamepadInstructions(ItemSlot.singleSlotArray, context, 0);
             inv = ItemSlot.singleSlotArray[0];
             return gamepadInstructions;
         }
 
         public static string GetGamepadInstructions(Item[] inv, int context = 0, int slot = 0)
         {
-            Player player = Main.player[Main.myPlayer];
-            string str1 = "";
+            var player = Main.player[Main.myPlayer];
+            var str1 = "";
             if (inv == null || inv[slot] == null || Main.mouseItem == null)
                 return str1;
             if (context == 0 || context == 1 || context == 2)
@@ -2252,7 +2252,7 @@ namespace Terraria.UI
 
                     if (context == 8 && slot >= 3)
                     {
-                        bool flag = player.hideVisual[slot];
+                        var flag = player.hideVisual[slot];
                         str1 += PlayerInput.BuildCommand(Lang.misc[flag ? 77 : 78].Value, false,
                             PlayerInput.ProfileGamepadUI.KeyStatus["Grapple"]);
                         if (PlayerInput.Triggers.JustPressed.Grapple)
@@ -2268,7 +2268,7 @@ namespace Terraria.UI
                     if ((context == 16 || context == 17 || (context == 18 || context == 19) || context == 20) &&
                         slot < 2)
                     {
-                        bool flag = player.hideMisc[slot];
+                        var flag = player.hideMisc[slot];
                         str1 += PlayerInput.BuildCommand(Lang.misc[flag ? 77 : 78].Value, false,
                             PlayerInput.ProfileGamepadUI.KeyStatus["Grapple"]);
                         if (PlayerInput.Triggers.JustPressed.Grapple)
@@ -2288,7 +2288,7 @@ namespace Terraria.UI
                             PlayerInput.ProfileGamepadUI.KeyStatus["MouseLeft"]);
                     if (context == 8 && slot >= 3)
                     {
-                        bool flag = player.hideVisual[slot];
+                        var flag = player.hideVisual[slot];
                         str1 += PlayerInput.BuildCommand(Lang.misc[flag ? 77 : 78].Value, false,
                             PlayerInput.ProfileGamepadUI.KeyStatus["Grapple"]);
                         if (PlayerInput.Triggers.JustPressed.Grapple)
@@ -2304,7 +2304,7 @@ namespace Terraria.UI
                     if ((context == 16 || context == 17 || (context == 18 || context == 19) || context == 20) &&
                         slot < 2)
                     {
-                        bool flag = player.hideMisc[slot];
+                        var flag = player.hideMisc[slot];
                         str1 += PlayerInput.BuildCommand(Lang.misc[flag ? 77 : 78].Value, false,
                             PlayerInput.ProfileGamepadUI.KeyStatus["Grapple"]);
                         if (PlayerInput.Triggers.JustPressed.Grapple)
@@ -2355,7 +2355,7 @@ namespace Terraria.UI
 
                         if (context == 12)
                         {
-                            int num = -1;
+                            var num = -1;
                             if (inv == player.dye)
                                 num = slot;
                             if (inv == player.miscDyes)
@@ -2364,7 +2364,7 @@ namespace Terraria.UI
                             {
                                 if (num < 10)
                                 {
-                                    bool flag = player.hideVisual[slot];
+                                    var flag = player.hideVisual[slot];
                                     str1 += PlayerInput.BuildCommand(Lang.misc[flag ? 77 : 78].Value, false,
                                         PlayerInput.ProfileGamepadUI.KeyStatus["Grapple"]);
                                     if (PlayerInput.Triggers.JustPressed.Grapple)
@@ -2378,7 +2378,7 @@ namespace Terraria.UI
                                 }
                                 else
                                 {
-                                    bool flag = player.hideMisc[slot];
+                                    var flag = player.hideMisc[slot];
                                     str1 += PlayerInput.BuildCommand(Lang.misc[flag ? 77 : 78].Value, false,
                                         PlayerInput.ProfileGamepadUI.KeyStatus["Grapple"]);
                                     if (PlayerInput.Triggers.JustPressed.Grapple)
@@ -2401,7 +2401,7 @@ namespace Terraria.UI
                 default:
                     if (context == 5 || context == 7)
                     {
-                        bool flag = false;
+                        var flag = false;
                         if (context == 5)
                             flag = Main.mouseItem.Prefix(-3) || Main.mouseItem.type == 0;
                         if (context == 7)
@@ -2425,7 +2425,7 @@ namespace Terraria.UI
                         return str1;
                     }
 
-                    string overrideInstructions = ItemSlot.GetOverrideInstructions(inv, context, slot);
+                    var overrideInstructions = ItemSlot.GetOverrideInstructions(inv, context, slot);
                     if (Main.mouseItem.type > 0 &&
                         (context == 0 || context == 1 || (context == 2 || context == 6) || context == 15 ||
                          context == 7) && string.IsNullOrEmpty(overrideInstructions))
@@ -2438,7 +2438,7 @@ namespace Terraria.UI
                     else if (!string.IsNullOrEmpty(overrideInstructions))
                     {
                         ItemSlot.ShiftForcedOn = true;
-                        int cursorOverride = Main.cursorOverride;
+                        var cursorOverride = Main.cursorOverride;
                         ItemSlot.OverrideHover(inv, context, slot);
                         if (-1 != Main.cursorOverride)
                         {
@@ -2452,7 +2452,7 @@ namespace Terraria.UI
                         ItemSlot.ShiftForcedOn = false;
                     }
 
-                    int num1 = 0;
+                    var num1 = 0;
                     if (ItemSlot.IsABuildingItem(Main.mouseItem))
                         num1 = 1;
                     if (num1 == 0 && Main.mouseItem.stack <= 0 && (context == 0 && ItemSlot.IsABuildingItem(inv[slot])))
@@ -2461,7 +2461,7 @@ namespace Terraria.UI
                         num1 = 0;
                     if (num1 > 0)
                     {
-                        Item mouseItem = Main.mouseItem;
+                        var mouseItem = Main.mouseItem;
                         if (num1 == 1)
                             mouseItem = Main.mouseItem;
                         if (num1 == 2)

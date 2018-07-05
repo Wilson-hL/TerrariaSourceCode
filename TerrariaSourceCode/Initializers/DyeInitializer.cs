@@ -17,7 +17,7 @@ namespace Terraria.Initializers
         private static void LoadBasicColorDye(int baseDyeItem, int blackDyeItem, int brightDyeItem, int silverDyeItem,
             float r, float g, float b, float saturation = 1f, int oldShader = 1)
         {
-            Ref<Effect> pixelShaderRef = Main.PixelShaderRef;
+            var pixelShaderRef = Main.PixelShaderRef;
             GameShaders.Armor
                 .BindShader<ArmorShaderData>(baseDyeItem, new ArmorShaderData(pixelShaderRef, "ArmorColored"))
                 .UseColor(r, g, b).UseSaturation(saturation);
@@ -60,7 +60,7 @@ namespace Terraria.Initializers
 
         private static void LoadArmorDyes()
         {
-            Ref<Effect> pixelShaderRef = Main.PixelShaderRef;
+            var pixelShaderRef = Main.PixelShaderRef;
             DyeInitializer.LoadBasicColorDyes();
             GameShaders.Armor
                 .BindShader<ArmorShaderData>(1050, new ArmorShaderData(pixelShaderRef, "ArmorBrightnessColored"))
@@ -223,7 +223,7 @@ namespace Terraria.Initializers
 
         private static void LoadHairDyes()
         {
-            Ref<Effect> pixelShaderRef = Main.PixelShaderRef;
+            var pixelShaderRef = Main.PixelShaderRef;
             DyeInitializer.LoadLegacyHairdyes();
             GameShaders.Hair.BindShader<HairShaderData>(3259, new HairShaderData(pixelShaderRef, "ArmorTwilight"))
                 .UseImage("Images/Misc/noise").UseColor(0.5f, 0.1f, 1f);
@@ -231,7 +231,7 @@ namespace Terraria.Initializers
 
         private static void LoadLegacyHairdyes()
         {
-            Ref<Effect> pixelShaderRef = Main.PixelShaderRef;
+            var pixelShaderRef = Main.PixelShaderRef;
             GameShaders.Hair.BindShader<LegacyHairShaderData>(1977, new LegacyHairShaderData().UseLegacyMethod(
                 (LegacyHairShaderData.ColorProcessingMethod) ((Player player, Color newColor, ref bool lighting) =>
                 {
@@ -253,42 +253,42 @@ namespace Terraria.Initializers
             GameShaders.Hair.BindShader<LegacyHairShaderData>(1979, new LegacyHairShaderData().UseLegacyMethod(
                 (LegacyHairShaderData.ColorProcessingMethod) ((Player player, Color newColor, ref bool lighting) =>
                 {
-                    float num1 = (float) (Main.worldSurface * 0.45) * 16f;
-                    float num2 = (float) (Main.worldSurface + Main.rockLayer) * 8f;
-                    float num3 = ((float) Main.rockLayer + (float) Main.maxTilesY) * 8f;
-                    float num4 = (float) (Main.maxTilesY - 150) * 16f;
-                    Vector2 center = player.Center;
+                    var num1 = (float) (Main.worldSurface * 0.45) * 16f;
+                    var num2 = (float) (Main.worldSurface + Main.rockLayer) * 8f;
+                    var num3 = ((float) Main.rockLayer + (float) Main.maxTilesY) * 8f;
+                    var num4 = (float) (Main.maxTilesY - 150) * 16f;
+                    var center = player.Center;
                     if ((double) center.Y < (double) num1)
                     {
-                        float num5 = center.Y / num1;
-                        float num6 = 1f - num5;
+                        var num5 = center.Y / num1;
+                        var num6 = 1f - num5;
                         newColor.R = (byte) (116.0 * (double) num6 + 28.0 * (double) num5);
                         newColor.G = (byte) (160.0 * (double) num6 + 216.0 * (double) num5);
                         newColor.B = (byte) (249.0 * (double) num6 + 94.0 * (double) num5);
                     }
                     else if ((double) center.Y < (double) num2)
                     {
-                        float num5 = num1;
-                        float num6 = (float) (((double) center.Y - (double) num5) / ((double) num2 - (double) num5));
-                        float num7 = 1f - num6;
+                        var num5 = num1;
+                        var num6 = (float) (((double) center.Y - (double) num5) / ((double) num2 - (double) num5));
+                        var num7 = 1f - num6;
                         newColor.R = (byte) (28.0 * (double) num7 + 151.0 * (double) num6);
                         newColor.G = (byte) (216.0 * (double) num7 + 107.0 * (double) num6);
                         newColor.B = (byte) (94.0 * (double) num7 + 75.0 * (double) num6);
                     }
                     else if ((double) center.Y < (double) num3)
                     {
-                        float num5 = num2;
-                        float num6 = (float) (((double) center.Y - (double) num5) / ((double) num3 - (double) num5));
-                        float num7 = 1f - num6;
+                        var num5 = num2;
+                        var num6 = (float) (((double) center.Y - (double) num5) / ((double) num3 - (double) num5));
+                        var num7 = 1f - num6;
                         newColor.R = (byte) (151.0 * (double) num7 + 128.0 * (double) num6);
                         newColor.G = (byte) (107.0 * (double) num7 + 128.0 * (double) num6);
                         newColor.B = (byte) (75.0 * (double) num7 + 128.0 * (double) num6);
                     }
                     else if ((double) center.Y < (double) num4)
                     {
-                        float num5 = num3;
-                        float num6 = (float) (((double) center.Y - (double) num5) / ((double) num4 - (double) num5));
-                        float num7 = 1f - num6;
+                        var num5 = num3;
+                        var num6 = (float) (((double) center.Y - (double) num5) / ((double) num4 - (double) num5));
+                        var num7 = 1f - num6;
                         newColor.R = (byte) (128.0 * (double) num7 + (double) byte.MaxValue * (double) num6);
                         newColor.G = (byte) (128.0 * (double) num7 + 50.0 * (double) num6);
                         newColor.B = (byte) (128.0 * (double) num7 + 15.0 * (double) num6);
@@ -305,8 +305,8 @@ namespace Terraria.Initializers
             GameShaders.Hair.BindShader<LegacyHairShaderData>(1980, new LegacyHairShaderData().UseLegacyMethod(
                 (LegacyHairShaderData.ColorProcessingMethod) ((Player player, Color newColor, ref bool lighting) =>
                 {
-                    int num1 = 0;
-                    for (int index = 0; index < 54; ++index)
+                    var num1 = 0;
+                    for (var index = 0; index < 54; ++index)
                     {
                         if (player.inventory[index].type == 71)
                             num1 += player.inventory[index].stack;
@@ -318,35 +318,35 @@ namespace Terraria.Initializers
                             num1 += player.inventory[index].stack * 1000000;
                     }
 
-                    float num2 = (float) Item.buyPrice(0, 5, 0, 0);
-                    float num3 = (float) Item.buyPrice(0, 50, 0, 0);
-                    float num4 = (float) Item.buyPrice(2, 0, 0, 0);
-                    Color color1 = new Color(226, 118, 76);
-                    Color color2 = new Color(174, 194, 196);
-                    Color color3 = new Color(204, 181, 72);
-                    Color color4 = new Color(161, 172, 173);
+                    var num2 = (float) Item.buyPrice(0, 5, 0, 0);
+                    var num3 = (float) Item.buyPrice(0, 50, 0, 0);
+                    var num4 = (float) Item.buyPrice(2, 0, 0, 0);
+                    var color1 = new Color(226, 118, 76);
+                    var color2 = new Color(174, 194, 196);
+                    var color3 = new Color(204, 181, 72);
+                    var color4 = new Color(161, 172, 173);
                     if ((double) num1 < (double) num2)
                     {
-                        float num5 = (float) num1 / num2;
-                        float num6 = 1f - num5;
+                        var num5 = (float) num1 / num2;
+                        var num6 = 1f - num5;
                         newColor.R = (byte) ((double) color1.R * (double) num6 + (double) color2.R * (double) num5);
                         newColor.G = (byte) ((double) color1.G * (double) num6 + (double) color2.G * (double) num5);
                         newColor.B = (byte) ((double) color1.B * (double) num6 + (double) color2.B * (double) num5);
                     }
                     else if ((double) num1 < (double) num3)
                     {
-                        float num5 = num2;
-                        float num6 = (float) (((double) num1 - (double) num5) / ((double) num3 - (double) num5));
-                        float num7 = 1f - num6;
+                        var num5 = num2;
+                        var num6 = (float) (((double) num1 - (double) num5) / ((double) num3 - (double) num5));
+                        var num7 = 1f - num6;
                         newColor.R = (byte) ((double) color2.R * (double) num7 + (double) color3.R * (double) num6);
                         newColor.G = (byte) ((double) color2.G * (double) num7 + (double) color3.G * (double) num6);
                         newColor.B = (byte) ((double) color2.B * (double) num7 + (double) color3.B * (double) num6);
                     }
                     else if ((double) num1 < (double) num4)
                     {
-                        float num5 = num3;
-                        float num6 = (float) (((double) num1 - (double) num5) / ((double) num4 - (double) num5));
-                        float num7 = 1f - num6;
+                        var num5 = num3;
+                        var num6 = (float) (((double) num1 - (double) num5) / ((double) num4 - (double) num5));
+                        var num7 = 1f - num6;
                         newColor.R = (byte) ((double) color3.R * (double) num7 + (double) color4.R * (double) num6);
                         newColor.G = (byte) ((double) color3.G * (double) num7 + (double) color4.G * (double) num6);
                         newColor.B = (byte) ((double) color3.B * (double) num7 + (double) color4.B * (double) num6);
@@ -359,25 +359,25 @@ namespace Terraria.Initializers
             GameShaders.Hair.BindShader<LegacyHairShaderData>(1981, new LegacyHairShaderData().UseLegacyMethod(
                 (LegacyHairShaderData.ColorProcessingMethod) ((Player player, Color newColor, ref bool lighting) =>
                 {
-                    Color color1 = new Color(1, 142, (int) byte.MaxValue);
-                    Color color2 = new Color((int) byte.MaxValue, (int) byte.MaxValue, 0);
-                    Color color3 = new Color(211, 45, (int) sbyte.MaxValue);
-                    Color color4 = new Color(67, 44, 118);
+                    var color1 = new Color(1, 142, (int) byte.MaxValue);
+                    var color2 = new Color((int) byte.MaxValue, (int) byte.MaxValue, 0);
+                    var color3 = new Color(211, 45, (int) sbyte.MaxValue);
+                    var color4 = new Color(67, 44, 118);
                     if (Main.dayTime)
                     {
                         if (Main.time < 27000.0)
                         {
-                            float num1 = (float) (Main.time / 27000.0);
-                            float num2 = 1f - num1;
+                            var num1 = (float) (Main.time / 27000.0);
+                            var num2 = 1f - num1;
                             newColor.R = (byte) ((double) color1.R * (double) num2 + (double) color2.R * (double) num1);
                             newColor.G = (byte) ((double) color1.G * (double) num2 + (double) color2.G * (double) num1);
                             newColor.B = (byte) ((double) color1.B * (double) num2 + (double) color2.B * (double) num1);
                         }
                         else
                         {
-                            float num1 = 27000f;
-                            float num2 = (float) ((Main.time - (double) num1) / (54000.0 - (double) num1));
-                            float num3 = 1f - num2;
+                            var num1 = 27000f;
+                            var num2 = (float) ((Main.time - (double) num1) / (54000.0 - (double) num1));
+                            var num3 = 1f - num2;
                             newColor.R = (byte) ((double) color2.R * (double) num3 + (double) color3.R * (double) num2);
                             newColor.G = (byte) ((double) color2.G * (double) num3 + (double) color3.G * (double) num2);
                             newColor.B = (byte) ((double) color2.B * (double) num3 + (double) color3.B * (double) num2);
@@ -385,17 +385,17 @@ namespace Terraria.Initializers
                     }
                     else if (Main.time < 16200.0)
                     {
-                        float num1 = (float) (Main.time / 16200.0);
-                        float num2 = 1f - num1;
+                        var num1 = (float) (Main.time / 16200.0);
+                        var num2 = 1f - num1;
                         newColor.R = (byte) ((double) color3.R * (double) num2 + (double) color4.R * (double) num1);
                         newColor.G = (byte) ((double) color3.G * (double) num2 + (double) color4.G * (double) num1);
                         newColor.B = (byte) ((double) color3.B * (double) num2 + (double) color4.B * (double) num1);
                     }
                     else
                     {
-                        float num1 = 16200f;
-                        float num2 = (float) ((Main.time - (double) num1) / (32400.0 - (double) num1));
-                        float num3 = 1f - num2;
+                        var num1 = 16200f;
+                        var num2 = (float) ((Main.time - (double) num1) / (32400.0 - (double) num1));
+                        var num3 = 1f - num2;
                         newColor.R = (byte) ((double) color4.R * (double) num3 + (double) color1.R * (double) num2);
                         newColor.G = (byte) ((double) color4.G * (double) num3 + (double) color1.G * (double) num2);
                         newColor.B = (byte) ((double) color4.B * (double) num3 + (double) color1.B * (double) num2);
@@ -413,7 +413,7 @@ namespace Terraria.Initializers
             GameShaders.Hair.BindShader<LegacyHairShaderData>(1983, new LegacyHairShaderData().UseLegacyMethod(
                 (LegacyHairShaderData.ColorProcessingMethod) ((Player player, Color newColor, ref bool lighting) =>
                 {
-                    Color color1 = new Color();
+                    var color1 = new Color();
                     switch (Main.waterStyle)
                     {
                         case 2:
@@ -448,7 +448,7 @@ namespace Terraria.Initializers
                             break;
                     }
 
-                    Color color2 = player.hairDyeColor;
+                    var color2 = player.hairDyeColor;
                     if (color2.A == (byte) 0)
                         color2 = color1;
                     if ((int) color2.R > (int) color1.R)
@@ -474,8 +474,8 @@ namespace Terraria.Initializers
                     {
                         if (Main.rand.Next(45) == 0)
                         {
-                            int Type = Main.rand.Next(139, 143);
-                            int index = Dust.NewDust(player.position, player.width, 8, Type, 0.0f, 0.0f, 0, new Color(),
+                            var Type = Main.rand.Next(139, 143);
+                            var index = Dust.NewDust(player.position, player.width, 8, Type, 0.0f, 0.0f, 0, new Color(),
                                 1.2f);
                             Main.dust[index].velocity.X *=
                                 (float) (1.0 + (double) Main.rand.Next(-50, 51) * 0.00999999977648258);
@@ -491,8 +491,8 @@ namespace Terraria.Initializers
 
                         if (Main.rand.Next(225) == 0)
                         {
-                            int Type = Main.rand.Next(276, 283);
-                            int index = Gore.NewGore(
+                            var Type = Main.rand.Next(276, 283);
+                            var index = Gore.NewGore(
                                 new Vector2(player.position.X + (float) Main.rand.Next(player.width),
                                     player.position.Y + (float) Main.rand.Next(8)), player.velocity, Type, 1f);
                             Main.gore[index].velocity.X *=
@@ -519,12 +519,12 @@ namespace Terraria.Initializers
             GameShaders.Hair.BindShader<LegacyHairShaderData>(1986, new LegacyHairShaderData().UseLegacyMethod(
                 (LegacyHairShaderData.ColorProcessingMethod) ((Player player, Color newColor, ref bool lighting) =>
                 {
-                    float num1 = Math.Abs(player.velocity.X) + Math.Abs(player.velocity.Y);
-                    float num2 = 10f;
+                    var num1 = Math.Abs(player.velocity.X) + Math.Abs(player.velocity.Y);
+                    var num2 = 10f;
                     if ((double) num1 > (double) num2)
                         num1 = num2;
-                    float num3 = num1 / num2;
-                    float num4 = 1f - num3;
+                    var num3 = num1 / num2;
+                    var num4 = 1f - num3;
                     newColor.R = (byte) (75.0 * (double) num3 + (double) player.hairColor.R * (double) num4);
                     newColor.G = (byte) ((double) byte.MaxValue * (double) num3 +
                                          (double) player.hairColor.G * (double) num4);
@@ -535,7 +535,7 @@ namespace Terraria.Initializers
                 (LegacyHairShaderData.ColorProcessingMethod) ((Player player, Color newColor, ref bool lighting) =>
                 {
                     lighting = false;
-                    Color color =
+                    var color =
                         Lighting.GetColor((int) ((double) player.position.X + (double) player.width * 0.5) / 16,
                             (int) (((double) player.position.Y + (double) player.height * 0.25) / 16.0));
                     newColor.R = (byte) ((int) color.R + (int) newColor.R >> 1);
@@ -547,7 +547,7 @@ namespace Terraria.Initializers
 
         private static void LoadMisc()
         {
-            Ref<Effect> pixelShaderRef = Main.PixelShaderRef;
+            var pixelShaderRef = Main.PixelShaderRef;
             GameShaders.Misc["ForceField"] = new MiscShaderData(pixelShaderRef, "ForceField");
             GameShaders.Misc["WaterProcessor"] = new MiscShaderData(pixelShaderRef, "WaterProcessor");
             GameShaders.Misc["WaterDistortionObject"] = new MiscShaderData(pixelShaderRef, "WaterDistortionObject");
@@ -563,7 +563,7 @@ namespace Terraria.Initializers
 
         private static void FixRecipes()
         {
-            for (int index = 0; index < Recipe.maxRecipes; ++index)
+            for (var index = 0; index < Recipe.maxRecipes; ++index)
             {
                 Main.recipe[index].createItem.dye =
                     (byte) GameShaders.Armor.GetShaderIdFromItemId(Main.recipe[index].createItem.type);

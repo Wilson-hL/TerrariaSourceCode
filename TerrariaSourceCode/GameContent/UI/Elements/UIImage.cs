@@ -31,7 +31,7 @@ namespace Terraria.GameContent.UI.Elements
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
-            CalculatedStyle dimensions = this.GetDimensions();
+            var dimensions = this.GetDimensions();
             spriteBatch.Draw(this._texture, dimensions.Position() + this._texture.Size() * (1f - this.ImageScale) / 2f,
                 new Rectangle?(), Color.White, 0.0f, Vector2.Zero, this.ImageScale, SpriteEffects.None, 0.0f);
         }

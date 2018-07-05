@@ -45,7 +45,7 @@ namespace Terraria.Graphics.Capture
             get
             {
                 Monitor.Enter(this._captureLock);
-                bool flag = this._activeSettings != null;
+                var flag = this._activeSettings != null;
                 Monitor.Exit(this._captureLock);
                 return flag;
             }
@@ -82,8 +82,8 @@ namespace Terraria.Graphics.Capture
             if (this._activeSettings != null)
                 throw new InvalidOperationException("Capture called while another capture was already active.");
             this._activeSettings = settings;
-            Microsoft.Xna.Framework.Rectangle area = settings.Area;
-            float num1 = 1f;
+            var area = settings.Area;
+            var num1 = 1f;
             if (settings.UseScaling)
             {
                 if (area.Width << 4 > 4096)
@@ -96,7 +96,7 @@ namespace Terraria.Graphics.Capture
                         (int) MathHelper.Clamp((float) (int) ((double) num1 * (double) (area.Width << 4)), 1f, 4096f),
                         (int) MathHelper.Clamp((float) (int) ((double) num1 * (double) (area.Height << 4)), 1f, 4096f));
                 this._outputData = new byte[4 * this._outputImageSize.Width * this._outputImageSize.Height];
-                int num2 = (int) Math.Floor((double) num1 * 2048.0);
+                var num2 = (int) Math.Floor((double) num1 * 2048.0);
                 this._scaledFrameData = new byte[4 * num2 * num2];
                 this._scaledFrameBuffer = new RenderTarget2D(this._graphics, num2, num2, false,
                     this._graphics.PresentationParameters.BackBufferFormat, DepthFormat.Depth24);
@@ -106,18 +106,18 @@ namespace Terraria.Graphics.Capture
 
             this._tilesProcessed = 0.0f;
             this._totalTiles = (float) (area.Width * area.Height);
-            int x1 = area.X;
+            var x1 = area.X;
             while (x1 < area.X + area.Width)
             {
-                int y1 = area.Y;
+                var y1 = area.Y;
                 while (y1 < area.Y + area.Height)
                 {
-                    int width1 = Math.Min(128, area.X + area.Width - x1);
-                    int height1 = Math.Min(128, area.Y + area.Height - y1);
-                    int width2 = (int) Math.Floor((double) num1 * (double) (width1 << 4));
-                    int height2 = (int) Math.Floor((double) num1 * (double) (height1 << 4));
-                    int x2 = (int) Math.Floor((double) num1 * (double) (x1 - area.X << 4));
-                    int y2 = (int) Math.Floor((double) num1 * (double) (y1 - area.Y << 4));
+                    var width1 = Math.Min(128, area.X + area.Width - x1);
+                    var height1 = Math.Min(128, area.Y + area.Height - y1);
+                    var width2 = (int) Math.Floor((double) num1 * (double) (width1 << 4));
+                    var height2 = (int) Math.Floor((double) num1 * (double) (height1 << 4));
+                    var x2 = (int) Math.Floor((double) num1 * (double) (x1 - area.X << 4));
+                    var y2 = (int) Math.Floor((double) num1 * (double) (y1 - area.Y << 4));
                     this._renderQueue.Enqueue(new CaptureCamera.CaptureChunk(
                         new Microsoft.Xna.Framework.Rectangle(x1, y1, width1, height1),
                         new Microsoft.Xna.Framework.Rectangle(x2, y2, width2, height2)));
@@ -137,7 +137,7 @@ namespace Terraria.Graphics.Capture
                 return;
             if (this._renderQueue.Count > 0)
             {
-                CaptureCamera.CaptureChunk captureChunk = this._renderQueue.Dequeue();
+                var captureChunk = this._renderQueue.Dequeue();
                 this._graphics.SetRenderTarget(this._frameBuffer);
                 this._graphics.Clear(Microsoft.Xna.Framework.Color.Transparent);
                 Main.instance.DrawCapture(captureChunk.Area, this._activeSettings);
@@ -181,11 +181,11 @@ namespace Terraria.Graphics.Capture
             fixed (byte* numPtr2Fixed = &sourceBuffer[0])
             {
                 //Fix By GScience(Attention)
-                byte* numPtr2 = numPtr2Fixed;
-                byte* numPtr3 = numPtr1 + (destinationBufferWidth * area.Y + area.X << 2);
-                for (int index1 = 0; index1 < area.Height; ++index1)
+                var numPtr2 = numPtr2Fixed;
+                var numPtr3 = numPtr1 + (destinationBufferWidth * area.Y + area.X << 2);
+                for (var index1 = 0; index1 < area.Height; ++index1)
                 {
-                    for (int index2 = 0; index2 < area.Width; ++index2)
+                    for (var index2 = 0; index2 < area.Width; ++index2)
                     {
                         numPtr3[2] = *numPtr2;
                         numPtr3[1] = numPtr2[1];
@@ -214,10 +214,10 @@ namespace Terraria.Graphics.Capture
             {
                 Directory.CreateDirectory(Main.SavePath + (object) Path.DirectorySeparatorChar + "Captures" +
                                           (object) Path.DirectorySeparatorChar);
-                using (Bitmap bitmap = new Bitmap(width, height))
+                using (var bitmap = new Bitmap(width, height))
                 {
-                    System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, width, height);
-                    BitmapData bitmapdata =
+                    var rect = new System.Drawing.Rectangle(0, 0, width, height);
+                    var bitmapdata =
                         bitmap.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppPArgb);
                     Marshal.Copy(this._outputData, 0, bitmapdata.Scan0, width * height * 4);
                     bitmap.UnlockBits(bitmapdata);
@@ -237,22 +237,22 @@ namespace Terraria.Graphics.Capture
         private void SaveImage(Texture2D texture, int width, int height, ImageFormat imageFormat, string foldername,
             string filename)
         {
-            string str = Main.SavePath + (object) Path.DirectorySeparatorChar + "Captures" +
+            var str = Main.SavePath + (object) Path.DirectorySeparatorChar + "Captures" +
                          (object) Path.DirectorySeparatorChar + foldername;
-            string filename1 = Path.Combine(str, filename);
+            var filename1 = Path.Combine(str, filename);
             Directory.CreateDirectory(str);
-            using (Bitmap bitmap = new Bitmap(width, height))
+            using (var bitmap = new Bitmap(width, height))
             {
-                System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, width, height);
-                int elementCount = texture.Width * texture.Height * 4;
+                var rect = new System.Drawing.Rectangle(0, 0, width, height);
+                var elementCount = texture.Width * texture.Height * 4;
                 texture.GetData<byte>(this._outputData, 0, elementCount);
-                int index1 = 0;
-                int index2 = 0;
-                for (int index3 = 0; index3 < height; ++index3)
+                var index1 = 0;
+                var index2 = 0;
+                for (var index3 = 0; index3 < height; ++index3)
                 {
-                    for (int index4 = 0; index4 < width; ++index4)
+                    for (var index4 = 0; index4 < width; ++index4)
                     {
-                        byte num = this._outputData[index1 + 2];
+                        var num = this._outputData[index1 + 2];
                         this._outputData[index2 + 2] = this._outputData[index1];
                         this._outputData[index2] = num;
                         this._outputData[index2 + 1] = this._outputData[index1 + 1];
@@ -264,7 +264,7 @@ namespace Terraria.Graphics.Capture
                     index1 += texture.Width - width << 2;
                 }
 
-                BitmapData bitmapdata = bitmap.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppPArgb);
+                var bitmapdata = bitmap.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppPArgb);
                 Marshal.Copy(this._outputData, 0, bitmapdata.Scan0, width * height * 4);
                 bitmap.UnlockBits(bitmapdata);
                 bitmap.Save(filename1, imageFormat);
@@ -275,7 +275,7 @@ namespace Terraria.Graphics.Capture
         {
             if (this._activeSettings.UseScaling)
             {
-                int num = 0;
+                var num = 0;
                 do
                 {
                     if (!this.SaveImage(this._outputImageSize.Width, this._outputImageSize.Height, ImageFormat.Png,

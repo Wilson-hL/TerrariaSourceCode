@@ -14,7 +14,7 @@ namespace Terraria.World.Generation
     {
         public static GenAction Chain(params GenAction[] actions)
         {
-            for (int index = 0; index < actions.Length - 1; ++index)
+            for (var index = 0; index < actions.Length - 1; ++index)
                 actions[index].NextAction = actions[index + 1];
             return actions[0];
         }
@@ -81,13 +81,13 @@ namespace Terraria.World.Generation
             {
                 this._tileIds = tiles;
                 this._tileCounts = new Dictionary<ushort, int>();
-                for (int index = 0; index < tiles.Length; ++index)
+                for (var index = 0; index < tiles.Length; ++index)
                     this._tileCounts[this._tileIds[index]] = 0;
             }
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                Tile tile = GenBase._tiles[x, y];
+                var tile = GenBase._tiles[x, y];
                 if (tile.active() && this._tileCounts.ContainsKey(tile.type))
                 {
                     Dictionary<ushort, int> tileCounts;
@@ -101,7 +101,7 @@ namespace Terraria.World.Generation
             public Actions.TileScanner Output(Dictionary<ushort, int> resultsOutput)
             {
                 this._tileCounts = resultsOutput;
-                for (int index = 0; index < this._tileIds.Length; ++index)
+                for (var index = 0; index < this._tileIds.Length; ++index)
                 {
                     if (!this._tileCounts.ContainsKey(this._tileIds[index]))
                         this._tileCounts[this._tileIds[index]] = 0;
@@ -370,7 +370,7 @@ namespace Terraria.World.Generation
 
             public override bool Apply(Point origin, int x, int y, params object[] args)
             {
-                Tile tile = GenBase._tiles[x, y];
+                var tile = GenBase._tiles[x, y];
                 if (!WorldGen.SolidTile(tile))
                     return this.Fail();
                 tile.ResetToType(this._type);

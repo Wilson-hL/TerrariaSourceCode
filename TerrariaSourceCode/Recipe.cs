@@ -43,7 +43,7 @@ namespace Terraria
 
     public bool ProcessGroupsForText(int type, out string theText)
     {
-      foreach (int acceptedGroup in this.acceptedGroups)
+      foreach (var acceptedGroup in this.acceptedGroups)
       {
         if (RecipeGroup.recipeGroups[acceptedGroup].ValidItems.Contains(type))
         {
@@ -57,7 +57,7 @@ namespace Terraria
 
     public bool AcceptedByItemGroups(int invType, int reqType)
     {
-      foreach (int acceptedGroup in this.acceptedGroups)
+      foreach (var acceptedGroup in this.acceptedGroups)
       {
         if (RecipeGroup.recipeGroups[acceptedGroup].ValidItems.Contains(invType) && RecipeGroup.recipeGroups[acceptedGroup].ValidItems.Contains(reqType))
           return true;
@@ -67,7 +67,7 @@ namespace Terraria
 
     public Recipe()
     {
-      for (int index = 0; index < Recipe.maxRequirements; ++index)
+      for (var index = 0; index < Recipe.maxRequirements; ++index)
       {
         this.requiredItem[index] = new Item();
         this.requiredTile[index] = -1;
@@ -76,18 +76,18 @@ namespace Terraria
 
     public void Create()
     {
-      for (int index1 = 0; index1 < Recipe.maxRequirements; ++index1)
+      for (var index1 = 0; index1 < Recipe.maxRequirements; ++index1)
       {
-        Item compareItem = this.requiredItem[index1];
+        var compareItem = this.requiredItem[index1];
         if (compareItem.type != 0)
         {
-          int num1 = compareItem.stack;
+          var num1 = compareItem.stack;
           if (this.alchemy && Main.player[Main.myPlayer].alchemyTable)
           {
             if (num1 > 1)
             {
-              int num2 = 0;
-              for (int index2 = 0; index2 < num1; ++index2)
+              var num2 = 0;
+              for (var index2 = 0; index2 < num1; ++index2)
               {
                 if (Main.rand.Next(3) == 0)
                   ++num2;
@@ -99,10 +99,10 @@ namespace Terraria
           }
           if (num1 > 0)
           {
-            Item[] inventory = Main.player[Main.myPlayer].inventory;
-            for (int index2 = 0; index2 < 58; ++index2)
+            var inventory = Main.player[Main.myPlayer].inventory;
+            for (var index2 = 0; index2 < 58; ++index2)
             {
-              Item obj = inventory[index2];
+              var obj = inventory[index2];
               if (num1 > 0)
               {
                 if (obj.IsTheSameAs(compareItem) || this.useWood(obj.type, compareItem.type) || (this.useSand(obj.type, compareItem.type) || this.useFragment(obj.type, compareItem.type)) || (this.useIronBar(obj.type, compareItem.type) || this.usePressurePlate(obj.type, compareItem.type) || this.AcceptedByItemGroups(obj.type, compareItem.type)))
@@ -132,9 +132,9 @@ namespace Terraria
                 inventory = Main.player[Main.myPlayer].bank2.item;
               else if (Main.player[Main.myPlayer].chest == -4)
                 inventory = Main.player[Main.myPlayer].bank3.item;
-              for (int index2 = 0; index2 < 40; ++index2)
+              for (var index2 = 0; index2 < 40; ++index2)
               {
-                Item obj = inventory[index2];
+                var obj = inventory[index2];
                 if (num1 > 0)
                 {
                   if (obj.IsTheSameAs(compareItem) || this.useWood(obj.type, compareItem.type) || (this.useSand(obj.type, compareItem.type) || this.useIronBar(obj.type, compareItem.type)) || (this.usePressurePlate(obj.type, compareItem.type) || this.useFragment(obj.type, compareItem.type) || this.AcceptedByItemGroups(obj.type, compareItem.type)))
@@ -266,16 +266,16 @@ namespace Terraria
 
     public static void FindRecipes()
     {
-      int num1 = Main.availableRecipe[Main.focusRecipe];
-      float num2 = Main.availableRecipeY[Main.focusRecipe];
-      for (int index = 0; index < Recipe.maxRecipes; ++index)
+      var num1 = Main.availableRecipe[Main.focusRecipe];
+      var num2 = Main.availableRecipeY[Main.focusRecipe];
+      for (var index = 0; index < Recipe.maxRecipes; ++index)
         Main.availableRecipe[index] = 0;
       Main.numAvailableRecipes = 0;
       if (Main.guideItem.type > 0 && Main.guideItem.stack > 0 && Main.guideItem.Name != "")
       {
-        for (int index1 = 0; index1 < Recipe.maxRecipes && Main.recipe[index1].createItem.type != 0; ++index1)
+        for (var index1 = 0; index1 < Recipe.maxRecipes && Main.recipe[index1].createItem.type != 0; ++index1)
         {
-          for (int index2 = 0; index2 < Recipe.maxRequirements && Main.recipe[index1].requiredItem[index2].type != 0; ++index2)
+          for (var index2 = 0; index2 < Recipe.maxRequirements && Main.recipe[index1].requiredItem[index2].type != 0; ++index2)
           {
             if (Main.guideItem.IsTheSameAs(Main.recipe[index1].requiredItem[index2]) || Main.recipe[index1].useWood(Main.guideItem.type, Main.recipe[index1].requiredItem[index2].type) || (Main.recipe[index1].useSand(Main.guideItem.type, Main.recipe[index1].requiredItem[index2].type) || Main.recipe[index1].useIronBar(Main.guideItem.type, Main.recipe[index1].requiredItem[index2].type)) || (Main.recipe[index1].useFragment(Main.guideItem.type, Main.recipe[index1].requiredItem[index2].type) || Main.recipe[index1].AcceptedByItemGroups(Main.guideItem.type, Main.recipe[index1].requiredItem[index2].type) || Main.recipe[index1].usePressurePlate(Main.guideItem.type, Main.recipe[index1].requiredItem[index2].type)))
             {
@@ -288,11 +288,11 @@ namespace Terraria
       }
       else
       {
-        Dictionary<int, int> dictionary1 = new Dictionary<int, int>();
-        Item[] inventory = Main.player[Main.myPlayer].inventory;
-        for (int index = 0; index < 58; ++index)
+        var dictionary1 = new Dictionary<int, int>();
+        var inventory = Main.player[Main.myPlayer].inventory;
+        for (var index = 0; index < 58; ++index)
         {
-          Item obj = inventory[index];
+          var obj = inventory[index];
           if (obj.stack > 0)
           {
             if (dictionary1.ContainsKey(obj.netID))
@@ -315,9 +315,9 @@ namespace Terraria
             inventory = Main.player[Main.myPlayer].bank2.item;
           else if (Main.player[Main.myPlayer].chest == -4)
             inventory = Main.player[Main.myPlayer].bank3.item;
-          for (int index = 0; index < 40; ++index)
+          for (var index = 0; index < 40; ++index)
           {
-            Item obj = inventory[index];
+            var obj = inventory[index];
             if (obj.stack > 0)
             {
               if (dictionary1.ContainsKey(obj.netID))
@@ -331,12 +331,12 @@ namespace Terraria
             }
           }
         }
-        for (int index1 = 0; index1 < Recipe.maxRecipes && Main.recipe[index1].createItem.type != 0; ++index1)
+        for (var index1 = 0; index1 < Recipe.maxRecipes && Main.recipe[index1].createItem.type != 0; ++index1)
         {
-          bool flag1 = true;
+          var flag1 = true;
           if (flag1)
           {
-            for (int index2 = 0; index2 < Recipe.maxRequirements && Main.recipe[index1].requiredTile[index2] != -1; ++index2)
+            for (var index2 = 0; index2 < Recipe.maxRequirements && Main.recipe[index1].requiredTile[index2] != -1; ++index2)
             {
               if (!Main.player[Main.myPlayer].adjTile[Main.recipe[index1].requiredTile[index2]])
               {
@@ -347,14 +347,14 @@ namespace Terraria
           }
           if (flag1)
           {
-            for (int index2 = 0; index2 < Recipe.maxRequirements; ++index2)
+            for (var index2 = 0; index2 < Recipe.maxRequirements; ++index2)
             {
-              Item obj = Main.recipe[index1].requiredItem[index2];
+              var obj = Main.recipe[index1].requiredItem[index2];
               if (obj.type != 0)
               {
-                int stack = obj.stack;
-                bool flag2 = false;
-                foreach (int key in dictionary1.Keys)
+                var stack = obj.stack;
+                var flag2 = false;
+                foreach (var key in dictionary1.Keys)
                 {
                   if (Main.recipe[index1].useWood(key, obj.type) || Main.recipe[index1].useSand(key, obj.type) || (Main.recipe[index1].useIronBar(key, obj.type) || Main.recipe[index1].useFragment(key, obj.type)) || (Main.recipe[index1].AcceptedByItemGroups(key, obj.type) || Main.recipe[index1].usePressurePlate(key, obj.type)))
                   {
@@ -383,7 +383,7 @@ namespace Terraria
           }
         }
       }
-      for (int index = 0; index < Main.numAvailableRecipes; ++index)
+      for (var index = 0; index < Main.numAvailableRecipes; ++index)
       {
         if (num1 == Main.availableRecipe[index])
         {
@@ -395,8 +395,8 @@ namespace Terraria
         Main.focusRecipe = Main.numAvailableRecipes - 1;
       if (Main.focusRecipe < 0)
         Main.focusRecipe = 0;
-      float num3 = Main.availableRecipeY[Main.focusRecipe] - num2;
-      for (int index = 0; index < Recipe.maxRecipes; ++index)
+      var num3 = Main.availableRecipeY[Main.focusRecipe] - num2;
+      for (var index = 0; index < Recipe.maxRecipes; ++index)
         Main.availableRecipeY[index] -= num3;
     }
 
@@ -454,8 +454,8 @@ namespace Terraria
 
         public static void SetupRecipes()
         {
-            int num = 5;
-            int stack = 2;
+            var num = 5;
+            var stack = 2;
             SetupRecipeGroups();
             newRecipe.createItem.SetDefaults(8, false);
             newRecipe.createItem.stack = 3;
@@ -1837,9 +1837,9 @@ namespace Terraria
             newRecipe.requiredItem[5].SetDefaults(178, false);
             newRecipe.requiredTile[0] = 18;
             AddRecipe();
-            int num2 = 0;
-            int num3 = 0;
-            int num4 = 0;
+            var num2 = 0;
+            var num3 = 0;
+            var num4 = 0;
             newRecipe.createItem.SetDefaults(1970, false);
             newRecipe.createItem.stack = 20;
             newRecipe.requiredItem[0].SetDefaults(170, false);
@@ -4038,7 +4038,7 @@ namespace Terraria
             newRecipe.requiredItem[0].SetDefaults(2860, false);
             newRecipe.requiredItem[0].stack = 10;
             AddRecipe();
-            int type = 3234;
+            var type = 3234;
             newRecipe.createItem.SetDefaults(3895, false);
             newRecipe.requiredItem[0].SetDefaults(type, false);
             newRecipe.requiredItem[0].stack = 35;
@@ -4212,7 +4212,7 @@ namespace Terraria
             newRecipe.requiredItem[0].stack = 1;
             newRecipe.requiredTile[0] = 16;
             AddRecipe();
-            for (int i = 3665; i <= 3704; i++)
+            for (var i = 3665; i <= 3704; i++)
             {
                 newRecipe.createItem.SetDefaults(i, false);
                 newRecipe.requiredItem[0].SetDefaults(ItemID.Sets.TextureCopyLoad[i], false);
@@ -4221,7 +4221,7 @@ namespace Terraria
                 newRecipe.requiredTile[0] = 283;
                 AddRecipe();
             }
-            int[,] array = new int[2, 2]
+            var array = new int[2, 2]
             {
             {
                 3886,
@@ -4232,7 +4232,7 @@ namespace Terraria
                 3885
             }
             };
-            for (int j = 0; j < array.GetLength(0); j++)
+            for (var j = 0; j < array.GetLength(0); j++)
             {
                 newRecipe.createItem.SetDefaults(array[j, 0], false);
                 newRecipe.requiredItem[0].SetDefaults(array[j, 1], false);
@@ -4338,7 +4338,7 @@ namespace Terraria
             newRecipe.requiredTile[0] = 106;
             newRecipe.anyWood = true;
             AddRecipe();
-            for (int k = 2114; k <= 2118; k++)
+            for (var k = 2114; k <= 2118; k++)
             {
                 newRecipe.createItem.SetDefaults(k, false);
                 newRecipe.requiredItem[0].SetDefaults(9, false);
@@ -6560,7 +6560,7 @@ namespace Terraria
             newRecipe.requiredItem[0].SetDefaults(3306, false);
             newRecipe.requiredItem[1].SetDefaults(1066, false);
             AddRecipe();
-            for (int l = 3309; l <= 3314; l++)
+            for (var l = 3309; l <= 3314; l++)
             {
                 newRecipe.createItem.SetDefaults(3366, false);
                 newRecipe.requiredItem[0].SetDefaults(3306, false);
@@ -6632,7 +6632,7 @@ namespace Terraria
             newRecipe.requiredItem[0].stack = 50;
             newRecipe.requiredTile[0] = 18;
             AddRecipe();
-            for (int m = 0; m < 36; m++)
+            for (var m = 0; m < 36; m++)
             {
                 newRecipe.createItem.SetDefaults(2702 + m, false);
                 newRecipe.requiredItem[0].SetDefaults(3, false);
@@ -6640,7 +6640,7 @@ namespace Terraria
                 newRecipe.requiredTile[0] = 283;
                 AddRecipe();
             }
-            int[,] array2 = new int[15, 3]
+            var array2 = new int[15, 3]
             {
             {
                 444,
@@ -6718,46 +6718,46 @@ namespace Terraria
                 2740
             }
             };
-            int[,] array3 = array2;
-            int squirrels = RecipeGroupID.Squirrels;
+            var array3 = array2;
+            var squirrels = RecipeGroupID.Squirrels;
             array3[2, 1] = squirrels;
-            int[,] array4 = array2;
-            int butterflies = RecipeGroupID.Butterflies;
+            var array4 = array2;
+            var butterflies = RecipeGroupID.Butterflies;
             array4[3, 1] = butterflies;
-            int[,] array5 = array2;
-            int fireflies = RecipeGroupID.Fireflies;
+            var array5 = array2;
+            var fireflies = RecipeGroupID.Fireflies;
             array5[4, 1] = fireflies;
-            int[,] array6 = array2;
-            int scorpions = RecipeGroupID.Scorpions;
+            var array6 = array2;
+            var scorpions = RecipeGroupID.Scorpions;
             array6[5, 1] = scorpions;
-            int[,] array7 = array2;
-            int snails = RecipeGroupID.Snails;
+            var array7 = array2;
+            var snails = RecipeGroupID.Snails;
             array7[6, 1] = snails;
-            int[,] array8 = array2;
-            int ducks = RecipeGroupID.Ducks;
+            var array8 = array2;
+            var ducks = RecipeGroupID.Ducks;
             array8[8, 1] = ducks;
-            int[,] array9 = array2;
-            int bugs = RecipeGroupID.Bugs;
+            var array9 = array2;
+            var bugs = RecipeGroupID.Bugs;
             array9[11, 1] = bugs;
-            int[,] array10 = array2;
-            int birds = RecipeGroupID.Birds;
+            var array10 = array2;
+            var birds = RecipeGroupID.Birds;
             array10[13, 1] = birds;
-            int[,] array11 = array2;
-            for (int n = 0; n < array11.GetLength(0); n++)
+            var array11 = array2;
+            for (var n = 0; n < array11.GetLength(0); n++)
             {
                 newRecipe.createItem.SetDefaults(array11[n, 0], false);
-                int num5 = 0;
+                var num5 = 0;
                 newRecipe.requiredItem[num5].SetDefaults(3, false);
                 newRecipe.requiredItem[num5].stack = 50;
-                int num6 = array11[n, 1];
+                var num6 = array11[n, 1];
                 if (num6 != -1)
                 {
-                    RecipeGroup recipeGroup = RecipeGroup.recipeGroups[num6];
+                    var recipeGroup = RecipeGroup.recipeGroups[num6];
                     newRecipe.requiredItem[++num5].SetDefaults(recipeGroup.ValidItems[recipeGroup.IconicItemIndex], false);
                     newRecipe.requiredItem[num5].stack = 5;
                     newRecipe.acceptedGroups.Add(num6);
                 }
-                int num7 = array11[n, 2];
+                var num7 = array11[n, 2];
                 if (num7 != -1)
                 {
                     newRecipe.requiredItem[++num5].SetDefaults(num7, false);
@@ -9421,7 +9421,7 @@ namespace Terraria
             newRecipe.requiredItem[0].stack = 1;
             newRecipe.requiredItem[1].SetDefaults(126, false);
             AddRecipe();
-            for (int num8 = 0; num8 < 8; num8++)
+            for (var num8 = 0; num8 < 8; num8++)
             {
                 newRecipe.createItem.SetDefaults(2178 + num8, false);
                 newRecipe.requiredItem[0].SetDefaults(1994 + num8, false);
@@ -10824,21 +10824,21 @@ namespace Terraria
             AddRecipe();
             WallReturn();
             PlatformReturn();
-            for (int num9 = 0; num9 < numRecipes; num9++)
+            for (var num9 = 0; num9 < numRecipes; num9++)
             {
-                for (int num10 = 0; Main.recipe[num9].requiredItem[num10].type > 0; num10++)
+                for (var num10 = 0; Main.recipe[num9].requiredItem[num10].type > 0; num10++)
                 {
                     Main.recipe[num9].requiredItem[num10].checkMat();
                 }
                 Main.recipe[num9].createItem.checkMat();
             }
-            int numRecipe = numRecipes;
+            var numRecipe = numRecipes;
         }
 
         private static void PlatformReturn()
     {
-      int numRecipes = Recipe.numRecipes;
-      for (int index1 = 0; index1 < numRecipes; ++index1)
+      var numRecipes = Recipe.numRecipes;
+      for (var index1 = 0; index1 < numRecipes; ++index1)
       {
         if (Main.recipe[index1].createItem.createTile >= 0 && TileID.Sets.Platforms[Main.recipe[index1].createItem.createTile] && Main.recipe[index1].requiredItem[1].type == 0)
         {
@@ -10846,11 +10846,11 @@ namespace Terraria
           Recipe.newRecipe.createItem.stack = Main.recipe[index1].requiredItem[0].stack;
           Recipe.newRecipe.requiredItem[0].SetDefaults(Main.recipe[index1].createItem.type, false);
           Recipe.newRecipe.requiredItem[0].stack = Main.recipe[index1].createItem.stack;
-          for (int index2 = 0; index2 < Recipe.newRecipe.requiredTile.Length; ++index2)
+          for (var index2 = 0; index2 < Recipe.newRecipe.requiredTile.Length; ++index2)
             Recipe.newRecipe.requiredTile[index2] = Main.recipe[index1].requiredTile[index2];
           Recipe.AddRecipe();
-          Recipe recipe = Main.recipe[Recipe.numRecipes - 1];
-          for (int index2 = Recipe.numRecipes - 2; index2 > index1; --index2)
+          var recipe = Main.recipe[Recipe.numRecipes - 1];
+          for (var index2 = Recipe.numRecipes - 2; index2 > index1; --index2)
             Main.recipe[index2 + 1] = Main.recipe[index2];
           Main.recipe[index1 + 1] = recipe;
         }
@@ -10859,8 +10859,8 @@ namespace Terraria
 
     private static void WallReturn()
     {
-      int numRecipes = Recipe.numRecipes;
-      for (int index1 = 0; index1 < numRecipes; ++index1)
+      var numRecipes = Recipe.numRecipes;
+      for (var index1 = 0; index1 < numRecipes; ++index1)
       {
         if (Main.recipe[index1].createItem.createWall > 0 && Main.recipe[index1].requiredItem[1].type == 0 && Main.recipe[index1].requiredItem[0].createWall == -1)
         {
@@ -10868,11 +10868,11 @@ namespace Terraria
           Recipe.newRecipe.createItem.stack = Main.recipe[index1].requiredItem[0].stack;
           Recipe.newRecipe.requiredItem[0].SetDefaults(Main.recipe[index1].createItem.type, false);
           Recipe.newRecipe.requiredItem[0].stack = Main.recipe[index1].createItem.stack;
-          for (int index2 = 0; index2 < Recipe.newRecipe.requiredTile.Length; ++index2)
+          for (var index2 = 0; index2 < Recipe.newRecipe.requiredTile.Length; ++index2)
             Recipe.newRecipe.requiredTile[index2] = Main.recipe[index1].requiredTile[index2];
           Recipe.AddRecipe();
-          Recipe recipe = Main.recipe[Recipe.numRecipes - 1];
-          for (int index2 = Recipe.numRecipes - 2; index2 > index1; --index2)
+          var recipe = Main.recipe[Recipe.numRecipes - 1];
+          for (var index2 = Recipe.numRecipes - 2; index2 > index1; --index2)
             Main.recipe[index2 + 1] = Main.recipe[index2];
           Main.recipe[index1 + 1] = recipe;
         }
